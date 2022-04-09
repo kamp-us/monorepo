@@ -1,0 +1,19 @@
+{
+  "stackTemplatePathOrUrl": "amplify-cfn-templates/function/temp/temp-GQLCustomResolvers-cloudformation-template.json",
+  "parameters": {
+    "CloudWatchRule": "NONE",
+    "s3Key": "amplify-builds/GQLCustomResolvers-5a7a746e2f5755467243-build.zip",
+    "apipanoGraphQLAPIEndpointOutput": "https://ajyygwsb3nhsvgsiptcipwplvy.appsync-api.us-west-2.amazonaws.com/graphql",
+    "deploymentBucketName": "amplify-pano-dev-110553-deployment",
+    "apipanoGraphQLAPIIdOutput": "sbgktzey3vfz7cunk4snx64jhy",
+    "env": "dev",
+    "authpano4ba861aeUserPoolId": "us-west-2_qbJ6tKZKA",
+    "apipanoGraphQLAPIKeyOutput": "da2-etelip6q3ncrhbhf3h2dt2xoyy"
+  },
+  "stackName": "arn:aws:cloudformation:us-west-2:012233696177:stack/amplify-pano-dev-110553-functionGQLCustomResolvers-9AUOZWQY5U32/54993580-b446-11ec-be05-021c607f4363",
+  "capabilities": [
+    "CAPABILITY_NAMED_IAM",
+    "CAPABILITY_AUTO_EXPAND"
+  ],
+  "tableNames": []
+}

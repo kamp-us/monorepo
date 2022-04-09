@@ -1,0 +1,70 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+
+type Post
+@model
+@auth(rules: [
+  { allow: owner, ownerField: "owner", operations: [create, delete, read, update] }
+  { allow: public, operations: [read] }
+  { allow: private, operations: [read] }
+]) {
+  id: ID!
+  title: String!
+  url: String!
+  owner: String!
+
+  isUpvoted: Boolean @function(name: "GQLCustomResolvers-${env}")
+  upvoteCount: Int @function(name: "GQLCustomResolvers-${env}")
+  commentCount: Int @function(name: "GQLCustomResolvers-${env}")
+
+  comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
+  upvotes: [Upvote] @hasMany
+  tags: [Tag] @hasMany(indexName: "byPost", fields: ["id"])
+}
+
+type Comment
+@model
+@auth(rules: [
+  { allow: owner, ownerField: "owner", operations: [create, delete, read, update] }
+  { allow: public, operations: [read] }
+  { allow: private, operations: [read] }
+]) {
+  id: ID!
+  content: String!
+  owner: String!
+
+  parentID: ID @index(name: "byComment", sortKeyFields: ["id"])
+  postID: ID! @index(name: "byPost", sortKeyFields: ["id"])
+
+  comments: [Comment] @hasMany(indexName: "byComment", fields: ["id"])
+}
+
+
+type Upvote
+@model
+@auth(rules: [
+  { allow: owner, ownerField: "owner", operations: [create, delete, read, update] }
+  { allow: public, operations: [read] }
+  { allow: private, operations: [read] }
+]) {
+  postID: ID! @primaryKey(sortKeyFields: ["owner"])
+  owner: String!
+
+  post: Post @belongsTo
+}
+
+type Tag
+@model
+@auth(rules: [
+  { allow: public, operations: [read] }
+  { allow: private, operations: [read] }
+]) {
+  id: ID!
+  name: String!
+  category: String!
+}
+
+type PostTag
+@model

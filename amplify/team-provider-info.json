@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pano-dev-110553-authRole",
+      "UnauthRoleArn": "arn:aws:iam::012233696177:role/amplify-pano-dev-110553-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::012233696177:role/amplify-pano-dev-110553-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-pano-dev-110553-deployment",
+      "UnauthRoleName": "amplify-pano-dev-110553-unauthRole",
+      "StackName": "amplify-pano-dev-110553",
+      "StackId": "arn:aws:cloudformation:us-west-2:012233696177:stack/amplify-pano-dev-110553/e5d72980-b441-11ec-8835-027f0ea8cc41",
+      "AmplifyAppId": "d1qqdl2jy808wi"
+    },
+    "categories": {
+      "auth": {
+        "pano4ba861ae": {}
+      },
+      "function": {
+        "GQLCustomResolvers": {
+          "deploymentBucketName": "amplify-pano-dev-110553-deployment",
+          "s3Key": "amplify-builds/GQLCustomResolvers-54775777726846446f57-build.zip"
+        }
+      }
+    }
+  }
+}
