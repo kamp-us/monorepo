@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CenteredContainer } from "../ui-library/layout-components/CenteredContainer";
-import { Link } from "react-router-dom";
 import { API } from "aws-amplify";
 import { createPost } from "../graphql/mutations";
 import { CreatePostMutationVariables } from "../API";
 import { useUserContext } from "../features/auth/user-context";
+import { Link } from "../ui-library/Link";
 
 const initialState = { title: "", url: "" };
 

@@ -6,8 +6,8 @@ import {
   GetPostQueryVariables,
   Post,
 } from "../API";
-import React, { FC, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { FC, useState } from "react";
+import { useParams } from "react-router-dom";
 import { getPost } from "../graphql/queries";
 import { CenteredContainer } from "../ui-library/layout-components/CenteredContainer";
 import { createComment } from "../graphql/mutations";
@@ -15,6 +15,10 @@ import { CommentItem } from "../features/comment/Comment";
 import { useAmplifyQuery } from "../features/utils/amplify/useQuery";
 import { useAmplifyMutation } from "../features/utils/amplify/useMutation";
 import { useUserContext } from "../features/auth/user-context";
+import { PostItem } from "../features/post/PostItem";
+import { Button } from "../ui-library/layout-components/Button";
+import { Textarea } from "../ui-library/Textarea";
+import { Box } from "../ui-library/layout-components/Box";
 
 type PostProps = {};
 
@@ -44,7 +48,7 @@ const toVisualTree = (comments: Comment[]) => {
 };
 
 export const SinglePost: FC<PostProps> = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [comment, setComment] = useState("");
   const { mutationFn: mutateComment } = useAmplifyMutation<
     CreateCommentMutation,
@@ -55,11 +59,11 @@ export const SinglePost: FC<PostProps> = () => {
   const { data, loading, refetch } = useAmplifyQuery<
     GetPostQuery,
     GetPostQueryVariables
-  >(getPost, {
-    id: id as string,
-  });
+  >(getPost, { id: id as string }, { skip: !id });
 
-  if (loading) return <CenteredContainer>Loading...</CenteredContainer>;
+  if (loading) {
+    return null;
+  }
 
   const post = data?.getPost as Post;
   const sortedComments = [...(post.comments?.items as Comment[])].sort((a, b) =>
@@ -70,11 +74,19 @@ export const SinglePost: FC<PostProps> = () => {
     try {
       if (!comment) return;
 
+      if (!user?.username) {
+        return;
+      }
+
+      if (!id) {
+        return;
+      }
+
       await mutateComment({
         input: {
           content: comment,
-          owner: user?.username as string,
-          postID: id as string,
+          owner: user.username,
+          postID: id,
         },
       });
       refetch();
@@ -86,13 +98,12 @@ export const SinglePost: FC<PostProps> = () => {
   const visualTree = toVisualTree(sortedComments);
 
   return (
-    <CenteredContainer>
-      <Link to="/">Home</Link>
-      <br />
-      <p>{post?.url}</p>
-      <p>{post?.title}</p>
-      <textarea onChange={(event) => setComment(event.target.value)} />
-      <button onClick={addComment}>add comment</button>
+    <CenteredContainer css={{ gap: 5 }}>
+      <PostItem post={post} />
+      <Textarea rows={4} onChange={(event) => setComment(event.target.value)} />
+      <Box css={{ paddingBottom: 10 }}>
+        <Button onClick={addComment}>Cevap yaz</Button>
+      </Box>
       {Object.values(visualTree).map(({ comment, comments }) => {
         return (
           <>

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useUserContext } from "../features/auth/user-context";
 import { Auth } from "aws-amplify";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CenteredContainer } from "../ui-library/layout-components/CenteredContainer";
+import { Link } from "../ui-library/Link";
 
 const initialState = { username: "", password: "" };
 
 export const Login = () => {
   const [formState, updateFormState] = useState(initialState);
-  const [error, setError] = useState<Error | null>(null);
+  const [, setError] = useState<Error | null>(null);
   const user = useUserContext();
   const navigate = useNavigate();
 

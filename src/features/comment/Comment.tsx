@@ -5,6 +5,14 @@ import {
   CreateCommentMutationVariables,
 } from "../../API";
 import { createComment } from "../../graphql/mutations";
+import { styled } from "../../stitches.config";
+import { GappedBox } from "../../ui-library/GappedBox";
+import { Box } from "../../ui-library/layout-components/Box";
+import { Button } from "../../ui-library/layout-components/Button";
+import { SmallLink } from "../../ui-library/SmallLink";
+import { Text } from "../../ui-library/Text";
+import { Textarea } from "../../ui-library/Textarea";
+import { Timeago } from "../../ui-library/Timeago";
 import { GQLOperation } from "../utils/amplify/GQLOperation";
 
 type CommentProps = {
@@ -27,6 +35,8 @@ export const CommentItem: FC<CommentProps> = ({
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
 
+  const [showComments, setShowComments] = useState(false);
+
   const addComment = async (commentID: string) => {
     try {
       if (!message) return;
@@ -44,6 +54,7 @@ export const CommentItem: FC<CommentProps> = ({
         createComment,
         variables
       );
+
       refetch();
       setOpen(false);
     } catch (e) {
@@ -52,30 +63,64 @@ export const CommentItem: FC<CommentProps> = ({
   };
 
   return (
-    <div>
-      <p>{comment.content}</p>
-      <button onClick={() => setOpen(!open)}>reply</button>
+    <GappedBox css={{ flexDirection: "column", gap: 15 }}>
+      <GappedBox css={{ flexDirection: "column" }}>
+        <GappedBox css={{ alignItems: "center" }}>
+          <Text size="1">{comment.owner}</Text>
+          <Text size="1">
+            <Timeago date={new Date(comment.createdAt)} />
+          </Text>
+        </GappedBox>
+        <Box>
+          <Text size="4" css={{ color: "$gray12" }}>
+            {comment.content}
+          </Text>
+        </Box>
+        <GappedBox>
+          <SmallLink to="#" onClick={() => setOpen(!open)}>
+            Cevapla
+          </SmallLink>
+          {comments.length > 0 && (
+            <SmallLink to="#" onClick={() => setShowComments(!showComments)}>
+              {showComments
+                ? "Gizle"
+                : `Göster (${comments.length ?? 0} yorum)`}
+            </SmallLink>
+          )}
+        </GappedBox>
+      </GappedBox>
       {open && (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <textarea onChange={(event) => setMessage(event.target.value)} />
-          <button onClick={() => addComment(comment.id)}>add comment</button>
-        </div>
+        <GappedBox css={{ flexDirection: "column" }}>
+          <Textarea
+            rows={6}
+            onChange={(event) => setMessage(event.target.value)}
+          />
+          <Box>
+            <Button onClick={() => addComment(comment.id)}>Gönder</Button>
+          </Box>
+        </GappedBox>
       )}
-      <div style={{ paddingLeft: 30 }}>
-        {comments?.map((c) => {
-          return (
-            <CommentItem
-              key={c.id}
-              comment={c}
-              username={username}
-              comments={allComments[c.id]?.comments ?? []}
-              postID={postID}
-              allComments={allComments}
-              refetch={refetch}
-            />
-          );
-        })}
-      </div>
-    </div>
+      <CommentListContainer>
+        {showComments &&
+          comments.map((c) => {
+            return (
+              <CommentItem
+                key={c.id}
+                comment={c}
+                username={username}
+                comments={allComments[c.id]?.comments ?? []}
+                postID={postID}
+                allComments={allComments}
+                refetch={refetch}
+              />
+            );
+          })}
+      </CommentListContainer>
+    </GappedBox>
   );
 };
+
+const CommentListContainer = styled(Box, {
+  paddingLeft: 25,
+  borderLeft: "1px dotted $gray6",
+});

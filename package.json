@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@radix-ui/colors": "^0.1.8",
+    "@radix-ui/react-icons": "^1.1.0",
     "@stitches/react": "^1.2.7",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",

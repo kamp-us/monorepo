@@ -1,5 +1,5 @@
 import { Post } from "../../API";
-import React, { FC } from "react";
+import { FC } from "react";
 import { PostItem } from "./PostItem";
 import { styled } from "@stitches/react";
 
@@ -12,7 +12,7 @@ export const PostList: FC<PostListProps> = ({ posts, refetch }) => {
   return (
     <Container>
       {posts.map((post, index) => {
-        return <PostItem refetch={refetch} key={index} post={post} />;
+        return <PostItem onUpvoteSuccess={refetch} key={index} post={post} />;
       })}
     </Container>
   );
@@ -21,5 +21,5 @@ export const PostList: FC<PostListProps> = ({ posts, refetch }) => {
 const Container = styled("div", {
   display: "flex",
   flexDirection: "column",
-  gap: 10,
+  // gap: 10,
 });
