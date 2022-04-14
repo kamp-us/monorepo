@@ -1,10 +1,9 @@
-import { styled } from "@stitches/react";
+import { styled } from "../../stitches.config";
 
 export const CenteredContainer = styled("div", {
-  width: 400,
+  maxWidth: 600,
   margin: "0 auto",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  padding: 20,
 });

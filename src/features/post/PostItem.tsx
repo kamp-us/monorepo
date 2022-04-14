@@ -1,17 +1,19 @@
 import { CreateUpvoteMutation, Post } from "../../API";
-import React, { FC } from "react";
-import { styled } from "@stitches/react";
-import { Link } from "react-router-dom";
+import { FC } from "react";
 import { createUpvote } from "../../graphql/mutations";
 import { useUserContext } from "../auth/user-context";
 import { useAmplifyMutation } from "../utils/amplify/useMutation";
+import { UpvoteButton } from "../../ui-library/UpvoteButton";
+import { ExternalLink } from "../../ui-library/ExternalLink";
+import { SmallLink } from "../../ui-library/SmallLink";
+import { GappedBox } from "../../ui-library/GappedBox";
 
 type PostItemProps = {
   post: Post;
-  refetch: () => void;
+  onUpvoteSuccess?: () => void;
 };
 
-export const PostItem: FC<PostItemProps> = ({ post, refetch }) => {
+export const PostItem: FC<PostItemProps> = ({ post, onUpvoteSuccess }) => {
   const user = useUserContext();
   const { mutationFn } = useAmplifyMutation<CreateUpvoteMutation>(createUpvote);
 
@@ -26,30 +28,45 @@ export const PostItem: FC<PostItemProps> = ({ post, refetch }) => {
 
     try {
       await mutationFn(variables);
-      refetch();
+      onUpvoteSuccess?.();
     } catch (err) {
       console.log("error upvoting", err);
     }
   };
 
   return (
-    <Container>
-      {!post.isUpvoted && <button onClick={handleUpvote}>Upvote</button>}
-      {post.upvoteCount} upvotes
-      <Link to={`posts/${post.id}`}>{post.commentCount} comments</Link>
-      <a href={`//${post.url}`} target="_blank" rel="noopener noreferrer">
-        {post.title}
-      </a>
-      <p>{post.url}</p>
-      <p>{post.owner}</p>
-    </Container>
+    <GappedBox css={{ padding: 5, alignItems: "center" }}>
+      <UpvoteButton
+        isUpvoted={!!post.isUpvoted}
+        onClick={handleUpvote}
+        upvoteCount={post.upvoteCount ?? 0}
+      />
+      <GappedBox css={{ flexDirection: "column" }}>
+        <GappedBox css={{ alignItems: "center" }}>
+          <ExternalLink
+            href={`//${post.url}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {post.title}
+          </ExternalLink>
+          <SmallLink to={post.url}>{post.url}</SmallLink>
+        </GappedBox>
+        <GappedBox
+          css={{
+            display: "flex",
+            gap: "5px",
+            alignItems: "center",
+            color: "$gray9",
+            fontSize: "0.8rem",
+          }}
+        >
+          <div>{post.owner}</div> |
+          <SmallLink to={`posts/${post.id}`}>
+            {post.commentCount} yorum
+          </SmallLink>
+        </GappedBox>
+      </GappedBox>
+    </GappedBox>
   );
 };
-
-const Container = styled("div", {
-  display: "flex",
-  flexDirection: "column",
-  padding: 20,
-  backgroundColor: "wheat",
-  gap: 10,
-});

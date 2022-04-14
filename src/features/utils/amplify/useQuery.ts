@@ -8,12 +8,17 @@ type UseAmplifyQueryType<ResultType> = {
   error: any;
 };
 
+type OptionsType = {
+  skip: boolean;
+};
+
 export const useAmplifyQuery = <
   ResultType extends {},
   VariablesType extends {} = {}
 >(
   query: string,
-  variables?: VariablesType
+  variables?: VariablesType,
+  options?: OptionsType
 ): UseAmplifyQueryType<ResultType> => {
   const [data, setData] = useState<any>(undefined);
   const [error, setError] = useState<any>(false);
@@ -35,11 +40,15 @@ export const useAmplifyQuery = <
   }, [query, variables]);
 
   const refetch = () => {
-    fetchQuery();
+    if (!options?.skip) {
+      fetchQuery();
+    }
   };
 
   useEffect(() => {
-    fetchQuery();
+    if (!options?.skip) {
+      fetchQuery();
+    }
   }, []);
 
   return { data, error, loading, refetch };
