@@ -51,9 +51,26 @@ export const onCreatePost = /* GraphQL */ `
       tags {
         items {
           id
-          name
-          category
           postID
+          tagID
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
+          post {
+            id
+            title
+            url
+            owner
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -113,9 +130,26 @@ export const onUpdatePost = /* GraphQL */ `
       tags {
         items {
           id
-          name
-          category
           postID
+          tagID
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
+          post {
+            id
+            title
+            url
+            owner
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -175,9 +209,26 @@ export const onDeletePost = /* GraphQL */ `
       tags {
         items {
           id
-          name
-          category
           postID
+          tagID
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
+          post {
+            id
+            title
+            url
+            owner
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -310,9 +361,8 @@ export const onCreateUpvote = /* GraphQL */ `
         tags {
           items {
             id
-            name
-            category
             postID
+            tagID
             createdAt
             updatedAt
           }
@@ -365,9 +415,8 @@ export const onUpdateUpvote = /* GraphQL */ `
         tags {
           items {
             id
-            name
-            category
             postID
+            tagID
             createdAt
             updatedAt
           }
@@ -420,9 +469,8 @@ export const onDeleteUpvote = /* GraphQL */ `
         tags {
           items {
             id
-            name
-            category
             postID
+            tagID
             createdAt
             updatedAt
           }
@@ -443,7 +491,6 @@ export const onCreateTag = /* GraphQL */ `
       id
       name
       category
-      postID
       createdAt
       updatedAt
     }
@@ -455,7 +502,6 @@ export const onUpdateTag = /* GraphQL */ `
       id
       name
       category
-      postID
       createdAt
       updatedAt
     }
@@ -467,7 +513,189 @@ export const onDeleteTag = /* GraphQL */ `
       id
       name
       category
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreatePostTag = /* GraphQL */ `
+  subscription OnCreatePostTag {
+    onCreatePostTag {
+      id
       postID
+      tagID
+      tag {
+        id
+        name
+        category
+        createdAt
+        updatedAt
+      }
+      post {
+        id
+        title
+        url
+        owner
+        isUpvoted
+        upvoteCount
+        commentCount
+        comments {
+          items {
+            id
+            content
+            owner
+            parentID
+            postID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        upvotes {
+          items {
+            postID
+            owner
+            createdAt
+            updatedAt
+            postUpvotesId
+          }
+          nextToken
+        }
+        tags {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePostTag = /* GraphQL */ `
+  subscription OnUpdatePostTag {
+    onUpdatePostTag {
+      id
+      postID
+      tagID
+      tag {
+        id
+        name
+        category
+        createdAt
+        updatedAt
+      }
+      post {
+        id
+        title
+        url
+        owner
+        isUpvoted
+        upvoteCount
+        commentCount
+        comments {
+          items {
+            id
+            content
+            owner
+            parentID
+            postID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        upvotes {
+          items {
+            postID
+            owner
+            createdAt
+            updatedAt
+            postUpvotesId
+          }
+          nextToken
+        }
+        tags {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePostTag = /* GraphQL */ `
+  subscription OnDeletePostTag {
+    onDeletePostTag {
+      id
+      postID
+      tagID
+      tag {
+        id
+        name
+        category
+        createdAt
+        updatedAt
+      }
+      post {
+        id
+        title
+        url
+        owner
+        isUpvoted
+        upvoteCount
+        commentCount
+        comments {
+          items {
+            id
+            content
+            owner
+            parentID
+            postID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        upvotes {
+          items {
+            postID
+            owner
+            createdAt
+            updatedAt
+            postUpvotesId
+          }
+          nextToken
+        }
+        tags {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

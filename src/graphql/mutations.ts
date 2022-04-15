@@ -54,9 +54,26 @@ export const createPost = /* GraphQL */ `
       tags {
         items {
           id
-          name
-          category
           postID
+          tagID
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
+          post {
+            id
+            title
+            url
+            owner
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -119,9 +136,26 @@ export const updatePost = /* GraphQL */ `
       tags {
         items {
           id
-          name
-          category
           postID
+          tagID
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
+          post {
+            id
+            title
+            url
+            owner
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -184,9 +218,26 @@ export const deletePost = /* GraphQL */ `
       tags {
         items {
           id
-          name
-          category
           postID
+          tagID
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
+          post {
+            id
+            title
+            url
+            owner
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -331,9 +382,8 @@ export const createUpvote = /* GraphQL */ `
         tags {
           items {
             id
-            name
-            category
             postID
+            tagID
             createdAt
             updatedAt
           }
@@ -389,9 +439,8 @@ export const updateUpvote = /* GraphQL */ `
         tags {
           items {
             id
-            name
-            category
             postID
+            tagID
             createdAt
             updatedAt
           }
@@ -447,9 +496,8 @@ export const deleteUpvote = /* GraphQL */ `
         tags {
           items {
             id
-            name
-            category
             postID
+            tagID
             createdAt
             updatedAt
           }
@@ -473,7 +521,6 @@ export const createTag = /* GraphQL */ `
       id
       name
       category
-      postID
       createdAt
       updatedAt
     }
@@ -488,7 +535,6 @@ export const updateTag = /* GraphQL */ `
       id
       name
       category
-      postID
       createdAt
       updatedAt
     }
@@ -503,7 +549,198 @@ export const deleteTag = /* GraphQL */ `
       id
       name
       category
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPostTag = /* GraphQL */ `
+  mutation CreatePostTag(
+    $input: CreatePostTagInput!
+    $condition: ModelPostTagConditionInput
+  ) {
+    createPostTag(input: $input, condition: $condition) {
+      id
       postID
+      tagID
+      tag {
+        id
+        name
+        category
+        createdAt
+        updatedAt
+      }
+      post {
+        id
+        title
+        url
+        owner
+        isUpvoted
+        upvoteCount
+        commentCount
+        comments {
+          items {
+            id
+            content
+            owner
+            parentID
+            postID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        upvotes {
+          items {
+            postID
+            owner
+            createdAt
+            updatedAt
+            postUpvotesId
+          }
+          nextToken
+        }
+        tags {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePostTag = /* GraphQL */ `
+  mutation UpdatePostTag(
+    $input: UpdatePostTagInput!
+    $condition: ModelPostTagConditionInput
+  ) {
+    updatePostTag(input: $input, condition: $condition) {
+      id
+      postID
+      tagID
+      tag {
+        id
+        name
+        category
+        createdAt
+        updatedAt
+      }
+      post {
+        id
+        title
+        url
+        owner
+        isUpvoted
+        upvoteCount
+        commentCount
+        comments {
+          items {
+            id
+            content
+            owner
+            parentID
+            postID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        upvotes {
+          items {
+            postID
+            owner
+            createdAt
+            updatedAt
+            postUpvotesId
+          }
+          nextToken
+        }
+        tags {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePostTag = /* GraphQL */ `
+  mutation DeletePostTag(
+    $input: DeletePostTagInput!
+    $condition: ModelPostTagConditionInput
+  ) {
+    deletePostTag(input: $input, condition: $condition) {
+      id
+      postID
+      tagID
+      tag {
+        id
+        name
+        category
+        createdAt
+        updatedAt
+      }
+      post {
+        id
+        title
+        url
+        owner
+        isUpvoted
+        upvoteCount
+        commentCount
+        comments {
+          items {
+            id
+            content
+            owner
+            parentID
+            postID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        upvotes {
+          items {
+            postID
+            owner
+            createdAt
+            updatedAt
+            postUpvotesId
+          }
+          nextToken
+        }
+        tags {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

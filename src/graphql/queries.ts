@@ -51,9 +51,26 @@ export const getPost = /* GraphQL */ `
       tags {
         items {
           id
-          name
-          category
           postID
+          tagID
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
+          post {
+            id
+            title
+            url
+            owner
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -104,9 +121,8 @@ export const listPosts = /* GraphQL */ `
         tags {
           items {
             id
-            name
-            category
             postID
+            tagID
             createdAt
             updatedAt
           }
@@ -217,9 +233,8 @@ export const getUpvote = /* GraphQL */ `
         tags {
           items {
             id
-            name
-            category
             postID
+            tagID
             createdAt
             updatedAt
           }
@@ -288,7 +303,6 @@ export const getTag = /* GraphQL */ `
       id
       name
       category
-      postID
       createdAt
       updatedAt
     }
@@ -305,7 +319,112 @@ export const listTags = /* GraphQL */ `
         id
         name
         category
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getPostTag = /* GraphQL */ `
+  query GetPostTag($id: ID!) {
+    getPostTag(id: $id) {
+      id
+      postID
+      tagID
+      tag {
+        id
+        name
+        category
+        createdAt
+        updatedAt
+      }
+      post {
+        id
+        title
+        url
+        owner
+        isUpvoted
+        upvoteCount
+        commentCount
+        comments {
+          items {
+            id
+            content
+            owner
+            parentID
+            postID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        upvotes {
+          items {
+            postID
+            owner
+            createdAt
+            updatedAt
+            postUpvotesId
+          }
+          nextToken
+        }
+        tags {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPostTags = /* GraphQL */ `
+  query ListPostTags(
+    $filter: ModelPostTagFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPostTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
         postID
+        tagID
+        tag {
+          id
+          name
+          category
+          createdAt
+          updatedAt
+        }
+        post {
+          id
+          title
+          url
+          owner
+          isUpvoted
+          upvoteCount
+          commentCount
+          comments {
+            nextToken
+          }
+          upvotes {
+            nextToken
+          }
+          tags {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
