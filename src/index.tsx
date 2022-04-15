@@ -1,10 +1,10 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import "./configureAmplify";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { globalStyles } from "./ui-library/globalStyles";
+import "./index.css";
 
 globalStyles();
 
