@@ -1,6 +1,6 @@
-import { CreateUpvoteMutation, Post } from "../../API";
+import { CreateUpvoteMutation, DeleteUpvoteMutation, Post } from "../../API";
 import { FC } from "react";
-import { createUpvote } from "../../graphql/mutations";
+import { createUpvote, deleteUpvote } from "../../graphql/mutations";
 import { useUserContext } from "../auth/user-context";
 import { useAmplifyMutation } from "../utils/amplify/useMutation";
 import { UpvoteButton } from "../../ui-library/UpvoteButton";
@@ -15,19 +15,37 @@ type PostItemProps = {
 
 export const PostItem: FC<PostItemProps> = ({ post, onUpvoteSuccess }) => {
   const user = useUserContext();
-  const { mutationFn } = useAmplifyMutation<CreateUpvoteMutation>(createUpvote);
+  const { mutationFn: createUpvoteMutation } =
+    useAmplifyMutation<CreateUpvoteMutation>(createUpvote);
+
+  const { mutationFn: deleteUpvoteMutation } =
+    useAmplifyMutation<DeleteUpvoteMutation>(deleteUpvote);
 
   const handleUpvote = async () => {
-    const variables = {
-      input: {
-        postID: post.id,
-        postUpvotesId: post.id,
-        owner: user?.username as string,
-      },
-    };
+    if (!user) {
+      console.log("User not logged in");
+      return;
+    }
 
     try {
-      await mutationFn(variables);
+      if (!!post.isUpvoted) {
+        const variables = {
+          input: {
+            postID: post.id,
+            owner: user.username,
+          },
+        };
+        await deleteUpvoteMutation(variables);
+      } else {
+        const variables = {
+          input: {
+            postID: post.id,
+            postUpvotesId: post.id,
+            owner: user.username,
+          },
+        };
+        await createUpvoteMutation(variables);
+      }
       onUpvoteSuccess?.();
     } catch (err) {
       console.log("error upvoting", err);

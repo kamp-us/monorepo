@@ -1,7 +1,7 @@
 import { styled } from "../stitches.config";
 
 export const ExternalLink = styled("a", {
-  color: "$blue9",
+  color: "$gray12",
   fontWeight: "bold",
   "&:hover": {
     textDecoration: "none",

@@ -31,7 +31,7 @@ export const UpvoteButton: FC<UpvoteProps> = ({
         css={{
           width: 24,
           height: 24,
-          color: isUpvoted ? "$purple9" : "$gray9",
+          color: isUpvoted ? "$amber9" : "$gray9",
         }}
       />
       <Box>{upvoteCount}</Box>

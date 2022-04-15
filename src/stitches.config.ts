@@ -1,9 +1,11 @@
 import {
+  amber,
   gray,
   blue,
   red,
   green,
   purple,
+  amberDark,
   grayDark,
   blueDark,
   redDark,
@@ -17,6 +19,7 @@ import { createStitches } from "@stitches/react";
 export const { styled, createTheme } = createStitches({
   theme: {
     colors: {
+      ...amber,
       ...gray,
       ...blue,
       ...red,
@@ -35,6 +38,7 @@ export const { styled, createTheme } = createStitches({
 
 export const darkTheme = createTheme({
   colors: {
+    ...amberDark,
     ...grayDark,
     ...blueDark,
     ...redDark,
