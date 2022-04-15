@@ -99,7 +99,7 @@ export const SinglePost: FC<PostProps> = () => {
 
   return (
     <CenteredContainer css={{ gap: 5 }}>
-      <PostItem post={post} />
+      <PostItem post={post} onUpvoteSuccess={refetch} />
       <Textarea rows={4} onChange={(event) => setComment(event.target.value)} />
       <Box css={{ paddingBottom: 10 }}>
         <Button onClick={addComment}>Cevap yaz</Button>
