@@ -3,14 +3,12 @@ import { ListPostsQuery, ListPostsQueryVariables, Post } from "../API";
 import { listPosts } from "../graphql/queries";
 import { CenteredContainer } from "../ui-library/layout-components/CenteredContainer";
 import { PostList } from "../features/post/PostList";
-import { useAmplifyQuery } from "../features/utils/amplify/useQuery";
-import { Box } from "../ui-library/layout-components/Box";
+import { gql, useQuery } from "@apollo/client";
 
 export const Home = () => {
-  const { data, refetch } = useAmplifyQuery<
-    ListPostsQuery,
-    ListPostsQueryVariables
-  >(listPosts);
+  const { data, refetch } = useQuery<ListPostsQuery, ListPostsQueryVariables>(
+    gql(listPosts)
+  );
   const [posts, setPosts] = React.useState<Post[]>([]);
 
   useEffect(() => {
@@ -20,10 +18,8 @@ export const Home = () => {
   }, [data]);
 
   return (
-    <CenteredContainer>
-      <Box css={{ paddingTop: 20 }}>
-        <PostList posts={posts} refetch={refetch} />
-      </Box>
+    <CenteredContainer css={{ paddingTop: 20 }}>
+      <PostList posts={posts} refetch={refetch} />
     </CenteredContainer>
   );
 };

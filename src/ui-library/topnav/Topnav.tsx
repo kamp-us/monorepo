@@ -17,11 +17,23 @@ export const Topnav: FC = () => {
           <Spacer />
           <Box css={{ display: "flex", gap: 10, alignItems: "center" }}>
             <ThemeToggle />
-            <StyledLink to="/send">Yeni Gönderi</StyledLink>
-            {user && (
-              <StyledLink to="#" onClick={() => Auth.signOut()}>
-                Çıkış
-              </StyledLink>
+            {user ? (
+              <>
+                <StyledLink to="/send">Yeni Gönderi</StyledLink>
+                <StyledLink
+                  to="#"
+                  onClick={async () => {
+                    await Auth.signOut();
+                    window.location.reload();
+                  }}
+                >
+                  Çıkış
+                </StyledLink>
+              </>
+            ) : (
+              <>
+                <StyledLink to="/login">Giriş</StyledLink>
+              </>
             )}
           </Box>
         </Box>
