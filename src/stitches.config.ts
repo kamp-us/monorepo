@@ -33,6 +33,9 @@ export const { styled, createTheme } = createStitches({
       4: "15px",
       5: "16px",
     },
+    fonts: {
+      inter: "Inter, sans-serif",
+    },
   },
 });
 

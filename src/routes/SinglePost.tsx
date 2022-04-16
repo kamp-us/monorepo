@@ -18,6 +18,7 @@ import { Button } from "../ui-library/layout-components/Button";
 import { Textarea } from "../ui-library/Textarea";
 import { Box } from "../ui-library/layout-components/Box";
 import { gql, useMutation, useQuery } from "@apollo/client";
+import { Text } from "../ui-library/Text";
 
 type PostProps = {};
 
@@ -56,12 +57,12 @@ export const SinglePost: FC<PostProps> = () => {
     CreateCommentMutationVariables
   >(gql(createComment));
 
-  const { data, loading, refetch } = useQuery<
-    GetPostQuery,
-    GetPostQueryVariables
-  >(gql(getPost), { variables: { id: id as string }, skip: !id });
+  const { data, refetch } = useQuery<GetPostQuery, GetPostQueryVariables>(
+    gql(getPost),
+    { variables: { id: id as string }, skip: !id }
+  );
 
-  if (loading) {
+  if (!data) {
     return null;
   }
 
@@ -106,23 +107,49 @@ export const SinglePost: FC<PostProps> = () => {
   return (
     <CenteredContainer css={{ gap: 5 }}>
       <PostItem post={post} onUpvoteSuccess={refetch} />
-      <Textarea rows={4} onChange={(event) => setComment(event.target.value)} />
-      <Box css={{ paddingBottom: 10 }}>
-        <Button onClick={addComment}>Cevap yaz</Button>
+      <Textarea
+        css={{
+          cursor: user ? "pointer" : "not-allowed",
+        }}
+        disabled={!user}
+        rows={4}
+        onChange={(event) => setComment(event.target.value)}
+        value={user ? comment : "Yorum yazmak için giriş yapmış olmalısın."}
+      />
+      <Box css={{ padding: "5px 0 10px" }}>
+        <Button
+          disabled={!user}
+          css={{
+            cursor: user ? "pointer" : "not-allowed",
+          }}
+          onClick={addComment}
+        >
+          Cevap yaz
+        </Button>
       </Box>
-      {postComments.map(({ comment, comments }) => {
-        return (
-          <CommentItem
-            key={comment.id}
-            comment={comment}
-            comments={comments}
-            postID={post?.id as string}
-            username={user?.username as string}
-            allComments={visualTree}
-            refetch={refetch}
-          />
-        );
-      })}
+      {postComments.length > 0 && (
+        <>
+          <Text
+            size={5}
+            css={{ fontWeight: 500, color: "$gray11", lineHeight: 1.5 }}
+          >
+            Yorumlar
+          </Text>
+          {postComments.map(({ comment, comments }) => {
+            return (
+              <CommentItem
+                key={comment.id}
+                comment={comment}
+                comments={comments}
+                postID={post?.id as string}
+                username={user?.username as string}
+                allComments={visualTree}
+                refetch={refetch}
+              />
+            );
+          })}
+        </>
+      )}
     </CenteredContainer>
   );
 };
