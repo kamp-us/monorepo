@@ -66,13 +66,13 @@ export const CommentItem: FC<CommentProps> = ({
     <GappedBox css={{ flexDirection: "column", gap: 15 }}>
       <GappedBox css={{ flexDirection: "column" }}>
         <GappedBox css={{ alignItems: "center" }}>
-          <Text size="1">{comment.owner}</Text>
+          <Text size="1">@{comment.owner}</Text>
           <Text size="1">
             <Timeago date={new Date(comment.createdAt)} />
           </Text>
         </GappedBox>
         <Box>
-          <Text size="4" css={{ color: "$gray12" }}>
+          <Text size="3" css={{ color: "$gray12" }}>
             {comment.content}
           </Text>
         </Box>

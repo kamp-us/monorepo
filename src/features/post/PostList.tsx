@@ -1,7 +1,7 @@
 import { Post } from "../../API";
 import { FC } from "react";
 import { PostItem } from "./PostItem";
-import { styled } from "@stitches/react";
+import { Box } from "../../ui-library/layout-components/Box";
 
 type PostListProps = {
   posts: Post[];
@@ -10,16 +10,10 @@ type PostListProps = {
 
 export const PostList: FC<PostListProps> = ({ posts, refetch }) => {
   return (
-    <Container>
-      {posts.map((post, index) => {
-        return <PostItem onUpvoteSuccess={refetch} key={index} post={post} />;
+    <Box>
+      {posts.map((post) => {
+        return <PostItem onUpvoteSuccess={refetch} key={post.id} post={post} />;
       })}
-    </Container>
+    </Box>
   );
 };
-
-const Container = styled("div", {
-  display: "flex",
-  flexDirection: "column",
-  // gap: 10,
-});

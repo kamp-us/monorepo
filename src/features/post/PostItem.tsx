@@ -1,12 +1,18 @@
-import { CreateUpvoteMutation, DeleteUpvoteMutation, Post } from "../../API";
+import {
+  CreateUpvoteMutation,
+  CreateUpvoteMutationVariables,
+  DeleteUpvoteMutation,
+  DeleteUpvoteMutationVariables,
+  Post,
+} from "../../API";
 import { FC } from "react";
 import { createUpvote, deleteUpvote } from "../../graphql/mutations";
 import { useUserContext } from "../auth/user-context";
-import { useAmplifyMutation } from "../utils/amplify/useMutation";
 import { UpvoteButton } from "../../ui-library/UpvoteButton";
 import { ExternalLink } from "../../ui-library/ExternalLink";
 import { SmallLink } from "../../ui-library/SmallLink";
 import { GappedBox } from "../../ui-library/GappedBox";
+import { gql, useMutation } from "@apollo/client";
 
 type PostItemProps = {
   post: Post;
@@ -15,11 +21,16 @@ type PostItemProps = {
 
 export const PostItem: FC<PostItemProps> = ({ post, onUpvoteSuccess }) => {
   const user = useUserContext();
-  const { mutationFn: createUpvoteMutation } =
-    useAmplifyMutation<CreateUpvoteMutation>(createUpvote);
 
-  const { mutationFn: deleteUpvoteMutation } =
-    useAmplifyMutation<DeleteUpvoteMutation>(deleteUpvote);
+  const [createUpvoteMutation] = useMutation<
+    CreateUpvoteMutation,
+    CreateUpvoteMutationVariables
+  >(gql(createUpvote));
+
+  const [deleteUpvoteMutation] = useMutation<
+    DeleteUpvoteMutation,
+    DeleteUpvoteMutationVariables
+  >(gql(deleteUpvote));
 
   const handleUpvote = async () => {
     if (!user) {
@@ -35,7 +46,7 @@ export const PostItem: FC<PostItemProps> = ({ post, onUpvoteSuccess }) => {
             owner: user.username,
           },
         };
-        await deleteUpvoteMutation(variables);
+        await deleteUpvoteMutation({ variables });
       } else {
         const variables = {
           input: {
@@ -44,7 +55,7 @@ export const PostItem: FC<PostItemProps> = ({ post, onUpvoteSuccess }) => {
             owner: user.username,
           },
         };
-        await createUpvoteMutation(variables);
+        await createUpvoteMutation({ variables });
       }
       onUpvoteSuccess?.();
     } catch (err) {
