@@ -6,7 +6,7 @@ export const Button = styled("button", {
   borderRadius: 5,
   fontSize: "13px",
   border: "0",
-  padding: 5,
+  padding: "5px 10px",
   cursor: "pointer",
 
   "&:hover": {

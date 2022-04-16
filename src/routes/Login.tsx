@@ -3,7 +3,11 @@ import { useUserContext } from "../features/auth/user-context";
 import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import { CenteredContainer } from "../ui-library/layout-components/CenteredContainer";
-import { Link } from "../ui-library/Link";
+import { Box } from "../ui-library/layout-components/Box";
+import { Label } from "../ui-library/Label";
+import { Input } from "../ui-library/Input";
+import { GappedBox } from "../ui-library/GappedBox";
+import { Button } from "../ui-library/layout-components/Button";
 
 const initialState = { username: "", password: "" };
 
@@ -34,7 +38,7 @@ export const Login = () => {
     setError(null);
     try {
       await signIn();
-      navigate("/");
+      window.location.reload();
     } catch (err) {
       console.log(err);
       setError(err as Error);
@@ -42,48 +46,34 @@ export const Login = () => {
   };
 
   return (
-    <CenteredContainer>
-      <div>
-        <form onSubmit={onFormSubmit}>
-          <div>
-            <label htmlFor="username">Username</label>
-            <div>
-              <input
-                id="username"
-                name="username"
-                type="text"
-                placeholder="iron-man"
-                required
-                onChange={(event) => setInput("username", event.target.value)}
-              />
-            </div>
-          </div>
+    <form onSubmit={onFormSubmit}>
+      <CenteredContainer>
+        <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
+          <Label htmlFor="username">Kullanıcı Adı</Label>
+          <Input
+            id="username"
+            name="username"
+            type="text"
+            placeholder="iron-man"
+            required
+            onChange={(event) => setInput("username", event.target.value)}
+          />
 
-          <div>
-            <label htmlFor="password">Password</label>
-            <div>
-              <input
-                id="password"
-                name="password"
-                placeholder="super-secret-password"
-                type="password"
-                required
-                onChange={(event) => setInput("password", event.target.value)}
-              />
-            </div>
-          </div>
+          <Label htmlFor="password">Parola</Label>
+          <Input
+            id="password"
+            name="password"
+            placeholder="super-secret-password"
+            type="password"
+            required
+            onChange={(event) => setInput("password", event.target.value)}
+          />
 
-          <div>
-            <button type="submit">Log in</button>
-          </div>
-          {/*{error && (*/}
-          {/*  <div className="mt-6">*/}
-          {/*    <p>{error}</p>*/}
-          {/*  </div>*/}
-          {/*)}*/}
-        </form>
-      </div>
-      <Link to="/signup">Don't you have an account?</Link>
-    </CenteredContainer>
+          <Box>
+            <Button type="submit">Giriş yap</Button>
+          </Box>
+        </GappedBox>
+      </CenteredContainer>
+    </form>
   );
 };
