@@ -13,6 +13,7 @@ import { ExternalLink } from "../../ui-library/ExternalLink";
 import { SmallLink } from "../../ui-library/SmallLink";
 import { GappedBox } from "../../ui-library/GappedBox";
 import { gql, useMutation } from "@apollo/client";
+import { Box } from "../../ui-library/layout-components/Box";
 
 type PostItemProps = {
   post: Post;
@@ -90,8 +91,8 @@ export const PostItem: FC<PostItemProps> = ({ post, onUpvoteSuccess }) => {
             fontSize: "0.8rem",
           }}
         >
-          <div>{post.owner}</div> |
-          <SmallLink to={`posts/${post.id}`}>
+          <Box>@{post.owner}</Box> |
+          <SmallLink to={`/posts/${post.id}`}>
             {post.commentCount} yorum
           </SmallLink>
         </GappedBox>

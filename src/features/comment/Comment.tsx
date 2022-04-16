@@ -13,6 +13,7 @@ import { SmallLink } from "../../ui-library/SmallLink";
 import { Text } from "../../ui-library/Text";
 import { Textarea } from "../../ui-library/Textarea";
 import { Timeago } from "../../ui-library/Timeago";
+import { useUserContext } from "../auth/user-context";
 import { GQLOperation } from "../utils/amplify/GQLOperation";
 
 type CommentProps = {
@@ -34,6 +35,7 @@ export const CommentItem: FC<CommentProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const user = useUserContext();
 
   const [showComments, setShowComments] = useState(false);
 
@@ -77,9 +79,11 @@ export const CommentItem: FC<CommentProps> = ({
           </Text>
         </Box>
         <GappedBox>
-          <SmallLink to="#" onClick={() => setOpen(!open)}>
-            Cevapla
-          </SmallLink>
+          {user && (
+            <SmallLink to="#" onClick={() => setOpen(!open)}>
+              Cevapla
+            </SmallLink>
+          )}
           {comments.length > 0 && (
             <SmallLink to="#" onClick={() => setShowComments(!showComments)}>
               {showComments
