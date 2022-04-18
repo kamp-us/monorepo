@@ -14,7 +14,6 @@ import { ThemeProvider } from "~/ui-library/ThemeProvider";
 import { fetchUser } from "./features/auth/useFetchUser";
 import { AuthUser, UserContext } from "./features/auth/user-context";
 import { createApolloClient } from "./graphql/createApolloClient";
-import { getCssText } from "./stitches.config";
 // @ts-ignore
 import config from "~/aws-exports";
 import { ApolloProvider } from "@apollo/client";

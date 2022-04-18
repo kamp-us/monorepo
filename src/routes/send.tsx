@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const initialState = { title: "", url: "" };
 
-export const SendPost = () => {
+export const Send = () => {
   const [formState, setFormState] = useState(initialState);
   const user = useUserContext();
   const navigate = useNavigate();
@@ -61,3 +61,5 @@ export const SendPost = () => {
     </CenteredContainer>
   );
 };
+
+export default Send;

@@ -1,26 +1,18 @@
-import {
-  Comment,
-  CreateCommentMutation,
-  CreateCommentMutationVariables,
-  GetPostQuery,
-  GetPostQueryVariables,
-  Post,
-} from "../API";
-import { FC, useState } from "react";
+import { Comment, GetPostQuery, GetPostQueryVariables, Post } from "~/API";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPost } from "../graphql/queries";
-import { CenteredContainer } from "../ui-library/layout-components/CenteredContainer";
-import { createComment } from "../graphql/mutations";
-import { CommentItem } from "../features/comment/Comment";
-import { useUserContext } from "../features/auth/user-context";
-import { PostItem } from "../features/post/PostItem";
-import { Button } from "../ui-library/layout-components/Button";
-import { Textarea } from "../ui-library/Textarea";
-import { Box } from "../ui-library/layout-components/Box";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { Text } from "../ui-library/Text";
-
-type PostProps = {};
+import { getPost } from "~/graphql/queries";
+import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
+import { CommentItem } from "~/features/comment/Comment";
+import { useUserContext } from "~/features/auth/user-context";
+import { PostItem } from "~/features/post/PostItem";
+import { Button } from "~/ui-library/layout-components/Button";
+import { Textarea } from "~/ui-library/Textarea";
+import { Box } from "~/ui-library/layout-components/Box";
+import { gql } from "@apollo/client";
+import { Text } from "~/ui-library/Text";
+import { LoaderFunction, useLoaderData } from "remix";
+import { createClient } from "~/graphql/apollo-client";
 
 interface VisualTree {
   [key: string]: {
@@ -47,26 +39,43 @@ const toVisualTree = (comments: Comment[]) => {
   return tree;
 };
 
-export const SinglePost: FC<PostProps> = () => {
-  const { id } = useParams<{ id: string }>();
-  const [comment, setComment] = useState("");
-  const user = useUserContext();
+export const loader: LoaderFunction = async ({ params }) => {
+  const client = await createClient();
 
-  const [mutateComment] = useMutation<
-    CreateCommentMutation,
-    CreateCommentMutationVariables
-  >(gql(createComment));
+  if (!params.id) return null;
 
-  const { data, refetch } = useQuery<GetPostQuery, GetPostQueryVariables>(
-    gql(getPost),
-    { variables: { id: id as string }, skip: !id }
-  );
+  const { data, error } = await client.query<
+    GetPostQuery,
+    GetPostQueryVariables
+  >({
+    query: gql(getPost),
+    variables: { id: params.id },
+  });
 
-  if (!data) {
-    return null;
+  if (error) {
+    throw error;
   }
 
-  const post = data?.getPost as Post;
+  return { data };
+};
+
+type LoaderData = {
+  data: GetPostQuery;
+};
+
+const SinglePost = () => {
+  const { id } = useParams<{ id: string }>();
+  const user = useUserContext();
+  const { data } = useLoaderData<LoaderData>();
+
+  const [comment, setComment] = useState("");
+  // const [mutateComment] = useMutation<
+  //   CreateCommentMutation,
+  //   CreateCommentMutationVariables
+  // >(gql(createComment));
+  //
+
+  const post = data.getPost as Post;
   const sortedComments = [...(post.comments?.items as Comment[])].sort((a, b) =>
     a.createdAt > b.createdAt ? 1 : -1
   );
@@ -83,16 +92,16 @@ export const SinglePost: FC<PostProps> = () => {
         return;
       }
 
-      await mutateComment({
-        variables: {
-          input: {
-            content: comment,
-            owner: user.username,
-            postID: id,
-          },
-        },
-      });
-      refetch();
+      // await mutateComment({
+      //   variables: {
+      //     input: {
+      //       content: comment,
+      //       owner: user.username,
+      //       postID: id,
+      //     },
+      //   },
+      // });
+      // refetch();
     } catch (e) {
       console.log("error adding comment", e);
     }
@@ -106,7 +115,7 @@ export const SinglePost: FC<PostProps> = () => {
 
   return (
     <CenteredContainer css={{ gap: 5 }}>
-      <PostItem post={post} onUpvoteSuccess={refetch} />
+      <PostItem post={post} onUpvoteSuccess={() => {}} />
       <Textarea
         css={{
           cursor: user ? "pointer" : "not-allowed",
@@ -144,7 +153,7 @@ export const SinglePost: FC<PostProps> = () => {
                 postID={post?.id as string}
                 username={user?.username as string}
                 allComments={visualTree}
-                refetch={refetch}
+                refetch={() => {}}
               />
             );
           })}
@@ -153,3 +162,5 @@ export const SinglePost: FC<PostProps> = () => {
     </CenteredContainer>
   );
 };
+
+export default SinglePost;
