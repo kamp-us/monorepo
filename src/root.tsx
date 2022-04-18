@@ -19,6 +19,8 @@ import { getCssText } from "./stitches.config";
 import config from "~/aws-exports";
 import { ApolloProvider } from "@apollo/client";
 import { Topnav } from "~/ui-library/topnav/Topnav";
+import { useEffect } from "react";
+import { useClientStyle } from "~/ui-library/StyleProvider";
 
 console.log("config");
 Amplify.configure({ ...config });
@@ -47,18 +49,17 @@ export const loader = async () => {
   });
 };
 
-export default function App() {
-  const { user, session } = useLoaderData<LoaderData>();
+interface DocumentProps {
+  children: React.ReactNode;
+  title?: string;
+}
 
-  globalStyles();
+const Document = ({ children, title }: DocumentProps) => {
+  const clientStyle = useClientStyle();
 
-  const apolloClient = createApolloClient({
-    user,
-    session,
-    endpoint: config.aws_appsync_graphqlEndpoint,
-    region: config.aws_appsync_region,
-    apiKey: config.aws_appsync_apiKey,
-  });
+  useEffect(() => {
+    clientStyle.reset();
+  }, [clientStyle]);
 
   return (
     <html lang="en">
@@ -79,22 +80,42 @@ export default function App() {
         />
         <style
           id="stitches"
-          dangerouslySetInnerHTML={{ __html: getCssText() }}
+          dangerouslySetInnerHTML={{ __html: clientStyle.sheet }}
         />
       </head>
       <body>
-        <UserContext.Provider value={user}>
-          <ApolloProvider client={apolloClient}>
-            <ThemeProvider>
-              <Topnav />
-              <Outlet />
-            </ThemeProvider>
-          </ApolloProvider>
-        </UserContext.Provider>
+        {children}
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>
+  );
+};
+
+export default function App() {
+  const { user, session } = useLoaderData<LoaderData>();
+
+  globalStyles();
+
+  const apolloClient = createApolloClient({
+    user,
+    session,
+    endpoint: config.aws_appsync_graphqlEndpoint,
+    region: config.aws_appsync_region,
+    apiKey: config.aws_appsync_apiKey,
+  });
+
+  return (
+    <Document>
+      <UserContext.Provider value={user}>
+        <ApolloProvider client={apolloClient}>
+          <ThemeProvider>
+            <Topnav />
+            <Outlet />
+          </ThemeProvider>
+        </ApolloProvider>
+      </UserContext.Provider>
+    </Document>
   );
 }
