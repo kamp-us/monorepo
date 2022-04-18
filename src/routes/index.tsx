@@ -33,7 +33,6 @@ export const loader: LoaderFunction = async () => {
 export const Home = () => {
   const { data } = useLoaderData<LoaderData>();
   const [posts, setPosts] = React.useState<Post[]>([]);
-  console.log("hoppala");
 
   useEffect(() => {
     if (data) {
