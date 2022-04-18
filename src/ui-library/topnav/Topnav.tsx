@@ -5,7 +5,6 @@ import { Box } from "../layout-components/Box";
 import { CenteredContainer } from "../layout-components/CenteredContainer";
 import { Link } from "../Link";
 import { ThemeToggle } from "../ThemeToggle";
-import { ReactComponent as KoalaLogo } from "../../features/logo/logo.svg";
 import { GappedBox } from "../GappedBox";
 
 export const Topnav: FC = () => {
@@ -15,12 +14,7 @@ export const Topnav: FC = () => {
       <CenteredContainer>
         <GappedBox css={{ padding: "10px 0", alignItems: "center" }}>
           <StyledLink to="/">
-            <GappedBox css={{ alignItems: "center" }}>
-              <Box css={{ display: "flex", alignItems: "center", width: 30 }}>
-                <KoalaLogo />
-              </Box>
-              pano
-            </GappedBox>
+            <GappedBox css={{ alignItems: "center" }}>pano</GappedBox>
           </StyledLink>
           <Spacer />
           <Box css={{ display: "flex", gap: 10, alignItems: "center" }}>

@@ -7,6 +7,7 @@ import "./index.css";
 import { fetchUser } from "./features/auth/useFetchUser";
 import { createApolloClient } from "./graphql/createApolloClient";
 import { Amplify, Auth } from "aws-amplify";
+// @ts-ignore
 import config from "./aws-exports";
 import { AuthUser, UserContext } from "./features/auth/user-context";
 import { ApolloProvider } from "@apollo/client";

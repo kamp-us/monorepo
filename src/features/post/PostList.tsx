@@ -5,7 +5,7 @@ import { Box } from "../../ui-library/layout-components/Box";
 
 type PostListProps = {
   posts: Post[];
-  refetch: () => void;
+  refetch?: () => void;
 };
 
 export const PostList: FC<PostListProps> = ({ posts, refetch }) => {
