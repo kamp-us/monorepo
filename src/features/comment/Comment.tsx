@@ -28,13 +28,13 @@ export const CommentItem: FC<CommentProps> = ({
   allComments,
 }) => {
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
   const [showComments, setShowComments] = useState(false);
   const user = useUserContext();
   const transition = useTransition();
   const isCommenting =
     transition.state === "submitting" &&
-    transition.submission?.formData.get("content");
+    transition.submission?.formData.get("content") &&
+    transition.submission?.formData.get("commentID") === comment.id;
 
   const formRef = useRef<HTMLFormElement>(null);
 
