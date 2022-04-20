@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { ListPostsQuery, ListPostsQueryVariables, Post } from "../API";
+import { ListPostsQuery, ListPostsQueryVariables, Post } from "~/API";
 import { listPosts } from "~/graphql/queries";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 import { PostList } from "~/features/post/PostList";
@@ -30,17 +29,14 @@ export const loader: LoaderFunction = async () => {
 
 export const Home = () => {
   const { data } = useLoaderData<LoaderData>();
-  const [posts, setPosts] = React.useState<Post[]>([]);
-
-  useEffect(() => {
-    if (data) {
-      setPosts((data.listPosts?.items as Post[]) || []);
-    }
-  }, [data]);
+  const posts = (data.listPosts?.items as Post[]) || [];
+  const sortedPosts = [...posts].sort((a, b) =>
+    a.createdAt < b.createdAt ? 1 : -1
+  );
 
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>
-      <PostList posts={posts} />
+      <PostList posts={sortedPosts} />
     </CenteredContainer>
   );
 };
