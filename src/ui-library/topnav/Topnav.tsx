@@ -7,7 +7,7 @@ import { Link } from "../Link";
 import { ThemeToggle } from "../ThemeToggle";
 import { GappedBox } from "../GappedBox";
 import { Button } from "~/ui-library/layout-components/Button";
-import { Form } from "@remix-run/react";
+import { Form } from "~/ui-library/Form";
 
 export const Topnav: FC = () => {
   const user = useUserContext();

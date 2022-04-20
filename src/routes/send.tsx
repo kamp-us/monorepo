@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { CenteredContainer } from "../ui-library/layout-components/CenteredContainer";
+import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 import { API } from "aws-amplify";
-import { createPost } from "../graphql/mutations";
-import { CreatePostMutationVariables } from "../API";
-import { useUserContext } from "../features/auth/user-context";
-import { Button } from "../ui-library/layout-components/Button";
-import { Input } from "../ui-library/Input";
-import { GappedBox } from "../ui-library/GappedBox";
-import { Box } from "../ui-library/layout-components/Box";
-import { Label } from "../ui-library/Label";
+import { createPost } from "~/graphql/mutations";
+import { CreatePostMutationVariables } from "~/API";
+import { useUserContext } from "~/features/auth/user-context";
+import { Button } from "~/ui-library/layout-components/Button";
+import { Input } from "~/ui-library/Input";
+import { GappedBox } from "~/ui-library/GappedBox";
+import { Box } from "~/ui-library/layout-components/Box";
+import { Label } from "~/ui-library/Label";
 import { useNavigate } from "react-router-dom";
 
 const initialState = { title: "", url: "" };
