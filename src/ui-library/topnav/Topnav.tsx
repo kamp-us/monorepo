@@ -6,6 +6,8 @@ import { CenteredContainer } from "../layout-components/CenteredContainer";
 import { Link } from "../Link";
 import { ThemeToggle } from "../ThemeToggle";
 import { GappedBox } from "../GappedBox";
+import { Button } from "~/ui-library/layout-components/Button";
+import { Form } from "~/ui-library/Form";
 
 export const Topnav: FC = () => {
   const user = useUserContext();
@@ -22,15 +24,11 @@ export const Topnav: FC = () => {
             {user ? (
               <>
                 <StyledLink to="/send">Yeni Gönderi</StyledLink>
-                <StyledLink
-                  to="#"
-                  onClick={async () => {
-                    await Auth.signOut();
-                    window.location.reload();
-                  }}
-                >
-                  Çıkış
-                </StyledLink>
+                <Form method="post" action="/logout">
+                  <Button type="submit" color="transparent">
+                    Çıkış
+                  </Button>
+                </Form>
               </>
             ) : (
               <>
