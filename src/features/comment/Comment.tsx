@@ -33,7 +33,6 @@ export const CommentItem: FC<CommentProps> = ({
   const transition = useTransition();
   const isCommenting =
     transition.state === "submitting" &&
-    transition.submission?.formData.get("content") &&
     transition.submission?.formData.get("commentID") === comment.id;
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -77,12 +76,7 @@ export const CommentItem: FC<CommentProps> = ({
       {open && (
         <GappedBox css={{ flexDirection: "column" }}>
           <Form ref={formRef} method="post" css={{ width: "100%" }}>
-            <Textarea
-              css={{ width: "100%" }}
-              rows={6}
-              name="content"
-              onChange={(event) => setMessage(event.target.value)}
-            />
+            <Textarea css={{ width: "100%" }} rows={6} name="content" />
             <Box>
               <Button value={comment.id} name="commentID" type="submit">
                 {isCommenting ? "Kaydediliyor..." : "Cevapla"}
