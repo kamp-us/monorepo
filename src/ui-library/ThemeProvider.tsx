@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { darkTheme } from "../stitches.config";
+import { darkTheme } from "~/stitches.config";
 
 type ThemeVariants = "light" | "dark";
 

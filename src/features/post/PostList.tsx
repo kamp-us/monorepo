@@ -5,14 +5,14 @@ import { Box } from "../../ui-library/layout-components/Box";
 
 type PostListProps = {
   posts: Post[];
-  refetch: () => void;
+  refetch?: () => void;
 };
 
 export const PostList: FC<PostListProps> = ({ posts, refetch }) => {
   return (
     <Box>
       {posts.map((post) => {
-        return <PostItem onUpvoteSuccess={refetch} key={post.id} post={post} />;
+        return <PostItem key={post.id} post={post} />;
       })}
     </Box>
   );

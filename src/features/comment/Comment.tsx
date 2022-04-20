@@ -1,10 +1,5 @@
-import { FC, useState } from "react";
-import {
-  Comment,
-  CreateCommentMutation,
-  CreateCommentMutationVariables,
-} from "../../API";
-import { createComment } from "../../graphql/mutations";
+import { FC, useRef, useState, useEffect } from "react";
+import { Comment } from "../../API";
 import { styled } from "../../stitches.config";
 import { GappedBox } from "../../ui-library/GappedBox";
 import { Box } from "../../ui-library/layout-components/Box";
@@ -14,7 +9,8 @@ import { Text } from "../../ui-library/Text";
 import { Textarea } from "../../ui-library/Textarea";
 import { Timeago } from "../../ui-library/Timeago";
 import { useUserContext } from "../auth/user-context";
-import { GQLOperation } from "../utils/amplify/GQLOperation";
+import { Form } from "~/ui-library/Form";
+import { useTransition } from "@remix-run/react";
 
 type CommentProps = {
   comment: Comment;
@@ -22,7 +18,6 @@ type CommentProps = {
   username: string;
   comments: Comment[];
   allComments: Record<string, { comment: Comment; comments: Comment[] }>;
-  refetch: () => void;
 };
 
 export const CommentItem: FC<CommentProps> = ({
@@ -31,38 +26,24 @@ export const CommentItem: FC<CommentProps> = ({
   username,
   comments,
   allComments,
-  refetch,
 }) => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const user = useUserContext();
-
   const [showComments, setShowComments] = useState(false);
+  const user = useUserContext();
+  const transition = useTransition();
+  const isCommenting =
+    transition.state === "submitting" &&
+    transition.submission?.formData.get("content");
 
-  const addComment = async (commentID: string) => {
-    try {
-      if (!message) return;
+  const formRef = useRef<HTMLFormElement>(null);
 
-      const variables = {
-        input: {
-          content: message,
-          parentID: commentID,
-          owner: username,
-          postID: postID as string,
-        },
-      };
-
-      await GQLOperation<CreateCommentMutation, CreateCommentMutationVariables>(
-        createComment,
-        variables
-      );
-
-      refetch();
-      setOpen(false);
-    } catch (e) {
-      console.log("error adding comment", e);
+  useEffect(() => {
+    if (!isCommenting && formRef.current) {
+      formRef.current.reset();
+      formRef.current.focus();
     }
-  };
+  }, [isCommenting]);
 
   return (
     <GappedBox css={{ flexDirection: "column", gap: 15 }}>
@@ -95,13 +76,19 @@ export const CommentItem: FC<CommentProps> = ({
       </GappedBox>
       {open && (
         <GappedBox css={{ flexDirection: "column" }}>
-          <Textarea
-            rows={6}
-            onChange={(event) => setMessage(event.target.value)}
-          />
-          <Box>
-            <Button onClick={() => addComment(comment.id)}>Gönder</Button>
-          </Box>
+          <Form ref={formRef} method="post" css={{ width: "100%" }}>
+            <Textarea
+              css={{ width: "100%" }}
+              rows={6}
+              name="content"
+              onChange={(event) => setMessage(event.target.value)}
+            />
+            <Box>
+              <Button value={comment.id} name="commentID" type="submit">
+                {isCommenting ? "Kaydediliyor..." : "Cevapla"}
+              </Button>
+            </Box>
+          </Form>
         </GappedBox>
       )}
       <CommentListContainer>
@@ -115,7 +102,6 @@ export const CommentItem: FC<CommentProps> = ({
                 comments={allComments[c.id]?.comments ?? []}
                 postID={postID}
                 allComments={allComments}
-                refetch={refetch}
               />
             );
           })}

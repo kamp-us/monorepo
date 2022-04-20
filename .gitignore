@@ -11,6 +11,10 @@
 # production
 /build
 
+/.cache
+/public/build
+.env
+
 #idea
 /.idea
 /.vscode

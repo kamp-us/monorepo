@@ -7,6 +7,9 @@
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-icons": "^1.1.0",
     "@radix-ui/react-label": "^0.1.5",
+    "@remix-run/node": "^1.4.0",
+    "@remix-run/react": "^1.4.0",
+    "@remix-run/serve": "^1.4.0",
     "@stitches/react": "^1.2.7",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
@@ -22,6 +25,8 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
+    "remix": "^1.4.0",
+    "tiny-invariant": "^1.2.0",
     "typescript": "^4.6.3",
     "use-deep-compare-effect": "^1.8.1",
     "web-vitals": "^2.1.4"
@@ -31,6 +36,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "remix-build": "remix build",
+    "postinstall": "remix setup node",
+    "dev": "remix dev",
     "amplify:GQLCustomResolvers": "cd amplify/backend/function/GQLCustomResolvers/src && tsc -p ./tsconfig.json && cd -"
   },
   "eslintConfig": {
@@ -52,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "@remix-run/dev": "^1.4.0",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.6.1"
   }
