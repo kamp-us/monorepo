@@ -6,14 +6,14 @@ import { Button } from "./layout-components/Button";
 
 type UpvoteProps = {
   isUpvoted: boolean;
-  onClick: () => void;
   upvoteCount: number;
+  isVoting: boolean;
 };
 
 export const UpvoteButton: FC<UpvoteProps> = ({
   isUpvoted,
-  onClick,
   upvoteCount,
+  isVoting = false,
 }) => {
   return (
     <Button
@@ -25,13 +25,14 @@ export const UpvoteButton: FC<UpvoteProps> = ({
         alignItems: "center",
         flexDirection: "column",
       }}
-      onClick={onClick}
+      type="submit"
     >
       <Triangle
         css={{
           width: 24,
           height: 24,
           color: isUpvoted ? "$amber9" : "$gray9",
+          opacity: isVoting ? 0.5 : 1,
         }}
       />
       <Box>{upvoteCount}</Box>

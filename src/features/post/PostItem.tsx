@@ -1,76 +1,51 @@
-import {
-  CreateUpvoteMutation,
-  CreateUpvoteMutationVariables,
-  DeleteUpvoteMutation,
-  DeleteUpvoteMutationVariables,
-  Post,
-} from "../../API";
+import { Post } from "~/API";
+import { useActionData } from "@remix-run/react";
 import { FC } from "react";
-import { createUpvote, deleteUpvote } from "../../graphql/mutations";
 import { useUserContext } from "../auth/user-context";
-import { UpvoteButton } from "../../ui-library/UpvoteButton";
-import { ExternalLink } from "../../ui-library/ExternalLink";
-import { SmallLink } from "../../ui-library/SmallLink";
-import { GappedBox } from "../../ui-library/GappedBox";
-import { gql, useMutation } from "@apollo/client";
-import { Box } from "../../ui-library/layout-components/Box";
+import { UpvoteButton } from "~/ui-library/UpvoteButton";
+import { ExternalLink } from "~/ui-library/ExternalLink";
+import { SmallLink } from "~/ui-library/SmallLink";
+import { GappedBox } from "~/ui-library/GappedBox";
+import { Box } from "~/ui-library/layout-components/Box";
+import { Form } from "~/ui-library/Form";
+import { useFetcher } from "@remix-run/react";
 
 type PostItemProps = {
   post: Post;
-  onUpvoteSuccess?: () => void;
 };
 
-export const PostItem: FC<PostItemProps> = ({ post, onUpvoteSuccess }) => {
+export const PostItem: FC<PostItemProps> = ({ post }) => {
   const user = useUserContext();
+  const fetcher = useFetcher();
+  const isLoading = !!fetcher.submission;
 
-  const [createUpvoteMutation] = useMutation<
-    CreateUpvoteMutation,
-    CreateUpvoteMutationVariables
-  >(gql(createUpvote));
-
-  const [deleteUpvoteMutation] = useMutation<
-    DeleteUpvoteMutation,
-    DeleteUpvoteMutationVariables
-  >(gql(deleteUpvote));
-
-  const handleUpvote = async () => {
-    if (!user) {
-      console.log("User not logged in");
-      return;
-    }
-
-    try {
-      if (!!post.isUpvoted) {
-        const variables = {
-          input: {
-            postID: post.id,
-            owner: user.username,
-          },
-        };
-        await deleteUpvoteMutation({ variables });
-      } else {
-        const variables = {
-          input: {
-            postID: post.id,
-            postUpvotesId: post.id,
-            owner: user.username,
-          },
-        };
-        await createUpvoteMutation({ variables });
+  const variables = !post.isUpvoted
+    ? {
+        type: "create",
+        input: {
+          postID: post.id,
+          postUpvotesId: post.id,
+          owner: user?.username,
+        },
       }
-      onUpvoteSuccess?.();
-    } catch (err) {
-      console.log("error upvoting", err);
-    }
-  };
+    : {
+        type: "delete",
+        input: {
+          postID: post.id,
+          owner: user?.username,
+        },
+      };
 
   return (
     <GappedBox css={{ padding: 5, alignItems: "center" }}>
-      <UpvoteButton
-        isUpvoted={!!post.isUpvoted}
-        onClick={handleUpvote}
-        upvoteCount={post.upvoteCount ?? 0}
-      />
+      <fetcher.Form method="post" action="/upvote">
+        <UpvoteButton
+          isUpvoted={!!post.isUpvoted}
+          upvoteCount={post.upvoteCount ?? 0}
+          isVoting={isLoading}
+        />
+        <input type="hidden" name="json" value={JSON.stringify(variables)} />
+      </fetcher.Form>
       <GappedBox css={{ flexDirection: "column" }}>
         <GappedBox css={{ alignItems: "center" }}>
           <ExternalLink
