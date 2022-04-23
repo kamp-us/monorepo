@@ -19,6 +19,10 @@
         "GQLCustomResolvers": {
           "deploymentBucketName": "amplify-pano-dev-110553-deployment",
           "s3Key": "amplify-builds/GQLCustomResolvers-54775777726846446f57-build.zip"
+        },
+        "AdminQueries2e1e6724": {
+          "deploymentBucketName": "amplify-pano-dev-110553-deployment",
+          "s3Key": "amplify-builds/AdminQueries2e1e6724-634b447238557142396a-build.zip"
         }
       }
     }

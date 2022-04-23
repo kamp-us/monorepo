@@ -41,14 +41,45 @@
             {
               "authenticationType": "API_KEY",
               "apiKeyConfig": {
-                "apiKeyExpirationDays": 7,
-                "apiKeyExpirationDate": "2022-04-11T18:13:54.668Z",
+                "apiKeyExpirationDays": 365,
+                "apiKeyExpirationDate": "2023-04-23T19:35:36.024Z",
                 "description": ""
               }
             }
           ]
         }
-      }
+      },
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "pano4ba861ae",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    },
+    "AdminQueries": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "authorizationType": "AMAZON_COGNITO_USER_POOLS",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "pano4ba861ae",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "AdminQueries2e1e6724",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ]
     }
   },
   "function": {
@@ -71,6 +102,20 @@
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput",
             "GraphQLAPIKeyOutput"
+          ]
+        }
+      ]
+    },
+    "AdminQueries2e1e6724": {
+      "service": "Lambda",
+      "providerPlugin": "awscloudformation",
+      "build": true,
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "pano4ba861ae",
+          "attributes": [
+            "UserPoolId"
           ]
         }
       ]
