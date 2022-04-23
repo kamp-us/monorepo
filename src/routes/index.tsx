@@ -14,18 +14,25 @@ type LoaderData = {
 export const loader: LoaderFunction = async () => {
   const client = await createClient();
 
-  const { data, error } = await client.query<
-    ListPostsQuery,
-    ListPostsQueryVariables
-  >({
-    query: gql(listPosts),
-  });
+  try {
+    const { data, error } = await client.query<
+      ListPostsQuery,
+      ListPostsQueryVariables
+    >({
+      query: gql(listPosts),
+    });
 
-  if (error) {
-    throw error;
+    if (error) {
+      console.log("index route", error);
+      // throw error;
+      return { data: null, error };
+    }
+
+    return { data };
+  } catch (error) {
+    console.log("index route", error);
+    return { data: null, error };
   }
-
-  return { data };
 };
 
 export const Home = () => {
