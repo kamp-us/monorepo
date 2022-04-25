@@ -1,6 +1,5 @@
-import { Auth } from "aws-amplify";
 import { FC } from "react";
-import { useUserContext } from "../../features/auth/user-context";
+import { useUserContext } from "~/features/auth/user-context";
 import { Box } from "../layout-components/Box";
 import { CenteredContainer } from "../layout-components/CenteredContainer";
 import { Link } from "../Link";
@@ -24,6 +23,7 @@ export const Topnav: FC = () => {
             {user ? (
               <>
                 <StyledLink to="/send">Yeni Gönderi</StyledLink>
+                <StyledLink to="/settings">Hesap</StyledLink>
                 <Form method="post" action="/logout">
                   <Button type="submit" color="transparent">
                     Çıkış
