@@ -1,5 +1,5 @@
 import * as LabelPrimitive from "@radix-ui/react-label";
-import { styled } from "../stitches.config";
+import { styled } from "~/stitches.config";
 
 export const Label = styled(LabelPrimitive.Root, {
   fontSize: "$3",

@@ -1,7 +1,7 @@
-import { Post } from "../../API";
+import { Post } from "~/API";
 import { FC } from "react";
 import { PostItem } from "./PostItem";
-import { Box } from "../../ui-library/layout-components/Box";
+import { Box } from "~/ui-library";
 
 type PostListProps = {
   posts: Post[];

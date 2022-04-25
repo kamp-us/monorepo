@@ -1,19 +1,21 @@
-import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
-import { Form } from "~/ui-library/Form";
-import { GappedBox } from "~/ui-library/GappedBox";
-import { Label } from "~/ui-library/Label";
-import { Text } from "~/ui-library/Text";
-import { Input } from "~/ui-library/Input";
-import { ValidationMessage } from "~/ui-library/ValidationMessage";
-import { Box } from "~/ui-library/layout-components/Box";
-import { Button } from "~/ui-library/layout-components/Button";
 import { useActionData, useTransition } from "@remix-run/react";
 import { ActionFunction, useLoaderData } from "remix";
-import { json, LoaderFunction, redirect } from "@remix-run/node";
+import { json, LoaderFunction } from "@remix-run/node";
 import { Auth } from "aws-amplify";
 import { AuthUser } from "~/features/auth/user-context";
 import { fetchUser } from "~/features/auth/useFetchUser";
 import { useEffect, useRef } from "react";
+import {
+  Box,
+  Button,
+  CenteredContainer,
+  GappedBox,
+  ValidationMessage,
+  Text,
+  Label,
+  Form,
+  Input,
+} from "~/ui-library";
 
 type ActionData = {
   formError?: string;
@@ -39,7 +41,7 @@ export const action: ActionFunction = async ({ request }) => {
   const oldPassword = formData.get("oldPassword");
   const newPassword = formData.get("newPassword");
 
-  let user: AuthUser | null = null;
+  let user: AuthUser | null;
   try {
     user = await fetchUser(Auth);
   } catch {

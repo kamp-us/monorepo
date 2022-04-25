@@ -1,14 +1,14 @@
 import { Post } from "~/API";
-import { useActionData } from "@remix-run/react";
+import { useFetcher } from "@remix-run/react";
 import { FC } from "react";
 import { useUserContext } from "../auth/user-context";
-import { UpvoteButton } from "~/ui-library/UpvoteButton";
-import { ExternalLink } from "~/ui-library/ExternalLink";
-import { SmallLink } from "~/ui-library/SmallLink";
-import { GappedBox } from "~/ui-library/GappedBox";
-import { Box } from "~/ui-library/layout-components/Box";
-import { Form } from "~/ui-library/Form";
-import { useFetcher } from "@remix-run/react";
+import {
+  Box,
+  ExternalLink,
+  GappedBox,
+  SmallLink,
+  UpvoteButton,
+} from "~/ui-library";
 
 type PostItemProps = {
   post: Post;
