@@ -8,6 +8,7 @@ export const Button = styled("button", {
   border: "0",
   padding: "5px 10px",
   cursor: "pointer",
+  fontWeight: 600,
 
   "&:hover": {
     backgroundColor: "$gray4",
