@@ -8,7 +8,7 @@ export * from "./SmallLink";
 export * from "./SmallText";
 export * from "./StyleProvider";
 export * from "./Text";
-export * from "./TextArea";
+export * from "./Textarea";
 export * from "./topnav/Topnav";
 export * from "./ThemeProvider";
 export * from "./ThemeToggle";
