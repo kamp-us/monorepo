@@ -1,15 +1,17 @@
-import { FC, useRef, useState, useEffect } from "react";
-import { Comment } from "../../API";
-import { styled } from "../../stitches.config";
-import { GappedBox } from "../../ui-library/GappedBox";
-import { Box } from "../../ui-library/layout-components/Box";
-import { Button } from "../../ui-library/layout-components/Button";
-import { SmallLink } from "../../ui-library/SmallLink";
-import { Text } from "../../ui-library/Text";
-import { Textarea } from "../../ui-library/Textarea";
-import { Timeago } from "../../ui-library/Timeago";
+import { FC, useEffect, useRef, useState } from "react";
+import { Comment } from "~/API";
+import { styled } from "~/stitches.config";
+import {
+  Box,
+  Button,
+  GappedBox,
+  SmallLink,
+  Text,
+  Textarea,
+  Timeago,
+  Form,
+} from "~/ui-library";
 import { useUserContext } from "../auth/user-context";
-import { Form } from "~/ui-library/Form";
 import { useTransition } from "@remix-run/react";
 
 type CommentProps = {

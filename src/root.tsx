@@ -9,17 +9,15 @@ import {
   useLoaderData,
 } from "remix";
 import { json } from "@remix-run/node";
-import { globalStyles } from "~/ui-library/globalStyles";
-import { ThemeProvider } from "~/ui-library/ThemeProvider";
 import { fetchUser } from "./features/auth/useFetchUser";
 import { AuthUser, UserContext } from "./features/auth/user-context";
 import { createApolloClient } from "./graphql/createApolloClient";
 // @ts-ignore
 import config from "~/aws-exports";
 import { ApolloProvider } from "@apollo/client";
-import { Topnav } from "~/ui-library/topnav/Topnav";
 import { useEffect } from "react";
-import { useClientStyle } from "~/ui-library/StyleProvider";
+import { ThemeProvider, useClientStyle, Topnav } from "~/ui-library";
+import { globalStyles } from "~/ui-library/globalStyles";
 
 console.log("config");
 Amplify.configure({ ...config });

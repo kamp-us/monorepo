@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Box } from "~/ui-library/layout-components/Box";
+import { Box } from "~/ui-library";
 
 type ValidationMessageProps = {
   error: string;

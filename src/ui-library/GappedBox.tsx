@@ -1,5 +1,5 @@
-import { styled } from "../stitches.config";
-import { Box } from "./layout-components/Box";
+import { styled } from "~/stitches.config";
+import { Box } from "~/ui-library";
 
 export const GappedBox = styled(Box, {
   display: "flex",

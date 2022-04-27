@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useTheme } from "./ThemeProvider";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import { Button } from "./layout-components/Button";
+import { Button } from "~/ui-library";
 
 export const ThemeToggle: FC = () => {
   const { theme, setTheme } = useTheme();

@@ -1,15 +1,17 @@
 import { Auth } from "aws-amplify";
-import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
-import { Box } from "~/ui-library/layout-components/Box";
-import { Label } from "~/ui-library/Label";
-import { Input } from "~/ui-library/Input";
-import { GappedBox } from "~/ui-library/GappedBox";
-import { Button } from "~/ui-library/layout-components/Button";
 import { useActionData, useTransition } from "@remix-run/react";
 import { ActionFunction } from "remix";
 import { json, redirect } from "@remix-run/node";
-import { ValidationMessage } from "~/ui-library/ValidationMessage";
-import { Form } from "~/ui-library/Form";
+import {
+  Box,
+  Button,
+  CenteredContainer,
+  Form,
+  GappedBox,
+  Input,
+  Label,
+  ValidationMessage,
+} from "~/ui-library";
 
 const validateUsername = (username: unknown) => {
   if (typeof username !== "string" || username.length < 3) {
