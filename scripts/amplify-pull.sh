@@ -8,11 +8,11 @@ AWSCLOUDFORMATIONCONFIG="{\
 \"profileName\":\"default\",\
 \"accessKeyId\":\"$AWS_ACCESS_KEY\",\
 \"secretAccessKey\":\"$AWS_SECRET_KEY\",\
-\"region\":\"us-west-2\"\
+\"region\":\"eu-central-1\"\
 }"
 AMPLIFY="{\
 \"projectName\":\"pano\",\
-\"appId\":\"d1qqdl2jy808wi\",\
+\"appId\":\"d29c6nmgivvy2w\",\
 \"envName\":\"dev\",\
 \"defaultEditor\":\"code\"\
 }"
