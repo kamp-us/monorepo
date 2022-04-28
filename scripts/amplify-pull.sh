@@ -13,7 +13,7 @@ AWSCLOUDFORMATIONCONFIG="{\
 AMPLIFY="{\
 \"projectName\":\"pano\",\
 \"appId\":\"d29c6nmgivvy2w\",\
-\"envName\":\"dev\",\
+\"envName\":\"prod\",\
 \"defaultEditor\":\"code\"\
 }"
 PROVIDERS="{\
