@@ -16,8 +16,8 @@ import { createApolloClient } from "./graphql/createApolloClient";
 import config from "~/aws-exports";
 import { ApolloProvider } from "@apollo/client";
 import { useEffect } from "react";
-import { ThemeProvider, useClientStyle, Topnav } from "~/ui-library";
-import { globalStyles } from "~/ui-library/globalStyles";
+import { ThemeProvider, useClientStyle, Topnav, useTheme } from "~/ui-library";
+import { darkTheme, getCssText } from "./stitches.config";
 
 console.log("config");
 Amplify.configure({ ...config });
@@ -48,11 +48,12 @@ export const loader = async () => {
 
 interface DocumentProps {
   children: React.ReactNode;
-  title?: string;
 }
 
-const Document = ({ children, title }: DocumentProps) => {
+const Document = ({ children }: DocumentProps) => {
   const clientStyle = useClientStyle();
+
+  const { theme } = useTheme();
 
   useEffect(() => {
     clientStyle.reset();
@@ -77,10 +78,23 @@ const Document = ({ children, title }: DocumentProps) => {
         />
         <style
           id="stitches"
-          dangerouslySetInnerHTML={{ __html: clientStyle.sheet }}
+          dangerouslySetInnerHTML={{ __html: getCssText() }}
+          suppressHydrationWarning
+        />
+        <style
+          id="global"
+          dangerouslySetInnerHTML={{
+            __html: `
+            * { margin: 0; padding: 0; }
+            body {
+              font-family: Inter, sans-serif;
+              background: var(--colors-gray1);
+            }
+          `,
+          }}
         />
       </head>
-      <body>
+      <body className={theme === "dark" ? darkTheme : ""}>
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -93,8 +107,6 @@ const Document = ({ children, title }: DocumentProps) => {
 export default function App() {
   const { user, session } = useLoaderData<LoaderData>();
 
-  globalStyles();
-
   const apolloClient = createApolloClient({
     user,
     session,
@@ -104,15 +116,15 @@ export default function App() {
   });
 
   return (
-    <Document>
-      <UserContext.Provider value={user}>
-        <ApolloProvider client={apolloClient}>
-          <ThemeProvider>
+    <ThemeProvider>
+      <Document>
+        <UserContext.Provider value={user}>
+          <ApolloProvider client={apolloClient}>
             <Topnav />
             <Outlet />
-          </ThemeProvider>
-        </ApolloProvider>
-      </UserContext.Provider>
-    </Document>
+          </ApolloProvider>
+        </UserContext.Provider>
+      </Document>
+    </ThemeProvider>
   );
 }

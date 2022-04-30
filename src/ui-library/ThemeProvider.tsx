@@ -27,13 +27,6 @@ export const ThemeProvider: FC = ({ children }) => {
 
   const context = useMemo(() => ({ theme, setTheme }), [theme]);
 
-  useEffect(() => {
-    if (theme === "dark") {
-      document.body.classList.add(darkTheme);
-    } else {
-      document.body.classList.remove(darkTheme);
-    }
-  }, [theme]);
 
   console.log({ theme });
 
