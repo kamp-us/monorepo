@@ -78,7 +78,7 @@ const Document = ({ children }: DocumentProps) => {
         />
         <style
           id="stitches"
-          dangerouslySetInnerHTML={{ __html: getCssText() }}
+          dangerouslySetInnerHTML={{ __html: clientStyle.sheet }}
           suppressHydrationWarning
         />
         <style
