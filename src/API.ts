@@ -101,7 +101,8 @@ export type Post = {
   commentCount?: number | null,
   comments?: ModelCommentConnection | null,
   upvotes?: ModelUpvoteConnection | null,
-  tags?: ModelPostTagConnection | null,
+  tags?: ModelPostTagsConnection | null,
+  collections?: ModelCollectionPostsConnection | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -140,21 +141,22 @@ export type Upvote = {
   postUpvotesId?: string | null,
 };
 
-export type ModelPostTagConnection = {
-  __typename: "ModelPostTagConnection",
-  items:  Array<PostTag | null >,
+export type ModelPostTagsConnection = {
+  __typename: "ModelPostTagsConnection",
+  items:  Array<PostTags | null >,
   nextToken?: string | null,
 };
 
-export type PostTag = {
-  __typename: "PostTag",
+export type PostTags = {
+  __typename: "PostTags",
   id: string,
-  postID?: string | null,
+  postID: string,
   tagID: string,
-  tag?: Tag | null,
-  post?: Post | null,
+  post: Post,
+  tag: Tag,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export type Tag = {
@@ -162,6 +164,38 @@ export type Tag = {
   id: string,
   name: string,
   category: string,
+  posts?: ModelPostTagsConnection | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelCollectionPostsConnection = {
+  __typename: "ModelCollectionPostsConnection",
+  items:  Array<CollectionPosts | null >,
+  nextToken?: string | null,
+};
+
+export type CollectionPosts = {
+  __typename: "CollectionPosts",
+  id: string,
+  postID: string,
+  collectionID: string,
+  post: Post,
+  collection: Collection,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type Collection = {
+  __typename: "Collection",
+  id: string,
+  name: string,
+  description?: string | null,
+  isPrivate: boolean,
+  isPublic: boolean,
+  owner: string,
+  posts?: ModelCollectionPostsConnection | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -277,27 +311,84 @@ export type DeleteTagInput = {
   id: string,
 };
 
-export type CreatePostTagInput = {
+export type CreateCollectionInput = {
   id?: string | null,
-  postID?: string | null,
+  name: string,
+  description?: string | null,
+  isPrivate: boolean,
+  isPublic: boolean,
+  owner: string,
+};
+
+export type ModelCollectionConditionInput = {
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  isPrivate?: ModelBooleanInput | null,
+  isPublic?: ModelBooleanInput | null,
+  owner?: ModelStringInput | null,
+  and?: Array< ModelCollectionConditionInput | null > | null,
+  or?: Array< ModelCollectionConditionInput | null > | null,
+  not?: ModelCollectionConditionInput | null,
+};
+
+export type UpdateCollectionInput = {
+  id: string,
+  name?: string | null,
+  description?: string | null,
+  isPrivate?: boolean | null,
+  isPublic?: boolean | null,
+  owner?: string | null,
+};
+
+export type DeleteCollectionInput = {
+  id: string,
+};
+
+export type CreatePostTagsInput = {
+  id?: string | null,
+  postID: string,
   tagID: string,
 };
 
-export type ModelPostTagConditionInput = {
+export type ModelPostTagsConditionInput = {
   postID?: ModelIDInput | null,
   tagID?: ModelIDInput | null,
-  and?: Array< ModelPostTagConditionInput | null > | null,
-  or?: Array< ModelPostTagConditionInput | null > | null,
-  not?: ModelPostTagConditionInput | null,
+  and?: Array< ModelPostTagsConditionInput | null > | null,
+  or?: Array< ModelPostTagsConditionInput | null > | null,
+  not?: ModelPostTagsConditionInput | null,
 };
 
-export type UpdatePostTagInput = {
+export type UpdatePostTagsInput = {
   id: string,
   postID?: string | null,
   tagID?: string | null,
 };
 
-export type DeletePostTagInput = {
+export type DeletePostTagsInput = {
+  id: string,
+};
+
+export type CreateCollectionPostsInput = {
+  id?: string | null,
+  postID: string,
+  collectionID: string,
+};
+
+export type ModelCollectionPostsConditionInput = {
+  postID?: ModelIDInput | null,
+  collectionID?: ModelIDInput | null,
+  and?: Array< ModelCollectionPostsConditionInput | null > | null,
+  or?: Array< ModelCollectionPostsConditionInput | null > | null,
+  not?: ModelCollectionPostsConditionInput | null,
+};
+
+export type UpdateCollectionPostsInput = {
+  id: string,
+  postID?: string | null,
+  collectionID?: string | null,
+};
+
+export type DeleteCollectionPostsInput = {
   id: string,
 };
 
@@ -374,13 +465,40 @@ export type ModelTagConnection = {
   nextToken?: string | null,
 };
 
-export type ModelPostTagFilterInput = {
+export type ModelCollectionFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  isPrivate?: ModelBooleanInput | null,
+  isPublic?: ModelBooleanInput | null,
+  owner?: ModelStringInput | null,
+  and?: Array< ModelCollectionFilterInput | null > | null,
+  or?: Array< ModelCollectionFilterInput | null > | null,
+  not?: ModelCollectionFilterInput | null,
+};
+
+export type ModelCollectionConnection = {
+  __typename: "ModelCollectionConnection",
+  items:  Array<Collection | null >,
+  nextToken?: string | null,
+};
+
+export type ModelPostTagsFilterInput = {
   id?: ModelIDInput | null,
   postID?: ModelIDInput | null,
   tagID?: ModelIDInput | null,
-  and?: Array< ModelPostTagFilterInput | null > | null,
-  or?: Array< ModelPostTagFilterInput | null > | null,
-  not?: ModelPostTagFilterInput | null,
+  and?: Array< ModelPostTagsFilterInput | null > | null,
+  or?: Array< ModelPostTagsFilterInput | null > | null,
+  not?: ModelPostTagsFilterInput | null,
+};
+
+export type ModelCollectionPostsFilterInput = {
+  id?: ModelIDInput | null,
+  postID?: ModelIDInput | null,
+  collectionID?: ModelIDInput | null,
+  and?: Array< ModelCollectionPostsFilterInput | null > | null,
+  or?: Array< ModelCollectionPostsFilterInput | null > | null,
+  not?: ModelCollectionPostsFilterInput | null,
 };
 
 export type CreatePostMutationVariables = {
@@ -443,21 +561,13 @@ export type CreatePostMutation = {
       nextToken?: string | null,
     } | null,
     tags?:  {
-      __typename: "ModelPostTagConnection",
+      __typename: "ModelPostTagsConnection",
       items:  Array< {
-        __typename: "PostTag",
+        __typename: "PostTags",
         id: string,
-        postID?: string | null,
+        postID: string,
         tagID: string,
-        tag?:  {
-          __typename: "Tag",
-          id: string,
-          name: string,
-          category: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null,
-        post?:  {
+        post:  {
           __typename: "Post",
           id: string,
           title: string,
@@ -469,9 +579,54 @@ export type CreatePostMutation = {
           commentCount?: number | null,
           createdAt: string,
           updatedAt: string,
-        } | null,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    collections?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -540,21 +695,13 @@ export type UpdatePostMutation = {
       nextToken?: string | null,
     } | null,
     tags?:  {
-      __typename: "ModelPostTagConnection",
+      __typename: "ModelPostTagsConnection",
       items:  Array< {
-        __typename: "PostTag",
+        __typename: "PostTags",
         id: string,
-        postID?: string | null,
+        postID: string,
         tagID: string,
-        tag?:  {
-          __typename: "Tag",
-          id: string,
-          name: string,
-          category: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null,
-        post?:  {
+        post:  {
           __typename: "Post",
           id: string,
           title: string,
@@ -566,9 +713,54 @@ export type UpdatePostMutation = {
           commentCount?: number | null,
           createdAt: string,
           updatedAt: string,
-        } | null,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    collections?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -637,21 +829,13 @@ export type DeletePostMutation = {
       nextToken?: string | null,
     } | null,
     tags?:  {
-      __typename: "ModelPostTagConnection",
+      __typename: "ModelPostTagsConnection",
       items:  Array< {
-        __typename: "PostTag",
+        __typename: "PostTags",
         id: string,
-        postID?: string | null,
+        postID: string,
         tagID: string,
-        tag?:  {
-          __typename: "Tag",
-          id: string,
-          name: string,
-          category: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null,
-        post?:  {
+        post:  {
           __typename: "Post",
           id: string,
           title: string,
@@ -663,9 +847,54 @@ export type DeletePostMutation = {
           commentCount?: number | null,
           createdAt: string,
           updatedAt: string,
-        } | null,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    collections?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -829,14 +1058,28 @@ export type CreateUpvoteMutation = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -896,14 +1139,28 @@ export type UpdateUpvoteMutation = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -963,14 +1220,28 @@ export type DeleteUpvoteMutation = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -994,6 +1265,39 @@ export type CreateTagMutation = {
     id: string,
     name: string,
     category: string,
+    posts?:  {
+      __typename: "ModelPostTagsConnection",
+      items:  Array< {
+        __typename: "PostTags",
+        id: string,
+        postID: string,
+        tagID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1010,6 +1314,39 @@ export type UpdateTagMutation = {
     id: string,
     name: string,
     category: string,
+    posts?:  {
+      __typename: "ModelPostTagsConnection",
+      items:  Array< {
+        __typename: "PostTags",
+        id: string,
+        postID: string,
+        tagID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1026,31 +1363,221 @@ export type DeleteTagMutation = {
     id: string,
     name: string,
     category: string,
+    posts?:  {
+      __typename: "ModelPostTagsConnection",
+      items:  Array< {
+        __typename: "PostTags",
+        id: string,
+        postID: string,
+        tagID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type CreatePostTagMutationVariables = {
-  input: CreatePostTagInput,
-  condition?: ModelPostTagConditionInput | null,
+export type CreateCollectionMutationVariables = {
+  input: CreateCollectionInput,
+  condition?: ModelCollectionConditionInput | null,
 };
 
-export type CreatePostTagMutation = {
-  createPostTag?:  {
-    __typename: "PostTag",
+export type CreateCollectionMutation = {
+  createCollection?:  {
+    __typename: "Collection",
     id: string,
-    postID?: string | null,
-    tagID: string,
-    tag?:  {
-      __typename: "Tag",
-      id: string,
-      name: string,
-      category: string,
-      createdAt: string,
-      updatedAt: string,
+    name: string,
+    description?: string | null,
+    isPrivate: boolean,
+    isPublic: boolean,
+    owner: string,
+    posts?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
     } | null,
-    post?:  {
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateCollectionMutationVariables = {
+  input: UpdateCollectionInput,
+  condition?: ModelCollectionConditionInput | null,
+};
+
+export type UpdateCollectionMutation = {
+  updateCollection?:  {
+    __typename: "Collection",
+    id: string,
+    name: string,
+    description?: string | null,
+    isPrivate: boolean,
+    isPublic: boolean,
+    owner: string,
+    posts?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteCollectionMutationVariables = {
+  input: DeleteCollectionInput,
+  condition?: ModelCollectionConditionInput | null,
+};
+
+export type DeleteCollectionMutation = {
+  deleteCollection?:  {
+    __typename: "Collection",
+    id: string,
+    name: string,
+    description?: string | null,
+    isPrivate: boolean,
+    isPublic: boolean,
+    owner: string,
+    posts?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreatePostTagsMutationVariables = {
+  input: CreatePostTagsInput,
+  condition?: ModelPostTagsConditionInput | null,
+};
+
+export type CreatePostTagsMutation = {
+  createPostTags?:  {
+    __typename: "PostTags",
+    id: string,
+    postID: string,
+    tagID: string,
+    post:  {
       __typename: "Post",
       id: string,
       title: string,
@@ -1087,45 +1614,73 @@ export type CreatePostTagMutation = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdatePostTagMutationVariables = {
-  input: UpdatePostTagInput,
-  condition?: ModelPostTagConditionInput | null,
-};
-
-export type UpdatePostTagMutation = {
-  updatePostTag?:  {
-    __typename: "PostTag",
-    id: string,
-    postID?: string | null,
-    tagID: string,
-    tag?:  {
+    },
+    tag:  {
       __typename: "Tag",
       id: string,
       name: string,
       category: string,
+      posts?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    post?:  {
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdatePostTagsMutationVariables = {
+  input: UpdatePostTagsInput,
+  condition?: ModelPostTagsConditionInput | null,
+};
+
+export type UpdatePostTagsMutation = {
+  updatePostTags?:  {
+    __typename: "PostTags",
+    id: string,
+    postID: string,
+    tagID: string,
+    post:  {
       __typename: "Post",
       id: string,
       title: string,
@@ -1162,45 +1717,73 @@ export type UpdatePostTagMutation = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeletePostTagMutationVariables = {
-  input: DeletePostTagInput,
-  condition?: ModelPostTagConditionInput | null,
-};
-
-export type DeletePostTagMutation = {
-  deletePostTag?:  {
-    __typename: "PostTag",
-    id: string,
-    postID?: string | null,
-    tagID: string,
-    tag?:  {
+    },
+    tag:  {
       __typename: "Tag",
       id: string,
       name: string,
       category: string,
+      posts?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    post?:  {
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeletePostTagsMutationVariables = {
+  input: DeletePostTagsInput,
+  condition?: ModelPostTagsConditionInput | null,
+};
+
+export type DeletePostTagsMutation = {
+  deletePostTags?:  {
+    __typename: "PostTags",
+    id: string,
+    postID: string,
+    tagID: string,
+    post:  {
       __typename: "Post",
       id: string,
       title: string,
@@ -1237,22 +1820,373 @@ export type DeletePostTagMutation = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
+    },
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      name: string,
+      category: string,
+      posts?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateCollectionPostsMutationVariables = {
+  input: CreateCollectionPostsInput,
+  condition?: ModelCollectionPostsConditionInput | null,
+};
+
+export type CreateCollectionPostsMutation = {
+  createCollectionPosts?:  {
+    __typename: "CollectionPosts",
+    id: string,
+    postID: string,
+    collectionID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      url: string,
+      owner: string,
+      isUpvoted?: boolean | null,
+      upvoteCount?: number | null,
+      commentCount?: number | null,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        items:  Array< {
+          __typename: "Comment",
+          id: string,
+          content: string,
+          owner: string,
+          parentID?: string | null,
+          postID: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      upvotes?:  {
+        __typename: "ModelUpvoteConnection",
+        items:  Array< {
+          __typename: "Upvote",
+          postID: string,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+          postUpvotesId?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      tags?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    collection:  {
+      __typename: "Collection",
+      id: string,
+      name: string,
+      description?: string | null,
+      isPrivate: boolean,
+      isPublic: boolean,
+      owner: string,
+      posts?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateCollectionPostsMutationVariables = {
+  input: UpdateCollectionPostsInput,
+  condition?: ModelCollectionPostsConditionInput | null,
+};
+
+export type UpdateCollectionPostsMutation = {
+  updateCollectionPosts?:  {
+    __typename: "CollectionPosts",
+    id: string,
+    postID: string,
+    collectionID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      url: string,
+      owner: string,
+      isUpvoted?: boolean | null,
+      upvoteCount?: number | null,
+      commentCount?: number | null,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        items:  Array< {
+          __typename: "Comment",
+          id: string,
+          content: string,
+          owner: string,
+          parentID?: string | null,
+          postID: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      upvotes?:  {
+        __typename: "ModelUpvoteConnection",
+        items:  Array< {
+          __typename: "Upvote",
+          postID: string,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+          postUpvotesId?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      tags?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    collection:  {
+      __typename: "Collection",
+      id: string,
+      name: string,
+      description?: string | null,
+      isPrivate: boolean,
+      isPublic: boolean,
+      owner: string,
+      posts?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteCollectionPostsMutationVariables = {
+  input: DeleteCollectionPostsInput,
+  condition?: ModelCollectionPostsConditionInput | null,
+};
+
+export type DeleteCollectionPostsMutation = {
+  deleteCollectionPosts?:  {
+    __typename: "CollectionPosts",
+    id: string,
+    postID: string,
+    collectionID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      url: string,
+      owner: string,
+      isUpvoted?: boolean | null,
+      upvoteCount?: number | null,
+      commentCount?: number | null,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        items:  Array< {
+          __typename: "Comment",
+          id: string,
+          content: string,
+          owner: string,
+          parentID?: string | null,
+          postID: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      upvotes?:  {
+        __typename: "ModelUpvoteConnection",
+        items:  Array< {
+          __typename: "Upvote",
+          postID: string,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+          postUpvotesId?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      tags?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    collection:  {
+      __typename: "Collection",
+      id: string,
+      name: string,
+      description?: string | null,
+      isPrivate: boolean,
+      isPublic: boolean,
+      owner: string,
+      posts?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1315,21 +2249,13 @@ export type GetPostQuery = {
       nextToken?: string | null,
     } | null,
     tags?:  {
-      __typename: "ModelPostTagConnection",
+      __typename: "ModelPostTagsConnection",
       items:  Array< {
-        __typename: "PostTag",
+        __typename: "PostTags",
         id: string,
-        postID?: string | null,
+        postID: string,
         tagID: string,
-        tag?:  {
-          __typename: "Tag",
-          id: string,
-          name: string,
-          category: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null,
-        post?:  {
+        post:  {
           __typename: "Post",
           id: string,
           title: string,
@@ -1341,9 +2267,54 @@ export type GetPostQuery = {
           commentCount?: number | null,
           createdAt: string,
           updatedAt: string,
-        } | null,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    collections?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1398,14 +2369,28 @@ export type ListPostsQuery = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -1535,14 +2520,28 @@ export type GetUpvoteQuery = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -1590,7 +2589,11 @@ export type ListUpvotesQuery = {
           nextToken?: string | null,
         } | null,
         tags?:  {
-          __typename: "ModelPostTagConnection",
+          __typename: "ModelPostTagsConnection",
+          nextToken?: string | null,
+        } | null,
+        collections?:  {
+          __typename: "ModelCollectionPostsConnection",
           nextToken?: string | null,
         } | null,
         createdAt: string,
@@ -1614,6 +2617,39 @@ export type GetTagQuery = {
     id: string,
     name: string,
     category: string,
+    posts?:  {
+      __typename: "ModelPostTagsConnection",
+      items:  Array< {
+        __typename: "PostTags",
+        id: string,
+        postID: string,
+        tagID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1633,6 +2669,19 @@ export type ListTagsQuery = {
       id: string,
       name: string,
       category: string,
+      posts?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1640,25 +2689,108 @@ export type ListTagsQuery = {
   } | null,
 };
 
-export type GetPostTagQueryVariables = {
+export type GetCollectionQueryVariables = {
   id: string,
 };
 
-export type GetPostTagQuery = {
-  getPostTag?:  {
-    __typename: "PostTag",
+export type GetCollectionQuery = {
+  getCollection?:  {
+    __typename: "Collection",
     id: string,
-    postID?: string | null,
-    tagID: string,
-    tag?:  {
-      __typename: "Tag",
+    name: string,
+    description?: string | null,
+    isPrivate: boolean,
+    isPublic: boolean,
+    owner: string,
+    posts?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListCollectionsQueryVariables = {
+  filter?: ModelCollectionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListCollectionsQuery = {
+  listCollections?:  {
+    __typename: "ModelCollectionConnection",
+    items:  Array< {
+      __typename: "Collection",
       id: string,
       name: string,
-      category: string,
+      description?: string | null,
+      isPrivate: boolean,
+      isPublic: boolean,
+      owner: string,
+      posts?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    post?:  {
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetPostTagsQueryVariables = {
+  id: string,
+};
+
+export type GetPostTagsQuery = {
+  getPostTags?:  {
+    __typename: "PostTags",
+    id: string,
+    postID: string,
+    tagID: string,
+    post:  {
       __typename: "Post",
       id: string,
       title: string,
@@ -1695,48 +2827,76 @@ export type GetPostTagQuery = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
+    },
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      name: string,
+      category: string,
+      posts?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type ListPostTagsQueryVariables = {
-  filter?: ModelPostTagFilterInput | null,
+  filter?: ModelPostTagsFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
 export type ListPostTagsQuery = {
   listPostTags?:  {
-    __typename: "ModelPostTagConnection",
+    __typename: "ModelPostTagsConnection",
     items:  Array< {
-      __typename: "PostTag",
+      __typename: "PostTags",
       id: string,
-      postID?: string | null,
+      postID: string,
       tagID: string,
-      tag?:  {
-        __typename: "Tag",
-        id: string,
-        name: string,
-        category: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      post?:  {
+      post:  {
         __typename: "Post",
         id: string,
         title: string,
@@ -1755,14 +2915,200 @@ export type ListPostTagsQuery = {
           nextToken?: string | null,
         } | null,
         tags?:  {
-          __typename: "ModelPostTagConnection",
+          __typename: "ModelPostTagsConnection",
+          nextToken?: string | null,
+        } | null,
+        collections?:  {
+          __typename: "ModelCollectionPostsConnection",
           nextToken?: string | null,
         } | null,
         createdAt: string,
         updatedAt: string,
+      },
+      tag:  {
+        __typename: "Tag",
+        id: string,
+        name: string,
+        category: string,
+        posts?:  {
+          __typename: "ModelPostTagsConnection",
+          nextToken?: string | null,
+        } | null,
+        createdAt: string,
+        updatedAt: string,
+      },
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetCollectionPostsQueryVariables = {
+  id: string,
+};
+
+export type GetCollectionPostsQuery = {
+  getCollectionPosts?:  {
+    __typename: "CollectionPosts",
+    id: string,
+    postID: string,
+    collectionID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      url: string,
+      owner: string,
+      isUpvoted?: boolean | null,
+      upvoteCount?: number | null,
+      commentCount?: number | null,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        items:  Array< {
+          __typename: "Comment",
+          id: string,
+          content: string,
+          owner: string,
+          parentID?: string | null,
+          postID: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      upvotes?:  {
+        __typename: "ModelUpvoteConnection",
+        items:  Array< {
+          __typename: "Upvote",
+          postID: string,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+          postUpvotesId?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      tags?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+    },
+    collection:  {
+      __typename: "Collection",
+      id: string,
+      name: string,
+      description?: string | null,
+      isPrivate: boolean,
+      isPublic: boolean,
+      owner: string,
+      posts?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListCollectionPostsQueryVariables = {
+  filter?: ModelCollectionPostsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListCollectionPostsQuery = {
+  listCollectionPosts?:  {
+    __typename: "ModelCollectionPostsConnection",
+    items:  Array< {
+      __typename: "CollectionPosts",
+      id: string,
+      postID: string,
+      collectionID: string,
+      post:  {
+        __typename: "Post",
+        id: string,
+        title: string,
+        url: string,
+        owner: string,
+        isUpvoted?: boolean | null,
+        upvoteCount?: number | null,
+        commentCount?: number | null,
+        comments?:  {
+          __typename: "ModelCommentConnection",
+          nextToken?: string | null,
+        } | null,
+        upvotes?:  {
+          __typename: "ModelUpvoteConnection",
+          nextToken?: string | null,
+        } | null,
+        tags?:  {
+          __typename: "ModelPostTagsConnection",
+          nextToken?: string | null,
+        } | null,
+        collections?:  {
+          __typename: "ModelCollectionPostsConnection",
+          nextToken?: string | null,
+        } | null,
+        createdAt: string,
+        updatedAt: string,
+      },
+      collection:  {
+        __typename: "Collection",
+        id: string,
+        name: string,
+        description?: string | null,
+        isPrivate: boolean,
+        isPublic: boolean,
+        owner: string,
+        posts?:  {
+          __typename: "ModelCollectionPostsConnection",
+          nextToken?: string | null,
+        } | null,
+        createdAt: string,
+        updatedAt: string,
+      },
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1827,21 +3173,13 @@ export type OnCreatePostSubscription = {
       nextToken?: string | null,
     } | null,
     tags?:  {
-      __typename: "ModelPostTagConnection",
+      __typename: "ModelPostTagsConnection",
       items:  Array< {
-        __typename: "PostTag",
+        __typename: "PostTags",
         id: string,
-        postID?: string | null,
+        postID: string,
         tagID: string,
-        tag?:  {
-          __typename: "Tag",
-          id: string,
-          name: string,
-          category: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null,
-        post?:  {
+        post:  {
           __typename: "Post",
           id: string,
           title: string,
@@ -1853,9 +3191,54 @@ export type OnCreatePostSubscription = {
           commentCount?: number | null,
           createdAt: string,
           updatedAt: string,
-        } | null,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    collections?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1923,21 +3306,13 @@ export type OnUpdatePostSubscription = {
       nextToken?: string | null,
     } | null,
     tags?:  {
-      __typename: "ModelPostTagConnection",
+      __typename: "ModelPostTagsConnection",
       items:  Array< {
-        __typename: "PostTag",
+        __typename: "PostTags",
         id: string,
-        postID?: string | null,
+        postID: string,
         tagID: string,
-        tag?:  {
-          __typename: "Tag",
-          id: string,
-          name: string,
-          category: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null,
-        post?:  {
+        post:  {
           __typename: "Post",
           id: string,
           title: string,
@@ -1949,9 +3324,54 @@ export type OnUpdatePostSubscription = {
           commentCount?: number | null,
           createdAt: string,
           updatedAt: string,
-        } | null,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    collections?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -2019,21 +3439,13 @@ export type OnDeletePostSubscription = {
       nextToken?: string | null,
     } | null,
     tags?:  {
-      __typename: "ModelPostTagConnection",
+      __typename: "ModelPostTagsConnection",
       items:  Array< {
-        __typename: "PostTag",
+        __typename: "PostTags",
         id: string,
-        postID?: string | null,
+        postID: string,
         tagID: string,
-        tag?:  {
-          __typename: "Tag",
-          id: string,
-          name: string,
-          category: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null,
-        post?:  {
+        post:  {
           __typename: "Post",
           id: string,
           title: string,
@@ -2045,9 +3457,54 @@ export type OnDeletePostSubscription = {
           commentCount?: number | null,
           createdAt: string,
           updatedAt: string,
-        } | null,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    collections?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -2207,14 +3664,28 @@ export type OnCreateUpvoteSubscription = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -2273,14 +3744,28 @@ export type OnUpdateUpvoteSubscription = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -2339,14 +3824,28 @@ export type OnDeleteUpvoteSubscription = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -2365,6 +3864,39 @@ export type OnCreateTagSubscription = {
     id: string,
     name: string,
     category: string,
+    posts?:  {
+      __typename: "ModelPostTagsConnection",
+      items:  Array< {
+        __typename: "PostTags",
+        id: string,
+        postID: string,
+        tagID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2376,6 +3908,39 @@ export type OnUpdateTagSubscription = {
     id: string,
     name: string,
     category: string,
+    posts?:  {
+      __typename: "ModelPostTagsConnection",
+      items:  Array< {
+        __typename: "PostTags",
+        id: string,
+        postID: string,
+        tagID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2387,26 +3952,217 @@ export type OnDeleteTagSubscription = {
     id: string,
     name: string,
     category: string,
+    posts?:  {
+      __typename: "ModelPostTagsConnection",
+      items:  Array< {
+        __typename: "PostTags",
+        id: string,
+        postID: string,
+        tagID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        tag:  {
+          __typename: "Tag",
+          id: string,
+          name: string,
+          category: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnCreatePostTagSubscription = {
-  onCreatePostTag?:  {
-    __typename: "PostTag",
+export type OnCreateCollectionSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateCollectionSubscription = {
+  onCreateCollection?:  {
+    __typename: "Collection",
     id: string,
-    postID?: string | null,
-    tagID: string,
-    tag?:  {
-      __typename: "Tag",
-      id: string,
-      name: string,
-      category: string,
-      createdAt: string,
-      updatedAt: string,
+    name: string,
+    description?: string | null,
+    isPrivate: boolean,
+    isPublic: boolean,
+    owner: string,
+    posts?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
     } | null,
-    post?:  {
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateCollectionSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateCollectionSubscription = {
+  onUpdateCollection?:  {
+    __typename: "Collection",
+    id: string,
+    name: string,
+    description?: string | null,
+    isPrivate: boolean,
+    isPublic: boolean,
+    owner: string,
+    posts?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteCollectionSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteCollectionSubscription = {
+  onDeleteCollection?:  {
+    __typename: "Collection",
+    id: string,
+    name: string,
+    description?: string | null,
+    isPrivate: boolean,
+    isPublic: boolean,
+    owner: string,
+    posts?:  {
+      __typename: "ModelCollectionPostsConnection",
+      items:  Array< {
+        __typename: "CollectionPosts",
+        id: string,
+        postID: string,
+        collectionID: string,
+        post:  {
+          __typename: "Post",
+          id: string,
+          title: string,
+          url: string,
+          owner: string,
+          isUpvoted?: boolean | null,
+          upvoteCount?: number | null,
+          commentCount?: number | null,
+          createdAt: string,
+          updatedAt: string,
+        },
+        collection:  {
+          __typename: "Collection",
+          id: string,
+          name: string,
+          description?: string | null,
+          isPrivate: boolean,
+          isPublic: boolean,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+        },
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreatePostTagsSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreatePostTagsSubscription = {
+  onCreatePostTags?:  {
+    __typename: "PostTags",
+    id: string,
+    postID: string,
+    tagID: string,
+    post:  {
       __typename: "Post",
       id: string,
       title: string,
@@ -2443,40 +4199,72 @@ export type OnCreatePostTagSubscription = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdatePostTagSubscription = {
-  onUpdatePostTag?:  {
-    __typename: "PostTag",
-    id: string,
-    postID?: string | null,
-    tagID: string,
-    tag?:  {
+    },
+    tag:  {
       __typename: "Tag",
       id: string,
       name: string,
       category: string,
+      posts?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    post?:  {
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdatePostTagsSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdatePostTagsSubscription = {
+  onUpdatePostTags?:  {
+    __typename: "PostTags",
+    id: string,
+    postID: string,
+    tagID: string,
+    post:  {
       __typename: "Post",
       id: string,
       title: string,
@@ -2513,40 +4301,72 @@ export type OnUpdatePostTagSubscription = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeletePostTagSubscription = {
-  onDeletePostTag?:  {
-    __typename: "PostTag",
-    id: string,
-    postID?: string | null,
-    tagID: string,
-    tag?:  {
+    },
+    tag:  {
       __typename: "Tag",
       id: string,
       name: string,
       category: string,
+      posts?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    post?:  {
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeletePostTagsSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeletePostTagsSubscription = {
+  onDeletePostTags?:  {
+    __typename: "PostTags",
+    id: string,
+    postID: string,
+    tagID: string,
+    post:  {
       __typename: "Post",
       id: string,
       title: string,
@@ -2583,21 +4403,369 @@ export type OnDeletePostTagSubscription = {
         nextToken?: string | null,
       } | null,
       tags?:  {
-        __typename: "ModelPostTagConnection",
+        __typename: "ModelPostTagsConnection",
         items:  Array< {
-          __typename: "PostTag",
+          __typename: "PostTags",
           id: string,
-          postID?: string | null,
+          postID: string,
           tagID: string,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
+    },
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      name: string,
+      category: string,
+      posts?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateCollectionPostsSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateCollectionPostsSubscription = {
+  onCreateCollectionPosts?:  {
+    __typename: "CollectionPosts",
+    id: string,
+    postID: string,
+    collectionID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      url: string,
+      owner: string,
+      isUpvoted?: boolean | null,
+      upvoteCount?: number | null,
+      commentCount?: number | null,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        items:  Array< {
+          __typename: "Comment",
+          id: string,
+          content: string,
+          owner: string,
+          parentID?: string | null,
+          postID: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      upvotes?:  {
+        __typename: "ModelUpvoteConnection",
+        items:  Array< {
+          __typename: "Upvote",
+          postID: string,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+          postUpvotesId?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      tags?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    collection:  {
+      __typename: "Collection",
+      id: string,
+      name: string,
+      description?: string | null,
+      isPrivate: boolean,
+      isPublic: boolean,
+      owner: string,
+      posts?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateCollectionPostsSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateCollectionPostsSubscription = {
+  onUpdateCollectionPosts?:  {
+    __typename: "CollectionPosts",
+    id: string,
+    postID: string,
+    collectionID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      url: string,
+      owner: string,
+      isUpvoted?: boolean | null,
+      upvoteCount?: number | null,
+      commentCount?: number | null,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        items:  Array< {
+          __typename: "Comment",
+          id: string,
+          content: string,
+          owner: string,
+          parentID?: string | null,
+          postID: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      upvotes?:  {
+        __typename: "ModelUpvoteConnection",
+        items:  Array< {
+          __typename: "Upvote",
+          postID: string,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+          postUpvotesId?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      tags?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    collection:  {
+      __typename: "Collection",
+      id: string,
+      name: string,
+      description?: string | null,
+      isPrivate: boolean,
+      isPublic: boolean,
+      owner: string,
+      posts?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteCollectionPostsSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteCollectionPostsSubscription = {
+  onDeleteCollectionPosts?:  {
+    __typename: "CollectionPosts",
+    id: string,
+    postID: string,
+    collectionID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      url: string,
+      owner: string,
+      isUpvoted?: boolean | null,
+      upvoteCount?: number | null,
+      commentCount?: number | null,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        items:  Array< {
+          __typename: "Comment",
+          id: string,
+          content: string,
+          owner: string,
+          parentID?: string | null,
+          postID: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      upvotes?:  {
+        __typename: "ModelUpvoteConnection",
+        items:  Array< {
+          __typename: "Upvote",
+          postID: string,
+          owner: string,
+          createdAt: string,
+          updatedAt: string,
+          postUpvotesId?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      tags?:  {
+        __typename: "ModelPostTagsConnection",
+        items:  Array< {
+          __typename: "PostTags",
+          id: string,
+          postID: string,
+          tagID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      collections?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    collection:  {
+      __typename: "Collection",
+      id: string,
+      name: string,
+      description?: string | null,
+      isPrivate: boolean,
+      isPublic: boolean,
+      owner: string,
+      posts?:  {
+        __typename: "ModelCollectionPostsConnection",
+        items:  Array< {
+          __typename: "CollectionPosts",
+          id: string,
+          postID: string,
+          collectionID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null >,
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
   } | null,
 };
