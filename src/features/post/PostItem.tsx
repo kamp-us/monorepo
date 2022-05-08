@@ -4,11 +4,24 @@ import { FC } from "react";
 import { useUserContext } from "../auth/user-context";
 import {
   Box,
+  Button,
   ExternalLink,
   GappedBox,
+  Input,
+  Label,
   SmallLink,
   UpvoteButton,
 } from "~/ui-library";
+import { Cross2Icon } from "@radix-ui/react-icons";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "~/ui-library/Dialog";
+import { SelectComponent } from "~/ui-library/Select";
 
 type PostItemProps = {
   post: Post;
@@ -55,7 +68,7 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
           >
             {post.title}
           </ExternalLink>
-          <SmallLink to={post.url}>{post.url}</SmallLink>
+          <SmallLink to={`//${post.url}`}>{post.url}</SmallLink>
         </GappedBox>
         <GappedBox
           css={{
@@ -70,6 +83,37 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
           <SmallLink to={`/posts/${post.id}`}>
             {post.commentCount} yorum
           </SmallLink>
+          |
+          <fetcher.Form method="post" action="/addToCollections">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>Ekle</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogTitle>Koleksiyona ekle</DialogTitle>
+                <DialogDescription>
+                  Postu eklemek istediğin koleksiyonu seç
+                </DialogDescription>
+                <GappedBox css={{ flexDirection: "column" }}>
+                  <SelectComponent
+                    label="Koleksiyonlar"
+                    options={[
+                      { value: "javascript", text: "Javascript" },
+                      { value: "java", text: "Java" },
+                      { value: "typescript", text: "Typescript" },
+                    ]}
+                  />
+                </GappedBox>
+                <GappedBox css={{ marginTop: 10, gap: 10 }}>
+                  <DialogClose asChild>
+                    <Button type="submit" aria-label="Close">
+                      Ekle
+                    </Button>
+                  </DialogClose>
+                </GappedBox>
+              </DialogContent>
+            </Dialog>
+          </fetcher.Form>
         </GappedBox>
       </GappedBox>
     </GappedBox>
