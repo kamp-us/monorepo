@@ -1,3 +1,4 @@
+import { Auth } from "aws-amplify";
 import { FC } from "react";
 import { useUserContext } from "~/features/auth/user-context";
 import {
@@ -12,6 +13,13 @@ import {
 
 export const Topnav: FC = () => {
   const user = useUserContext();
+
+  const onLogout = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    Auth.signOut();
+    location.reload();
+  };
+
   return (
     <Box css={{ backgroundColor: "$gray2" }}>
       <CenteredContainer>
@@ -26,7 +34,7 @@ export const Topnav: FC = () => {
               <>
                 <StyledLink to="/send">Yeni Gönderi</StyledLink>
                 <StyledLink to="/settings">Hesap</StyledLink>
-                <Form method="post" action="/logout">
+                <Form onSubmit={onLogout}>
                   <Button type="submit" color="transparent">
                     Çıkış
                   </Button>

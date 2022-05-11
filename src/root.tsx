@@ -8,7 +8,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "remix";
-import { json } from "@remix-run/node";
+import { json, LoaderFunction } from "@remix-run/node";
 import { fetchUser } from "./features/auth/useFetchUser";
 import { AuthUser, UserContext } from "./features/auth/user-context";
 import { createApolloClient } from "./graphql/createApolloClient";
@@ -17,10 +17,10 @@ import config from "~/aws-exports";
 import { ApolloProvider } from "@apollo/client";
 import { useEffect } from "react";
 import { ThemeProvider, useClientStyle, Topnav, useTheme } from "~/ui-library";
-import { darkTheme, getCssText } from "./stitches.config";
+import { darkTheme } from "./stitches.config";
+import { withSSR } from "./features/utils/amplify/withSSR";
 
-console.log("config");
-Amplify.configure({ ...config });
+Amplify.configure({ ...config, ssr: true });
 
 type CognitoSession = Awaited<ReturnType<typeof Auth.currentSession>>;
 
@@ -29,13 +29,16 @@ type LoaderData = {
   session: CognitoSession | null;
 };
 
-export const loader = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  const SSR = withSSR({ request });
+
   let user: AuthUser | null = null;
   let session: CognitoSession | null = null;
   try {
-    user = await fetchUser(Auth);
-    session = await Auth.currentSession();
-  } catch {
+    user = await fetchUser(SSR.Auth);
+    session = await SSR.Auth.currentSession();
+  } catch (error) {
+    console.log("error", error);
     user = null;
     session = null;
   }
@@ -52,7 +55,6 @@ interface DocumentProps {
 
 const Document = ({ children }: DocumentProps) => {
   const clientStyle = useClientStyle();
-
   const { theme } = useTheme();
 
   useEffect(() => {

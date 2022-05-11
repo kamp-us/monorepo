@@ -1,7 +1,4 @@
 import { Auth } from "aws-amplify";
-import { useActionData, useTransition } from "@remix-run/react";
-import { ActionFunction } from "remix";
-import { json, redirect } from "@remix-run/node";
 import {
   Box,
   Button,
@@ -12,6 +9,7 @@ import {
   Label,
   ValidationMessage,
 } from "~/ui-library";
+import { FormEvent, useState } from "react";
 
 const validateUsername = (username: unknown) => {
   if (typeof username !== "string" || username.length < 3) {
@@ -25,63 +23,51 @@ const validatePassword = (password: unknown) => {
   }
 };
 
-type ActionData = {
-  formError?: string;
-  fieldErrors?: {
+export const Login = () => {
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | undefined>(undefined);
+  const [fieldErrors, setFieldErrors] = useState<{
     username: string | undefined;
     password: string | undefined;
+  }>({
+    username: undefined,
+    password: undefined,
+  });
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const username = formData.get("username");
+    const password = formData.get("password");
+
+    const fieldErrors = {
+      username: validateUsername(username),
+      password: validatePassword(password),
+    };
+
+    if (Object.values(fieldErrors).some(Boolean)) {
+      setFieldErrors(fieldErrors);
+      return;
+    }
+
+    if (typeof username !== "string" || typeof password !== "string") {
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      await Auth.signIn(username, password);
+      location.href = "/";
+    } catch (error) {
+      setFormError("Kullanıcı adı veya parola yanlış.");
+    } finally {
+      setSubmitting(false);
+    }
   };
-  fields?: {
-    username: string;
-    password: string;
-  };
-};
-
-const badRequest = (data: ActionData) => json(data, { status: 400 });
-
-export const action: ActionFunction = async ({ request }) => {
-  const formData = await request.formData();
-  const username = formData.get("username");
-  const password = formData.get("password");
-
-  if (typeof username !== "string" || typeof password !== "string") {
-    return badRequest({
-      formError: "Lütfen kullanıcı adı ve parola alanlarını doldurun.",
-    });
-  }
-
-  const fields = { username, password };
-  const fieldErrors = {
-    username: validateUsername(username),
-    password: validatePassword(password),
-  };
-
-  if (Object.values(fieldErrors).some(Boolean)) {
-    return badRequest({
-      fieldErrors,
-      fields,
-    });
-  }
-
-  try {
-    await Auth.signIn(username, password);
-    return redirect("/");
-  } catch (error) {
-    return badRequest({
-      formError: "Kullanıcı adı veya parola yanlış.",
-      fieldErrors,
-      fields,
-    });
-  }
-};
-
-export const Login = () => {
-  const data = useActionData();
-  const transition = useTransition();
 
   return (
     <CenteredContainer>
-      <Form method="post">
+      <Form onSubmit={onSubmit}>
         <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
           <Label htmlFor="username">Kullanıcı Adı</Label>
           <Input
@@ -90,13 +76,13 @@ export const Login = () => {
             type="text"
             placeholder="iron-man"
             aria-errormessage={
-              data?.fieldErrors?.username ? "username-error" : undefined
+              fieldErrors?.username ? "username-error" : undefined
             }
           />
-          {data?.fieldErrors?.username ? (
+          {fieldErrors?.username ? (
             <ValidationMessage
-              error={data.fieldErrors.username}
-              isSubmitting={transition.state === "submitting"}
+              error={fieldErrors.username}
+              isSubmitting={submitting}
             />
           ) : null}
 
@@ -107,23 +93,20 @@ export const Login = () => {
             placeholder="super-secret-password"
             type="password"
             aria-errormessage={
-              data?.fieldErrors?.password ? "password-error" : undefined
+              fieldErrors?.password ? "password-error" : undefined
             }
           />
-          {data?.fieldErrors?.password ? (
+          {fieldErrors?.password ? (
             <ValidationMessage
-              error={data.fieldErrors.password}
-              isSubmitting={transition.state === "submitting"}
+              error={fieldErrors.password}
+              isSubmitting={submitting}
             />
           ) : null}
           <Box>
-            <Button type="submit">Giriş yap</Button>
+            <Button type="submit">{submitting ? "..." : "Giriş yap"}</Button>
           </Box>
-          {data?.formError ? (
-            <ValidationMessage
-              error={data.formError}
-              isSubmitting={transition.state === "submitting"}
-            />
+          {formError ? (
+            <ValidationMessage error={formError} isSubmitting={submitting} />
           ) : null}
         </GappedBox>
       </Form>
