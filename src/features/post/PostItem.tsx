@@ -1,14 +1,11 @@
-import { Post } from "~/API";
+import { Collection, Post } from "~/API";
 import { useFetcher } from "@remix-run/react";
 import { FC } from "react";
 import { useUserContext } from "../auth/user-context";
 import {
   Box,
-  Button,
   ExternalLink,
   GappedBox,
-  Input,
-  Label,
   SmallLink,
   UpvoteButton,
 } from "~/ui-library";
@@ -23,12 +20,14 @@ import {
   DialogTrigger,
 } from "~/ui-library/Dialog";
 import { SelectComponent } from "~/ui-library/Select";
+import { MoreOptionsDropdown } from "~/ui-library/MoreOptionsDropdown";
 
 type PostItemProps = {
   post: Post;
+  collections: Collection[] | [];
 };
 
-export const PostItem: FC<PostItemProps> = ({ post }) => {
+export const PostItem: FC<PostItemProps> = ({ post, collections }) => {
   const user = useUserContext();
   const fetcher = useFetcher();
   const isLoading = !!fetcher.submission;
@@ -80,37 +79,11 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
           <SmallLink to={`/posts/${post.id}`}>
             {post.commentCount} yorum
           </SmallLink>
-          |
-          <fetcher.Form method="post" action="/addToCollections">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button>Ekle</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogTitle>Koleksiyona ekle</DialogTitle>
-                <DialogDescription>
-                  Postu eklemek istediğin koleksiyonu seç
-                </DialogDescription>
-                <GappedBox css={{ flexDirection: "column" }}>
-                  <SelectComponent
-                    label="Koleksiyonlar"
-                    options={[
-                      { value: "javascript", text: "Javascript" },
-                      { value: "java", text: "Java" },
-                      { value: "typescript", text: "Typescript" },
-                    ]}
-                  />
-                </GappedBox>
-                <GappedBox css={{ marginTop: 10, gap: 10 }}>
-                  <DialogClose asChild>
-                    <Button type="submit" aria-label="Close">
-                      Ekle
-                    </Button>
-                  </DialogClose>
-                </GappedBox>
-              </DialogContent>
-            </Dialog>
-          </fetcher.Form>
+          {user && (
+            <>
+              | <MoreOptionsDropdown collections={collections} post={post} />
+            </>
+          )}
         </GappedBox>
       </GappedBox>
     </GappedBox>

@@ -1,6 +1,14 @@
-import { Comment, GetPostQuery, GetPostQueryVariables, Post } from "~/API";
+import {
+  Collection,
+  Comment,
+  GetPostQuery,
+  GetPostQueryVariables,
+  ListCollectionsQuery,
+  ListCollectionsQueryVariables,
+  Post,
+} from "~/API";
 import { useState } from "react";
-import { getPost } from "~/graphql/queries";
+import { getPost, listCollections } from "~/graphql/queries";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 import { CommentItem } from "~/features/comment/Comment";
 import { AuthUser, useUserContext } from "~/features/auth/user-context";
@@ -54,7 +62,8 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 };
 
 type LoaderData = {
-  data: GetPostQuery;
+  post: GetPostQuery;
+  collections: ListCollectionsQuery;
 };
 
 export const action: ActionFunction = async ({ request, params }) => {
@@ -98,14 +107,17 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 const SinglePost = () => {
   const user = useUserContext();
-  const { data } = useLoaderData<LoaderData>();
+  const { post: postData, collections: collectionsData } =
+    useLoaderData<LoaderData>();
 
   const [comment, setComment] = useState("");
 
-  const post = data.getPost as Post;
+  const post = postData.getPost as Post;
   const sortedComments = [...(post.comments?.items as Comment[])].sort((a, b) =>
     a.createdAt > b.createdAt ? 1 : -1
   );
+
+  const collections = collectionsData?.listCollections?.items as Collection[];
 
   const visualTree = toVisualTree(sortedComments);
 
@@ -113,9 +125,11 @@ const SinglePost = () => {
     return !comment.parentID;
   });
 
+  console.log(post);
+
   return (
     <CenteredContainer css={{ gap: 5 }}>
-      <PostItem post={post} />
+      <PostItem post={post} collections={collections} />
       <Form method="post" css={{ width: "100%" }}>
         <Textarea
           css={{

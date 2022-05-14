@@ -1,4 +1,4 @@
-import { ListPostsQuery, Post } from "~/API";
+import { Collection, ListCollectionsQuery, ListPostsQuery, Post } from "~/API";
 import { listPosts } from "~/graphql/queries";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 import { PostList } from "~/features/post/PostList";
@@ -6,7 +6,8 @@ import { json, LoaderFunction, useLoaderData } from "remix";
 import { withSSR } from "~/features/utils/amplify/withSSR";
 
 type LoaderData = {
-  data: ListPostsQuery;
+  posts: ListPostsQuery;
+  collections: ListCollectionsQuery;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -21,15 +22,18 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export const Home = () => {
-  const { data } = useLoaderData<LoaderData>();
-  const posts = (data.listPosts?.items as Post[]) || [];
+  const { posts: postsData, collections: collectionsData } =
+    useLoaderData<LoaderData>();
+  const posts = (postsData.listPosts?.items as Post[]) || [];
+  const collections =
+    (collectionsData.listCollections?.items as Collection[]) || [];
   const sortedPosts = [...posts].sort((a, b) =>
     a.createdAt < b.createdAt ? 1 : -1
   );
 
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>
-      <PostList posts={sortedPosts} />
+      <PostList posts={sortedPosts} collections={collections} />
     </CenteredContainer>
   );
 };
