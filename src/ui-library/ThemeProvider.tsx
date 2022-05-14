@@ -27,9 +27,6 @@ export const ThemeProvider: FC = ({ children }) => {
 
   const context = useMemo(() => ({ theme, setTheme }), [theme]);
 
-
-  console.log({ theme });
-
   return (
     <ThemeContext.Provider value={context}>{children}</ThemeContext.Provider>
   );

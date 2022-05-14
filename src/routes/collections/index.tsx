@@ -4,7 +4,14 @@ import { gql } from "@apollo/client";
 import { listCollections } from "~/graphql/queries";
 import { useLoaderData } from "remix";
 import { Collection, ListCollectionsQuery } from "~/API";
-import { CenteredContainer } from "~/ui-library";
+import {
+  Box,
+  CenteredContainer,
+  GappedBox,
+  Link,
+  SmallLink,
+  Text,
+} from "~/ui-library";
 
 export const loader: LoaderFunction = async ({}) => {
   const client = await createClient();
@@ -33,11 +40,17 @@ const CollectionsPage = () => {
 
   return (
     <CenteredContainer>
-      <h1>Collections Page</h1>
       {sortedCollections.map((collection) => (
-        <div key={collection.id}>
-          <h2>{collection.name}</h2>
-        </div>
+        <GappedBox
+          css={{
+            alignItems: "center",
+            color: "$gray9",
+            fontSize: "0.8rem",
+          }}
+        >
+          <Box>@{collection.owner}</Box> |
+          <Link to={`/collections/${collection.id}`}>{collection.name}</Link>
+        </GappedBox>
       ))}
     </CenteredContainer>
   );
