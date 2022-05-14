@@ -10,7 +10,8 @@ type LoaderData = {
   data: ListPostsQuery;
 };
 
-export const loader: LoaderFunction = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  // request.headers.
   const client = await createClient();
 
   try {

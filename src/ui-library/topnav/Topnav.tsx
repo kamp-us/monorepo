@@ -10,6 +10,7 @@ import {
   Link,
   ThemeToggle,
 } from "~/ui-library";
+import { UserDropdown } from "../UserDropdown";
 
 export const Topnav: FC = () => {
   const user = useUserContext();
@@ -45,6 +46,7 @@ export const Topnav: FC = () => {
                 <StyledLink to="/login">Giriş</StyledLink>
               </>
             )}
+            <UserDropdown />
           </Box>
         </GappedBox>
       </CenteredContainer>
