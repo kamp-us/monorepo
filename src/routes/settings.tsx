@@ -1,8 +1,8 @@
 import { useActionData, useTransition } from "@remix-run/react";
-import { ActionFunction, useLoaderData } from "remix";
-import { json, LoaderFunction } from "@remix-run/node";
+import { ActionFunction } from "remix";
+import { json } from "@remix-run/node";
 import { Auth } from "aws-amplify";
-import { AuthUser } from "~/features/auth/user-context";
+import { AuthUser, useUserContext } from "~/features/auth/user-context";
 import { fetchUser } from "~/features/auth/useFetchUser";
 import { useEffect, useRef } from "react";
 import {
@@ -81,17 +81,10 @@ export const action: ActionFunction = async ({ request }) => {
   }
 };
 
-export const loader: LoaderFunction = async () => {
-  const user = await fetchUser(Auth);
-  return json({
-    user,
-  });
-};
-
 const Settings = () => {
-  const loaderData = useLoaderData();
-  const username = loaderData?.user?.username;
-  const email = loaderData?.user?.attributes?.email;
+  const user = useUserContext();
+  const username = user?.username;
+  const email = user?.attributes?.email;
 
   return (
     <CenteredContainer>
