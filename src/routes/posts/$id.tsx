@@ -126,6 +126,7 @@ const SinglePost = () => {
           css={{
             width: "100%",
             cursor: user ? "pointer" : "not-allowed",
+            resize: user ? "vertical" : "none",
           }}
           name="content"
           disabled={!user}
