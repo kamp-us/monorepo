@@ -5,7 +5,7 @@ import { ActionFunction } from "remix";
 import { createClient } from "~/graphql/apollo-client";
 import { gql } from "@apollo/client";
 import { fetchUser } from "~/features/auth/useFetchUser";
-import { redirect } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import {
   Box,
   Button,
@@ -15,31 +15,31 @@ import {
   Input,
   Label,
 } from "~/ui-library";
+import { SSRGQL } from "~/graphql/SSRGQL";
+import { withSSR } from "~/features/utils/amplify/withSSR";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const title = formData.get("title");
   const url = formData.get("url");
+  const SSR = withSSR({ request });
+  const user = await fetchUser(SSR.Auth);
 
-  const client = await createClient();
-
-  let user: AuthUser | null;
   try {
-    user = await fetchUser(Auth);
-  } catch {
-    user = null;
-  }
-
-  await client.mutate({
-    mutation: gql(createPost),
-    variables: {
-      input: {
-        title,
-        url,
-        owner: user?.username,
+    await SSRGQL({
+      request,
+      query: createPost,
+      variables: {
+        input: {
+          title,
+          url,
+          owner: user.username,
+        },
       },
-    },
-  });
+    });
+  } catch (e) {
+    return json(null, { status: 500 });
+  }
 
   return redirect("/");
 };
