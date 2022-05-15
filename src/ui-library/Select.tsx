@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { styled } from "@stitches/react";
-import { blackA } from "@radix-ui/colors";
 import {
   CheckIcon,
   ChevronDownIcon,
@@ -17,18 +16,18 @@ const StyledTrigger = styled(SelectPrimitive.SelectTrigger, {
   padding: "0 15px",
   fontSize: 13,
   lineHeight: 1,
-  height: 35,
+  height: 25,
   gap: 5,
-  backgroundColor: "white",
+  backgroundColor: "$gray4",
   color: "$amber11",
-  boxShadow: `0 2px 10px ${blackA.blackA7}`,
+  boxShadow: `0 2px 10px $gray7`,
   "&:hover": { backgroundColor: "$amber3" },
   "&:focus": { boxShadow: `0 0 0 2px black` },
 });
 
 const StyledContent = styled(SelectPrimitive.Content, {
   overflow: "hidden",
-  backgroundColor: "white",
+  backgroundColor: "$gray2",
   borderRadius: 6,
   zIndex: 999,
   boxShadow:
@@ -129,11 +128,12 @@ type Option = {
 type SelectProps = {
   options: Option[];
   label: string;
+  name: string;
 };
 
-export const SelectComponent: FC<SelectProps> = ({ options, label }) => {
+export const SelectComponent: FC<SelectProps> = ({ options, label, name }) => {
   return (
-    <Select defaultValue={options[0].value}>
+    <Select name={name} defaultValue={options[0]?.value ?? "Koleksiyonun yok"}>
       <SelectTrigger aria-label="Collection">
         <SelectValue />
         <SelectIcon>
@@ -147,16 +147,25 @@ export const SelectComponent: FC<SelectProps> = ({ options, label }) => {
         <SelectViewport>
           <SelectGroup>
             <SelectLabel>{label}</SelectLabel>
-            {options.map((option) => {
-              return (
-                <SelectItem value={option.value}>
-                  <SelectItemText>{option.text}</SelectItemText>
-                  <SelectItemIndicator>
-                    <CheckIcon />
-                  </SelectItemIndicator>
-                </SelectItem>
-              );
-            })}
+            {options.length ? (
+              options.map((option) => {
+                return (
+                  <SelectItem value={option.value}>
+                    <SelectItemText>{option.text}</SelectItemText>
+                    <SelectItemIndicator>
+                      <CheckIcon />
+                    </SelectItemIndicator>
+                  </SelectItem>
+                );
+              })
+            ) : (
+              <SelectItem value="Koleksiyonun yok" disabled>
+                <SelectItemText>Koleksiyonun yok</SelectItemText>
+                <SelectItemIndicator>
+                  <CheckIcon />
+                </SelectItemIndicator>
+              </SelectItem>
+            )}
           </SelectGroup>
         </SelectViewport>
         <SelectScrollDownButton>

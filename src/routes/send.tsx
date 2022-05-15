@@ -18,6 +18,7 @@ import { CreatePostMutationVariables } from "~/API";
 import { getSitename } from "~/features/url/get-sitename";
 
 export const action: ActionFunction = async ({ request }) => {
+  const SSR = withSSR({ request });
   const formData = await request.formData();
   const title = formData.get("title");
   const url = formData.get("url");

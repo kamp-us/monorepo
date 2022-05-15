@@ -15,16 +15,13 @@ import { fetchUser } from "~/features/auth/useFetchUser";
 import { Auth } from "aws-amplify";
 import { gql } from "@apollo/client";
 import { createCollection } from "~/graphql/mutations";
-import { redirect } from "remix";
-import {
-  CreateCollectionInput,
-  CreateCollectionMutationVariables,
-} from "~/API";
+import { json, redirect } from "remix";
 import { Checkbox, CheckboxIndicator } from "~/ui-library/Checkbox";
-import { useState } from "react";
 import { CheckIcon } from "@radix-ui/react-icons";
+import { withSSR } from "~/features/utils/amplify/withSSR";
 
 export const action: ActionFunction = async ({ request }) => {
+  const SSR = withSSR({ request });
   const formData = await request.formData();
   const name = formData.get("name");
   const isPrivate = formData.get("isPrivate") === "on";
@@ -37,20 +34,23 @@ export const action: ActionFunction = async ({ request }) => {
 
   let user: AuthUser | null;
   try {
-    user = await fetchUser(Auth);
+    user = await fetchUser(SSR.Auth);
   } catch {
     user = null;
   }
+  console.log(user);
+
+  if (!user) {
+    return json(null, { status: 500 });
+  }
+
+  const input = { name, isPrivate, isPublic: !isPrivate, owner: user.username };
+  console.log(input, "INPUT");
 
   await client.mutate({
     mutation: gql(createCollection),
     variables: {
-      input: {
-        name,
-        isPrivate,
-        isPublic: !isPrivate,
-        owner: user?.username,
-      },
+      input,
     },
   });
 
