@@ -11,6 +11,7 @@ import { Collection, Post } from "~/API";
 import { useFetcher } from "@remix-run/react";
 import { ToastComponent } from "~/ui-library/Toast";
 import { GappedBox } from "./GappedBox";
+import { Link } from "~/ui-library/Link";
 
 const slideUpAndFade = keyframes({
   "0%": { opacity: 0, transform: "translateY(2px)" },
@@ -33,7 +34,7 @@ const slideLeftAndFade = keyframes({
 });
 
 const StyledContent = styled(DropdownMenuPrimitive.Content, {
-  minWidth: 220,
+  minWidth: 180,
   backgroundColor: "$gray3",
   borderRadius: 6,
   padding: 5,
@@ -102,7 +103,7 @@ const StyledLabel = styled(DropdownMenuPrimitive.Label, {
 
 const StyledSeparator = styled(DropdownMenuPrimitive.Separator, {
   height: 1,
-  backgroundColor: "$amber6",
+  backgroundColor: "$gray6",
   margin: 5,
 });
 
@@ -228,7 +229,7 @@ export const MoreOptionsDropdown: FC<DropdownMenuProps> = ({
                 <ChevronRightIcon />
               </RightSlot>
             </DropdownMenuTriggerItem>
-            <DropdownMenuContent sideOffset={2} alignOffset={-5}>
+            <DropdownMenuContent sideOffset={6} alignOffset={-5}>
               {collections.map((collection) => {
                 const { id, checked } = isChecked(post, collection);
                 return (
@@ -244,6 +245,10 @@ export const MoreOptionsDropdown: FC<DropdownMenuProps> = ({
                   </DropdownMenuCheckboxItem>
                 );
               })}
+              {collections.length > 1 && <DropdownMenuSeparator />}
+              <Link to={`/collections/new`}>
+                <DropdownMenuItem>Yeni koleksiyon yarat</DropdownMenuItem>
+              </Link>
             </DropdownMenuContent>
           </DropdownMenu>
           <CopyToClipboard text={`https://pano.kamp.us/posts/${post.id}`}>

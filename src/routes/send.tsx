@@ -15,23 +15,25 @@ import {
   Input,
   Label,
 } from "~/ui-library";
+import { withSSR } from "~/features/utils/amplify/withSSR";
 
 export const action: ActionFunction = async ({ request }) => {
+  const SSR = withSSR({ request });
   const formData = await request.formData();
   const title = formData.get("title");
   const url = formData.get("url");
 
-  const client = await createClient();
+  // const client = await createClient();
 
   let user: AuthUser | null;
   try {
-    user = await fetchUser(Auth);
+    user = await fetchUser(SSR.Auth);
   } catch {
     user = null;
   }
 
-  await client.mutate({
-    mutation: gql(createPost),
+  await SSR.API.graphql({
+    query: createPost,
     variables: {
       input: {
         title,
@@ -40,6 +42,14 @@ export const action: ActionFunction = async ({ request }) => {
       },
     },
   });
+
+  // await client.mutate({
+  //   mutation: gql(createPost),
+  //   variables: {
+  //     input: {
+  //     },
+  //   },
+  // });
 
   return redirect("/");
 };
