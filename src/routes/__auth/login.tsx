@@ -36,6 +36,14 @@ export const Login = () => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const clearErrors = () => {
+      setFieldErrors({
+        username: undefined,
+        password: undefined,
+      });
+    }
+    clearErrors();
+    
     const formData = new FormData(e.currentTarget);
     const username = formData.get("username");
     const password = formData.get("password");
