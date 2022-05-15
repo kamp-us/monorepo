@@ -6,6 +6,8 @@ export const Textarea = styled("textarea", {
   height: "auto",
   border: "1px solid $gray6",
   fontFamily: "$inter",
+  resize: "vertical",
+  minHeight: "80px",
   padding: 5,
   "&:focus": {
     outline: "2px solid $amber6",
