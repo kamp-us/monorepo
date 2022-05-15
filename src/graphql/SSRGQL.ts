@@ -4,9 +4,11 @@ import { listPosts } from "~/graphql/queries";
 export const SSRGQL = async ({
   request,
   query,
+  variables,
 }: {
   request: Request;
   query: string;
+  variables: {};
 }) => {
   const SSR = withSSR({ request });
   let authMode;
@@ -20,6 +22,7 @@ export const SSRGQL = async ({
   const { data } = await SSR.API.graphql({
     query,
     authMode,
+    variables,
   });
 
   return data;
