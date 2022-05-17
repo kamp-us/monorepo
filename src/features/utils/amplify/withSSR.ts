@@ -9,7 +9,31 @@ export const withSSR = ({ request }: { request: Request }) => {
     },
   });
 
+  const graphql = async ({
+    query,
+    variables,
+  }: {
+    query: string;
+    variables?: {};
+  }) => {
+    let authMode;
+    try {
+      await SSR.Auth.currentSession();
+      authMode = "AMAZON_COGNITO_USER_POOLS";
+    } catch {
+      authMode = "API_KEY";
+    }
+
+    const { data } = await SSR.API.graphql({
+      query,
+      authMode,
+      variables,
+    });
+
+    return data;
+  };
+
   // const auth = SSR.Auth as typeof Auth;
 
-  return SSR;
+  return { graphql, SSR };
 };
