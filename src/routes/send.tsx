@@ -1,9 +1,5 @@
-import { Auth } from "aws-amplify";
 import { createPost } from "~/graphql/mutations";
-import { AuthUser } from "~/features/auth/user-context";
 import { ActionFunction } from "remix";
-import { createClient } from "~/graphql/apollo-client";
-import { gql } from "@apollo/client";
 import { fetchUser } from "~/features/auth/useFetchUser";
 import { json, redirect } from "@remix-run/node";
 import {
@@ -15,19 +11,17 @@ import {
   Input,
   Label,
 } from "~/ui-library";
-import { SSRGQL } from "~/graphql/SSRGQL";
 import { withSSR } from "~/features/utils/amplify/withSSR";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const title = formData.get("title");
   const url = formData.get("url");
-  const SSR = withSSR({ request });
+  const { SSR, graphql } = withSSR({ request });
   const user = await fetchUser(SSR.Auth);
 
   try {
-    await SSRGQL({
-      request,
+    await graphql({
       query: createPost,
       variables: {
         input: {

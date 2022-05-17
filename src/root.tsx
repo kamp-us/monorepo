@@ -30,7 +30,7 @@ type LoaderData = {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const SSR = withSSR({ request });
+  const { SSR } = withSSR({ request });
 
   let user: AuthUser | null = null;
   let session: CognitoSession | null = null;

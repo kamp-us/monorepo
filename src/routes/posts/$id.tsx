@@ -1,21 +1,19 @@
-import { Comment, GetPostQuery, GetPostQueryVariables, Post } from "~/API";
+import { Comment, GetPostQuery, Post } from "~/API";
 import { useState } from "react";
 import { getPost } from "~/graphql/queries";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 import { CommentItem } from "~/features/comment/Comment";
-import { AuthUser, useUserContext } from "~/features/auth/user-context";
+import { useUserContext } from "~/features/auth/user-context";
 import { PostItem } from "~/features/post/PostItem";
 import { Button } from "~/ui-library/layout-components/Button";
 import { Textarea } from "~/ui-library/Textarea";
 import { Box } from "~/ui-library/layout-components/Box";
-import { gql } from "@apollo/client";
 import { Text } from "~/ui-library/Text";
 import { ActionFunction, LoaderFunction, useLoaderData } from "remix";
-import { createClient } from "~/graphql/apollo-client";
 import { createComment } from "~/graphql/mutations";
 import { fetchUser } from "~/features/auth/useFetchUser";
-import { Auth } from "aws-amplify";
 import { Form } from "~/ui-library/Form";
+import { withSSR } from "~/features/utils/amplify/withSSR";
 
 interface VisualTree {
   [key: string]: {
@@ -42,22 +40,16 @@ const toVisualTree = (comments: Comment[]) => {
   return tree;
 };
 
-export const loader: LoaderFunction = async ({ params }) => {
-  const client = await createClient();
-
+export const loader: LoaderFunction = async ({ params, request }) => {
+  const { graphql } = withSSR({ request });
   if (!params.id) return null;
 
-  const { data, error } = await client.query<
-    GetPostQuery,
-    GetPostQueryVariables
-  >({
-    query: gql(getPost),
-    variables: { id: params.id },
+  const data = await graphql({
+    query: getPost,
+    variables: {
+      id: params.id,
+    },
   });
-
-  if (error) {
-    throw error;
-  }
 
   return { data };
 };
@@ -70,35 +62,28 @@ export const action: ActionFunction = async ({ request, params }) => {
   const formData = await request.formData();
   const content = formData.get("content");
   const commentID = formData.get("commentID");
-
-  const client = await createClient();
-
-  let user: AuthUser | null = null;
-  try {
-    user = await fetchUser(Auth);
-  } catch {
-    user = null;
-  }
+  const { SSR, graphql } = withSSR({ request });
+  const user = await fetchUser(SSR.Auth);
 
   const variables = commentID
     ? {
         postID: params.id,
         content,
-        owner: user?.username,
+        owner: user.username,
         parentID: commentID,
       }
     : {
         postID: params.id,
         content,
-        owner: user?.username,
+        owner: user.username,
       };
 
-  const { data } = await client.mutate({
-    mutation: gql(createComment),
+  await graphql({
+    query: createComment,
     variables: { input: variables },
   });
 
-  return { data };
+  return null;
 };
 
 const SinglePost = () => {
@@ -126,6 +111,7 @@ const SinglePost = () => {
           css={{
             width: "100%",
             cursor: user ? "pointer" : "not-allowed",
+            resize: user ? "both" : "none",
           }}
           name="content"
           disabled={!user}

@@ -4,14 +4,15 @@ import { CenteredContainer } from "~/ui-library/layout-components/CenteredContai
 import { PostList } from "~/features/post/PostList";
 import { LoaderFunction, useLoaderData } from "remix";
 import { json } from "@remix-run/node";
-import { SSRGQL } from "~/graphql/SSRGQL";
+import { withSSR } from "~/features/utils/amplify/withSSR";
 
 type LoaderData = {
   data: ListPostsQuery;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const data = await SSRGQL({ request, query: listPosts });
+  const { graphql } = withSSR({ request });
+  const data = await graphql({ query: listPosts });
 
   if (!data) {
     return json(null, { status: 500 });
