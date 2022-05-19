@@ -14,9 +14,9 @@ import {
 export const Topnav: FC = () => {
   const user = useUserContext();
 
-  const onLogout = (e: React.FormEvent<HTMLFormElement>) => {
+  const onLogout = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    Auth.signOut();
+    await Auth.signOut();
     location.reload();
   };
 
