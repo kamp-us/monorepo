@@ -12,6 +12,7 @@ export const Button = styled("button", {
 
   "&:hover": {
     backgroundColor: "$gray4",
+    color: "$amber11",
   },
 
   variants: {

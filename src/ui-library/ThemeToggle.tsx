@@ -1,4 +1,5 @@
 import { FC } from "react";
+
 import { useTheme } from "./ThemeProvider";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { Button } from "~/ui-library";
@@ -18,7 +19,13 @@ export const ThemeToggle: FC = () => {
 
   return (
     <Button
-      css={{ cursor: "pointer", color: "$gray12" }}
+      css={{
+        cursor: "pointer",
+        color: "$gray12",
+        "&:hover": {
+          backgroundColor: "transparent",
+        },
+      }}
       color="transparent"
       onClick={onClick}
       aria-label="toggle a light and dark color scheme"
