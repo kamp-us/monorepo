@@ -3,11 +3,10 @@ import { styled } from "~/stitches.config";
 
 const StyledContent = styled(DropdownMenuPrimitive.Content, {
   minWidth: 180,
-  backgroundColor: "$gray2",
+  backgroundColor: "$gray3",
   borderRadius: 6,
   padding: 5,
-  boxShadow:
-    "0px 10px 38px -10px $colors$gray5, 0px 10px 20px -15px $colors$gray6",
+  boxShadow: "0px 4px 8px 0px $colors$gray4, 0px 0px 4px 0px $colors$gray4",
 });
 
 const itemStyles = {
