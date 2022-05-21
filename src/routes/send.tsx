@@ -13,25 +13,30 @@ import {
   Label,
 } from "~/ui-library";
 import { withSSR } from "~/features/utils/amplify/withSSR";
+import normalizeUrl from "normalize-url";
+import { CreatePostMutationVariables } from "~/API";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const title = formData.get("title");
   const url = formData.get("url");
 
+  if (!url || !title) {
+    return json(null, { status: 400 });
+  }
+
   const { graphql, Auth } = withSSR({ request });
 
   let user: AuthUser | null;
   try {
     user = await fetchUser(Auth);
-
-    await graphql({
+    await graphql<CreatePostMutationVariables>({
       query: createPost,
       variables: {
         input: {
-          title,
-          url,
-          owner: user?.username,
+          title: title.toString(),
+          url: normalizeUrl(url.toString()),
+          owner: user.username,
         },
       },
     });
