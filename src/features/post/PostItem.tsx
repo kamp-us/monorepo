@@ -9,6 +9,7 @@ import {
   SmallLink,
   UpvoteButton,
 } from "~/ui-library";
+import normalizeUrl from "normalize-url";
 
 type PostItemProps = {
   post: Post;
@@ -36,6 +37,8 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
         },
       };
 
+  const normalized = normalizeUrl(post.url);
+
   return (
     <GappedBox css={{ padding: 5, alignItems: "center" }}>
       <fetcher.Form method="post" action="/upvote">
@@ -48,19 +51,18 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
       </fetcher.Form>
       <GappedBox css={{ flexDirection: "column" }}>
         <GappedBox css={{ alignItems: "center" }}>
-          <ExternalLink
-            href={`//${post.url}`}
+          <ExternalLink href={normalized}>{post.title}</ExternalLink>
+          <SmallLink
+            as="a"
+            href={normalized}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noreferrer noopener"
           >
-            {post.title}
-          </ExternalLink>
-          <SmallLink to={post.url}>{post.url}</SmallLink>
+            {post.url}
+          </SmallLink>
         </GappedBox>
         <GappedBox
           css={{
-            display: "flex",
-            gap: "5px",
             alignItems: "center",
             color: "$gray9",
             fontSize: "0.8rem",

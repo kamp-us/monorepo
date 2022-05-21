@@ -7,3 +7,8 @@ export const ExternalLink = styled("a", {
     textDecoration: "none",
   },
 });
+
+ExternalLink.defaultProps = {
+  target: "_blank",
+  rel: "noopener noreferrer",
+};
