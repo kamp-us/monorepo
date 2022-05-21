@@ -1,24 +1,22 @@
 import { ActionFunction } from "remix";
-import { createClient } from "~/graphql/apollo-client";
 import invariant from "tiny-invariant";
-import { gql } from "@apollo/client";
 import { createUpvote, deleteUpvote } from "~/graphql/mutations";
+import { withSSR } from "~/features/utils/amplify/withSSR";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const jsonData = formData.get("json") as string | null;
-  const client = await createClient();
+
   invariant(jsonData, "json is required");
+
+  const { graphql } = withSSR({ request });
 
   let { type, ...variables } = JSON.parse(jsonData);
 
   switch (type) {
     case "create":
       try {
-        await client.mutate({
-          mutation: gql(createUpvote),
-          variables,
-        });
+        await graphql({ query: createUpvote, variables });
       } catch (e) {
         return {
           status: 500,
@@ -28,10 +26,7 @@ export const action: ActionFunction = async ({ request }) => {
       break;
     case "delete":
       try {
-        await client.mutate({
-          mutation: gql(deleteUpvote),
-          variables,
-        });
+        await graphql({ query: deleteUpvote, variables });
       } catch (e) {
         return {
           status: 500,

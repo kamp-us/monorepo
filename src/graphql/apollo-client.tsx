@@ -1,4 +1,4 @@
-import { Auth, Amplify } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import { fetchUser } from "~/features/auth/useFetchUser";
 import { AuthUser } from "~/features/auth/user-context";
 // @ts-ignore
