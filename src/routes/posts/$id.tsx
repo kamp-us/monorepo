@@ -8,14 +8,12 @@ import { PostItem } from "~/features/post/PostItem";
 import { Button } from "~/ui-library/layout-components/Button";
 import { Textarea } from "~/ui-library/Textarea";
 import { Box } from "~/ui-library/layout-components/Box";
-import { gql } from "@apollo/client";
 import { Text } from "~/ui-library/Text";
-import { ActionFunction, LoaderFunction, useLoaderData } from "remix";
-import { createClient } from "~/graphql/apollo-client";
+import { ActionFunction, json, LoaderFunction, useLoaderData } from "remix";
 import { createComment } from "~/graphql/mutations";
 import { fetchUser } from "~/features/auth/useFetchUser";
-import { Auth } from "aws-amplify";
 import { Form } from "~/ui-library/Form";
+import { withSSR } from "~/features/utils/amplify/withSSR";
 
 interface VisualTree {
   [key: string]: {
@@ -42,24 +40,20 @@ const toVisualTree = (comments: Comment[]) => {
   return tree;
 };
 
-export const loader: LoaderFunction = async ({ params }) => {
-  const client = await createClient();
+export const loader: LoaderFunction = async ({ params, request }) => {
+  const { graphql } = withSSR({ request });
 
   if (!params.id) return null;
 
-  const { data, error } = await client.query<
-    GetPostQuery,
-    GetPostQueryVariables
-  >({
-    query: gql(getPost),
-    variables: { id: params.id },
-  });
-
-  if (error) {
+  try {
+    const data = await graphql<GetPostQueryVariables>({
+      query: getPost,
+      variables: { id: params.id },
+    });
+    return { data };
+  } catch (error) {
     throw error;
   }
-
-  return { data };
 };
 
 type LoaderData = {
@@ -71,34 +65,38 @@ export const action: ActionFunction = async ({ request, params }) => {
   const content = formData.get("content");
   const commentID = formData.get("commentID");
 
-  const client = await createClient();
+  const { Auth, graphql } = withSSR({ request });
 
-  let user: AuthUser | null = null;
+  let user: AuthUser;
   try {
     user = await fetchUser(Auth);
   } catch {
-    user = null;
+    return json(null, { status: 500 });
   }
 
   const variables = commentID
     ? {
         postID: params.id,
         content,
-        owner: user?.username,
+        owner: user.username,
         parentID: commentID,
       }
     : {
         postID: params.id,
         content,
-        owner: user?.username,
+        owner: user.username,
       };
 
-  const { data } = await client.mutate({
-    mutation: gql(createComment),
-    variables: { input: variables },
+  await graphql({
+    query: createComment,
+    variables: {
+      input: {
+        variables: { input: variables },
+      },
+    },
   });
 
-  return { data };
+  return null;
 };
 
 const SinglePost = () => {
@@ -126,6 +124,7 @@ const SinglePost = () => {
           css={{
             width: "100%",
             cursor: user ? "pointer" : "not-allowed",
+            resize: user ? "both" : "noe",
           }}
           name="content"
           disabled={!user}

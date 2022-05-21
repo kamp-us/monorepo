@@ -1,11 +1,8 @@
-import { Auth } from "aws-amplify";
 import { createPost } from "~/graphql/mutations";
 import { AuthUser } from "~/features/auth/user-context";
 import { ActionFunction } from "remix";
-import { createClient } from "~/graphql/apollo-client";
-import { gql } from "@apollo/client";
 import { fetchUser } from "~/features/auth/useFetchUser";
-import { redirect } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import {
   Box,
   Button,
@@ -15,33 +12,33 @@ import {
   Input,
   Label,
 } from "~/ui-library";
+import { withSSR } from "~/features/utils/amplify/withSSR";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const title = formData.get("title");
   const url = formData.get("url");
 
-  const client = await createClient();
+  const { graphql, Auth } = withSSR({ request });
 
   let user: AuthUser | null;
   try {
     user = await fetchUser(Auth);
-  } catch {
-    user = null;
-  }
 
-  await client.mutate({
-    mutation: gql(createPost),
-    variables: {
-      input: {
-        title,
-        url,
-        owner: user?.username,
+    await graphql({
+      query: createPost,
+      variables: {
+        input: {
+          title,
+          url,
+          owner: user?.username,
+        },
       },
-    },
-  });
-
-  return redirect("/");
+    });
+    return redirect("/");
+  } catch {
+    return json(null, { status: 500 });
+  }
 };
 
 export const Send = () => {

@@ -1,4 +1,4 @@
-import { Auth, withSSRContext } from "aws-amplify";
+import { withSSRContext } from "aws-amplify";
 
 export const withSSR = ({ request }: { request: Request }) => {
   const SSR = withSSRContext({
@@ -9,7 +9,29 @@ export const withSSR = ({ request }: { request: Request }) => {
     },
   });
 
-  // const auth = SSR.Auth as typeof Auth;
+  const graphql = async <TVariables = {}>({
+    query,
+    variables,
+  }: {
+    query: string;
+    variables?: TVariables;
+  }) => {
+    let authMode;
+    try {
+      await SSR.Auth.currentSession();
+      authMode = "AMAZON_COGNITO_USER_POOLS";
+    } catch {
+      authMode = "API_KEY";
+    }
 
-  return SSR;
+    const { data } = await SSR.API.graphql({
+      query,
+      authMode,
+      variables,
+    });
+
+    return data;
+  };
+
+  return { ...SSR, graphql };
 };
