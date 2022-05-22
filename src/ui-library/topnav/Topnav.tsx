@@ -15,7 +15,7 @@ export const Topnav: FC = () => {
   const user = useUserContext();
 
   return (
-    <Box css={{ backgroundColor: "$gray2" }}>
+    <Box css={{ paddingX: 10, backgroundColor: "$gray2" }}>
       <CenteredContainer>
         <GappedBox css={{ padding: "10px 0", alignItems: "center" }}>
           <Link prefetch="intent" to="/">
