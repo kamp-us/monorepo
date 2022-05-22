@@ -37,6 +37,10 @@ const StyledFallback = styled(AvatarPrimitive.Fallback, {
     backgroundColor: "$gray4",
     color: "$amber11",
   },
+
+  "&:active": {
+    backgroundColor: "$gray5",
+  },
 });
 
 // Exports
