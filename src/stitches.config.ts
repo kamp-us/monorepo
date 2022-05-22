@@ -39,6 +39,12 @@ export const { styled, createTheme, getCssText } = createStitches({
       inter: "Inter, sans-serif",
     },
   },
+  utils: {
+    paddingX: (value: number) => ({
+      paddingRight: value,
+      paddingLeft: value,
+    }),
+  },
 });
 
 export const darkTheme = createTheme({
