@@ -11,6 +11,7 @@ import {
   redDark,
   greenDark,
   purpleDark,
+  blackA,
 } from "@radix-ui/colors";
 
 // Spread the scales in your light and dark themes
@@ -25,6 +26,7 @@ export const { styled, createTheme, getCssText } = createStitches({
       ...red,
       ...green,
       ...purple,
+      ...blackA,
     },
     fontSizes: {
       1: "12px",
