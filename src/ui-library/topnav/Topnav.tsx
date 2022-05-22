@@ -1,3 +1,4 @@
+import { PlusIcon } from "@radix-ui/react-icons";
 import { FC } from "react";
 import { useUserContext } from "~/features/auth/user-context";
 import {
@@ -7,6 +8,7 @@ import {
   Link,
   ThemeToggle,
 } from "~/ui-library";
+import { IconButton } from "../IconButton";
 import { UserDropdown } from "../UserDropdown";
 
 export const Topnav: FC = () => {
@@ -23,7 +25,9 @@ export const Topnav: FC = () => {
           <Box css={{ display: "flex", gap: 10, alignItems: "center" }}>
             {user ? (
               <>
-                <Link to="/send">Yeni Gönderi</Link>
+                <IconButton as={Link} to="/send">
+                  <PlusIcon />
+                </IconButton>
                 <ThemeToggle />
                 <UserDropdown login={user.username} />
               </>
