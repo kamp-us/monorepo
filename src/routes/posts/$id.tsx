@@ -45,15 +45,12 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
   if (!params.id) return null;
 
-  try {
-    const data = await graphql<GetPostQueryVariables>({
-      query: getPost,
-      variables: { id: params.id },
-    });
-    return { data };
-  } catch (error) {
-    throw error;
-  }
+  const data = await graphql<GetPostQueryVariables>({
+    query: getPost,
+    variables: { id: params.id },
+  });
+
+  return json({ data });
 };
 
 type LoaderData = {

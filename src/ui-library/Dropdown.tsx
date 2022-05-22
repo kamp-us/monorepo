@@ -6,7 +6,7 @@ const StyledContent = styled(DropdownMenuPrimitive.Content, {
   backgroundColor: "$gray3",
   borderRadius: 6,
   padding: 5,
-  boxShadow: "0px 4px 8px 0px $colors$gray4, 0px 0px 4px 0px $colors$gray4",
+  boxShadow: "0px 4px 8px 0px $colors$blackA9, 0px 0px 4px 0px $colors$blackA9",
 });
 
 const itemStyles = {

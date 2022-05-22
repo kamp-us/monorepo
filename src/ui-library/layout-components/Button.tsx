@@ -15,6 +15,10 @@ export const Button = styled("button", {
     color: "$amber11",
   },
 
+  "&:active": {
+    backgroundColor: "$gray5",
+  },
+
   variants: {
     color: {
       transparent: {
