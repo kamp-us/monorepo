@@ -9,6 +9,7 @@ export const getPost = /* GraphQL */ `
       title
       url
       owner
+      site
       isUpvoted
       upvoteCount
       commentCount
@@ -36,6 +37,7 @@ export const getPost = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -65,6 +67,7 @@ export const getPost = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -93,6 +96,7 @@ export const listPosts = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount
@@ -205,6 +209,7 @@ export const getUpvote = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount
@@ -274,6 +279,7 @@ export const listUpvotes = /* GraphQL */ `
           title
           url
           owner
+          site
           isUpvoted
           upvoteCount
           commentCount
@@ -344,6 +350,7 @@ export const getPostTag = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount
@@ -410,6 +417,7 @@ export const listPostTags = /* GraphQL */ `
           title
           url
           owner
+          site
           isUpvoted
           upvoteCount
           commentCount

@@ -12,6 +12,7 @@ export const createPost = /* GraphQL */ `
       title
       url
       owner
+      site
       isUpvoted
       upvoteCount
       commentCount
@@ -39,6 +40,7 @@ export const createPost = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -68,6 +70,7 @@ export const createPost = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -94,6 +97,7 @@ export const updatePost = /* GraphQL */ `
       title
       url
       owner
+      site
       isUpvoted
       upvoteCount
       commentCount
@@ -121,6 +125,7 @@ export const updatePost = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -150,6 +155,7 @@ export const updatePost = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -176,6 +182,7 @@ export const deletePost = /* GraphQL */ `
       title
       url
       owner
+      site
       isUpvoted
       upvoteCount
       commentCount
@@ -203,6 +210,7 @@ export const deletePost = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -232,6 +240,7 @@ export const deletePost = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -354,6 +363,7 @@ export const createUpvote = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount
@@ -411,6 +421,7 @@ export const updateUpvote = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount
@@ -468,6 +479,7 @@ export const deleteUpvote = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount
@@ -575,6 +587,7 @@ export const createPostTag = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount
@@ -639,6 +652,7 @@ export const updatePostTag = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount
@@ -703,6 +717,7 @@ export const deletePostTag = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount

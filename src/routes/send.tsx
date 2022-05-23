@@ -15,6 +15,7 @@ import {
 import { withSSR } from "~/features/utils/amplify/withSSR";
 import normalizeUrl from "normalize-url";
 import { CreatePostMutationVariables } from "~/API";
+import { getSitename } from "~/features/url/get-sitename";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -27,6 +28,10 @@ export const action: ActionFunction = async ({ request }) => {
 
   const { graphql, Auth } = withSSR({ request });
 
+  const normalized = normalizeUrl(url.toString());
+  const postUrl = new URL(normalized);
+  const site = getSitename(postUrl);
+
   let user: AuthUser | null;
   try {
     user = await fetchUser(Auth);
@@ -35,8 +40,9 @@ export const action: ActionFunction = async ({ request }) => {
       variables: {
         input: {
           title: title.toString(),
-          url: normalizeUrl(url.toString()),
+          url: normalized,
           owner: user.username,
+          site: site,
         },
       },
     });
