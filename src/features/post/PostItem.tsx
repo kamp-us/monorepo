@@ -52,14 +52,9 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
       <GappedBox css={{ flexDirection: "column" }}>
         <GappedBox css={{ alignItems: "center" }}>
           <ExternalLink href={normalized}>{post.title}</ExternalLink>
-          <SmallLink
-            as="a"
-            href={normalized}
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            {post.url}
-          </SmallLink>
+          {post.site && (
+            <SmallLink to={`/site/${post.site}`}>{post.site}</SmallLink>
+          )}
         </GappedBox>
         <GappedBox
           css={{
