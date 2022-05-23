@@ -22,6 +22,8 @@ type Post
   url: String!
   owner: String!
 
+  site: String @index(name: "bySite", sortKeyFields: ["createdAt"])
+
   isUpvoted: Boolean @function(name: "GQLCustomResolvers-${env}")
   upvoteCount: Int @function(name: "GQLCustomResolvers-${env}")
   commentCount: Int @function(name: "GQLCustomResolvers-${env}")
@@ -29,6 +31,9 @@ type Post
   comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
   upvotes: [Upvote] @hasMany
   tags: [PostTag] @hasMany(indexName: "byPost", fields: ["id"])
+
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
 }
 
 type Comment
