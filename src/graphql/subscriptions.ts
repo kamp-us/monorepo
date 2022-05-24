@@ -50,6 +50,8 @@ export const onCreatePost = /* GraphQL */ `
         }
         nextToken
       }
+      createdAt
+      updatedAt
       tags {
         items {
           id
@@ -90,6 +92,7 @@ export const onCreatePost = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -103,6 +106,7 @@ export const onCreatePost = /* GraphQL */ `
             isPrivate
             isPublic
             owner
+            slug
             createdAt
             updatedAt
           }
@@ -112,8 +116,6 @@ export const onCreatePost = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -165,6 +167,8 @@ export const onUpdatePost = /* GraphQL */ `
         }
         nextToken
       }
+      createdAt
+      updatedAt
       tags {
         items {
           id
@@ -205,6 +209,7 @@ export const onUpdatePost = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -218,6 +223,7 @@ export const onUpdatePost = /* GraphQL */ `
             isPrivate
             isPublic
             owner
+            slug
             createdAt
             updatedAt
           }
@@ -227,8 +233,6 @@ export const onUpdatePost = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -280,6 +284,8 @@ export const onDeletePost = /* GraphQL */ `
         }
         nextToken
       }
+      createdAt
+      updatedAt
       tags {
         items {
           id
@@ -320,6 +326,7 @@ export const onDeletePost = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -333,6 +340,7 @@ export const onDeletePost = /* GraphQL */ `
             isPrivate
             isPublic
             owner
+            slug
             createdAt
             updatedAt
           }
@@ -342,8 +350,6 @@ export const onDeletePost = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -467,6 +473,8 @@ export const onCreateUpvote = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -489,8 +497,6 @@ export const onCreateUpvote = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       createdAt
       updatedAt
@@ -534,6 +540,8 @@ export const onUpdateUpvote = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -556,8 +564,6 @@ export const onUpdateUpvote = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       createdAt
       updatedAt
@@ -601,6 +607,8 @@ export const onDeleteUpvote = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -623,8 +631,6 @@ export const onDeleteUpvote = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       createdAt
       updatedAt
@@ -648,6 +654,7 @@ export const onCreateTag = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -688,6 +695,7 @@ export const onUpdateTag = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -728,6 +736,7 @@ export const onDeleteTag = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -761,6 +770,7 @@ export const onCreateCollection = /* GraphQL */ `
       isPrivate
       isPublic
       owner
+      slug
       posts {
         items {
           id
@@ -771,6 +781,7 @@ export const onCreateCollection = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -784,6 +795,7 @@ export const onCreateCollection = /* GraphQL */ `
             isPrivate
             isPublic
             owner
+            slug
             createdAt
             updatedAt
           }
@@ -807,6 +819,7 @@ export const onUpdateCollection = /* GraphQL */ `
       isPrivate
       isPublic
       owner
+      slug
       posts {
         items {
           id
@@ -817,6 +830,7 @@ export const onUpdateCollection = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -830,6 +844,7 @@ export const onUpdateCollection = /* GraphQL */ `
             isPrivate
             isPublic
             owner
+            slug
             createdAt
             updatedAt
           }
@@ -853,6 +868,7 @@ export const onDeleteCollection = /* GraphQL */ `
       isPrivate
       isPublic
       owner
+      slug
       posts {
         items {
           id
@@ -863,6 +879,7 @@ export const onDeleteCollection = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -876,6 +893,7 @@ export const onDeleteCollection = /* GraphQL */ `
             isPrivate
             isPublic
             owner
+            slug
             createdAt
             updatedAt
           }
@@ -927,6 +945,8 @@ export const onCreatePostTags = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -949,8 +969,6 @@ export const onCreatePostTags = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       tag {
         id
@@ -1013,6 +1031,8 @@ export const onUpdatePostTags = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -1035,8 +1055,6 @@ export const onUpdatePostTags = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       tag {
         id
@@ -1099,6 +1117,8 @@ export const onDeletePostTags = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -1121,8 +1141,6 @@ export const onDeletePostTags = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       tag {
         id
@@ -1159,6 +1177,7 @@ export const onCreateCollectionPosts = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount
@@ -1184,6 +1203,8 @@ export const onCreateCollectionPosts = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -1206,8 +1227,6 @@ export const onCreateCollectionPosts = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       collection {
         id
@@ -1216,6 +1235,7 @@ export const onCreateCollectionPosts = /* GraphQL */ `
         isPrivate
         isPublic
         owner
+        slug
         posts {
           items {
             id
@@ -1247,6 +1267,7 @@ export const onUpdateCollectionPosts = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount
@@ -1272,6 +1293,8 @@ export const onUpdateCollectionPosts = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -1294,8 +1317,6 @@ export const onUpdateCollectionPosts = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       collection {
         id
@@ -1304,6 +1325,7 @@ export const onUpdateCollectionPosts = /* GraphQL */ `
         isPrivate
         isPublic
         owner
+        slug
         posts {
           items {
             id
@@ -1335,6 +1357,7 @@ export const onDeleteCollectionPosts = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount
@@ -1360,6 +1383,8 @@ export const onDeleteCollectionPosts = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -1382,8 +1407,6 @@ export const onDeleteCollectionPosts = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       collection {
         id
@@ -1392,6 +1415,7 @@ export const onDeleteCollectionPosts = /* GraphQL */ `
         isPrivate
         isPublic
         owner
+        slug
         posts {
           items {
             id

@@ -101,10 +101,10 @@ export type Post = {
   commentCount?: number | null,
   comments?: ModelCommentConnection | null,
   upvotes?: ModelUpvoteConnection | null,
-  tags?: ModelPostTagsConnection | null,
-  collections?: ModelCollectionPostsConnection | null,
   createdAt: string,
   updatedAt: string,
+  tags?: ModelPostTagsConnection | null,
+  collections?: ModelCollectionPostsConnection | null,
 };
 
 export type ModelCommentConnection = {
@@ -195,6 +195,7 @@ export type Collection = {
   isPrivate: boolean,
   isPublic: boolean,
   owner: string,
+  slug: string,
   posts?: ModelCollectionPostsConnection | null,
   createdAt: string,
   updatedAt: string,
@@ -318,6 +319,7 @@ export type CreateCollectionInput = {
   isPrivate: boolean,
   isPublic: boolean,
   owner: string,
+  slug: string,
 };
 
 export type ModelCollectionConditionInput = {
@@ -326,6 +328,7 @@ export type ModelCollectionConditionInput = {
   isPrivate?: ModelBooleanInput | null,
   isPublic?: ModelBooleanInput | null,
   owner?: ModelStringInput | null,
+  slug?: ModelStringInput | null,
   and?: Array< ModelCollectionConditionInput | null > | null,
   or?: Array< ModelCollectionConditionInput | null > | null,
   not?: ModelCollectionConditionInput | null,
@@ -338,6 +341,7 @@ export type UpdateCollectionInput = {
   isPrivate?: boolean | null,
   isPublic?: boolean | null,
   owner?: string | null,
+  slug?: string | null,
 };
 
 export type DeleteCollectionInput = {
@@ -472,6 +476,7 @@ export type ModelCollectionFilterInput = {
   isPrivate?: ModelBooleanInput | null,
   isPublic?: ModelBooleanInput | null,
   owner?: ModelStringInput | null,
+  slug?: ModelStringInput | null,
   and?: Array< ModelCollectionFilterInput | null > | null,
   or?: Array< ModelCollectionFilterInput | null > | null,
   not?: ModelCollectionFilterInput | null,
@@ -560,6 +565,8 @@ export type CreatePostMutation = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
     tags?:  {
       __typename: "ModelPostTagsConnection",
       items:  Array< {
@@ -607,6 +614,7 @@ export type CreatePostMutation = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -621,6 +629,7 @@ export type CreatePostMutation = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -630,8 +639,6 @@ export type CreatePostMutation = {
       } | null >,
       nextToken?: string | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -694,6 +701,8 @@ export type UpdatePostMutation = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
     tags?:  {
       __typename: "ModelPostTagsConnection",
       items:  Array< {
@@ -741,6 +750,7 @@ export type UpdatePostMutation = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -755,6 +765,7 @@ export type UpdatePostMutation = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -764,8 +775,6 @@ export type UpdatePostMutation = {
       } | null >,
       nextToken?: string | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -828,6 +837,8 @@ export type DeletePostMutation = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
     tags?:  {
       __typename: "ModelPostTagsConnection",
       items:  Array< {
@@ -875,6 +886,7 @@ export type DeletePostMutation = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -889,6 +901,7 @@ export type DeletePostMutation = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -898,8 +911,6 @@ export type DeletePostMutation = {
       } | null >,
       nextToken?: string | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -1057,6 +1068,8 @@ export type CreateUpvoteMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -1083,8 +1096,6 @@ export type CreateUpvoteMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -1138,6 +1149,8 @@ export type UpdateUpvoteMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -1164,8 +1177,6 @@ export type UpdateUpvoteMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -1219,6 +1230,8 @@ export type DeleteUpvoteMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -1245,8 +1258,6 @@ export type DeleteUpvoteMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -1278,6 +1289,7 @@ export type CreateTagMutation = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -1327,6 +1339,7 @@ export type UpdateTagMutation = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -1376,6 +1389,7 @@ export type DeleteTagMutation = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -1415,6 +1429,7 @@ export type CreateCollectionMutation = {
     isPrivate: boolean,
     isPublic: boolean,
     owner: string,
+    slug: string,
     posts?:  {
       __typename: "ModelCollectionPostsConnection",
       items:  Array< {
@@ -1428,6 +1443,7 @@ export type CreateCollectionMutation = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -1442,6 +1458,7 @@ export type CreateCollectionMutation = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -1470,6 +1487,7 @@ export type UpdateCollectionMutation = {
     isPrivate: boolean,
     isPublic: boolean,
     owner: string,
+    slug: string,
     posts?:  {
       __typename: "ModelCollectionPostsConnection",
       items:  Array< {
@@ -1483,6 +1501,7 @@ export type UpdateCollectionMutation = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -1497,6 +1516,7 @@ export type UpdateCollectionMutation = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -1525,6 +1545,7 @@ export type DeleteCollectionMutation = {
     isPrivate: boolean,
     isPublic: boolean,
     owner: string,
+    slug: string,
     posts?:  {
       __typename: "ModelCollectionPostsConnection",
       items:  Array< {
@@ -1538,6 +1559,7 @@ export type DeleteCollectionMutation = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -1552,6 +1574,7 @@ export type DeleteCollectionMutation = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -1613,6 +1636,8 @@ export type CreatePostTagsMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -1639,8 +1664,6 @@ export type CreatePostTagsMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     tag:  {
       __typename: "Tag",
@@ -1716,6 +1739,8 @@ export type UpdatePostTagsMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -1742,8 +1767,6 @@ export type UpdatePostTagsMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     tag:  {
       __typename: "Tag",
@@ -1819,6 +1842,8 @@ export type DeletePostTagsMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -1845,8 +1870,6 @@ export type DeletePostTagsMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     tag:  {
       __typename: "Tag",
@@ -1892,6 +1915,7 @@ export type CreateCollectionPostsMutation = {
       title: string,
       url: string,
       owner: string,
+      site?: string | null,
       isUpvoted?: boolean | null,
       upvoteCount?: number | null,
       commentCount?: number | null,
@@ -1921,6 +1945,8 @@ export type CreateCollectionPostsMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -1947,8 +1973,6 @@ export type CreateCollectionPostsMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     collection:  {
       __typename: "Collection",
@@ -1958,6 +1982,7 @@ export type CreateCollectionPostsMutation = {
       isPrivate: boolean,
       isPublic: boolean,
       owner: string,
+      slug: string,
       posts?:  {
         __typename: "ModelCollectionPostsConnection",
         items:  Array< {
@@ -1997,6 +2022,7 @@ export type UpdateCollectionPostsMutation = {
       title: string,
       url: string,
       owner: string,
+      site?: string | null,
       isUpvoted?: boolean | null,
       upvoteCount?: number | null,
       commentCount?: number | null,
@@ -2026,6 +2052,8 @@ export type UpdateCollectionPostsMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -2052,8 +2080,6 @@ export type UpdateCollectionPostsMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     collection:  {
       __typename: "Collection",
@@ -2063,6 +2089,7 @@ export type UpdateCollectionPostsMutation = {
       isPrivate: boolean,
       isPublic: boolean,
       owner: string,
+      slug: string,
       posts?:  {
         __typename: "ModelCollectionPostsConnection",
         items:  Array< {
@@ -2102,6 +2129,7 @@ export type DeleteCollectionPostsMutation = {
       title: string,
       url: string,
       owner: string,
+      site?: string | null,
       isUpvoted?: boolean | null,
       upvoteCount?: number | null,
       commentCount?: number | null,
@@ -2131,6 +2159,8 @@ export type DeleteCollectionPostsMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -2157,8 +2187,6 @@ export type DeleteCollectionPostsMutation = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     collection:  {
       __typename: "Collection",
@@ -2168,6 +2196,7 @@ export type DeleteCollectionPostsMutation = {
       isPrivate: boolean,
       isPublic: boolean,
       owner: string,
+      slug: string,
       posts?:  {
         __typename: "ModelCollectionPostsConnection",
         items:  Array< {
@@ -2248,6 +2277,8 @@ export type GetPostQuery = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
     tags?:  {
       __typename: "ModelPostTagsConnection",
       items:  Array< {
@@ -2295,6 +2326,7 @@ export type GetPostQuery = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -2309,6 +2341,7 @@ export type GetPostQuery = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -2318,8 +2351,6 @@ export type GetPostQuery = {
       } | null >,
       nextToken?: string | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -2368,6 +2399,8 @@ export type ListPostsQuery = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -2394,8 +2427,6 @@ export type ListPostsQuery = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2519,6 +2550,8 @@ export type GetUpvoteQuery = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -2545,8 +2578,6 @@ export type GetUpvoteQuery = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -2588,6 +2619,8 @@ export type ListUpvotesQuery = {
           __typename: "ModelUpvoteConnection",
           nextToken?: string | null,
         } | null,
+        createdAt: string,
+        updatedAt: string,
         tags?:  {
           __typename: "ModelPostTagsConnection",
           nextToken?: string | null,
@@ -2596,8 +2629,6 @@ export type ListUpvotesQuery = {
           __typename: "ModelCollectionPostsConnection",
           nextToken?: string | null,
         } | null,
-        createdAt: string,
-        updatedAt: string,
       } | null,
       createdAt: string,
       updatedAt: string,
@@ -2630,6 +2661,7 @@ export type GetTagQuery = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -2702,6 +2734,7 @@ export type GetCollectionQuery = {
     isPrivate: boolean,
     isPublic: boolean,
     owner: string,
+    slug: string,
     posts?:  {
       __typename: "ModelCollectionPostsConnection",
       items:  Array< {
@@ -2715,6 +2748,7 @@ export type GetCollectionQuery = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -2729,6 +2763,7 @@ export type GetCollectionQuery = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -2760,6 +2795,7 @@ export type ListCollectionsQuery = {
       isPrivate: boolean,
       isPublic: boolean,
       owner: string,
+      slug: string,
       posts?:  {
         __typename: "ModelCollectionPostsConnection",
         items:  Array< {
@@ -2826,6 +2862,8 @@ export type GetPostTagsQuery = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -2852,8 +2890,6 @@ export type GetPostTagsQuery = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     tag:  {
       __typename: "Tag",
@@ -2914,6 +2950,8 @@ export type ListPostTagsQuery = {
           __typename: "ModelUpvoteConnection",
           nextToken?: string | null,
         } | null,
+        createdAt: string,
+        updatedAt: string,
         tags?:  {
           __typename: "ModelPostTagsConnection",
           nextToken?: string | null,
@@ -2922,8 +2960,6 @@ export type ListPostTagsQuery = {
           __typename: "ModelCollectionPostsConnection",
           nextToken?: string | null,
         } | null,
-        createdAt: string,
-        updatedAt: string,
       },
       tag:  {
         __typename: "Tag",
@@ -2961,6 +2997,7 @@ export type GetCollectionPostsQuery = {
       title: string,
       url: string,
       owner: string,
+      site?: string | null,
       isUpvoted?: boolean | null,
       upvoteCount?: number | null,
       commentCount?: number | null,
@@ -2990,6 +3027,8 @@ export type GetCollectionPostsQuery = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -3016,8 +3055,6 @@ export type GetCollectionPostsQuery = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     collection:  {
       __typename: "Collection",
@@ -3027,6 +3064,7 @@ export type GetCollectionPostsQuery = {
       isPrivate: boolean,
       isPublic: boolean,
       owner: string,
+      slug: string,
       posts?:  {
         __typename: "ModelCollectionPostsConnection",
         items:  Array< {
@@ -3069,6 +3107,7 @@ export type ListCollectionPostsQuery = {
         title: string,
         url: string,
         owner: string,
+        site?: string | null,
         isUpvoted?: boolean | null,
         upvoteCount?: number | null,
         commentCount?: number | null,
@@ -3080,6 +3119,8 @@ export type ListCollectionPostsQuery = {
           __typename: "ModelUpvoteConnection",
           nextToken?: string | null,
         } | null,
+        createdAt: string,
+        updatedAt: string,
         tags?:  {
           __typename: "ModelPostTagsConnection",
           nextToken?: string | null,
@@ -3088,8 +3129,6 @@ export type ListCollectionPostsQuery = {
           __typename: "ModelCollectionPostsConnection",
           nextToken?: string | null,
         } | null,
-        createdAt: string,
-        updatedAt: string,
       },
       collection:  {
         __typename: "Collection",
@@ -3099,6 +3138,7 @@ export type ListCollectionPostsQuery = {
         isPrivate: boolean,
         isPublic: boolean,
         owner: string,
+        slug: string,
         posts?:  {
           __typename: "ModelCollectionPostsConnection",
           nextToken?: string | null,
@@ -3172,6 +3212,8 @@ export type OnCreatePostSubscription = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
     tags?:  {
       __typename: "ModelPostTagsConnection",
       items:  Array< {
@@ -3219,6 +3261,7 @@ export type OnCreatePostSubscription = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -3233,6 +3276,7 @@ export type OnCreatePostSubscription = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -3242,8 +3286,6 @@ export type OnCreatePostSubscription = {
       } | null >,
       nextToken?: string | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -3305,6 +3347,8 @@ export type OnUpdatePostSubscription = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
     tags?:  {
       __typename: "ModelPostTagsConnection",
       items:  Array< {
@@ -3352,6 +3396,7 @@ export type OnUpdatePostSubscription = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -3366,6 +3411,7 @@ export type OnUpdatePostSubscription = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -3375,8 +3421,6 @@ export type OnUpdatePostSubscription = {
       } | null >,
       nextToken?: string | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -3438,6 +3482,8 @@ export type OnDeletePostSubscription = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
     tags?:  {
       __typename: "ModelPostTagsConnection",
       items:  Array< {
@@ -3485,6 +3531,7 @@ export type OnDeletePostSubscription = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -3499,6 +3546,7 @@ export type OnDeletePostSubscription = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -3508,8 +3556,6 @@ export type OnDeletePostSubscription = {
       } | null >,
       nextToken?: string | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -3663,6 +3709,8 @@ export type OnCreateUpvoteSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -3689,8 +3737,6 @@ export type OnCreateUpvoteSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -3743,6 +3789,8 @@ export type OnUpdateUpvoteSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -3769,8 +3817,6 @@ export type OnUpdateUpvoteSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -3823,6 +3869,8 @@ export type OnDeleteUpvoteSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -3849,8 +3897,6 @@ export type OnDeleteUpvoteSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -3877,6 +3923,7 @@ export type OnCreateTagSubscription = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -3921,6 +3968,7 @@ export type OnUpdateTagSubscription = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -3965,6 +4013,7 @@ export type OnDeleteTagSubscription = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -4003,6 +4052,7 @@ export type OnCreateCollectionSubscription = {
     isPrivate: boolean,
     isPublic: boolean,
     owner: string,
+    slug: string,
     posts?:  {
       __typename: "ModelCollectionPostsConnection",
       items:  Array< {
@@ -4016,6 +4066,7 @@ export type OnCreateCollectionSubscription = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -4030,6 +4081,7 @@ export type OnCreateCollectionSubscription = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -4057,6 +4109,7 @@ export type OnUpdateCollectionSubscription = {
     isPrivate: boolean,
     isPublic: boolean,
     owner: string,
+    slug: string,
     posts?:  {
       __typename: "ModelCollectionPostsConnection",
       items:  Array< {
@@ -4070,6 +4123,7 @@ export type OnUpdateCollectionSubscription = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -4084,6 +4138,7 @@ export type OnUpdateCollectionSubscription = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -4111,6 +4166,7 @@ export type OnDeleteCollectionSubscription = {
     isPrivate: boolean,
     isPublic: boolean,
     owner: string,
+    slug: string,
     posts?:  {
       __typename: "ModelCollectionPostsConnection",
       items:  Array< {
@@ -4124,6 +4180,7 @@ export type OnDeleteCollectionSubscription = {
           title: string,
           url: string,
           owner: string,
+          site?: string | null,
           isUpvoted?: boolean | null,
           upvoteCount?: number | null,
           commentCount?: number | null,
@@ -4138,6 +4195,7 @@ export type OnDeleteCollectionSubscription = {
           isPrivate: boolean,
           isPublic: boolean,
           owner: string,
+          slug: string,
           createdAt: string,
           updatedAt: string,
         },
@@ -4198,6 +4256,8 @@ export type OnCreatePostTagsSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -4224,8 +4284,6 @@ export type OnCreatePostTagsSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     tag:  {
       __typename: "Tag",
@@ -4300,6 +4358,8 @@ export type OnUpdatePostTagsSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -4326,8 +4386,6 @@ export type OnUpdatePostTagsSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     tag:  {
       __typename: "Tag",
@@ -4402,6 +4460,8 @@ export type OnDeletePostTagsSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -4428,8 +4488,6 @@ export type OnDeletePostTagsSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     tag:  {
       __typename: "Tag",
@@ -4474,6 +4532,7 @@ export type OnCreateCollectionPostsSubscription = {
       title: string,
       url: string,
       owner: string,
+      site?: string | null,
       isUpvoted?: boolean | null,
       upvoteCount?: number | null,
       commentCount?: number | null,
@@ -4503,6 +4562,8 @@ export type OnCreateCollectionPostsSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -4529,8 +4590,6 @@ export type OnCreateCollectionPostsSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     collection:  {
       __typename: "Collection",
@@ -4540,6 +4599,7 @@ export type OnCreateCollectionPostsSubscription = {
       isPrivate: boolean,
       isPublic: boolean,
       owner: string,
+      slug: string,
       posts?:  {
         __typename: "ModelCollectionPostsConnection",
         items:  Array< {
@@ -4578,6 +4638,7 @@ export type OnUpdateCollectionPostsSubscription = {
       title: string,
       url: string,
       owner: string,
+      site?: string | null,
       isUpvoted?: boolean | null,
       upvoteCount?: number | null,
       commentCount?: number | null,
@@ -4607,6 +4668,8 @@ export type OnUpdateCollectionPostsSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -4633,8 +4696,6 @@ export type OnUpdateCollectionPostsSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     collection:  {
       __typename: "Collection",
@@ -4644,6 +4705,7 @@ export type OnUpdateCollectionPostsSubscription = {
       isPrivate: boolean,
       isPublic: boolean,
       owner: string,
+      slug: string,
       posts?:  {
         __typename: "ModelCollectionPostsConnection",
         items:  Array< {
@@ -4682,6 +4744,7 @@ export type OnDeleteCollectionPostsSubscription = {
       title: string,
       url: string,
       owner: string,
+      site?: string | null,
       isUpvoted?: boolean | null,
       upvoteCount?: number | null,
       commentCount?: number | null,
@@ -4711,6 +4774,8 @@ export type OnDeleteCollectionPostsSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
       tags?:  {
         __typename: "ModelPostTagsConnection",
         items:  Array< {
@@ -4737,8 +4802,6 @@ export type OnDeleteCollectionPostsSubscription = {
         } | null >,
         nextToken?: string | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     },
     collection:  {
       __typename: "Collection",
@@ -4748,6 +4811,7 @@ export type OnDeleteCollectionPostsSubscription = {
       isPrivate: boolean,
       isPublic: boolean,
       owner: string,
+      slug: string,
       posts?:  {
         __typename: "ModelCollectionPostsConnection",
         items:  Array< {

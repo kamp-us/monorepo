@@ -30,7 +30,6 @@ type Post
 
   comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
   upvotes: [Upvote] @hasMany
-  tags: [PostTag] @hasMany(indexName: "byPost", fields: ["id"])
 
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -114,6 +113,7 @@ type Collection
   isPrivate: Boolean!
   isPublic: Boolean!
   owner: String!
+  slug: String!
 
   posts: [Post] @manyToMany(relationName: "CollectionPosts")
 }

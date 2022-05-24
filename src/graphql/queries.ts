@@ -50,6 +50,8 @@ export const getPost = /* GraphQL */ `
         }
         nextToken
       }
+      createdAt
+      updatedAt
       tags {
         items {
           id
@@ -90,6 +92,7 @@ export const getPost = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -103,6 +106,7 @@ export const getPost = /* GraphQL */ `
             isPrivate
             isPublic
             owner
+            slug
             createdAt
             updatedAt
           }
@@ -112,8 +116,6 @@ export const getPost = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -155,6 +157,8 @@ export const listPosts = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -177,8 +181,6 @@ export const listPosts = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
@@ -280,6 +282,8 @@ export const getUpvote = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -302,8 +306,6 @@ export const getUpvote = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       createdAt
       updatedAt
@@ -346,14 +348,14 @@ export const listUpvotes = /* GraphQL */ `
           upvotes {
             nextToken
           }
+          createdAt
+          updatedAt
           tags {
             nextToken
           }
           collections {
             nextToken
           }
-          createdAt
-          updatedAt
         }
         createdAt
         updatedAt
@@ -379,6 +381,7 @@ export const getTag = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -441,6 +444,7 @@ export const getCollection = /* GraphQL */ `
       isPrivate
       isPublic
       owner
+      slug
       posts {
         items {
           id
@@ -451,6 +455,7 @@ export const getCollection = /* GraphQL */ `
             title
             url
             owner
+            site
             isUpvoted
             upvoteCount
             commentCount
@@ -464,6 +469,7 @@ export const getCollection = /* GraphQL */ `
             isPrivate
             isPublic
             owner
+            slug
             createdAt
             updatedAt
           }
@@ -492,6 +498,7 @@ export const listCollections = /* GraphQL */ `
         isPrivate
         isPublic
         owner
+        slug
         posts {
           items {
             id
@@ -547,6 +554,8 @@ export const getPostTags = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -569,8 +578,6 @@ export const getPostTags = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       tag {
         id
@@ -622,14 +629,14 @@ export const listPostTags = /* GraphQL */ `
           upvotes {
             nextToken
           }
+          createdAt
+          updatedAt
           tags {
             nextToken
           }
           collections {
             nextToken
           }
-          createdAt
-          updatedAt
         }
         tag {
           id
@@ -660,6 +667,7 @@ export const getCollectionPosts = /* GraphQL */ `
         title
         url
         owner
+        site
         isUpvoted
         upvoteCount
         commentCount
@@ -685,6 +693,8 @@ export const getCollectionPosts = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -707,8 +717,6 @@ export const getCollectionPosts = /* GraphQL */ `
           }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       collection {
         id
@@ -717,6 +725,7 @@ export const getCollectionPosts = /* GraphQL */ `
         isPrivate
         isPublic
         owner
+        slug
         posts {
           items {
             id
@@ -753,6 +762,7 @@ export const listCollectionPosts = /* GraphQL */ `
           title
           url
           owner
+          site
           isUpvoted
           upvoteCount
           commentCount
@@ -762,14 +772,14 @@ export const listCollectionPosts = /* GraphQL */ `
           upvotes {
             nextToken
           }
+          createdAt
+          updatedAt
           tags {
             nextToken
           }
           collections {
             nextToken
           }
-          createdAt
-          updatedAt
         }
         collection {
           id
@@ -778,6 +788,7 @@ export const listCollectionPosts = /* GraphQL */ `
           isPrivate
           isPublic
           owner
+          slug
           posts {
             nextToken
           }
