@@ -104,7 +104,7 @@ export const getPost = /* GraphQL */ `
             name
             description
             isPrivate
-            isPublic
+            isPublished
             owner
             slug
             createdAt
@@ -442,7 +442,7 @@ export const getCollection = /* GraphQL */ `
       name
       description
       isPrivate
-      isPublic
+      isPublished
       owner
       slug
       posts {
@@ -467,7 +467,7 @@ export const getCollection = /* GraphQL */ `
             name
             description
             isPrivate
-            isPublic
+            isPublished
             owner
             slug
             createdAt
@@ -496,7 +496,7 @@ export const listCollections = /* GraphQL */ `
         name
         description
         isPrivate
-        isPublic
+        isPublished
         owner
         slug
         posts {
@@ -723,7 +723,7 @@ export const getCollectionPosts = /* GraphQL */ `
         name
         description
         isPrivate
-        isPublic
+        isPublished
         owner
         slug
         posts {
@@ -786,7 +786,7 @@ export const listCollectionPosts = /* GraphQL */ `
           name
           description
           isPrivate
-          isPublic
+          isPublished
           owner
           slug
           posts {

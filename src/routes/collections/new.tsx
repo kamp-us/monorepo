@@ -9,48 +9,73 @@ import {
   Textarea,
 } from "~/ui-library";
 import { ActionFunction } from "@remix-run/node";
-import { createClient } from "~/graphql/apollo-client";
-import { AuthUser } from "~/features/auth/user-context";
 import { fetchUser } from "~/features/auth/useFetchUser";
-import { Auth } from "aws-amplify";
-import { gql } from "@apollo/client";
 import { createCollection } from "~/graphql/mutations";
-import { json, redirect } from "remix";
+import { redirect } from "remix";
 import { Checkbox, CheckboxIndicator } from "~/ui-library/Checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { withSSR } from "~/features/utils/amplify/withSSR";
+import {
+  CreateCollectionMutation,
+  CreateCollectionMutationVariables,
+  ListCollectionsQuery,
+  ListCollectionsQueryVariables,
+} from "~/API";
+import slugify from "slugify";
+import { listCollections } from "~/graphql/queries";
+import invariant from "tiny-invariant";
 
 export const action: ActionFunction = async ({ request }) => {
-  const SSR = withSSR({ request });
+  const { Auth, graphql } = withSSR({ request });
   const formData = await request.formData();
-  const name = formData.get("name");
+
+  const formName = formData.get("name");
+  invariant(formName, "name is required");
+
+  const name = formName.toString();
+
   const isPrivate = formData.get("isPrivate") === "on";
 
   if (!name) {
     return;
   }
 
-  const client = await createClient();
-
-  let user: AuthUser | null;
-  try {
-    user = await fetchUser(SSR.Auth);
-  } catch {
-    user = null;
-  }
-  console.log(user);
-
-  if (!user) {
-    return json(null, { status: 500 });
-  }
+  const user = await fetchUser(Auth);
 
   const input = { name, isPrivate, isPublic: !isPrivate, owner: user.username };
   console.log(input, "INPUT");
 
-  await client.mutate({
-    mutation: gql(createCollection),
+  let slug = slugify(name);
+
+  const withSlug = await graphql<
+    ListCollectionsQuery,
+    ListCollectionsQueryVariables
+  >({
+    query: listCollections,
     variables: {
-      input,
+      filter: {
+        slug: { eq: slug },
+        owner: { eq: user.username },
+      },
+    },
+  });
+
+  const hasSlug = (withSlug.listCollections?.items?.length ?? 0) > 0;
+  console.log(">>>>", hasSlug, withSlug);
+  if (hasSlug) {
+    slug = slugify(name + "-" + Date.now().toString(36));
+  }
+
+  await graphql<CreateCollectionMutation, CreateCollectionMutationVariables>({
+    query: createCollection,
+    variables: {
+      input: {
+        isPrivate,
+        name: name.toString(),
+        owner: user.username,
+        isPublished: false,
+        slug,
+      },
     },
   });
 

@@ -1,6 +1,7 @@
 import { PlusIcon } from "@radix-ui/react-icons";
 import { FC } from "react";
 import { useUserContext } from "~/features/auth/user-context";
+import { SkipToButton } from "~/features/skip-to/components/skip-to-button";
 import {
   Box,
   CenteredContainer,
@@ -15,7 +16,12 @@ export const Topnav: FC = () => {
   const user = useUserContext();
 
   return (
-    <Box css={{ paddingX: 10, backgroundColor: "$gray2" }}>
+    <Box
+      css={{ paddingX: 10, backgroundColor: "$gray2", position: "relative" }}
+    >
+      <Box css={{ position: "absolute" }}>
+        <SkipToButton />
+      </Box>
       <CenteredContainer>
         <GappedBox css={{ padding: "10px 0", alignItems: "center" }}>
           <Link prefetch="intent" to="/">

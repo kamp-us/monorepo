@@ -111,9 +111,10 @@ type Collection
   name: String!
   description: String
   isPrivate: Boolean!
-  isPublic: Boolean!
+
+  isPublished: Boolean!
   owner: String!
-  slug: String!
+  slug: String! @index(name: "bySlug", sortKeyFields: ["id"])
 
   posts: [Post] @manyToMany(relationName: "CollectionPosts")
 }

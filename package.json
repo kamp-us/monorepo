@@ -32,7 +32,9 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.2.2",
+    "react-scripts": "^5.0.1",
     "remix": "^1.4.0",
+    "slugify": "^1.6.5",
     "tiny-invariant": "^1.2.0",
     "typescript": "^4.6.3",
     "use-deep-compare-effect": "^1.8.1",
@@ -43,7 +45,8 @@
     "build": "remix build",
     "postinstall": "remix setup node",
     "dev": "remix dev",
-    "amplify:GQLCustomResolvers": "cd amplify/backend/function/GQLCustomResolvers/src && tsc -p ./tsconfig.json && cd -"
+    "amplify:GQLCustomResolvers": "cd amplify/backend/function/GQLCustomResolvers/src && tsc -p ./tsconfig.json && cd -",
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": [

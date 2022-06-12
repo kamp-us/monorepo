@@ -107,6 +107,12 @@ const Document = ({ children }: DocumentProps) => {
   );
 };
 
+const MainContent = styled(Box, {
+  "&:focus": {
+    outline: "none",
+  },
+});
+
 export default function App() {
   const { user, session } = useLoaderData<LoaderData>();
 
@@ -124,7 +130,9 @@ export default function App() {
         <UserContext.Provider value={user}>
           <ApolloProvider client={apolloClient}>
             <Topnav />
-            <Outlet />
+            <div id="main-content">
+              <Outlet />
+            </div>
           </ApolloProvider>
         </UserContext.Provider>
       </Document>

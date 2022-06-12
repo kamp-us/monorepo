@@ -6,8 +6,10 @@ import { json, LoaderFunction, useLoaderData } from "remix";
 import { withSSR } from "~/features/utils/amplify/withSSR";
 
 type LoaderData = {
-  posts: ListPostsQuery;
-  collections: ListCollectionsQuery;
+  data: {
+    posts: ListPostsQuery;
+    collections: ListCollectionsQuery;
+  };
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -23,7 +25,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export const Home = () => {
-  const { data } = useLoaderData();
+  const { data } = useLoaderData<LoaderData>();
   const { posts, collections } = data;
   console.log(data);
   const postsData = (posts.listPosts?.items as Post[]) || [];

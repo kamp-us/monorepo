@@ -1,4 +1,10 @@
-import { withSSRContext } from "aws-amplify";
+import { withSSRContext, API } from "aws-amplify";
+import { GraphQLOptions } from "@aws-amplify/api-graphql";
+
+interface GQLOptions<TVariables = object>
+  extends Omit<GraphQLOptions, "variables"> {
+  variables?: TVariables;
+}
 
 export const withSSR = ({ request }: { request: Request }) => {
   const SSR = withSSRContext({
@@ -9,14 +15,13 @@ export const withSSR = ({ request }: { request: Request }) => {
     },
   });
 
-  const graphql = async <TVariables = {}>({
-    query,
-    variables,
-  }: {
-    query: string;
-    variables?: TVariables;
-  }) => {
-    let authMode;
+  const graphql = async <T, TVariables extends object>(
+    options: GQLOptions<TVariables>,
+    additionalHeaders?: {
+      [key: string]: string;
+    }
+  ) => {
+    let authMode: "AMAZON_COGNITO_USER_POOLS" | "API_KEY";
     try {
       await SSR.Auth.currentSession();
       authMode = "AMAZON_COGNITO_USER_POOLS";
@@ -24,13 +29,14 @@ export const withSSR = ({ request }: { request: Request }) => {
       authMode = "API_KEY";
     }
 
-    const { data } = await SSR.API.graphql({
-      query,
-      authMode,
-      variables,
-    });
+    const result = await (SSR.API as typeof API).graphql<T>(
+      { ...options, authMode },
+      additionalHeaders
+    );
 
-    return data;
+    console.log(result);
+
+    return result.data as T;
   };
 
   return { ...SSR, graphql };
