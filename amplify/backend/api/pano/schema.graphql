@@ -118,19 +118,3 @@ type Collection
 
   posts: [Post] @manyToMany(relationName: "CollectionPosts")
 }
-
-#type PostTag
-#@model
-#@auth(
-#  rules: [
-#    { allow: public, operations: [read] }
-#    { allow: private, operations: [read] }
-#  ]
-#) {
-#  id: ID!
-#  postID: ID! @index(name: "byPost", sortKeyFields: ["id"])
-#  tagID: ID! @index(name: "byTag", sortKeyFields: ["id"])
-#
-#  tag: Tag @belongsTo
-#  post: Post @belongsTo
-#}
