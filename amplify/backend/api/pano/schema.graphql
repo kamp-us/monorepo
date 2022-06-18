@@ -30,10 +30,11 @@ type Post
 
   comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
   upvotes: [Upvote] @hasMany
-  tags: [PostTag] @hasMany(indexName: "byPost", fields: ["id"])
 
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
+  tags: [Tag] @manyToMany(relationName: "PostTags")
+  collections: [Collection] @manyToMany(relationName: "CollectionPosts")
 }
 
 type Comment
@@ -89,20 +90,47 @@ type Tag
   id: ID!
   name: String!
   category: String!
+
+  posts: [Post] @manyToMany(relationName: "PostTags")
 }
 
-type PostTag
+type Collection
 @model
 @auth(
   rules: [
+    {
+      allow: owner
+      ownerField: "owner"
+      operations: [create, delete, read, update]
+    }
     { allow: public, operations: [read] }
     { allow: private, operations: [read] }
   ]
 ) {
   id: ID!
-  postID: ID @index(name: "byPost", sortKeyFields: ["id"])
-  tagID: ID! @index(name: "byTag", sortKeyFields: ["id"])
+  name: String!
+  description: String
+  isPrivate: Boolean!
 
-  tag: Tag
-  post: Post @belongsTo
+  isPublished: Boolean!
+  owner: String!
+  slug: String! @index(name: "bySlug", sortKeyFields: ["id"])
+
+  posts: [Post] @manyToMany(relationName: "CollectionPosts")
 }
+
+#type PostTag
+#@model
+#@auth(
+#  rules: [
+#    { allow: public, operations: [read] }
+#    { allow: private, operations: [read] }
+#  ]
+#) {
+#  id: ID!
+#  postID: ID! @index(name: "byPost", sortKeyFields: ["id"])
+#  tagID: ID! @index(name: "byTag", sortKeyFields: ["id"])
+#
+#  tag: Tag @belongsTo
+#  post: Post @belongsTo
+#}
