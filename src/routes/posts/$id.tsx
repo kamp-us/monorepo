@@ -14,6 +14,7 @@ import { createComment } from "~/graphql/mutations";
 import { fetchUser } from "~/features/auth/useFetchUser";
 import { Form } from "~/ui-library/Form";
 import { withSSR } from "~/features/utils/amplify/withSSR";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 interface VisualTree {
   [key: string]: {
@@ -71,7 +72,7 @@ export const action: ActionFunction = async ({ request, params }) => {
     return json(null, { status: 500 });
   }
 
-  const variables = commentID
+  const input = commentID
     ? {
         postID: params.id,
         content,
@@ -86,11 +87,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   await graphql({
     query: createComment,
-    variables: {
-      input: {
-        variables: { input: variables },
-      },
-    },
+    variables: { input },
   });
 
   return null;
@@ -116,11 +113,11 @@ const SinglePost = () => {
   return (
     <CenteredContainer css={{ gap: 5 }}>
       <PostItem post={post} />
-      <Form method="post" css={{ width: "100%" }}>
+      <Form method="post" css={{ display: "flex", flexDirection: "column" }}>
         <Textarea
           css={{
-            width: "100%",
-            cursor: user ? "pointer" : "not-allowed",
+            width: "auto",
+            cursor: user ? "text" : "not-allowed",
             resize: user ? "both" : "noe",
           }}
           name="content"
@@ -129,14 +126,18 @@ const SinglePost = () => {
           onChange={(event) => setComment(event.target.value)}
           value={user ? comment : "Yorum yazmak için giriş yapmış olmalısın."}
         />
-        <Box css={{ padding: "5px 0 10px" }}>
+        <Box css={{ padding: "$1 0 $2" }}>
           <Button
             disabled={!user}
+            size="2"
             css={{
               cursor: user ? "pointer" : "not-allowed",
             }}
             type="submit"
           >
+            <Box css={{ mr: "$1", display: "flex", alignItems: "center" }}>
+              <PlusIcon />
+            </Box>
             Cevap yaz
           </Button>
         </Box>

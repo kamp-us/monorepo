@@ -9,7 +9,7 @@ export const withSSR = ({ request }: { request: Request }) => {
     },
   });
 
-  const graphql = async <TVariables = {}>({
+  const graphql = async <TVariables = {}, TQuery = any>({
     query,
     variables,
   }: {
@@ -30,7 +30,7 @@ export const withSSR = ({ request }: { request: Request }) => {
       variables,
     });
 
-    return data;
+    return data as TQuery;
   };
 
   return { ...SSR, graphql };
