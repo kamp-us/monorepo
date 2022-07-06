@@ -1,7 +1,7 @@
 import { TriangleUpIcon } from "@radix-ui/react-icons";
 import { FC } from "react";
 import { styled } from "~/stitches.config";
-import { Button, Box } from "~/ui-library";
+import { OldButton, Box } from "~/ui-library";
 
 type UpvoteProps = {
   isUpvoted: boolean;
@@ -15,7 +15,7 @@ export const UpvoteButton: FC<UpvoteProps> = ({
   isVoting = false,
 }) => {
   return (
-    <Button
+    <OldButton
       color="transparent"
       title={`${upvoteCount} beğeni`}
       css={{
@@ -35,7 +35,7 @@ export const UpvoteButton: FC<UpvoteProps> = ({
         }}
       />
       <Box>{upvoteCount}</Box>
-    </Button>
+    </OldButton>
   );
 };
 

@@ -8,9 +8,9 @@ type PostListProps = {
   refetch?: () => void;
 };
 
-export const PostList: FC<PostListProps> = ({ posts, refetch }) => {
+export const PostList: FC<PostListProps> = ({ posts }) => {
   return (
-    <Box>
+    <Box as="section" aria-label="Gönderi Listesi">
       {posts.map((post) => {
         return <PostItem key={post.id} post={post} />;
       })}

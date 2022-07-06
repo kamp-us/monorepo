@@ -15,6 +15,11 @@
       "auth": {
         "pano4ba861ae": {}
       },
+      "api": {
+        "pano": {
+          "ElasticSearchInstanceType": "t3.medium.elasticsearch"
+        }
+      },
       "function": {
         "GQLCustomResolvers": {
           "deploymentBucketName": "amplify-pano-prod-221737-deployment",

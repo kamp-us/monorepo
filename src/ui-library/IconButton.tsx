@@ -1,7 +1,7 @@
 import { styled } from "~/stitches.config";
-import { Button } from "./layout-components/Button";
+import { OldButton } from "./layout-components/Button";
 
-export const IconButton = styled(Button, {
+export const IconButton = styled(OldButton, {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
