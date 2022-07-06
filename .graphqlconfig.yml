@@ -2,7 +2,7 @@ projects:
   pano:
     schemaPath: amplify/backend/api/pano/build/schema.graphql
     includes:
-      - src/graphql/**/*.ts
+      - src/**/*.ts
     excludes:
       - ./amplify/**
     extensions:

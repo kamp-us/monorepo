@@ -50,18 +50,13 @@ export const onCreatePost = /* GraphQL */ `
         }
         nextToken
       }
+      createdAt
+      updatedAt
       tags {
         items {
           id
           postID
           tagID
-          tag {
-            id
-            name
-            category
-            createdAt
-            updatedAt
-          }
           post {
             id
             title
@@ -74,13 +69,53 @@ export const onCreatePost = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
+      collections {
+        items {
+          id
+          postID
+          collectionID
+          post {
+            id
+            title
+            url
+            owner
+            site
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
+          collection {
+            id
+            name
+            description
+            isPrivate
+            isPublished
+            owner
+            slug
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -132,18 +167,13 @@ export const onUpdatePost = /* GraphQL */ `
         }
         nextToken
       }
+      createdAt
+      updatedAt
       tags {
         items {
           id
           postID
           tagID
-          tag {
-            id
-            name
-            category
-            createdAt
-            updatedAt
-          }
           post {
             id
             title
@@ -156,13 +186,53 @@ export const onUpdatePost = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
+      collections {
+        items {
+          id
+          postID
+          collectionID
+          post {
+            id
+            title
+            url
+            owner
+            site
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
+          collection {
+            id
+            name
+            description
+            isPrivate
+            isPublished
+            owner
+            slug
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -214,18 +284,13 @@ export const onDeletePost = /* GraphQL */ `
         }
         nextToken
       }
+      createdAt
+      updatedAt
       tags {
         items {
           id
           postID
           tagID
-          tag {
-            id
-            name
-            category
-            createdAt
-            updatedAt
-          }
           post {
             id
             title
@@ -238,13 +303,53 @@ export const onDeletePost = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
+      collections {
+        items {
+          id
+          postID
+          collectionID
+          post {
+            id
+            title
+            url
+            owner
+            site
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
+          collection {
+            id
+            name
+            description
+            isPrivate
+            isPublished
+            owner
+            slug
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -368,6 +473,8 @@ export const onCreateUpvote = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -375,11 +482,21 @@ export const onCreateUpvote = /* GraphQL */ `
             tagID
             createdAt
             updatedAt
+            owner
           }
           nextToken
         }
-        createdAt
-        updatedAt
+        collections {
+          items {
+            id
+            postID
+            collectionID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
       }
       createdAt
       updatedAt
@@ -423,6 +540,8 @@ export const onUpdateUpvote = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -430,11 +549,21 @@ export const onUpdateUpvote = /* GraphQL */ `
             tagID
             createdAt
             updatedAt
+            owner
           }
           nextToken
         }
-        createdAt
-        updatedAt
+        collections {
+          items {
+            id
+            postID
+            collectionID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
       }
       createdAt
       updatedAt
@@ -478,6 +607,8 @@ export const onDeleteUpvote = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -485,11 +616,21 @@ export const onDeleteUpvote = /* GraphQL */ `
             tagID
             createdAt
             updatedAt
+            owner
           }
           nextToken
         }
-        createdAt
-        updatedAt
+        collections {
+          items {
+            id
+            postID
+            collectionID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
       }
       createdAt
       updatedAt
@@ -503,6 +644,36 @@ export const onCreateTag = /* GraphQL */ `
       id
       name
       category
+      posts {
+        items {
+          id
+          postID
+          tagID
+          post {
+            id
+            title
+            url
+            owner
+            site
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -514,6 +685,36 @@ export const onUpdateTag = /* GraphQL */ `
       id
       name
       category
+      posts {
+        items {
+          id
+          postID
+          tagID
+          post {
+            id
+            title
+            url
+            owner
+            site
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -525,24 +726,194 @@ export const onDeleteTag = /* GraphQL */ `
       id
       name
       category
+      posts {
+        items {
+          id
+          postID
+          tagID
+          post {
+            id
+            title
+            url
+            owner
+            site
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
+          tag {
+            id
+            name
+            category
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onCreatePostTag = /* GraphQL */ `
-  subscription OnCreatePostTag {
-    onCreatePostTag {
+export const onCreateCollection = /* GraphQL */ `
+  subscription OnCreateCollection($owner: String) {
+    onCreateCollection(owner: $owner) {
+      id
+      name
+      description
+      isPrivate
+      isPublished
+      owner
+      slug
+      posts {
+        items {
+          id
+          postID
+          collectionID
+          post {
+            id
+            title
+            url
+            owner
+            site
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
+          collection {
+            id
+            name
+            description
+            isPrivate
+            isPublished
+            owner
+            slug
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCollection = /* GraphQL */ `
+  subscription OnUpdateCollection($owner: String) {
+    onUpdateCollection(owner: $owner) {
+      id
+      name
+      description
+      isPrivate
+      isPublished
+      owner
+      slug
+      posts {
+        items {
+          id
+          postID
+          collectionID
+          post {
+            id
+            title
+            url
+            owner
+            site
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
+          collection {
+            id
+            name
+            description
+            isPrivate
+            isPublished
+            owner
+            slug
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCollection = /* GraphQL */ `
+  subscription OnDeleteCollection($owner: String) {
+    onDeleteCollection(owner: $owner) {
+      id
+      name
+      description
+      isPrivate
+      isPublished
+      owner
+      slug
+      posts {
+        items {
+          id
+          postID
+          collectionID
+          post {
+            id
+            title
+            url
+            owner
+            site
+            isUpvoted
+            upvoteCount
+            commentCount
+            createdAt
+            updatedAt
+          }
+          collection {
+            id
+            name
+            description
+            isPrivate
+            isPublished
+            owner
+            slug
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreatePostTags = /* GraphQL */ `
+  subscription OnCreatePostTags($owner: String) {
+    onCreatePostTags(owner: $owner) {
       id
       postID
       tagID
-      tag {
-        id
-        name
-        category
-        createdAt
-        updatedAt
-      }
       post {
         id
         title
@@ -574,6 +945,8 @@ export const onCreatePostTag = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -581,6 +954,34 @@ export const onCreatePostTag = /* GraphQL */ `
             tagID
             createdAt
             updatedAt
+            owner
+          }
+          nextToken
+        }
+        collections {
+          items {
+            id
+            postID
+            collectionID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      tag {
+        id
+        name
+        category
+        posts {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+            owner
           }
           nextToken
         }
@@ -589,22 +990,16 @@ export const onCreatePostTag = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
-export const onUpdatePostTag = /* GraphQL */ `
-  subscription OnUpdatePostTag {
-    onUpdatePostTag {
+export const onUpdatePostTags = /* GraphQL */ `
+  subscription OnUpdatePostTags($owner: String) {
+    onUpdatePostTags(owner: $owner) {
       id
       postID
       tagID
-      tag {
-        id
-        name
-        category
-        createdAt
-        updatedAt
-      }
       post {
         id
         title
@@ -636,6 +1031,8 @@ export const onUpdatePostTag = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -643,6 +1040,34 @@ export const onUpdatePostTag = /* GraphQL */ `
             tagID
             createdAt
             updatedAt
+            owner
+          }
+          nextToken
+        }
+        collections {
+          items {
+            id
+            postID
+            collectionID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      tag {
+        id
+        name
+        category
+        posts {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+            owner
           }
           nextToken
         }
@@ -651,22 +1076,16 @@ export const onUpdatePostTag = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
-export const onDeletePostTag = /* GraphQL */ `
-  subscription OnDeletePostTag {
-    onDeletePostTag {
+export const onDeletePostTags = /* GraphQL */ `
+  subscription OnDeletePostTags($owner: String) {
+    onDeletePostTags(owner: $owner) {
       id
       postID
       tagID
-      tag {
-        id
-        name
-        category
-        createdAt
-        updatedAt
-      }
       post {
         id
         title
@@ -698,6 +1117,8 @@ export const onDeletePostTag = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
         tags {
           items {
             id
@@ -705,6 +1126,34 @@ export const onDeletePostTag = /* GraphQL */ `
             tagID
             createdAt
             updatedAt
+            owner
+          }
+          nextToken
+        }
+        collections {
+          items {
+            id
+            postID
+            collectionID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      tag {
+        id
+        name
+        category
+        posts {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+            owner
           }
           nextToken
         }
@@ -713,6 +1162,277 @@ export const onDeletePostTag = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateCollectionPosts = /* GraphQL */ `
+  subscription OnCreateCollectionPosts($owner: String) {
+    onCreateCollectionPosts(owner: $owner) {
+      id
+      postID
+      collectionID
+      post {
+        id
+        title
+        url
+        owner
+        site
+        isUpvoted
+        upvoteCount
+        commentCount
+        comments {
+          items {
+            id
+            content
+            owner
+            parentID
+            postID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        upvotes {
+          items {
+            postID
+            owner
+            createdAt
+            updatedAt
+            postUpvotesId
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        tags {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        collections {
+          items {
+            id
+            postID
+            collectionID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      collection {
+        id
+        name
+        description
+        isPrivate
+        isPublished
+        owner
+        slug
+        posts {
+          items {
+            id
+            postID
+            collectionID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateCollectionPosts = /* GraphQL */ `
+  subscription OnUpdateCollectionPosts($owner: String) {
+    onUpdateCollectionPosts(owner: $owner) {
+      id
+      postID
+      collectionID
+      post {
+        id
+        title
+        url
+        owner
+        site
+        isUpvoted
+        upvoteCount
+        commentCount
+        comments {
+          items {
+            id
+            content
+            owner
+            parentID
+            postID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        upvotes {
+          items {
+            postID
+            owner
+            createdAt
+            updatedAt
+            postUpvotesId
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        tags {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        collections {
+          items {
+            id
+            postID
+            collectionID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      collection {
+        id
+        name
+        description
+        isPrivate
+        isPublished
+        owner
+        slug
+        posts {
+          items {
+            id
+            postID
+            collectionID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteCollectionPosts = /* GraphQL */ `
+  subscription OnDeleteCollectionPosts($owner: String) {
+    onDeleteCollectionPosts(owner: $owner) {
+      id
+      postID
+      collectionID
+      post {
+        id
+        title
+        url
+        owner
+        site
+        isUpvoted
+        upvoteCount
+        commentCount
+        comments {
+          items {
+            id
+            content
+            owner
+            parentID
+            postID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        upvotes {
+          items {
+            postID
+            owner
+            createdAt
+            updatedAt
+            postUpvotesId
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        tags {
+          items {
+            id
+            postID
+            tagID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        collections {
+          items {
+            id
+            postID
+            collectionID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      collection {
+        id
+        name
+        description
+        isPrivate
+        isPublished
+        owner
+        slug
+        posts {
+          items {
+            id
+            postID
+            collectionID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
