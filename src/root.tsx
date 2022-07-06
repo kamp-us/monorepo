@@ -1,4 +1,5 @@
 import { Amplify, Auth } from "aws-amplify";
+import nProgressStyles from "nprogress/nprogress.css";
 import {
   Links,
   LiveReload,
@@ -8,7 +9,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "remix";
-import { json, LoaderFunction } from "@remix-run/node";
+import { json, LinksFunction, LoaderFunction } from "@remix-run/node";
 import { fetchUser } from "./features/auth/useFetchUser";
 import { AuthUser, UserContext } from "./features/auth/user-context";
 import { createApolloClient } from "./graphql/createApolloClient";
@@ -19,6 +20,8 @@ import { useEffect } from "react";
 import { ThemeProvider, useClientStyle, Topnav, useTheme } from "~/ui-library";
 import { darkTheme } from "./stitches.config";
 import { withSSR } from "./features/utils/amplify/withSSR";
+import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
+import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
 
 Amplify.configure({ ...config, ssr: true });
 
@@ -27,6 +30,10 @@ type CognitoSession = Awaited<ReturnType<typeof Auth.currentSession>>;
 type LoaderData = {
   user: AuthUser | null;
   session: CognitoSession | null;
+};
+
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: loadingIndicatorStyles }];
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -56,6 +63,8 @@ interface DocumentProps {
 const Document = ({ children }: DocumentProps) => {
   const clientStyle = useClientStyle();
   const { theme } = useTheme();
+
+  useLoadingIndicator();
 
   useEffect(() => {
     clientStyle.reset();
