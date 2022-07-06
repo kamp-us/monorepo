@@ -6,6 +6,7 @@
     "@apollo/client": "^3.5.10",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-avatar": "^0.1.4",
+    "@radix-ui/react-dialog": "^0.1.7",
     "@radix-ui/react-dropdown-menu": "^0.1.6",
     "@radix-ui/react-icons": "^1.1.0",
     "@radix-ui/react-label": "^0.1.5",
@@ -24,6 +25,7 @@
     "aws-appsync-auth-link": "^3.0.7",
     "aws-appsync-subscription-link": "^3.0.10",
     "normalize-url": "^7.0.3",
+    "nprogress": "^0.2.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.2.2",
@@ -37,7 +39,7 @@
     "eject": "react-scripts eject",
     "build": "remix build",
     "postinstall": "remix setup node",
-    "dev": "remix dev",
+    "dev": "NODE_ENV=development remix dev",
     "amplify:GQLCustomResolvers": "cd amplify/backend/function/GQLCustomResolvers/src && tsc -p ./tsconfig.json && cd -"
   },
   "eslintConfig": {
@@ -60,6 +62,7 @@
   },
   "devDependencies": {
     "@remix-run/dev": "^1.4.0",
+    "@types/nprogress": "^0.2.0",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.6.1"
   }
