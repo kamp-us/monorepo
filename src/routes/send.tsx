@@ -54,15 +54,17 @@ export const action: ActionFunction = async ({ request }) => {
 
 export const Send = () => {
   return (
-    <CenteredContainer css={{ width: 400 }}>
+    <CenteredContainer>
       <Form method="post">
         <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
           <Label htmlFor="title">Başlık</Label>
-          <Input id="title" name="title" />
+          <Input id="title" name="title" size="2" />
           <Label htmlFor="url">URL</Label>
-          <Input id="url" name="url" />
+          <Input id="url" name="url" size="2" />
           <Box>
-            <Button type="submit">Gönder</Button>
+            <Button size="2" type="submit" variant="green">
+              Gönder
+            </Button>
           </Box>
         </GappedBox>
       </Form>
