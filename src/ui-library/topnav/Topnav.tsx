@@ -10,18 +10,21 @@ import {
 } from "~/ui-library";
 import { IconButton } from "../IconButton";
 import { UserDropdown } from "../UserDropdown";
+import { SearchInput } from "./SearchInput";
 
 export const Topnav: FC = () => {
   const user = useUserContext();
 
   return (
-    <Box css={{ paddingX: 10, backgroundColor: "$gray2" }}>
+    <Box css={{ px: "$2", backgroundColor: "$gray2" }}>
       <CenteredContainer>
-        <GappedBox css={{ padding: "10px 0", alignItems: "center" }}>
+        <GappedBox as="nav" css={{ padding: "$2 0", alignItems: "center" }}>
           <Link prefetch="intent" to="/">
             <GappedBox css={{ alignItems: "center" }}>pano</GappedBox>
           </Link>
-          <Spacer />
+          <Box css={{ px: 10, flex: 1 }}>
+            <SearchInput />
+          </Box>
           <Box css={{ display: "flex", gap: 10, alignItems: "center" }}>
             {user ? (
               <>
@@ -43,5 +46,3 @@ export const Topnav: FC = () => {
     </Box>
   );
 };
-
-const Spacer = () => <Box css={{ flex: "1" }} />;
