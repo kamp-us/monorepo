@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { useFetchers, useTransition } from "remix";
+import { useFetchers, useTransition } from "@remix-run/react";
 import NProgress from "nprogress";
 
 export const useLoadingIndicator = () => {

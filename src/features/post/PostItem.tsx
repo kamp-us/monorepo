@@ -1,6 +1,6 @@
-import { Post } from "~/API";
+import type { Post } from "~/API";
 import { useFetcher } from "@remix-run/react";
-import { FC } from "react";
+import type { FC } from "react";
 import { useUserContext } from "../auth/user-context";
 import {
   Box,

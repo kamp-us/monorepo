@@ -1,5 +1,5 @@
-import { Post } from "~/API";
-import { FC } from "react";
+import type { Post } from "~/API";
+import type { FC } from "react";
 import { PostItem } from "./PostItem";
 import { Box } from "~/ui-library";
 

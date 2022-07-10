@@ -1,5 +1,6 @@
-import { FC, useEffect, useRef, useState } from "react";
-import { Comment } from "~/API";
+import type { FC} from "react";
+import { useEffect, useRef, useState } from "react";
+import type { Comment } from "~/API";
 import { styled } from "~/stitches.config";
 import {
   Box,

@@ -9,7 +9,8 @@ import {
   Label,
   ValidationMessage,
 } from "~/ui-library";
-import { FormEvent, useState } from "react";
+import type { FormEvent} from "react";
+import { useState } from "react";
 
 const validateUsername = (username: unknown) => {
   if (typeof username !== "string" || username.length < 3) {

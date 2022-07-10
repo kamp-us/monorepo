@@ -1,5 +1,5 @@
-import { Amplify, Auth } from "aws-amplify";
-import nProgressStyles from "nprogress/nprogress.css";
+import type { Auth } from "aws-amplify";
+import { Amplify } from "aws-amplify";
 import {
   Links,
   LiveReload,
@@ -8,10 +8,12 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
-} from "remix";
-import { json, LinksFunction, LoaderFunction } from "@remix-run/node";
+} from "@remix-run/react";
+import type { LinksFunction, LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { fetchUser } from "./features/auth/useFetchUser";
-import { AuthUser, UserContext } from "./features/auth/user-context";
+import type { AuthUser } from "./features/auth/user-context";
+import { UserContext } from "./features/auth/user-context";
 import { createApolloClient } from "./graphql/createApolloClient";
 // @ts-ignore
 import config from "~/aws-exports";

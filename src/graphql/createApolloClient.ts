@@ -6,7 +6,7 @@ import {
 } from "@apollo/client";
 import { createAuthLink } from "aws-appsync-auth-link";
 import { createSubscriptionHandshakeLink } from "aws-appsync-subscription-link";
-import { AuthUser } from "../features/auth/user-context";
+import type { AuthUser } from "../features/auth/user-context";
 
 interface CognitoUserSession {
   getIdToken: () => {

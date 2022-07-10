@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 import { useTheme } from "./ThemeProvider";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
