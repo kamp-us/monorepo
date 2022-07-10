@@ -1,5 +1,7 @@
-import { json, LoaderFunction, useLoaderData } from "remix";
-import { ListPostsQuery, ListPostsQueryVariables, Post } from "~/API";
+import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import type { ListPostsQuery, ListPostsQueryVariables, Post } from "~/API";
 import { PostList } from "~/features/post/PostList";
 import { withSSR } from "~/features/utils/amplify/withSSR";
 import { listPosts } from "~/graphql/queries";

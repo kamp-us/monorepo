@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from "react";
+import type { FC } from "react";
+import { useEffect, useState } from "react";
 import { formatTimeAgo } from "~/features/utils/format-time-ago";
 
 export const Timeago: FC<{ date: Date }> = ({ date }) => {
@@ -10,7 +11,7 @@ export const Timeago: FC<{ date: Date }> = ({ date }) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [date]);
 
   return <>{timeAgo}</>;
 };

@@ -1,5 +1,5 @@
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { FC } from "react";
+import type { FC } from "react";
 import { ControlGroup } from "../ControlGroup";
 import { Form } from "../Form";
 import { Input } from "../Input";

@@ -1,6 +1,6 @@
 import { Auth } from "aws-amplify";
 import { fetchUser } from "~/features/auth/useFetchUser";
-import { AuthUser } from "~/features/auth/user-context";
+import type { AuthUser } from "~/features/auth/user-context";
 // @ts-ignore
 import config from "~/aws-exports";
 import { createApolloClient } from "./createApolloClient";

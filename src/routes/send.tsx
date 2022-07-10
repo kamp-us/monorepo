@@ -1,6 +1,6 @@
 import { createPost } from "~/graphql/mutations";
-import { AuthUser } from "~/features/auth/user-context";
-import { ActionFunction } from "remix";
+import type { AuthUser } from "~/features/auth/user-context";
+import type { ActionFunction } from "@remix-run/node";
 import { fetchUser } from "~/features/auth/useFetchUser";
 import { json, redirect } from "@remix-run/node";
 import {
@@ -14,7 +14,7 @@ import {
 } from "~/ui-library";
 import { withSSR } from "~/features/utils/amplify/withSSR";
 import normalizeUrl from "normalize-url";
-import { CreatePostMutationVariables } from "~/API";
+import type { CreatePostMutationVariables } from "~/API";
 import { getSitename } from "~/features/url/get-sitename";
 
 export const action: ActionFunction = async ({ request }) => {

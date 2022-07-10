@@ -1,5 +1,5 @@
 import { TriangleUpIcon } from "@radix-ui/react-icons";
-import { FC } from "react";
+import type { FC } from "react";
 import { styled } from "~/stitches.config";
 import { OldButton, Box } from "~/ui-library";
 

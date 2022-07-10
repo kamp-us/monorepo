@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { Button } from "./layout-components/Button";
 import { UserAvatar } from "./UserAvatar";
 import {

@@ -1,7 +1,9 @@
-import { Post } from "~/API";
+import type { Post } from "~/API";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 import { PostList } from "~/features/post/PostList";
-import { json, LoaderFunction, useLoaderData } from "remix";
+import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import { withSSR } from "~/features/utils/amplify/withSSR";
 import { indexPageQuery } from "./index-page-query.server";
 

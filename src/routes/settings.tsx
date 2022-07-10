@@ -1,6 +1,7 @@
 import { useUserContext } from "~/features/auth/user-context";
 import { fetchUser } from "~/features/auth/useFetchUser";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import type { FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -14,7 +15,8 @@ import {
 } from "~/ui-library";
 import { withSSR } from "~/features/utils/amplify/withSSR";
 import { Auth } from "aws-amplify";
-import { json, LoaderFunction, redirect } from "remix";
+import type { LoaderFunction } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 
 type ActionData = {
   formError?: string;
@@ -72,7 +74,6 @@ const Settings = () => {
 };
 
 const PasswordResetForm = () => {
-  const user = useUserContext();
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | undefined>(undefined);
   const [fieldErrors, setFieldErrors] = useState<{

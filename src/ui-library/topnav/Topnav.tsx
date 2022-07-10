@@ -1,5 +1,5 @@
 import { PlusIcon } from "@radix-ui/react-icons";
-import { FC } from "react";
+import type { FC } from "react";
 import { useUserContext } from "~/features/auth/user-context";
 import {
   Box,

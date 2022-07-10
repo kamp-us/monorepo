@@ -49,7 +49,7 @@ export const useAmplifyQuery = <
     if (!options?.skip) {
       fetchQuery();
     }
-  }, []);
+  }, [fetchQuery, options?.skip]);
 
   return { data, error, loading, refetch };
 };

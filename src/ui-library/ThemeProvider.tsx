@@ -1,12 +1,5 @@
-import {
-  createContext,
-  FC,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import { darkTheme } from "~/stitches.config";
+import type { FC } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 type ThemeVariants = "light" | "dark";
 
@@ -26,7 +19,6 @@ export const ThemeProvider: FC = ({ children }) => {
   const [theme, setTheme] = useState<ThemeVariants>("dark");
 
   const context = useMemo(() => ({ theme, setTheme }), [theme]);
-
 
   console.log({ theme });
 

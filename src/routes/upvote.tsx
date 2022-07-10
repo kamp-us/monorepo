@@ -1,4 +1,4 @@
-import { ActionFunction } from "remix";
+import type { ActionFunction } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { createUpvote, deleteUpvote } from "~/graphql/mutations";
 import { withSSR } from "~/features/utils/amplify/withSSR";

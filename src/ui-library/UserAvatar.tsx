@@ -1,4 +1,5 @@
-import { FC, forwardRef } from "react";
+import type { FC } from "react";
+import { forwardRef } from "react";
 import { Avatar, AvatarFallback } from "./Avatar";
 
 export interface UserAvatarProps {
@@ -17,3 +18,5 @@ export const UserAvatar: FC<UserAvatarProps> = forwardRef<
     </Avatar>
   );
 });
+
+UserAvatar.displayName = "UserAvatar";

@@ -1,6 +1,7 @@
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { forwardRef } from "react";
-import { CSS, styled } from "~/stitches.config";
+import type { CSS } from "~/stitches.config";
+import { styled } from "~/stitches.config";
 
 const SelectWrapper = styled("div", {
   backgroundColor: "$loContrast",
@@ -106,3 +107,5 @@ export const Select = forwardRef<
 ));
 
 Select.toString = () => `.${SelectWrapper.className}`;
+
+Select.displayName = "Select";
