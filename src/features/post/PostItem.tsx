@@ -10,6 +10,7 @@ import {
   UpvoteButton,
 } from "~/ui-library";
 import normalizeUrl from "normalize-url";
+import { MoreOptionsDropdown } from "~/ui-library/MoreOptionsDropdown";
 
 type PostItemProps = {
   post: Post;
@@ -67,6 +68,11 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
           <SmallLink to={`/posts/${post.id}`}>
             {post.commentCount} yorum
           </SmallLink>
+          {user && (
+            <>
+              | <MoreOptionsDropdown post={post} />
+            </>
+          )}
         </GappedBox>
       </GappedBox>
     </GappedBox>

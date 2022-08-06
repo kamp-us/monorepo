@@ -5103,6 +5103,20 @@ export type IndexPageQuery = {
   } | null,
 };
 
+export type EditPostPage_GetPostQueryVariables = {
+  id: string,
+};
+
+export type EditPostPage_GetPostQuery = {
+  getPost?:  {
+    __typename: "Post",
+    id: string,
+    title: string,
+    url: string,
+    owner: string,
+  } | null,
+};
+
 export type SearchPageQueryVariables = {
   filter?: SearchablePostFilterInput | null,
   sort?: Array< SearchablePostSortInput | null > | null,
