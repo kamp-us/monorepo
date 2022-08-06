@@ -11,6 +11,7 @@ import {
 } from "~/ui-library";
 import normalizeUrl from "normalize-url";
 import { MoreOptionsDropdown } from "~/ui-library/MoreOptionsDropdown";
+import { canUserEdit } from "~/features/auth/can-user-edit";
 
 type PostItemProps = {
   post: Post;
@@ -68,7 +69,7 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
           <SmallLink to={`/posts/${post.id}`}>
             {post.commentCount} yorum
           </SmallLink>
-          {user && (
+          {canUserEdit(user, post) && (
             <>
               | <MoreOptionsDropdown post={post} />
             </>
