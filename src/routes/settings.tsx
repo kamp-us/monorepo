@@ -116,7 +116,6 @@ const PasswordResetForm = () => {
       await Auth.changePassword(u, oldPassword, newPassword);
       setMessage("Şifreniz başarıyla değiştirildi.");
     } catch (e) {
-      console.log(e, "ERROR");
       setFormError("Bir hata oluştu.");
     } finally {
       setSubmitting(false);
