@@ -16,16 +16,7 @@ import {
 import { withSSR } from "~/features/utils/amplify/withSSR";
 import { Auth } from "aws-amplify";
 import type { LoaderFunction } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
-
-type ActionData = {
-  formError?: string;
-  fieldErrors?: {
-    oldPassword: string | undefined;
-    newPassword: string | undefined;
-  };
-};
-const badRequest = (data: ActionData) => json(data, { status: 400 });
+import { redirect } from "@remix-run/node";
 
 const validatePassword = (password: unknown) => {
   if (typeof password !== "string" || password.length < 6) {
@@ -97,13 +88,16 @@ const PasswordResetForm = () => {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const oldPassword = formData.get("oldPassword");
-    const newPassword = formData.get("newPassword");
+    const oldPassword = formData.get("oldPassword")?.toString();
+    const newPassword = formData.get("newPassword")?.toString();
 
-    if (typeof oldPassword !== "string" || typeof newPassword !== "string") {
-      return badRequest({
-        formError: "Lütfen eski parola ve yeni parola alanlarını doldurun.",
-      });
+    if (!oldPassword) {
+      setFormError("Lütfen eski parola alanını doldurun.");
+      return;
+    }
+    if (!newPassword) {
+      setFormError("Lütfen yeni parola alanını doldurun.");
+      return;
     }
 
     const errors = {
@@ -122,7 +116,7 @@ const PasswordResetForm = () => {
       await Auth.changePassword(u, oldPassword, newPassword);
       setMessage("Şifreniz başarıyla değiştirildi.");
     } catch (e) {
-      setFormError("Yeni parolada veya eski parolada bir hata var.");
+      setFormError("Bir hata oluştu.");
     } finally {
       setSubmitting(false);
     }
