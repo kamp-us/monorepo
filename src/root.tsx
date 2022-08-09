@@ -24,6 +24,8 @@ import { darkTheme } from "./stitches.config";
 import { withSSR } from "./features/utils/amplify/withSSR";
 import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
+import { SkipToContextManager } from "./features/skip-to/context";
+import { SkipToLandmark } from "./features/skip-to/components/SkipToLandmark";
 
 Amplify.configure({ ...config, ssr: true });
 
@@ -134,8 +136,12 @@ export default function App() {
       <Document>
         <UserContext.Provider value={user}>
           <ApolloProvider client={apolloClient}>
-            <Topnav />
-            <Outlet />
+            <SkipToContextManager>
+              <Topnav />
+              <SkipToLandmark type="main" id="main" label="Main">
+                <Outlet />
+              </SkipToLandmark>
+            </SkipToContextManager>
           </ApolloProvider>
         </UserContext.Provider>
       </Document>
