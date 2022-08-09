@@ -11,6 +11,9 @@ import {
   DropdownMenuTrigger,
 } from "./Dropdown";
 import { IconButton } from "./IconButton";
+import { useState } from "react";
+import { canUserEdit } from "~/features/auth/can-user-edit";
+import PostDeleteAlert from "~/ui-library/PostDeleteAlert";
 
 const DotsButton = styled(IconButton, {
   borderRadius: 5,
@@ -30,23 +33,33 @@ interface Props {
 
 export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
   const user = useUserContext();
+  const [open, setOpen] = useState(false);
+
+  const onDelete = () => {
+    setOpen(true);
+  };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <DotsButton color="transparent" aria-label="Daha fazla seçenek">
-          <DotsHorizontalIcon />
-        </DotsButton>
-      </DropdownMenuTrigger>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <DotsButton color="transparent" aria-label="Daha fazla seçenek">
+            <DotsHorizontalIcon />
+          </DotsButton>
+        </DropdownMenuTrigger>
 
-      <DropdownMenuContent>
-        {!!user && post.owner === user.username && (
-          <Item as={Link} to={`/posts/${post.id}/edit`}>
-            Düzenle
-          </Item>
-        )}
-        {!!user && post.owner === user.username && <Item>Sil</Item>}
-      </DropdownMenuContent>
-    </DropdownMenu>
+        <DropdownMenuContent>
+          {canUserEdit(user, post) && (
+            <>
+              <Item as={Link} to={`/posts/${post.id}/edit`}>
+                Düzenle
+              </Item>
+              <Item onSelect={onDelete}>Sil</Item>
+            </>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <PostDeleteAlert open={open} setOpen={setOpen} postID={post.id} />
+    </>
   );
 };
