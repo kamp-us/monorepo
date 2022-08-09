@@ -1,32 +1,34 @@
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
-import type { FC } from "react";
 import type {
   EditPostPage_GetPostQuery,
   EditPostPage_GetPostQueryVariables,
   UpdatePostMutationVariables,
 } from "~/API";
-import { fetchUser } from "~/features/auth/useFetchUser";
-import type { AuthUser } from "~/features/auth/user-context";
-import { canUserEdit } from "~/features/auth/can-user-edit";
-import { withSSR } from "~/features/utils/amplify/withSSR";
-import { getPost } from "~/graphql/queries";
 import {
   Box,
   Button,
   CenteredContainer,
-  Form,
   GappedBox,
-  Input,
   Label,
+  Input,
   ValidationMessage,
 } from "~/ui-library";
-import normalizeUrl from "normalize-url";
-import { getSitename } from "~/features/url/get-sitename";
-import { editPostPageQuery } from "~/routes/posts/edit-post-query.server";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import {
+  Form,
+  useActionData,
+  useLoaderData,
+  useTransition,
+} from "@remix-run/react";
+import type { AuthUser } from "~/features/auth/user-context";
+import { getPost } from "~/graphql/queries";
 import { updatePost } from "~/graphql/mutations";
+import { fetchUser } from "~/features/auth/useFetchUser";
+import { withSSR } from "~/features/utils/amplify/withSSR";
+import { getSitename } from "~/features/url/get-sitename";
+import { canUserEdit } from "~/features/auth/can-user-edit";
+import type { FC } from "react";
+import normalizeUrl from "normalize-url";
 
 type LoaderData = {
   post: NonNullable<EditPostPage_GetPostQuery["getPost"]>;
