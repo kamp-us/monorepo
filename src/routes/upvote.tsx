@@ -5,13 +5,13 @@ import { withSSR } from "~/features/utils/amplify/withSSR";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const jsonData = formData.get("json") as string | null;
+  const jsonData = formData.get("json");
 
   invariant(jsonData, "json is required");
 
   const { graphql } = withSSR({ request });
 
-  let { type, ...variables } = JSON.parse(jsonData);
+  let { type, ...variables } = JSON.parse(jsonData?.toString());
 
   switch (type) {
     case "create":
