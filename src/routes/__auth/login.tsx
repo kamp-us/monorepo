@@ -1,4 +1,3 @@
-import { Auth } from "aws-amplify";
 import {
   Box,
   Button,
@@ -9,74 +8,75 @@ import {
   Label,
   ValidationMessage,
 } from "~/ui-library";
-import type { FormEvent} from "react";
-import { useState } from "react";
+import type { ActionFunction, MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useActionData, useSearchParams } from "@remix-run/react";
+import { safeRedirect } from "~/utils";
+import { verifyLogin } from "~/models/user.server";
+import { createUserSession } from "~/session.server";
 
-const validateUsername = (username: unknown) => {
+interface ActionData {
+  errors?: {
+    username?: string;
+    password?: string;
+  };
+}
+
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  const username = formData.get("username");
+  const password = formData.get("password");
+  const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
+
   if (typeof username !== "string" || username.length < 3) {
-    return `Kullanıcı adı en az 3 karakter olmalıdır.`;
+    return json<ActionData>({
+      errors: {
+        username: "Kullanıcı adı en az 3 karakter olmalıdır.",
+      },
+    });
   }
+
+  if (typeof password !== "string" || password.length < 6) {
+    return json<ActionData>({
+      errors: {
+        password: "Şifre en az 6 karakter olmalıdır.",
+      },
+    });
+  }
+
+  const user = await verifyLogin(username, password);
+  if (!user) {
+    return json<ActionData>({
+      errors: {
+        username: "Kullanıcı adı veya şifre hatalı.",
+      },
+    });
+  }
+
+  return createUserSession({
+    request,
+    userID: user.id,
+    redirectTo,
+    remember: true,
+  });
 };
 
-const validatePassword = (password: unknown) => {
-  if (typeof password !== "string" || password.length < 6) {
-    return `Şifre en az 6 karakter olmalıdır.`;
-  }
+export const meta: MetaFunction = () => {
+  return {
+    title: "Giriş",
+  };
 };
 
 export const Login = () => {
-  const [submitting, setSubmitting] = useState(false);
-  const [formError, setFormError] = useState<string | undefined>(undefined);
-  const [fieldErrors, setFieldErrors] = useState<{
-    username: string | undefined;
-    password: string | undefined;
-  }>({
-    username: undefined,
-    password: undefined,
-  });
+  const [searchParams] = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") ?? "/";
+  const actionData = useActionData<ActionData>();
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const clearErrors = () => {
-      setFieldErrors({
-        username: undefined,
-        password: undefined,
-      });
-    }
-    clearErrors();
-    
-    const formData = new FormData(e.currentTarget);
-    const username = formData.get("username");
-    const password = formData.get("password");
-
-    const fieldErrors = {
-      username: validateUsername(username),
-      password: validatePassword(password),
-    };
-
-    if (Object.values(fieldErrors).some(Boolean)) {
-      setFieldErrors(fieldErrors);
-      return;
-    }
-
-    if (typeof username !== "string" || typeof password !== "string") {
-      return;
-    }
-
-    setSubmitting(true);
-    try {
-      await Auth.signIn(username, password);
-      location.href = "/";
-    } catch (error) {
-      setFormError("Kullanıcı adı veya parola yanlış.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  const fieldErrors = actionData?.errors;
 
   return (
     <CenteredContainer>
-      <Form onSubmit={onSubmit}>
+      <Form method="post" noValidate>
         <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
           <Label htmlFor="username">Kullanıcı Adı</Label>
           <Input
@@ -91,7 +91,7 @@ export const Login = () => {
           {fieldErrors?.username ? (
             <ValidationMessage
               error={fieldErrors.username}
-              isSubmitting={submitting}
+              isSubmitting={false}
             />
           ) : null}
 
@@ -108,16 +108,14 @@ export const Login = () => {
           {fieldErrors?.password ? (
             <ValidationMessage
               error={fieldErrors.password}
-              isSubmitting={submitting}
+              isSubmitting={false}
             />
           ) : null}
-          <Box>
-            <Button type="submit">{submitting ? "..." : "Giriş yap"}</Button>
-          </Box>
-          {formError ? (
-            <ValidationMessage error={formError} isSubmitting={submitting} />
-          ) : null}
         </GappedBox>
+        <Box>
+          <Button type="submit">Giriş yap</Button>
+        </Box>
+        <input type="hidden" name="redirectTo" value={redirectTo} />
       </Form>
     </CenteredContainer>
   );
