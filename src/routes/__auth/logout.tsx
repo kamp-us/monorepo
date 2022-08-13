@@ -1,10 +1,13 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
-import { Auth } from "aws-amplify";
+import { logout } from "~/session.server";
 
-export const action: ActionFunction = async () => {
-  await Auth.signOut();
-  return redirect("/");
+export const action: ActionFunction = async ({ request }) => {
+  return redirect("/", {
+    headers: {
+      "Set-Cookie": await logout(request),
+    },
+  });
 };
 
 export const loader: LoaderFunction = async () => {
