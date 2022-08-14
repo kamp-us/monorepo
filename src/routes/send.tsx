@@ -1,7 +1,4 @@
-import { createPost } from "~/graphql/mutations";
-import type { AuthUser } from "~/features/auth/user-context";
 import type { ActionFunction } from "@remix-run/node";
-import { fetchUser } from "~/features/auth/useFetchUser";
 import { json, redirect } from "@remix-run/node";
 import {
   Box,
@@ -12,10 +9,10 @@ import {
   Input,
   Label,
 } from "~/ui-library";
-import { withSSR } from "~/features/utils/amplify/withSSR";
 import normalizeUrl from "normalize-url";
-import type { CreatePostMutationVariables } from "~/API";
 import { getSitename } from "~/features/url/get-sitename";
+import { requireUserId } from "~/session.server";
+import { createPost } from "~/models/post.server";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -26,27 +23,15 @@ export const action: ActionFunction = async ({ request }) => {
     return json(null, { status: 400 });
   }
 
-  const { graphql, Auth } = withSSR({ request });
-
   const normalized = normalizeUrl(url.toString());
   const postUrl = new URL(normalized);
   const site = getSitename(postUrl);
 
-  let user: AuthUser | null;
+  const userID = await requireUserId(request);
+
   try {
-    user = await fetchUser(Auth);
-    await graphql<CreatePostMutationVariables>({
-      query: createPost,
-      variables: {
-        input: {
-          title: title.toString(),
-          url: normalized,
-          owner: user.username,
-          site: site,
-        },
-      },
-    });
-    return redirect("/");
+    const post = await createPost(title.toString(), normalized, site, userID);
+    return redirect(`/posts/${post.id}`);
   } catch {
     return json(null, { status: 500 });
   }

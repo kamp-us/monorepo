@@ -37,6 +37,27 @@ export const getAllPosts = () => {
     include: {
       upvotes: true,
       comments: true,
+      owner: true,
+    },
+  });
+};
+
+export const createPost = (
+  title: string,
+  url: string,
+  site: string,
+  userID: string
+) => {
+  return prisma.post.create({
+    data: {
+      title,
+      url,
+      site,
+      owner: {
+        connect: {
+          id: userID,
+        },
+      },
     },
   });
 };
