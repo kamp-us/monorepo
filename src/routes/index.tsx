@@ -3,7 +3,7 @@ import { PostList } from "~/features/post/PostList";
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import type { Post } from "@prisma/client";
+import type { Post } from "~/models/post.server";
 import { getAllPosts } from "~/models/post.server";
 
 type LoaderData = {
@@ -12,7 +12,6 @@ type LoaderData = {
 
 export const loader: LoaderFunction = async () => {
   const allPosts = await getAllPosts();
-
   return json<LoaderData>({
     data: allPosts,
   });

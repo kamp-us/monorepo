@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "./Dropdown";
 import { IconButton } from "./IconButton";
-import { isOwner } from "~/models/user.server";
+import { canUserEdit } from "~/features/auth/can-user-edit";
 
 const DotsButton = styled(IconButton, {
   borderRadius: 5,
@@ -33,7 +33,7 @@ export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
   const user = useUserContext();
 
   const ownerItems: JSX.Element[] = [];
-  if (isOwner(user, post)) {
+  if (canUserEdit(user, post)) {
     ownerItems.push(
       <Item as={Link} to={`/posts/${post.id}/edit`}>
         Düzenle

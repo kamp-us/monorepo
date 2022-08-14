@@ -1,5 +1,4 @@
 import type { Post } from "~/models/post.server";
-import { isPostUpvoted } from "~/models/post.server";
 import { useFetcher } from "@remix-run/react";
 import type { FC } from "react";
 import { useUserContext } from "../auth/user-context";
@@ -12,7 +11,7 @@ import {
 } from "~/ui-library";
 import normalizeUrl from "normalize-url";
 import { MoreOptionsDropdown } from "~/ui-library/MoreOptionsDropdown";
-import { isOwner } from "~/models/user.server";
+import { canUserEdit } from "../auth/can-user-edit";
 
 type PostItemProps = {
   post: Post;
@@ -30,7 +29,8 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
   const fetcher = useFetcher();
   const isLoading = !!fetcher.submission;
 
-  const isUpvoted = user ? isPostUpvoted(post, user.id) : false;
+  const isUpvoted =
+    user && post ? post.upvotes.some((u) => u.userID === user.id) : false;
 
   const variables = user
     ? isUpvoted
@@ -45,7 +45,7 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
       <fetcher.Form method="post" action="/upvote">
         <UpvoteButton
           isUpvoted={isUpvoted}
-          upvoteCount={post.upvotes?.length ?? 0}
+          upvoteCount={post.upvotes.length}
           isVoting={isLoading}
           disabled={!!user}
         />
@@ -65,11 +65,11 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
             fontSize: "0.8rem",
           }}
         >
-          <Box>@{post.owner}</Box> |
+          <Box>@{post.owner.username}</Box> |
           <SmallLink to={`/posts/${post.id}`}>
             {post.comments.length} yorum
           </SmallLink>
-          {isOwner(user, post) && (
+          {canUserEdit(user, post) && (
             <>
               | <MoreOptionsDropdown post={post} />
             </>
