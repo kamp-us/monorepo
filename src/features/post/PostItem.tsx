@@ -1,4 +1,5 @@
-import type { Post } from "~/API";
+import type { Post } from "~/models/post.server";
+import { isPostUpvoted } from "~/models/post.server";
 import { useFetcher } from "@remix-run/react";
 import type { FC } from "react";
 import { useUserContext } from "../auth/user-context";
@@ -11,10 +12,17 @@ import {
 } from "~/ui-library";
 import normalizeUrl from "normalize-url";
 import { MoreOptionsDropdown } from "~/ui-library/MoreOptionsDropdown";
-import { canUserEdit } from "~/features/auth/can-user-edit";
+import { isOwner } from "~/models/user.server";
 
 type PostItemProps = {
   post: Post;
+};
+
+const getVariables = (
+  type: "create" | "delete",
+  input: { postID: string; userID: string }
+) => {
+  return { type, input };
 };
 
 export const PostItem: FC<PostItemProps> = ({ post }) => {
@@ -22,22 +30,13 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
   const fetcher = useFetcher();
   const isLoading = !!fetcher.submission;
 
-  const variables = !post.isUpvoted
-    ? {
-        type: "create",
-        input: {
-          postID: post.id,
-          postUpvotesId: post.id,
-          owner: user?.username,
-        },
-      }
-    : {
-        type: "delete",
-        input: {
-          postID: post.id,
-          owner: user?.username,
-        },
-      };
+  const isUpvoted = user ? isPostUpvoted(post, user.id) : false;
+
+  const variables = user
+    ? isUpvoted
+      ? getVariables("create", { postID: post.id, userID: user.id })
+      : getVariables("delete", { postID: post.id, userID: user.id })
+    : null;
 
   const normalized = normalizeUrl(post.url);
 
@@ -45,9 +44,10 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
     <GappedBox css={{ padding: 5, alignItems: "center" }}>
       <fetcher.Form method="post" action="/upvote">
         <UpvoteButton
-          isUpvoted={!!post.isUpvoted}
-          upvoteCount={post.upvoteCount ?? 0}
+          isUpvoted={isUpvoted}
+          upvoteCount={post.upvotes?.length ?? 0}
           isVoting={isLoading}
+          disabled={!!user}
         />
         <input type="hidden" name="json" value={JSON.stringify(variables)} />
       </fetcher.Form>
@@ -67,9 +67,9 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
         >
           <Box>@{post.owner}</Box> |
           <SmallLink to={`/posts/${post.id}`}>
-            {post.commentCount} yorum
+            {post.comments.length} yorum
           </SmallLink>
-          {canUserEdit(user, post) && (
+          {isOwner(user, post) && (
             <>
               | <MoreOptionsDropdown post={post} />
             </>

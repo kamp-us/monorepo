@@ -7,12 +7,14 @@ type UpvoteProps = {
   isUpvoted: boolean;
   upvoteCount: number;
   isVoting: boolean;
+  disabled?: boolean;
 };
 
 export const UpvoteButton: FC<UpvoteProps> = ({
   isUpvoted,
   upvoteCount,
   isVoting = false,
+  disabled = false,
 }) => {
   return (
     <OldButton
@@ -25,6 +27,7 @@ export const UpvoteButton: FC<UpvoteProps> = ({
         flexDirection: "column",
       }}
       type="submit"
+      disabled={disabled}
     >
       <Triangle
         css={{

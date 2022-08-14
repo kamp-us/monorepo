@@ -1,30 +1,21 @@
-import type { Post } from "~/API";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 import { PostList } from "~/features/post/PostList";
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { withSSR } from "~/features/utils/amplify/withSSR";
-import { indexPageQuery } from "./index-page-query.server";
+import type { Post } from "@prisma/client";
+import { getAllPosts } from "~/models/post.server";
 
 type LoaderData = {
   data: Post[];
 };
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const { graphql } = withSSR({ request });
-  const data = await graphql({ query: indexPageQuery, variables: {} });
+export const loader: LoaderFunction = async () => {
+  const allPosts = await getAllPosts();
 
-  if (!data) {
-    return json(null, { status: 500 });
-  }
-
-  const posts = (data.listPosts?.items as Post[]) || [];
-  const sortedPosts = [...posts].sort((a, b) =>
-    a.createdAt < b.createdAt ? 1 : -1
-  );
-
-  return { data: sortedPosts };
+  return json<LoaderData>({
+    data: allPosts,
+  });
 };
 
 export const Home = () => {

@@ -65,3 +65,14 @@ export async function verifyLogin(
 
   return userWithoutPassword;
 }
+
+interface Entity {
+  owner: User;
+}
+
+export const isOwner = <T extends Entity>(
+  user: User | null,
+  entity?: T | null
+): entity is T => {
+  return !!user && !!entity && entity.owner.id === user.id;
+};
