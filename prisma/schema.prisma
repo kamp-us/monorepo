@@ -46,7 +46,7 @@ model Post {
   id    String @id @default(cuid())
   title String
   url   String
-  site  String @unique
+  site  String
 
   userID String
   owner  User   @relation(fields: [userID], references: [id])
