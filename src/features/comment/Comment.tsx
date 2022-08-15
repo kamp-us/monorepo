@@ -1,6 +1,6 @@
-import type { FC} from "react";
+import type { Comment } from "~/models/comment.server";
+import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
-import type { Comment } from "~/API";
 import { styled } from "~/stitches.config";
 import {
   Box,
@@ -51,7 +51,7 @@ export const CommentItem: FC<CommentProps> = ({
     <GappedBox css={{ flexDirection: "column", gap: 15 }}>
       <GappedBox css={{ flexDirection: "column" }}>
         <GappedBox css={{ alignItems: "center" }}>
-          <Text size="1">@{comment.owner}</Text>
+          <Text size="1">@{comment.owner.username}</Text>
           <Text size="1">
             <Timeago date={new Date(comment.createdAt)} />
           </Text>

@@ -1,9 +1,6 @@
-import type { Comment, GetPostQuery, GetPostQueryVariables, Post } from "~/API";
 import { useState } from "react";
-import { getPost } from "~/graphql/queries";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 import { CommentItem } from "~/features/comment/Comment";
-import type { AuthUser} from "~/features/auth/user-context";
 import { useUserContext } from "~/features/auth/user-context";
 import { PostItem } from "~/features/post/PostItem";
 import { Button } from "~/ui-library/layout-components/Button";
@@ -13,11 +10,14 @@ import { Text } from "~/ui-library/Text";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { createComment } from "~/graphql/mutations";
-import { fetchUser } from "~/features/auth/useFetchUser";
 import { Form } from "~/ui-library/Form";
-import { withSSR } from "~/features/utils/amplify/withSSR";
 import { PlusIcon } from "@radix-ui/react-icons";
+import type { Post } from "~/models/post.server";
+import { getPostById } from "~/models/post.server";
+import type { Comment } from "~/models/comment.server";
+import { createComment } from "~/models/comment.server";
+import { requireUserId } from "~/session.server";
+import invariant from "tiny-invariant";
 
 interface VisualTree {
   [key: string]: {
@@ -44,70 +44,42 @@ const toVisualTree = (comments: Comment[]) => {
   return tree;
 };
 
-export const loader: LoaderFunction = async ({ params, request }) => {
-  const { graphql } = withSSR({ request });
-
+export const loader: LoaderFunction = async ({ params }) => {
   if (!params.id) return null;
-
-  const data = await graphql<GetPostQueryVariables>({
-    query: getPost,
-    variables: { id: params.id },
-  });
-
-  return json({ data });
+  const post = await getPostById(params.id);
+  return json({ post });
 };
 
 type LoaderData = {
-  data: GetPostQuery;
+  post: Post;
 };
 
 export const action: ActionFunction = async ({ request, params }) => {
   const formData = await request.formData();
   const content = formData.get("content");
-  const commentID = formData.get("commentID");
 
-  const { Auth, graphql } = withSSR({ request });
+  invariant(content, "content is required");
+  invariant(params.id, "postID is required");
 
-  let user: AuthUser;
+  const commentID = formData.get("commentID")?.toString();
+  const userID = await requireUserId(request);
+
   try {
-    user = await fetchUser(Auth);
+    await createComment(content.toString(), params.id, userID, commentID);
+
+    return null;
   } catch {
     return json(null, { status: 500 });
   }
-
-  const input = commentID
-    ? {
-        postID: params.id,
-        content,
-        owner: user.username,
-        parentID: commentID,
-      }
-    : {
-        postID: params.id,
-        content,
-        owner: user.username,
-      };
-
-  await graphql({
-    query: createComment,
-    variables: { input },
-  });
-
-  return null;
 };
 
 const SinglePost = () => {
   const user = useUserContext();
-  const { data } = useLoaderData<LoaderData>();
+  const { post } = useLoaderData<LoaderData>();
 
   const [comment, setComment] = useState("");
 
-  const post = data.getPost as Post;
-  const sortedComments = [...(post.comments?.items as Comment[])].sort((a, b) =>
-    a.createdAt > b.createdAt ? 1 : -1
-  );
-
-  const visualTree = toVisualTree(sortedComments);
+  const visualTree = toVisualTree(post.comments);
 
   const postComments = Object.values(visualTree).filter(({ comment }) => {
     return !comment.parentID;

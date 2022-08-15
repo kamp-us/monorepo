@@ -3,7 +3,11 @@ import { prisma } from "~/db.server";
 
 const selectPostWithComment = Prisma.validator<Prisma.PostArgs>()({
   include: {
-    comments: true,
+    comments: {
+      include: {
+        owner: true,
+      },
+    },
   },
 });
 
@@ -36,7 +40,26 @@ export const getAllPosts = () => {
     orderBy: { createdAt: "desc" },
     include: {
       upvotes: true,
-      comments: true,
+      owner: true,
+      comments: {
+        include: {
+          owner: true,
+        },
+      },
+    },
+  });
+};
+
+export const getPostById = (id: string) => {
+  return prisma.post.findFirst({
+    where: { id },
+    include: {
+      upvotes: true,
+      comments: {
+        include: {
+          owner: true,
+        },
+      },
       owner: true,
     },
   });
