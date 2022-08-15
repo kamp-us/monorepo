@@ -1,40 +1,30 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import type { ListPostsQuery, ListPostsQueryVariables, Post } from "~/API";
 import { PostList } from "~/features/post/PostList";
-import { withSSR } from "~/features/utils/amplify/withSSR";
-import { listPosts } from "~/graphql/queries";
+import { getPostsBySite, Post } from "~/models/post.server";
 import { CenteredContainer } from "~/ui-library";
 
 type LoaderData = {
-  data: ListPostsQuery;
+  posts: Post[];
 };
 
-export const loader: LoaderFunction = async ({ request, params }) => {
-  const { graphql } = withSSR({ request });
-
+export const loader: LoaderFunction = async ({ params }) => {
   const sitename = params["*"];
 
   if (!sitename) return json(null, { status: 400 });
 
-  const data = await graphql<ListPostsQueryVariables>({
-    query: listPosts,
-    variables: {
-      filter: { site: { eq: sitename } },
-    },
-  });
+  const posts = await getPostsBySite(sitename);
 
-  if (!data) {
+  if (!posts) {
     return json(null, { status: 500 });
   }
 
-  return { data };
+  return json<LoaderData>({ posts });
 };
 
-export const Home = () => {
-  const { data } = useLoaderData<LoaderData>();
-  const posts = (data.listPosts?.items as Post[]) || [];
+export const Search = () => {
+  const { posts } = useLoaderData<LoaderData>();
   const sortedPosts = [...posts].sort((a, b) =>
     a.createdAt < b.createdAt ? 1 : -1
   );
@@ -46,4 +36,4 @@ export const Home = () => {
   );
 };
 
-export default Home;
+export default Search;
