@@ -1,7 +1,7 @@
 import { styled } from "~/stitches.config";
 import { Input } from "./Input";
-import { Button } from "./layout-components/Button";
 import { Select } from "./Select";
+import { Button } from "./layout-components/Button";
 
 export const ControlGroup = styled("div", {
   display: "flex",

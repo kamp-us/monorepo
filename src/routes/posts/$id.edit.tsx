@@ -2,17 +2,21 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
+import normalizeUrl from "normalize-url";
 import type { FC } from "react";
 import type {
   EditPostPage_GetPostQuery,
   EditPostPage_GetPostQueryVariables,
   UpdatePostMutationVariables,
 } from "~/API";
+import { canUserEdit } from "~/features/auth/can-user-edit";
 import { fetchUser } from "~/features/auth/useFetchUser";
 import type { AuthUser } from "~/features/auth/user-context";
-import { canUserEdit } from "~/features/auth/can-user-edit";
+import { getSitename } from "~/features/url/get-sitename";
 import { withSSR } from "~/features/utils/amplify/withSSR";
+import { updatePost } from "~/graphql/mutations";
 import { getPost } from "~/graphql/queries";
+import { editPostPageQuery } from "~/routes/posts/edit-post-query.server";
 import {
   Box,
   Button,
@@ -23,10 +27,6 @@ import {
   Label,
   ValidationMessage,
 } from "~/ui-library";
-import normalizeUrl from "normalize-url";
-import { getSitename } from "~/features/url/get-sitename";
-import { editPostPageQuery } from "~/routes/posts/edit-post-query.server";
-import { updatePost } from "~/graphql/mutations";
 
 type LoaderData = {
   post: NonNullable<EditPostPage_GetPostQuery["getPost"]>;

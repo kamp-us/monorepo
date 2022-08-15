@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
+import { useEffect, useState } from "react";
 import type { AuthUser } from "./user-context";
 
 export const fetchUser = async (auth: typeof Auth) => {

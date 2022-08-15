@@ -1,8 +1,8 @@
 import { Auth } from "aws-amplify";
+import config from "~/aws-exports";
 import { fetchUser } from "~/features/auth/useFetchUser";
 import type { AuthUser } from "~/features/auth/user-context";
 // @ts-ignore
-import config from "~/aws-exports";
 import { createApolloClient } from "./createApolloClient";
 
 type CognitoSession = Awaited<ReturnType<typeof Auth.currentSession>>;

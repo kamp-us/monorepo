@@ -1,8 +1,8 @@
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import type { FC } from "react";
 
-import { useTheme } from "./ThemeProvider";
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { IconButton } from "./IconButton";
+import { useTheme } from "./ThemeProvider";
 
 export const ThemeToggle: FC = () => {
   const { theme, setTheme } = useTheme();

@@ -1,5 +1,5 @@
-import { GQLOperation } from "./GQLOperation";
 import { useCallback, useState } from "react";
+import { GQLOperation } from "./GQLOperation";
 
 type UseAmplifyMutationType<ResultType, VariablesType> = {
   data: ResultType;

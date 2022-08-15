@@ -1,8 +1,9 @@
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
-import type { Post } from "~/models/post.server";
+import { canUserEdit } from "~/features/auth/can-user-edit";
 import { useUserContext } from "~/features/auth/user-context";
+import type { Post } from "~/models/post.server";
 import { styled } from "~/stitches.config";
 import {
   DropdownMenu,
@@ -11,7 +12,6 @@ import {
   DropdownMenuTrigger,
 } from "./Dropdown";
 import { IconButton } from "./IconButton";
-import { canUserEdit } from "~/features/auth/can-user-edit";
 
 const DotsButton = styled(IconButton, {
   borderRadius: 5,

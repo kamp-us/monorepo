@@ -1,4 +1,9 @@
-import { Amplify } from "aws-amplify";
+import type {
+  LinksFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
+import { json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -8,21 +13,16 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import type {
-  LinksFunction,
-  LoaderFunction,
-  MetaFunction,
-} from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { UserContextManager } from "./features/auth/user-context";
+import { Amplify } from "aws-amplify";
 // @ts-ignore
-import config from "~/aws-exports";
 import { useEffect } from "react";
-import { ThemeProvider, useClientStyle, Topnav, useTheme } from "~/ui-library";
-import { darkTheme } from "./stitches.config";
-import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
+import config from "~/aws-exports";
+import { ThemeProvider, Topnav, useClientStyle, useTheme } from "~/ui-library";
+import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
+import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
 import { getUser } from "./session.server";
+import { darkTheme } from "./stitches.config";
 
 Amplify.configure({ ...config, ssr: true });
 

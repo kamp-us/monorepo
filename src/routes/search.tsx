@@ -2,10 +2,10 @@ import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import type { Post, SearchPageQuery, SearchPageQueryVariables } from "~/API";
-import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
-import { withSSR } from "~/features/utils/amplify/withSSR";
 import { PostList } from "~/features/post/PostList";
+import { withSSR } from "~/features/utils/amplify/withSSR";
 import { Text } from "~/ui-library";
+import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 import { searchPageQuery } from "./search-page-query.server";
 
 type LoaderDataSuccess = {

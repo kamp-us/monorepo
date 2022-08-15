@@ -1,7 +1,7 @@
-import type { Post } from "~/models/post.server";
 import { useFetcher } from "@remix-run/react";
+import normalizeUrl from "normalize-url";
 import type { FC } from "react";
-import { useUserContext } from "../auth/user-context";
+import type { Post } from "~/models/post.server";
 import {
   Box,
   ExternalLink,
@@ -9,9 +9,9 @@ import {
   SmallLink,
   UpvoteButton,
 } from "~/ui-library";
-import normalizeUrl from "normalize-url";
 import { MoreOptionsDropdown } from "~/ui-library/MoreOptionsDropdown";
 import { canUserEdit } from "../auth/can-user-edit";
+import { useUserContext } from "../auth/user-context";
 
 type PostItemProps = {
   post: Post;

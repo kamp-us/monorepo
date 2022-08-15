@@ -1,19 +1,19 @@
-import type { Comment } from "~/models/comment.server";
+import { useTransition } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
+import type { Comment } from "~/models/comment.server";
 import { styled } from "~/stitches.config";
 import {
   Box,
   Button,
+  Form,
   GappedBox,
   SmallLink,
   Text,
   Textarea,
   Timeago,
-  Form,
 } from "~/ui-library";
 import { useUserContext } from "../auth/user-context";
-import { useTransition } from "@remix-run/react";
 
 type CommentProps = {
   comment: Comment;

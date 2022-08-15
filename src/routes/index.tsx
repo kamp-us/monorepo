@@ -1,10 +1,8 @@
-import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
-import { PostList } from "~/features/post/PostList";
-import type { LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import type { Post } from "~/models/post.server";
-import { getAllPosts } from "~/models/post.server";
+import { PostList } from "~/features/post/PostList";
+import { getAllPosts, Post } from "~/models/post.server";
+import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 
 type LoaderData = {
   data: Post[];

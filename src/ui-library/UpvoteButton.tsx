@@ -1,7 +1,7 @@
 import { TriangleUpIcon } from "@radix-ui/react-icons";
 import type { FC } from "react";
 import { styled } from "~/stitches.config";
-import { OldButton, Box } from "~/ui-library";
+import { Box, OldButton } from "~/ui-library";
 
 type UpvoteProps = {
   isUpvoted: boolean;

@@ -1,5 +1,8 @@
-import type { ActionFunction } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { ActionFunction, json, redirect } from "@remix-run/node";
+import normalizeUrl from "normalize-url";
+import { getSitename } from "~/features/url/get-sitename";
+import { createPost } from "~/models/post.server";
+import { requireUserId } from "~/session.server";
 import {
   Box,
   Button,
@@ -9,10 +12,6 @@ import {
   Input,
   Label,
 } from "~/ui-library";
-import normalizeUrl from "normalize-url";
-import { getSitename } from "~/features/url/get-sitename";
-import { requireUserId } from "~/session.server";
-import { createPost } from "~/models/post.server";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();

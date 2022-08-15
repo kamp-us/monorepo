@@ -1,22 +1,22 @@
-import { useUserContext } from "~/features/auth/user-context";
-import { fetchUser } from "~/features/auth/useFetchUser";
+import type { LoaderFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
+import { Auth } from "aws-amplify";
 import type { FormEvent } from "react";
 import { useEffect, useRef, useState } from "react";
+import { fetchUser } from "~/features/auth/useFetchUser";
+import { useUserContext } from "~/features/auth/user-context";
+import { withSSR } from "~/features/utils/amplify/withSSR";
 import {
   Box,
   Button,
   CenteredContainer,
-  GappedBox,
-  ValidationMessage,
-  Text,
-  Label,
   Form,
+  GappedBox,
   Input,
+  Label,
+  Text,
+  ValidationMessage,
 } from "~/ui-library";
-import { withSSR } from "~/features/utils/amplify/withSSR";
-import { Auth } from "aws-amplify";
-import type { LoaderFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
 
 const validatePassword = (password: unknown) => {
   if (typeof password !== "string" || password.length < 6) {

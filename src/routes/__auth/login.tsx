@@ -1,3 +1,8 @@
+import type { ActionFunction, MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useActionData, useSearchParams } from "@remix-run/react";
+import { verifyLogin } from "~/models/user.server";
+import { createUserSession } from "~/session.server";
 import {
   Box,
   Button,
@@ -8,12 +13,7 @@ import {
   Label,
   ValidationMessage,
 } from "~/ui-library";
-import type { ActionFunction, MetaFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { useActionData, useSearchParams } from "@remix-run/react";
 import { safeRedirect } from "~/utils";
-import { verifyLogin } from "~/models/user.server";
-import { createUserSession } from "~/session.server";
 
 interface ActionData {
   errors?: {
