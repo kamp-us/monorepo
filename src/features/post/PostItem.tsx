@@ -34,8 +34,8 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
 
   const variables = user
     ? isUpvoted
-      ? getVariables("create", { postID: post.id, userID: user.id })
-      : getVariables("delete", { postID: post.id, userID: user.id })
+      ? getVariables("delete", { postID: post.id, userID: user.id })
+      : getVariables("create", { postID: post.id, userID: user.id })
     : null;
 
   const normalized = normalizeUrl(post.url);
@@ -47,7 +47,7 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
           isUpvoted={isUpvoted}
           upvoteCount={post.upvotes.length}
           isVoting={isLoading}
-          disabled={!!user}
+          disabled={!user}
         />
         <input type="hidden" name="json" value={JSON.stringify(variables)} />
       </fetcher.Form>
