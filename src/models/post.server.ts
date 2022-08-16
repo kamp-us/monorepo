@@ -98,6 +98,19 @@ export const createPost = (title: string, url: string, userID: string) => {
   });
 };
 
+export const editPost = (id: string, title: string, url: string) => {
+  const postURL = new URL(url);
+  const site = getSitename(postURL);
+  return prisma.post.update({
+    where: { id },
+    data: {
+      title,
+      url,
+      site,
+    },
+  });
+};
+
 export const isPostUpvoted = (post: Post, userID: string) => {
   return post.upvotes.some((upvote) => upvote.userID === userID);
 };
