@@ -26,7 +26,7 @@ export const UserDropdown: FC<{ login: string }> = ({ login }) => {
   const submit = useSubmit();
 
   const onLogout = async () => {
-    submit(null, { method: "post", action: "/logout" });
+    submit(null, { method: "post", action: "/api/auth/logout" });
   };
 
   return (
