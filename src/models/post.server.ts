@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "~/db.server";
+import { getSitename } from "~/features/url/get-sitename";
 
 const selectPostWithComment = Prisma.validator<Prisma.PostArgs>()({
   include: {
@@ -80,12 +81,9 @@ export const getPostsBySite = (site: string) => {
   });
 };
 
-export const createPost = (
-  title: string,
-  url: string,
-  site: string,
-  userID: string
-) => {
+export const createPost = (title: string, url: string, userID: string) => {
+  const postURL = new URL(url);
+  const site = getSitename(postURL);
   return prisma.post.create({
     data: {
       title,

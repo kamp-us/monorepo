@@ -1,6 +1,5 @@
 import { ActionFunction, json, redirect } from "@remix-run/node";
 import normalizeUrl from "normalize-url";
-import { getSitename } from "~/features/url/get-sitename";
 import { createPost } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
 import {
@@ -23,13 +22,10 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   const normalized = normalizeUrl(url.toString());
-  const postUrl = new URL(normalized);
-  const site = getSitename(postUrl);
-
   const userID = await requireUserId(request);
 
   try {
-    const post = await createPost(title.toString(), normalized, site, userID);
+    const post = await createPost(title.toString(), normalized, userID);
     return redirect(`/posts/${post.id}`);
   } catch {
     return json(null, { status: 500 });
