@@ -29,6 +29,7 @@ services:
       - POSTGRES_USER=pgtest
       - POSTGRES_DB=pgtest
       - POSTGRES_PASSWORD=pgtest
+      - PGDATA=/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
@@ -36,3 +37,8 @@ services:
       interval: 10s
       timeout: 3s
       retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
