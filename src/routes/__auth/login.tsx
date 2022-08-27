@@ -1,10 +1,9 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useActionData, useFetcher, useSearchParams } from "@remix-run/react";
+import { useFetcher, useSearchParams } from "@remix-run/react";
 import {
   Box,
   Button,
   CenteredContainer,
-  Form,
   GappedBox,
   Input,
   Label,
@@ -24,7 +23,6 @@ export const Login = () => {
   const fetcher = useFetcher<ActionData>();
 
   const fieldErrors = fetcher.data?.errors;
-  console.log(fieldErrors, "!!!");
 
   return (
     <CenteredContainer>
