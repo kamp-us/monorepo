@@ -8,7 +8,7 @@ export const Timeago: FC<{ date: Date }> = ({ date }) => {
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeAgo(formatTimeAgo(date));
-    }, 1000);
+    }, 10000);
 
     return () => clearInterval(timer);
   }, [date]);
