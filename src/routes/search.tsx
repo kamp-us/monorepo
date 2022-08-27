@@ -1,53 +1,37 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import type { Post, SearchPageQuery, SearchPageQueryVariables } from "~/API";
 import { PostList } from "~/features/post/PostList";
-import { withSSR } from "~/features/utils/amplify/withSSR";
+import { Post, searchPosts } from "~/models/post.server";
 import { Text } from "~/ui-library";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
-import { searchPageQuery } from "./search-page-query.server";
 
 type LoaderDataSuccess = {
   query: string;
   data: Post[];
 };
 
-type LoaderData = LoaderDataSuccess;
+type LoaderDataError = {
+  status: number;
+  error: string;
+};
+
+type LoaderData = LoaderDataSuccess | LoaderDataError;
+
+const isError = (data: LoaderData): data is LoaderDataError => {
+  return (data as LoaderDataError).error !== undefined;
+};
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const { graphql } = withSSR({ request });
   const url = new URL(request.url);
-
   const searchQuery = url.searchParams.get("q");
-
   if (!searchQuery) {
-    return json({ data: { searchPosts: null } });
+    return json<LoaderData>({ status: 400, error: "Query is required" });
   }
 
   try {
-    const data = await graphql<SearchPageQueryVariables, SearchPageQuery>({
-      query: searchPageQuery,
-      variables: {
-        filter: {
-          title: {
-            wildcard: `*${searchQuery}*`,
-          },
-        },
-      },
-    });
-
-    const posts = (data.searchPosts?.items as Post[]) || [];
-    const sortedPosts = [...posts].sort((a, b) =>
-      a.createdAt < b.createdAt ? 1 : -1
-    );
-
-    console.log(data);
-
-    return json({
-      data: sortedPosts,
-      query: searchQuery,
-    });
+    const posts = await searchPosts(searchQuery);
+    return json({ data: posts, query: searchQuery });
   } catch (e) {
     return {
       status: 500,
@@ -57,7 +41,19 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export const Search = () => {
-  const { data, query = "" } = useLoaderData<LoaderData>();
+  const loaderData = useLoaderData<LoaderData>();
+
+  if (isError(loaderData)) {
+    return (
+      <>
+        <CenteredContainer css={{ paddingTop: 20 }}>
+          <Text as="h1">Arama Sonuçları - Hata</Text>
+        </CenteredContainer>
+      </>
+    );
+  }
+
+  const { query, data } = loaderData;
 
   return (
     <>

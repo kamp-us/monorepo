@@ -81,6 +81,23 @@ export const getPostsBySite = (site: string) => {
   });
 };
 
+export const searchPosts = (query: string) => {
+  return prisma.post.findMany({
+    where: {
+      OR: [{ title: { contains: query } }, { site: { contains: query } }],
+    },
+    include: {
+      upvotes: true,
+      comments: {
+        include: {
+          owner: true,
+        },
+      },
+      owner: true,
+    },
+  });
+};
+
 export const createPost = (title: string, url: string, userID: string) => {
   const postURL = new URL(url);
   const site = getSitename(postURL);
