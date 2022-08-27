@@ -2,7 +2,7 @@
 FROM node:16-bullseye-slim
 
 # set for base and all that inherit from it
-# ENV NODE_ENV=development
+ENV NODE_ENV=development
 
 # Install openssl for Prisma
 RUN apt-get update && apt-get install -y openssl

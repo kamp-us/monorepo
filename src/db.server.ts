@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 function getClient() {
-  const { DATABASE_URL } = process.env;
+  const { DATABASE_URL, NODE_ENV } = process.env;
   invariant(typeof DATABASE_URL === "string", "DATABASE_URL env var not set");
 
   const databaseUrl = new URL(DATABASE_URL);
@@ -32,6 +32,7 @@ function getClient() {
   // re-run per request like everything else is. So if you need to change
   // something in this file, you'll need to manually restart the server.
   const client = new PrismaClient({
+    log: NODE_ENV === "development" ? ["query", "info", "warn", "error"] : [],
     datasources: {
       db: {
         url: databaseUrl.toString(),

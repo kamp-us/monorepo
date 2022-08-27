@@ -44,12 +44,6 @@
     "amplify:GQLCustomResolvers": "cd amplify/backend/function/GQLCustomResolvers/src && tsc -p ./tsconfig.json && cd -",
     "prisma:seed": "ts-node ./prisma/seed.ts"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
