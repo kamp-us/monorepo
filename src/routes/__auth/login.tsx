@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useActionData, useSearchParams } from "@remix-run/react";
+import { useActionData, useFetcher, useSearchParams } from "@remix-run/react";
 import {
   Box,
   Button,
@@ -21,13 +21,14 @@ export const meta: MetaFunction = () => {
 export const Login = () => {
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") ?? "/";
-  const actionData = useActionData<ActionData>();
+  const fetcher = useFetcher<ActionData>();
 
-  const fieldErrors = actionData?.errors;
+  const fieldErrors = fetcher.data?.errors;
+  console.log(fieldErrors, "!!!");
 
   return (
     <CenteredContainer>
-      <Form method="post" action="/api/auth/login" noValidate>
+      <fetcher.Form method="post" action="/api/auth/login" noValidate>
         <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
           <Label htmlFor="username">Kullanıcı Adı</Label>
           <Input
@@ -42,7 +43,7 @@ export const Login = () => {
           {fieldErrors?.username ? (
             <ValidationMessage
               error={fieldErrors.username}
-              isSubmitting={false}
+              isSubmitting={!!fetcher.submission}
             />
           ) : null}
 
@@ -59,7 +60,7 @@ export const Login = () => {
           {fieldErrors?.password ? (
             <ValidationMessage
               error={fieldErrors.password}
-              isSubmitting={false}
+              isSubmitting={!!fetcher.submission}
             />
           ) : null}
         </GappedBox>
@@ -67,7 +68,7 @@ export const Login = () => {
           <Button type="submit">Giriş yap</Button>
         </Box>
         <input type="hidden" name="redirectTo" value={redirectTo} />
-      </Form>
+      </fetcher.Form>
     </CenteredContainer>
   );
 };
