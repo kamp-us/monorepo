@@ -1,11 +1,10 @@
-import type { LoaderFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
+import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
+import { useActionData } from "@remix-run/react";
 import { Auth } from "aws-amplify";
-import type { FormEvent } from "react";
+import type { FC, FormEvent } from "react";
 import { useEffect, useRef, useState } from "react";
-import { fetchUser } from "~/features/auth/useFetchUser";
-import { useUserContext } from "~/features/auth/user-context";
-import { withSSR } from "~/features/utils/amplify/withSSR";
+import { updatePassword } from "~/models/user.server";
+import { requireUser } from "~/session.server";
 import {
   Box,
   Button,
@@ -17,28 +16,57 @@ import {
   Text,
   ValidationMessage,
 } from "~/ui-library";
+import { useUser } from "~/utils";
 
-const validatePassword = (password: unknown) => {
-  if (typeof password !== "string" || password.length < 6) {
-    return `Şifre en az 6 karakter olmalıdır.`;
-  }
-};
+export interface ActionData {
+  errors?: {
+    oldPassword?: string;
+    newPassword?: string;
+  };
+  success?: true;
+}
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const SSR = withSSR({ request });
-  try {
-    await fetchUser(SSR.Auth);
-  } catch {
-    return redirect("/login");
-  }
-
+  await requireUser(request);
   return true;
 };
 
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  const oldPassword = formData.get("oldPassword")?.toString() ?? "";
+  const newPassword = formData.get("newPassword")?.toString() ?? "";
+
+  if (!oldPassword) {
+    return json<ActionData>({
+      errors: {
+        oldPassword: "Lütfen eski parola alanını doldurun.",
+      },
+    });
+  }
+
+  if (newPassword.length < 6) {
+    return json<ActionData>({
+      errors: {
+        newPassword: "Yeni parola en az 6 karakter olmalıdır.",
+      },
+    });
+  }
+
+  const user = await requireUser(request);
+
+  await updatePassword(user, oldPassword, newPassword);
+
+  return json<ActionData>({
+    success: true,
+  });
+};
+
 const Settings = () => {
-  const user = useUserContext();
-  const username = user?.username;
-  const email = user?.attributes?.email;
+  const user = useUser();
+  const username = user.username;
+  const email = user.email;
+
+  const actionData = useActionData<ActionData>();
 
   return (
     <CenteredContainer>
@@ -58,72 +86,21 @@ const Settings = () => {
         >
           Parola
         </Text>
-        <PasswordResetForm />
+        <PasswordResetForm
+          errors={actionData?.errors}
+          success={actionData?.success}
+        />
       </GappedBox>
     </CenteredContainer>
   );
 };
 
-const PasswordResetForm = () => {
-  const [submitting, setSubmitting] = useState(false);
-  const [formError, setFormError] = useState<string | undefined>(undefined);
-  const [fieldErrors, setFieldErrors] = useState<{
-    newPassword: string | undefined;
-    oldPassword: string | undefined;
-  }>({
-    newPassword: undefined,
-    oldPassword: undefined,
-  });
-  const [message, setMessage] = useState("");
-
-  const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    if (!submitting && formRef.current) {
-      formRef.current.reset();
-      formRef.current.focus();
-    }
-  }, [submitting]);
-
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const oldPassword = formData.get("oldPassword")?.toString();
-    const newPassword = formData.get("newPassword")?.toString();
-
-    if (!oldPassword) {
-      setFormError("Lütfen eski parola alanını doldurun.");
-      return;
-    }
-    if (!newPassword) {
-      setFormError("Lütfen yeni parola alanını doldurun.");
-      return;
-    }
-
-    const errors = {
-      oldPassword: validatePassword(oldPassword),
-      newPassword: validatePassword(newPassword),
-    };
-
-    if (Object.values(errors).some(Boolean)) {
-      setFieldErrors(errors);
-      return;
-    }
-
-    setSubmitting(true);
-    try {
-      const u = await Auth.currentAuthenticatedUser();
-      await Auth.changePassword(u, oldPassword, newPassword);
-      setMessage("Şifreniz başarıyla değiştirildi.");
-    } catch (e) {
-      setFormError("Bir hata oluştu.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
+const PasswordResetForm: FC<{
+  errors: ActionData["errors"];
+  success: ActionData["success"];
+}> = ({ errors, success }) => {
   return (
-    <Form onSubmit={onSubmit} css={{ width: "100%" }} ref={formRef}>
+    <Form method="post" css={{ width: "100%" }}>
       <GappedBox css={{ flexDirection: "column", marginTop: 10, gap: 10 }}>
         <Label htmlFor="oldPassword">Eski Parola</Label>
         <Input
@@ -132,14 +109,11 @@ const PasswordResetForm = () => {
           type="password"
           placeholder="eskimis-parola"
           aria-errormessage={
-            fieldErrors?.oldPassword ? "old-password-error" : undefined
+            errors?.oldPassword ? "old-password-error" : undefined
           }
         />
-        {fieldErrors?.oldPassword ? (
-          <ValidationMessage
-            error={fieldErrors.oldPassword}
-            isSubmitting={submitting}
-          />
+        {errors?.oldPassword ? (
+          <ValidationMessage error={errors.oldPassword} />
         ) : null}
 
         <Label htmlFor="newPassword">Yeni Parola</Label>
@@ -148,23 +122,18 @@ const PasswordResetForm = () => {
           name="newPassword"
           placeholder="cok-gizli-parola"
           type="password"
-          aria-errormessage={
-            fieldErrors?.newPassword ? "password-error" : undefined
-          }
+          aria-errormessage={errors?.newPassword ? "password-error" : undefined}
         />
-        {fieldErrors?.newPassword ? (
-          <ValidationMessage
-            error={fieldErrors.newPassword}
-            isSubmitting={submitting}
-          />
+        {errors?.newPassword ? (
+          <ValidationMessage error={errors.newPassword} />
         ) : null}
         <Box>
           <Button type="submit">Parolanı Değiştir </Button>
         </Box>
-        {formError ? (
-          <ValidationMessage error={formError} isSubmitting={submitting} />
-        ) : (
-          <Text css={{ color: "$amber11" }}>{message}</Text>
+        {success && (
+          <Text css={{ color: "$amber11" }}>
+            Şifreniz başarıyla değiştirildi.
+          </Text>
         )}
       </GappedBox>
     </Form>

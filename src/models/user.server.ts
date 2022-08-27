@@ -37,6 +37,10 @@ export async function deleteUserByEmail(id: User["id"]) {
   return prisma.user.delete({ where: { id } });
 }
 
+const verifyPassword = async (password: Password, passwordToVerify: string) => {
+  return await bcrypt.compare(passwordToVerify, password.hash);
+};
+
 export async function verifyLogin(
   username: User["username"],
   password: Password["hash"]
@@ -52,10 +56,7 @@ export async function verifyLogin(
     return null;
   }
 
-  const isValid = await bcrypt.compare(
-    password,
-    userWithPassword.password.hash
-  );
+  const isValid = await verifyPassword(userWithPassword.password, password);
 
   if (!isValid) {
     return null;
@@ -65,6 +66,42 @@ export async function verifyLogin(
 
   return userWithoutPassword;
 }
+
+export const updatePassword = async (
+  user: User,
+  oldPassword: string,
+  newPassword: string
+) => {
+  const userWithPassword = await prisma.user.findUnique({
+    where: { id: user.id },
+    include: {
+      password: true,
+    },
+  });
+
+  if (!userWithPassword || !userWithPassword.password) {
+    return null;
+  }
+
+  const isValid = await verifyPassword(userWithPassword.password, oldPassword);
+
+  if (!isValid) {
+    return null;
+  }
+
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+  return prisma.user.update({
+    where: { id: user.id },
+    data: {
+      password: {
+        update: {
+          hash: hashedPassword,
+        },
+      },
+    },
+  });
+};
 
 interface Entity {
   owner: User;
