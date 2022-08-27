@@ -3,7 +3,7 @@
  */
 module.exports = {
   appDirectory: "./src",
-  serverDependenciesToBundle: ["@apollo/client", "normalize-url"],
+  serverDependenciesToBundle: ["normalize-url"],
   assetsBuildDirectory: "public/build",
   publicPath: "/build/",
   serverBuildDirectory: "build",

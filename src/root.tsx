@@ -13,18 +13,13 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import { Amplify } from "aws-amplify";
-// @ts-ignore
 import { useEffect } from "react";
-import config from "~/aws-exports";
 import { ThemeProvider, Topnav, useClientStyle, useTheme } from "~/ui-library";
 import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
 import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
 import { getUser } from "./session.server";
 import { darkTheme } from "./stitches.config";
-
-Amplify.configure({ ...config, ssr: true });
 
 type LoaderData = {
   user: Awaited<ReturnType<typeof getUser>>;
@@ -108,7 +103,6 @@ const Document = ({ children }: DocumentProps) => {
 
 export default function App() {
   const { user } = useLoaderData<LoaderData>();
-
   return (
     <ThemeProvider>
       <Document>
