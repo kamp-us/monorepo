@@ -68,7 +68,13 @@ export const CommentItem: FC<CommentProps> = ({
             </SmallLink>
           )}
           {comments.length > 0 && (
-            <SmallLink to="#" onClick={() => setShowComments(!showComments)}>
+            <SmallLink
+              to="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowComments(!showComments);
+              }}
+            >
               {showComments
                 ? "Gizle"
                 : `Göster (${comments.length ?? 0} yorum)`}
