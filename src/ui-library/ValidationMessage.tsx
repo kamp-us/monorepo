@@ -1,15 +1,15 @@
-import type { FC} from "react";
+import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { Box } from "~/ui-library";
 
 type ValidationMessageProps = {
   error: string;
-  isSubmitting: boolean;
+  isSubmitting?: boolean;
 };
 
 export const ValidationMessage: FC<ValidationMessageProps> = ({
   error,
-  isSubmitting,
+  isSubmitting = false,
 }) => {
   const [show, setShow] = useState(!!error);
 
