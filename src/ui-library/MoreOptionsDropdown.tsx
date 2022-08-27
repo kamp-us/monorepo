@@ -35,11 +35,11 @@ export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
   const ownerItems: JSX.Element[] = [];
   if (canUserEdit(user, post)) {
     ownerItems.push(
-      <Item as={Link} to={`/posts/${post.id}/edit`}>
+      <Item key="edit" as={Link} to={`/posts/${post.id}/edit`}>
         Düzenle
       </Item>
     );
-    ownerItems.push(<Item>Sil</Item>);
+    ownerItems.push(<Item key="delete">Sil</Item>);
   }
 
   const menuItems = [...ownerItems];
