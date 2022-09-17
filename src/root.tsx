@@ -1,5 +1,9 @@
-import type { Auth } from "aws-amplify";
-import { Amplify } from "aws-amplify";
+import type {
+  LinksFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
+import { json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -9,52 +13,31 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction, LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { fetchUser } from "./features/auth/useFetchUser";
-import type { AuthUser } from "./features/auth/user-context";
-import { UserContext } from "./features/auth/user-context";
-import { createApolloClient } from "./graphql/createApolloClient";
-// @ts-ignore
-import config from "~/aws-exports";
-import { ApolloProvider } from "@apollo/client";
 import { useEffect } from "react";
-import { ThemeProvider, useClientStyle, Topnav, useTheme } from "~/ui-library";
-import { darkTheme } from "./stitches.config";
-import { withSSR } from "./features/utils/amplify/withSSR";
-import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
+import { ThemeProvider, Topnav, useClientStyle, useTheme } from "~/ui-library";
+import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
-
-Amplify.configure({ ...config, ssr: true });
-
-type CognitoSession = Awaited<ReturnType<typeof Auth.currentSession>>;
+import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
+import { getUser } from "./session.server";
+import { darkTheme } from "./stitches.config";
 
 type LoaderData = {
-  user: AuthUser | null;
-  session: CognitoSession | null;
+  user: Awaited<ReturnType<typeof getUser>>;
 };
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: loadingIndicatorStyles }];
 };
 
+export const meta: MetaFunction = () => ({
+  charset: "utf-8",
+  title: "kamp.us pano",
+  viewport: "width=device-width,initial-scale=1",
+});
+
 export const loader: LoaderFunction = async ({ request }) => {
-  const SSR = withSSR({ request });
-
-  let user: AuthUser | null = null;
-  let session: CognitoSession | null = null;
-  try {
-    user = await fetchUser(SSR.Auth);
-    session = await SSR.Auth.currentSession();
-  } catch (error) {
-    console.log("error", error);
-    user = null;
-    session = null;
-  }
-
-  return json({
-    user,
-    session,
+  return json<LoaderData>({
+    user: await getUser(request),
   });
 };
 
@@ -119,25 +102,14 @@ const Document = ({ children }: DocumentProps) => {
 };
 
 export default function App() {
-  const { user, session } = useLoaderData<LoaderData>();
-
-  const apolloClient = createApolloClient({
-    user,
-    session,
-    endpoint: config.aws_appsync_graphqlEndpoint,
-    region: config.aws_appsync_region,
-    apiKey: config.aws_appsync_apiKey,
-  });
-
+  const { user } = useLoaderData<LoaderData>();
   return (
     <ThemeProvider>
       <Document>
-        <UserContext.Provider value={user}>
-          <ApolloProvider client={apolloClient}>
-            <Topnav />
-            <Outlet />
-          </ApolloProvider>
-        </UserContext.Provider>
+        <UserContextManager user={user}>
+          <Topnav />
+          <Outlet />
+        </UserContextManager>
       </Document>
     </ThemeProvider>
   );

@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Upvote {
+  id String @id @default(cuid())
+
+  postID String
+  post   Post   @relation(fields: [postID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  userID String
+  owner  User   @relation(fields: [userID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id      String @id @default(cuid())
+  content String
+
+  userID String
+  owner  User   @relation(fields: [userID], references: [id])
+
+  postID String
+  post   Post   @relation(fields: [postID], references: [id])
+
+  parentID String?
+  parent   Comment?  @relation("CommentComments", fields: [parentID], references: [id])
+  comments Comment[] @relation("CommentComments")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id    String @id @default(cuid())
+  title String
+  url   String
+  site  String
+
+  userID String
+  owner  User   @relation(fields: [userID], references: [id])
+
+  comments Comment[]
+  upvotes  Upvote[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([site])
+}
+
+model Password {
+  hash String
+
+  user   User   @relation(fields: [userID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userID String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id       String @id @default(cuid())
+  username String @unique
+  email    String @unique
+
+  password Password?
+
+  comments Comment[]
+  upvotes  Upvote[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  posts     Post[]
+}

@@ -1,7 +1,6 @@
 import type { ActionFunction } from "@remix-run/node";
 import invariant from "tiny-invariant";
-import { createUpvote, deleteUpvote } from "~/graphql/mutations";
-import { withSSR } from "~/features/utils/amplify/withSSR";
+import { createUpvote, deleteUpvote } from "~/models/post.server";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -9,14 +8,12 @@ export const action: ActionFunction = async ({ request }) => {
 
   invariant(jsonData, "json is required");
 
-  const { graphql } = withSSR({ request });
-
-  let { type, ...variables } = JSON.parse(jsonData);
+  let { type, input } = JSON.parse(jsonData);
 
   switch (type) {
     case "create":
       try {
-        await graphql({ query: createUpvote, variables });
+        await createUpvote(input.postID, input.userID);
       } catch (e) {
         return {
           status: 500,
@@ -26,7 +23,7 @@ export const action: ActionFunction = async ({ request }) => {
       break;
     case "delete":
       try {
-        await graphql({ query: deleteUpvote, variables });
+        await deleteUpvote(input.postID, input.userID);
       } catch (e) {
         return {
           status: 500,

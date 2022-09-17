@@ -1,18 +1,20 @@
 import { TriangleUpIcon } from "@radix-ui/react-icons";
 import type { FC } from "react";
 import { styled } from "~/stitches.config";
-import { OldButton, Box } from "~/ui-library";
+import { Box, OldButton } from "~/ui-library";
 
 type UpvoteProps = {
   isUpvoted: boolean;
   upvoteCount: number;
   isVoting: boolean;
+  disabled?: boolean;
 };
 
 export const UpvoteButton: FC<UpvoteProps> = ({
   isUpvoted,
   upvoteCount,
   isVoting = false,
+  disabled = false,
 }) => {
   return (
     <OldButton
@@ -25,6 +27,7 @@ export const UpvoteButton: FC<UpvoteProps> = ({
         flexDirection: "column",
       }}
       type="submit"
+      disabled={disabled}
     >
       <Triangle
         css={{

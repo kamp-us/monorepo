@@ -2,17 +2,11 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
+import normalizeUrl from "normalize-url";
 import type { FC } from "react";
-import type {
-  EditPostPage_GetPostQuery,
-  EditPostPage_GetPostQueryVariables,
-  UpdatePostMutationVariables,
-} from "~/API";
-import { fetchUser } from "~/features/auth/useFetchUser";
-import type { AuthUser } from "~/features/auth/user-context";
 import { canUserEdit } from "~/features/auth/can-user-edit";
-import { withSSR } from "~/features/utils/amplify/withSSR";
-import { getPost } from "~/graphql/queries";
+import { editPost, getPostById, Post } from "~/models/post.server";
+import { requireUser } from "~/session.server";
 import {
   Box,
   Button,
@@ -23,36 +17,16 @@ import {
   Label,
   ValidationMessage,
 } from "~/ui-library";
-import normalizeUrl from "normalize-url";
-import { getSitename } from "~/features/url/get-sitename";
-import { editPostPageQuery } from "~/routes/posts/edit-post-query.server";
-import { updatePost } from "~/graphql/mutations";
 
 type LoaderData = {
-  post: NonNullable<EditPostPage_GetPostQuery["getPost"]>;
+  post: Post;
 };
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   if (!params.id) return null;
 
-  const { Auth, graphql } = withSSR({ request });
-
-  let user: AuthUser;
-  try {
-    user = await fetchUser(Auth);
-  } catch {
-    return json(null, { status: 500 });
-  }
-
-  const data = await graphql<
-    EditPostPage_GetPostQueryVariables,
-    EditPostPage_GetPostQuery
-  >({
-    query: getPost,
-    variables: { id: params.id },
-  });
-
-  const post = data.getPost;
+  const user = await requireUser(request);
+  const post = await getPostById(params.id);
 
   if (!canUserEdit(user, post)) {
     return redirect(`/posts/${params.id}`);
@@ -72,26 +46,15 @@ export const action: ActionFunction = async ({ request, params }) => {
     return json("URL veya başlık boş olamaz.", { status: 400 });
   }
 
-  const { graphql, Auth } = withSSR({ request });
-  const normalized = normalizeUrl(url.toString());
-  const postUrl = new URL(normalized);
-  const site = getSitename(postUrl);
+  const user = await requireUser(request);
+  const post = await getPostById(params.id);
 
-  let user: AuthUser | null;
+  if (!canUserEdit(user, post)) {
+    return json(null, { status: 403 });
+  }
+
   try {
-    user = await fetchUser(Auth);
-    await graphql<UpdatePostMutationVariables>({
-      query: updatePost,
-      variables: {
-        input: {
-          title: title.toString(),
-          url: normalized,
-          site: site,
-          owner: user.username,
-          id: params.id,
-        },
-      },
-    });
+    await editPost(params.id, title.toString(), normalizeUrl(url.toString()));
     return redirect("/");
   } catch {
     return json("Bir hata oluştu.", { status: 500 });

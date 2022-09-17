@@ -1,7 +1,7 @@
-import type { Post } from "~/API";
 import type { FC } from "react";
-import { PostItem } from "./PostItem";
+import type { Post } from "~/models/post.server";
 import { Box } from "~/ui-library";
+import { PostItem } from "./PostItem";
 
 type PostListProps = {
   posts: Post[];

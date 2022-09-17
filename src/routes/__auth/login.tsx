@@ -1,82 +1,32 @@
-import { Auth } from "aws-amplify";
+import type { MetaFunction } from "@remix-run/node";
+import { useFetcher, useSearchParams } from "@remix-run/react";
 import {
   Box,
   Button,
   CenteredContainer,
-  Form,
   GappedBox,
   Input,
   Label,
   ValidationMessage,
 } from "~/ui-library";
-import type { FormEvent} from "react";
-import { useState } from "react";
+import type { ActionData } from "../api/auth/login";
 
-const validateUsername = (username: unknown) => {
-  if (typeof username !== "string" || username.length < 3) {
-    return `Kullanıcı adı en az 3 karakter olmalıdır.`;
-  }
-};
-
-const validatePassword = (password: unknown) => {
-  if (typeof password !== "string" || password.length < 6) {
-    return `Şifre en az 6 karakter olmalıdır.`;
-  }
+export const meta: MetaFunction = () => {
+  return {
+    title: "Giriş",
+  };
 };
 
 export const Login = () => {
-  const [submitting, setSubmitting] = useState(false);
-  const [formError, setFormError] = useState<string | undefined>(undefined);
-  const [fieldErrors, setFieldErrors] = useState<{
-    username: string | undefined;
-    password: string | undefined;
-  }>({
-    username: undefined,
-    password: undefined,
-  });
+  const [searchParams] = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") ?? "/";
+  const fetcher = useFetcher<ActionData>();
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const clearErrors = () => {
-      setFieldErrors({
-        username: undefined,
-        password: undefined,
-      });
-    }
-    clearErrors();
-    
-    const formData = new FormData(e.currentTarget);
-    const username = formData.get("username");
-    const password = formData.get("password");
-
-    const fieldErrors = {
-      username: validateUsername(username),
-      password: validatePassword(password),
-    };
-
-    if (Object.values(fieldErrors).some(Boolean)) {
-      setFieldErrors(fieldErrors);
-      return;
-    }
-
-    if (typeof username !== "string" || typeof password !== "string") {
-      return;
-    }
-
-    setSubmitting(true);
-    try {
-      await Auth.signIn(username, password);
-      location.href = "/";
-    } catch (error) {
-      setFormError("Kullanıcı adı veya parola yanlış.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  const fieldErrors = fetcher.data?.errors;
 
   return (
     <CenteredContainer>
-      <Form onSubmit={onSubmit}>
+      <fetcher.Form method="post" action="/api/auth/login" noValidate>
         <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
           <Label htmlFor="username">Kullanıcı Adı</Label>
           <Input
@@ -91,7 +41,7 @@ export const Login = () => {
           {fieldErrors?.username ? (
             <ValidationMessage
               error={fieldErrors.username}
-              isSubmitting={submitting}
+              isSubmitting={!!fetcher.submission}
             />
           ) : null}
 
@@ -108,17 +58,15 @@ export const Login = () => {
           {fieldErrors?.password ? (
             <ValidationMessage
               error={fieldErrors.password}
-              isSubmitting={submitting}
+              isSubmitting={!!fetcher.submission}
             />
           ) : null}
-          <Box>
-            <Button type="submit">{submitting ? "..." : "Giriş yap"}</Button>
-          </Box>
-          {formError ? (
-            <ValidationMessage error={formError} isSubmitting={submitting} />
-          ) : null}
         </GappedBox>
-      </Form>
+        <Box>
+          <Button type="submit">Giriş yap</Button>
+        </Box>
+        <input type="hidden" name="redirectTo" value={redirectTo} />
+      </fetcher.Form>
     </CenteredContainer>
   );
 };

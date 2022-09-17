@@ -1,6 +1,6 @@
+import { useSubmit } from "@remix-run/react";
 import type { FC } from "react";
-import { Button } from "./layout-components/Button";
-import { UserAvatar } from "./UserAvatar";
+import { styled } from "~/stitches.config";
 import {
   DropdownMenu,
   DropdownMenuArrow,
@@ -9,9 +9,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./Dropdown";
-import { styled } from "~/stitches.config";
-import { Auth } from "aws-amplify";
 import { Link } from "./Link";
+import { UserAvatar } from "./UserAvatar";
+import { Button } from "./layout-components/Button";
 
 const MenuItem = styled(DropdownMenuItem, {
   width: "auto",
@@ -23,9 +23,10 @@ const MenuLink = styled(Link, {
 });
 
 export const UserDropdown: FC<{ login: string }> = ({ login }) => {
+  const submit = useSubmit();
+
   const onLogout = async () => {
-    await Auth.signOut();
-    location.reload();
+    submit(null, { method: "post", action: "/api/auth/logout" });
   };
 
   return (

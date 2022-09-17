@@ -3,8 +3,8 @@ import type { FC } from "react";
 import { ControlGroup } from "../ControlGroup";
 import { Form } from "../Form";
 import { Input } from "../Input";
-import { Button } from "../layout-components/Button";
 import { Select } from "../Select";
+import { Button } from "../layout-components/Button";
 
 const hasCollections = () => false;
 

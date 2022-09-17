@@ -1,30 +1,30 @@
 import {
   amber,
-  gray,
-  blue,
-  red,
-  green,
-  purple,
   amberDark,
-  grayDark,
-  blueDark,
-  redDark,
-  greenDark,
-  purpleDark,
   blackA,
-  grayA,
-  grayDarkA,
+  blue,
   blueA,
+  blueDark,
   blueDarkA,
-  greenDarkA,
+  gray,
+  grayA,
+  grayDark,
+  grayDarkA,
+  green,
   greenA,
+  greenDark,
+  greenDarkA,
+  purple,
+  purpleDark,
+  red,
+  redDark,
 } from "@radix-ui/colors";
 
 import type * as Stitches from "@stitches/react";
 // Spread the scales in your light and dark themes
 import { createStitches } from "@stitches/react";
 
-export const { styled, createTheme, getCssText, config, keyframes } =
+export const { styled, createTheme, getCssText, config, keyframes, reset } =
   createStitches({
     theme: {
       colors: {

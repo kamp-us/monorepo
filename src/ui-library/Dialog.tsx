@@ -1,6 +1,6 @@
-import React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Cross1Icon } from "@radix-ui/react-icons";
+import React from "react";
 import { keyframes, styled } from "~/stitches.config";
 
 type DialogContentProps = {

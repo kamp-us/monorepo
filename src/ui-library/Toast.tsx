@@ -1,6 +1,7 @@
-import { styled, keyframes } from "@stitches/react";
 import * as ToastPrimitive from "@radix-ui/react-toast";
-import React, { FC } from "react";
+import { keyframes, styled } from "@stitches/react";
+import type { FC } from "react";
+import React from "react";
 
 const VIEWPORT_PADDING = 25;
 

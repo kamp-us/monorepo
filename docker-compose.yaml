@@ -1,7 +1,44 @@
 version: "3.3"
 services:
-  api:
-    build: .
-    entrypoint: node node_modules/.bin/remix-serve build
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    entrypoint: node node_modules/.bin/remix dev
     ports:
       - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public
+      - SESSION_SECRET=sessionsecret
+      - NODE_ENV=development
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./remix.config.js:/app/remix.config.js
+      - ./tsconfig.json:/app/tsconfig.json
+    links:
+      - postgres
+    depends_on:
+      - postgres
+
+  postgres:
+    # match the version to the RDS
+    image: postgres:14.2-alpine
+    environment:
+      - POSTGRES_USER=pgtest
+      - POSTGRES_DB=pgtest
+      - POSTGRES_PASSWORD=pgtest
+      - PGDATA=/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: pg_isready -U pgtest -d pgtest
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

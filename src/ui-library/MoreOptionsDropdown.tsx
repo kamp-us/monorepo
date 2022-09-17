@@ -1,8 +1,9 @@
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
-import type { Post } from "~/API";
+import { canUserEdit } from "~/features/auth/can-user-edit";
 import { useUserContext } from "~/features/auth/user-context";
+import type { Post } from "~/models/post.server";
 import { styled } from "~/stitches.config";
 import {
   DropdownMenu,
@@ -31,6 +32,22 @@ interface Props {
 export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
   const user = useUserContext();
 
+  const ownerItems: JSX.Element[] = [];
+  if (canUserEdit(user, post)) {
+    ownerItems.push(
+      <Item key="edit" as={Link} to={`/posts/${post.id}/edit`}>
+        Düzenle
+      </Item>
+    );
+    ownerItems.push(<Item key="delete">Sil</Item>);
+  }
+
+  const menuItems = [...ownerItems];
+
+  if (menuItems.length === 0) {
+    return null;
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -39,14 +56,7 @@ export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
         </DotsButton>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent>
-        {!!user && post.owner === user.username && (
-          <Item as={Link} to={`/posts/${post.id}/edit`}>
-            Düzenle
-          </Item>
-        )}
-        {!!user && post.owner === user.username && <Item>Sil</Item>}
-      </DropdownMenuContent>
+      <DropdownMenuContent>{ownerItems}</DropdownMenuContent>
     </DropdownMenu>
   );
 };

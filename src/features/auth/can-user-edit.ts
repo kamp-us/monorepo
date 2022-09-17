@@ -1,12 +1,16 @@
-import type { AuthUser } from "./user-context";
-
 interface Entity {
-  owner: string;
+  owner: {
+    id: string;
+  };
+}
+
+interface User {
+  id: string;
 }
 
 export const canUserEdit = <T extends Entity>(
-  user: AuthUser | null,
+  user: User | null,
   entity?: T | null
 ): entity is T => {
-  return !!user && !!entity && entity.owner === user.username;
+  return !!user && !!entity && entity.owner.id === user.id;
 };

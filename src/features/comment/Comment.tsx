@@ -1,19 +1,19 @@
-import type { FC} from "react";
+import { useTransition } from "@remix-run/react";
+import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
-import type { Comment } from "~/API";
+import type { Comment } from "~/models/comment.server";
 import { styled } from "~/stitches.config";
 import {
   Box,
   Button,
+  Form,
   GappedBox,
   SmallLink,
   Text,
   Textarea,
   Timeago,
-  Form,
 } from "~/ui-library";
 import { useUserContext } from "../auth/user-context";
-import { useTransition } from "@remix-run/react";
 
 type CommentProps = {
   comment: Comment;
@@ -51,7 +51,7 @@ export const CommentItem: FC<CommentProps> = ({
     <GappedBox css={{ flexDirection: "column", gap: 15 }}>
       <GappedBox css={{ flexDirection: "column" }}>
         <GappedBox css={{ alignItems: "center" }}>
-          <Text size="1">@{comment.owner}</Text>
+          <Text size="1">@{comment.owner.username}</Text>
           <Text size="1">
             <Timeago date={new Date(comment.createdAt)} />
           </Text>
@@ -68,7 +68,13 @@ export const CommentItem: FC<CommentProps> = ({
             </SmallLink>
           )}
           {comments.length > 0 && (
-            <SmallLink to="#" onClick={() => setShowComments(!showComments)}>
+            <SmallLink
+              to="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowComments(!showComments);
+              }}
+            >
               {showComments
                 ? "Gizle"
                 : `Göster (${comments.length ?? 0} yorum)`}
