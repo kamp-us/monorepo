@@ -1,4 +1,4 @@
-FROM node:14 AS builder
+FROM node:16 AS builder
 
 # Create app directory
 WORKDIR /app
@@ -8,11 +8,11 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 # Install app dependencies
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 ADD . .
 
-FROM node:14
+FROM node:16
 
 
 RUN mkdir /app
