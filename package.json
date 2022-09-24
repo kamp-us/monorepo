@@ -26,7 +26,8 @@
     "build": "remix build",
     "dev": "NODE_ENV=development remix dev",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint src",
-    "prisma:seed": "ts-node ./prisma/seed.ts"
+    "prisma:seed": "ts-node ./prisma/seed.ts",
+    "migrate:start:dev": "npx prisma migrate dev && npm run dev"
   },
   "browserslist": {
     "production": [
