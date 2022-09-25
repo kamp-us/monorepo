@@ -18,6 +18,7 @@ import { Textarea } from "~/ui-library/Textarea";
 import { Box } from "~/ui-library/layout-components/Box";
 import { Button } from "~/ui-library/layout-components/Button";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
+import { MetaFunction } from 'remix/react'
 
 interface VisualTree {
   [key: string]: {
@@ -48,6 +49,21 @@ export const loader: LoaderFunction = async ({ params }) => {
   if (!params.id) return null;
   const post = await getPostById(params.id);
   return json({ post });
+};
+
+export const meta: MetaFunction = ({
+  data,
+}: {
+  data: LoaderData | undefined;
+}) => {
+  if (!data) {
+    return {
+      title: "No post",
+    };
+  }
+  return {
+    title: data.post.title,
+  };
 };
 
 type LoaderData = {
