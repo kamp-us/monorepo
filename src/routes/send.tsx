@@ -47,7 +47,7 @@ export const Send = () => {
           <Input id="url" name="url" size="2" />
           <Box>
             <Button size="2" type="submit" variant="green">
-              Gönder
+              {transition.submission ? "Gönderiliyor..." : "Gönder"}
             </Button>
           </Box>
           <ValidationMessage
