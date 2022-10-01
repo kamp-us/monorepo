@@ -1,4 +1,4 @@
-import { ActionFunction, json, redirect, } from "@remix-run/node";
+import { ActionFunction, json, redirect } from "@remix-run/node";
 import normalizeUrl from "normalize-url";
 import { createPost } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
@@ -11,7 +11,7 @@ import {
   GappedBox,
   Input,
   Label,
-  ValidationMessage
+  ValidationMessage,
 } from "~/ui-library";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -19,7 +19,7 @@ export const action: ActionFunction = async ({ request }) => {
   const title = formData.get("title");
   const url = formData.get("url");
 
-if (!url || !title) {
+  if (!url || !title) {
     return json("URL veya başlık boş olamaz.", { status: 400 });
   }
 
