@@ -18,7 +18,7 @@ import { Textarea } from "~/ui-library/Textarea";
 import { Box } from "~/ui-library/layout-components/Box";
 import { Button } from "~/ui-library/layout-components/Button";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
-import { MetaFunction } from 'remix/react'
+import { MetaFunction } from "remix/react";
 
 interface VisualTree {
   [key: string]: {
