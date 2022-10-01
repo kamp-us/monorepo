@@ -60,7 +60,6 @@ const Document = ({ children }: DocumentProps) => {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>pano</title>
         <Meta />
         <Links />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
