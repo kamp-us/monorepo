@@ -26,9 +26,13 @@
     "build": "remix build",
     "dev": "cross-env NODE_ENV=development DATABASE_URL=postgresql://pgtest:pgtest@localhost:5432/pgtest?schema=public SESSION_SECRET=sessionsecret npm run migrate:start:dev",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint src",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier:check": "prettier . --check",
+    "prettier:write": "prettier . --write",
     "prisma:seed": "ts-node ./prisma/seed.ts",
     "prisma:migrate": "prisma migrate dev",
-    "migrate:start:dev": "npm run prisma:migrate && npm run prisma:seed && remix dev"
+    "migrate:start:dev": "npm run prisma:migrate && npm run prisma:seed && remix dev",
+    "prepare": "husky install"
   },
   "browserslist": {
     "production": [
@@ -63,6 +67,8 @@
     "@types/react-dom": "^17.0.14",
     "cross-env": "^7.0.3",
     "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.6.1",
     "prism": "^4.1.2",
     "prisma": "^4.2.1",
