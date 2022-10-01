@@ -1,26 +1,25 @@
 version: "3.3"
 services:
-
-#   app:
-#     build:
-#       context: .
-#       dockerfile: Dockerfile.dev
-# #     entrypoint: node node_modules/.bin/remix dev
-#     ports:
-#       - "3000:3000"
-#     environment:
-#       - DATABASE_URL=postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public
-#       - SESSION_SECRET=sessionsecret
-#       - NODE_ENV=development
-#     volumes:
-#       - ./src:/app/src
-#       - ./public:/app/public
-#       - ./remix.config.js:/app/remix.config.js
-#       - ./tsconfig.json:/app/tsconfig.json
-#     links:
-#       - postgres
-#     depends_on:
-#       - postgres
+  #   app:
+  #     build:
+  #       context: .
+  #       dockerfile: Dockerfile.dev
+  # #     entrypoint: node node_modules/.bin/remix dev
+  #     ports:
+  #       - "3000:3000"
+  #     environment:
+  #       - DATABASE_URL=postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public
+  #       - SESSION_SECRET=sessionsecret
+  #       - NODE_ENV=development
+  #     volumes:
+  #       - ./src:/app/src
+  #       - ./public:/app/public
+  #       - ./remix.config.js:/app/remix.config.js
+  #       - ./tsconfig.json:/app/tsconfig.json
+  #     links:
+  #       - postgres
+  #     depends_on:
+  #       - postgres
 
   postgres:
     # match the version to the RDS

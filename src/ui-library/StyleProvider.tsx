@@ -1,4 +1,4 @@
-import type { FC} from "react";
+import type { FC } from "react";
 import { createContext, useCallback, useContext, useState } from "react";
 import { getCssText } from "~/stitches.config";
 

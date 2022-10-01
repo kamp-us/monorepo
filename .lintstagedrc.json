@@ -1,0 +1,4 @@
+{
+  "**/*.{js,ts,jsx,tsx,json}": ["npx pretty-quick --staged"],
+  "**/*.{ts,tsx}": ["npm run lint:fix"]
+}
