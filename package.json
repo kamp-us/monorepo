@@ -24,11 +24,11 @@
   },
   "scripts": {
     "build": "remix build",
-    "dev": "NODE_ENV=development remix dev",
+    "dev": "cross-env NODE_ENV=development DATABASE_URL=postgresql://pgtest:pgtest@localhost:5432/pgtest?schema=public SESSION_SECRET=sessionsecret npm run migrate:start:dev",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint src",
     "prisma:seed": "ts-node ./prisma/seed.ts",
     "prisma:migrate": "prisma migrate dev",
-    "migrate:start:dev": "npm run prisma:migrate && npm run prisma:seed && npm run dev"
+    "migrate:start:dev": "npm run prisma:migrate && npm run prisma:seed && remix dev"
   },
   "browserslist": {
     "production": [
@@ -61,6 +61,7 @@
     "@types/nprogress": "^0.2.0",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
+    "cross-env": "^7.0.3",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.6.1",
     "prism": "^4.1.2",
