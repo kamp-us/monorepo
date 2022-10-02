@@ -18,6 +18,8 @@ services:
       - ./tsconfig.json:/app/tsconfig.json
     networks:
       - pano
+    depends_on:
+    - postgres
   postgres:
     # match the version to the RDS
     image: postgres:14.2-alpine
