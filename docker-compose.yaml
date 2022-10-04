@@ -8,7 +8,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-       - DATABASE_URL=postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public
+       - DATABASE_URL=postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public&connect_timeout=300
        - SESSION_SECRET=sessionsecret
        - NODE_ENV=development
     volumes:
