@@ -13,4 +13,5 @@ RUN npm ci
 ADD . .
 
 EXPOSE 3000
-CMD ["npm", "run", "migrate:start:dev" ]
+
+ENTRYPOINT ["npm", "run", "migrate:start:dev" ]
