@@ -18,6 +18,11 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const title = formData.get("title");
   const url = formData.get("url");
+  const expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
+
+  if (!url.match(expression)){
+    return json("Lütfen geçerli bir URL adresi girin.", { status: 400 })
+  }
 
   if (!url || !title) {
     return json("URL veya başlık boş olamaz.", { status: 400 });
