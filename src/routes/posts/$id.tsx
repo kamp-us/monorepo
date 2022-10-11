@@ -1,7 +1,7 @@
 import { PlusIcon } from "@radix-ui/react-icons";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
 import { useState } from "react";
 import invariant from "tiny-invariant";
 import { useUserContext } from "~/features/auth/user-context";
@@ -12,6 +12,7 @@ import type { Comment } from "~/models/comment.server";
 import { getPostById } from "~/models/post.server";
 import type { Post } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
+import { ValidationMessage } from "~/ui-library";
 import { Form } from "~/ui-library/Form";
 import { Text } from "~/ui-library/Text";
 import { Textarea } from "~/ui-library/Textarea";
@@ -74,7 +75,10 @@ export const action: ActionFunction = async ({ request, params }) => {
   const formData = await request.formData();
   const content = formData.get("content");
 
-  invariant(content, "content is required");
+  if (!content) {
+    return json("Yorum alanı boş bırakılamaz.", { status: 400 });
+  }
+  
   invariant(params.id, "postID is required");
 
   const commentID = formData.get("commentID")?.toString();
@@ -94,6 +98,8 @@ const SinglePost = () => {
   const { post } = useLoaderData<LoaderData>();
 
   const [comment, setComment] = useState("");
+  const transition = useTransition();
+  const error = useActionData();
 
   const visualTree = toVisualTree(post.comments);
 
@@ -132,6 +138,10 @@ const SinglePost = () => {
             Cevap yaz
           </Button>
         </Box>
+        <ValidationMessage
+          error={error}
+          isSubmitting={transition.state === "submitting"}
+        />
       </Form>
       {postComments.length > 0 && (
         <>
