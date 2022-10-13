@@ -13,11 +13,16 @@ import {
   Label,
   ValidationMessage,
 } from "~/ui-library";
+import { validateURL } from "~/utils";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const title = formData.get("title");
   const url = formData.get("url");
+
+  if (!validateURL(url)) {
+    return json("Lütfen geçerli bir URL adresi girin.", { status: 400 })
+  }
 
   if (!url || !title) {
     return json("URL veya başlık boş olamaz.", { status: 400 });
