@@ -14,7 +14,6 @@ export const Textarea = styled("textarea", {
   boxShadow: "inset 0 0 0 1px $colors$gray7",
   color: "$hiContrast",
   fontVariantNumeric: "tabular-nums",
-  position: "relative",
   minHeight: 80,
   resize: "vertical",
 
