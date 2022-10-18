@@ -51,6 +51,53 @@ export const getAllPosts = () => {
   });
 };
 
+export const getActivePosts = async () => {
+  const posts = await prisma.post.findMany({
+    include: {
+      upvotes: true,
+      owner: true,
+      comments: {
+        include: {
+          owner: true,
+        },
+      },
+    },
+  });
+
+  const sortLastCommendPosts = (posts: Post[]) => {
+    const lastCommentedPosts = posts.sort((a, b) => {
+      const lastCommentA = a.comments[a.comments.length - 1];
+      const lastCommentB = b.comments[b.comments.length - 1];
+      return (
+        lastCommentB.createdAt.getTime() - lastCommentA.createdAt.getTime()
+      );
+    });
+    return lastCommentedPosts;
+  };
+
+  const activePosts = sortLastCommendPosts(posts);
+  return activePosts;
+};
+
+export const getMostCommentedPosts = () => {
+  return prisma.post.findMany({
+    orderBy: {
+      comments: {
+        _count: "desc",
+      },
+    },
+    include: {
+      upvotes: true,
+      owner: true,
+      comments: {
+        include: {
+          owner: true,
+        },
+      },
+    },
+  });
+};
+
 export const getPostById = (id: string) => {
   return prisma.post.findFirst({
     where: { id },
