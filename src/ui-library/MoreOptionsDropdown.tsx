@@ -1,10 +1,12 @@
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { Link } from "@remix-run/react";
+import { useNavigate } from "@remix-run/react";
 import type { FC } from "react";
+import { useState } from "react";
 import { canUserEdit } from "~/features/auth/can-user-edit";
 import { useUserContext } from "~/features/auth/user-context";
 import type { Post } from "~/models/post.server";
 import { styled } from "~/stitches.config";
+import PostDeleteAlert from "~/ui-library/PostDeleteAlert";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,15 +33,25 @@ interface Props {
 
 export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
   const user = useUserContext();
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const ownerItems: JSX.Element[] = [];
   if (canUserEdit(user, post)) {
     ownerItems.push(
-      <Item key="edit" as={Link} to={`/posts/${post.id}/edit`}>
+      <Item onSelect={() => navigate(`/posts/${post.id}/edit`)} key="edit">
         Düzenle
       </Item>
     );
-    ownerItems.push(<Item key="delete">Sil</Item>);
+    ownerItems.push(
+      <Item onSelect={handleOpen} key="delete">
+        Sil
+      </Item>
+    );
   }
 
   const menuItems = [...ownerItems];
@@ -49,14 +61,17 @@ export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <DotsButton color="transparent" aria-label="Daha fazla seçenek">
-          <DotsHorizontalIcon />
-        </DotsButton>
-      </DropdownMenuTrigger>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <DotsButton color="transparent" aria-label="Daha fazla seçenek">
+            <DotsHorizontalIcon />
+          </DotsButton>
+        </DropdownMenuTrigger>
 
-      <DropdownMenuContent>{ownerItems}</DropdownMenuContent>
-    </DropdownMenu>
+        <DropdownMenuContent>{ownerItems}</DropdownMenuContent>
+      </DropdownMenu>
+      <PostDeleteAlert open={open} setOpen={setOpen} postID={post.id} />
+    </>
   );
 };

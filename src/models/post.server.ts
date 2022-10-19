@@ -115,6 +115,12 @@ export const createPost = (title: string, url: string, userID: string) => {
   });
 };
 
+export const deletePost = (id: string) => {
+  return prisma.post.delete({
+    where: { id },
+  });
+};
+
 export const editPost = (id: string, title: string, url: string) => {
   const postURL = new URL(url);
   const site = getSitename(postURL);
