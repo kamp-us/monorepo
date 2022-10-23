@@ -91,7 +91,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
     return null;
   } catch {
-    return json("null", { status: 500 });
+    return json(null, { status: 500 });
   }
 };
 

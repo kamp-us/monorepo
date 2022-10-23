@@ -35,7 +35,7 @@ export const action: ActionFunction = async ({ request }) => {
     const post = await createPost(title.toString(), normalized, userID);
     return redirect(`/posts/${post.slug}`);
   } catch {
-    return json("null", { status: 500 });
+    return json(null, { status: 500 });
   }
 };
 
