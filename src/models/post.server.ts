@@ -126,7 +126,7 @@ export const searchPosts = (query: string) => {
 export const createPost = (title: string, url: string, userID: string) => {
   const postURL = new URL(url);
   const site = getSitename(postURL);
-  const slug = slugify(title);
+  let slug = slugify(title);
 
   const isPostSlugUnique = prisma.post.findFirst({
     where: { slug },
