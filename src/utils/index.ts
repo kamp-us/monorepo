@@ -92,6 +92,19 @@ export function slugify(title: string) {
     .replace(/\-$/g, "");
 }
 
+export function randomCharacters() {
+  let characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+  let randomString = "";
+
+  for (let i = 0; i < 6; i++)
+    randomString += characters.charAt(
+      Math.floor(Math.random() * characters.length)
+    );
+
+  return randomString;
+}
+
 export function validateUsername(username: unknown): username is string {
   return typeof username === "string" && username.length >= 2;
 }

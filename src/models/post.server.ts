@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "~/db.server";
 import { getSitename } from "~/features/url/get-sitename";
-import { slugify } from "~/utils";
+import { randomCharacters, slugify } from "~/utils";
 
 const selectPostWithComment = Prisma.validator<Prisma.PostArgs>()({
   include: {
@@ -127,6 +127,13 @@ export const createPost = (title: string, url: string, userID: string) => {
   const postURL = new URL(url);
   const site = getSitename(postURL);
   const slug = slugify(title);
+
+  const isPostSlugUnique = prisma.post.findFirst({
+    where: { slug },
+  });
+
+  if (!isPostSlugUnique) slug + randomCharacters();
+
   return prisma.post.create({
     data: {
       title,

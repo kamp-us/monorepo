@@ -32,7 +32,7 @@ model Comment {
   owner  User   @relation(fields: [userID], references: [id])
 
   postID String
-  post   Post   @relation(fields: [postID], references: [id])
+  post   Post   @relation(fields: [postID], references: [id], onDelete: Cascade)
 
   parentID String?
   parent   Comment?  @relation("CommentComments", fields: [parentID], references: [id])
