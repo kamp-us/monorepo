@@ -20,7 +20,7 @@ import { Box } from "~/ui-library/layout-components/Box";
 import { Button } from "~/ui-library/layout-components/Button";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 import { MetaFunction } from "remix/react";
-
+import { useEffect } from "react";
 interface VisualTree {
   [key: string]: {
     comment: Comment;
@@ -106,7 +106,10 @@ const SinglePost = () => {
   const postComments = Object.values(visualTree).filter(({ comment }) => {
     return !comment.parentID;
   });
-
+  useEffect(() => {
+    if (transition.state === "submitting")
+      setComment("");
+  }, [transition.state]);
   return (
     <CenteredContainer css={{ gap: 5 }}>
       <PostItem post={post} />
