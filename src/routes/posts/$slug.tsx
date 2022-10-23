@@ -9,7 +9,7 @@ import { CommentItem } from "~/features/comment/Comment";
 import { PostItem } from "~/features/post/PostItem";
 import { createComment } from "~/models/comment.server";
 import type { Comment } from "~/models/comment.server";
-import { getPostById } from "~/models/post.server";
+import { getPostBySlug, getPostIdBySlug } from "~/models/post.server";
 import type { Post } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
 import { ValidationMessage } from "~/ui-library";
@@ -47,8 +47,8 @@ const toVisualTree = (comments: Comment[]) => {
 };
 
 export const loader: LoaderFunction = async ({ params }) => {
-  if (!params.id) return null;
-  const post = await getPostById(params.id);
+  if (!params.slug) return null;
+  const post = await getPostBySlug(params.slug);
   return json({ post });
 };
 
@@ -78,18 +78,20 @@ export const action: ActionFunction = async ({ request, params }) => {
   if (!content) {
     return json("Yorum alanı boş bırakılamaz.", { status: 400 });
   }
-  
-  invariant(params.id, "postID is required");
+
+  invariant(params.slug, "postSlug is required");
+
+  const post = await getPostIdBySlug(params.slug);
 
   const commentID = formData.get("commentID")?.toString();
   const userID = await requireUserId(request);
 
   try {
-    await createComment(content.toString(), params.id, userID, commentID);
+    await createComment(content.toString(), post.id, userID, commentID);
 
     return null;
   } catch {
-    return json(null, { status: 500 });
+    return json("null", { status: 500 });
   }
 };
 

@@ -43,10 +43,11 @@ model Comment {
 }
 
 model Post {
-  id    String @id @default(cuid())
+  id    String  @id @default(cuid())
   title String
   url   String
   site  String
+  slug  String?
 
   userID String
   owner  User   @relation(fields: [userID], references: [id])

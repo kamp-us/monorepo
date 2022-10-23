@@ -72,12 +72,26 @@ export function validateEmail(email: unknown): email is string {
 }
 
 export function validateURL(url: string) {
-  const expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
+  const expression =
+    /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
 
-  if (url.match(expression)){
-    return true
+  if (url.match(expression)) {
+    return true;
   }
 }
+
+export function slugify(title: string) {
+  return title
+    .normalize("NFKD")
+    .toLocaleLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\_/g, "-")
+    .replace(/\-\-+/g, "-")
+    .replace(/\-$/g, "");
+}
+
 export function validateUsername(username: unknown): username is string {
   return typeof username === "string" && username.length >= 2;
 }

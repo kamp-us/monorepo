@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "~/db.server";
 import { getSitename } from "~/features/url/get-sitename";
+import { slugify } from "~/utils";
 
 const selectPostWithComment = Prisma.validator<Prisma.PostArgs>()({
   include: {
@@ -66,6 +67,30 @@ export const getPostById = (id: string) => {
   });
 };
 
+export const getPostBySlug = (slug: string) => {
+  return prisma.post.findFirst({
+    where: { slug },
+    include: {
+      upvotes: true,
+      comments: {
+        include: {
+          owner: true,
+        },
+      },
+      owner: true,
+    },
+  });
+};
+
+export const getPostIdBySlug = (slug: string) => {
+  return prisma.post.findFirst({
+    where: { slug },
+    select: {
+      id: true,
+    },
+  });
+};
+
 export const getPostsBySite = (site: string) => {
   return prisma.post.findMany({
     where: { site },
@@ -101,11 +126,13 @@ export const searchPosts = (query: string) => {
 export const createPost = (title: string, url: string, userID: string) => {
   const postURL = new URL(url);
   const site = getSitename(postURL);
+  const slug = slugify(title);
   return prisma.post.create({
     data: {
       title,
       url,
       site,
+      slug,
       owner: {
         connect: {
           id: userID,
@@ -124,12 +151,14 @@ export const deletePost = (id: string) => {
 export const editPost = (id: string, title: string, url: string) => {
   const postURL = new URL(url);
   const site = getSitename(postURL);
+  const slug = slugify(title);
   return prisma.post.update({
     where: { id },
     data: {
       title,
       url,
       site,
+      slug,
     },
   });
 };

@@ -21,7 +21,7 @@ export const action: ActionFunction = async ({ request }) => {
   const url = formData.get("url");
 
   if (!validateURL(url)) {
-    return json("Lütfen geçerli bir URL adresi girin.", { status: 400 })
+    return json("Lütfen geçerli bir URL adresi girin.", { status: 400 });
   }
 
   if (!url || !title) {
@@ -33,9 +33,9 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const post = await createPost(title.toString(), normalized, userID);
-    return redirect(`/posts/${post.id}`);
+    return redirect(`/posts/${post.slug}`);
   } catch {
-    return json(null, { status: 500 });
+    return json("null", { status: 500 });
   }
 };
 
