@@ -119,3 +119,15 @@ export const isOwner = <T extends Entity>(
 ): entity is T => {
   return !!user && !!entity && entity.owner.id === user.id;
 };
+
+export const getUserComments = (userId: string) => {
+  return prisma.user.findMany({
+    where: {
+      id: userId,
+    },
+    include: {
+      comments: true,
+      upvotes: true,
+    },
+  });
+};

@@ -22,9 +22,12 @@ const MenuLink = styled(Link, {
   textDecoration: "none",
 });
 
-export const UserDropdown: FC<{ login: string }> = ({ login }) => {
+export const UserDropdown: FC<{ login: string; userId: string }> = ({
+  login,
+  userId,
+}) => {
   const submit = useSubmit();
-
+  console.log("userDropDown", userId);
   const onLogout = async () => {
     submit(null, { method: "post", action: "/api/auth/logout" });
   };
@@ -41,7 +44,9 @@ export const UserDropdown: FC<{ login: string }> = ({ login }) => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent sideOffset={5}>
-        <MenuItem disabled>Profil</MenuItem>
+        <MenuLink to={`/profile/${userId}`}>
+          <MenuItem>Profil</MenuItem>
+        </MenuLink>
         <MenuLink prefetch="intent" to="/settings">
           <MenuItem>Ayarlar</MenuItem>
         </MenuLink>

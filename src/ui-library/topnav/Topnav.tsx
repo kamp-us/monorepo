@@ -14,7 +14,7 @@ import { SearchInput } from "./SearchInput";
 
 export const Topnav: FC = () => {
   const user = useUserContext();
-
+  console.log(user);
   return (
     <Box css={{ px: "$2", backgroundColor: "$gray2" }}>
       <CenteredContainer>
@@ -32,7 +32,7 @@ export const Topnav: FC = () => {
                   <PlusIcon />
                 </IconButton>
                 <ThemeToggle />
-                <UserDropdown login={user.username} />
+                <UserDropdown login={user.username} userId={user.id} />
               </>
             ) : (
               <>
