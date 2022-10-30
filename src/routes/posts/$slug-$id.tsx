@@ -2,14 +2,15 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { MetaFunction } from "remix/react";
 import invariant from "tiny-invariant";
 import { useUserContext } from "~/features/auth/user-context";
 import { CommentItem } from "~/features/comment/Comment";
 import { PostItem } from "~/features/post/PostItem";
 import { createComment } from "~/models/comment.server";
 import type { Comment } from "~/models/comment.server";
-import { getPostById } from "~/models/post.server";
+import { getPostBySlugAndId } from "~/models/post.server";
 import type { Post } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
 import { ValidationMessage } from "~/ui-library";
@@ -19,8 +20,7 @@ import { Textarea } from "~/ui-library/Textarea";
 import { Box } from "~/ui-library/layout-components/Box";
 import { Button } from "~/ui-library/layout-components/Button";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
-import { MetaFunction } from "remix/react";
-import { useEffect } from "react";
+
 interface VisualTree {
   [key: string]: {
     comment: Comment;
@@ -47,8 +47,8 @@ const toVisualTree = (comments: Comment[]) => {
 };
 
 export const loader: LoaderFunction = async ({ params }) => {
-  if (!params.id) return null;
-  const post = await getPostById(params.id);
+  if (!params.slug && !params.id) return null;
+  const post = await getPostBySlugAndId(params.slug, params.id);
   return json({ post });
 };
 
@@ -78,8 +78,9 @@ export const action: ActionFunction = async ({ request, params }) => {
   if (!content) {
     return json("Yorum alanı boş bırakılamaz.", { status: 400 });
   }
-  
-  invariant(params.id, "postID is required");
+
+  invariant(params.slug, "postSlug is required");
+  invariant(params.id, "postId is required");
 
   const commentID = formData.get("commentID")?.toString();
   const userID = await requireUserId(request);
@@ -106,10 +107,13 @@ const SinglePost = () => {
   const postComments = Object.values(visualTree).filter(({ comment }) => {
     return !comment.parentID;
   });
+
   useEffect(() => {
-    if (transition.state === "submitting")
+    if (transition.state === "submitting") {
       setComment("");
+    }
   }, [transition.state]);
+
   return (
     <CenteredContainer css={{ gap: 5 }}>
       <PostItem post={post} />

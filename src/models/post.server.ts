@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import slugify from "slugify";
 import { prisma } from "~/db.server";
 import { getSitename } from "~/features/url/get-sitename";
 
@@ -66,6 +67,21 @@ export const getPostById = (id: string) => {
   });
 };
 
+export const getPostBySlugAndId = (slug: string, id: string) => {
+  return prisma.post.findFirst({
+    where: { slug, id },
+    include: {
+      upvotes: true,
+      comments: {
+        include: {
+          owner: true,
+        },
+      },
+      owner: true,
+    },
+  });
+};
+
 export const getPostsBySite = (site: string) => {
   return prisma.post.findMany({
     where: { site },
@@ -101,11 +117,14 @@ export const searchPosts = (query: string) => {
 export const createPost = (title: string, url: string, userID: string) => {
   const postURL = new URL(url);
   const site = getSitename(postURL);
+  const slug = slugify(title);
+
   return prisma.post.create({
     data: {
       title,
       url,
       site,
+      slug,
       owner: {
         connect: {
           id: userID,
@@ -124,18 +143,23 @@ export const deletePost = (id: string) => {
 export const editPost = (id: string, title: string, url: string) => {
   const postURL = new URL(url);
   const site = getSitename(postURL);
+  const slug = slugify(title);
+
   return prisma.post.update({
     where: { id },
     data: {
       title,
       url,
       site,
+      slug,
     },
   });
 };
 
 export const isPostUpvoted = (post: Post, userID: string) => {
-  return post.upvotes.some((upvote) => upvote.userID === userID);
+  return post.upvotes.some(
+    (upvote: { userID: string }) => upvote.userID === userID
+  );
 };
 
 export const createUpvote = (postID: string, userID: string) => {
