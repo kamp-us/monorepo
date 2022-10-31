@@ -115,9 +115,12 @@ export const createPost = (title: string, url: string, userID: string) => {
   });
 };
 
-export const deletePost = (id: string) => {
+export const deletePost = async (id: string) => {
+  await prisma.comment.deleteMany({
+    where: { postID: id },
+  })
   return prisma.post.delete({
-    where: { id },
+    where: { id }
   });
 };
 
