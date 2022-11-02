@@ -3,7 +3,7 @@ import { json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { getUserComments } from "~/models/user.server";
 import { getUserById } from "~/models/user.server";
-import { Box, Button, CenteredContainer, Timeago } from "~/ui-library";
+import { Box, CenteredContainer, Timeago } from "~/ui-library";
 
 type UserComment = {
   id: string;
@@ -100,7 +100,7 @@ export default function ProfilePage() {
                 {comments.map((comment: UserComment, index: number) => {
                   return (
                     <tbody>
-                      <tr>
+                      <tr key={comment.id}>
                         <td style={{ padding: ".5rem" }}>{index + 1}</td>
                         <td>{comment.content}</td>
                       </tr>
