@@ -3,6 +3,7 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useState } from "react";
+import { MetaFunction } from "remix/react";
 import invariant from "tiny-invariant";
 import { useUserContext } from "~/features/auth/user-context";
 import { CommentItem } from "~/features/comment/Comment";
@@ -18,7 +19,6 @@ import { Textarea } from "~/ui-library/Textarea";
 import { Box } from "~/ui-library/layout-components/Box";
 import { Button } from "~/ui-library/layout-components/Button";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
-import { MetaFunction } from "remix/react";
 
 interface VisualTree {
   [key: string]: {

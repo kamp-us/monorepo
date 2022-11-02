@@ -3,29 +3,32 @@ import { json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { getUserComments } from "~/models/user.server";
 import { getUserById } from "~/models/user.server";
-import { Box, Button, CenteredContainer } from "~/ui-library";
+import { Box, Button, CenteredContainer, Timeago } from "~/ui-library";
+
+type UserComment = {
+  id: string;
+  content: string;
+  userID: string;
+  postID: string;
+  parentID: null;
+  createdAt: string;
+  updatedAt: string;
+};
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-  console.log("Profile loader function:", params);
   if (!params.userId) return null;
   const user = (await getUserById(params.userId)) || null;
   const comments = (await getUserComments(params.userId)) || null;
-  console.log("loader:", comments);
+
   return json({ user, data: comments });
 };
 
 export default function ProfilePage() {
   const { user, data } = useLoaderData();
 
-  const comments = data.map((item: any) => {
-    return item.comments;
+  const comments = data.comments.map((item: UserComment) => {
+    return item;
   });
-
-  // const upvotes = data.map((item: any) => {
-  //   return item.upvotes;
-  // });
-
-  const getUpvotedPost = () => {};
 
   return (
     <CenteredContainer
@@ -46,16 +49,15 @@ export default function ProfilePage() {
         }}
       >
         <Box style={{ margin: "0.5rem" }}>
-          <p>User: {user.username}</p>
+          <p>Kullanıcı Adı: {user.username}</p>
         </Box>
         <Box style={{ margin: "0.5rem" }}>
-          <p>Created: 27-10-2022</p>
+          <p>
+            Üyelik Tarihi: <Timeago date={new Date(user.createdAt)} />
+          </p>
         </Box>
         <Box style={{ margin: "0.5rem" }}>
-          <p>About: ajsdjasds</p>
-        </Box>
-        <Box style={{ margin: "0.5rem" }}>
-          <p>{user.email}</p>
+          <p>E-mail: {user.email}</p>
         </Box>
       </Box>
       <Box
@@ -85,21 +87,27 @@ export default function ProfilePage() {
                   borderRadius: ".2rem",
                 }}
               >
-                Comments
+                Yorumlar
               </Tabs.Trigger>
               {/* <Tabs.Trigger value="tab2" style={{ marginRight:"1rem", padding:".3rem", background:"transparent", border:"1px solid gray", color:"white", borderRadius:".2rem"}}>Upvotes</Tabs.Trigger> */}
             </Tabs.List>
             <Tabs.Content value="tab1">
-              {comments.map((item: any) => {
-                return item.map((comment: { id: string; content: string }) => {
-                  console.log("comment:", comment);
+              <table>
+                <thead>
+                  <th>*</th>
+                  <th style={{ textAlign: "center" }}>Yorumlarınız</th>
+                </thead>
+                {comments.map((comment: UserComment, index: number) => {
                   return (
-                    <div key={comment.id}>
-                      <p>{comment.content}</p>
-                    </div>
+                    <tbody>
+                      <tr>
+                        <td style={{ padding: ".5rem" }}>{index + 1}</td>
+                        <td>{comment.content}</td>
+                      </tr>
+                    </tbody>
                   );
-                });
-              })}
+                })}
+              </table>
             </Tabs.Content>
             {/* <Tabs.Content value="tab2">
             {upvotes.map((item: any) => {

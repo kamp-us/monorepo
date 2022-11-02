@@ -1,8 +1,8 @@
 import { ActionFunction, json, redirect } from "@remix-run/node";
+import { useActionData, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import { createPost } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
-import { useActionData, useTransition } from "@remix-run/react";
 import {
   Box,
   Button,

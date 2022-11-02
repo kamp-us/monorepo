@@ -121,11 +121,11 @@ export const isOwner = <T extends Entity>(
 };
 
 export const getUserComments = (userId: string) => {
-  return prisma.user.findMany({
+  return prisma.user.findUnique({
     where: {
       id: userId,
     },
-    include: {
+    select: {
       comments: true,
       upvotes: true,
     },
