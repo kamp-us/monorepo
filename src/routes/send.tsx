@@ -1,8 +1,8 @@
 import { ActionFunction, json, redirect } from "@remix-run/node";
+import { useActionData, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import { createPost } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
-import { useActionData, useTransition } from "@remix-run/react";
 import {
   Box,
   Button,
@@ -21,7 +21,7 @@ export const action: ActionFunction = async ({ request }) => {
   const url = formData.get("url");
 
   if (!validateURL(url)) {
-    return json("Lütfen geçerli bir URL adresi girin.", { status: 400 })
+    return json("Lütfen geçerli bir URL adresi girin.", { status: 400 });
   }
 
   if (!url || !title) {
@@ -33,7 +33,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const post = await createPost(title.toString(), normalized, userID);
-    return redirect(`/posts/${post.id}`);
+    return redirect(`/posts/${post.slug}-${post.id}`);
   } catch {
     return json(null, { status: 500 });
   }
