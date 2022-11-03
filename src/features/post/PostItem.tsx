@@ -66,7 +66,7 @@ export const PostItem: FC<PostItemProps> = ({ post }) => {
           }}
         >
           <Box>@{post.owner.username}</Box> |
-          <SmallLink to={`/posts/${post.id}`}>
+          <SmallLink to={`/posts/${post.slug}-${post.id}`}>
             {post.comments.length} yorum
           </SmallLink>
           {canUserEdit(user, post) && (

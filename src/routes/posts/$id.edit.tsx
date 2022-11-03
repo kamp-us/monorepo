@@ -29,7 +29,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const post = await getPostById(params.id);
 
   if (!canUserEdit(user, post)) {
-    return redirect(`/posts/${params.id}`);
+    return redirect(`/posts/${params.slug}-${params.id}`);
   }
 
   return json<LoaderData>({ post });
