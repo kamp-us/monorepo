@@ -1,9 +1,14 @@
 import { PlusIcon } from "@radix-ui/react-icons";
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
+import {
+  useActionData,
+  useLoaderData,
+  useLocation,
+  useTransition,
+} from "@remix-run/react";
 import { useEffect, useState } from "react";
-import { MetaFunction } from "remix/react";
 import invariant from "tiny-invariant";
 import { useUserContext } from "~/features/auth/user-context";
 import { CommentItem } from "~/features/comment/Comment";
@@ -47,7 +52,10 @@ const toVisualTree = (comments: Comment[]) => {
 };
 
 export const loader: LoaderFunction = async ({ params }) => {
-  if (!params.slug && !params.id) return null;
+  if (typeof params.slug !== "string" || typeof params.id !== "string") {
+    return json({ data: null }, { status: 404 });
+  }
+
   const post = await getPostBySlugAndId(params.slug, params.id);
   return json({ post });
 };
@@ -97,6 +105,8 @@ export const action: ActionFunction = async ({ request, params }) => {
 const SinglePost = () => {
   const user = useUserContext();
   const { post } = useLoaderData<LoaderData>();
+  const location = useLocation();
+  const expanded = !!location.hash;
 
   const [comment, setComment] = useState("");
   const transition = useTransition();
@@ -161,6 +171,7 @@ const SinglePost = () => {
           {postComments.map(({ comment, comments }) => {
             return (
               <CommentItem
+                expanded={expanded}
                 key={comment.id}
                 comment={comment}
                 comments={comments}

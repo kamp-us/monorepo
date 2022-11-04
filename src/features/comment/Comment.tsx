@@ -21,6 +21,7 @@ type CommentProps = {
   username: string;
   comments: Comment[];
   allComments: Record<string, { comment: Comment; comments: Comment[] }>;
+  expanded: boolean;
 };
 
 export const CommentItem: FC<CommentProps> = ({
@@ -29,9 +30,10 @@ export const CommentItem: FC<CommentProps> = ({
   username,
   comments,
   allComments,
+  expanded,
 }) => {
   const [open, setOpen] = useState(false);
-  const [showComments, setShowComments] = useState(false);
+  const [showComments, setShowComments] = useState(expanded);
   const user = useUserContext();
   const transition = useTransition();
   const isCommenting =
@@ -98,14 +100,16 @@ export const CommentItem: FC<CommentProps> = ({
         {showComments &&
           comments.map((c) => {
             return (
-              <CommentItem
-                key={c.id}
-                comment={c}
-                username={username}
-                comments={allComments[c.id]?.comments ?? []}
-                postID={postID}
-                allComments={allComments}
-              />
+              <div key={c.id} id={`c_${c.id}`} tabIndex={0}>
+                <CommentItem
+                  expanded={expanded}
+                  comment={c}
+                  username={username}
+                  comments={allComments[c.id]?.comments ?? []}
+                  postID={postID}
+                  allComments={allComments}
+                />
+              </div>
             );
           })}
       </CommentListContainer>
