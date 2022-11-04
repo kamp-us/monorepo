@@ -33,6 +33,7 @@
     "prettier:write": "prettier . --write",
     "prisma:seed": "ts-node ./prisma/seed.ts",
     "prisma:migrate": "prisma migrate dev",
+    "prisma:generate": "prisma generate",
     "migrate:start:dev": "npm run prisma:migrate && npm run prisma:seed && remix dev",
     "prepare": "husky install"
   },
