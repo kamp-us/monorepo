@@ -3,6 +3,7 @@ import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
 
 import type { User } from "~/models/user.server";
+import { Post } from "~/models/post.server";
 
 const DEFAULT_REDIRECT = "/";
 
@@ -85,3 +86,17 @@ export function validateUsername(username: unknown): username is string {
 export function validatePassword(password: unknown): password is string {
   return typeof password === "string" && password.length > 8;
 }
+
+export function getExternalPostURL(post: Post) {
+  const location = global.location;
+  const postUrl = `${location.origin}/posts/${post.slug}-${post.id}`;
+  return postUrl;
+}
+
+export declare type $ElementProps<T> = T extends React.ComponentType<
+  infer Props
+>
+  ? Props extends object
+    ? Props
+    : never
+  : never;
