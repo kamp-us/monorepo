@@ -64,6 +64,8 @@ export const meta: MetaFunction = ({
   }
   return {
     title: data.post.title,
+    author: data.post.owner.username,
+    description: `${data.post.comments.length} yorum`,
   };
 };
 
