@@ -4,22 +4,23 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    entrypoint: ["npm","run", "migrate:start:dev"]
+    entrypoint: ["npm", "run", "docker"]
     ports:
       - "3000:3000"
     environment:
-       - DATABASE_URL=postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public&connect_timeout=300
-       - SESSION_SECRET=sessionsecret
-       - NODE_ENV=development
+      - DATABASE_URL=postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public&connect_timeout=300
+      - SESSION_SECRET=sessionsecret
+      - NODE_ENV=development
     volumes:
       - ./src:/app/src
+      - ./prisma:/app/prisma
       - ./public:/app/public
       - ./remix.config.js:/app/remix.config.js
       - ./tsconfig.json:/app/tsconfig.json
     networks:
       - pano
     depends_on:
-    - postgres
+      - postgres
   postgres:
     # match the version to the RDS
     image: postgres:14.2-alpine
@@ -39,6 +40,13 @@ services:
       - pano
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  ssl-proxy:
+    image: esplo/docker-local-ssl-termination-proxy
+    environment:
+      - PORT=3000
+    ports:
+      - "443:443"
 
 volumes:
   pgdata:

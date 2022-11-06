@@ -1,4 +1,4 @@
-FROM node:16 AS builder
+FROM node:16
 
 # Create app directory
 WORKDIR /app
@@ -10,10 +10,10 @@ RUN npm install
 
 COPY prisma ./prisma/
 
-RUN npm run prisma:generate
+RUN npx prisma generate
 
 ADD . .
 
 EXPOSE 3000
 
-ENTRYPOINT ["npm", "run", "migrate:start:dev" ]
+ENTRYPOINT ["npm", "run", "docker"]
