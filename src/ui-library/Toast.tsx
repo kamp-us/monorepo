@@ -111,12 +111,9 @@ export const Toast: FC<ToastProps> = ({
   description,
 }) => {
   return (
-    <ToastProvider swipeDirection="right">
-      <ToastBase open={open} onOpenChange={setOpen} duration={duration}>
-        <ToastTitle>{title}</ToastTitle>
-        {description && <ToastDescription>{description}</ToastDescription>}
-      </ToastBase>
-      <ToastViewport />
-    </ToastProvider>
+    <ToastBase open={open} onOpenChange={setOpen} duration={duration}>
+      <ToastTitle>{title}</ToastTitle>
+      {description && <ToastDescription>{description}</ToastDescription>}
+    </ToastBase>
   );
 };
