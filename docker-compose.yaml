@@ -41,6 +41,13 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  ssl-proxy:
+    image: esplo/docker-local-ssl-termination-proxy
+    environment:
+      - PORT=3000
+    ports:
+      - "443:443"
+
 volumes:
   pgdata:
 networks:
