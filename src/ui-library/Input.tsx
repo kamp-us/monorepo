@@ -26,7 +26,8 @@ export const Input = styled("input", {
 
   "&:-webkit-autofill": {
     boxShadow:
-      "inset 0 0 0 1px $colors$amber6, inset 0 0 0 100px $colors$amber3",
+      "inset 0 0 0 1px $colors$amber6, inset 0 0 0 100px $colors$amber3 !important",
+    WebkitTextFillColor: "$colors$hiContrast",
   },
 
   "&:-webkit-autofill::first-line": {
