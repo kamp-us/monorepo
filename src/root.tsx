@@ -15,6 +15,7 @@ import {
 } from "@remix-run/react";
 import { useEffect } from "react";
 import { ThemeProvider, Topnav, useClientStyle, useTheme } from "~/ui-library";
+import { ToastProvider, ToastViewport } from "~/ui-library/Toast";
 import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
 import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
@@ -104,12 +105,15 @@ export default function App() {
   const { user } = useLoaderData<LoaderData>();
   return (
     <ThemeProvider>
-      <Document>
-        <UserContextManager user={user}>
-          <Topnav />
-          <Outlet />
-        </UserContextManager>
-      </Document>
+      <ToastProvider swipeDirection="right">
+        <Document>
+          <UserContextManager user={user}>
+            <Topnav />
+            <ToastViewport />
+            <Outlet />
+          </UserContextManager>
+        </Document>
+      </ToastProvider>
     </ThemeProvider>
   );
 }
