@@ -2,9 +2,9 @@ version: "3.3"
 services:
   app:
     build:
-      context: .
-      dockerfile: Dockerfile.dev
-    entrypoint: ["npm", "run", "docker"]
+      context: ../../
+      dockerfile: ./apps/pano/Dockerfile.dev
+    entrypoint: ["turbo", "run", "docker", "--scope=@kampus-apps/pano"]
     ports:
       - "3000:3000"
     environment:
@@ -40,13 +40,6 @@ services:
       - pano
     volumes:
       - pgdata:/var/lib/postgresql/data
-
-  ssl-proxy:
-    image: esplo/docker-local-ssl-termination-proxy
-    environment:
-      - PORT=3000
-    ports:
-      - "443:443"
 
 volumes:
   pgdata:

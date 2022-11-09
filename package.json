@@ -1,0 +1,26 @@
+{
+  "name": "@kampus/monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamp-us/pano.git"
+  },
+  "author": "kamp.us <infra@kamp.us> (https://kamp.us/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kamp-us/pano/issues"
+  },
+  "homepage": "https://github.com/kamp-us/pano#readme",
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "turbo": "^1.6.3"
+  }
+}

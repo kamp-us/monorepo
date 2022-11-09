@@ -1,5 +1,5 @@
 {
-  "name": "pano",
+  "name": "@kampus-apps/pano",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -36,7 +36,6 @@
     "prisma:migrate": "prisma migrate deploy",
     "prisma:generate": "prisma generate",
     "migrate:start:dev": "npm run prisma:migrate && npm run prisma:seed && remix dev",
-    "prepare": "husky install",
     "dev:remix": "remix dev",
     "docker:prisma": "run-s prisma:migrate prisma:seed",
     "docker": "run-p docker:prisma dev:remix"
@@ -75,8 +74,6 @@
     "@types/react-dom": "^17.0.14",
     "cross-env": "^7.0.3",
     "eslint-config-prettier": "^8.5.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.6.1",
     "prism": "^4.1.2",
