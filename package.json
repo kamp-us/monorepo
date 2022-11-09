@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kamp-us/pano.git"
+    "url": "git+https://github.com/kamp-us/monorepo.git"
   },
   "author": "kamp.us <infra@kamp.us> (https://kamp.us/)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kamp-us/pano/issues"
+    "url": "https://github.com/kamp-us/monorepo/issues"
   },
-  "homepage": "https://github.com/kamp-us/pano#readme",
+  "homepage": "https://github.com/kamp-us/monorepo#readme",
   "devDependencies": {
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
