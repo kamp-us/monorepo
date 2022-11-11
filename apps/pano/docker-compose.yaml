@@ -12,11 +12,11 @@ services:
       - SESSION_SECRET=sessionsecret
       - NODE_ENV=development
     volumes:
-      - ./src:/app/src
-      - ./prisma:/app/prisma
-      - ./public:/app/public
-      - ./remix.config.js:/app/remix.config.js
-      - ./tsconfig.json:/app/tsconfig.json
+      - ./src:/app/apps/pano/src
+      - ./prisma:/app/apps/pano/prisma
+      - ./public:/app/apps/pano/public
+      - ./remix.config.js:/app/apps/pano/remix.config.js
+      - ./tsconfig.json:/app/apps/pano/tsconfig.json
     networks:
       - pano
     depends_on:
