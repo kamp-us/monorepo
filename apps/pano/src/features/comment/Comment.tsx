@@ -12,6 +12,7 @@ import {
   Text,
   Textarea,
   Timeago,
+  ValidationMessage,
 } from "~/ui-library";
 import { useUserContext } from "../auth/user-context";
 
@@ -22,6 +23,10 @@ type CommentProps = {
   comments: Comment[];
   allComments: Record<string, { comment: Comment; comments: Comment[] }>;
   expanded: boolean;
+  error: {
+    message: string;
+    id: string;
+  } | null;
 };
 
 export const CommentItem: FC<CommentProps> = ({
@@ -31,6 +36,7 @@ export const CommentItem: FC<CommentProps> = ({
   comments,
   allComments,
   expanded,
+  error,
 }) => {
   const [open, setOpen] = useState(false);
   const [showComments, setShowComments] = useState(expanded);
@@ -65,7 +71,13 @@ export const CommentItem: FC<CommentProps> = ({
         </Box>
         <GappedBox>
           {user && (
-            <SmallLink to="#" onClick={() => setOpen(!open)}>
+            <SmallLink
+              to="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setOpen(!open);
+              }}
+            >
               Cevapla
             </SmallLink>
           )}
@@ -88,11 +100,19 @@ export const CommentItem: FC<CommentProps> = ({
         <GappedBox css={{ flexDirection: "column" }}>
           <Form ref={formRef} method="post" css={{ width: "100%" }}>
             <Textarea css={{ width: "100%" }} rows={6} name="content" />
-            <Box>
+            <GappedBox
+              css={{ padding: "$1 0 $2", gap: 10, alignItems: "center" }}
+            >
               <Button value={comment.id} name="commentID" type="submit">
                 {isCommenting ? "Kaydediliyor..." : "Cevapla"}
               </Button>
-            </Box>
+              {error && error.id === comment.id && (
+                <ValidationMessage
+                  error={error.message}
+                  isSubmitting={transition.state === "submitting"}
+                />
+              )}
+            </GappedBox>
           </Form>
         </GappedBox>
       )}
@@ -108,6 +128,7 @@ export const CommentItem: FC<CommentProps> = ({
                   comments={allComments[c.id]?.comments ?? []}
                   postID={postID}
                   allComments={allComments}
+                  error={error}
                 />
               </div>
             );
