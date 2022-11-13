@@ -68,7 +68,7 @@ export const Send = () => {
             id="title"
             name="title"
             size="2"
-            defaultValue={(meta && meta.title) ?? ""}
+            defaultValue={meta ? meta.title : ""}
           />
           <Box>
             <Button size="2" type="submit" variant="green">
