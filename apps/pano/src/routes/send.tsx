@@ -1,5 +1,5 @@
 import { ActionFunction, json, redirect } from "@remix-run/node";
-import { useActionData, useTransition } from "@remix-run/react";
+import { useActionData, useFetcher, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import { createPost } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
@@ -7,7 +7,6 @@ import {
   Box,
   Button,
   CenteredContainer,
-  Form,
   GappedBox,
   Input,
   Label,
@@ -42,14 +41,35 @@ export const action: ActionFunction = async ({ request }) => {
 export const Send = () => {
   const transition = useTransition();
   const error = useActionData();
+  const fetcher = useFetcher();
+  const meta = fetcher.data?.meta;
+
+  const onCopyPasta = (url: string) => {
+    const formData = new FormData();
+    formData.set("url", url);
+    fetcher.submit(formData, { method: "post", action: "/api/parse-meta" });
+  };
+
   return (
     <CenteredContainer>
-      <Form method="post">
+      <fetcher.Form method="post">
         <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
           <Label htmlFor="title">Başlık</Label>
-          <Input id="title" name="title" size="2" />
+          <Input
+            id="title"
+            name="title"
+            size="2"
+            defaultValue={(meta && meta.title) ?? ""}
+          />
           <Label htmlFor="url">URL</Label>
-          <Input id="url" name="url" size="2" />
+          <Input
+            id="url"
+            name="url"
+            size="2"
+            onPaste={(e) => {
+              onCopyPasta(e.clipboardData.getData("text"));
+            }}
+          />
           <Box>
             <Button size="2" type="submit" variant="green">
               {transition.submission ? "Gönderiliyor..." : "Gönder"}
@@ -60,7 +80,7 @@ export const Send = () => {
             isSubmitting={transition.state === "submitting"}
           />
         </GappedBox>
-      </Form>
+      </fetcher.Form>
     </CenteredContainer>
   );
 };
