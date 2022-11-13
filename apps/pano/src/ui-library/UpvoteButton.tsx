@@ -65,7 +65,6 @@ export const CommentUpvoteButton: FC<UpvoteProps> = ({
       disabled={disabled}
     >
       <GappedBox css={{ alignItems: "center", gap: 1 }}>
-        {/*<Box css={{ paddingLeft: 3 }}>{upvoteCount} Beğeni</Box>*/}
         <Triangle
           css={{
             width: 18,
