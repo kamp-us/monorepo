@@ -11,5 +11,10 @@ export const Text = styled("p", {
       4: { fontSize: "$4" },
       5: { fontSize: "$5" },
     },
+    lineHeight: {
+      1: { lineHeight: "16px" },
+      2: { lineHeight: "20px" },
+      3: { lineHeight: "23px" },
+    },
   },
 });

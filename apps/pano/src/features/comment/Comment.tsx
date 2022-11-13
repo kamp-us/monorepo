@@ -1,4 +1,4 @@
-import { useTransition } from "@remix-run/react";
+import { useFetcher, useTransition } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
 import type { Comment } from "~/models/comment.server";
@@ -6,6 +6,7 @@ import { styled } from "~/stitches.config";
 import {
   Box,
   Button,
+  CommentUpvoteButton,
   Form,
   GappedBox,
   SmallLink,
@@ -29,6 +30,13 @@ type CommentProps = {
   } | null;
 };
 
+const getVariables = (
+  type: "create" | "delete",
+  input: { commentID: string; userID: string }
+) => {
+  return { type, input };
+};
+
 export const CommentItem: FC<CommentProps> = ({
   comment,
   postID,
@@ -46,6 +54,18 @@ export const CommentItem: FC<CommentProps> = ({
     transition.state === "submitting" &&
     transition.submission?.formData.get("commentID") === comment.id;
 
+  const fetcher = useFetcher();
+
+  const isLoading = !!fetcher.submission;
+  const isUpvoted =
+    user && comment ? comment.upvotes.some((u) => u.userID === user.id) : false;
+
+  const variables = user
+    ? isUpvoted
+      ? getVariables("delete", { commentID: comment.id, userID: user.id })
+      : getVariables("create", { commentID: comment.id, userID: user.id })
+    : null;
+
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -56,20 +76,33 @@ export const CommentItem: FC<CommentProps> = ({
   }, [isCommenting]);
 
   return (
-    <GappedBox css={{ flexDirection: "column", gap: 15 }}>
+    <GappedBox css={{ flexDirection: "column", gap: 20 }}>
       <GappedBox css={{ flexDirection: "column" }}>
         <GappedBox css={{ alignItems: "center" }}>
           <Text size="1">@{comment.owner.username}</Text>
           <Text size="1">
             <Timeago date={new Date(comment.createdAt)} />
           </Text>
+          <fetcher.Form method="post" action="/commentUpvote">
+            <CommentUpvoteButton
+              isUpvoted={isUpvoted}
+              upvoteCount={comment.upvotes.length}
+              isVoting={isLoading}
+              disabled={!user}
+            />
+            <input
+              type="hidden"
+              name="json"
+              value={JSON.stringify(variables)}
+            />
+          </fetcher.Form>
         </GappedBox>
         <Box>
-          <Text size="3" css={{ color: "$gray12" }}>
+          <Text size="3" lineHeight="2" css={{ color: "$gray12" }}>
             {comment.content}
           </Text>
         </Box>
-        <GappedBox>
+        <GappedBox css={{ alignItems: "center" }}>
           {user && (
             <SmallLink
               to="#"
