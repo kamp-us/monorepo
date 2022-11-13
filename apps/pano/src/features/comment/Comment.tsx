@@ -76,7 +76,7 @@ export const CommentItem: FC<CommentProps> = ({
   }, [isCommenting]);
 
   return (
-    <GappedBox css={{ flexDirection: "column" }}>
+    <GappedBox css={{ flexDirection: "column", gap: 20 }}>
       <GappedBox css={{ flexDirection: "column" }}>
         <GappedBox css={{ alignItems: "center" }}>
           <Text size="1">@{comment.owner.username}</Text>
