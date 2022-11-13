@@ -44,7 +44,7 @@ export const Send = () => {
   const fetcher = useFetcher();
   const meta = fetcher.data?.meta;
 
-  const onCopyPasta = (url: string) => {
+  const onPaste = (url: string) => {
     const formData = new FormData();
     formData.set("url", url);
     fetcher.submit(formData, { method: "post", action: "/api/parse-meta" });
@@ -54,21 +54,21 @@ export const Send = () => {
     <CenteredContainer>
       <fetcher.Form method="post">
         <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
-          <Label htmlFor="title">Başlık</Label>
-          <Input
-            id="title"
-            name="title"
-            size="2"
-            defaultValue={(meta && meta.title) ?? ""}
-          />
           <Label htmlFor="url">URL</Label>
           <Input
             id="url"
             name="url"
             size="2"
             onPaste={(e) => {
-              onCopyPasta(e.clipboardData.getData("text"));
+              onPaste(e.clipboardData.getData("text"));
             }}
+          />
+          <Label htmlFor="title">Başlık</Label>
+          <Input
+            id="title"
+            name="title"
+            size="2"
+            defaultValue={(meta && meta.title) ?? ""}
           />
           <Box>
             <Button size="2" type="submit" variant="green">
