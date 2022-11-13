@@ -1,7 +1,10 @@
 import { PlusIcon } from "@radix-ui/react-icons";
+import type {
+  ActionFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
 import { json } from "@remix-run/node";
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import type { MetaFunction } from "@remix-run/node";
 import {
   useActionData,
   useLoaderData,
@@ -13,12 +16,12 @@ import invariant from "tiny-invariant";
 import { useUserContext } from "~/features/auth/user-context";
 import { CommentItem } from "~/features/comment/Comment";
 import { PostItem } from "~/features/post/PostItem";
-import { createComment } from "~/models/comment.server";
 import type { Comment } from "~/models/comment.server";
-import { getPostBySlugAndId } from "~/models/post.server";
+import { createComment } from "~/models/comment.server";
 import type { Post } from "~/models/post.server";
+import { getPostBySlugAndId } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
-import { ValidationMessage } from "~/ui-library";
+import { GappedBox, ValidationMessage } from "~/ui-library";
 import { Form } from "~/ui-library/Form";
 import { Text } from "~/ui-library/Text";
 import { Textarea } from "~/ui-library/Textarea";
@@ -81,26 +84,58 @@ type LoaderData = {
   post: Post;
 };
 
+type ActionData = {
+  error?: {
+    comment: { message: string; id: string } | null;
+    post: string | null;
+  };
+};
+
 export const action: ActionFunction = async ({ request, params }) => {
   const formData = await request.formData();
   const content = formData.get("content");
+  const commentID = formData.get("commentID")?.toString();
 
-  if (!content) {
-    return json("Yorum alanı boş bırakılamaz.", { status: 400 });
-  }
+  const userID = await requireUserId(request);
 
   invariant(params.slug, "postSlug is required");
   invariant(params.id, "postId is required");
 
-  const commentID = formData.get("commentID")?.toString();
-  const userID = await requireUserId(request);
+  if (!content) {
+    if (commentID) {
+      return json<ActionData>(
+        {
+          error: {
+            comment: {
+              message: "Cevap kısmı boş bırakılamaz.",
+              id: commentID,
+            },
+            post: null,
+          },
+        },
+        { status: 400 }
+      );
+    } else {
+      return json<ActionData>(
+        {
+          error: {
+            post: "Yorum boş gönderilemez.",
+            comment: null,
+          },
+        },
+        { status: 400 }
+      );
+    }
+  }
 
   try {
     await createComment(content.toString(), params.id, userID, commentID);
-
     return null;
   } catch {
-    return json(null, { status: 500 });
+    return json<ActionData>(
+      { error: { comment: null, post: null } },
+      { status: 500 }
+    );
   }
 };
 
@@ -112,7 +147,9 @@ const SinglePost = () => {
 
   const [comment, setComment] = useState("");
   const transition = useTransition();
-  const error = useActionData();
+  const actionData = useActionData<ActionData>();
+  const commentError = actionData?.error?.comment;
+  const postError = actionData?.error?.post;
 
   const visualTree = toVisualTree(post.comments);
 
@@ -142,7 +179,7 @@ const SinglePost = () => {
           onChange={(event) => setComment(event.target.value)}
           value={user ? comment : "Yorum yazmak için giriş yapmış olmalısın."}
         />
-        <Box css={{ padding: "$1 0 $2" }}>
+        <GappedBox css={{ padding: "$1 0 $2", alignItems: "center", gap: 10 }}>
           <Button
             disabled={!user}
             size="2"
@@ -156,11 +193,13 @@ const SinglePost = () => {
             </Box>
             Cevap yaz
           </Button>
-        </Box>
-        <ValidationMessage
-          error={error}
-          isSubmitting={transition.state === "submitting"}
-        />
+          {postError && (
+            <ValidationMessage
+              error={postError}
+              isSubmitting={transition.state === "submitting"}
+            />
+          )}
+        </GappedBox>
       </Form>
       {postComments.length > 0 && (
         <>
@@ -180,6 +219,7 @@ const SinglePost = () => {
                 postID={post?.id as string}
                 username={user?.username as string}
                 allComments={visualTree}
+                error={commentError ?? null}
               />
             );
           })}
