@@ -1,20 +1,10 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+  "extends": "@kampus/tsconfig/remix.json",
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2019"],
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "jsx": "react-jsx",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "target": "ES2019",
-    "strict": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]
-    },
-    "noEmit": true,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    }
+  },
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"]
 }
