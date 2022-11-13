@@ -7,11 +7,21 @@ const selectCommentWithOwner = Prisma.validator<Prisma.CommentArgs>()({
   },
 });
 
+const selectCommentWithUpvotes = Prisma.validator<Prisma.CommentArgs>()({
+  include: {
+    upvotes: true,
+  },
+});
+
 export type CommentWithOwner = Prisma.CommentGetPayload<
   typeof selectCommentWithOwner
 >;
 
-export type Comment = CommentWithOwner;
+export type CommentWithUpvotes = Prisma.CommentGetPayload<
+  typeof selectCommentWithUpvotes
+>;
+
+export type Comment = CommentWithOwner & CommentWithUpvotes;
 
 export const createComment = (
   content: string,
@@ -25,6 +35,24 @@ export const createComment = (
       post: { connect: { id: postID } },
       owner: { connect: { id: userID } },
       parent: parentID ? { connect: { id: parentID } } : undefined,
+    },
+  });
+};
+
+export const deleteUpvote = (commentID: string, userID: string) => {
+  return prisma.commentUpvote.deleteMany({
+    where: {
+      commentID,
+      userID,
+    },
+  });
+};
+
+export const createUpvote = (commentID: string, userID: string) => {
+  return prisma.commentUpvote.create({
+    data: {
+      commentID,
+      userID,
     },
   });
 };

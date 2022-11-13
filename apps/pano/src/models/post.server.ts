@@ -8,6 +8,7 @@ const selectPostWithComment = Prisma.validator<Prisma.PostArgs>()({
     comments: {
       include: {
         owner: true,
+        upvotes: true,
       },
     },
   },
@@ -75,6 +76,7 @@ export const getPostBySlugAndId = (slug: string, id: string) => {
       comments: {
         include: {
           owner: true,
+          upvotes: true,
         },
       },
       owner: true,
