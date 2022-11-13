@@ -1,5 +1,5 @@
-import { json } from "@remix-run/node";
 import { useMatches } from "@remix-run/react";
+import { parser } from "html-metadata-parser";
 import { useMemo } from "react";
 
 import { Post } from "~/models/post.server";
