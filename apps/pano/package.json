@@ -62,6 +62,7 @@
     "/build"
   ],
   "devDependencies": {
+    "@kampus/eslint-config": "*",
     "@remix-run/dev": "1.6.4",
     "@remix-run/eslint-config": "1.6.4",
     "@testing-library/jest-dom": "^5.16.3",

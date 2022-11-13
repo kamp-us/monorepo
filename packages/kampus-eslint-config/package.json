@@ -1,0 +1,22 @@
+{
+  "name": "@kampus/eslint-config",
+  "version": "0.0.0",
+  "description": "Shared eslint config package for kamp.us web projects",
+  "main": "index.cjs",
+  "author": "kamp.us <infra@kamp.us> (https://kamp.us)",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@remix-run/eslint-config": "^1.7.5",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-config-turbo": "^0.0.4"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.4.10"
+  }
+}
