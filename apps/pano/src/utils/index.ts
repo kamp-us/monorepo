@@ -100,7 +100,3 @@ export declare type $ElementProps<T> = T extends React.ComponentType<
     ? Props
     : never
   : never;
-
-export const parseMetafromUrl = async (url: string) => {
-  return await parser(url);
-};

@@ -1,6 +1,6 @@
 import { ActionFunction, json } from "@remix-run/node";
+import { parser } from "html-metadata-parser";
 import invariant from "tiny-invariant";
-import { parseMetafromUrl } from "~/utils";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -9,7 +9,7 @@ export const action: ActionFunction = async ({ request }) => {
   invariant(typeof url === "string", "URL is required");
 
   try {
-    const metaTags = await parseMetafromUrl(url);
+    const metaTags = await parser(url);
     return json(metaTags, {
       status: 200,
     });
