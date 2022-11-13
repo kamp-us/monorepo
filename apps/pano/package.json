@@ -64,7 +64,6 @@
   "devDependencies": {
     "@kampus/eslint-config": "*",
     "@remix-run/dev": "1.6.4",
-    "@remix-run/eslint-config": "1.6.4",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -77,10 +76,8 @@
     "@types/react-copy-to-clipboard": "^5.0.4",
     "@types/react-dom": "^17.0.14",
     "cross-env": "^7.0.3",
-    "eslint-config-prettier": "^8.5.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.6.1",
-    "prism": "^4.1.2",
     "prisma": "^4.2.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.6.3"
