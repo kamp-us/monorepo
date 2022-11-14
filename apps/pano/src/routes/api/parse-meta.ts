@@ -1,4 +1,5 @@
-import { ActionFunction, json } from "@remix-run/node";
+import type { ActionFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { parser } from "html-metadata-parser";
 import invariant from "tiny-invariant";
 

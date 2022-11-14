@@ -23,6 +23,9 @@
     },
     "clean": {
       "cache": false
+    },
+    "@kampus-apps/pano#*": {
+      "env": ["NODE_ENV", "DATABASE_URL", "SESSION_SECRET"]
     }
   }
 }

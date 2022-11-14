@@ -1,7 +1,9 @@
-import { json, LoaderFunction } from "@remix-run/node";
+import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { PostList } from "~/features/post/PostList";
-import { getAllPosts, Post } from "~/models/post.server";
+import type { Post } from "~/models/post.server";
+import { getAllPosts } from "~/models/post.server";
 import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 
 type LoaderData = {

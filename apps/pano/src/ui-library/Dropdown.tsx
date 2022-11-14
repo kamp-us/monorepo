@@ -1,7 +1,7 @@
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 import { keyframes, styled } from "~/stitches.config";
-import { $ElementProps } from "~/utils";
+import type { $ElementProps } from "~/utils";
 
 const StyledContent = styled(DropdownMenuPrimitive.Content, {
   minWidth: 180,

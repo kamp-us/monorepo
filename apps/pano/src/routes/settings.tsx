@@ -1,6 +1,7 @@
-import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
-import { FC } from "react";
+import type { FC } from "react";
 import { updatePassword } from "~/models/user.server";
 import { requireUser } from "~/session.server";
 import {

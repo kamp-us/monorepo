@@ -1,7 +1,7 @@
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "@remix-run/react";
 import type { FC } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { canUserEdit } from "~/features/auth/can-user-edit";
 import { useUserContext } from "~/features/auth/user-context";

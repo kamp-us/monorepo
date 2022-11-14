@@ -1,7 +1,8 @@
-import { ActionFunction, json } from "@remix-run/node";
+import type { ActionFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { createUser, getUserByEmail } from "~/models/user.server";
 import {
-  safeRedirect,
+  // safeRedirect,
   validateEmail,
   validatePassword,
   validateUsername,
@@ -18,7 +19,7 @@ export interface ActionData {
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
+  // const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
   const username = formData.get("username");
   const password = formData.get("password");
   const email = formData.get("email");
