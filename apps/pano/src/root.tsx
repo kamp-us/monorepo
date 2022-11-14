@@ -14,11 +14,17 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { useEffect } from "react";
-import { ThemeProvider, Topnav, useClientStyle, useTheme } from "~/ui-library";
-import { ToastProvider, ToastViewport } from "~/ui-library/Toast";
+import {
+  ThemeProvider,
+  ToastProvider,
+  ToastViewport,
+  useClientStyle,
+  useTheme,
+} from "~/ui-library";
 import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
 import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
+import { Topnav } from "./features/topnav/Topnav";
 import { getUser } from "./session.server";
 import { darkTheme } from "./stitches.config";
 
@@ -95,6 +101,7 @@ const Document = ({ children }: DocumentProps) => {
         {children}
         <ScrollRestoration />
         <Scripts />
+        {/* eslint-disable-next-line turbo/no-undeclared-env-vars */}
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>

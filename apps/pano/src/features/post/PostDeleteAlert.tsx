@@ -7,9 +7,9 @@ import {
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogTitle,
-} from "~/ui-library/AlertDialog";
-import { GappedBox } from "~/ui-library/GappedBox";
-import { Button } from "~/ui-library/layout-components/Button";
+  Button,
+  GappedBox,
+} from "~/ui-library";
 
 type AlertDialogProps = {
   open: boolean;

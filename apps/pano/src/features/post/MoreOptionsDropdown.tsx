@@ -7,23 +7,21 @@ import { canUserEdit } from "~/features/auth/can-user-edit";
 import { useUserContext } from "~/features/auth/user-context";
 import type { Post } from "~/models/post.server";
 import { styled } from "~/stitches.config";
-import { GappedBox } from "~/ui-library/GappedBox";
-import PostDeleteAlert from "~/ui-library/PostDeleteAlert";
-import {
-  FacebookShare,
-  RedditShare,
-  TwitterShare,
-} from "~/ui-library/SocialMediaButtons";
-import { Toast } from "~/ui-library/Toast";
-import { getExternalPostURL } from "~/utils";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./Dropdown";
-import { IconButton } from "./IconButton";
+  FacebookShare,
+  GappedBox,
+  IconButton,
+  RedditShare,
+  Toast,
+  TwitterShare,
+} from "~/ui-library";
+import { getExternalPostURL } from "~/utils";
+import PostDeleteAlert from "./PostDeleteAlert";
 
 const DotsButton = styled(IconButton, {
   borderRadius: 5,

@@ -4,7 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 import { PostList } from "~/features/post/PostList";
 import type { Post } from "~/models/post.server";
 import { getAllPosts } from "~/models/post.server";
-import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
+import { CenteredContainer } from "~/ui-library";
 
 type LoaderData = {
   data: Post[];

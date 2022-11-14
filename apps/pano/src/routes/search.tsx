@@ -4,8 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 import { PostList } from "~/features/post/PostList";
 import type { Post } from "~/models/post.server";
 import { searchPosts } from "~/models/post.server";
-import { Text } from "~/ui-library";
-import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
+import { CenteredContainer, Text } from "~/ui-library";
 
 type LoaderDataSuccess = {
   query: string;

@@ -1,15 +1,15 @@
 import { PlusIcon } from "@radix-ui/react-icons";
 import type { FC } from "react";
 import { useUserContext } from "~/features/auth/user-context";
+import { UserDropdown } from "~/features/user-dropdown/UserDropdown";
 import {
   Box,
   CenteredContainer,
   GappedBox,
+  IconButton,
   Link,
   ThemeToggle,
 } from "~/ui-library";
-import { IconButton } from "../IconButton";
-import { UserDropdown } from "../UserDropdown";
 import { SearchInput } from "./SearchInput";
 
 export const Topnav: FC = () => {

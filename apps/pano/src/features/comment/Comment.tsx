@@ -6,7 +6,6 @@ import { styled } from "~/stitches.config";
 import {
   Box,
   Button,
-  CommentUpvoteButton,
   Form,
   GappedBox,
   SmallLink,
@@ -16,6 +15,7 @@ import {
   ValidationMessage,
 } from "~/ui-library";
 import { useUserContext } from "../auth/user-context";
+import { CommentUpvoteButton } from "../upvote/UpvoteButton";
 
 type CommentProps = {
   comment: Comment;

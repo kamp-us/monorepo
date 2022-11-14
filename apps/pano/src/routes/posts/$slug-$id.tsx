@@ -21,13 +21,16 @@ import { createComment } from "~/models/comment.server";
 import type { Post } from "~/models/post.server";
 import { getPostBySlugAndId } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
-import { GappedBox, ValidationMessage } from "~/ui-library";
-import { Form } from "~/ui-library/Form";
-import { Text } from "~/ui-library/Text";
-import { Textarea } from "~/ui-library/Textarea";
-import { Box } from "~/ui-library/layout-components/Box";
-import { Button } from "~/ui-library/layout-components/Button";
-import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
+import {
+  Box,
+  Button,
+  CenteredContainer,
+  Form,
+  GappedBox,
+  Text,
+  Textarea,
+  ValidationMessage,
+} from "~/ui-library";
 
 interface VisualTree {
   [key: string]: {
