@@ -5,7 +5,8 @@ import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
 import { canUserEdit } from "~/features/auth/can-user-edit";
-import { editPost, getPostById, Post } from "~/models/post.server";
+import type { Post } from "~/models/post.server";
+import { editPost, getPostById } from "~/models/post.server";
 import { requireUser } from "~/session.server";
 import {
   Box,

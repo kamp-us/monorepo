@@ -1,4 +1,5 @@
-import { ActionFunction, json } from "@remix-run/node";
+import type { ActionFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession } from "~/session.server";
 import { safeRedirect } from "~/utils";
