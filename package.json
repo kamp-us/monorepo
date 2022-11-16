@@ -5,9 +5,7 @@
     "apps/*",
     "packages/*"
   ],
-  "scripts": {
-    "prepare": "husky install"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kamp-us/monorepo.git"
