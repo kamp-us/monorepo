@@ -5,22 +5,18 @@
     "apps/*",
     "packages/*"
   ],
-  "scripts": {
-    "prepare": "husky install"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kamp-us/monorepo.git"
   },
   "author": "kamp.us <infra@kamp.us> (https://kamp.us/)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kamp-us/monorepo/issues"
   },
   "homepage": "https://github.com/kamp-us/monorepo#readme",
   "devDependencies": {
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
     "turbo": "^1.6.3"
   }
 }
