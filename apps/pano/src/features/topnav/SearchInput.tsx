@@ -1,6 +1,6 @@
+import { Button, ControlGroup, Form, Input, Select } from "@kampus/ui";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import type { FC } from "react";
-import { Button, ControlGroup, Form, Input, Select } from "~/ui-library";
 const hasCollections = () => false;
 
 export const SearchInput: FC = () => {

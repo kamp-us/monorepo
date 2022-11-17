@@ -1,3 +1,4 @@
+export * from "./stitches.config";
 export * from "./AlertDialog";
 export * from "./ControlGroup";
 export * from "./Dialog";

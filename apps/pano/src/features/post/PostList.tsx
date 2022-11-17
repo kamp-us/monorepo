@@ -1,6 +1,6 @@
+import { Box } from "@kampus/ui";
 import type { FC } from "react";
 import type { Post } from "~/models/post.server";
-import { Box } from "~/ui-library";
 import { PostItem } from "./PostItem";
 
 type PostListProps = {

@@ -1,5 +1,3 @@
-import type { MetaFunction } from "@remix-run/node";
-import { useFetcher, useSearchParams } from "@remix-run/react";
 import {
   Box,
   Button,
@@ -8,7 +6,9 @@ import {
   Input,
   Label,
   ValidationMessage,
-} from "~/ui-library";
+} from "@kampus/ui";
+import type { MetaFunction } from "@remix-run/node";
+import { useFetcher, useSearchParams } from "@remix-run/react";
 import type { ActionData } from "../api/auth/login";
 
 export const meta: MetaFunction = () => {

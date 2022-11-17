@@ -1,6 +1,3 @@
-import { useSubmit } from "@remix-run/react";
-import type { FC } from "react";
-import { styled } from "~/stitches.config";
 import {
   Button,
   DropdownMenu,
@@ -10,8 +7,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   Link,
+  styled,
   UserAvatar,
-} from "~/ui-library";
+} from "@kampus/ui";
+import { useSubmit } from "@remix-run/react";
+import type { FC } from "react";
 
 const MenuItem = styled(DropdownMenuItem, {
   width: "auto",

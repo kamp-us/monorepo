@@ -1,3 +1,13 @@
+import {
+  Box,
+  Button,
+  CenteredContainer,
+  Form,
+  GappedBox,
+  Text,
+  Textarea,
+  ValidationMessage,
+} from "@kampus/ui";
 import { PlusIcon } from "@radix-ui/react-icons";
 import type {
   ActionFunction,
@@ -21,16 +31,6 @@ import { createComment } from "~/models/comment.server";
 import type { Post } from "~/models/post.server";
 import { getPostBySlugAndId } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
-import {
-  Box,
-  Button,
-  CenteredContainer,
-  Form,
-  GappedBox,
-  Text,
-  Textarea,
-  ValidationMessage,
-} from "~/ui-library";
 
 interface VisualTree {
   [key: string]: {

@@ -1,3 +1,11 @@
+import {
+  darkTheme,
+  ThemeProvider,
+  ToastProvider,
+  ToastViewport,
+  useClientStyle,
+  useTheme,
+} from "@kampus/ui";
 import type {
   LinksFunction,
   LoaderFunction,
@@ -14,19 +22,11 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { useEffect } from "react";
-import {
-  ThemeProvider,
-  ToastProvider,
-  ToastViewport,
-  useClientStyle,
-  useTheme,
-} from "~/ui-library";
 import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
 import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
 import { Topnav } from "./features/topnav/Topnav";
 import { getUser } from "./session.server";
-import { darkTheme } from "./stitches.config";
 
 type LoaderData = {
   user: Awaited<ReturnType<typeof getUser>>;

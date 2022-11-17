@@ -1,7 +1,3 @@
-import { PlusIcon } from "@radix-ui/react-icons";
-import type { FC } from "react";
-import { useUserContext } from "~/features/auth/user-context";
-import { UserDropdown } from "~/features/user-dropdown/UserDropdown";
 import {
   Box,
   CenteredContainer,
@@ -9,7 +5,11 @@ import {
   IconButton,
   Link,
   ThemeToggle,
-} from "~/ui-library";
+} from "@kampus/ui";
+import { PlusIcon } from "@radix-ui/react-icons";
+import type { FC } from "react";
+import { useUserContext } from "~/features/auth/user-context";
+import { UserDropdown } from "~/features/user-dropdown/UserDropdown";
 import { SearchInput } from "./SearchInput";
 
 export const Topnav: FC = () => {

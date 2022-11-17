@@ -1,9 +1,3 @@
-import type { ActionFunction } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
-import { useActionData, useFetcher, useTransition } from "@remix-run/react";
-import normalizeUrl from "normalize-url";
-import { createPost } from "~/models/post.server";
-import { requireUserId } from "~/session.server";
 import {
   Box,
   Button,
@@ -12,7 +6,13 @@ import {
   Input,
   Label,
   ValidationMessage,
-} from "~/ui-library";
+} from "@kampus/ui";
+import type { ActionFunction } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import { useActionData, useFetcher, useTransition } from "@remix-run/react";
+import normalizeUrl from "normalize-url";
+import { createPost } from "~/models/post.server";
+import { requireUserId } from "~/session.server";
 import { validateURL } from "~/utils";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -20,7 +20,7 @@ export const action: ActionFunction = async ({ request }) => {
   const title = formData.get("title");
   const url = formData.get("url");
 
-  if (!validateURL(url)) {
+  if (!validateURL(url?.toString() ?? "")) {
     return json("Lütfen geçerli bir URL adresi girin.", { status: 400 });
   }
 

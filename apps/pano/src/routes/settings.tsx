@@ -1,9 +1,3 @@
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { useActionData } from "@remix-run/react";
-import type { FC } from "react";
-import { updatePassword } from "~/models/user.server";
-import { requireUser } from "~/session.server";
 import {
   Box,
   Button,
@@ -14,7 +8,13 @@ import {
   Label,
   Text,
   ValidationMessage,
-} from "~/ui-library";
+} from "@kampus/ui";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useActionData } from "@remix-run/react";
+import type { FC } from "react";
+import { updatePassword } from "~/models/user.server";
+import { requireUser } from "~/session.server";
 import { useUser } from "~/utils";
 
 export interface ActionData {

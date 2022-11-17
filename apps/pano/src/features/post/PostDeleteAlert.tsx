@@ -1,5 +1,3 @@
-import { useFetcher } from "@remix-run/react";
-import React from "react";
 import {
   AlertDialogAction,
   AlertDialogBase,
@@ -9,7 +7,9 @@ import {
   AlertDialogTitle,
   Button,
   GappedBox,
-} from "~/ui-library";
+} from "@kampus/ui";
+import { useFetcher } from "@remix-run/react";
+import React from "react";
 
 type AlertDialogProps = {
   open: boolean;

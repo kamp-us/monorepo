@@ -5,5 +5,8 @@
   "license": "MIT",
   "dependencies": {
     "ts-jest": "^26.5.0"
+  },
+  "devDependencies": {
+    "typescript": "4.7.4"
   }
 }
