@@ -1,5 +1,6 @@
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import type { FC } from "react";
+import React from "react";
 
 import { IconButton } from "./IconButton";
 import { useTheme } from "./ThemeProvider";

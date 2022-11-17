@@ -1,11 +1,10 @@
+import { CenteredContainer, Text } from "@kampus/ui";
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { PostList } from "~/features/post/PostList";
 import type { Post } from "~/models/post.server";
 import { searchPosts } from "~/models/post.server";
-import { Text } from "~/ui-library";
-import { CenteredContainer } from "~/ui-library/layout-components/CenteredContainer";
 
 type LoaderDataSuccess = {
   query: string;

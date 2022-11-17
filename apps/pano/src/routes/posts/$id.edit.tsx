@@ -1,3 +1,13 @@
+import {
+  Box,
+  Button,
+  CenteredContainer,
+  Form,
+  GappedBox,
+  Input,
+  Label,
+  ValidationMessage,
+} from "@kampus/ui";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
@@ -8,16 +18,6 @@ import { canUserEdit } from "~/features/auth/can-user-edit";
 import type { Post } from "~/models/post.server";
 import { editPost, getPostById } from "~/models/post.server";
 import { requireUser } from "~/session.server";
-import {
-  Box,
-  Button,
-  CenteredContainer,
-  Form,
-  GappedBox,
-  Input,
-  Label,
-  ValidationMessage,
-} from "~/ui-library";
 
 type LoaderData = {
   post: Post;

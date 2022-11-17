@@ -1,21 +1,21 @@
-import { useFetcher, useTransition } from "@remix-run/react";
-import type { FC } from "react";
-import { useEffect, useRef, useState } from "react";
-import type { Comment } from "~/models/comment.server";
-import { styled } from "~/stitches.config";
 import {
   Box,
   Button,
-  CommentUpvoteButton,
   Form,
   GappedBox,
   SmallLink,
+  styled,
   Text,
   Textarea,
   Timeago,
   ValidationMessage,
-} from "~/ui-library";
+} from "@kampus/ui";
+import { useFetcher, useTransition } from "@remix-run/react";
+import type { FC } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { Comment } from "~/models/comment.server";
 import { useUserContext } from "../auth/user-context";
+import { CommentUpvoteButton } from "../upvote/UpvoteButton";
 
 type CommentProps = {
   comment: Comment;

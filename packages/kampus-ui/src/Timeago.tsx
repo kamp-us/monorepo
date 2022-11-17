@@ -1,3 +1,6 @@
+import type { FC } from "react";
+import { useEffect, useState } from "react";
+
 const formatter = new Intl.RelativeTimeFormat("tr", {
   // numeric: "auto",
 });
@@ -27,3 +30,17 @@ export function formatTimeAgo(date: Date) {
     duration /= division.amount;
   }
 }
+
+export const Timeago: FC<{ date: Date }> = ({ date }) => {
+  const [timeAgo, setTimeAgo] = useState(formatTimeAgo(date));
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeAgo(formatTimeAgo(date));
+    }, 10000);
+
+    return () => clearInterval(timer);
+  }, [date]);
+
+  return <>{timeAgo}</>;
+};

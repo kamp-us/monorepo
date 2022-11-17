@@ -1,7 +1,6 @@
+import { Box, GappedBox, OldButton, styled, Text } from "@kampus/ui";
 import { TriangleUpIcon } from "@radix-ui/react-icons";
 import type { FC } from "react";
-import { styled } from "~/stitches.config";
-import { Box, GappedBox, OldButton, Text } from "~/ui-library";
 
 type UpvoteProps = {
   isUpvoted: boolean;

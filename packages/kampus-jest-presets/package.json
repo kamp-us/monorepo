@@ -1,10 +1,10 @@
 {
-  "name": "@kampus/tsconfig",
+  "name": "@kampus/jest-presets",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
-  "publishConfig": {
-    "access": "public"
+  "dependencies": {
+    "ts-jest": "^26.5.0"
   },
   "devDependencies": {
     "typescript": "4.7.4"

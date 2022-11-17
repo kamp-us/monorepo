@@ -1,3 +1,17 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  FacebookShare,
+  GappedBox,
+  IconButton,
+  RedditShare,
+  styled,
+  Toast,
+  TwitterShare,
+} from "@kampus/ui";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "@remix-run/react";
 import type { FC } from "react";
@@ -6,24 +20,8 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { canUserEdit } from "~/features/auth/can-user-edit";
 import { useUserContext } from "~/features/auth/user-context";
 import type { Post } from "~/models/post.server";
-import { styled } from "~/stitches.config";
-import { GappedBox } from "~/ui-library/GappedBox";
-import PostDeleteAlert from "~/ui-library/PostDeleteAlert";
-import {
-  FacebookShare,
-  RedditShare,
-  TwitterShare,
-} from "~/ui-library/SocialMediaButtons";
-import { Toast } from "~/ui-library/Toast";
 import { getExternalPostURL } from "~/utils";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "./Dropdown";
-import { IconButton } from "./IconButton";
+import PostDeleteAlert from "./PostDeleteAlert";
 
 const DotsButton = styled(IconButton, {
   borderRadius: 5,
