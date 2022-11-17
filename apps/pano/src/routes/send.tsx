@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   CenteredContainer,
+  Form,
   GappedBox,
   Input,
   Label,
@@ -53,7 +54,7 @@ export const Send = () => {
 
   return (
     <CenteredContainer>
-      <fetcher.Form method="post">
+      <Form method="post">
         <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
           <Label htmlFor="url">URL</Label>
           <Input
@@ -81,7 +82,7 @@ export const Send = () => {
             isSubmitting={transition.state === "submitting"}
           />
         </GappedBox>
-      </fetcher.Form>
+      </Form>
     </CenteredContainer>
   );
 };
