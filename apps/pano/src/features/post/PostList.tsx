@@ -1,4 +1,4 @@
-import { Box } from "@kampus/ui";
+import { GappedBox } from "@kampus/ui";
 import type { FC } from "react";
 import type { Post } from "~/models/post.server";
 import { PostItem } from "./PostItem";
@@ -10,10 +10,14 @@ type PostListProps = {
 
 export const PostList: FC<PostListProps> = ({ posts }) => {
   return (
-    <Box as="section" aria-label="Gönderi Listesi">
+    <GappedBox
+      css={{ flexDirection: "column", gap: 10 }}
+      as="section"
+      aria-label="Gönderi Listesi"
+    >
       {posts.map((post) => {
         return <PostItem key={post.id} post={post} />;
       })}
-    </Box>
+    </GappedBox>
   );
 };
