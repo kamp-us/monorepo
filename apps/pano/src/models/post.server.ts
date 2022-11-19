@@ -116,9 +116,18 @@ export const searchPosts = (query: string) => {
   });
 };
 
-export const createPost = (title: string, url: string, userID: string) => {
-  const postURL = new URL(url);
-  const site = getSitename(postURL);
+export const createPost = (
+  title: string,
+  userID: string,
+  url: string | null,
+  content: string | null
+) => {
+  let site;
+  if (url) {
+    const postURL = new URL(url);
+    site = getSitename(postURL);
+  }
+
   const slug = slugify(title);
 
   return prisma.post.create({
@@ -127,6 +136,7 @@ export const createPost = (title: string, url: string, userID: string) => {
       url,
       site,
       slug,
+      content,
       owner: {
         connect: {
           id: userID,
@@ -142,9 +152,17 @@ export const deletePost = (id: string) => {
   });
 };
 
-export const editPost = (id: string, title: string, url: string) => {
-  const postURL = new URL(url);
-  const site = getSitename(postURL);
+export const editPost = (
+  id: string,
+  title: string,
+  url: string | null,
+  content: string | null
+) => {
+  let site;
+  if (url) {
+    const postURL = new URL(url);
+    site = getSitename(postURL);
+  }
   const slug = slugify(title);
 
   return prisma.post.update({
@@ -154,6 +172,7 @@ export const editPost = (id: string, title: string, url: string) => {
       url,
       site,
       slug,
+      content,
     },
   });
 };
