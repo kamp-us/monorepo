@@ -167,8 +167,13 @@ const SinglePost = () => {
   }, [transition.state]);
 
   return (
-    <CenteredContainer css={{ gap: 5 }}>
-      <PostItem post={post} />
+    <CenteredContainer css={{ gap: 5, pt: 20 }}>
+      <PostItem post={post} showContent />
+      <Box css={{ mt: 10 }}>
+        <Text size={5} css={{ fontWeight: 500, color: "$gray11" }}>
+          Yorumlar
+        </Text>
+      </Box>
       <Form method="post" css={{ display: "flex", flexDirection: "column" }}>
         <Textarea
           css={{
@@ -206,12 +211,6 @@ const SinglePost = () => {
       </Form>
       {postComments.length > 0 && (
         <>
-          <Text
-            size={5}
-            css={{ fontWeight: 500, color: "$gray11", lineHeight: 1.5 }}
-          >
-            Yorumlar
-          </Text>
           {postComments.map(({ comment, comments }) => {
             return (
               <CommentItem
