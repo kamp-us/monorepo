@@ -16,7 +16,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Comment } from "~/models/comment.server";
 import { useUserContext } from "../auth/user-context";
 import { CommentUpvoteButton } from "../upvote/UpvoteButton";
-
+import { MoreOptionsDropdown } from "./MoreOptionsDropdown";
 type CommentProps = {
   comment: Comment;
   postID: string;
@@ -76,7 +76,7 @@ export const CommentItem: FC<CommentProps> = ({
   }, [isCommenting]);
 
   return (
-    <GappedBox css={{ flexDirection: "column", gap: 20 }}>
+    <GappedBox id={`c_${comment.id}`} css={{ flexDirection: "column", gap: 20 }}>
       <GappedBox css={{ flexDirection: "column" }}>
         <GappedBox css={{ alignItems: "center" }}>
           <Text size="1">@{comment.owner.username}</Text>
@@ -127,6 +127,7 @@ export const CommentItem: FC<CommentProps> = ({
                 : `Göster (${comments.length ?? 0} yorum)`}
             </SmallLink>
           )}
+          <MoreOptionsDropdown comment={comment} />
         </GappedBox>
       </GappedBox>
       {open && (
@@ -153,7 +154,7 @@ export const CommentItem: FC<CommentProps> = ({
         {showComments &&
           comments.map((c) => {
             return (
-              <div key={c.id} id={`c_${c.id}`} tabIndex={0}>
+              <div key={c.id} tabIndex={0}>
                 <CommentItem
                   expanded={expanded}
                   comment={c}
