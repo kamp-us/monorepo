@@ -79,11 +79,16 @@ export function validateURL(url: string) {
     return true;
   }
 }
+
+export function validate(value: unknown): value is string {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
 export function validateUsername(username: unknown): username is string {
-  return typeof username === "string" && username.length >= 2;
+  return validate(username) && username.length >= 2;
 }
 export function validatePassword(password: unknown): password is string {
-  return typeof password === "string" && password.length > 8;
+  return validate(password) && password.length > 8;
 }
 
 export function getExternalPostURL(post: Post) {

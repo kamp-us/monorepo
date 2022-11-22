@@ -5,6 +5,7 @@ import {
   GappedBox,
   Input,
   Label,
+  Textarea,
   ValidationMessage,
 } from "@kampus/ui";
 import type { ActionFunction } from "@remix-run/node";
@@ -13,37 +14,62 @@ import { useActionData, useFetcher, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import { createPost } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
-import { validateURL } from "~/utils";
+import { validate, validateURL } from "~/utils";
+
+type ActionData = {
+  error: {
+    message: string;
+  };
+};
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const title = formData.get("title");
-  const url = formData.get("url");
-
-  if (!validateURL(url?.toString() ?? "")) {
-    return json("Lütfen geçerli bir URL adresi girin.", { status: 400 });
-  }
-
-  if (!url || !title) {
-    return json("URL veya başlık boş olamaz.", { status: 400 });
-  }
-
-  const normalized = normalizeUrl(url.toString());
+  const title = formData.get("title")?.toString();
+  const content = formData.get("content")?.toString();
+  const formUrl = formData.get("url")?.toString();
   const userID = await requireUserId(request);
 
+  if (!validate(title)) {
+    return json<ActionData>({
+      error: { message: "Başlık en az iki harfli olmalıdır." },
+    });
+  }
+
+  if (!validate(content) && !validate(formUrl)) {
+    return json<ActionData>({
+      error: {
+        message:
+          "En az 1 harften oluşacak içerik veya URL adresi eklenmelidir.",
+      },
+    });
+  }
+
+  let url = null;
+  if (validate(formUrl)) {
+    if (!validateURL(formUrl)) {
+      return json<ActionData>({
+        error: { message: "Lütfen geçerli bir URL adresi girin." },
+      });
+    } else {
+      url = normalizeUrl(formUrl as string);
+    }
+  }
+
+  let body = validate(content) ? content : null;
+
   try {
-    const post = await createPost(title.toString(), normalized, userID);
+    const post = await createPost(title, userID, url, body);
     return redirect(`/posts/${post.slug}-${post.id}`);
-  } catch {
-    return json(null, { status: 500 });
+  } catch (e) {
+    return json(e, { status: 500 });
   }
 };
 
-export const Send = () => {
+const Send = () => {
   const transition = useTransition();
-  const error = useActionData();
   const fetcher = useFetcher();
   const meta = fetcher.data?.meta;
+  const error = fetcher.data?.error;
 
   const onPaste = (url: string) => {
     const formData = new FormData();
@@ -52,9 +78,9 @@ export const Send = () => {
   };
 
   return (
-    <CenteredContainer>
+    <CenteredContainer css={{ paddingTop: 20 }}>
       <fetcher.Form method="post">
-        <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
+        <GappedBox css={{ flexDirection: "column" }}>
           <Label htmlFor="url">URL</Label>
           <Input
             id="url"
@@ -71,15 +97,23 @@ export const Send = () => {
             size="2"
             defaultValue={meta ? meta.title : ""}
           />
+          <Label htmlFor="content">İçerik</Label>
+          <Textarea
+            css={{ width: "auto", cursor: "text", resize: "both" }}
+            name="content"
+            rows={4}
+          />
           <Box>
             <Button size="2" type="submit" variant="green">
               {transition.submission ? "Gönderiliyor..." : "Gönder"}
             </Button>
           </Box>
-          <ValidationMessage
-            error={error}
-            isSubmitting={transition.state === "submitting"}
-          />
+          {error && (
+            <ValidationMessage
+              error={error.message}
+              isSubmitting={transition.state === "submitting"}
+            />
+          )}
         </GappedBox>
       </fetcher.Form>
     </CenteredContainer>
