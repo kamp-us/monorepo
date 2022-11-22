@@ -15,6 +15,7 @@
     "clean": "rm -rf dist",
     "dev": "tsup src/index.tsx --format esm,cjs --watch --dts",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
+    "lint:fix": "TIMING=1 npm run lint -- --fix",
     "test": "jest"
   },
   "jest": {
