@@ -31,6 +31,7 @@ import { createComment } from "~/models/comment.server";
 import type { Post } from "~/models/post.server";
 import { getPostBySlugAndId } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
+import { validate } from "~/utils";
 
 interface VisualTree {
   [key: string]: {
@@ -88,15 +89,32 @@ type LoaderData = {
 };
 
 type ActionData = {
-  error?: {
-    comment: { message: string; id: string } | null;
-    post: string | null;
+  error: {
+    [x: string]: { message: string; id: string } | null;
   };
+};
+
+const errorMessage = (
+  type: "comment" | "post",
+  message: string,
+  id: string
+) => {
+  return json<ActionData>(
+    {
+      error: {
+        [type]: { message, id },
+        [type === "comment" ? "post" : "comment"]: null,
+      },
+    },
+    {
+      status: 400,
+    }
+  );
 };
 
 export const action: ActionFunction = async ({ request, params }) => {
   const formData = await request.formData();
-  const content = formData.get("content");
+  const content = formData.get("content")?.toString();
   const commentID = formData.get("commentID")?.toString();
 
   const userID = await requireUserId(request);
@@ -106,28 +124,17 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   if (!content) {
     if (commentID) {
-      return json<ActionData>(
-        {
-          error: {
-            comment: {
-              message: "Cevap kısmı boş bırakılamaz.",
-              id: commentID,
-            },
-            post: null,
-          },
-        },
-        { status: 400 }
-      );
+      return errorMessage("comment", "Cevap kısmı boş bırakılamaz.", commentID);
     } else {
-      return json<ActionData>(
-        {
-          error: {
-            post: "Yorum boş gönderilemez.",
-            comment: null,
-          },
-        },
-        { status: 400 }
-      );
+      return errorMessage("post", "Yorum boş gönderilemez.", params.id);
+    }
+  }
+
+  if (!validate(content)) {
+    if (commentID) {
+      return errorMessage("comment", "Cevap kısmı boş bırakılamaz.", commentID);
+    } else {
+      return errorMessage("post", "Yorum boş gönderilemez.", params.id);
     }
   }
 
@@ -203,7 +210,7 @@ const SinglePost = () => {
           </Button>
           {postError && (
             <ValidationMessage
-              error={postError}
+              error={postError.message}
               isSubmitting={transition.state === "submitting"}
             />
           )}
