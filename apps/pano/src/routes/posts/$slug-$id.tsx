@@ -122,14 +122,6 @@ export const action: ActionFunction = async ({ request, params }) => {
   invariant(params.slug, "postSlug is required");
   invariant(params.id, "postId is required");
 
-  if (!content) {
-    if (commentID) {
-      return errorMessage("comment", "Cevap kısmı boş bırakılamaz.", commentID);
-    } else {
-      return errorMessage("post", "Yorum boş gönderilemez.", params.id);
-    }
-  }
-
   if (!validate(content)) {
     if (commentID) {
       return errorMessage("comment", "Cevap kısmı boş bırakılamaz.", commentID);
