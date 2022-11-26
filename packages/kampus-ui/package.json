@@ -7,9 +7,6 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist/**"
-  ],
   "scripts": {
     "build": "tsup src/index.tsx --format esm,cjs --dts",
     "clean": "rm -rf dist",

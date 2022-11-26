@@ -9,7 +9,7 @@ import {
 } from "@kampus/ui";
 import type { MetaFunction } from "@remix-run/node";
 import { useFetcher, useSearchParams } from "@remix-run/react";
-import type { ActionData } from "../api/auth/login";
+import type { ActionData } from "./api/auth/login";
 
 export const meta: MetaFunction = () => {
   return {
@@ -21,6 +21,8 @@ export const Login = () => {
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") ?? "/";
   const fetcher = useFetcher<ActionData>();
+
+  console.log("login form redirext", redirectTo, fetcher.state, fetcher.type);
 
   const fieldErrors = fetcher.data?.errors;
 

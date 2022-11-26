@@ -12,6 +12,7 @@ export const sessionStorage = createCookieSessionStorage({
     httpOnly: true,
     path: "/",
     sameSite: "lax",
+    domain: "kampus.local",
     secrets: [process.env.SESSION_SECRET],
     secure: process.env.NODE_ENV === "production",
   },
@@ -79,6 +80,7 @@ export async function createUserSession({
   return redirect(redirectTo, {
     headers: {
       "Set-Cookie": await sessionStorage.commitSession(session, {
+        domain: "kampus.local",
         maxAge: remember
           ? 60 * 60 * 24 * 7 // 7 days
           : undefined,
@@ -89,6 +91,5 @@ export async function createUserSession({
 
 export async function logout(request: Request) {
   const session = await getSession(request);
-
   return sessionStorage.destroySession(session);
 }

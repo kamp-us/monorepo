@@ -99,6 +99,7 @@ const Document = ({ children }: DocumentProps) => {
       </head>
       <body className={theme === "dark" ? darkTheme : ""}>
         {children}
+
         <ScrollRestoration />
         <Scripts />
         {/* eslint-disable-next-line turbo/no-undeclared-env-vars */}
@@ -117,6 +118,7 @@ export default function App() {
           <UserContextManager user={user}>
             <Topnav />
             <ToastViewport />
+
             <Outlet />
           </UserContextManager>
         </Document>

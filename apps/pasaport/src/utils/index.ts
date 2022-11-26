@@ -1,7 +1,6 @@
 import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
 
-import type { Post } from "~/models/post.server";
 import type { User } from "~/models/user.server";
 
 const DEFAULT_REDIRECT = "/";
@@ -17,8 +16,14 @@ export function safeRedirect(
   to: FormDataEntryValue | string | null | undefined,
   defaultRedirect: string = DEFAULT_REDIRECT
 ) {
+  console.log("safeRedirect", to);
+
   if (!to || typeof to !== "string") {
     return defaultRedirect;
+  }
+
+  if (to.startsWith("http")) {
+    return to;
   }
 
   if (!to.startsWith("/") || to.startsWith("//")) {
@@ -89,12 +94,6 @@ export function validateUsername(username: unknown): username is string {
 }
 export function validatePassword(password: unknown): password is string {
   return validate(password) && password.length > 8;
-}
-
-export function getExternalPostURL(post: Post) {
-  const location = global.location;
-  const postUrl = `${location.origin}/posts/${post.slug}-${post.id}`;
-  return postUrl;
 }
 
 export declare type $ElementProps<T> = T extends React.ComponentType<

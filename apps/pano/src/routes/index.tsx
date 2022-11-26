@@ -7,22 +7,26 @@ import type { Post } from "~/models/post.server";
 import { getAllPosts } from "~/models/post.server";
 
 type LoaderData = {
-  data: Post[];
+  allPosts: Post[];
+  oldPosts: Post[];
 };
 
 export const loader: LoaderFunction = async () => {
   const allPosts = await getAllPosts();
+  const oldPosts = await getAllPosts();
+
   return json<LoaderData>({
-    data: allPosts,
+    allPosts,
+    oldPosts,
   });
 };
 
 export const Home = () => {
-  const { data } = useLoaderData<LoaderData>();
+  const { allPosts, oldPosts } = useLoaderData<LoaderData>();
 
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>
-      <PostList posts={data} />
+      <PostList posts={oldPosts} />
     </CenteredContainer>
   );
 };

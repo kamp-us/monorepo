@@ -25,16 +25,16 @@ model Upvote {
 }
 
 model CommentUpvote {
-    id String @id @default(cuid())
+  id String @id @default(cuid())
 
-    commentID String
-    comment   Comment @relation(fields: [commentID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  commentID String
+  comment   Comment @relation(fields: [commentID], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
-    userID String
-    owner  User     @relation(fields: [userID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userID String
+  owner  User   @relation(fields: [userID], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Comment {
@@ -48,20 +48,20 @@ model Comment {
   post   Post   @relation(fields: [postID], references: [id], onDelete: Cascade)
 
   parentID String?
-  parent   Comment?  @relation("CommentComments", fields: [parentID], references: [id])
-  comments Comment[] @relation("CommentComments")
-  upvotes CommentUpvote[]
+  parent   Comment?        @relation("CommentComments", fields: [parentID], references: [id])
+  comments Comment[]       @relation("CommentComments")
+  upvotes  CommentUpvote[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Post {
-  id    String @id @default(cuid())
-  title String
-  url   String?
-  site  String?
-  slug  String
+  id      String  @id @default(cuid())
+  title   String
+  url     String?
+  site    String?
+  slug    String
   content String?
 
   userID String
@@ -93,10 +93,9 @@ model User {
 
   password Password?
 
-  comments Comment[]
+  comments       Comment[]
   commentUpvotes CommentUpvote[]
-  upvotes  Upvote[]
-
+  upvotes        Upvote[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())

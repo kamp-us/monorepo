@@ -11,6 +11,7 @@ export const sessionStorage = createCookieSessionStorage({
     name: "__session",
     httpOnly: true,
     path: "/",
+    domain: "kampus.local",
     sameSite: "lax",
     secrets: [process.env.SESSION_SECRET],
     secure: process.env.NODE_ENV === "production",
@@ -36,8 +37,17 @@ export async function getUser(request: Request) {
   const userId = await getUserId(request);
   if (userId === undefined) return null;
 
-  const user = await getUserById(userId);
-  if (user) return user;
+  const headers = new Headers();
+  headers.append("Cookie", request.headers.get("Cookie") ?? "");
+
+  try {
+    const user = await fetch("http://pasaport.kampus.local:5080/api/whoami", {
+      headers,
+    });
+    if (user) return user.json();
+  } catch (err) {
+    console.log("error while fetching user from pasaport", err);
+  }
 
   throw await logout(request);
 }

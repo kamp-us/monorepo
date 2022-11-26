@@ -1,6 +1,7 @@
 import {
   Box,
   CenteredContainer,
+  ExternalLink,
   GappedBox,
   IconButton,
   Link,
@@ -37,7 +38,12 @@ export const Topnav: FC = () => {
             ) : (
               <>
                 <ThemeToggle />
-                <Link to="/login">Giriş</Link>
+                <ExternalLink
+                  target="_self"
+                  href="http://pasaport.kampus.local:5080/login?redirectTo=http://pano.kampus.local:4080"
+                >
+                  Giriş
+                </ExternalLink>
               </>
             )}
           </Box>

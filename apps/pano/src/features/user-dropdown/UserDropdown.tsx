@@ -10,7 +10,6 @@ import {
   styled,
   UserAvatar,
 } from "@kampus/ui";
-import { useSubmit } from "@remix-run/react";
 import type { FC } from "react";
 
 const MenuItem = styled(DropdownMenuItem, {
@@ -23,12 +22,6 @@ const MenuLink = styled(Link, {
 });
 
 export const UserDropdown: FC<{ login: string }> = ({ login }) => {
-  const submit = useSubmit();
-
-  const onLogout = async () => {
-    submit(null, { method: "post", action: "/api/auth/logout" });
-  };
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -46,7 +39,17 @@ export const UserDropdown: FC<{ login: string }> = ({ login }) => {
           <MenuItem>Ayarlar</MenuItem>
         </MenuLink>
         <DropdownMenuSeparator />
-        <MenuItem onClick={onLogout}>Çıkış</MenuItem>
+        <form
+          method="post"
+          action="http://pasaport.kampus.local:5080/api/auth/logout?redirectTo=http://pano.kampus.local:4080"
+        >
+          <MenuItem
+            as="input"
+            type="submit"
+            value="Çıkış"
+            css={{ width: "100%" }}
+          />
+        </form>
         <DropdownMenuArrow offset={12} />
       </DropdownMenuContent>
     </DropdownMenu>
