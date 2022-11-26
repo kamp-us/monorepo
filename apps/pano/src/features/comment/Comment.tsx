@@ -98,7 +98,11 @@ export const CommentItem: FC<CommentProps> = ({
           </fetcher.Form>
         </GappedBox>
         <Box>
-          <Text size="3" lineHeight="2" css={{ color: "$gray12" }}>
+          <Text
+            size="3"
+            lineHeight="2"
+            css={{ color: "$gray12", whiteSpace: "pre" }}
+          >
             {comment.content}
           </Text>
         </Box>
