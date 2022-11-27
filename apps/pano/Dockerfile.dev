@@ -14,6 +14,7 @@ RUN npm install --global turbo
 RUN npm install
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
+RUN npx turbo build
 
 # WORKDIR /app/apps/pano
 RUN npx --workspace=@kampus-apps/pano prisma generate
