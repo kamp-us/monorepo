@@ -96,6 +96,7 @@ export const CommentItem: FC<CommentProps> = ({
               value={JSON.stringify(variables)}
             />
           </fetcher.Form>
+          <MoreOptionsDropdown comment={comment} />
         </GappedBox>
         <Box>
           <Text size="3" lineHeight="2" css={{ color: "$gray12" }}>
@@ -127,7 +128,6 @@ export const CommentItem: FC<CommentProps> = ({
                 : `Göster (${comments.length ?? 0} yorum)`}
             </SmallLink>
           )}
-          <MoreOptionsDropdown comment={comment} />
         </GappedBox>
       </GappedBox>
       {open && (
