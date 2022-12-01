@@ -86,13 +86,12 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
                 borderRadius: 4,
                 border: "1px solid $gray7",
                 backgroundColor: "$gray3",
-                whiteSpace: "break-spaces",
               }}
             >
               <Text
                 size="3"
                 lineHeight="2"
-                css={{ color: "$gray12", whiteSpace: "pre" }}
+                css={{ color: "$gray12", whiteSpace: "break-spaces" }}
               >
                 {post.content}
               </Text>
