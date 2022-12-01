@@ -86,6 +86,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
                 borderRadius: 4,
                 border: "1px solid $gray7",
                 backgroundColor: "$gray3",
+                whiteSpace: "break-spaces",
               }}
             >
               <Text
