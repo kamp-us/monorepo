@@ -91,7 +91,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
               <Text
                 size="3"
                 lineHeight="2"
-                css={{ color: "$gray12", whiteSpace: "pre" }}
+                css={{ color: "$gray12", whiteSpace: "break-spaces" }}
               >
                 {post.content}
               </Text>
