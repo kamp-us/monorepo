@@ -2,8 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const users = [
-  { username: "admin", email: "admin@kamp", password: "123123123" },
-  { username: "testuser", email: "user1@kamp", password: "123123123" }
+  { username: "admin", email: "admin@kamp.us", password: "123123" },
+  { username: "testuser", email: "user1a@kamp.us", password: "123123123" }
 ]
 
 type User = { username: string; email: string; password: string };
@@ -19,9 +19,17 @@ async function seedAll(users: User[]) {
 
     const prismaUser = await prisma.user.upsert({
       where: {
-        email,
+        username
       },
-      update: {},
+      update: {
+        username,
+        email,
+        password: {
+          update: {
+            hash: hashedPassword,
+          },
+        },
+      },
       create: {
         username,
         email,
