@@ -32,9 +32,6 @@ const DotsButton = styled(IconButton, {
 
 const Item = styled(DropdownMenuItem, {
   minWidth: 0,
-  "&:hover": {
-    cursor: "pointer",
-  },
   // padding: "$1",
 });
 
