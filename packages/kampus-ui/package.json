@@ -11,9 +11,11 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "tsup src/index.tsx --format esm,cjs --dts",
+    "build:tsup": "tsup src/index.tsx --format esm,cjs",
+    "build:dts": "tsc --emitDeclarationOnly --declaration",
+    "build": "npm run build && npm run dts",
     "clean": "rm -rf dist",
-    "dev": "tsup src/index.tsx --format esm,cjs --watch --dts",
+    "dev": "npm run build:tsup -- --watch",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
     "lint:fix": "TIMING=1 npm run lint -- --fix",
     "test": "jest"
