@@ -72,11 +72,9 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
             <SmallLink to={`/posts/${post.slug}-${post.id}`}>
               {post.comments.length} yorum
             </SmallLink>
-            {canUserEdit(user, post) && (
               <>
                 | <MoreOptionsDropdown post={post} />
               </>
-            )}
           </GappedBox>
           {isContentVisible && (
             <GappedBox

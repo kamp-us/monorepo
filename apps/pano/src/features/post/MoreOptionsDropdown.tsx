@@ -70,10 +70,6 @@ export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
 
   const menuItems = [...ownerItems];
 
-  if (menuItems.length === 0) {
-    return null;
-  }
-
   return (
     <>
       <DropdownMenu>
@@ -84,7 +80,9 @@ export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           {ownerItems}
-          <DropdownMenuSeparator />
+          {canUserEdit(user, post) && (
+            <DropdownMenuSeparator />
+          )}
           <MoreOptionsShareButtons
             postUrl={externalPostUrl}
             openToast={setOpenToast}
