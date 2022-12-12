@@ -58,6 +58,7 @@ const Document = ({ children }: DocumentProps) => {
   const apple_icon_url="https://kampus-logo.s3.eu-central-1.amazonaws.com/apple-touch-icon.png"
   const favicon_16x16_url="https://kampus-logo.s3.eu-central-1.amazonaws.com/favicon-16x16.png"
   const favicon_32x32_url="https://kampus-logo.s3.eu-central-1.amazonaws.com/favicon-32x32.png"
+  const kampus_logo_url="https://kampus-logo.s3.eu-central-1.amazonaws.com/kampus_logo.png"
   useLoadingIndicator();
 
   useEffect(() => {
@@ -69,8 +70,8 @@ const Document = ({ children }: DocumentProps) => {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="twitter:image" content="https://kampus-logo.s3.eu-central-1.amazonaws.com/kampus_logo.png"></meta>
-        <meta name="og:image" content="https://kampus-logo.s3.eu-central-1.amazonaws.com/kampus_logo.png"></meta>
+        <meta name="twitter:image" content={kampus_logo_url}></meta>
+        <meta name="og:image" content={kampus_logo_url}></meta>
         <Meta />
         <Links />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
