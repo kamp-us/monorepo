@@ -81,6 +81,14 @@ export const meta: MetaFunction = ({
     title: data.post.title,
     author: data.post.owner.username,
     description: `${data.post.comments.length} yorum`,
+    "twitter:title":data.post.title,
+    "twitter:description":`${data.post.comments.length} yorum`,
+    "twitter:card":"summary",
+    "twitter:image":"https://kampus-logo.s3.eu-central-1.amazonaws.com/DplcC3sZ_400x400.png",
+    "og:title": data.post.title,
+    "og:description": `${data.post.comments.length} yorum`,
+    "og:type": "article",
+    "og:image": "https://kampus-logo.s3.eu-central-1.amazonaws.com/DplcC3sZ_400x400.png",
   };
 };
 

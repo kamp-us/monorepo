@@ -76,6 +76,14 @@ const Document = ({ children }: DocumentProps) => {
           crossOrigin="true"
         />
         <link
+          href="https://kampus-logo.s3.eu-central-1.amazonaws.com/favicon.ico"
+          rel="shortcut icon"
+        />
+        <link
+          href="https://kampus-logo.s3.eu-central-1.amazonaws.com/DplcC3sZ_400x400.png"
+          rel="apple-touch-icon"
+        />
+        <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
