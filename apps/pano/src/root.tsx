@@ -55,7 +55,9 @@ interface DocumentProps {
 const Document = ({ children }: DocumentProps) => {
   const clientStyle = useClientStyle();
   const { theme } = useTheme();
-
+  const apple_icon_url="https://kampus-logo.s3.eu-central-1.amazonaws.com/apple-touch-icon.png"
+  const favicon_16x16_url="https://kampus-logo.s3.eu-central-1.amazonaws.com/favicon-16x16.png"
+  const favicon_32x32_url="https://kampus-logo.s3.eu-central-1.amazonaws.com/favicon-32x32.png"
   useLoadingIndicator();
 
   useEffect(() => {
@@ -67,6 +69,8 @@ const Document = ({ children }: DocumentProps) => {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="twitter:image" content="https://kampus-logo.s3.eu-central-1.amazonaws.com/kampus_logo.png"></meta>
+        <meta name="og:image" content="https://kampus-logo.s3.eu-central-1.amazonaws.com/kampus_logo.png"></meta>
         <Meta />
         <Links />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -75,14 +79,9 @@ const Document = ({ children }: DocumentProps) => {
           href="https://fonts.gstatic.com"
           crossOrigin="true"
         />
-        <link
-          href="https://kampus-logo.s3.eu-central-1.amazonaws.com/favicon.ico"
-          rel="shortcut icon"
-        />
-        <link
-          href="https://kampus-logo.s3.eu-central-1.amazonaws.com/DplcC3sZ_400x400.png"
-          rel="apple-touch-icon"
-        />
+        <link rel="apple-touch-icon" sizes="180x180" href={apple_icon_url}/>
+        <link rel="icon" type="image/png" sizes="32x32" href={favicon_32x32_url}/>
+        <link rel="icon" type="image/png" sizes="16x16" href={favicon_16x16_url}/>
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet"
