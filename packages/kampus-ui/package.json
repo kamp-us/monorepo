@@ -13,7 +13,7 @@
   "scripts": {
     "build:tsup": "tsup src/index.tsx --format esm,cjs",
     "build:dts": "tsc --emitDeclarationOnly --declaration",
-    "build": "npm run build && npm run dts",
+    "build": "npm run build:tsup && npm run build:dts",
     "clean": "rm -rf dist",
     "dev": "npm run build:tsup -- --watch",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
