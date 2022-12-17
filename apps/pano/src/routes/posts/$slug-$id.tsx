@@ -81,6 +81,12 @@ export const meta: MetaFunction = ({
     title: data.post.title,
     author: data.post.owner.username,
     description: `${data.post.comments.length} yorum`,
+    "twitter:title":data.post.title,
+    "twitter:description":`${data.post.comments.length} yorum`,
+    "twitter:card":"summary",
+    "og:title": data.post.title,
+    "og:description": `${data.post.comments.length} yorum`,
+    "og:type": "article",
   };
 };
 
