@@ -7,6 +7,7 @@ services:
     entrypoint: ["turbo", "run", "docker", "--scope=@kampus-apps/pano"]
     ports:
       - "3000:3000"
+      - "8002:8002"
     environment:
       - DATABASE_URL=postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public&connect_timeout=300
       - SESSION_SECRET=sessionsecret
