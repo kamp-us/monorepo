@@ -17,7 +17,7 @@ docker-compose up --build
 The database seed script creates a new user with some data you can use to get started:
 
 - Username: `admin`
-- Password: `123123123`
+- Password: `123123`
 
 ### Formatting
 
