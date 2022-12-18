@@ -12,11 +12,11 @@ import {
 } from "@kampus/ui";
 import { useFetcher, useTransition } from "@remix-run/react";
 import type { FC } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState,useLayoutEffect } from "react";
 import type { Comment } from "~/models/comment.server";
 import { useUserContext } from "../auth/user-context";
 import { CommentUpvoteButton } from "../upvote/UpvoteButton";
-
+import { MoreOptionsDropdown } from "./MoreOptionsDropdown";
 type CommentProps = {
   comment: Comment;
   postID: string;
@@ -47,15 +47,13 @@ export const CommentItem: FC<CommentProps> = ({
   error,
 }) => {
   const [open, setOpen] = useState(false);
-  const [showComments, setShowComments] = useState(expanded);
+  const [showComments, setShowComments] = useState(true);
   const user = useUserContext();
   const transition = useTransition();
   const isCommenting =
     transition.state === "submitting" &&
     transition.submission?.formData.get("commentID") === comment.id;
-
   const fetcher = useFetcher();
-
   const isLoading = !!fetcher.submission;
   const isUpvoted =
     user && comment ? comment.upvotes.some((u) => u.userID === user.id) : false;
@@ -74,10 +72,13 @@ export const CommentItem: FC<CommentProps> = ({
       formRef.current.focus();
     }
   }, [isCommenting]);
+  useLayoutEffect(() => {
+    setShowComments(expanded);
+  }, [expanded]);
 
   return (
-    <GappedBox css={{ flexDirection: "column", gap: 20 }}>
-      <GappedBox css={{ flexDirection: "column" }}>
+    <GappedBox css={{ flexDirection: "column" }}>
+      <GappedBox id={`c_${comment.id}`} tabIndex={0} css={{ flexDirection: "column", gap: 20,"transition":"background-color 0.3s" ,"&:target":{backgroundColor:"$amber4" ,borderRadius:"8px" ,padding:"5px"}}}>
         <GappedBox css={{ alignItems: "center" }}>
           <Text size="1">@{comment.owner.username}</Text>
           <Text size="1">
@@ -96,6 +97,7 @@ export const CommentItem: FC<CommentProps> = ({
               value={JSON.stringify(variables)}
             />
           </fetcher.Form>
+          <MoreOptionsDropdown comment={comment} />
         </GappedBox>
         <Box>
           <Text
@@ -157,7 +159,7 @@ export const CommentItem: FC<CommentProps> = ({
         {showComments &&
           comments.map((c) => {
             return (
-              <div key={c.id} id={`c_${c.id}`} tabIndex={0}>
+              <div key={c.id} >
                 <CommentItem
                   expanded={expanded}
                   comment={c}

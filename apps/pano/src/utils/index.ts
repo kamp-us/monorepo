@@ -2,6 +2,7 @@ import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
 
 import type { Post } from "~/models/post.server";
+import type { Comment } from "~/models/comment.server";
 import type { User } from "~/models/user.server";
 
 const DEFAULT_REDIRECT = "/";
@@ -96,7 +97,11 @@ export function getExternalPostURL(post: Post) {
   const postUrl = `${location.origin}/posts/${post.slug}-${post.id}`;
   return postUrl;
 }
-
+export function getExternalCommentURL(comment: Comment) {
+  const location = global.location;
+  const commentUrl = `${location.origin}${location.pathname}#c_${comment.id}`;
+  return commentUrl;
+}
 export declare type $ElementProps<T> = T extends React.ComponentType<
   infer Props
 >
