@@ -54,6 +54,13 @@ export const deleteComment = (id: string) => {
   });
 };
 
+export const editComment = (id: string, content: string) => {
+  return prisma.comment.update({
+    where: { id },
+    data: { content },
+  });
+};
+
 export const deleteUpvote = (commentID: string, userID: string) => {
   return prisma.commentUpvote.deleteMany({
     where: {
