@@ -72,7 +72,7 @@ export const CommentItem: FC<CommentProps> = ({
       formRef.current.focus();
     }
   }, [isCommenting]);
-  useLayoutEffect(() => {
+  useEffect(() => {
     setShowComments(expanded);
   }, [expanded]);
 
