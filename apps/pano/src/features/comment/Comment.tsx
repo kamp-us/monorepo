@@ -13,10 +13,10 @@ import {
 import { useFetcher, useTransition } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useRef, useState,useLayoutEffect } from "react";
-import type { Comment } from "~/models/comment.server";
 import { useUserContext } from "../auth/user-context";
 import { CommentUpvoteButton } from "../upvote/UpvoteButton";
 import { MoreOptionsDropdown } from "./MoreOptionsDropdown";
+import type { Comment } from "~/models/comment.server";
 type CommentProps = {
   comment: Comment;
   postID: string;
@@ -68,6 +68,7 @@ export const CommentItem: FC<CommentProps> = ({
 
   useEffect(() => {
     if (!isCommenting && formRef.current) {
+      setOpen(false);
       formRef.current.reset();
       formRef.current.focus();
     }
