@@ -1,10 +1,9 @@
 import {
     Button,
-    Form,
-    GappedBox,
     Textarea,
+    ValidationMessage
   } from "@kampus/ui";
-import { useFetcher, useTransition } from "@remix-run/react";import type { FC } from "react";
+import { useFetcher } from "@remix-run/react";import { FC, useEffect } from "react";
 import { useState } from "react";
 import type { Comment } from "~/models/comment.server";
 type EditCommentProps = {
@@ -18,11 +17,21 @@ export const EditCommentForm: FC<EditCommentProps> = ({
   }) => {
     const [editedComment, setEditedComment] = useState(comment.content);
     const fetcher = useFetcher();
+    const isCommenting =
+    fetcher.state === "submitting" || fetcher.state === "loading";
     const variables = {
       commentID: comment.id,
       commentContent: editedComment,
     };
 
+    useEffect(() => {
+      if (fetcher.type === "done") {
+        setEditOpen(false);
+      }
+    }, [fetcher.type, setEditOpen]);
+
+    console.log(fetcher)
+    console.log(isCommenting)
     return (
         <fetcher.Form method="post" action="/commentEdit">
             <Textarea name="comment" 
@@ -34,7 +43,9 @@ export const EditCommentForm: FC<EditCommentProps> = ({
               name="json"
               value={JSON.stringify(variables)}
             />
-            <Button type="submit">Kaydet</Button>
+            <Button type="submit">
+              {isCommenting ? "Kaydediliyor..." : "Kaydet"}
+            </Button>
             <Button onClick={() => setEditOpen(false)}>İptal</Button>
           </fetcher.Form>
     )
