@@ -23,11 +23,19 @@ export type CommentWithUpvotes = Prisma.CommentGetPayload<
 
 export type Comment = CommentWithOwner & CommentWithUpvotes;
 
+export const normalizeComment = (model: Comment) => {
+  if (model.deletedAt !== null) {
+    model.content = "[deleted]";
+  }
+  return model;
+};
+
 export const createComment = (
   content: string,
   postID: string,
   userID: string,
-  parentID?: string
+  parentID?: string,
+  deletedAt?: Date | null
 ) => {
   return prisma.comment.create({
     data: {
@@ -35,7 +43,14 @@ export const createComment = (
       post: { connect: { id: postID } },
       owner: { connect: { id: userID } },
       parent: parentID ? { connect: { id: parentID } } : undefined,
+      deletedAt: deletedAt,
     },
+  });
+};
+
+export const deleteComment = (id: string) => {
+  return prisma.comment.delete({
+    where: { id },
   });
 };
 
