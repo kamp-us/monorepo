@@ -1,7 +1,6 @@
 import {
     Button,
     Textarea,
-    ValidationMessage
   } from "@kampus/ui";
 import { useFetcher } from "@remix-run/react";import { FC, useEffect } from "react";
 import { useState } from "react";
@@ -30,8 +29,6 @@ export const EditCommentForm: FC<EditCommentProps> = ({
       }
     }, [fetcher.type, setEditOpen]);
 
-    console.log(fetcher)
-    console.log(isCommenting)
     return (
         <fetcher.Form method="post" action="/commentEdit">
             <Textarea name="comment" 
