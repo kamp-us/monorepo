@@ -36,9 +36,10 @@ const Item = styled(DropdownMenuItem, {
 
 interface Props {
   comment: Comment;
+  setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const MoreOptionsDropdown: FC<Props> = ({ comment }) => {
+export const MoreOptionsDropdown: FC<Props> = ({ comment, setEditOpen }) => {
   const user = useUserContext();
   const [openAlert, setOpenAlert] = useState(false);
   const [openToast, setOpenToast] = useState(false);
@@ -52,8 +53,17 @@ export const MoreOptionsDropdown: FC<Props> = ({ comment }) => {
     setOpenAlert(true);
   };
 
+  const handleIsEditing = () => {
+    setEditOpen(true);
+  };
+
   const ownerItems: JSX.Element[] = [];
   if (canUserEdit(user, comment) && comment.deletedAt === null) {
+    ownerItems.push(
+      <Item onSelect={handleIsEditing} key="edit">
+        Düzenle
+      </Item>
+    );
     ownerItems.push(
       <Item onSelect={handleOpen} key="delete">
         Sil
