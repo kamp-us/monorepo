@@ -5,6 +5,36 @@ import { getSitename } from "~/features/url/get-sitename";
 import type { Comment } from "~/models/comment.server";
 import { normalizeComment } from "~/models/comment.server";
 
+const selectPostWithOwner = Prisma.validator<Prisma.PostArgs>()({
+  include: {
+    owner: true,
+  },
+});
+
+export type PostWithOwner = Prisma.PostGetPayload<typeof selectPostWithOwner>;
+
+const selectPostWithUpvote = Prisma.validator<Prisma.PostArgs>()({
+  include: {
+    upvotes: true,
+  },
+});
+
+export type PostWithUpvotes = Prisma.PostGetPayload<
+  typeof selectPostWithUpvote
+>;
+
+const selectPostWithCommentCount = Prisma.validator<Prisma.PostArgs>()({
+  include: {
+    _count: {
+      select: { comments: true }
+    }
+  },
+});
+
+export type _PostWithCommentCount = Prisma.PostGetPayload<
+  typeof selectPostWithCommentCount
+>;
+
 const selectPostWithComment = Prisma.validator<Prisma.PostArgs>()({
   include: {
     comments: {
@@ -20,25 +50,9 @@ export type PostWithComments = Prisma.PostGetPayload<
   typeof selectPostWithComment
 >;
 
-const selectPostWithUpvote = Prisma.validator<Prisma.PostArgs>()({
-  include: {
-    upvotes: true,
-  },
-});
+export type Post = PostWithOwner & PostWithUpvotes & PostWithComments & _PostWithCommentCount;
 
-export type PostWithUpvotes = Prisma.PostGetPayload<
-  typeof selectPostWithUpvote
->;
-
-const selectPostWithOwner = Prisma.validator<Prisma.PostArgs>()({
-  include: {
-    owner: true,
-  },
-});
-
-export type PostWithOwner = Prisma.PostGetPayload<typeof selectPostWithOwner>;
-
-export type Post = PostWithComments & PostWithUpvotes & PostWithOwner;
+export type PostWithCommentCount = PostWithOwner & PostWithUpvotes & _PostWithCommentCount;
 
 export const getAllPosts = () => {
   return prisma.post.findMany({
