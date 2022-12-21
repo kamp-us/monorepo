@@ -13,10 +13,12 @@ import {
   TwitterShare,
 } from "@kampus/ui";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { useNavigate } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import CommentDeleteAlert from "./CommentDeleteAlert";
+import { canUserEdit } from "~/features/auth/can-user-edit";
+import { useUserContext } from "~/features/auth/user-context";
 import type { Comment } from "~/models/comment.server";
 import { getExternalCommentURL } from "~/utils";
 
@@ -34,15 +36,43 @@ const Item = styled(DropdownMenuItem, {
 
 interface Props {
   comment: Comment;
+  setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const MoreOptionsDropdown: FC<Props> = ({ comment }) => {
+export const MoreOptionsDropdown: FC<Props> = ({ comment, setEditOpen }) => {
+  const user = useUserContext();
+  const [openAlert, setOpenAlert] = useState(false);
   const [openToast, setOpenToast] = useState(false);
   const [externalCommentUrl, setExternalCommentUrl] = useState("");
 
   useEffect(() => {
     setExternalCommentUrl(getExternalCommentURL(comment));
   }, [comment]);
+
+  const handleOpen = () => {
+    setOpenAlert(true);
+  };
+
+  const handleIsEditing = () => {
+    setEditOpen(true);
+  };
+
+  const ownerItems: JSX.Element[] = [];
+  if (canUserEdit(user, comment) && comment.deletedAt === null) {
+    ownerItems.push(
+      <Item onSelect={handleIsEditing} key="edit">
+        Düzenle
+      </Item>
+    );
+    ownerItems.push(
+      <Item onSelect={handleOpen} key="delete">
+        Sil
+      </Item>
+    );
+    ownerItems.push(
+      <DropdownMenuSeparator key="separator"/>
+    );
+  }
 
   return (
     <>
@@ -53,12 +83,18 @@ export const MoreOptionsDropdown: FC<Props> = ({ comment }) => {
           </DotsButton>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
+          {ownerItems}
           <MoreOptionsShareButtons
             commentUrl={externalCommentUrl}
             openToast={setOpenToast}
           />
         </DropdownMenuContent>
       </DropdownMenu>
+      <CommentDeleteAlert
+        open={openAlert}
+        setOpen={setOpenAlert}
+        commentID={comment.id}
+      />
       <Toast
         open={openToast}
         setOpen={setOpenToast}
