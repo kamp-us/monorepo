@@ -7,7 +7,7 @@ import type { PostWithCommentCount } from "~/models/post.server";
 import { getPostsBySite } from "~/models/post.server";
 
 type LoaderData = {
-  posts: Post[];
+  posts: PostWithCommentCount[];
 };
 
 export const loader: LoaderFunction = async ({ params }) => {
