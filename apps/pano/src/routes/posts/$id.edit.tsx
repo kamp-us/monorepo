@@ -18,13 +18,13 @@ import type { FC } from "react";
 import { useState } from "react";
 import invariant from "tiny-invariant";
 import { canUserEdit } from "~/features/auth/can-user-edit";
-import type { Post } from "~/models/post.server";
+import type { PostWithCommentCount } from "~/models/post.server";
 import { editPost, getPostById } from "~/models/post.server";
 import { requireUser } from "~/session.server";
 import { validate, validateURL } from "~/utils";
 
 type LoaderData = {
-  post: Post;
+  post: PostWithCommentCount;
 };
 
 type ActionData = {

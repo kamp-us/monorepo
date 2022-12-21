@@ -2,13 +2,14 @@ import { Box, ExternalLink, GappedBox, SmallLink, Text } from "@kampus/ui";
 import { useFetcher } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
+import type { PostWithCommentCount } from "~/models/post.server";
 import { useUserContext } from "../auth/user-context";
 import { UpvoteButton } from "../upvote/UpvoteButton";
 import { MoreOptionsDropdown } from "~/features/post/MoreOptionsDropdown";
 import type { Post } from "~/models/post.server";
 
 type PostItemProps = {
-  post: Post;
+  post: PostWithCommentCount;
   showContent?: boolean;
 };
 
@@ -69,7 +70,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
           >
             <Box>@{post.owner.username}</Box> |
             <SmallLink to={`/posts/${post.slug}-${post.id}`}>
-              {post.comments.length} yorum
+              {post._count.comments} yorum
             </SmallLink>
             <>
               | <MoreOptionsDropdown post={post} />

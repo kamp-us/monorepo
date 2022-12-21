@@ -20,7 +20,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import PostDeleteAlert from "./PostDeleteAlert";
 import { canUserEdit } from "~/features/auth/can-user-edit";
 import { useUserContext } from "~/features/auth/user-context";
-import type { Post } from "~/models/post.server";
+import type { PostWithCommentCount } from "~/models/post.server";
 import { getExternalPostURL } from "~/utils";
 
 const DotsButton = styled(IconButton, {
@@ -36,7 +36,7 @@ const Item = styled(DropdownMenuItem, {
 });
 
 interface Props {
-  post: Post;
+  post: PostWithCommentCount;
 }
 
 export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
