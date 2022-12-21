@@ -69,9 +69,7 @@ export const MoreOptionsDropdown: FC<Props> = ({ comment, setEditOpen }) => {
         Sil
       </Item>
     );
-    ownerItems.push(
-      <DropdownMenuSeparator key="separator"/>
-    );
+    ownerItems.push(<DropdownMenuSeparator key="separator" />);
   }
 
   return (

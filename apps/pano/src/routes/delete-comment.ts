@@ -13,7 +13,6 @@ export const action: ActionFunction = async ({ request }) => {
   const commentID = variables.id ? variables.id : null;
   invariant(commentID, "commentID is required");
 
-
   try {
     await deleteComment(commentID);
     return json({ status: 200 });

@@ -66,9 +66,7 @@ export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
         Sil
       </Item>
     );
-    ownerItems.push(
-      <DropdownMenuSeparator key="separator"/>
-    );
+    ownerItems.push(<DropdownMenuSeparator key="separator" />);
   }
 
   const menuItems = [...ownerItems];

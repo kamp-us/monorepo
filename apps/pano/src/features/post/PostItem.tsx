@@ -2,11 +2,10 @@ import { Box, ExternalLink, GappedBox, SmallLink, Text } from "@kampus/ui";
 import { useFetcher } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
-import type { Post } from "~/models/post.server";
-import { canUserEdit } from "../auth/can-user-edit";
 import { useUserContext } from "../auth/user-context";
 import { UpvoteButton } from "../upvote/UpvoteButton";
 import { MoreOptionsDropdown } from "~/features/post/MoreOptionsDropdown";
+import type { Post } from "~/models/post.server";
 
 type PostItemProps = {
   post: Post;
@@ -72,9 +71,9 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
             <SmallLink to={`/posts/${post.slug}-${post.id}`}>
               {post.comments.length} yorum
             </SmallLink>
-              <>
-                | <MoreOptionsDropdown post={post} />
-              </>
+            <>
+              | <MoreOptionsDropdown post={post} />
+            </>
           </GappedBox>
           {isContentVisible && (
             <GappedBox

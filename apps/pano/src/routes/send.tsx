@@ -10,7 +10,7 @@ import {
 } from "@kampus/ui";
 import type { ActionFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useActionData, useFetcher, useTransition } from "@remix-run/react";
+import { useFetcher, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import { createPost } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
