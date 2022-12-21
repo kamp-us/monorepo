@@ -6,13 +6,11 @@ created with remix.run
 
 # Development
 
-
 - Start the Application and Postgres Database in [Docker](https://www.docker.com/get-started):
-  
+
 ```sh
 docker-compose up --build
 ```
-
 
 The database seed script creates a new user with some data you can use to get started:
 

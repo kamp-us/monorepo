@@ -1,7 +1,7 @@
 import { GappedBox } from "@kampus/ui";
 import type { FC } from "react";
-import type { Post } from "~/models/post.server";
 import { PostItem } from "./PostItem";
+import type { Post } from "~/models/post.server";
 
 type PostListProps = {
   posts: Post[];

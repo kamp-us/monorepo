@@ -87,7 +87,7 @@ export const getPostBySlugAndId = async (slug: string, id: string) => {
 
   response?.comments.map((comment: Comment) => normalizeComment(comment));
 
-  return response
+  return response;
 };
 
 export const getPostsBySite = (site: string) => {
@@ -108,7 +108,11 @@ export const getPostsBySite = (site: string) => {
 export const searchPosts = (query: string) => {
   return prisma.post.findMany({
     where: {
-      OR: [{ title: { contains: query } }, { site: { contains: query } }, { content: { contains: query } }],
+      OR: [
+        { title: { contains: query } },
+        { site: { contains: query } },
+        { content: { contains: query } },
+      ],
     },
     include: {
       upvotes: true,

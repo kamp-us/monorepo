@@ -1,7 +1,7 @@
 name: Bug Report
 description: Create a bug report to help Pano improve
 title: "Title"
-labels: [ "Status: Needs Triage" ]
+labels: ["Status: Needs Triage"]
 body:
   - type: textarea
     id: description

@@ -8,9 +8,9 @@ import {
 } from "@kampus/ui";
 import { PlusIcon } from "@radix-ui/react-icons";
 import type { FC } from "react";
+import { SearchInput } from "./SearchInput";
 import { useUserContext } from "~/features/auth/user-context";
 import { UserDropdown } from "~/features/user-dropdown/UserDropdown";
-import { SearchInput } from "./SearchInput";
 
 export const Topnav: FC = () => {
   const user = useUserContext();

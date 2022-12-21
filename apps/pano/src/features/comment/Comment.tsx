@@ -12,7 +12,7 @@ import {
 } from "@kampus/ui";
 import { useFetcher, useTransition } from "@remix-run/react";
 import type { FC } from "react";
-import { useEffect, useRef, useState,useLayoutEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUserContext } from "../auth/user-context";
 import { CommentUpvoteButton } from "../upvote/UpvoteButton";
 import { EditCommentForm } from "./EditCommentForm";
@@ -82,7 +82,20 @@ export const CommentItem: FC<CommentProps> = ({
 
   return (
     <GappedBox css={{ flexDirection: "column" }}>
-      <GappedBox id={`c_${comment.id}`} tabIndex={0} css={{ flexDirection: "column", gap: 20,"transition":"background-color 0.3s" ,"&:target":{backgroundColor:"$amber4" ,borderRadius:"8px" ,padding:"5px"}}}>
+      <GappedBox
+        id={`c_${comment.id}`}
+        tabIndex={0}
+        css={{
+          flexDirection: "column",
+          gap: 20,
+          transition: "background-color 0.3s",
+          "&:target": {
+            backgroundColor: "$amber4",
+            borderRadius: "8px",
+            padding: "5px",
+          },
+        }}
+      >
         <GappedBox css={{ alignItems: "center" }}>
           <Text size="1">@{comment.owner.username}</Text>
           <Text size="1">
@@ -104,18 +117,17 @@ export const CommentItem: FC<CommentProps> = ({
           <MoreOptionsDropdown comment={comment} setEditOpen={setEditOpen} />
         </GappedBox>
         <Box>
-          { (editOpen && (
-            <EditCommentForm comment={comment} setEditOpen={setEditOpen}/>
+          {(editOpen && (
+            <EditCommentForm comment={comment} setEditOpen={setEditOpen} />
           )) || (
             <Text
-            size="3"
-            lineHeight="2"
-            css={{ color: "$gray12", whiteSpace: "break-spaces" }}
-          >
-            {comment.content}
-          </Text>
-          )
-          }
+              size="3"
+              lineHeight="2"
+              css={{ color: "$gray12", whiteSpace: "break-spaces" }}
+            >
+              {comment.content}
+            </Text>
+          )}
         </Box>
         <GappedBox css={{ alignItems: "center" }}>
           {user && (
@@ -168,7 +180,7 @@ export const CommentItem: FC<CommentProps> = ({
         {showComments &&
           comments.map((c) => {
             return (
-              <div key={c.id} >
+              <div key={c.id}>
                 <CommentItem
                   expanded={expanded}
                   comment={c}
