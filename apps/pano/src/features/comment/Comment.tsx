@@ -15,6 +15,7 @@ import type { FC } from "react";
 import { useEffect, useRef, useState,useLayoutEffect } from "react";
 import { useUserContext } from "../auth/user-context";
 import { CommentUpvoteButton } from "../upvote/UpvoteButton";
+import { EditCommentForm } from "./EditCommentForm";
 import { MoreOptionsDropdown } from "./MoreOptionsDropdown";
 import type { Comment } from "~/models/comment.server";
 type CommentProps = {
@@ -47,6 +48,7 @@ export const CommentItem: FC<CommentProps> = ({
   error,
 }) => {
   const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const [showComments, setShowComments] = useState(true);
   const user = useUserContext();
   const transition = useTransition();
@@ -69,11 +71,12 @@ export const CommentItem: FC<CommentProps> = ({
   useEffect(() => {
     if (!isCommenting && formRef.current) {
       setOpen(false);
+      setShowComments(true);
       formRef.current.reset();
       formRef.current.focus();
     }
   }, [isCommenting]);
-  useLayoutEffect(() => {
+  useEffect(() => {
     setShowComments(expanded);
   }, [expanded]);
 
@@ -98,16 +101,21 @@ export const CommentItem: FC<CommentProps> = ({
               value={JSON.stringify(variables)}
             />
           </fetcher.Form>
-          <MoreOptionsDropdown comment={comment} />
+          <MoreOptionsDropdown comment={comment} setEditOpen={setEditOpen} />
         </GappedBox>
         <Box>
-          <Text
+          { (editOpen && (
+            <EditCommentForm comment={comment} setEditOpen={setEditOpen}/>
+          )) || (
+            <Text
             size="3"
             lineHeight="2"
             css={{ color: "$gray12", whiteSpace: "break-spaces" }}
           >
             {comment.content}
           </Text>
+          )
+          }
         </Box>
         <GappedBox css={{ alignItems: "center" }}>
           {user && (

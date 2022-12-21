@@ -2,6 +2,8 @@ import { Prisma } from "@prisma/client";
 import slugify from "slugify";
 import { prisma } from "~/db.server";
 import { getSitename } from "~/features/url/get-sitename";
+import type { Comment } from "~/models/comment.server";
+import { normalizeComment } from "~/models/comment.server";
 
 const selectPostWithComment = Prisma.validator<Prisma.PostArgs>()({
   include: {
@@ -68,8 +70,8 @@ export const getPostById = (id: string) => {
   });
 };
 
-export const getPostBySlugAndId = (slug: string, id: string) => {
-  return prisma.post.findFirst({
+export const getPostBySlugAndId = async (slug: string, id: string) => {
+  const response = await prisma.post.findFirst({
     where: { slug, id },
     include: {
       upvotes: true,
@@ -82,6 +84,10 @@ export const getPostBySlugAndId = (slug: string, id: string) => {
       owner: true,
     },
   });
+
+  response?.comments.map((comment: Comment) => normalizeComment(comment));
+
+  return response
 };
 
 export const getPostsBySite = (site: string) => {
