@@ -70,6 +70,7 @@ export const CommentItem: FC<CommentProps> = ({
 
   useEffect(() => {
     if (!isCommenting && formRef.current) {
+      setOpen(false);
       setShowComments(true);
       formRef.current.reset();
       formRef.current.focus();
