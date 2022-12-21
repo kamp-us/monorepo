@@ -60,10 +60,8 @@ export const getAllPosts = () => {
     include: {
       upvotes: true,
       owner: true,
-      comments: {
-        include: {
-          owner: true,
-        },
+      _count: {
+        select: { comments: true },
       },
     },
   });
@@ -74,10 +72,8 @@ export const getPostById = (id: string) => {
     where: { id },
     include: {
       upvotes: true,
-      comments: {
-        include: {
-          owner: true,
-        },
+      _count: {
+        select: { comments: true },
       },
       owner: true,
     },
@@ -95,6 +91,9 @@ export const getPostBySlugAndId = async (slug: string, id: string) => {
           upvotes: true,
         },
       },
+      _count: {
+        select: { comments: true },
+      },
       owner: true,
     },
   });
@@ -109,10 +108,8 @@ export const getPostsBySite = (site: string) => {
     where: { site },
     include: {
       upvotes: true,
-      comments: {
-        include: {
-          owner: true,
-        },
+      _count: {
+        select: { comments: true },
       },
       owner: true,
     },
@@ -130,10 +127,8 @@ export const searchPosts = (query: string) => {
     },
     include: {
       upvotes: true,
-      comments: {
-        include: {
-          owner: true,
-        },
+      _count: {
+        select: { comments: true },
       },
       owner: true,
     },
