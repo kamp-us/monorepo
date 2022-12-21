@@ -80,6 +80,9 @@ export const getPostBySlugAndId = async (slug: string, id: string) => {
           owner: true,
           upvotes: true,
         },
+        orderBy: {
+          createdAt: "desc",
+        },
       },
       owner: true,
     },
