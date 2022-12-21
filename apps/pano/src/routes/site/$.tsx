@@ -3,7 +3,7 @@ import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { PostList } from "~/features/post/PostList";
-import type { Post } from "~/models/post.server";
+import type { PostWithCommentCount } from "~/models/post.server";
 import { getPostsBySite } from "~/models/post.server";
 
 type LoaderData = {
