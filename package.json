@@ -6,7 +6,9 @@
     "packages/*"
   ],
   "scripts": {
-    "prettier": "prettier --write ."
+    "build": "turbo run build",
+    "prettier": "prettier --write .",
+    "lint": "turbo run lint"
   },
   "repository": {
     "type": "git",
