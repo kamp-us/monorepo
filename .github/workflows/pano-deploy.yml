@@ -75,7 +75,8 @@ jobs:
       - name: Docker build
         uses: docker/build-push-action@v3
         with:
-          context: ./apps/pano
+          context: .
+          file: ./apps/pano/Dockerfile
           push: true
           tags: registry.fly.io/pano-dev:${{ github.ref_name }}-${{ github.sha }}
           build-args: |
@@ -118,7 +119,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/dev' }}
         uses: superfly/flyctl-actions@1.3
         with:
-          args: "deploy --app pano-dev --image registry.fly.io/pano-dev:${{ github.ref_name }}-${{ github.sha }}"
+          args: "deploy --app pano-dev --image registry.fly.io/pano-dev:${{ github.ref_name }}-${{ github.sha }} --config ./apps/pano/fly.toml"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
