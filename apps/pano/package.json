@@ -34,7 +34,9 @@
     "migrate:start:dev": "npm run prisma:migrate && npm run prisma:seed && remix dev",
     "dev:remix": "remix dev",
     "docker:prisma": "run-s prisma:migrate prisma:seed",
-    "docker": "run-p docker:prisma dev:remix"
+    "docker:dev": "run-p docker:prisma dev:remix",
+    "start": "NODE_ENV=production remix-serve ./build",
+    "docker:start": "NODE_ENV=production run-p prisma:migrate start"
   },
   "eslintIgnore": [
     "/node_modules",
