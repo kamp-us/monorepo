@@ -71,12 +71,25 @@ const Send = () => {
   const meta = fetcher.data?.meta;
   const error = fetcher.data?.error;
 
-  const onPaste = (url: string) => {
+  const onPaste = (event: any) => {
+    let url :string;
+    if(event.target?.value?.trim()){
+       url = event.target?.value?.trim();
+    } else {
+       url = event.clipboardData?.getData("text")
+    }
     const formData = new FormData();
     formData.set("url", url);
     fetcher.submit(formData, { method: "post", action: "/api/parse-meta" });
   };
-
+  const debounce = (event: any) => {
+    const oldUrl = event.target?.value
+    setTimeout(() => {
+        if(oldUrl === event.target?.value){
+          onPaste(event)
+        }
+    }, 1500)
+  }
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>
       <fetcher.Form method="post">
@@ -86,9 +99,8 @@ const Send = () => {
             id="url"
             name="url"
             size="2"
-            onPaste={(e) => {
-              onPaste(e.clipboardData.getData("text"));
-            }}
+            onPaste={onPaste}
+            onChange={debounce}
           />
           <Label htmlFor="title">Başlık</Label>
           <Input
@@ -101,6 +113,7 @@ const Send = () => {
           <Textarea
             css={{ width: "auto", cursor: "text", resize: "both" }}
             name="content"
+            defaultValue={meta ? meta.description : ""}
             rows={4}
           />
           <Box>
