@@ -1,27 +1,27 @@
 version: "3.3"
 services:
-  app:
-    build:
-      context: ../../
-      dockerfile: ./apps/pano/Dockerfile.dev
-    entrypoint: ["turbo", "run", "docker", "--scope=@kampus-apps/pano"]
-    ports:
-      - "3000:3000"
-      - "8002:8002"
-    environment:
-      - DATABASE_URL=postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public&connect_timeout=300
-      - SESSION_SECRET=sessionsecret
-      - NODE_ENV=development
-    volumes:
-      - ./src:/app/apps/pano/src
-      - ./prisma:/app/apps/pano/prisma
-      - ./public:/app/apps/pano/public
-      - ./remix.config.js:/app/apps/pano/remix.config.js
-      - ./tsconfig.json:/app/apps/pano/tsconfig.json
-    networks:
-      - pano
-    depends_on:
-      - postgres
+  # app:
+  #   build:
+  #     context: ../../
+  #     dockerfile: ./apps/pano/Dockerfile.dev
+  #   entrypoint: ["turbo", "run", "docker", "--scope=@kampus-apps/pano"]
+  #   ports:
+  #     - "3000:3000"
+  #     - "8002:8002"
+  #   environment:
+  #     - DATABASE_URL=postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public&connect_timeout=300
+  #     - SESSION_SECRET=sessionsecret
+  #     - NODE_ENV=development
+  #   volumes:
+  #     - ./src:/app/apps/pano/src
+  #     - ./prisma:/app/apps/pano/prisma
+  #     - ./public:/app/apps/pano/public
+  #     - ./remix.config.js:/app/apps/pano/remix.config.js
+  #     - ./tsconfig.json:/app/apps/pano/tsconfig.json
+  #   networks:
+  #     - pano
+  #   depends_on:
+  #     - postgres
   postgres:
     # match the version to the RDS
     image: postgres:14.2-alpine

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@kampus/layout-tree": "*",
     "@kampus/ui": "*",
     "@prisma/client": "^4.2.1",
     "@radix-ui/react-icons": "^1.1.0",
@@ -16,8 +17,11 @@
     "react": "^18.0.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.0.0",
+    "react-resizable-panels": "^0.0.11",
     "react-router-dom": "^6.2.2",
     "react-share": "^4.4.1",
+    "react-twitch-embed": "^3.0.1",
+    "react-virtualized-auto-sizer": "^1.0.7",
     "slugify": "^1.6.5",
     "tiny-invariant": "^1.2.0"
   },
@@ -57,6 +61,7 @@
     "@types/react": "^17.0.43",
     "@types/react-copy-to-clipboard": "^5.0.4",
     "@types/react-dom": "^17.0.14",
+    "@types/react-virtualized-auto-sizer": "^1.0.1",
     "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.6.1",
