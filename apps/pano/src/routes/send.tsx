@@ -71,11 +71,15 @@ const Send = () => {
   const meta = fetcher.data?.meta;
   const error = fetcher.data?.error;
 
-  const onPaste = (url: string) => {
-    const formData = new FormData();
-    formData.set("url", url);
-    fetcher.submit(formData, { method: "post", action: "/api/parse-meta" });
-  };
+  const fetchMetaTags = (url: string) => {
+    if (validateURL(url)) {
+      const formData = new FormData();
+      formData.set("url", url);
+      fetcher.submit(formData, { method: "post", action: "/api/parse-meta" });
+    }
+  }
+
+
 
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>
@@ -87,7 +91,10 @@ const Send = () => {
             name="url"
             size="2"
             onPaste={(e) => {
-              onPaste(e.clipboardData.getData("text"));
+              fetchMetaTags(e.clipboardData.getData("text"));
+            }}
+            onBlur={(e) => {
+              fetchMetaTags(e.target.value);
             }}
           />
           <Label htmlFor="title">Başlık</Label>
