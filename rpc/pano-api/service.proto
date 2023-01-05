@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package kampus.panoapi;
+option go_package = "/rpc/pano-api";
+
+service PanoAPI {
+  rpc GetPost(GetPostRequest) returns (Post);
+  rpc CreatePost(CreatePostRequest) returns (Post);
+}
+
+// Post Start
+message GetPostRequest {
+  string ID = 1;
+}
+
+message CreatePostRequest {
+  string title = 1;
+  string url = 2;
+  string content = 3;
+  string userID = 4;
+}
+
+message Post {
+  string title = 1;
+  string url = 2;
+  string content = 3;
+  string slug = 4;
+  string userID = 5;
+}
