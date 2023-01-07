@@ -31,7 +31,7 @@ func (b *PostgreSQLBackend) GetPost(ctx context.Context, id string) (*models.Pos
 }
 
 func (b *PostgreSQLBackend) CreatePost(ctx context.Context, title string, url string, content string, userId string) (*models.Post, error) {
-	slug := slug.Make(title)
+	slug := slug.MakeLang(title, "tr")
 
 	post := models.Post{
 		Title:   title,
