@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -36,5 +37,6 @@ func main() {
 	mux := http.NewServeMux()
 	mux.Handle(twirpHander.PathPrefix(), twirpHander)
 
+	fmt.Println("Listening to :8080")
 	http.ListenAndServe(":8080", mux)
 }
