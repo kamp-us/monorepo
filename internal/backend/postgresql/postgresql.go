@@ -58,3 +58,27 @@ func (b *PostgreSQLBackend) GetAllPosts(ctx context.Context) ([]*models.Post, er
 
 	return posts, nil
 }
+
+func (b *PostgreSQLBackend) UpdatePost(ctx context.Context, id string, title *string, url *string, content *string) error {
+	post := models.Post{}
+	result := b.DB.First(&post, "id = ?", id)
+	if result.Error != nil {
+		return result.Error
+	}
+
+	slug := slug.MakeLang(*title, "tr")
+
+	updates := models.Post{
+		Title:   *title,
+		Url:     *url,
+		Content: *content,
+		Slug:    slug,
+	}
+
+	result = b.DB.Model(&post).Updates(updates)
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}

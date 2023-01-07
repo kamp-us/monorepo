@@ -3,10 +3,14 @@ syntax = "proto3";
 package kampus.panoapi;
 option go_package = "/rpc/pano-api";
 
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+
 service PanoAPI {
   rpc GetPost(GetPostRequest) returns (Post);
   rpc CreatePost(CreatePostRequest) returns (Post);
   rpc GetAllPosts(GetPostsRequest) returns (GetPostsResponse);
+  rpc UpdatePost(UpdatePostRequest) returns (google.protobuf.Empty);
 }
 
 // Post Start
@@ -21,6 +25,13 @@ message CreatePostRequest {
   string url = 2;
   string content = 3;
   string userID = 4;
+}
+
+message UpdatePostRequest {
+  string ID = 1;
+  google.protobuf.StringValue title = 2;
+  google.protobuf.StringValue url = 3;
+  google.protobuf.StringValue content = 4;
 }
 
 message GetPostsResponse {
