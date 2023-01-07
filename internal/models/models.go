@@ -1,8 +1,12 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"github.com/google/uuid"
+	"gorm.io/gorm"
+)
 
 type Post struct {
+	ID      uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4()"`
 	Title   string
 	Url     string
 	Content string
