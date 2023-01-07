@@ -6,9 +6,12 @@ option go_package = "/rpc/pano-api";
 service PanoAPI {
   rpc GetPost(GetPostRequest) returns (Post);
   rpc CreatePost(CreatePostRequest) returns (Post);
+  rpc GetAllPosts(GetPostsRequest) returns (GetPostsResponse);
 }
 
 // Post Start
+message GetPostsRequest {}
+
 message GetPostRequest {
   string ID = 1;
 }
@@ -18,6 +21,10 @@ message CreatePostRequest {
   string url = 2;
   string content = 3;
   string userID = 4;
+}
+
+message GetPostsResponse {
+  repeated Post postData = 1;
 }
 
 message Post {

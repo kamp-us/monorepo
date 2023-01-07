@@ -48,3 +48,13 @@ func (b *PostgreSQLBackend) CreatePost(ctx context.Context, title string, url st
 
 	return &post, nil
 }
+
+func (b *PostgreSQLBackend) GetAllPosts(ctx context.Context) ([]*models.Post, error) {
+	var posts []*models.Post
+	result := b.DB.Find(&posts)
+	if result == nil {
+		return nil, result.Error
+	}
+
+	return posts, nil
+}
