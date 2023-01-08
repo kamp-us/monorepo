@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package kampus.metadata.parser;
+option go_package = "/rpc/html-metadata-parser";
+
+service MetadataParser {
+  rpc ParseMe(ParseMeRequest) returns (ParseMeResponse);
+}
+
+message ParseMeRequest {
+  string url = 1;
+}
+
+message ParseMeResponse {
+  string title = 1;
+}
