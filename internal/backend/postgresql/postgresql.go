@@ -82,3 +82,18 @@ func (b *PostgreSQLBackend) UpdatePost(ctx context.Context, id string, title *st
 
 	return nil
 }
+
+func (b *PostgreSQLBackend) DeletePost(ctx context.Context, id string) error {
+	post := models.Post{}
+	result := b.DB.First(&post, "id = ?", id)
+	if result.Error != nil {
+		return result.Error
+	}
+
+	result = b.DB.Delete(&post)
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}

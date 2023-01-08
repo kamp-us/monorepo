@@ -11,4 +11,5 @@ type Backender interface {
 	CreatePost(ctx context.Context, title string, url string, content string, userId string) (*models.Post, error)
 	GetAllPosts(ctx context.Context) ([]*models.Post, error)
 	UpdatePost(ctx context.Context, id string, title *string, url *string, content *string) error
+	DeletePost(ctx context.Context, id string) error
 }

@@ -11,6 +11,7 @@ service PanoAPI {
   rpc CreatePost(CreatePostRequest) returns (Post);
   rpc GetAllPosts(GetPostsRequest) returns (GetPostsResponse);
   rpc UpdatePost(UpdatePostRequest) returns (google.protobuf.Empty);
+  rpc DeletePost(DeletePostRequest) returns (google.protobuf.Empty);
 }
 
 // Post Start
@@ -32,6 +33,10 @@ message UpdatePostRequest {
   google.protobuf.StringValue title = 2;
   google.protobuf.StringValue url = 3;
   google.protobuf.StringValue content = 4;
+}
+
+message DeletePostRequest {
+  string ID = 1;
 }
 
 message GetPostsResponse {
