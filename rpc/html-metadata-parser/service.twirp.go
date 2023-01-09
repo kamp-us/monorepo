@@ -27,28 +27,28 @@ import url "net/url"
 // See https://twitchtv.github.io/twirp/docs/version_matrix.html
 const _ = twirp.TwirpPackageMinVersion_8_1_0
 
-// ========================
-// MetadataParser Interface
-// ========================
+// ============================
+// HTMLMetadataParser Interface
+// ============================
 
-type MetadataParser interface {
-	ParseMe(context.Context, *ParseMeRequest) (*ParseMeResponse, error)
+type HTMLMetadataParser interface {
+	Parse(context.Context, *ParseRequest) (*ParseResponse, error)
 }
 
-// ==============================
-// MetadataParser Protobuf Client
-// ==============================
+// ==================================
+// HTMLMetadataParser Protobuf Client
+// ==================================
 
-type metadataParserProtobufClient struct {
+type hTMLMetadataParserProtobufClient struct {
 	client      HTTPClient
 	urls        [1]string
 	interceptor twirp.Interceptor
 	opts        twirp.ClientOptions
 }
 
-// NewMetadataParserProtobufClient creates a Protobuf client that implements the MetadataParser interface.
+// NewHTMLMetadataParserProtobufClient creates a Protobuf client that implements the HTMLMetadataParser interface.
 // It communicates using Protobuf and can be configured with a custom HTTPClient.
-func NewMetadataParserProtobufClient(baseURL string, client HTTPClient, opts ...twirp.ClientOption) MetadataParser {
+func NewHTMLMetadataParserProtobufClient(baseURL string, client HTTPClient, opts ...twirp.ClientOption) HTMLMetadataParser {
 	if c, ok := client.(*http.Client); ok {
 		client = withoutRedirects(c)
 	}
@@ -68,12 +68,12 @@ func NewMetadataParserProtobufClient(baseURL string, client HTTPClient, opts ...
 
 	// Build method URLs: <baseURL>[<prefix>]/<package>.<Service>/<Method>
 	serviceURL := sanitizeBaseURL(baseURL)
-	serviceURL += baseServicePath(pathPrefix, "kampus.metadata.parser", "MetadataParser")
+	serviceURL += baseServicePath(pathPrefix, "kampus.metadata.parser", "HTMLMetadataParser")
 	urls := [1]string{
-		serviceURL + "ParseMe",
+		serviceURL + "Parse",
 	}
 
-	return &metadataParserProtobufClient{
+	return &hTMLMetadataParserProtobufClient{
 		client:      client,
 		urls:        urls,
 		interceptor: twirp.ChainInterceptors(clientOpts.Interceptors...),
@@ -81,26 +81,26 @@ func NewMetadataParserProtobufClient(baseURL string, client HTTPClient, opts ...
 	}
 }
 
-func (c *metadataParserProtobufClient) ParseMe(ctx context.Context, in *ParseMeRequest) (*ParseMeResponse, error) {
+func (c *hTMLMetadataParserProtobufClient) Parse(ctx context.Context, in *ParseRequest) (*ParseResponse, error) {
 	ctx = ctxsetters.WithPackageName(ctx, "kampus.metadata.parser")
-	ctx = ctxsetters.WithServiceName(ctx, "MetadataParser")
-	ctx = ctxsetters.WithMethodName(ctx, "ParseMe")
-	caller := c.callParseMe
+	ctx = ctxsetters.WithServiceName(ctx, "HTMLMetadataParser")
+	ctx = ctxsetters.WithMethodName(ctx, "Parse")
+	caller := c.callParse
 	if c.interceptor != nil {
-		caller = func(ctx context.Context, req *ParseMeRequest) (*ParseMeResponse, error) {
+		caller = func(ctx context.Context, req *ParseRequest) (*ParseResponse, error) {
 			resp, err := c.interceptor(
 				func(ctx context.Context, req interface{}) (interface{}, error) {
-					typedReq, ok := req.(*ParseMeRequest)
+					typedReq, ok := req.(*ParseRequest)
 					if !ok {
-						return nil, twirp.InternalError("failed type assertion req.(*ParseMeRequest) when calling interceptor")
+						return nil, twirp.InternalError("failed type assertion req.(*ParseRequest) when calling interceptor")
 					}
-					return c.callParseMe(ctx, typedReq)
+					return c.callParse(ctx, typedReq)
 				},
 			)(ctx, req)
 			if resp != nil {
-				typedResp, ok := resp.(*ParseMeResponse)
+				typedResp, ok := resp.(*ParseResponse)
 				if !ok {
-					return nil, twirp.InternalError("failed type assertion resp.(*ParseMeResponse) when calling interceptor")
+					return nil, twirp.InternalError("failed type assertion resp.(*ParseResponse) when calling interceptor")
 				}
 				return typedResp, err
 			}
@@ -110,8 +110,8 @@ func (c *metadataParserProtobufClient) ParseMe(ctx context.Context, in *ParseMeR
 	return caller(ctx, in)
 }
 
-func (c *metadataParserProtobufClient) callParseMe(ctx context.Context, in *ParseMeRequest) (*ParseMeResponse, error) {
-	out := new(ParseMeResponse)
+func (c *hTMLMetadataParserProtobufClient) callParse(ctx context.Context, in *ParseRequest) (*ParseResponse, error) {
+	out := new(ParseResponse)
 	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[0], in, out)
 	if err != nil {
 		twerr, ok := err.(twirp.Error)
@@ -127,20 +127,20 @@ func (c *metadataParserProtobufClient) callParseMe(ctx context.Context, in *Pars
 	return out, nil
 }
 
-// ==========================
-// MetadataParser JSON Client
-// ==========================
+// ==============================
+// HTMLMetadataParser JSON Client
+// ==============================
 
-type metadataParserJSONClient struct {
+type hTMLMetadataParserJSONClient struct {
 	client      HTTPClient
 	urls        [1]string
 	interceptor twirp.Interceptor
 	opts        twirp.ClientOptions
 }
 
-// NewMetadataParserJSONClient creates a JSON client that implements the MetadataParser interface.
+// NewHTMLMetadataParserJSONClient creates a JSON client that implements the HTMLMetadataParser interface.
 // It communicates using JSON and can be configured with a custom HTTPClient.
-func NewMetadataParserJSONClient(baseURL string, client HTTPClient, opts ...twirp.ClientOption) MetadataParser {
+func NewHTMLMetadataParserJSONClient(baseURL string, client HTTPClient, opts ...twirp.ClientOption) HTMLMetadataParser {
 	if c, ok := client.(*http.Client); ok {
 		client = withoutRedirects(c)
 	}
@@ -160,12 +160,12 @@ func NewMetadataParserJSONClient(baseURL string, client HTTPClient, opts ...twir
 
 	// Build method URLs: <baseURL>[<prefix>]/<package>.<Service>/<Method>
 	serviceURL := sanitizeBaseURL(baseURL)
-	serviceURL += baseServicePath(pathPrefix, "kampus.metadata.parser", "MetadataParser")
+	serviceURL += baseServicePath(pathPrefix, "kampus.metadata.parser", "HTMLMetadataParser")
 	urls := [1]string{
-		serviceURL + "ParseMe",
+		serviceURL + "Parse",
 	}
 
-	return &metadataParserJSONClient{
+	return &hTMLMetadataParserJSONClient{
 		client:      client,
 		urls:        urls,
 		interceptor: twirp.ChainInterceptors(clientOpts.Interceptors...),
@@ -173,26 +173,26 @@ func NewMetadataParserJSONClient(baseURL string, client HTTPClient, opts ...twir
 	}
 }
 
-func (c *metadataParserJSONClient) ParseMe(ctx context.Context, in *ParseMeRequest) (*ParseMeResponse, error) {
+func (c *hTMLMetadataParserJSONClient) Parse(ctx context.Context, in *ParseRequest) (*ParseResponse, error) {
 	ctx = ctxsetters.WithPackageName(ctx, "kampus.metadata.parser")
-	ctx = ctxsetters.WithServiceName(ctx, "MetadataParser")
-	ctx = ctxsetters.WithMethodName(ctx, "ParseMe")
-	caller := c.callParseMe
+	ctx = ctxsetters.WithServiceName(ctx, "HTMLMetadataParser")
+	ctx = ctxsetters.WithMethodName(ctx, "Parse")
+	caller := c.callParse
 	if c.interceptor != nil {
-		caller = func(ctx context.Context, req *ParseMeRequest) (*ParseMeResponse, error) {
+		caller = func(ctx context.Context, req *ParseRequest) (*ParseResponse, error) {
 			resp, err := c.interceptor(
 				func(ctx context.Context, req interface{}) (interface{}, error) {
-					typedReq, ok := req.(*ParseMeRequest)
+					typedReq, ok := req.(*ParseRequest)
 					if !ok {
-						return nil, twirp.InternalError("failed type assertion req.(*ParseMeRequest) when calling interceptor")
+						return nil, twirp.InternalError("failed type assertion req.(*ParseRequest) when calling interceptor")
 					}
-					return c.callParseMe(ctx, typedReq)
+					return c.callParse(ctx, typedReq)
 				},
 			)(ctx, req)
 			if resp != nil {
-				typedResp, ok := resp.(*ParseMeResponse)
+				typedResp, ok := resp.(*ParseResponse)
 				if !ok {
-					return nil, twirp.InternalError("failed type assertion resp.(*ParseMeResponse) when calling interceptor")
+					return nil, twirp.InternalError("failed type assertion resp.(*ParseResponse) when calling interceptor")
 				}
 				return typedResp, err
 			}
@@ -202,8 +202,8 @@ func (c *metadataParserJSONClient) ParseMe(ctx context.Context, in *ParseMeReque
 	return caller(ctx, in)
 }
 
-func (c *metadataParserJSONClient) callParseMe(ctx context.Context, in *ParseMeRequest) (*ParseMeResponse, error) {
-	out := new(ParseMeResponse)
+func (c *hTMLMetadataParserJSONClient) callParse(ctx context.Context, in *ParseRequest) (*ParseResponse, error) {
+	out := new(ParseResponse)
 	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[0], in, out)
 	if err != nil {
 		twerr, ok := err.(twirp.Error)
@@ -219,12 +219,12 @@ func (c *metadataParserJSONClient) callParseMe(ctx context.Context, in *ParseMeR
 	return out, nil
 }
 
-// =============================
-// MetadataParser Server Handler
-// =============================
+// =================================
+// HTMLMetadataParser Server Handler
+// =================================
 
-type metadataParserServer struct {
-	MetadataParser
+type hTMLMetadataParserServer struct {
+	HTMLMetadataParser
 	interceptor      twirp.Interceptor
 	hooks            *twirp.ServerHooks
 	pathPrefix       string // prefix for routing
@@ -232,10 +232,10 @@ type metadataParserServer struct {
 	jsonCamelCase    bool   // JSON fields are serialized as lowerCamelCase rather than keeping the original proto names
 }
 
-// NewMetadataParserServer builds a TwirpServer that can be used as an http.Handler to handle
+// NewHTMLMetadataParserServer builds a TwirpServer that can be used as an http.Handler to handle
 // HTTP requests that are routed to the right method in the provided svc implementation.
 // The opts are twirp.ServerOption modifiers, for example twirp.WithServerHooks(hooks).
-func NewMetadataParserServer(svc MetadataParser, opts ...interface{}) TwirpServer {
+func NewHTMLMetadataParserServer(svc HTMLMetadataParser, opts ...interface{}) TwirpServer {
 	serverOpts := newServerOpts(opts)
 
 	// Using ReadOpt allows backwards and forwards compatibility with new options in the future
@@ -248,24 +248,24 @@ func NewMetadataParserServer(svc MetadataParser, opts ...interface{}) TwirpServe
 		pathPrefix = "/twirp" // default prefix
 	}
 
-	return &metadataParserServer{
-		MetadataParser:   svc,
-		hooks:            serverOpts.Hooks,
-		interceptor:      twirp.ChainInterceptors(serverOpts.Interceptors...),
-		pathPrefix:       pathPrefix,
-		jsonSkipDefaults: jsonSkipDefaults,
-		jsonCamelCase:    jsonCamelCase,
+	return &hTMLMetadataParserServer{
+		HTMLMetadataParser: svc,
+		hooks:              serverOpts.Hooks,
+		interceptor:        twirp.ChainInterceptors(serverOpts.Interceptors...),
+		pathPrefix:         pathPrefix,
+		jsonSkipDefaults:   jsonSkipDefaults,
+		jsonCamelCase:      jsonCamelCase,
 	}
 }
 
 // writeError writes an HTTP response with a valid Twirp error format, and triggers hooks.
 // If err is not a twirp.Error, it will get wrapped with twirp.InternalErrorWith(err)
-func (s *metadataParserServer) writeError(ctx context.Context, resp http.ResponseWriter, err error) {
+func (s *hTMLMetadataParserServer) writeError(ctx context.Context, resp http.ResponseWriter, err error) {
 	writeError(ctx, resp, err, s.hooks)
 }
 
 // handleRequestBodyError is used to handle error when the twirp server cannot read request
-func (s *metadataParserServer) handleRequestBodyError(ctx context.Context, resp http.ResponseWriter, msg string, err error) {
+func (s *hTMLMetadataParserServer) handleRequestBodyError(ctx context.Context, resp http.ResponseWriter, msg string, err error) {
 	if context.Canceled == ctx.Err() {
 		s.writeError(ctx, resp, twirp.NewError(twirp.Canceled, "failed to read request: context canceled"))
 		return
@@ -277,16 +277,16 @@ func (s *metadataParserServer) handleRequestBodyError(ctx context.Context, resp 
 	s.writeError(ctx, resp, twirp.WrapError(malformedRequestError(msg), err))
 }
 
-// MetadataParserPathPrefix is a convenience constant that may identify URL paths.
+// HTMLMetadataParserPathPrefix is a convenience constant that may identify URL paths.
 // Should be used with caution, it only matches routes generated by Twirp Go clients,
 // with the default "/twirp" prefix and default CamelCase service and method names.
 // More info: https://twitchtv.github.io/twirp/docs/routing.html
-const MetadataParserPathPrefix = "/twirp/kampus.metadata.parser.MetadataParser/"
+const HTMLMetadataParserPathPrefix = "/twirp/kampus.metadata.parser.HTMLMetadataParser/"
 
-func (s *metadataParserServer) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
+func (s *hTMLMetadataParserServer) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	ctx := req.Context()
 	ctx = ctxsetters.WithPackageName(ctx, "kampus.metadata.parser")
-	ctx = ctxsetters.WithServiceName(ctx, "MetadataParser")
+	ctx = ctxsetters.WithServiceName(ctx, "HTMLMetadataParser")
 	ctx = ctxsetters.WithResponseWriter(ctx, resp)
 
 	var err error
@@ -304,7 +304,7 @@ func (s *metadataParserServer) ServeHTTP(resp http.ResponseWriter, req *http.Req
 
 	// Verify path format: [<prefix>]/<package>.<Service>/<Method>
 	prefix, pkgService, method := parseTwirpPath(req.URL.Path)
-	if pkgService != "kampus.metadata.parser.MetadataParser" {
+	if pkgService != "kampus.metadata.parser.HTMLMetadataParser" {
 		msg := fmt.Sprintf("no handler for path %q", req.URL.Path)
 		s.writeError(ctx, resp, badRouteError(msg, req.Method, req.URL.Path))
 		return
@@ -316,8 +316,8 @@ func (s *metadataParserServer) ServeHTTP(resp http.ResponseWriter, req *http.Req
 	}
 
 	switch method {
-	case "ParseMe":
-		s.serveParseMe(ctx, resp, req)
+	case "Parse":
+		s.serveParse(ctx, resp, req)
 		return
 	default:
 		msg := fmt.Sprintf("no handler for path %q", req.URL.Path)
@@ -326,7 +326,7 @@ func (s *metadataParserServer) ServeHTTP(resp http.ResponseWriter, req *http.Req
 	}
 }
 
-func (s *metadataParserServer) serveParseMe(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+func (s *hTMLMetadataParserServer) serveParse(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
 	header := req.Header.Get("Content-Type")
 	i := strings.Index(header, ";")
 	if i == -1 {
@@ -334,9 +334,9 @@ func (s *metadataParserServer) serveParseMe(ctx context.Context, resp http.Respo
 	}
 	switch strings.TrimSpace(strings.ToLower(header[:i])) {
 	case "application/json":
-		s.serveParseMeJSON(ctx, resp, req)
+		s.serveParseJSON(ctx, resp, req)
 	case "application/protobuf":
-		s.serveParseMeProtobuf(ctx, resp, req)
+		s.serveParseProtobuf(ctx, resp, req)
 	default:
 		msg := fmt.Sprintf("unexpected Content-Type: %q", req.Header.Get("Content-Type"))
 		twerr := badRouteError(msg, req.Method, req.URL.Path)
@@ -344,9 +344,9 @@ func (s *metadataParserServer) serveParseMe(ctx context.Context, resp http.Respo
 	}
 }
 
-func (s *metadataParserServer) serveParseMeJSON(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+func (s *hTMLMetadataParserServer) serveParseJSON(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
 	var err error
-	ctx = ctxsetters.WithMethodName(ctx, "ParseMe")
+	ctx = ctxsetters.WithMethodName(ctx, "Parse")
 	ctx, err = callRequestRouted(ctx, s.hooks)
 	if err != nil {
 		s.writeError(ctx, resp, err)
@@ -359,29 +359,29 @@ func (s *metadataParserServer) serveParseMeJSON(ctx context.Context, resp http.R
 		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
 		return
 	}
-	reqContent := new(ParseMeRequest)
+	reqContent := new(ParseRequest)
 	unmarshaler := protojson.UnmarshalOptions{DiscardUnknown: true}
 	if err = unmarshaler.Unmarshal(rawReqBody, reqContent); err != nil {
 		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
 		return
 	}
 
-	handler := s.MetadataParser.ParseMe
+	handler := s.HTMLMetadataParser.Parse
 	if s.interceptor != nil {
-		handler = func(ctx context.Context, req *ParseMeRequest) (*ParseMeResponse, error) {
+		handler = func(ctx context.Context, req *ParseRequest) (*ParseResponse, error) {
 			resp, err := s.interceptor(
 				func(ctx context.Context, req interface{}) (interface{}, error) {
-					typedReq, ok := req.(*ParseMeRequest)
+					typedReq, ok := req.(*ParseRequest)
 					if !ok {
-						return nil, twirp.InternalError("failed type assertion req.(*ParseMeRequest) when calling interceptor")
+						return nil, twirp.InternalError("failed type assertion req.(*ParseRequest) when calling interceptor")
 					}
-					return s.MetadataParser.ParseMe(ctx, typedReq)
+					return s.HTMLMetadataParser.Parse(ctx, typedReq)
 				},
 			)(ctx, req)
 			if resp != nil {
-				typedResp, ok := resp.(*ParseMeResponse)
+				typedResp, ok := resp.(*ParseResponse)
 				if !ok {
-					return nil, twirp.InternalError("failed type assertion resp.(*ParseMeResponse) when calling interceptor")
+					return nil, twirp.InternalError("failed type assertion resp.(*ParseResponse) when calling interceptor")
 				}
 				return typedResp, err
 			}
@@ -390,7 +390,7 @@ func (s *metadataParserServer) serveParseMeJSON(ctx context.Context, resp http.R
 	}
 
 	// Call service method
-	var respContent *ParseMeResponse
+	var respContent *ParseResponse
 	func() {
 		defer ensurePanicResponses(ctx, resp, s.hooks)
 		respContent, err = handler(ctx, reqContent)
@@ -401,7 +401,7 @@ func (s *metadataParserServer) serveParseMeJSON(ctx context.Context, resp http.R
 		return
 	}
 	if respContent == nil {
-		s.writeError(ctx, resp, twirp.InternalError("received a nil *ParseMeResponse and nil error while calling ParseMe. nil responses are not supported"))
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *ParseResponse and nil error while calling Parse. nil responses are not supported"))
 		return
 	}
 
@@ -427,9 +427,9 @@ func (s *metadataParserServer) serveParseMeJSON(ctx context.Context, resp http.R
 	callResponseSent(ctx, s.hooks)
 }
 
-func (s *metadataParserServer) serveParseMeProtobuf(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+func (s *hTMLMetadataParserServer) serveParseProtobuf(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
 	var err error
-	ctx = ctxsetters.WithMethodName(ctx, "ParseMe")
+	ctx = ctxsetters.WithMethodName(ctx, "Parse")
 	ctx, err = callRequestRouted(ctx, s.hooks)
 	if err != nil {
 		s.writeError(ctx, resp, err)
@@ -441,28 +441,28 @@ func (s *metadataParserServer) serveParseMeProtobuf(ctx context.Context, resp ht
 		s.handleRequestBodyError(ctx, resp, "failed to read request body", err)
 		return
 	}
-	reqContent := new(ParseMeRequest)
+	reqContent := new(ParseRequest)
 	if err = proto.Unmarshal(buf, reqContent); err != nil {
 		s.writeError(ctx, resp, malformedRequestError("the protobuf request could not be decoded"))
 		return
 	}
 
-	handler := s.MetadataParser.ParseMe
+	handler := s.HTMLMetadataParser.Parse
 	if s.interceptor != nil {
-		handler = func(ctx context.Context, req *ParseMeRequest) (*ParseMeResponse, error) {
+		handler = func(ctx context.Context, req *ParseRequest) (*ParseResponse, error) {
 			resp, err := s.interceptor(
 				func(ctx context.Context, req interface{}) (interface{}, error) {
-					typedReq, ok := req.(*ParseMeRequest)
+					typedReq, ok := req.(*ParseRequest)
 					if !ok {
-						return nil, twirp.InternalError("failed type assertion req.(*ParseMeRequest) when calling interceptor")
+						return nil, twirp.InternalError("failed type assertion req.(*ParseRequest) when calling interceptor")
 					}
-					return s.MetadataParser.ParseMe(ctx, typedReq)
+					return s.HTMLMetadataParser.Parse(ctx, typedReq)
 				},
 			)(ctx, req)
 			if resp != nil {
-				typedResp, ok := resp.(*ParseMeResponse)
+				typedResp, ok := resp.(*ParseResponse)
 				if !ok {
-					return nil, twirp.InternalError("failed type assertion resp.(*ParseMeResponse) when calling interceptor")
+					return nil, twirp.InternalError("failed type assertion resp.(*ParseResponse) when calling interceptor")
 				}
 				return typedResp, err
 			}
@@ -471,7 +471,7 @@ func (s *metadataParserServer) serveParseMeProtobuf(ctx context.Context, resp ht
 	}
 
 	// Call service method
-	var respContent *ParseMeResponse
+	var respContent *ParseResponse
 	func() {
 		defer ensurePanicResponses(ctx, resp, s.hooks)
 		respContent, err = handler(ctx, reqContent)
@@ -482,7 +482,7 @@ func (s *metadataParserServer) serveParseMeProtobuf(ctx context.Context, resp ht
 		return
 	}
 	if respContent == nil {
-		s.writeError(ctx, resp, twirp.InternalError("received a nil *ParseMeResponse and nil error while calling ParseMe. nil responses are not supported"))
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *ParseResponse and nil error while calling Parse. nil responses are not supported"))
 		return
 	}
 
@@ -506,19 +506,19 @@ func (s *metadataParserServer) serveParseMeProtobuf(ctx context.Context, resp ht
 	callResponseSent(ctx, s.hooks)
 }
 
-func (s *metadataParserServer) ServiceDescriptor() ([]byte, int) {
+func (s *hTMLMetadataParserServer) ServiceDescriptor() ([]byte, int) {
 	return twirpFileDescriptor0, 0
 }
 
-func (s *metadataParserServer) ProtocGenTwirpVersion() string {
+func (s *hTMLMetadataParserServer) ProtocGenTwirpVersion() string {
 	return "v8.1.3"
 }
 
 // PathPrefix returns the base service path, in the form: "/<prefix>/<package>.<Service>/"
 // that is everything in a Twirp route except for the <Method>. This can be used for routing,
 // for example to identify the requests that are targeted to this service in a mux.
-func (s *metadataParserServer) PathPrefix() string {
-	return baseServicePath(s.pathPrefix, "kampus.metadata.parser", "MetadataParser")
+func (s *hTMLMetadataParserServer) PathPrefix() string {
+	return baseServicePath(s.pathPrefix, "kampus.metadata.parser", "HTMLMetadataParser")
 }
 
 // =====
@@ -1087,17 +1087,17 @@ func callClientError(ctx context.Context, h *twirp.ClientHooks, err twirp.Error)
 }
 
 var twirpFileDescriptor0 = []byte{
-	// 178 bytes of a gzipped FileDescriptorProto
+	// 180 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0x2b, 0x2a, 0x48, 0xd6,
 	0xcf, 0x28, 0xc9, 0xcd, 0xd1, 0xcd, 0x4d, 0x2d, 0x49, 0x4c, 0x49, 0x2c, 0x49, 0xd4, 0x2d, 0x48,
 	0x2c, 0x2a, 0x4e, 0x2d, 0xd2, 0x2f, 0x4e, 0x2d, 0x2a, 0xcb, 0x4c, 0x4e, 0xd5, 0x2b, 0x28, 0xca,
 	0x2f, 0xc9, 0x17, 0x12, 0xcb, 0x4e, 0xcc, 0x2d, 0x28, 0x2d, 0xd6, 0x83, 0xa9, 0xd2, 0x83, 0xa8,
-	0x52, 0x52, 0xe2, 0xe2, 0x0b, 0x00, 0xb1, 0x7c, 0x53, 0x83, 0x52, 0x0b, 0x4b, 0x53, 0x8b, 0x4b,
-	0x84, 0x04, 0xb8, 0x98, 0x4b, 0x8b, 0x72, 0x24, 0x18, 0x15, 0x18, 0x35, 0x38, 0x83, 0x40, 0x4c,
-	0x25, 0x75, 0x2e, 0x7e, 0xb8, 0x9a, 0xe2, 0x82, 0xfc, 0xbc, 0xe2, 0x54, 0x21, 0x11, 0x2e, 0xd6,
-	0x92, 0xcc, 0x92, 0x9c, 0x54, 0xa8, 0x32, 0x08, 0xc7, 0x28, 0x87, 0x8b, 0xcf, 0x17, 0x6a, 0x3e,
-	0x58, 0x43, 0x91, 0x50, 0x14, 0x17, 0x3b, 0x54, 0xab, 0x90, 0x9a, 0x1e, 0x76, 0x27, 0xe8, 0xa1,
-	0xda, 0x2f, 0xa5, 0x4e, 0x50, 0x1d, 0xc4, 0x0d, 0x4e, 0xd2, 0x51, 0x92, 0xfa, 0xb8, 0x7c, 0x9f,
-	0xc4, 0x06, 0xf6, 0xb6, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0x6f, 0x80, 0xf2, 0x3c, 0x20, 0x01,
-	0x00, 0x00,
+	0x52, 0x52, 0xe0, 0xe2, 0x09, 0x00, 0xb1, 0x82, 0x52, 0x0b, 0x4b, 0x53, 0x8b, 0x4b, 0x84, 0x04,
+	0xb8, 0x98, 0x4b, 0x8b, 0x72, 0x24, 0x18, 0x15, 0x18, 0x35, 0x38, 0x83, 0x40, 0x4c, 0x25, 0x55,
+	0x2e, 0x5e, 0xa8, 0x8a, 0xe2, 0x82, 0xfc, 0xbc, 0xe2, 0x54, 0x21, 0x11, 0x2e, 0xd6, 0x92, 0xcc,
+	0x92, 0x9c, 0x54, 0xa8, 0x22, 0x08, 0xc7, 0x28, 0x8b, 0x4b, 0xc8, 0x23, 0xc4, 0xd7, 0xc7, 0x17,
+	0x6a, 0x3e, 0x58, 0x4b, 0x91, 0x50, 0x08, 0x17, 0x2b, 0x98, 0x25, 0xa4, 0xa2, 0x87, 0xdd, 0x01,
+	0x7a, 0xc8, 0xb6, 0x4b, 0xa9, 0x12, 0x50, 0x05, 0x71, 0x81, 0x93, 0x74, 0x94, 0xa4, 0x3e, 0x2e,
+	0x7f, 0x27, 0xb1, 0x81, 0x3d, 0x6c, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0xec, 0xd6, 0xf9, 0x0d,
+	0x1a, 0x01, 0x00, 0x00,
 }

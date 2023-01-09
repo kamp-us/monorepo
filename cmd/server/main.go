@@ -12,7 +12,7 @@ import (
 func main() {
 
 	s := server.NewMetadataParserServer(backend.NewBackend())
-	twirpHandler := api.NewMetadataParserServer(s)
+	twirpHandler := api.NewHTMLMetadataParserServer(s)
 
 	mux := http.NewServeMux()
 	mux.Handle(twirpHandler.PathPrefix(), twirpHandler)

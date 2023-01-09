@@ -7,7 +7,7 @@ import (
 	"golang.org/x/net/html"
 )
 
-func GetTitle(url string) (title *string, err error) {
+func parseTitle(url string) (title *string, err error) {
 	resp, err := http.Get(url)
 	if err != nil {
 		fmt.Println("http.Get Error:", err)
