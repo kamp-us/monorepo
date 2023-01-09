@@ -3,14 +3,14 @@ syntax = "proto3";
 package kampus.metadata.parser;
 option go_package = "/rpc/html-metadata-parser";
 
-service MetadataParser {
-  rpc ParseMe(ParseMeRequest) returns (ParseMeResponse);
+service HTMLMetadataParser {
+  rpc Parse(ParseRequest) returns (ParseResponse);
 }
 
-message ParseMeRequest {
+message ParseRequest {
   string url = 1;
 }
 
-message ParseMeResponse {
+message ParseResponse {
   string title = 1;
 }

@@ -9,9 +9,9 @@ import (
 )
 
 func main() {
-	client := api.NewMetadataParserProtobufClient("http://localhost:8080", &http.Client{})
+	client := api.NewHTMLMetadataParserProtobufClient("http://localhost:8080", &http.Client{})
 
-	resp, err := client.ParseMe(context.Background(), &api.ParseMeRequest{Url: "https://go.dev"})
+	resp, err := client.Parse(context.Background(), &api.ParseRequest{Url: "https://go.dev"})
 	if err == nil {
 		fmt.Println(resp.Title)
 	}

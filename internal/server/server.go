@@ -15,15 +15,15 @@ func NewMetadataParserServer(backend backend.Backender) *MetadataParserServer {
 	return &MetadataParserServer{backend: backend}
 }
 
-func (s *MetadataParserServer) ParseMe(ctx context.Context, req *api.ParseMeRequest) (*api.ParseMeResponse, error) {
+func (s *MetadataParserServer) Parse(ctx context.Context, req *api.ParseRequest) (*api.ParseResponse, error) {
 	if req.Url == "" {
 		return nil, twirp.RequiredArgumentError("Title")
 	}
 
-	title, err := s.backend.ParseMe(ctx, req.Url)
+	title, err := s.backend.Parse(ctx, req.Url)
 	if err != nil {
 		return nil, err
 	}
 
-	return &api.ParseMeResponse{Title: helper.TrimSpace(*title)}, nil
+	return &api.ParseResponse{Title: helper.TrimSpace(*title)}, nil
 }
