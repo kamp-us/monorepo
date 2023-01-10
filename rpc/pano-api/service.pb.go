@@ -376,6 +376,53 @@ func (x *CreatePostRequest) GetUserID() string {
 	return ""
 }
 
+type CreatePostResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Post *Post `protobuf:"bytes,1,opt,name=post,proto3" json:"post,omitempty"`
+}
+
+func (x *CreatePostResponse) Reset() {
+	*x = CreatePostResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_rpc_pano_api_service_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreatePostResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatePostResponse) ProtoMessage() {}
+
+func (x *CreatePostResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_pano_api_service_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatePostResponse.ProtoReflect.Descriptor instead.
+func (*CreatePostResponse) Descriptor() ([]byte, []int) {
+	return file_rpc_pano_api_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CreatePostResponse) GetPost() *Post {
+	if x != nil {
+		return x.Post
+	}
+	return nil
+}
+
 type UpdatePostRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -390,7 +437,7 @@ type UpdatePostRequest struct {
 func (x *UpdatePostRequest) Reset() {
 	*x = UpdatePostRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_pano_api_service_proto_msgTypes[6]
+		mi := &file_rpc_pano_api_service_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -403,7 +450,7 @@ func (x *UpdatePostRequest) String() string {
 func (*UpdatePostRequest) ProtoMessage() {}
 
 func (x *UpdatePostRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_pano_api_service_proto_msgTypes[6]
+	mi := &file_rpc_pano_api_service_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -416,7 +463,7 @@ func (x *UpdatePostRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePostRequest.ProtoReflect.Descriptor instead.
 func (*UpdatePostRequest) Descriptor() ([]byte, []int) {
-	return file_rpc_pano_api_service_proto_rawDescGZIP(), []int{6}
+	return file_rpc_pano_api_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdatePostRequest) GetID() string {
@@ -456,7 +503,7 @@ type UpdatePostResponse struct {
 func (x *UpdatePostResponse) Reset() {
 	*x = UpdatePostResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_pano_api_service_proto_msgTypes[7]
+		mi := &file_rpc_pano_api_service_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -469,7 +516,7 @@ func (x *UpdatePostResponse) String() string {
 func (*UpdatePostResponse) ProtoMessage() {}
 
 func (x *UpdatePostResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_pano_api_service_proto_msgTypes[7]
+	mi := &file_rpc_pano_api_service_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -482,7 +529,7 @@ func (x *UpdatePostResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePostResponse.ProtoReflect.Descriptor instead.
 func (*UpdatePostResponse) Descriptor() ([]byte, []int) {
-	return file_rpc_pano_api_service_proto_rawDescGZIP(), []int{7}
+	return file_rpc_pano_api_service_proto_rawDescGZIP(), []int{8}
 }
 
 type DeletePostRequest struct {
@@ -496,7 +543,7 @@ type DeletePostRequest struct {
 func (x *DeletePostRequest) Reset() {
 	*x = DeletePostRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_pano_api_service_proto_msgTypes[8]
+		mi := &file_rpc_pano_api_service_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -509,7 +556,7 @@ func (x *DeletePostRequest) String() string {
 func (*DeletePostRequest) ProtoMessage() {}
 
 func (x *DeletePostRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_pano_api_service_proto_msgTypes[8]
+	mi := &file_rpc_pano_api_service_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -522,7 +569,7 @@ func (x *DeletePostRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePostRequest.ProtoReflect.Descriptor instead.
 func (*DeletePostRequest) Descriptor() ([]byte, []int) {
-	return file_rpc_pano_api_service_proto_rawDescGZIP(), []int{8}
+	return file_rpc_pano_api_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *DeletePostRequest) GetID() string {
@@ -541,7 +588,7 @@ type DeletePostResponse struct {
 func (x *DeletePostResponse) Reset() {
 	*x = DeletePostResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_pano_api_service_proto_msgTypes[9]
+		mi := &file_rpc_pano_api_service_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -554,7 +601,7 @@ func (x *DeletePostResponse) String() string {
 func (*DeletePostResponse) ProtoMessage() {}
 
 func (x *DeletePostResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_pano_api_service_proto_msgTypes[9]
+	mi := &file_rpc_pano_api_service_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -567,7 +614,7 @@ func (x *DeletePostResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePostResponse.ProtoReflect.Descriptor instead.
 func (*DeletePostResponse) Descriptor() ([]byte, []int) {
-	return file_rpc_pano_api_service_proto_rawDescGZIP(), []int{9}
+	return file_rpc_pano_api_service_proto_rawDescGZIP(), []int{10}
 }
 
 var File_rpc_pano_api_service_proto protoreflect.FileDescriptor
@@ -608,7 +655,11 @@ var file_rpc_pano_api_service_proto_rawDesc = []byte{
 	0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x75, 0x73,
 	0x65, 0x72, 0x49, 0x44, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72,
-	0x49, 0x44, 0x22, 0xbf, 0x01, 0x0a, 0x11, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6f, 0x73,
+	0x49, 0x44, 0x22, 0x3e, 0x0a, 0x12, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x28, 0x0a, 0x04, 0x70, 0x6f, 0x73, 0x74,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x6b, 0x61, 0x6d, 0x70, 0x75, 0x73, 0x2e,
+	0x70, 0x61, 0x6e, 0x6f, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x04, 0x70, 0x6f,
+	0x73, 0x74, 0x22, 0xbf, 0x01, 0x0a, 0x11, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6f, 0x73,
 	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x49, 0x44, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x49, 0x44, 0x12, 0x32, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c,
 	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
@@ -625,7 +676,7 @@ var file_rpc_pano_api_service_proto_rawDesc = []byte{
 	0x6c, 0x65, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
 	0x0e, 0x0a, 0x02, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x49, 0x44, 0x22,
 	0x14, 0x0a, 0x12, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xa7, 0x03, 0x0a, 0x07, 0x50, 0x61, 0x6e, 0x6f, 0x41, 0x50,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xb5, 0x03, 0x0a, 0x07, 0x50, 0x61, 0x6e, 0x6f, 0x41, 0x50,
 	0x49, 0x12, 0x5c, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x42, 0x61, 0x74, 0x63, 0x68, 0x50, 0x6f, 0x73,
 	0x74, 0x73, 0x12, 0x24, 0x2e, 0x6b, 0x61, 0x6d, 0x70, 0x75, 0x73, 0x2e, 0x70, 0x61, 0x6e, 0x6f,
 	0x61, 0x70, 0x69, 0x2e, 0x47, 0x65, 0x74, 0x42, 0x61, 0x74, 0x63, 0x68, 0x50, 0x6f, 0x73, 0x74,
@@ -636,24 +687,25 @@ var file_rpc_pano_api_service_proto_rawDesc = []byte{
 	0x6d, 0x70, 0x75, 0x73, 0x2e, 0x70, 0x61, 0x6e, 0x6f, 0x61, 0x70, 0x69, 0x2e, 0x47, 0x65, 0x74,
 	0x50, 0x6f, 0x73, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x20, 0x2e, 0x6b,
 	0x61, 0x6d, 0x70, 0x75, 0x73, 0x2e, 0x70, 0x61, 0x6e, 0x6f, 0x61, 0x70, 0x69, 0x2e, 0x47, 0x65,
-	0x74, 0x50, 0x6f, 0x73, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x45,
+	0x74, 0x50, 0x6f, 0x73, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x53,
 	0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x21, 0x2e, 0x6b,
 	0x61, 0x6d, 0x70, 0x75, 0x73, 0x2e, 0x70, 0x61, 0x6e, 0x6f, 0x61, 0x70, 0x69, 0x2e, 0x43, 0x72,
 	0x65, 0x61, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x14, 0x2e, 0x6b, 0x61, 0x6d, 0x70, 0x75, 0x73, 0x2e, 0x70, 0x61, 0x6e, 0x6f, 0x61, 0x70, 0x69,
-	0x2e, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x53, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50,
-	0x6f, 0x73, 0x74, 0x12, 0x21, 0x2e, 0x6b, 0x61, 0x6d, 0x70, 0x75, 0x73, 0x2e, 0x70, 0x61, 0x6e,
-	0x6f, 0x61, 0x70, 0x69, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x6b, 0x61, 0x6d, 0x70, 0x75, 0x73, 0x2e,
-	0x70, 0x61, 0x6e, 0x6f, 0x61, 0x70, 0x69, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6f,
-	0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x53, 0x0a, 0x0a, 0x44, 0x65,
-	0x6c, 0x65, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x21, 0x2e, 0x6b, 0x61, 0x6d, 0x70, 0x75,
-	0x73, 0x2e, 0x70, 0x61, 0x6e, 0x6f, 0x61, 0x70, 0x69, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
-	0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x6b, 0x61,
-	0x6d, 0x70, 0x75, 0x73, 0x2e, 0x70, 0x61, 0x6e, 0x6f, 0x61, 0x70, 0x69, 0x2e, 0x44, 0x65, 0x6c,
-	0x65, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42,
-	0x0f, 0x5a, 0x0d, 0x2f, 0x72, 0x70, 0x63, 0x2f, 0x70, 0x61, 0x6e, 0x6f, 0x2d, 0x61, 0x70, 0x69,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0x2e, 0x6b, 0x61, 0x6d, 0x70, 0x75, 0x73, 0x2e, 0x70, 0x61, 0x6e, 0x6f, 0x61, 0x70, 0x69,
+	0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x53, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6f, 0x73,
+	0x74, 0x12, 0x21, 0x2e, 0x6b, 0x61, 0x6d, 0x70, 0x75, 0x73, 0x2e, 0x70, 0x61, 0x6e, 0x6f, 0x61,
+	0x70, 0x69, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x6b, 0x61, 0x6d, 0x70, 0x75, 0x73, 0x2e, 0x70, 0x61,
+	0x6e, 0x6f, 0x61, 0x70, 0x69, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x53, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x21, 0x2e, 0x6b, 0x61, 0x6d, 0x70, 0x75, 0x73, 0x2e,
+	0x70, 0x61, 0x6e, 0x6f, 0x61, 0x70, 0x69, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6f,
+	0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x6b, 0x61, 0x6d, 0x70,
+	0x75, 0x73, 0x2e, 0x70, 0x61, 0x6e, 0x6f, 0x61, 0x70, 0x69, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x0f, 0x5a,
+	0x0d, 0x2f, 0x72, 0x70, 0x63, 0x2f, 0x70, 0x61, 0x6e, 0x6f, 0x2d, 0x61, 0x70, 0x69, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -668,7 +720,7 @@ func file_rpc_pano_api_service_proto_rawDescGZIP() []byte {
 	return file_rpc_pano_api_service_proto_rawDescData
 }
 
-var file_rpc_pano_api_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_rpc_pano_api_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_rpc_pano_api_service_proto_goTypes = []interface{}{
 	(*Post)(nil),                   // 0: kampus.panoapi.Post
 	(*GetBatchPostsRequest)(nil),   // 1: kampus.panoapi.GetBatchPostsRequest
@@ -676,33 +728,35 @@ var file_rpc_pano_api_service_proto_goTypes = []interface{}{
 	(*GetPostsRequest)(nil),        // 3: kampus.panoapi.GetPostsRequest
 	(*GetPostsResponse)(nil),       // 4: kampus.panoapi.GetPostsResponse
 	(*CreatePostRequest)(nil),      // 5: kampus.panoapi.CreatePostRequest
-	(*UpdatePostRequest)(nil),      // 6: kampus.panoapi.UpdatePostRequest
-	(*UpdatePostResponse)(nil),     // 7: kampus.panoapi.UpdatePostResponse
-	(*DeletePostRequest)(nil),      // 8: kampus.panoapi.DeletePostRequest
-	(*DeletePostResponse)(nil),     // 9: kampus.panoapi.DeletePostResponse
-	(*wrapperspb.StringValue)(nil), // 10: google.protobuf.StringValue
+	(*CreatePostResponse)(nil),     // 6: kampus.panoapi.CreatePostResponse
+	(*UpdatePostRequest)(nil),      // 7: kampus.panoapi.UpdatePostRequest
+	(*UpdatePostResponse)(nil),     // 8: kampus.panoapi.UpdatePostResponse
+	(*DeletePostRequest)(nil),      // 9: kampus.panoapi.DeletePostRequest
+	(*DeletePostResponse)(nil),     // 10: kampus.panoapi.DeletePostResponse
+	(*wrapperspb.StringValue)(nil), // 11: google.protobuf.StringValue
 }
 var file_rpc_pano_api_service_proto_depIdxs = []int32{
 	0,  // 0: kampus.panoapi.GetBatchPostsResponse.posts:type_name -> kampus.panoapi.Post
 	0,  // 1: kampus.panoapi.GetPostsResponse.posts:type_name -> kampus.panoapi.Post
-	10, // 2: kampus.panoapi.UpdatePostRequest.title:type_name -> google.protobuf.StringValue
-	10, // 3: kampus.panoapi.UpdatePostRequest.url:type_name -> google.protobuf.StringValue
-	10, // 4: kampus.panoapi.UpdatePostRequest.content:type_name -> google.protobuf.StringValue
-	1,  // 5: kampus.panoapi.PanoAPI.GetBatchPosts:input_type -> kampus.panoapi.GetBatchPostsRequest
-	3,  // 6: kampus.panoapi.PanoAPI.GetPosts:input_type -> kampus.panoapi.GetPostsRequest
-	5,  // 7: kampus.panoapi.PanoAPI.CreatePost:input_type -> kampus.panoapi.CreatePostRequest
-	6,  // 8: kampus.panoapi.PanoAPI.UpdatePost:input_type -> kampus.panoapi.UpdatePostRequest
-	8,  // 9: kampus.panoapi.PanoAPI.DeletePost:input_type -> kampus.panoapi.DeletePostRequest
-	2,  // 10: kampus.panoapi.PanoAPI.GetBatchPosts:output_type -> kampus.panoapi.GetBatchPostsResponse
-	4,  // 11: kampus.panoapi.PanoAPI.GetPosts:output_type -> kampus.panoapi.GetPostsResponse
-	0,  // 12: kampus.panoapi.PanoAPI.CreatePost:output_type -> kampus.panoapi.Post
-	7,  // 13: kampus.panoapi.PanoAPI.UpdatePost:output_type -> kampus.panoapi.UpdatePostResponse
-	9,  // 14: kampus.panoapi.PanoAPI.DeletePost:output_type -> kampus.panoapi.DeletePostResponse
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	0,  // 2: kampus.panoapi.CreatePostResponse.post:type_name -> kampus.panoapi.Post
+	11, // 3: kampus.panoapi.UpdatePostRequest.title:type_name -> google.protobuf.StringValue
+	11, // 4: kampus.panoapi.UpdatePostRequest.url:type_name -> google.protobuf.StringValue
+	11, // 5: kampus.panoapi.UpdatePostRequest.content:type_name -> google.protobuf.StringValue
+	1,  // 6: kampus.panoapi.PanoAPI.GetBatchPosts:input_type -> kampus.panoapi.GetBatchPostsRequest
+	3,  // 7: kampus.panoapi.PanoAPI.GetPosts:input_type -> kampus.panoapi.GetPostsRequest
+	5,  // 8: kampus.panoapi.PanoAPI.CreatePost:input_type -> kampus.panoapi.CreatePostRequest
+	7,  // 9: kampus.panoapi.PanoAPI.UpdatePost:input_type -> kampus.panoapi.UpdatePostRequest
+	9,  // 10: kampus.panoapi.PanoAPI.DeletePost:input_type -> kampus.panoapi.DeletePostRequest
+	2,  // 11: kampus.panoapi.PanoAPI.GetBatchPosts:output_type -> kampus.panoapi.GetBatchPostsResponse
+	4,  // 12: kampus.panoapi.PanoAPI.GetPosts:output_type -> kampus.panoapi.GetPostsResponse
+	6,  // 13: kampus.panoapi.PanoAPI.CreatePost:output_type -> kampus.panoapi.CreatePostResponse
+	8,  // 14: kampus.panoapi.PanoAPI.UpdatePost:output_type -> kampus.panoapi.UpdatePostResponse
+	10, // 15: kampus.panoapi.PanoAPI.DeletePost:output_type -> kampus.panoapi.DeletePostResponse
+	11, // [11:16] is the sub-list for method output_type
+	6,  // [6:11] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_rpc_pano_api_service_proto_init() }
@@ -784,7 +838,7 @@ func file_rpc_pano_api_service_proto_init() {
 			}
 		}
 		file_rpc_pano_api_service_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdatePostRequest); i {
+			switch v := v.(*CreatePostResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -796,7 +850,7 @@ func file_rpc_pano_api_service_proto_init() {
 			}
 		}
 		file_rpc_pano_api_service_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdatePostResponse); i {
+			switch v := v.(*UpdatePostRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -808,7 +862,7 @@ func file_rpc_pano_api_service_proto_init() {
 			}
 		}
 		file_rpc_pano_api_service_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeletePostRequest); i {
+			switch v := v.(*UpdatePostResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -820,6 +874,18 @@ func file_rpc_pano_api_service_proto_init() {
 			}
 		}
 		file_rpc_pano_api_service_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeletePostRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_rpc_pano_api_service_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeletePostResponse); i {
 			case 0:
 				return &v.state
@@ -838,7 +904,7 @@ func file_rpc_pano_api_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_rpc_pano_api_service_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

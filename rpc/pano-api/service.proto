@@ -11,7 +11,7 @@ service PanoAPI {
   rpc GetBatchPosts(GetBatchPostsRequest) returns (GetBatchPostsResponse);
   rpc GetPosts(GetPostsRequest) returns (GetPostsResponse);
 
-  rpc CreatePost(CreatePostRequest) returns (Post);
+  rpc CreatePost(CreatePostRequest) returns (CreatePostResponse);
   rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
   rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);  
 
@@ -54,9 +54,9 @@ message CreatePostRequest {
   string userID = 4;
 }
 
-// message CreatePostResponse {
-//   Post post = 1;
-// }
+message CreatePostResponse {
+  Post post = 1;
+}
 
 message UpdatePostRequest {
   string ID = 1;
