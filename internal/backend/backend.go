@@ -7,6 +7,7 @@ import (
 )
 
 type Backender interface {
+	// Post
 	GetBatchPosts(ctx context.Context, ids []string) ([]*models.Post, error)
 	GetPosts(ctx context.Context) ([]*models.Post, error)
 	CreatePost(ctx context.Context, title string, url string, content string, userId string) (*models.Post, error)

@@ -13,7 +13,7 @@ func (s *PanoAPIServer) UpdatePost(ctx context.Context, req *api.UpdatePostReque
 		return nil, err
 	}
 
-	err := s.backend.UpdatePost(ctx, req.ID, helper.ConvertToStringPtr(req.Title), helper.ConvertToStringPtr(req.Url), helper.ConvertToStringPtr(req.Content))
+	err := s.backend.UpdatePost(ctx, req.Id, helper.ConvertToStringPtr(req.Title), helper.ConvertToStringPtr(req.Url), helper.ConvertToStringPtr(req.Content))
 	if err != nil {
 		return nil, twirp.InternalErrorWith(err)
 	}
@@ -22,8 +22,8 @@ func (s *PanoAPIServer) UpdatePost(ctx context.Context, req *api.UpdatePostReque
 }
 
 func validateUpdatePostRequest(req *api.UpdatePostRequest) error {
-	if req.ID == "" {
-		return twirp.RequiredArgumentError("ID")
+	if req.Id == "" {
+		return twirp.RequiredArgumentError("Id")
 	}
 	return nil
 }

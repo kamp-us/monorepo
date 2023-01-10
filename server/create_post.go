@@ -8,17 +8,17 @@ import (
 	"github.com/twitchtv/twirp"
 )
 
-func (s *PanoAPIServer) CreatePost(ctx context.Context, req *api.CreatePostRequest) (*api.Post, error) {
+func (s *PanoAPIServer) CreatePost(ctx context.Context, req *api.CreatePostRequest) (*api.CreatePostResponse, error) {
 	if err := validateCreatePostRequest(req); err != nil {
 		return nil, err
 	}
 
-	post, err := s.backend.CreatePost(ctx, req.Title, req.Url, req.Content, req.UserID)
+	post, err := s.backend.CreatePost(ctx, req.Title, req.Url, req.Content, req.UserId)
 	if err != nil {
 		return nil, twirp.InternalErrorWith(err)
 	}
 
-	return helper.ConvertToPostModel(post), nil
+	return &api.CreatePostResponse{Post: helper.ConvertToPostModel(post)}, nil
 }
 
 func validateCreatePostRequest(req *api.CreatePostRequest) error {
@@ -31,8 +31,8 @@ func validateCreatePostRequest(req *api.CreatePostRequest) error {
 	if req.Content == "" {
 		return twirp.RequiredArgumentError("Content")
 	}
-	if req.UserID == "" {
-		return twirp.RequiredArgumentError("UserID")
+	if req.UserId == "" {
+		return twirp.RequiredArgumentError("UserId")
 	}
 	return nil
 }

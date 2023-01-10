@@ -12,7 +12,7 @@ func (s *PanoAPIServer) DeletePost(ctx context.Context, req *api.DeletePostReque
 		return nil, err
 	}
 
-	err := s.backend.DeletePost(ctx, req.ID)
+	err := s.backend.DeletePost(ctx, req.Id)
 	if err != nil {
 		return nil, twirp.InternalErrorWith(err)
 	}
@@ -21,8 +21,8 @@ func (s *PanoAPIServer) DeletePost(ctx context.Context, req *api.DeletePostReque
 }
 
 func validateDeletePostRequest(req *api.DeletePostRequest) error {
-	if req.ID == "" {
-		return twirp.RequiredArgumentError("ID")
+	if req.Id == "" {
+		return twirp.RequiredArgumentError("Id")
 	}
 	return nil
 }

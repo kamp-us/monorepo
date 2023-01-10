@@ -7,7 +7,7 @@ import (
 )
 
 func ConvertToPostModel(p *models.Post) *api.Post {
-	return &api.Post{ID: p.ID.String(), Title: p.Title, Url: p.Url, Content: p.Content, Slug: p.Slug, UserID: p.UserID}
+	return &api.Post{Id: p.ID.String(), Title: p.Title, Url: p.Url, Content: p.Content, Slug: p.Slug, UserId: p.UserID}
 }
 
 func ConvertToStringPtr(value *wrapperspb.StringValue) *string {
