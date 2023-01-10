@@ -9,7 +9,7 @@ import "google/protobuf/wrappers.proto";
 
 service PanoAPI {
   rpc GetPost(GetPostRequest) returns (Post);
-  // rpc GetBatchPosts(GetBatchPostsRequest) returns (GetBatchPostsResponse);
+  rpc GetBatchPosts(GetBatchPostsRequest) returns (GetBatchPostsResponse);
   rpc GetPosts(GetPostsRequest) returns (GetPostsResponse);
 
   rpc CreatePost(CreatePostRequest) returns (Post);
@@ -39,13 +39,13 @@ message GetPostResponse {
   Post post = 1;
 }
 
-// message GetBatchPostsRequest {
-//   repeated string ids = 1;
-// }
+message GetBatchPostsRequest {
+  repeated string ids = 1;
+}
 
-// message GetBatchPostsResponse {
-//   repeated Post posts = 1;
-// }
+message GetBatchPostsResponse {
+  repeated Post posts = 1;
+}
 
 message GetPostsRequest {
   int32 limit = 1;

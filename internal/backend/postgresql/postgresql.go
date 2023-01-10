@@ -30,6 +30,16 @@ func (b *PostgreSQLBackend) GetPost(ctx context.Context, id string) (*models.Pos
 	return &post, nil
 }
 
+func (b *PostgreSQLBackend) GetBatchPosts(ctx context.Context, ids []string) ([]*models.Post, error) {
+	var posts []*models.Post
+	result := b.DB.Find(&posts, ids)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return posts, nil
+}
+
 func (b *PostgreSQLBackend) GetPosts(ctx context.Context) ([]*models.Post, error) {
 	var posts []*models.Post
 	result := b.DB.Find(&posts)

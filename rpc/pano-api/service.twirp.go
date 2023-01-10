@@ -34,7 +34,8 @@ const _ = twirp.TwirpPackageMinVersion_8_1_0
 type PanoAPI interface {
 	GetPost(context.Context, *GetPostRequest) (*Post, error)
 
-	// rpc GetBatchPosts(GetBatchPostsRequest) returns (GetBatchPostsResponse);
+	GetBatchPosts(context.Context, *GetBatchPostsRequest) (*GetBatchPostsResponse, error)
+
 	GetPosts(context.Context, *GetPostsRequest) (*GetPostsResponse, error)
 
 	CreatePost(context.Context, *CreatePostRequest) (*Post, error)
@@ -50,7 +51,7 @@ type PanoAPI interface {
 
 type panoAPIProtobufClient struct {
 	client      HTTPClient
-	urls        [5]string
+	urls        [6]string
 	interceptor twirp.Interceptor
 	opts        twirp.ClientOptions
 }
@@ -78,8 +79,9 @@ func NewPanoAPIProtobufClient(baseURL string, client HTTPClient, opts ...twirp.C
 	// Build method URLs: <baseURL>[<prefix>]/<package>.<Service>/<Method>
 	serviceURL := sanitizeBaseURL(baseURL)
 	serviceURL += baseServicePath(pathPrefix, "kampus.panoapi", "PanoAPI")
-	urls := [5]string{
+	urls := [6]string{
 		serviceURL + "GetPost",
+		serviceURL + "GetBatchPosts",
 		serviceURL + "GetPosts",
 		serviceURL + "CreatePost",
 		serviceURL + "UpdatePost",
@@ -140,6 +142,52 @@ func (c *panoAPIProtobufClient) callGetPost(ctx context.Context, in *GetPostRequ
 	return out, nil
 }
 
+func (c *panoAPIProtobufClient) GetBatchPosts(ctx context.Context, in *GetBatchPostsRequest) (*GetBatchPostsResponse, error) {
+	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
+	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
+	ctx = ctxsetters.WithMethodName(ctx, "GetBatchPosts")
+	caller := c.callGetBatchPosts
+	if c.interceptor != nil {
+		caller = func(ctx context.Context, req *GetBatchPostsRequest) (*GetBatchPostsResponse, error) {
+			resp, err := c.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*GetBatchPostsRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*GetBatchPostsRequest) when calling interceptor")
+					}
+					return c.callGetBatchPosts(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*GetBatchPostsResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*GetBatchPostsResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+	return caller(ctx, in)
+}
+
+func (c *panoAPIProtobufClient) callGetBatchPosts(ctx context.Context, in *GetBatchPostsRequest) (*GetBatchPostsResponse, error) {
+	out := new(GetBatchPostsResponse)
+	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[1], in, out)
+	if err != nil {
+		twerr, ok := err.(twirp.Error)
+		if !ok {
+			twerr = twirp.InternalErrorWith(err)
+		}
+		callClientError(ctx, c.opts.Hooks, twerr)
+		return nil, err
+	}
+
+	callClientResponseReceived(ctx, c.opts.Hooks)
+
+	return out, nil
+}
+
 func (c *panoAPIProtobufClient) GetPosts(ctx context.Context, in *GetPostsRequest) (*GetPostsResponse, error) {
 	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
 	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
@@ -171,7 +219,7 @@ func (c *panoAPIProtobufClient) GetPosts(ctx context.Context, in *GetPostsReques
 
 func (c *panoAPIProtobufClient) callGetPosts(ctx context.Context, in *GetPostsRequest) (*GetPostsResponse, error) {
 	out := new(GetPostsResponse)
-	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[1], in, out)
+	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[2], in, out)
 	if err != nil {
 		twerr, ok := err.(twirp.Error)
 		if !ok {
@@ -217,7 +265,7 @@ func (c *panoAPIProtobufClient) CreatePost(ctx context.Context, in *CreatePostRe
 
 func (c *panoAPIProtobufClient) callCreatePost(ctx context.Context, in *CreatePostRequest) (*Post, error) {
 	out := new(Post)
-	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[2], in, out)
+	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[3], in, out)
 	if err != nil {
 		twerr, ok := err.(twirp.Error)
 		if !ok {
@@ -263,7 +311,7 @@ func (c *panoAPIProtobufClient) UpdatePost(ctx context.Context, in *UpdatePostRe
 
 func (c *panoAPIProtobufClient) callUpdatePost(ctx context.Context, in *UpdatePostRequest) (*UpdatePostResponse, error) {
 	out := new(UpdatePostResponse)
-	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[3], in, out)
+	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[4], in, out)
 	if err != nil {
 		twerr, ok := err.(twirp.Error)
 		if !ok {
@@ -309,7 +357,7 @@ func (c *panoAPIProtobufClient) DeletePost(ctx context.Context, in *DeletePostRe
 
 func (c *panoAPIProtobufClient) callDeletePost(ctx context.Context, in *DeletePostRequest) (*DeletePostResponse, error) {
 	out := new(DeletePostResponse)
-	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[4], in, out)
+	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[5], in, out)
 	if err != nil {
 		twerr, ok := err.(twirp.Error)
 		if !ok {
@@ -330,7 +378,7 @@ func (c *panoAPIProtobufClient) callDeletePost(ctx context.Context, in *DeletePo
 
 type panoAPIJSONClient struct {
 	client      HTTPClient
-	urls        [5]string
+	urls        [6]string
 	interceptor twirp.Interceptor
 	opts        twirp.ClientOptions
 }
@@ -358,8 +406,9 @@ func NewPanoAPIJSONClient(baseURL string, client HTTPClient, opts ...twirp.Clien
 	// Build method URLs: <baseURL>[<prefix>]/<package>.<Service>/<Method>
 	serviceURL := sanitizeBaseURL(baseURL)
 	serviceURL += baseServicePath(pathPrefix, "kampus.panoapi", "PanoAPI")
-	urls := [5]string{
+	urls := [6]string{
 		serviceURL + "GetPost",
+		serviceURL + "GetBatchPosts",
 		serviceURL + "GetPosts",
 		serviceURL + "CreatePost",
 		serviceURL + "UpdatePost",
@@ -420,6 +469,52 @@ func (c *panoAPIJSONClient) callGetPost(ctx context.Context, in *GetPostRequest)
 	return out, nil
 }
 
+func (c *panoAPIJSONClient) GetBatchPosts(ctx context.Context, in *GetBatchPostsRequest) (*GetBatchPostsResponse, error) {
+	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
+	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
+	ctx = ctxsetters.WithMethodName(ctx, "GetBatchPosts")
+	caller := c.callGetBatchPosts
+	if c.interceptor != nil {
+		caller = func(ctx context.Context, req *GetBatchPostsRequest) (*GetBatchPostsResponse, error) {
+			resp, err := c.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*GetBatchPostsRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*GetBatchPostsRequest) when calling interceptor")
+					}
+					return c.callGetBatchPosts(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*GetBatchPostsResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*GetBatchPostsResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+	return caller(ctx, in)
+}
+
+func (c *panoAPIJSONClient) callGetBatchPosts(ctx context.Context, in *GetBatchPostsRequest) (*GetBatchPostsResponse, error) {
+	out := new(GetBatchPostsResponse)
+	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[1], in, out)
+	if err != nil {
+		twerr, ok := err.(twirp.Error)
+		if !ok {
+			twerr = twirp.InternalErrorWith(err)
+		}
+		callClientError(ctx, c.opts.Hooks, twerr)
+		return nil, err
+	}
+
+	callClientResponseReceived(ctx, c.opts.Hooks)
+
+	return out, nil
+}
+
 func (c *panoAPIJSONClient) GetPosts(ctx context.Context, in *GetPostsRequest) (*GetPostsResponse, error) {
 	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
 	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
@@ -451,7 +546,7 @@ func (c *panoAPIJSONClient) GetPosts(ctx context.Context, in *GetPostsRequest) (
 
 func (c *panoAPIJSONClient) callGetPosts(ctx context.Context, in *GetPostsRequest) (*GetPostsResponse, error) {
 	out := new(GetPostsResponse)
-	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[1], in, out)
+	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[2], in, out)
 	if err != nil {
 		twerr, ok := err.(twirp.Error)
 		if !ok {
@@ -497,7 +592,7 @@ func (c *panoAPIJSONClient) CreatePost(ctx context.Context, in *CreatePostReques
 
 func (c *panoAPIJSONClient) callCreatePost(ctx context.Context, in *CreatePostRequest) (*Post, error) {
 	out := new(Post)
-	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[2], in, out)
+	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[3], in, out)
 	if err != nil {
 		twerr, ok := err.(twirp.Error)
 		if !ok {
@@ -543,7 +638,7 @@ func (c *panoAPIJSONClient) UpdatePost(ctx context.Context, in *UpdatePostReques
 
 func (c *panoAPIJSONClient) callUpdatePost(ctx context.Context, in *UpdatePostRequest) (*UpdatePostResponse, error) {
 	out := new(UpdatePostResponse)
-	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[3], in, out)
+	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[4], in, out)
 	if err != nil {
 		twerr, ok := err.(twirp.Error)
 		if !ok {
@@ -589,7 +684,7 @@ func (c *panoAPIJSONClient) DeletePost(ctx context.Context, in *DeletePostReques
 
 func (c *panoAPIJSONClient) callDeletePost(ctx context.Context, in *DeletePostRequest) (*DeletePostResponse, error) {
 	out := new(DeletePostResponse)
-	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[4], in, out)
+	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[5], in, out)
 	if err != nil {
 		twerr, ok := err.(twirp.Error)
 		if !ok {
@@ -703,6 +798,9 @@ func (s *panoAPIServer) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	switch method {
 	case "GetPost":
 		s.serveGetPost(ctx, resp, req)
+		return
+	case "GetBatchPosts":
+		s.serveGetBatchPosts(ctx, resp, req)
 		return
 	case "GetPosts":
 		s.serveGetPosts(ctx, resp, req)
@@ -880,6 +978,186 @@ func (s *panoAPIServer) serveGetPostProtobuf(ctx context.Context, resp http.Resp
 	}
 	if respContent == nil {
 		s.writeError(ctx, resp, twirp.InternalError("received a nil *Post and nil error while calling GetPost. nil responses are not supported"))
+		return
+	}
+
+	ctx = callResponsePrepared(ctx, s.hooks)
+
+	respBytes, err := proto.Marshal(respContent)
+	if err != nil {
+		s.writeError(ctx, resp, wrapInternal(err, "failed to marshal proto response"))
+		return
+	}
+
+	ctx = ctxsetters.WithStatusCode(ctx, http.StatusOK)
+	resp.Header().Set("Content-Type", "application/protobuf")
+	resp.Header().Set("Content-Length", strconv.Itoa(len(respBytes)))
+	resp.WriteHeader(http.StatusOK)
+	if n, err := resp.Write(respBytes); err != nil {
+		msg := fmt.Sprintf("failed to write response, %d of %d bytes written: %s", n, len(respBytes), err.Error())
+		twerr := twirp.NewError(twirp.Unknown, msg)
+		ctx = callError(ctx, s.hooks, twerr)
+	}
+	callResponseSent(ctx, s.hooks)
+}
+
+func (s *panoAPIServer) serveGetBatchPosts(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	header := req.Header.Get("Content-Type")
+	i := strings.Index(header, ";")
+	if i == -1 {
+		i = len(header)
+	}
+	switch strings.TrimSpace(strings.ToLower(header[:i])) {
+	case "application/json":
+		s.serveGetBatchPostsJSON(ctx, resp, req)
+	case "application/protobuf":
+		s.serveGetBatchPostsProtobuf(ctx, resp, req)
+	default:
+		msg := fmt.Sprintf("unexpected Content-Type: %q", req.Header.Get("Content-Type"))
+		twerr := badRouteError(msg, req.Method, req.URL.Path)
+		s.writeError(ctx, resp, twerr)
+	}
+}
+
+func (s *panoAPIServer) serveGetBatchPostsJSON(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	var err error
+	ctx = ctxsetters.WithMethodName(ctx, "GetBatchPosts")
+	ctx, err = callRequestRouted(ctx, s.hooks)
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+
+	d := json.NewDecoder(req.Body)
+	rawReqBody := json.RawMessage{}
+	if err := d.Decode(&rawReqBody); err != nil {
+		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
+		return
+	}
+	reqContent := new(GetBatchPostsRequest)
+	unmarshaler := protojson.UnmarshalOptions{DiscardUnknown: true}
+	if err = unmarshaler.Unmarshal(rawReqBody, reqContent); err != nil {
+		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
+		return
+	}
+
+	handler := s.PanoAPI.GetBatchPosts
+	if s.interceptor != nil {
+		handler = func(ctx context.Context, req *GetBatchPostsRequest) (*GetBatchPostsResponse, error) {
+			resp, err := s.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*GetBatchPostsRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*GetBatchPostsRequest) when calling interceptor")
+					}
+					return s.PanoAPI.GetBatchPosts(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*GetBatchPostsResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*GetBatchPostsResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+
+	// Call service method
+	var respContent *GetBatchPostsResponse
+	func() {
+		defer ensurePanicResponses(ctx, resp, s.hooks)
+		respContent, err = handler(ctx, reqContent)
+	}()
+
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+	if respContent == nil {
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *GetBatchPostsResponse and nil error while calling GetBatchPosts. nil responses are not supported"))
+		return
+	}
+
+	ctx = callResponsePrepared(ctx, s.hooks)
+
+	marshaler := &protojson.MarshalOptions{UseProtoNames: !s.jsonCamelCase, EmitUnpopulated: !s.jsonSkipDefaults}
+	respBytes, err := marshaler.Marshal(respContent)
+	if err != nil {
+		s.writeError(ctx, resp, wrapInternal(err, "failed to marshal json response"))
+		return
+	}
+
+	ctx = ctxsetters.WithStatusCode(ctx, http.StatusOK)
+	resp.Header().Set("Content-Type", "application/json")
+	resp.Header().Set("Content-Length", strconv.Itoa(len(respBytes)))
+	resp.WriteHeader(http.StatusOK)
+
+	if n, err := resp.Write(respBytes); err != nil {
+		msg := fmt.Sprintf("failed to write response, %d of %d bytes written: %s", n, len(respBytes), err.Error())
+		twerr := twirp.NewError(twirp.Unknown, msg)
+		ctx = callError(ctx, s.hooks, twerr)
+	}
+	callResponseSent(ctx, s.hooks)
+}
+
+func (s *panoAPIServer) serveGetBatchPostsProtobuf(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	var err error
+	ctx = ctxsetters.WithMethodName(ctx, "GetBatchPosts")
+	ctx, err = callRequestRouted(ctx, s.hooks)
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+
+	buf, err := io.ReadAll(req.Body)
+	if err != nil {
+		s.handleRequestBodyError(ctx, resp, "failed to read request body", err)
+		return
+	}
+	reqContent := new(GetBatchPostsRequest)
+	if err = proto.Unmarshal(buf, reqContent); err != nil {
+		s.writeError(ctx, resp, malformedRequestError("the protobuf request could not be decoded"))
+		return
+	}
+
+	handler := s.PanoAPI.GetBatchPosts
+	if s.interceptor != nil {
+		handler = func(ctx context.Context, req *GetBatchPostsRequest) (*GetBatchPostsResponse, error) {
+			resp, err := s.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*GetBatchPostsRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*GetBatchPostsRequest) when calling interceptor")
+					}
+					return s.PanoAPI.GetBatchPosts(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*GetBatchPostsResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*GetBatchPostsResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+
+	// Call service method
+	var respContent *GetBatchPostsResponse
+	func() {
+		defer ensurePanicResponses(ctx, resp, s.hooks)
+		respContent, err = handler(ctx, reqContent)
+	}()
+
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+	if respContent == nil {
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *GetBatchPostsResponse and nil error while calling GetBatchPosts. nil responses are not supported"))
 		return
 	}
 
@@ -2204,36 +2482,39 @@ func callClientError(ctx context.Context, h *twirp.ClientHooks, err twirp.Error)
 }
 
 var twirpFileDescriptor0 = []byte{
-	// 482 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x54, 0x5d, 0x8b, 0xd3, 0x40,
-	0x14, 0x25, 0x4d, 0xd2, 0xea, 0x5d, 0xec, 0x6e, 0x87, 0x22, 0x21, 0xc8, 0x5a, 0xc7, 0x97, 0x45,
-	0x30, 0x81, 0x0a, 0xbe, 0x08, 0x2e, 0x6a, 0x45, 0xfa, 0x20, 0x94, 0x16, 0x7d, 0xf0, 0x2d, 0x5b,
-	0x6f, 0x4b, 0x30, 0xcd, 0x8c, 0x33, 0x13, 0xfd, 0x03, 0x3e, 0xf9, 0xa7, 0xfc, 0x6b, 0x92, 0x99,
-	0xa4, 0x49, 0x3a, 0xed, 0xf6, 0x2d, 0xf7, 0xce, 0xb9, 0x5f, 0xe7, 0x1c, 0x02, 0xa1, 0xe0, 0xeb,
-	0x98, 0x27, 0x39, 0x7b, 0x99, 0xf0, 0x34, 0x96, 0x28, 0x7e, 0xa5, 0x6b, 0x8c, 0xb8, 0x60, 0x8a,
-	0x91, 0xe1, 0x8f, 0x64, 0xc7, 0x0b, 0x19, 0x95, 0xcf, 0x09, 0x4f, 0xc3, 0xeb, 0x2d, 0x63, 0xdb,
-	0x0c, 0x63, 0xfd, 0x7a, 0x57, 0x6c, 0xe2, 0xdf, 0x22, 0xe1, 0x1c, 0x85, 0x34, 0x78, 0xfa, 0xc7,
-	0x01, 0x6f, 0xc1, 0xa4, 0x22, 0x43, 0xe8, 0xcd, 0x67, 0x81, 0x33, 0x71, 0x6e, 0x1e, 0x2e, 0x7b,
-	0xf3, 0x19, 0x19, 0x83, 0xaf, 0x52, 0x95, 0x61, 0xd0, 0xd3, 0x29, 0x13, 0x90, 0x2b, 0x70, 0x0b,
-	0x91, 0x05, 0xae, 0xce, 0x95, 0x9f, 0x24, 0x80, 0xc1, 0x9a, 0xe5, 0x0a, 0x73, 0x15, 0x78, 0x3a,
-	0x5b, 0x87, 0x84, 0x80, 0x27, 0xb3, 0x62, 0x1b, 0xf8, 0x3a, 0xad, 0xbf, 0xc9, 0x63, 0xe8, 0x17,
-	0x12, 0xc5, 0x7c, 0x16, 0xf4, 0x75, 0xb6, 0x8a, 0xe8, 0x04, 0x86, 0x9f, 0x50, 0x95, 0x8b, 0x2c,
-	0xf1, 0x67, 0x81, 0xf6, 0x3e, 0xf4, 0x0d, 0x5c, 0xee, 0x11, 0x92, 0xb3, 0x5c, 0x22, 0xb9, 0x01,
-	0x8f, 0x33, 0xa9, 0x34, 0xe8, 0x62, 0x3a, 0x8e, 0xba, 0xa7, 0x47, 0x1a, 0xab, 0x11, 0xf4, 0x76,
-	0x5f, 0x2c, 0xeb, 0xfe, 0x63, 0xf0, 0xb3, 0x74, 0x97, 0x9a, 0x6a, 0x7f, 0x69, 0x82, 0x72, 0x3f,
-	0xb6, 0xd9, 0x48, 0x54, 0xfa, 0x6c, 0x7f, 0x59, 0x45, 0xf4, 0x2d, 0x5c, 0x35, 0x0d, 0xaa, 0xf1,
-	0x2f, 0xc0, 0x2f, 0x9b, 0xcb, 0xc0, 0x99, 0xb8, 0x27, 0xe7, 0x1b, 0x08, 0xdd, 0xc1, 0xe8, 0x83,
-	0xc0, 0x44, 0x61, 0xfb, 0xc4, 0x3d, 0xc5, 0xce, 0x11, 0x8a, 0x7b, 0x47, 0x29, 0x76, 0xbb, 0x14,
-	0x37, 0x74, 0x7a, 0x1d, 0x3a, 0xff, 0x39, 0x30, 0xfa, 0xc2, 0xbf, 0x1f, 0xcc, 0x3b, 0x94, 0x78,
-	0xda, 0x96, 0xf8, 0x62, 0xfa, 0x24, 0x32, 0x5e, 0x89, 0x6a, 0xaf, 0x44, 0x2b, 0x25, 0xd2, 0x7c,
-	0xfb, 0x35, 0xc9, 0x0a, 0xac, 0xb7, 0x8b, 0x1a, 0x03, 0x9c, 0xab, 0xd0, 0xbb, 0xbf, 0xee, 0xda,
-	0xe3, 0x5c, 0x4d, 0x0d, 0xa6, 0x63, 0x20, 0xed, 0x03, 0x0c, 0xe5, 0xf4, 0x39, 0x8c, 0x66, 0x98,
-	0xe1, 0xbd, 0x67, 0x95, 0xa5, 0x6d, 0x90, 0x29, 0x9d, 0xfe, 0x75, 0x61, 0xb0, 0x48, 0x72, 0xf6,
-	0x6e, 0x31, 0x27, 0xb7, 0x30, 0xa8, 0xd4, 0x24, 0xd7, 0x87, 0xaa, 0x75, 0x6d, 0x18, 0x1e, 0x55,
-	0x95, 0x7c, 0x86, 0x07, 0xb5, 0x1d, 0xc8, 0xd3, 0x13, 0x1d, 0x6a, 0xa7, 0x85, 0x93, 0xd3, 0x80,
-	0xca, 0x49, 0x1f, 0x01, 0x1a, 0x77, 0x90, 0x67, 0x87, 0x78, 0xcb, 0x39, 0x27, 0xb6, 0x5a, 0x01,
-	0x34, 0x9c, 0xd9, 0x6d, 0x2c, 0x43, 0x84, 0xf4, 0x3e, 0x48, 0xb5, 0xdb, 0x0a, 0xa0, 0x61, 0xd3,
-	0x6e, 0x6a, 0xc9, 0x61, 0x37, 0xb5, 0xc5, 0x78, 0x7f, 0xf9, 0xed, 0x51, 0xdc, 0xfe, 0x89, 0xdd,
-	0xf5, 0xb5, 0x1b, 0x5e, 0xfd, 0x0f, 0x00, 0x00, 0xff, 0xff, 0x5f, 0x27, 0xe1, 0x80, 0xdb, 0x04,
-	0x00, 0x00,
+	// 531 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0x5d, 0x8b, 0xd3, 0x40,
+	0x14, 0x25, 0x4d, 0xd2, 0xea, 0x5d, 0xb6, 0xdb, 0x0e, 0x51, 0x42, 0x90, 0xb5, 0x8e, 0x0a, 0x45,
+	0x30, 0x81, 0x0a, 0xbe, 0x08, 0x2e, 0xee, 0x56, 0x96, 0x3e, 0x08, 0xa5, 0x45, 0x1f, 0xc4, 0x97,
+	0x6c, 0x3b, 0xad, 0xc1, 0x34, 0x33, 0x66, 0x26, 0xfa, 0x07, 0xfc, 0x5f, 0xfe, 0x1d, 0x7f, 0x86,
+	0x64, 0xf2, 0x9d, 0xe9, 0x07, 0xec, 0x5b, 0xee, 0x9d, 0x33, 0xe7, 0x9e, 0x3b, 0xe7, 0x10, 0x70,
+	0x62, 0xb6, 0xf2, 0x98, 0x1f, 0xd1, 0xd7, 0x3e, 0x0b, 0x3c, 0x4e, 0xe2, 0x5f, 0xc1, 0x8a, 0xb8,
+	0x2c, 0xa6, 0x82, 0xa2, 0xfe, 0x0f, 0x7f, 0xc7, 0x12, 0xee, 0xa6, 0xc7, 0x3e, 0x0b, 0x9c, 0xcb,
+	0x2d, 0xa5, 0xdb, 0x90, 0x78, 0xf2, 0xf4, 0x2e, 0xd9, 0x78, 0xbf, 0x63, 0x9f, 0x31, 0x12, 0xf3,
+	0x0c, 0x8f, 0xff, 0x68, 0x60, 0xcc, 0x29, 0x17, 0xa8, 0x0f, 0x9d, 0xd9, 0xd4, 0xd6, 0x46, 0xda,
+	0xf8, 0xe1, 0xa2, 0x33, 0x9b, 0x22, 0x0b, 0x4c, 0x11, 0x88, 0x90, 0xd8, 0x1d, 0xd9, 0xca, 0x0a,
+	0x34, 0x00, 0x3d, 0x89, 0x43, 0x5b, 0x97, 0xbd, 0xf4, 0x13, 0xd9, 0xd0, 0x5b, 0xd1, 0x48, 0x90,
+	0x48, 0xd8, 0x86, 0xec, 0x16, 0x25, 0x42, 0x60, 0xf0, 0x30, 0xd9, 0xda, 0xa6, 0x6c, 0xcb, 0x6f,
+	0xf4, 0x18, 0xba, 0x09, 0x27, 0xf1, 0x6c, 0x6a, 0x77, 0x65, 0x37, 0xaf, 0xf0, 0x08, 0xfa, 0xb7,
+	0x44, 0xa4, 0x42, 0x16, 0xe4, 0x67, 0x42, 0x54, 0x3d, 0xf8, 0x1d, 0x5c, 0x94, 0x08, 0xce, 0x68,
+	0xc4, 0x09, 0x1a, 0x83, 0xc1, 0x28, 0x17, 0x12, 0x74, 0x36, 0xb1, 0xdc, 0xe6, 0xea, 0xae, 0xc4,
+	0x4a, 0x04, 0x1e, 0x83, 0x75, 0x4b, 0xc4, 0xb5, 0x2f, 0x56, 0xdf, 0xd3, 0x2e, 0x2f, 0x86, 0x0c,
+	0x40, 0x0f, 0xd6, 0xdc, 0xd6, 0x46, 0x7a, 0xba, 0x4e, 0xb0, 0xe6, 0xf8, 0x06, 0x1e, 0xb5, 0x90,
+	0xf9, 0xb0, 0x57, 0x60, 0xa6, 0x54, 0x19, 0xf8, 0xd0, 0xb4, 0x0c, 0x82, 0xaf, 0x4a, 0xad, 0xe5,
+	0x24, 0x0b, 0xcc, 0x30, 0xd8, 0x05, 0x99, 0x58, 0x73, 0x91, 0x15, 0xe9, 0x73, 0xd0, 0xcd, 0x86,
+	0x13, 0x21, 0x5f, 0xd9, 0x5c, 0xe4, 0x15, 0x7e, 0x0f, 0x83, 0x8a, 0xe0, 0x1e, 0x02, 0x76, 0x30,
+	0xbc, 0x89, 0x89, 0x2f, 0x48, 0xfd, 0x45, 0x4b, 0x47, 0xb5, 0x3d, 0x8e, 0x76, 0xf6, 0x3a, 0xaa,
+	0x37, 0x1d, 0xad, 0xdc, 0x33, 0x1a, 0xee, 0xfd, 0xd5, 0x60, 0xf8, 0x99, 0xad, 0x5b, 0xf3, 0xda,
+	0x89, 0x9a, 0xd4, 0x13, 0x75, 0x36, 0x79, 0xe2, 0x66, 0xd1, 0x74, 0x8b, 0x68, 0xba, 0x4b, 0x11,
+	0x07, 0xd1, 0xf6, 0x8b, 0x1f, 0x26, 0xa4, 0x50, 0xe7, 0x56, 0x79, 0x3b, 0x75, 0x43, 0x6a, 0x7f,
+	0xdb, 0x4c, 0xe3, 0xa9, 0x3b, 0x05, 0x18, 0x5b, 0x80, 0xea, 0x0b, 0x64, 0x4f, 0x8e, 0x9f, 0xc3,
+	0x70, 0x4a, 0x42, 0x72, 0x74, 0xad, 0xf4, 0x6a, 0x1d, 0x94, 0x5d, 0x9d, 0xfc, 0xd3, 0xa1, 0x37,
+	0xf7, 0x23, 0xfa, 0x61, 0x3e, 0x43, 0x57, 0xd0, 0xcb, 0xdd, 0x44, 0x97, 0x6d, 0xd7, 0x9a, 0xa9,
+	0x77, 0xf6, 0xba, 0x8a, 0xbe, 0xc1, 0x79, 0x23, 0x94, 0xe8, 0xc5, 0x1e, 0x1a, 0x25, 0xdd, 0xce,
+	0xcb, 0x13, 0xa8, 0x3c, 0x58, 0x9f, 0xe0, 0x41, 0x11, 0x36, 0xf4, 0xf4, 0x80, 0xbe, 0x92, 0x73,
+	0x74, 0x18, 0x90, 0xd3, 0x7d, 0x04, 0xa8, 0xb2, 0x87, 0x9e, 0xb5, 0xf1, 0x4a, 0x2e, 0x0f, 0xec,
+	0xbc, 0x04, 0xa8, 0x1c, 0x51, 0x69, 0x94, 0xb8, 0x39, 0xf8, 0x18, 0x24, 0xd7, 0xb6, 0x04, 0xa8,
+	0xbc, 0x52, 0x49, 0x15, 0xb3, 0x55, 0x52, 0xd5, 0xea, 0xeb, 0x8b, 0xaf, 0xe7, 0x5e, 0xfd, 0x8f,
+	0x7c, 0xd7, 0x95, 0x59, 0x7b, 0xf3, 0x3f, 0x00, 0x00, 0xff, 0xff, 0x07, 0x57, 0x5a, 0x79, 0xa8,
+	0x05, 0x00, 0x00,
 }
