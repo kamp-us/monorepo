@@ -19,17 +19,6 @@ func NewPostgreSQLBackend(db *gorm.DB) backend.Backender {
 	}
 }
 
-func (b *PostgreSQLBackend) GetPost(ctx context.Context, id string) (*models.Post, error) {
-	post := models.Post{}
-
-	result := b.DB.First(&post, "id = ?", id)
-	if result.Error != nil {
-		return nil, result.Error
-	}
-
-	return &post, nil
-}
-
 func (b *PostgreSQLBackend) GetBatchPosts(ctx context.Context, ids []string) ([]*models.Post, error) {
 	var posts []*models.Post
 	result := b.DB.Find(&posts, ids)

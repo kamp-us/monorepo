@@ -8,7 +8,6 @@ import "google/protobuf/wrappers.proto";
 // import "google/protobuf/timestamp.proto";
 
 service PanoAPI {
-  rpc GetPost(GetPostRequest) returns (Post);
   rpc GetBatchPosts(GetBatchPostsRequest) returns (GetBatchPostsResponse);
   rpc GetPosts(GetPostsRequest) returns (GetPostsResponse);
 
@@ -29,14 +28,6 @@ message Post {
   string content = 4;
   string slug = 5;
   string userID = 6;
-}
-
-message GetPostRequest {
-  string ID = 1;
-}
-
-message GetPostResponse {
-  Post post = 1;
 }
 
 message GetBatchPostsRequest {
