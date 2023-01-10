@@ -8,8 +8,8 @@ import (
 	"github.com/twitchtv/twirp"
 )
 
-func (s *PanoAPIServer) GetAllPosts(ctx context.Context, req *api.GetPostsRequest) (*api.GetPostsResponse, error) {
-	posts, err := s.backend.GetAllPosts(ctx)
+func (s *PanoAPIServer) GetPosts(ctx context.Context, req *api.GetPostsRequest) (*api.GetPostsResponse, error) {
+	posts, err := s.backend.GetPosts(ctx)
 	if err != nil {
 		return nil, twirp.InternalErrorWith(err)
 	}
@@ -20,5 +20,5 @@ func (s *PanoAPIServer) GetAllPosts(ctx context.Context, req *api.GetPostsReques
 		batch = append(batch, post)
 	}
 
-	return &api.GetPostsResponse{PostData: batch}, nil
+	return &api.GetPostsResponse{Posts: batch}, nil
 }

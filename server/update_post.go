@@ -6,10 +6,9 @@ import (
 	api "github.com/durmusrasit/pano-api/rpc/pano-api"
 	"github.com/durmusrasit/pano-api/server/helper"
 	"github.com/twitchtv/twirp"
-	"google.golang.org/protobuf/types/known/emptypb"
 )
 
-func (s *PanoAPIServer) UpdatePost(ctx context.Context, req *api.UpdatePostRequest) (*emptypb.Empty, error) {
+func (s *PanoAPIServer) UpdatePost(ctx context.Context, req *api.UpdatePostRequest) (*api.UpdatePostResponse, error) {
 	if err := validateUpdatePostRequest(req); err != nil {
 		return nil, err
 	}
@@ -19,7 +18,7 @@ func (s *PanoAPIServer) UpdatePost(ctx context.Context, req *api.UpdatePostReque
 		return nil, twirp.InternalErrorWith(err)
 	}
 
-	return &emptypb.Empty{}, nil
+	return &api.UpdatePostResponse{}, nil
 }
 
 func validateUpdatePostRequest(req *api.UpdatePostRequest) error {

@@ -30,6 +30,16 @@ func (b *PostgreSQLBackend) GetPost(ctx context.Context, id string) (*models.Pos
 	return &post, nil
 }
 
+func (b *PostgreSQLBackend) GetPosts(ctx context.Context) ([]*models.Post, error) {
+	var posts []*models.Post
+	result := b.DB.Find(&posts)
+	if result == nil {
+		return nil, result.Error
+	}
+
+	return posts, nil
+}
+
 func (b *PostgreSQLBackend) CreatePost(ctx context.Context, title string, url string, content string, userId string) (*models.Post, error) {
 	slug := slug.MakeLang(title, "tr")
 
@@ -47,16 +57,6 @@ func (b *PostgreSQLBackend) CreatePost(ctx context.Context, title string, url st
 	}
 
 	return &post, nil
-}
-
-func (b *PostgreSQLBackend) GetAllPosts(ctx context.Context) ([]*models.Post, error) {
-	var posts []*models.Post
-	result := b.DB.Find(&posts)
-	if result == nil {
-		return nil, result.Error
-	}
-
-	return posts, nil
 }
 
 func (b *PostgreSQLBackend) UpdatePost(ctx context.Context, id string, title *string, url *string, content *string) error {

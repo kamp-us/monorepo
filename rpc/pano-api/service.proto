@@ -4,21 +4,56 @@ package kampus.panoapi;
 option go_package = "/rpc/pano-api";
 
 import "google/protobuf/wrappers.proto";
-import "google/protobuf/empty.proto";
+// import "google/protobuf/empty.proto";
+// import "google/protobuf/timestamp.proto";
 
 service PanoAPI {
   rpc GetPost(GetPostRequest) returns (Post);
+  // rpc GetBatchPosts(GetBatchPostsRequest) returns (GetBatchPostsResponse);
+  rpc GetPosts(GetPostsRequest) returns (GetPostsResponse);
+
   rpc CreatePost(CreatePostRequest) returns (Post);
-  rpc GetAllPosts(GetPostsRequest) returns (GetPostsResponse);
-  rpc UpdatePost(UpdatePostRequest) returns (google.protobuf.Empty);
-  rpc DeletePost(DeletePostRequest) returns (google.protobuf.Empty);
+  rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
+  rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);  
+
+  // rpc GetBatchUpvote(GetBatchUpvoteRequest) returns (GetBatchUpvoteResponse);
+  // rpc CreateUpvote(CreateUpvoteRequest) returns (CreateUpvoteResponse);
+  // rpc DeleteUpvote(DeleteUpvoteRequest) returns (DeleteUpvoteResponse);
 }
 
 // Post Start
-message GetPostsRequest {}
+message Post {
+  string ID = 1;
+  string title = 2;
+  string url = 3;
+  string content = 4;
+  string slug = 5;
+  string userID = 6;
+}
 
 message GetPostRequest {
   string ID = 1;
+}
+
+message GetPostResponse {
+  Post post = 1;
+}
+
+// message GetBatchPostsRequest {
+//   repeated string ids = 1;
+// }
+
+// message GetBatchPostsResponse {
+//   repeated Post posts = 1;
+// }
+
+message GetPostsRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message GetPostsResponse {
+  repeated Post posts = 1;
 }
 
 message CreatePostRequest {
@@ -28,6 +63,10 @@ message CreatePostRequest {
   string userID = 4;
 }
 
+// message CreatePostResponse {
+//   Post post = 1;
+// }
+
 message UpdatePostRequest {
   string ID = 1;
   google.protobuf.StringValue title = 2;
@@ -35,19 +74,28 @@ message UpdatePostRequest {
   google.protobuf.StringValue content = 4;
 }
 
+message UpdatePostResponse {}
+
 message DeletePostRequest {
   string ID = 1;
 }
 
-message GetPostsResponse {
-  repeated Post postData = 1;
+message DeletePostResponse {}
+
+// Upvote Start
+/*message Upvote {
+  string ID = 1;
+  string postID = 2;
+  string userID = 3;
+  google.protobuf.Timestamp createdAt = 4;
 }
 
-message Post {
-  string ID = 1;
-  string title = 2;
-  string url = 3;
-  string content = 4;
-  string slug = 5;
-  string userID = 6;
+message CreateUpvoteRequest {
+  string postID = 1;
+  string userID = 2;
 }
+
+message DeleteUpvoteRequest {
+  string postID = 1;
+  string userID = 2;
+}*/
