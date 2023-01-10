@@ -6,12 +6,12 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/durmusrasit/pano-api/internal/backend/postgresql"
-	"github.com/durmusrasit/pano-api/internal/db"
-	"github.com/durmusrasit/pano-api/internal/models"
-	api "github.com/durmusrasit/pano-api/rpc/pano-api"
-	"github.com/durmusrasit/pano-api/server"
 	"github.com/joho/godotenv"
+	"github.com/kamp-us/pano-api/internal/backend/postgresql"
+	"github.com/kamp-us/pano-api/internal/db"
+	"github.com/kamp-us/pano-api/internal/models"
+	api "github.com/kamp-us/pano-api/rpc/pano-api"
+	"github.com/kamp-us/pano-api/server"
 )
 
 func main() {

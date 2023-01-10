@@ -3,7 +3,7 @@ package backend
 import (
 	"context"
 
-	"github.com/durmusrasit/pano-api/internal/models"
+	"github.com/kamp-us/pano-api/internal/models"
 )
 
 type Backender interface {

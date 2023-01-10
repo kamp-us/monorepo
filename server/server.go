@@ -1,6 +1,6 @@
 package server
 
-import "github.com/durmusrasit/pano-api/internal/backend"
+import "github.com/kamp-us/pano-api/internal/backend"
 
 type PanoAPIServer struct{ backend backend.Backender }
 

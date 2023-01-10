@@ -1,8 +1,8 @@
 package helper
 
 import (
-	"github.com/durmusrasit/pano-api/internal/models"
-	api "github.com/durmusrasit/pano-api/rpc/pano-api"
+	"github.com/kamp-us/pano-api/internal/models"
+	api "github.com/kamp-us/pano-api/rpc/pano-api"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 

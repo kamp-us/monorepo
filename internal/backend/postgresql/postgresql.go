@@ -3,9 +3,9 @@ package postgresql
 import (
 	"context"
 
-	"github.com/durmusrasit/pano-api/internal/backend"
-	"github.com/durmusrasit/pano-api/internal/models"
 	"github.com/gosimple/slug"
+	"github.com/kamp-us/pano-api/internal/backend"
+	"github.com/kamp-us/pano-api/internal/models"
 	"gorm.io/gorm"
 )
 

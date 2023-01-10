@@ -1,4 +1,4 @@
-module github.com/durmusrasit/pano-api
+module github.com/kamp-us/pano-api
 
 go 1.19
 

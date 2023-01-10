@@ -3,8 +3,8 @@ package server
 import (
 	"context"
 
-	api "github.com/durmusrasit/pano-api/rpc/pano-api"
-	"github.com/durmusrasit/pano-api/server/helper"
+	api "github.com/kamp-us/pano-api/rpc/pano-api"
+	"github.com/kamp-us/pano-api/server/helper"
 	"github.com/twitchtv/twirp"
 )
 
