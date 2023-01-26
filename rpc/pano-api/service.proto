@@ -4,7 +4,8 @@ package kampus.panoapi;
 option go_package = "/rpc/pano-api";
 
 import "google/protobuf/wrappers.proto";
-// import "google/protobuf/timestamp.proto";
+import "google/protobuf/timestamp.proto";
+// import "google/protobuf/empty.proto";
 
 service PanoAPI {
   rpc GetBatchPosts(GetBatchPostsRequest) returns (GetBatchPostsResponse);
@@ -14,9 +15,73 @@ service PanoAPI {
   rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
   rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);  
 
+  rpc GetBatchComments(GetBatchCommentsRequest) returns (GetBatchCommentsResponse);
+  rpc GetComments(GetCommentsRequest) returns (GetCommentsResponse);
+
+  rpc CreateComment(CreateCommentRequest) returns (CreateCommentResponse);
+  rpc UpdateComment(UpdateCommentRequest) returns (UpdateCommentResponse);
+  rpc DeleteComment(DeleteCommentRequest) returns (DeleteCommentResponse);  
+
   // rpc GetBatchUpvote(GetBatchUpvoteRequest) returns (GetBatchUpvoteResponse);
   // rpc CreateUpvote(CreateUpvoteRequest) returns (CreateUpvoteResponse);
   // rpc DeleteUpvote(DeleteUpvoteRequest) returns (DeleteUpvoteResponse);
+}
+
+// Comment Start
+message Comment {
+  string id = 1;
+  string content = 2;
+  string user_id = 3;
+  string post_id = 4;
+  string parent_id = 5;
+
+  // upvotes?
+}
+
+message GetBatchCommentsRequest {
+  repeated string ids = 1; // required
+}
+
+message GetBatchCommentsResponse {
+  repeated Comment Comments = 1; 
+}
+
+message GetCommentsRequest {
+  int32 limit = 1;  // default( 10 )
+  int32 offset = 2; // default( 0 )
+}
+
+message GetCommentsResponse {
+  repeated Comment Comments = 1;
+}
+
+message CreateCommentRequest {
+  string content = 1; // required
+  string user_id = 2; // required
+  string post_id = 3;  // required
+  google.protobuf.StringValue parent_id = 4;
+  google.protobuf.Timestamp deletedAt = 5;
+}
+
+message CreateCommentResponse {
+  Comment Comment = 1;
+}
+
+message UpdateCommentRequest {
+  string id = 1; // required
+  string content = 2; // required
+}
+
+message UpdateCommentResponse {
+  Comment Comment = 1;
+}
+
+message DeleteCommentRequest {
+  string id = 1; // required
+}
+
+message DeleteCommentResponse {
+  Comment Comment = 1;
 }
 
 // Post Start

@@ -41,6 +41,16 @@ type PanoAPI interface {
 	UpdatePost(context.Context, *UpdatePostRequest) (*UpdatePostResponse, error)
 
 	DeletePost(context.Context, *DeletePostRequest) (*DeletePostResponse, error)
+
+	GetBatchComments(context.Context, *GetBatchCommentsRequest) (*GetBatchCommentsResponse, error)
+
+	GetComments(context.Context, *GetCommentsRequest) (*GetCommentsResponse, error)
+
+	CreateComment(context.Context, *CreateCommentRequest) (*CreateCommentResponse, error)
+
+	UpdateComment(context.Context, *UpdateCommentRequest) (*UpdateCommentResponse, error)
+
+	DeleteComment(context.Context, *DeleteCommentRequest) (*DeleteCommentResponse, error)
 }
 
 // =======================
@@ -49,7 +59,7 @@ type PanoAPI interface {
 
 type panoAPIProtobufClient struct {
 	client      HTTPClient
-	urls        [5]string
+	urls        [10]string
 	interceptor twirp.Interceptor
 	opts        twirp.ClientOptions
 }
@@ -77,12 +87,17 @@ func NewPanoAPIProtobufClient(baseURL string, client HTTPClient, opts ...twirp.C
 	// Build method URLs: <baseURL>[<prefix>]/<package>.<Service>/<Method>
 	serviceURL := sanitizeBaseURL(baseURL)
 	serviceURL += baseServicePath(pathPrefix, "kampus.panoapi", "PanoAPI")
-	urls := [5]string{
+	urls := [10]string{
 		serviceURL + "GetBatchPosts",
 		serviceURL + "GetPosts",
 		serviceURL + "CreatePost",
 		serviceURL + "UpdatePost",
 		serviceURL + "DeletePost",
+		serviceURL + "GetBatchComments",
+		serviceURL + "GetComments",
+		serviceURL + "CreateComment",
+		serviceURL + "UpdateComment",
+		serviceURL + "DeleteComment",
 	}
 
 	return &panoAPIProtobufClient{
@@ -323,13 +338,243 @@ func (c *panoAPIProtobufClient) callDeletePost(ctx context.Context, in *DeletePo
 	return out, nil
 }
 
+func (c *panoAPIProtobufClient) GetBatchComments(ctx context.Context, in *GetBatchCommentsRequest) (*GetBatchCommentsResponse, error) {
+	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
+	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
+	ctx = ctxsetters.WithMethodName(ctx, "GetBatchComments")
+	caller := c.callGetBatchComments
+	if c.interceptor != nil {
+		caller = func(ctx context.Context, req *GetBatchCommentsRequest) (*GetBatchCommentsResponse, error) {
+			resp, err := c.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*GetBatchCommentsRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*GetBatchCommentsRequest) when calling interceptor")
+					}
+					return c.callGetBatchComments(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*GetBatchCommentsResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*GetBatchCommentsResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+	return caller(ctx, in)
+}
+
+func (c *panoAPIProtobufClient) callGetBatchComments(ctx context.Context, in *GetBatchCommentsRequest) (*GetBatchCommentsResponse, error) {
+	out := new(GetBatchCommentsResponse)
+	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[5], in, out)
+	if err != nil {
+		twerr, ok := err.(twirp.Error)
+		if !ok {
+			twerr = twirp.InternalErrorWith(err)
+		}
+		callClientError(ctx, c.opts.Hooks, twerr)
+		return nil, err
+	}
+
+	callClientResponseReceived(ctx, c.opts.Hooks)
+
+	return out, nil
+}
+
+func (c *panoAPIProtobufClient) GetComments(ctx context.Context, in *GetCommentsRequest) (*GetCommentsResponse, error) {
+	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
+	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
+	ctx = ctxsetters.WithMethodName(ctx, "GetComments")
+	caller := c.callGetComments
+	if c.interceptor != nil {
+		caller = func(ctx context.Context, req *GetCommentsRequest) (*GetCommentsResponse, error) {
+			resp, err := c.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*GetCommentsRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*GetCommentsRequest) when calling interceptor")
+					}
+					return c.callGetComments(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*GetCommentsResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*GetCommentsResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+	return caller(ctx, in)
+}
+
+func (c *panoAPIProtobufClient) callGetComments(ctx context.Context, in *GetCommentsRequest) (*GetCommentsResponse, error) {
+	out := new(GetCommentsResponse)
+	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[6], in, out)
+	if err != nil {
+		twerr, ok := err.(twirp.Error)
+		if !ok {
+			twerr = twirp.InternalErrorWith(err)
+		}
+		callClientError(ctx, c.opts.Hooks, twerr)
+		return nil, err
+	}
+
+	callClientResponseReceived(ctx, c.opts.Hooks)
+
+	return out, nil
+}
+
+func (c *panoAPIProtobufClient) CreateComment(ctx context.Context, in *CreateCommentRequest) (*CreateCommentResponse, error) {
+	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
+	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
+	ctx = ctxsetters.WithMethodName(ctx, "CreateComment")
+	caller := c.callCreateComment
+	if c.interceptor != nil {
+		caller = func(ctx context.Context, req *CreateCommentRequest) (*CreateCommentResponse, error) {
+			resp, err := c.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*CreateCommentRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*CreateCommentRequest) when calling interceptor")
+					}
+					return c.callCreateComment(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*CreateCommentResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*CreateCommentResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+	return caller(ctx, in)
+}
+
+func (c *panoAPIProtobufClient) callCreateComment(ctx context.Context, in *CreateCommentRequest) (*CreateCommentResponse, error) {
+	out := new(CreateCommentResponse)
+	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[7], in, out)
+	if err != nil {
+		twerr, ok := err.(twirp.Error)
+		if !ok {
+			twerr = twirp.InternalErrorWith(err)
+		}
+		callClientError(ctx, c.opts.Hooks, twerr)
+		return nil, err
+	}
+
+	callClientResponseReceived(ctx, c.opts.Hooks)
+
+	return out, nil
+}
+
+func (c *panoAPIProtobufClient) UpdateComment(ctx context.Context, in *UpdateCommentRequest) (*UpdateCommentResponse, error) {
+	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
+	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
+	ctx = ctxsetters.WithMethodName(ctx, "UpdateComment")
+	caller := c.callUpdateComment
+	if c.interceptor != nil {
+		caller = func(ctx context.Context, req *UpdateCommentRequest) (*UpdateCommentResponse, error) {
+			resp, err := c.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*UpdateCommentRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*UpdateCommentRequest) when calling interceptor")
+					}
+					return c.callUpdateComment(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*UpdateCommentResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*UpdateCommentResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+	return caller(ctx, in)
+}
+
+func (c *panoAPIProtobufClient) callUpdateComment(ctx context.Context, in *UpdateCommentRequest) (*UpdateCommentResponse, error) {
+	out := new(UpdateCommentResponse)
+	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[8], in, out)
+	if err != nil {
+		twerr, ok := err.(twirp.Error)
+		if !ok {
+			twerr = twirp.InternalErrorWith(err)
+		}
+		callClientError(ctx, c.opts.Hooks, twerr)
+		return nil, err
+	}
+
+	callClientResponseReceived(ctx, c.opts.Hooks)
+
+	return out, nil
+}
+
+func (c *panoAPIProtobufClient) DeleteComment(ctx context.Context, in *DeleteCommentRequest) (*DeleteCommentResponse, error) {
+	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
+	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
+	ctx = ctxsetters.WithMethodName(ctx, "DeleteComment")
+	caller := c.callDeleteComment
+	if c.interceptor != nil {
+		caller = func(ctx context.Context, req *DeleteCommentRequest) (*DeleteCommentResponse, error) {
+			resp, err := c.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*DeleteCommentRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*DeleteCommentRequest) when calling interceptor")
+					}
+					return c.callDeleteComment(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*DeleteCommentResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*DeleteCommentResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+	return caller(ctx, in)
+}
+
+func (c *panoAPIProtobufClient) callDeleteComment(ctx context.Context, in *DeleteCommentRequest) (*DeleteCommentResponse, error) {
+	out := new(DeleteCommentResponse)
+	ctx, err := doProtobufRequest(ctx, c.client, c.opts.Hooks, c.urls[9], in, out)
+	if err != nil {
+		twerr, ok := err.(twirp.Error)
+		if !ok {
+			twerr = twirp.InternalErrorWith(err)
+		}
+		callClientError(ctx, c.opts.Hooks, twerr)
+		return nil, err
+	}
+
+	callClientResponseReceived(ctx, c.opts.Hooks)
+
+	return out, nil
+}
+
 // ===================
 // PanoAPI JSON Client
 // ===================
 
 type panoAPIJSONClient struct {
 	client      HTTPClient
-	urls        [5]string
+	urls        [10]string
 	interceptor twirp.Interceptor
 	opts        twirp.ClientOptions
 }
@@ -357,12 +602,17 @@ func NewPanoAPIJSONClient(baseURL string, client HTTPClient, opts ...twirp.Clien
 	// Build method URLs: <baseURL>[<prefix>]/<package>.<Service>/<Method>
 	serviceURL := sanitizeBaseURL(baseURL)
 	serviceURL += baseServicePath(pathPrefix, "kampus.panoapi", "PanoAPI")
-	urls := [5]string{
+	urls := [10]string{
 		serviceURL + "GetBatchPosts",
 		serviceURL + "GetPosts",
 		serviceURL + "CreatePost",
 		serviceURL + "UpdatePost",
 		serviceURL + "DeletePost",
+		serviceURL + "GetBatchComments",
+		serviceURL + "GetComments",
+		serviceURL + "CreateComment",
+		serviceURL + "UpdateComment",
+		serviceURL + "DeleteComment",
 	}
 
 	return &panoAPIJSONClient{
@@ -603,6 +853,236 @@ func (c *panoAPIJSONClient) callDeletePost(ctx context.Context, in *DeletePostRe
 	return out, nil
 }
 
+func (c *panoAPIJSONClient) GetBatchComments(ctx context.Context, in *GetBatchCommentsRequest) (*GetBatchCommentsResponse, error) {
+	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
+	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
+	ctx = ctxsetters.WithMethodName(ctx, "GetBatchComments")
+	caller := c.callGetBatchComments
+	if c.interceptor != nil {
+		caller = func(ctx context.Context, req *GetBatchCommentsRequest) (*GetBatchCommentsResponse, error) {
+			resp, err := c.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*GetBatchCommentsRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*GetBatchCommentsRequest) when calling interceptor")
+					}
+					return c.callGetBatchComments(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*GetBatchCommentsResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*GetBatchCommentsResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+	return caller(ctx, in)
+}
+
+func (c *panoAPIJSONClient) callGetBatchComments(ctx context.Context, in *GetBatchCommentsRequest) (*GetBatchCommentsResponse, error) {
+	out := new(GetBatchCommentsResponse)
+	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[5], in, out)
+	if err != nil {
+		twerr, ok := err.(twirp.Error)
+		if !ok {
+			twerr = twirp.InternalErrorWith(err)
+		}
+		callClientError(ctx, c.opts.Hooks, twerr)
+		return nil, err
+	}
+
+	callClientResponseReceived(ctx, c.opts.Hooks)
+
+	return out, nil
+}
+
+func (c *panoAPIJSONClient) GetComments(ctx context.Context, in *GetCommentsRequest) (*GetCommentsResponse, error) {
+	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
+	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
+	ctx = ctxsetters.WithMethodName(ctx, "GetComments")
+	caller := c.callGetComments
+	if c.interceptor != nil {
+		caller = func(ctx context.Context, req *GetCommentsRequest) (*GetCommentsResponse, error) {
+			resp, err := c.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*GetCommentsRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*GetCommentsRequest) when calling interceptor")
+					}
+					return c.callGetComments(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*GetCommentsResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*GetCommentsResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+	return caller(ctx, in)
+}
+
+func (c *panoAPIJSONClient) callGetComments(ctx context.Context, in *GetCommentsRequest) (*GetCommentsResponse, error) {
+	out := new(GetCommentsResponse)
+	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[6], in, out)
+	if err != nil {
+		twerr, ok := err.(twirp.Error)
+		if !ok {
+			twerr = twirp.InternalErrorWith(err)
+		}
+		callClientError(ctx, c.opts.Hooks, twerr)
+		return nil, err
+	}
+
+	callClientResponseReceived(ctx, c.opts.Hooks)
+
+	return out, nil
+}
+
+func (c *panoAPIJSONClient) CreateComment(ctx context.Context, in *CreateCommentRequest) (*CreateCommentResponse, error) {
+	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
+	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
+	ctx = ctxsetters.WithMethodName(ctx, "CreateComment")
+	caller := c.callCreateComment
+	if c.interceptor != nil {
+		caller = func(ctx context.Context, req *CreateCommentRequest) (*CreateCommentResponse, error) {
+			resp, err := c.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*CreateCommentRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*CreateCommentRequest) when calling interceptor")
+					}
+					return c.callCreateComment(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*CreateCommentResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*CreateCommentResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+	return caller(ctx, in)
+}
+
+func (c *panoAPIJSONClient) callCreateComment(ctx context.Context, in *CreateCommentRequest) (*CreateCommentResponse, error) {
+	out := new(CreateCommentResponse)
+	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[7], in, out)
+	if err != nil {
+		twerr, ok := err.(twirp.Error)
+		if !ok {
+			twerr = twirp.InternalErrorWith(err)
+		}
+		callClientError(ctx, c.opts.Hooks, twerr)
+		return nil, err
+	}
+
+	callClientResponseReceived(ctx, c.opts.Hooks)
+
+	return out, nil
+}
+
+func (c *panoAPIJSONClient) UpdateComment(ctx context.Context, in *UpdateCommentRequest) (*UpdateCommentResponse, error) {
+	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
+	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
+	ctx = ctxsetters.WithMethodName(ctx, "UpdateComment")
+	caller := c.callUpdateComment
+	if c.interceptor != nil {
+		caller = func(ctx context.Context, req *UpdateCommentRequest) (*UpdateCommentResponse, error) {
+			resp, err := c.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*UpdateCommentRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*UpdateCommentRequest) when calling interceptor")
+					}
+					return c.callUpdateComment(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*UpdateCommentResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*UpdateCommentResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+	return caller(ctx, in)
+}
+
+func (c *panoAPIJSONClient) callUpdateComment(ctx context.Context, in *UpdateCommentRequest) (*UpdateCommentResponse, error) {
+	out := new(UpdateCommentResponse)
+	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[8], in, out)
+	if err != nil {
+		twerr, ok := err.(twirp.Error)
+		if !ok {
+			twerr = twirp.InternalErrorWith(err)
+		}
+		callClientError(ctx, c.opts.Hooks, twerr)
+		return nil, err
+	}
+
+	callClientResponseReceived(ctx, c.opts.Hooks)
+
+	return out, nil
+}
+
+func (c *panoAPIJSONClient) DeleteComment(ctx context.Context, in *DeleteCommentRequest) (*DeleteCommentResponse, error) {
+	ctx = ctxsetters.WithPackageName(ctx, "kampus.panoapi")
+	ctx = ctxsetters.WithServiceName(ctx, "PanoAPI")
+	ctx = ctxsetters.WithMethodName(ctx, "DeleteComment")
+	caller := c.callDeleteComment
+	if c.interceptor != nil {
+		caller = func(ctx context.Context, req *DeleteCommentRequest) (*DeleteCommentResponse, error) {
+			resp, err := c.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*DeleteCommentRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*DeleteCommentRequest) when calling interceptor")
+					}
+					return c.callDeleteComment(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*DeleteCommentResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*DeleteCommentResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+	return caller(ctx, in)
+}
+
+func (c *panoAPIJSONClient) callDeleteComment(ctx context.Context, in *DeleteCommentRequest) (*DeleteCommentResponse, error) {
+	out := new(DeleteCommentResponse)
+	ctx, err := doJSONRequest(ctx, c.client, c.opts.Hooks, c.urls[9], in, out)
+	if err != nil {
+		twerr, ok := err.(twirp.Error)
+		if !ok {
+			twerr = twirp.InternalErrorWith(err)
+		}
+		callClientError(ctx, c.opts.Hooks, twerr)
+		return nil, err
+	}
+
+	callClientResponseReceived(ctx, c.opts.Hooks)
+
+	return out, nil
+}
+
 // ======================
 // PanoAPI Server Handler
 // ======================
@@ -714,6 +1194,21 @@ func (s *panoAPIServer) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		return
 	case "DeletePost":
 		s.serveDeletePost(ctx, resp, req)
+		return
+	case "GetBatchComments":
+		s.serveGetBatchComments(ctx, resp, req)
+		return
+	case "GetComments":
+		s.serveGetComments(ctx, resp, req)
+		return
+	case "CreateComment":
+		s.serveCreateComment(ctx, resp, req)
+		return
+	case "UpdateComment":
+		s.serveUpdateComment(ctx, resp, req)
+		return
+	case "DeleteComment":
+		s.serveDeleteComment(ctx, resp, req)
 		return
 	default:
 		msg := fmt.Sprintf("no handler for path %q", req.URL.Path)
@@ -1622,6 +2117,906 @@ func (s *panoAPIServer) serveDeletePostProtobuf(ctx context.Context, resp http.R
 	callResponseSent(ctx, s.hooks)
 }
 
+func (s *panoAPIServer) serveGetBatchComments(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	header := req.Header.Get("Content-Type")
+	i := strings.Index(header, ";")
+	if i == -1 {
+		i = len(header)
+	}
+	switch strings.TrimSpace(strings.ToLower(header[:i])) {
+	case "application/json":
+		s.serveGetBatchCommentsJSON(ctx, resp, req)
+	case "application/protobuf":
+		s.serveGetBatchCommentsProtobuf(ctx, resp, req)
+	default:
+		msg := fmt.Sprintf("unexpected Content-Type: %q", req.Header.Get("Content-Type"))
+		twerr := badRouteError(msg, req.Method, req.URL.Path)
+		s.writeError(ctx, resp, twerr)
+	}
+}
+
+func (s *panoAPIServer) serveGetBatchCommentsJSON(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	var err error
+	ctx = ctxsetters.WithMethodName(ctx, "GetBatchComments")
+	ctx, err = callRequestRouted(ctx, s.hooks)
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+
+	d := json.NewDecoder(req.Body)
+	rawReqBody := json.RawMessage{}
+	if err := d.Decode(&rawReqBody); err != nil {
+		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
+		return
+	}
+	reqContent := new(GetBatchCommentsRequest)
+	unmarshaler := protojson.UnmarshalOptions{DiscardUnknown: true}
+	if err = unmarshaler.Unmarshal(rawReqBody, reqContent); err != nil {
+		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
+		return
+	}
+
+	handler := s.PanoAPI.GetBatchComments
+	if s.interceptor != nil {
+		handler = func(ctx context.Context, req *GetBatchCommentsRequest) (*GetBatchCommentsResponse, error) {
+			resp, err := s.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*GetBatchCommentsRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*GetBatchCommentsRequest) when calling interceptor")
+					}
+					return s.PanoAPI.GetBatchComments(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*GetBatchCommentsResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*GetBatchCommentsResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+
+	// Call service method
+	var respContent *GetBatchCommentsResponse
+	func() {
+		defer ensurePanicResponses(ctx, resp, s.hooks)
+		respContent, err = handler(ctx, reqContent)
+	}()
+
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+	if respContent == nil {
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *GetBatchCommentsResponse and nil error while calling GetBatchComments. nil responses are not supported"))
+		return
+	}
+
+	ctx = callResponsePrepared(ctx, s.hooks)
+
+	marshaler := &protojson.MarshalOptions{UseProtoNames: !s.jsonCamelCase, EmitUnpopulated: !s.jsonSkipDefaults}
+	respBytes, err := marshaler.Marshal(respContent)
+	if err != nil {
+		s.writeError(ctx, resp, wrapInternal(err, "failed to marshal json response"))
+		return
+	}
+
+	ctx = ctxsetters.WithStatusCode(ctx, http.StatusOK)
+	resp.Header().Set("Content-Type", "application/json")
+	resp.Header().Set("Content-Length", strconv.Itoa(len(respBytes)))
+	resp.WriteHeader(http.StatusOK)
+
+	if n, err := resp.Write(respBytes); err != nil {
+		msg := fmt.Sprintf("failed to write response, %d of %d bytes written: %s", n, len(respBytes), err.Error())
+		twerr := twirp.NewError(twirp.Unknown, msg)
+		ctx = callError(ctx, s.hooks, twerr)
+	}
+	callResponseSent(ctx, s.hooks)
+}
+
+func (s *panoAPIServer) serveGetBatchCommentsProtobuf(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	var err error
+	ctx = ctxsetters.WithMethodName(ctx, "GetBatchComments")
+	ctx, err = callRequestRouted(ctx, s.hooks)
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+
+	buf, err := io.ReadAll(req.Body)
+	if err != nil {
+		s.handleRequestBodyError(ctx, resp, "failed to read request body", err)
+		return
+	}
+	reqContent := new(GetBatchCommentsRequest)
+	if err = proto.Unmarshal(buf, reqContent); err != nil {
+		s.writeError(ctx, resp, malformedRequestError("the protobuf request could not be decoded"))
+		return
+	}
+
+	handler := s.PanoAPI.GetBatchComments
+	if s.interceptor != nil {
+		handler = func(ctx context.Context, req *GetBatchCommentsRequest) (*GetBatchCommentsResponse, error) {
+			resp, err := s.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*GetBatchCommentsRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*GetBatchCommentsRequest) when calling interceptor")
+					}
+					return s.PanoAPI.GetBatchComments(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*GetBatchCommentsResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*GetBatchCommentsResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+
+	// Call service method
+	var respContent *GetBatchCommentsResponse
+	func() {
+		defer ensurePanicResponses(ctx, resp, s.hooks)
+		respContent, err = handler(ctx, reqContent)
+	}()
+
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+	if respContent == nil {
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *GetBatchCommentsResponse and nil error while calling GetBatchComments. nil responses are not supported"))
+		return
+	}
+
+	ctx = callResponsePrepared(ctx, s.hooks)
+
+	respBytes, err := proto.Marshal(respContent)
+	if err != nil {
+		s.writeError(ctx, resp, wrapInternal(err, "failed to marshal proto response"))
+		return
+	}
+
+	ctx = ctxsetters.WithStatusCode(ctx, http.StatusOK)
+	resp.Header().Set("Content-Type", "application/protobuf")
+	resp.Header().Set("Content-Length", strconv.Itoa(len(respBytes)))
+	resp.WriteHeader(http.StatusOK)
+	if n, err := resp.Write(respBytes); err != nil {
+		msg := fmt.Sprintf("failed to write response, %d of %d bytes written: %s", n, len(respBytes), err.Error())
+		twerr := twirp.NewError(twirp.Unknown, msg)
+		ctx = callError(ctx, s.hooks, twerr)
+	}
+	callResponseSent(ctx, s.hooks)
+}
+
+func (s *panoAPIServer) serveGetComments(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	header := req.Header.Get("Content-Type")
+	i := strings.Index(header, ";")
+	if i == -1 {
+		i = len(header)
+	}
+	switch strings.TrimSpace(strings.ToLower(header[:i])) {
+	case "application/json":
+		s.serveGetCommentsJSON(ctx, resp, req)
+	case "application/protobuf":
+		s.serveGetCommentsProtobuf(ctx, resp, req)
+	default:
+		msg := fmt.Sprintf("unexpected Content-Type: %q", req.Header.Get("Content-Type"))
+		twerr := badRouteError(msg, req.Method, req.URL.Path)
+		s.writeError(ctx, resp, twerr)
+	}
+}
+
+func (s *panoAPIServer) serveGetCommentsJSON(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	var err error
+	ctx = ctxsetters.WithMethodName(ctx, "GetComments")
+	ctx, err = callRequestRouted(ctx, s.hooks)
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+
+	d := json.NewDecoder(req.Body)
+	rawReqBody := json.RawMessage{}
+	if err := d.Decode(&rawReqBody); err != nil {
+		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
+		return
+	}
+	reqContent := new(GetCommentsRequest)
+	unmarshaler := protojson.UnmarshalOptions{DiscardUnknown: true}
+	if err = unmarshaler.Unmarshal(rawReqBody, reqContent); err != nil {
+		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
+		return
+	}
+
+	handler := s.PanoAPI.GetComments
+	if s.interceptor != nil {
+		handler = func(ctx context.Context, req *GetCommentsRequest) (*GetCommentsResponse, error) {
+			resp, err := s.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*GetCommentsRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*GetCommentsRequest) when calling interceptor")
+					}
+					return s.PanoAPI.GetComments(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*GetCommentsResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*GetCommentsResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+
+	// Call service method
+	var respContent *GetCommentsResponse
+	func() {
+		defer ensurePanicResponses(ctx, resp, s.hooks)
+		respContent, err = handler(ctx, reqContent)
+	}()
+
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+	if respContent == nil {
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *GetCommentsResponse and nil error while calling GetComments. nil responses are not supported"))
+		return
+	}
+
+	ctx = callResponsePrepared(ctx, s.hooks)
+
+	marshaler := &protojson.MarshalOptions{UseProtoNames: !s.jsonCamelCase, EmitUnpopulated: !s.jsonSkipDefaults}
+	respBytes, err := marshaler.Marshal(respContent)
+	if err != nil {
+		s.writeError(ctx, resp, wrapInternal(err, "failed to marshal json response"))
+		return
+	}
+
+	ctx = ctxsetters.WithStatusCode(ctx, http.StatusOK)
+	resp.Header().Set("Content-Type", "application/json")
+	resp.Header().Set("Content-Length", strconv.Itoa(len(respBytes)))
+	resp.WriteHeader(http.StatusOK)
+
+	if n, err := resp.Write(respBytes); err != nil {
+		msg := fmt.Sprintf("failed to write response, %d of %d bytes written: %s", n, len(respBytes), err.Error())
+		twerr := twirp.NewError(twirp.Unknown, msg)
+		ctx = callError(ctx, s.hooks, twerr)
+	}
+	callResponseSent(ctx, s.hooks)
+}
+
+func (s *panoAPIServer) serveGetCommentsProtobuf(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	var err error
+	ctx = ctxsetters.WithMethodName(ctx, "GetComments")
+	ctx, err = callRequestRouted(ctx, s.hooks)
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+
+	buf, err := io.ReadAll(req.Body)
+	if err != nil {
+		s.handleRequestBodyError(ctx, resp, "failed to read request body", err)
+		return
+	}
+	reqContent := new(GetCommentsRequest)
+	if err = proto.Unmarshal(buf, reqContent); err != nil {
+		s.writeError(ctx, resp, malformedRequestError("the protobuf request could not be decoded"))
+		return
+	}
+
+	handler := s.PanoAPI.GetComments
+	if s.interceptor != nil {
+		handler = func(ctx context.Context, req *GetCommentsRequest) (*GetCommentsResponse, error) {
+			resp, err := s.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*GetCommentsRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*GetCommentsRequest) when calling interceptor")
+					}
+					return s.PanoAPI.GetComments(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*GetCommentsResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*GetCommentsResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+
+	// Call service method
+	var respContent *GetCommentsResponse
+	func() {
+		defer ensurePanicResponses(ctx, resp, s.hooks)
+		respContent, err = handler(ctx, reqContent)
+	}()
+
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+	if respContent == nil {
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *GetCommentsResponse and nil error while calling GetComments. nil responses are not supported"))
+		return
+	}
+
+	ctx = callResponsePrepared(ctx, s.hooks)
+
+	respBytes, err := proto.Marshal(respContent)
+	if err != nil {
+		s.writeError(ctx, resp, wrapInternal(err, "failed to marshal proto response"))
+		return
+	}
+
+	ctx = ctxsetters.WithStatusCode(ctx, http.StatusOK)
+	resp.Header().Set("Content-Type", "application/protobuf")
+	resp.Header().Set("Content-Length", strconv.Itoa(len(respBytes)))
+	resp.WriteHeader(http.StatusOK)
+	if n, err := resp.Write(respBytes); err != nil {
+		msg := fmt.Sprintf("failed to write response, %d of %d bytes written: %s", n, len(respBytes), err.Error())
+		twerr := twirp.NewError(twirp.Unknown, msg)
+		ctx = callError(ctx, s.hooks, twerr)
+	}
+	callResponseSent(ctx, s.hooks)
+}
+
+func (s *panoAPIServer) serveCreateComment(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	header := req.Header.Get("Content-Type")
+	i := strings.Index(header, ";")
+	if i == -1 {
+		i = len(header)
+	}
+	switch strings.TrimSpace(strings.ToLower(header[:i])) {
+	case "application/json":
+		s.serveCreateCommentJSON(ctx, resp, req)
+	case "application/protobuf":
+		s.serveCreateCommentProtobuf(ctx, resp, req)
+	default:
+		msg := fmt.Sprintf("unexpected Content-Type: %q", req.Header.Get("Content-Type"))
+		twerr := badRouteError(msg, req.Method, req.URL.Path)
+		s.writeError(ctx, resp, twerr)
+	}
+}
+
+func (s *panoAPIServer) serveCreateCommentJSON(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	var err error
+	ctx = ctxsetters.WithMethodName(ctx, "CreateComment")
+	ctx, err = callRequestRouted(ctx, s.hooks)
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+
+	d := json.NewDecoder(req.Body)
+	rawReqBody := json.RawMessage{}
+	if err := d.Decode(&rawReqBody); err != nil {
+		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
+		return
+	}
+	reqContent := new(CreateCommentRequest)
+	unmarshaler := protojson.UnmarshalOptions{DiscardUnknown: true}
+	if err = unmarshaler.Unmarshal(rawReqBody, reqContent); err != nil {
+		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
+		return
+	}
+
+	handler := s.PanoAPI.CreateComment
+	if s.interceptor != nil {
+		handler = func(ctx context.Context, req *CreateCommentRequest) (*CreateCommentResponse, error) {
+			resp, err := s.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*CreateCommentRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*CreateCommentRequest) when calling interceptor")
+					}
+					return s.PanoAPI.CreateComment(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*CreateCommentResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*CreateCommentResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+
+	// Call service method
+	var respContent *CreateCommentResponse
+	func() {
+		defer ensurePanicResponses(ctx, resp, s.hooks)
+		respContent, err = handler(ctx, reqContent)
+	}()
+
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+	if respContent == nil {
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *CreateCommentResponse and nil error while calling CreateComment. nil responses are not supported"))
+		return
+	}
+
+	ctx = callResponsePrepared(ctx, s.hooks)
+
+	marshaler := &protojson.MarshalOptions{UseProtoNames: !s.jsonCamelCase, EmitUnpopulated: !s.jsonSkipDefaults}
+	respBytes, err := marshaler.Marshal(respContent)
+	if err != nil {
+		s.writeError(ctx, resp, wrapInternal(err, "failed to marshal json response"))
+		return
+	}
+
+	ctx = ctxsetters.WithStatusCode(ctx, http.StatusOK)
+	resp.Header().Set("Content-Type", "application/json")
+	resp.Header().Set("Content-Length", strconv.Itoa(len(respBytes)))
+	resp.WriteHeader(http.StatusOK)
+
+	if n, err := resp.Write(respBytes); err != nil {
+		msg := fmt.Sprintf("failed to write response, %d of %d bytes written: %s", n, len(respBytes), err.Error())
+		twerr := twirp.NewError(twirp.Unknown, msg)
+		ctx = callError(ctx, s.hooks, twerr)
+	}
+	callResponseSent(ctx, s.hooks)
+}
+
+func (s *panoAPIServer) serveCreateCommentProtobuf(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	var err error
+	ctx = ctxsetters.WithMethodName(ctx, "CreateComment")
+	ctx, err = callRequestRouted(ctx, s.hooks)
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+
+	buf, err := io.ReadAll(req.Body)
+	if err != nil {
+		s.handleRequestBodyError(ctx, resp, "failed to read request body", err)
+		return
+	}
+	reqContent := new(CreateCommentRequest)
+	if err = proto.Unmarshal(buf, reqContent); err != nil {
+		s.writeError(ctx, resp, malformedRequestError("the protobuf request could not be decoded"))
+		return
+	}
+
+	handler := s.PanoAPI.CreateComment
+	if s.interceptor != nil {
+		handler = func(ctx context.Context, req *CreateCommentRequest) (*CreateCommentResponse, error) {
+			resp, err := s.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*CreateCommentRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*CreateCommentRequest) when calling interceptor")
+					}
+					return s.PanoAPI.CreateComment(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*CreateCommentResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*CreateCommentResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+
+	// Call service method
+	var respContent *CreateCommentResponse
+	func() {
+		defer ensurePanicResponses(ctx, resp, s.hooks)
+		respContent, err = handler(ctx, reqContent)
+	}()
+
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+	if respContent == nil {
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *CreateCommentResponse and nil error while calling CreateComment. nil responses are not supported"))
+		return
+	}
+
+	ctx = callResponsePrepared(ctx, s.hooks)
+
+	respBytes, err := proto.Marshal(respContent)
+	if err != nil {
+		s.writeError(ctx, resp, wrapInternal(err, "failed to marshal proto response"))
+		return
+	}
+
+	ctx = ctxsetters.WithStatusCode(ctx, http.StatusOK)
+	resp.Header().Set("Content-Type", "application/protobuf")
+	resp.Header().Set("Content-Length", strconv.Itoa(len(respBytes)))
+	resp.WriteHeader(http.StatusOK)
+	if n, err := resp.Write(respBytes); err != nil {
+		msg := fmt.Sprintf("failed to write response, %d of %d bytes written: %s", n, len(respBytes), err.Error())
+		twerr := twirp.NewError(twirp.Unknown, msg)
+		ctx = callError(ctx, s.hooks, twerr)
+	}
+	callResponseSent(ctx, s.hooks)
+}
+
+func (s *panoAPIServer) serveUpdateComment(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	header := req.Header.Get("Content-Type")
+	i := strings.Index(header, ";")
+	if i == -1 {
+		i = len(header)
+	}
+	switch strings.TrimSpace(strings.ToLower(header[:i])) {
+	case "application/json":
+		s.serveUpdateCommentJSON(ctx, resp, req)
+	case "application/protobuf":
+		s.serveUpdateCommentProtobuf(ctx, resp, req)
+	default:
+		msg := fmt.Sprintf("unexpected Content-Type: %q", req.Header.Get("Content-Type"))
+		twerr := badRouteError(msg, req.Method, req.URL.Path)
+		s.writeError(ctx, resp, twerr)
+	}
+}
+
+func (s *panoAPIServer) serveUpdateCommentJSON(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	var err error
+	ctx = ctxsetters.WithMethodName(ctx, "UpdateComment")
+	ctx, err = callRequestRouted(ctx, s.hooks)
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+
+	d := json.NewDecoder(req.Body)
+	rawReqBody := json.RawMessage{}
+	if err := d.Decode(&rawReqBody); err != nil {
+		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
+		return
+	}
+	reqContent := new(UpdateCommentRequest)
+	unmarshaler := protojson.UnmarshalOptions{DiscardUnknown: true}
+	if err = unmarshaler.Unmarshal(rawReqBody, reqContent); err != nil {
+		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
+		return
+	}
+
+	handler := s.PanoAPI.UpdateComment
+	if s.interceptor != nil {
+		handler = func(ctx context.Context, req *UpdateCommentRequest) (*UpdateCommentResponse, error) {
+			resp, err := s.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*UpdateCommentRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*UpdateCommentRequest) when calling interceptor")
+					}
+					return s.PanoAPI.UpdateComment(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*UpdateCommentResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*UpdateCommentResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+
+	// Call service method
+	var respContent *UpdateCommentResponse
+	func() {
+		defer ensurePanicResponses(ctx, resp, s.hooks)
+		respContent, err = handler(ctx, reqContent)
+	}()
+
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+	if respContent == nil {
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *UpdateCommentResponse and nil error while calling UpdateComment. nil responses are not supported"))
+		return
+	}
+
+	ctx = callResponsePrepared(ctx, s.hooks)
+
+	marshaler := &protojson.MarshalOptions{UseProtoNames: !s.jsonCamelCase, EmitUnpopulated: !s.jsonSkipDefaults}
+	respBytes, err := marshaler.Marshal(respContent)
+	if err != nil {
+		s.writeError(ctx, resp, wrapInternal(err, "failed to marshal json response"))
+		return
+	}
+
+	ctx = ctxsetters.WithStatusCode(ctx, http.StatusOK)
+	resp.Header().Set("Content-Type", "application/json")
+	resp.Header().Set("Content-Length", strconv.Itoa(len(respBytes)))
+	resp.WriteHeader(http.StatusOK)
+
+	if n, err := resp.Write(respBytes); err != nil {
+		msg := fmt.Sprintf("failed to write response, %d of %d bytes written: %s", n, len(respBytes), err.Error())
+		twerr := twirp.NewError(twirp.Unknown, msg)
+		ctx = callError(ctx, s.hooks, twerr)
+	}
+	callResponseSent(ctx, s.hooks)
+}
+
+func (s *panoAPIServer) serveUpdateCommentProtobuf(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	var err error
+	ctx = ctxsetters.WithMethodName(ctx, "UpdateComment")
+	ctx, err = callRequestRouted(ctx, s.hooks)
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+
+	buf, err := io.ReadAll(req.Body)
+	if err != nil {
+		s.handleRequestBodyError(ctx, resp, "failed to read request body", err)
+		return
+	}
+	reqContent := new(UpdateCommentRequest)
+	if err = proto.Unmarshal(buf, reqContent); err != nil {
+		s.writeError(ctx, resp, malformedRequestError("the protobuf request could not be decoded"))
+		return
+	}
+
+	handler := s.PanoAPI.UpdateComment
+	if s.interceptor != nil {
+		handler = func(ctx context.Context, req *UpdateCommentRequest) (*UpdateCommentResponse, error) {
+			resp, err := s.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*UpdateCommentRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*UpdateCommentRequest) when calling interceptor")
+					}
+					return s.PanoAPI.UpdateComment(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*UpdateCommentResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*UpdateCommentResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+
+	// Call service method
+	var respContent *UpdateCommentResponse
+	func() {
+		defer ensurePanicResponses(ctx, resp, s.hooks)
+		respContent, err = handler(ctx, reqContent)
+	}()
+
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+	if respContent == nil {
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *UpdateCommentResponse and nil error while calling UpdateComment. nil responses are not supported"))
+		return
+	}
+
+	ctx = callResponsePrepared(ctx, s.hooks)
+
+	respBytes, err := proto.Marshal(respContent)
+	if err != nil {
+		s.writeError(ctx, resp, wrapInternal(err, "failed to marshal proto response"))
+		return
+	}
+
+	ctx = ctxsetters.WithStatusCode(ctx, http.StatusOK)
+	resp.Header().Set("Content-Type", "application/protobuf")
+	resp.Header().Set("Content-Length", strconv.Itoa(len(respBytes)))
+	resp.WriteHeader(http.StatusOK)
+	if n, err := resp.Write(respBytes); err != nil {
+		msg := fmt.Sprintf("failed to write response, %d of %d bytes written: %s", n, len(respBytes), err.Error())
+		twerr := twirp.NewError(twirp.Unknown, msg)
+		ctx = callError(ctx, s.hooks, twerr)
+	}
+	callResponseSent(ctx, s.hooks)
+}
+
+func (s *panoAPIServer) serveDeleteComment(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	header := req.Header.Get("Content-Type")
+	i := strings.Index(header, ";")
+	if i == -1 {
+		i = len(header)
+	}
+	switch strings.TrimSpace(strings.ToLower(header[:i])) {
+	case "application/json":
+		s.serveDeleteCommentJSON(ctx, resp, req)
+	case "application/protobuf":
+		s.serveDeleteCommentProtobuf(ctx, resp, req)
+	default:
+		msg := fmt.Sprintf("unexpected Content-Type: %q", req.Header.Get("Content-Type"))
+		twerr := badRouteError(msg, req.Method, req.URL.Path)
+		s.writeError(ctx, resp, twerr)
+	}
+}
+
+func (s *panoAPIServer) serveDeleteCommentJSON(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	var err error
+	ctx = ctxsetters.WithMethodName(ctx, "DeleteComment")
+	ctx, err = callRequestRouted(ctx, s.hooks)
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+
+	d := json.NewDecoder(req.Body)
+	rawReqBody := json.RawMessage{}
+	if err := d.Decode(&rawReqBody); err != nil {
+		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
+		return
+	}
+	reqContent := new(DeleteCommentRequest)
+	unmarshaler := protojson.UnmarshalOptions{DiscardUnknown: true}
+	if err = unmarshaler.Unmarshal(rawReqBody, reqContent); err != nil {
+		s.handleRequestBodyError(ctx, resp, "the json request could not be decoded", err)
+		return
+	}
+
+	handler := s.PanoAPI.DeleteComment
+	if s.interceptor != nil {
+		handler = func(ctx context.Context, req *DeleteCommentRequest) (*DeleteCommentResponse, error) {
+			resp, err := s.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*DeleteCommentRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*DeleteCommentRequest) when calling interceptor")
+					}
+					return s.PanoAPI.DeleteComment(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*DeleteCommentResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*DeleteCommentResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+
+	// Call service method
+	var respContent *DeleteCommentResponse
+	func() {
+		defer ensurePanicResponses(ctx, resp, s.hooks)
+		respContent, err = handler(ctx, reqContent)
+	}()
+
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+	if respContent == nil {
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *DeleteCommentResponse and nil error while calling DeleteComment. nil responses are not supported"))
+		return
+	}
+
+	ctx = callResponsePrepared(ctx, s.hooks)
+
+	marshaler := &protojson.MarshalOptions{UseProtoNames: !s.jsonCamelCase, EmitUnpopulated: !s.jsonSkipDefaults}
+	respBytes, err := marshaler.Marshal(respContent)
+	if err != nil {
+		s.writeError(ctx, resp, wrapInternal(err, "failed to marshal json response"))
+		return
+	}
+
+	ctx = ctxsetters.WithStatusCode(ctx, http.StatusOK)
+	resp.Header().Set("Content-Type", "application/json")
+	resp.Header().Set("Content-Length", strconv.Itoa(len(respBytes)))
+	resp.WriteHeader(http.StatusOK)
+
+	if n, err := resp.Write(respBytes); err != nil {
+		msg := fmt.Sprintf("failed to write response, %d of %d bytes written: %s", n, len(respBytes), err.Error())
+		twerr := twirp.NewError(twirp.Unknown, msg)
+		ctx = callError(ctx, s.hooks, twerr)
+	}
+	callResponseSent(ctx, s.hooks)
+}
+
+func (s *panoAPIServer) serveDeleteCommentProtobuf(ctx context.Context, resp http.ResponseWriter, req *http.Request) {
+	var err error
+	ctx = ctxsetters.WithMethodName(ctx, "DeleteComment")
+	ctx, err = callRequestRouted(ctx, s.hooks)
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+
+	buf, err := io.ReadAll(req.Body)
+	if err != nil {
+		s.handleRequestBodyError(ctx, resp, "failed to read request body", err)
+		return
+	}
+	reqContent := new(DeleteCommentRequest)
+	if err = proto.Unmarshal(buf, reqContent); err != nil {
+		s.writeError(ctx, resp, malformedRequestError("the protobuf request could not be decoded"))
+		return
+	}
+
+	handler := s.PanoAPI.DeleteComment
+	if s.interceptor != nil {
+		handler = func(ctx context.Context, req *DeleteCommentRequest) (*DeleteCommentResponse, error) {
+			resp, err := s.interceptor(
+				func(ctx context.Context, req interface{}) (interface{}, error) {
+					typedReq, ok := req.(*DeleteCommentRequest)
+					if !ok {
+						return nil, twirp.InternalError("failed type assertion req.(*DeleteCommentRequest) when calling interceptor")
+					}
+					return s.PanoAPI.DeleteComment(ctx, typedReq)
+				},
+			)(ctx, req)
+			if resp != nil {
+				typedResp, ok := resp.(*DeleteCommentResponse)
+				if !ok {
+					return nil, twirp.InternalError("failed type assertion resp.(*DeleteCommentResponse) when calling interceptor")
+				}
+				return typedResp, err
+			}
+			return nil, err
+		}
+	}
+
+	// Call service method
+	var respContent *DeleteCommentResponse
+	func() {
+		defer ensurePanicResponses(ctx, resp, s.hooks)
+		respContent, err = handler(ctx, reqContent)
+	}()
+
+	if err != nil {
+		s.writeError(ctx, resp, err)
+		return
+	}
+	if respContent == nil {
+		s.writeError(ctx, resp, twirp.InternalError("received a nil *DeleteCommentResponse and nil error while calling DeleteComment. nil responses are not supported"))
+		return
+	}
+
+	ctx = callResponsePrepared(ctx, s.hooks)
+
+	respBytes, err := proto.Marshal(respContent)
+	if err != nil {
+		s.writeError(ctx, resp, wrapInternal(err, "failed to marshal proto response"))
+		return
+	}
+
+	ctx = ctxsetters.WithStatusCode(ctx, http.StatusOK)
+	resp.Header().Set("Content-Type", "application/protobuf")
+	resp.Header().Set("Content-Length", strconv.Itoa(len(respBytes)))
+	resp.WriteHeader(http.StatusOK)
+	if n, err := resp.Write(respBytes); err != nil {
+		msg := fmt.Sprintf("failed to write response, %d of %d bytes written: %s", n, len(respBytes), err.Error())
+		twerr := twirp.NewError(twirp.Unknown, msg)
+		ctx = callError(ctx, s.hooks, twerr)
+	}
+	callResponseSent(ctx, s.hooks)
+}
+
 func (s *panoAPIServer) ServiceDescriptor() ([]byte, int) {
 	return twirpFileDescriptor0, 0
 }
@@ -2203,38 +3598,55 @@ func callClientError(ctx context.Context, h *twirp.ClientHooks, err twirp.Error)
 }
 
 var twirpFileDescriptor0 = []byte{
-	// 514 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0xdf, 0x8b, 0xd3, 0x40,
-	0x10, 0x26, 0x4d, 0xd2, 0xea, 0x1c, 0xf7, 0xa3, 0x4b, 0xd4, 0x50, 0x44, 0x6b, 0x54, 0x28, 0x82,
-	0x09, 0x54, 0xf0, 0xf1, 0xc4, 0x3b, 0xe1, 0xb8, 0x07, 0xa1, 0xe4, 0xd0, 0x07, 0x11, 0x24, 0xd7,
-	0x4c, 0xeb, 0x62, 0x2e, 0xbb, 0x66, 0x37, 0xfa, 0x17, 0xf8, 0x27, 0xf9, 0xec, 0xbf, 0x26, 0xbb,
-	0x69, 0xc8, 0x8f, 0xed, 0xb5, 0x70, 0x6f, 0x99, 0xd9, 0x6f, 0xbe, 0x99, 0xf9, 0xe6, 0x23, 0x30,
-	0x29, 0xf8, 0x32, 0xe2, 0x49, 0xce, 0x5e, 0x27, 0x9c, 0x46, 0x02, 0x8b, 0x5f, 0x74, 0x89, 0x21,
-	0x2f, 0x98, 0x64, 0xe4, 0xe8, 0x47, 0x72, 0xc3, 0x4b, 0x11, 0xaa, 0xe7, 0x84, 0xd3, 0xc9, 0x93,
-	0x35, 0x63, 0xeb, 0x0c, 0x23, 0xfd, 0x7a, 0x5d, 0xae, 0xa2, 0xdf, 0x45, 0xc2, 0x39, 0x16, 0xa2,
-	0xc2, 0x07, 0x7f, 0x2c, 0x70, 0x16, 0x4c, 0x48, 0x72, 0x04, 0x03, 0x9a, 0xfa, 0xd6, 0xd4, 0x9a,
-	0xdd, 0x8f, 0x07, 0x34, 0x25, 0x1e, 0xb8, 0x92, 0xca, 0x0c, 0xfd, 0x81, 0x4e, 0x55, 0x01, 0x39,
-	0x01, 0xbb, 0x2c, 0x32, 0xdf, 0xd6, 0x39, 0xf5, 0x49, 0x7c, 0x18, 0x2d, 0x59, 0x2e, 0x31, 0x97,
-	0xbe, 0xa3, 0xb3, 0x75, 0x48, 0x08, 0x38, 0x22, 0x2b, 0xd7, 0xbe, 0xab, 0xd3, 0xfa, 0x9b, 0x3c,
-	0x82, 0x51, 0x29, 0xb0, 0xf8, 0x46, 0x53, 0x7f, 0xa8, 0xd3, 0x43, 0x15, 0x5e, 0xa6, 0xc1, 0x0c,
-	0xbc, 0x0b, 0x94, 0x67, 0x89, 0x5c, 0x7e, 0x57, 0xe3, 0x88, 0x18, 0x7f, 0x96, 0x28, 0xa4, 0x6a,
-	0x48, 0x53, 0xe1, 0x5b, 0x53, 0x5b, 0x35, 0xa4, 0xa9, 0x08, 0xce, 0xe1, 0x41, 0x0f, 0x29, 0x38,
-	0xcb, 0x05, 0x92, 0x57, 0xe0, 0x72, 0x95, 0xd0, 0xe0, 0x83, 0xb9, 0x17, 0x76, 0xa5, 0x08, 0x15,
-	0x3a, 0xae, 0x20, 0xc1, 0x3b, 0x38, 0xbe, 0x40, 0xd9, 0xe9, 0xe4, 0x81, 0x9b, 0xd1, 0x1b, 0x2a,
-	0xb5, 0x06, 0x6e, 0x5c, 0x05, 0xe4, 0x21, 0x0c, 0xd9, 0x6a, 0x25, 0x50, 0x6a, 0x1d, 0xdc, 0x78,
-	0x13, 0x05, 0xa7, 0x70, 0xd2, 0x10, 0xdc, 0x61, 0x80, 0x1c, 0xc6, 0xe7, 0x05, 0x26, 0x12, 0x75,
-	0xb2, 0x19, 0xa1, 0xd2, 0xdc, 0xda, 0xa2, 0xf9, 0x60, 0xab, 0xe6, 0x76, 0x57, 0xf3, 0x96, 0xbe,
-	0x4e, 0x47, 0xdf, 0x53, 0x20, 0xed, 0x7e, 0x9b, 0x89, 0x67, 0xe0, 0xa8, 0x71, 0x74, 0xbf, 0xdb,
-	0x06, 0xd6, 0x88, 0xe0, 0x9f, 0x05, 0xe3, 0x4f, 0x3c, 0xed, 0x0d, 0xdc, 0x37, 0xcd, 0xbc, 0x6d,
-	0x9a, 0x83, 0xf9, 0xe3, 0xb0, 0x72, 0x5f, 0x58, 0xbb, 0x2f, 0xbc, 0x92, 0x05, 0xcd, 0xd7, 0x9f,
-	0x93, 0xac, 0xc4, 0x7a, 0xbd, 0xb0, 0xb1, 0xd4, 0xbe, 0x0a, 0xbd, 0xfc, 0xdb, 0xae, 0xe1, 0xf6,
-	0xd5, 0xd4, 0xe0, 0xc0, 0x03, 0xd2, 0x5e, 0xa0, 0x52, 0x20, 0x78, 0x0e, 0xe3, 0x0f, 0x98, 0xe1,
-	0xce, 0xb5, 0x54, 0x69, 0x1b, 0x54, 0x95, 0xce, 0xff, 0xda, 0x30, 0x5a, 0x24, 0x39, 0x7b, 0xbf,
-	0xb8, 0x24, 0x5f, 0xe1, 0xb0, 0x63, 0x4a, 0xf2, 0xa2, 0xaf, 0xe5, 0x36, 0x77, 0x4f, 0x5e, 0xee,
-	0x41, 0x6d, 0xce, 0xf4, 0x11, 0xee, 0xd5, 0x66, 0x23, 0x4f, 0xb7, 0x94, 0x74, 0x38, 0xa7, 0xb7,
-	0x03, 0x36, 0x74, 0x57, 0x00, 0x8d, 0x17, 0xc8, 0xb3, 0x3e, 0xde, 0xf0, 0xe5, 0x24, 0xd8, 0x05,
-	0x69, 0x48, 0x1b, 0x79, 0x4d, 0x52, 0xc3, 0x3b, 0x26, 0xa9, 0x79, 0x1d, 0x45, 0xda, 0x08, 0x6f,
-	0x92, 0x1a, 0x97, 0x33, 0x49, 0xcd, 0xbb, 0x9d, 0x1d, 0x7f, 0x39, 0x8c, 0xda, 0x7f, 0xd0, 0xeb,
-	0xa1, 0x36, 0xce, 0x9b, 0xff, 0x01, 0x00, 0x00, 0xff, 0xff, 0xa9, 0x06, 0x1b, 0x92, 0x58, 0x05,
-	0x00, 0x00,
+	// 800 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x56, 0x59, 0x6f, 0xd3, 0x40,
+	0x10, 0x96, 0x73, 0x36, 0x13, 0xa5, 0xc7, 0xe2, 0xd2, 0x28, 0x20, 0x5a, 0x5c, 0x8e, 0x08, 0x84,
+	0x23, 0x52, 0x09, 0xc1, 0x4b, 0xa1, 0x2d, 0x52, 0x95, 0x4a, 0x88, 0xca, 0x85, 0x3e, 0xa0, 0x48,
+	0xc8, 0x8d, 0xb7, 0xc1, 0xc2, 0xb1, 0x8d, 0xbd, 0x86, 0x77, 0x24, 0x5e, 0xf9, 0x4b, 0xfc, 0x0c,
+	0xfe, 0x0e, 0xda, 0xc3, 0xf5, 0xb1, 0x9b, 0x04, 0xca, 0x5b, 0x76, 0xe7, 0x9b, 0x6f, 0xe7, 0xf8,
+	0xc6, 0x13, 0xe8, 0x45, 0xe1, 0x64, 0x10, 0xda, 0x7e, 0xf0, 0xc4, 0x0e, 0xdd, 0x41, 0x8c, 0xa3,
+	0xaf, 0xee, 0x04, 0x9b, 0x61, 0x14, 0x90, 0x00, 0xad, 0x7e, 0xb6, 0x67, 0x61, 0x12, 0x9b, 0xd4,
+	0x6c, 0x87, 0x6e, 0xef, 0xce, 0x34, 0x08, 0xa6, 0x1e, 0x1e, 0x30, 0xeb, 0x45, 0x72, 0x39, 0xf8,
+	0x16, 0xd9, 0x61, 0x88, 0xa3, 0x98, 0xe3, 0x7b, 0xdb, 0x65, 0x3b, 0x71, 0x67, 0x38, 0x26, 0xf6,
+	0x2c, 0xe4, 0x00, 0xe3, 0xbb, 0x06, 0xcd, 0xa3, 0x60, 0x36, 0xc3, 0x3e, 0x41, 0xab, 0x50, 0x71,
+	0x9d, 0xae, 0xb6, 0xa3, 0xf5, 0x5b, 0x56, 0xc5, 0x75, 0x50, 0x17, 0x9a, 0x93, 0xc0, 0x27, 0xd8,
+	0x27, 0xdd, 0x0a, 0xbb, 0x4c, 0x8f, 0x68, 0x0b, 0x9a, 0x49, 0x8c, 0xa3, 0x8f, 0xae, 0xd3, 0xad,
+	0x32, 0x4b, 0x83, 0x1e, 0x47, 0x0e, 0x35, 0x84, 0x41, 0x4c, 0xa8, 0xa1, 0xc6, 0x0d, 0xf4, 0x38,
+	0x72, 0xd0, 0x2d, 0x68, 0x85, 0x76, 0x84, 0x7d, 0x66, 0xaa, 0x33, 0xd3, 0x0a, 0xbf, 0x18, 0x39,
+	0xc6, 0x63, 0xd8, 0x3a, 0xc6, 0xe4, 0xd0, 0x26, 0x93, 0x4f, 0x22, 0x96, 0xd8, 0xc2, 0x5f, 0x12,
+	0x1c, 0x13, 0xb4, 0x0e, 0x55, 0xd7, 0x89, 0xbb, 0xda, 0x4e, 0xb5, 0xdf, 0xb2, 0xe8, 0x4f, 0xe3,
+	0x2d, 0x74, 0x65, 0x70, 0x1c, 0x06, 0x7e, 0x8c, 0xd1, 0x1e, 0xac, 0xa4, 0x77, 0xcc, 0xa5, 0x3d,
+	0xdc, 0x32, 0x8b, 0x15, 0x33, 0x85, 0xdd, 0xba, 0x02, 0x1a, 0x87, 0x80, 0x8e, 0x31, 0x29, 0x3f,
+	0xac, 0x43, 0xdd, 0x73, 0x67, 0x2e, 0x61, 0xf5, 0xa8, 0x5b, 0xfc, 0x80, 0x6e, 0x42, 0x23, 0xb8,
+	0xbc, 0x8c, 0x31, 0xaf, 0x48, 0xdd, 0x12, 0x27, 0xe3, 0x04, 0x6e, 0x14, 0x38, 0xfe, 0x27, 0x9e,
+	0xdf, 0x1a, 0xe8, 0x47, 0x11, 0xb6, 0x09, 0x4e, 0x6d, 0x22, 0xa4, 0x5c, 0x3f, 0xb4, 0xb9, 0xfd,
+	0xa8, 0xcc, 0xeb, 0x47, 0xb5, 0xd0, 0x8f, 0x17, 0xf9, 0x7e, 0xd0, 0x56, 0xb5, 0x87, 0xb7, 0x4d,
+	0x2e, 0x16, 0x33, 0x15, 0x8b, 0x79, 0x46, 0x22, 0xd7, 0x9f, 0x9e, 0xdb, 0x5e, 0x82, 0xb3, 0x6e,
+	0xa1, 0xe7, 0xd0, 0x72, 0xb0, 0x87, 0x09, 0x76, 0x0e, 0x08, 0x6b, 0x65, 0x7b, 0xd8, 0x93, 0x5c,
+	0xdf, 0xa5, 0x3a, 0xb3, 0x32, 0xb0, 0x71, 0x02, 0x9b, 0xa5, 0xc4, 0x44, 0x9d, 0x9e, 0x5e, 0x89,
+	0x90, 0x65, 0xb6, 0xa0, 0x4c, 0x29, 0xce, 0x78, 0x05, 0xfa, 0xfb, 0xd0, 0x91, 0x8b, 0xf4, 0xd7,
+	0x22, 0xa6, 0xd1, 0x94, 0x18, 0xae, 0x1f, 0xcd, 0x03, 0xd0, 0x5f, 0xb3, 0x34, 0x17, 0x47, 0x43,
+	0xdf, 0x2c, 0xe1, 0xae, 0xff, 0xe6, 0x0f, 0x0d, 0x6a, 0xa7, 0x81, 0x22, 0x65, 0x1d, 0xea, 0xc4,
+	0x25, 0x1e, 0x16, 0x09, 0xf3, 0x03, 0x9d, 0xa4, 0x24, 0xf2, 0x84, 0x0c, 0xe8, 0xcf, 0x7c, 0x69,
+	0x6a, 0x45, 0x3d, 0x21, 0xa8, 0xc5, 0x5e, 0x32, 0x15, 0x83, 0xca, 0x7e, 0xe7, 0x35, 0xd6, 0xc8,
+	0x6b, 0xcc, 0xe8, 0x83, 0x9e, 0x0e, 0x24, 0x0d, 0x67, 0xc1, 0xe8, 0x1e, 0xc1, 0x66, 0x09, 0x29,
+	0xb2, 0x7f, 0x04, 0x75, 0xaa, 0xcb, 0x74, 0x48, 0xf4, 0x72, 0xee, 0x14, 0x6d, 0x71, 0x88, 0xf1,
+	0x12, 0xd6, 0x8e, 0x31, 0x29, 0xbc, 0xf4, 0x6f, 0xb3, 0xba, 0x0f, 0xeb, 0x19, 0xc1, 0x35, 0x02,
+	0xf0, 0x61, 0x83, 0xab, 0x98, 0x5d, 0x66, 0x21, 0xf0, 0x9a, 0x6b, 0x8a, 0x9a, 0x57, 0x94, 0x35,
+	0xaf, 0xce, 0x9d, 0xe1, 0x5a, 0xa1, 0xbe, 0xfb, 0x80, 0xf2, 0xef, 0x89, 0x88, 0xfb, 0x50, 0xa3,
+	0xe1, 0x08, 0xb5, 0xa8, 0x03, 0x66, 0x08, 0xe3, 0x97, 0x06, 0x1b, 0x5c, 0xe8, 0xf9, 0x80, 0xcb,
+	0xa2, 0x19, 0xe6, 0x45, 0xb3, 0xec, 0x63, 0x20, 0xd2, 0x33, 0x33, 0x49, 0x2d, 0xf3, 0x60, 0xc9,
+	0x3f, 0x2b, 0x0a, 0x6e, 0x99, 0xcf, 0xd5, 0xa4, 0xea, 0x80, 0xf2, 0x09, 0xf0, 0x0a, 0x18, 0xbb,
+	0xb0, 0xc1, 0x67, 0x69, 0x41, 0x5a, 0xd4, 0x35, 0x0f, 0xe2, 0xae, 0xc3, 0x9f, 0x4d, 0x68, 0x9e,
+	0xda, 0x7e, 0x70, 0x70, 0x3a, 0x42, 0x63, 0xe8, 0x14, 0x44, 0x89, 0xee, 0x95, 0x6b, 0xa9, 0x52,
+	0x77, 0xef, 0xfe, 0x12, 0x94, 0x68, 0xd3, 0x1b, 0x58, 0x49, 0xc5, 0x86, 0xb6, 0x15, 0x2e, 0x05,
+	0xce, 0x9d, 0xf9, 0x00, 0x41, 0x77, 0x06, 0x90, 0x69, 0x01, 0xdd, 0x95, 0xbe, 0x11, 0x65, 0x5d,
+	0xf6, 0x8c, 0x45, 0x90, 0x8c, 0x34, 0x2b, 0xaf, 0x4c, 0x2a, 0x69, 0x47, 0x26, 0x95, 0xbb, 0x43,
+	0x49, 0xb3, 0xc2, 0xcb, 0xa4, 0x52, 0xe7, 0x64, 0x52, 0xb9, 0x6f, 0x08, 0xb3, 0xd1, 0x2d, 0xec,
+	0x7e, 0xf4, 0x70, 0x5e, 0x23, 0x4a, 0x1b, 0xbd, 0xd7, 0x5f, 0x0e, 0x14, 0xcf, 0x9c, 0x43, 0x3b,
+	0xb7, 0xcd, 0x91, 0xa1, 0x70, 0x2c, 0x93, 0xef, 0x2e, 0xc4, 0x08, 0xde, 0x31, 0x74, 0x0a, 0xfb,
+	0x4f, 0x96, 0x9a, 0x6a, 0xef, 0xcb, 0x52, 0x53, 0x2f, 0xd1, 0x31, 0x74, 0x0a, 0xfb, 0x4c, 0x66,
+	0x57, 0x2d, 0x4c, 0x99, 0x5d, 0xbd, 0x14, 0xc7, 0xd0, 0x29, 0x6c, 0x2e, 0x99, 0x5d, 0xb5, 0x00,
+	0x65, 0x76, 0xe5, 0xfa, 0x3b, 0x5c, 0xfb, 0xd0, 0x19, 0xe4, 0xff, 0xf6, 0x5e, 0x34, 0xd8, 0x17,
+	0x61, 0xef, 0x4f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x65, 0x95, 0x6b, 0x39, 0x0d, 0x0b, 0x00, 0x00,
 }

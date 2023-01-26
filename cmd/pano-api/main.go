@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/joho/godotenv"
 	"github.com/kamp-us/pano-api/internal/backend/postgresql"
 	"github.com/kamp-us/pano-api/internal/db"
 	"github.com/kamp-us/pano-api/internal/models"
@@ -15,27 +14,33 @@ import (
 )
 
 func main() {
-	envError := godotenv.Load()
-	if envError != nil {
-		log.Fatalf("An error occurred while loading env file. Error: %s", envError)
-	}
+	dbClient, err := db.NewPostgreSQLConnect(db.PostgreSQLConfig{
+		Host:     os.Getenv("POSTGRES_HOST"),
+		Port:     5432,
+		Username: os.Getenv("POSTGRES_USER"),
+		Password: os.Getenv("POSTGRES_PASSWORD"),
+		DbName:   os.Getenv("POSTGRES_DB"),
+	})
 
-	pgConfigData := db.PostgreSQLConfig{Host: os.Getenv("POSTGRES_HOST"), Port: 5432, Username: os.Getenv("POSTGRES_USERNAME"), Password: os.Getenv("POSTGRES_PASSWORD"), DbName: os.Getenv("POSTGRES_DBNAME")}
-
-	dbClient, dbError := db.NewPostgreSQLConnect(pgConfigData)
-	if dbError != nil {
-		log.Fatalf("An error occurred while establishing db connection. Error: %s", dbError)
+	if err != nil {
+		log.Fatalf("An error occurred while establishing db connection. Error: %s", err)
 	}
 
 	if err := models.AutoMigrate(dbClient); err != nil {
 		log.Fatalf("An error occurred while auto migrate. Error: %s", err)
 	}
 
-	s := server.NewPanoAPIServer(postgresql.NewPostgreSQLBackend(dbClient))
+	postgreSQLBackend := postgresql.NewPostgreSQLBackend(dbClient)
+
+	s := server.NewPanoAPIServer(postgreSQLBackend)
 	twirpHander := api.NewPanoAPIServer(s)
 
 	mux := http.NewServeMux()
 	mux.Handle(twirpHander.PathPrefix(), twirpHander)
+	mux.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("OK"))
+		w.WriteHeader(http.StatusOK)
+	}))
 
 	fmt.Println("Listening to :8080")
 	http.ListenAndServe(":8080", mux)

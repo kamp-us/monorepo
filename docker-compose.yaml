@@ -1,0 +1,67 @@
+version: "3.9"
+
+services:
+  api-with-air:
+    image: cosmtrek/air
+    working_dir: /app
+    environment:
+      - POSTGRES_USER=pgtest
+      - POSTGRES_DB=pgtest
+      - POSTGRES_PASSWORD=pgtest
+      - POSTGRES_HOST=postgres
+    ports:
+      - "8080:80"
+    volumes:
+      - ./.:/app
+    links:
+      - postgres
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13.3-alpine
+    environment:
+      - POSTGRES_USER=pgtest
+      - POSTGRES_DB=pgtest
+      - POSTGRES_PASSWORD=pgtest
+    ports:
+      - "15432:5432"
+    healthcheck:
+      test: pg_isready -U pgtest -d pgtest
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@kamp.us
+      - PGADMIN_DEFAULT_PASSWORD=secret
+      - PGADMIN_LISTEN_PORT=80
+      - PGADMIN_LOG_LEVEL=50
+    ports:
+      - "8090:80"
+    links:
+      - postgres
+    logging:
+      driver: "none"
+    volumes:
+      - ./scripts/servers.json:/pgadmin4/servers.json
+
+  db-migrator:
+    image: migrate/migrate
+    command:
+      - -path
+      - /migrations/
+      - -database
+      - postgres://pgtest:pgtest@postgres:5432/pgtest?sslmode=disable
+      - up
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    volumes:
+      - ./db/migrations:/migrations
+    profiles:
+      - tools

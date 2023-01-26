@@ -16,7 +16,9 @@ type PostgreSQLConfig struct {
 }
 
 func NewPostgreSQLConnect(c PostgreSQLConfig) (*gorm.DB, error) {
-	db, err := gorm.Open(postgres.Open(c.ToConnectionString()), &gorm.Config{})
+	dsn := postgres.Open(c.ToConnectionString())
+
+	db, err := gorm.Open(dsn, &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}
