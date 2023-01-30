@@ -3,6 +3,7 @@ package server
 import (
 	"context"
 
+	"github.com/kamp-us/pano-api/internal/models"
 	api "github.com/kamp-us/pano-api/rpc/pano-api"
 	"github.com/kamp-us/pano-api/server/helper"
 	"github.com/twitchtv/twirp"
@@ -13,7 +14,14 @@ func (s *PanoAPIServer) CreatePost(ctx context.Context, req *api.CreatePostReque
 		return nil, err
 	}
 
-	post, err := s.backend.CreatePost(ctx, req.Title, req.Url, req.Content, req.UserId)
+	args := models.CreatePostArgs{
+		Title:   req.Title,
+		Url:     req.Url,
+		Content: req.Content,
+		UserId:  req.UserId,
+	}
+
+	post, err := s.backend.CreatePost(ctx, args)
 	if err != nil {
 		return nil, twirp.InternalErrorWith(err)
 	}

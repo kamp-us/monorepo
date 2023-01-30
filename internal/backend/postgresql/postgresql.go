@@ -39,15 +39,15 @@ func (b *PostgreSQLBackend) GetPosts(ctx context.Context) ([]*models.Post, error
 	return posts, nil
 }
 
-func (b *PostgreSQLBackend) CreatePost(ctx context.Context, title string, url string, content string, userId string) (*models.Post, error) {
-	slug := slug.MakeLang(title, "tr")
+func (b *PostgreSQLBackend) CreatePost(ctx context.Context, args models.CreatePostArgs) (*models.Post, error) {
+	slug := slug.MakeLang(args.Title, "tr")
 
 	post := models.Post{
-		Title:   title,
-		Url:     url,
-		Content: content,
+		Title:   args.Title,
+		Url:     args.Url,
+		Content: args.Content,
 		Slug:    slug,
-		UserID:  userId,
+		UserID:  args.UserId,
 	}
 
 	result := b.DB.Create(&post)
@@ -58,19 +58,19 @@ func (b *PostgreSQLBackend) CreatePost(ctx context.Context, title string, url st
 	return &post, nil
 }
 
-func (b *PostgreSQLBackend) UpdatePost(ctx context.Context, id string, title *string, url *string, content *string) error {
+func (b *PostgreSQLBackend) UpdatePost(ctx context.Context, args models.UpdatePostArgs) error {
 	post := models.Post{}
-	result := b.DB.First(&post, "id = ?", id)
+	result := b.DB.First(&post, "id = ?", args.Id)
 	if result.Error != nil {
 		return result.Error
 	}
 
-	slug := slug.MakeLang(*title, "tr")
+	slug := slug.MakeLang(*args.Title, "tr")
 
 	updates := models.Post{
-		Title:   *title,
-		Url:     *url,
-		Content: *content,
+		Title:   *args.Title,
+		Url:     *args.Url,
+		Content: *args.Content,
 		Slug:    slug,
 	}
 
