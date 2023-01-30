@@ -21,4 +21,10 @@ type Backender interface {
 	CreateComment(ctx context.Context, content string, postId string, userId string, parentId *string, deletedAt *time.Time) (*models.Comment, error)
 	UpdateComment(ctx context.Context, id string, content string) error
 	DeleteComment(ctx context.Context, id string) error
+
+	// Upvote
+	GetUpvotes(ctx context.Context, entityId string, entityType string) ([]*models.Upvote, error)
+	CreateUpvote(ctx context.Context, entityId string, entityType string, userId string) (*models.Upvote, error)
+	DeleteUpvote(ctx context.Context, entityId string, entityType string, userId string) error
+	IsUpvoted(ctx context.Context, entityId string, entityType string, userId string) (*bool, error)
 }

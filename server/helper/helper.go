@@ -17,6 +17,10 @@ func ConvertToCommentModel(c *models.Comment) *api.Comment {
 	return &api.Comment{Id: c.ID.String(), Content: c.Content, PostId: c.PostID, UserId: c.UserID, ParentId: c.ParentID}
 }
 
+func ConvertToUpvoteModel(u *models.Upvote) *api.Upvote {
+	return &api.Upvote{Id: u.ID.String(), EntityId: u.EntityID, EntityType: u.EntityType, UserId: u.UserID}
+}
+
 func ConvertToStringPtr(value *wrapperspb.StringValue) *string {
 	val := value.GetValue()
 	return &val
