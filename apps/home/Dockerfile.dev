@@ -1,0 +1,24 @@
+FROM node:16.14.2 AS builder
+WORKDIR /app
+RUN npm install --global turbo
+COPY . .
+RUN turbo prune --scope=@kampus-apps/home --docker
+
+
+FROM node:16.14.2 AS runner
+WORKDIR /app
+COPY .gitignore .gitignore
+COPY --from=builder /app/out/json .
+COPY --from=builder /app/out/package-lock.json ./package-lock.json
+RUN npm install --global turbo
+RUN npm install
+COPY --from=builder /app/out/full/ .
+COPY turbo.json turbo.json
+RUN npx turbo build
+
+# WORKDIR /app/apps/home
+# RUN npx --workspace=@kampus-apps/home prisma generate
+
+EXPOSE 3000
+
+ENTRYPOINT ["npm", "run", "docker", "--workspace=@kampus-apps/home"]

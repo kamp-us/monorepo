@@ -20,6 +20,9 @@
     },
     "@kampus-apps/pano#*": {
       "env": ["NODE_ENV", "DATABASE_URL", "SESSION_SECRET"]
+    },
+    "@kampus-apps/home#*": {
+      "env": ["NODE_ENV", "SESSION_SECRET"]
     }
   }
 }

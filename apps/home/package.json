@@ -1,0 +1,59 @@
+{
+  "name": "@kampus-apps/home",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@kampus/ui": "*",
+    "@prisma/client": "^4.2.1",
+    "@radix-ui/react-icons": "^1.1.0",
+    "@remix-run/node": "1.7.5",
+    "@remix-run/react": "1.7.5",
+    "@remix-run/serve": "1.7.5",
+    "bcryptjs": "^2.4.3",
+    "html-metadata-parser": "^2.0.4",
+    "normalize-url": "^7.0.3",
+    "nprogress": "^0.2.0",
+    "react": "^18.0.0",
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.2.2",
+    "react-share": "^4.4.1",
+    "slugify": "^1.6.5",
+    "tiny-invariant": "^1.2.0"
+  },
+  "scripts": {
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint src",
+    "lint:fix": "npm run lint -- --fix",
+    "build": "remix build",
+    "dev:remix": "remix dev",
+    "docker": "run-p dev:remix"
+  },
+  "eslintIgnore": [
+    "/node_modules",
+    "/server/index.js",
+    "/public/build",
+    "/build"
+  ],
+  "devDependencies": {
+    "@kampus/eslint-config": "*",
+    "@kampus/tsconfig": "*",
+    "@remix-run/dev": "1.7.5",
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/eslint": "8.4.5",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^16.11.26",
+    "@types/nprogress": "^0.2.0",
+    "@types/react": "^17.0.43",
+    "@types/react-copy-to-clipboard": "^5.0.4",
+    "@types/react-dom": "^17.0.14",
+    "cross-env": "^7.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.6.1",
+    "prisma": "^4.2.1",
+    "ts-node": "^10.9.1",
+    "typescript": "4.7.4"
+  }
+}
