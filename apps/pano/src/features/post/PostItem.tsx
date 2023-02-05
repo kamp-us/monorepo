@@ -1,4 +1,4 @@
-import { Box, ExternalLink, GappedBox, SmallLink, Text } from "@kampus/ui";
+import { Box, ExternalLink, InternalLink, GappedBox, SmallLink, Text } from "@kampus/ui";
 import { useFetcher } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
@@ -39,7 +39,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
   const titleLink = post.url ? (
     <ExternalLink href={normalizeUrl(post.url)}>{post.title}</ExternalLink>
   ) : (
-    <SmallLink to={`/posts/${post.slug}-${post.id}`}>{post.title}</SmallLink>
+    <InternalLink to={`/posts/${post.slug}-${post.id}`}>{post.title}</InternalLink>
   );
 
   return (

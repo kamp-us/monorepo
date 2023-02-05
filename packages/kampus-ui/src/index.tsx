@@ -8,6 +8,7 @@ export * from "./Form";
 export * from "./GappedBox";
 export * from "./IconButton";
 export * from "./Input";
+export * from "./InternalLink";
 export * from "./Label";
 export * from "./Link";
 export * from "./Select";
