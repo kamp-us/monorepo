@@ -30,6 +30,13 @@ export const normalizeComment = (model: Comment) => {
   return model;
 };
 
+export const getCommentByID = async (id: string) => {
+  return prisma.comment.findFirst({
+    where: { id },
+    include: { owner: true },
+  });
+};
+
 export const createComment = (
   content: string,
   postID: string,

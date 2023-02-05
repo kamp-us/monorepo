@@ -1,10 +1,13 @@
 import type { ActionFunction } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { createUpvote, deleteUpvote } from "~/models/comment.server";
+import { requireUser } from "~/session.server";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const jsonData = formData.get("json") as string | null;
+
+  const user = await requireUser(request);
 
   invariant(jsonData, "json is required");
 
@@ -13,7 +16,7 @@ export const action: ActionFunction = async ({ request }) => {
   switch (type) {
     case "create":
       try {
-        await createUpvote(input.commentID, input.userID);
+        await createUpvote(input.commentID, user.id);
       } catch (e) {
         return {
           status: 500,
@@ -23,7 +26,7 @@ export const action: ActionFunction = async ({ request }) => {
       break;
     case "delete":
       try {
-        await deleteUpvote(input.commentID, input.userID);
+        await deleteUpvote(input.commentID, user.id);
       } catch (e) {
         return {
           status: 500,

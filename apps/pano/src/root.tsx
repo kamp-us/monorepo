@@ -22,14 +22,16 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { useEffect } from "react";
+import { authenticator } from "./features/auth/remix-auth-authenticator.server";
 import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
 import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
 import { Topnav } from "./features/topnav/Topnav";
-import { getUser } from "./session.server";
+import { getUserById } from "./models/user.server";
+import type { User } from "./models/user.server";
 
 type LoaderData = {
-  user: Awaited<ReturnType<typeof getUser>>;
+  user: User | null;
 };
 
 export const links: LinksFunction = () => {
@@ -43,8 +45,12 @@ export const meta: MetaFunction = () => ({
 });
 
 export const loader: LoaderFunction = async ({ request }) => {
+  const sessionUser = await authenticator.isAuthenticated(request);
+
+  const user = sessionUser ? await getUserById(sessionUser.id) : null;
+
   return json<LoaderData>({
-    user: await getUser(request),
+    user,
   });
 };
 
@@ -55,6 +61,7 @@ interface DocumentProps {
 const Document = ({ children }: DocumentProps) => {
   const clientStyle = useClientStyle();
   const { theme } = useTheme();
+  // TODO: move these to its own feature or package?
   const apple_icon_url =
     "https://kampus-logo.s3.eu-central-1.amazonaws.com/apple-touch-icon.png";
   const favicon_16x16_url =
@@ -132,11 +139,21 @@ const Document = ({ children }: DocumentProps) => {
 
 export default function App() {
   const { user } = useLoaderData<LoaderData>();
+
   return (
     <ThemeProvider>
       <ToastProvider swipeDirection="right">
         <Document>
-          <UserContextManager user={user}>
+          <UserContextManager
+            user={
+              user && {
+                ...user,
+                createdAt: new Date(user.createdAt),
+                updatedAt: new Date(user.updatedAt),
+                deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
+              }
+            }
+          >
             <Topnav />
             <ToastViewport />
             <Outlet />

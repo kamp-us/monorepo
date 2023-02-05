@@ -31,11 +31,11 @@ export const EditCommentForm: FC<EditCommentProps> = ({
   return (
     <fetcher.Form method="post" action="/commentEdit">
       <Textarea
-        name="comment"
+        name="content"
         defaultValue={comment.content}
         onChange={(event) => setEditedComment(event.target.value)}
       />
-      <input type="hidden" name="json" value={JSON.stringify(variables)} />
+      <input type="hidden" name="id" value={variables.commentID} />
       <Button type="submit">
         {isCommenting ? "Kaydediliyor..." : "Kaydet"}
       </Button>

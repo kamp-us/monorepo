@@ -30,7 +30,7 @@ import type { Comment } from "~/models/comment.server";
 import { createComment } from "~/models/comment.server";
 import type { Post } from "~/models/post.server";
 import { getPostBySlugAndId } from "~/models/post.server";
-import { requireUserId } from "~/session.server";
+import { requireUser } from "~/session.server";
 import { validate } from "~/utils";
 
 interface VisualTree {
@@ -123,7 +123,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   const content = formData.get("content")?.toString();
   const commentID = formData.get("commentID")?.toString();
 
-  const userID = await requireUserId(request);
+  const user = await requireUser(request);
 
   invariant(params.slug, "postSlug is required");
   invariant(params.id, "postId is required");
@@ -137,7 +137,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   }
 
   try {
-    await createComment(content.toString(), params.id, userID, commentID);
+    await createComment(content.toString(), params.id, user.id, commentID);
     return null;
   } catch {
     return json<ActionData>(

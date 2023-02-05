@@ -27,7 +27,8 @@ export interface ActionData {
 
 export const loader: LoaderFunction = async ({ request }) => {
   await requireUser(request);
-  return true;
+
+  return json({ success: true });
 };
 
 export const action: ActionFunction = async ({ request }) => {

@@ -91,12 +91,45 @@ model Password {
   deletedAt DateTime?
 }
 
+enum SocialProvider {
+  GITHUB
+  DISCORD
+  TWITCH
+}
+
+model SocialIdentity {
+  id String @id @default(cuid())
+
+  provider   SocialProvider
+  providerID String
+
+  user   User   @relation(fields: [userID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userID String
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model Otp {
+  id String @id @default(cuid())
+
+  code     String  @unique
+  active   Boolean @default(false)
+  attempts Int     @default(0)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  deletedAt DateTime?
+}
+
 model User {
   id       String @id @default(cuid())
   username String @unique
   email    String @unique
 
-  password Password?
+  password   Password?
+  identities SocialIdentity[]
 
   posts          Post[]
   comments       Comment[]

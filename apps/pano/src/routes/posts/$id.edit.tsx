@@ -15,7 +15,6 @@ import { json } from "@remix-run/node";
 import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
-import { useState } from "react";
 import invariant from "tiny-invariant";
 import { canUserEdit } from "~/features/auth/can-user-edit";
 import type { PostWithCommentCount } from "~/models/post.server";

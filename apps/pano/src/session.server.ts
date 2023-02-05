@@ -3,6 +3,7 @@ import invariant from "tiny-invariant";
 
 import type { User } from "~/models/user.server";
 import { getUserById } from "~/models/user.server";
+import { authenticator } from "./features/auth/remix-auth-authenticator.server";
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
@@ -17,6 +18,8 @@ export const sessionStorage = createCookieSessionStorage({
   },
 });
 
+export const { commitSession } = sessionStorage;
+
 const USER_SESSION_KEY = "userID";
 
 export async function getSession(request: Request) {
@@ -28,37 +31,20 @@ export async function getUserId(
   request: Request
 ): Promise<User["id"] | undefined> {
   const session = await getSession(request);
-  const userId = session.get(USER_SESSION_KEY);
-  return userId;
+
+  return session.get(USER_SESSION_KEY);
 }
 
-export async function getUser(request: Request) {
-  const userId = await getUserId(request);
-  if (userId === undefined) return null;
-
-  const user = await getUserById(userId);
-  if (user) return user;
-
-  throw await logout(request);
-}
-
-export async function requireUserId(
+export async function requireUser(
   request: Request,
-  redirectTo: string = new URL(request.url).pathname
+  { redirectTo }: { redirectTo?: string } = {}
 ) {
-  const userId = await getUserId(request);
-  if (!userId) {
-    const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
-    throw redirect(`/login?${searchParams}`);
-  }
-  return userId;
-}
+  const user = await authenticator.isAuthenticated(request, {
+    failureRedirect: redirectTo ?? "/login",
+  });
 
-export async function requireUser(request: Request) {
-  const userId = await requireUserId(request);
-
-  const user = await getUserById(userId);
-  if (user) return user;
+  const dbUser = await getUserById(user.id);
+  if (dbUser) return dbUser;
 
   throw await logout(request);
 }

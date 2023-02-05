@@ -19,7 +19,18 @@
       "cache": false
     },
     "@kampus-apps/pano#*": {
-      "env": ["NODE_ENV", "DATABASE_URL", "SESSION_SECRET"]
+      "env": [
+        "NODE_ENV",
+        "DATABASE_URL",
+        "SESSION_SECRET",
+        "GITHUB_CLIENT_ID",
+        "GITHUB_CLIENT_SECRET",
+        "TWITCH_CLIENT_ID",
+        "TWITCH_CLIENT_SECRET",
+        "DISCORD_CLIENT_ID",
+        "DISCORD_CLIENT_SECRET",
+        "SEND_IN_BLUE_API_KEY"
+      ]
     }
   }
 }

@@ -12,6 +12,13 @@ services:
       - DATABASE_URL=postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public&connect_timeout=300
       - SESSION_SECRET=sessionsecret
       - NODE_ENV=development
+      - GITHUB_CLIENT_ID=22fe15b4045649c8910b
+      - GITHUB_CLIENT_SECRET=3f0c8fd8e2e019713eb08315a729d80f13de3a79
+      - DISCORD_CLIENT_ID=1064152490054000720
+      - DISCORD_CLIENT_SECRET=SsNVywtRRhy19BbdizWol-cmYFK4-EWH
+      - TWITCH_CLIENT_ID=xplilpzx8tksu8myk0ulpoez649xo9
+      - TWITCH_CLIENT_SECRET=lm13an3qn9yzhtz6jqoz8gnf0fkmff
+      - SEND_IN_BLUE_API_KEY=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
     volumes:
       - ./src:/app/apps/pano/src
       - ./prisma:/app/apps/pano/prisma

@@ -1,4 +1,6 @@
+import { defineAbility } from "@casl/ability";
 import type { Password, User } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 import { prisma } from "~/db.server";
@@ -118,4 +120,29 @@ export const isOwner = <T extends Entity>(
   entity?: T | null
 ): entity is T => {
   return !!user && !!entity && entity.owner.id === user.id;
+};
+
+const selectUserWithIdentities = Prisma.validator<Prisma.UserArgs>()({
+  include: {
+    identities: true,
+  },
+});
+
+type UserWithIdentities = Prisma.UserGetPayload<
+  typeof selectUserWithIdentities
+>;
+
+export const defineAbilityFor = (user: UserWithIdentities) => {
+  return defineAbility((can, cannot) => {
+    const caylakAbility = defineCaylakAbilityFor(user);
+
+    if (
+      user.identities.find((identity) => identity.provider === "GITHUB") &&
+      user.identities.find((identity) => identity.provider === "TWITCH") &&
+      user.identities.find((identity) => identity.provider === "DISCORD") &&
+      user.caylakStatus === "APPROVED"
+    ) {
+      can("create", "Post");
+    }
+  });
 };

@@ -22,5 +22,8 @@
   "homepage": "https://github.com/kamp-us/monorepo#readme",
   "devDependencies": {
     "turbo": "^1.6.3"
+  },
+  "dependencies": {
+    "@sendinblue/client": "3.2.2"
   }
 }
