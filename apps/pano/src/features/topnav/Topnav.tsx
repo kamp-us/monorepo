@@ -8,11 +8,11 @@ import {
   useTheme,
 } from "@kampus/ui";
 import { PlusIcon } from "@radix-ui/react-icons";
+import { useFetcher } from "@remix-run/react";
 import type { FC } from "react";
-import { SearchInput } from "./SearchInput";
 import { useUserContext } from "~/features/auth/user-context";
 import { UserDropdown } from "~/features/user-dropdown/UserDropdown";
-import { useFetcher } from "@remix-run/react";
+import { SearchInput } from "./SearchInput";
 
 export const Topnav: FC = () => {
   const user = useUserContext();
@@ -36,7 +36,11 @@ export const Topnav: FC = () => {
                   <PlusIcon />
                 </IconButton>
                 <fetcher.Form method="post" action="/change-theme">
-                  <input type="hidden" name="theme" value={theme.toUpperCase()} />
+                  <input
+                    type="hidden"
+                    name="theme"
+                    value={theme.toUpperCase()}
+                  />
                   <ThemeToggle />
                 </fetcher.Form>
                 <UserDropdown login={user.username} />

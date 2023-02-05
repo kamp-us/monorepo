@@ -10,8 +10,6 @@ export const action: ActionFunction = async ({ request }) => {
 
   const { commentID, commentContent } = JSON.parse(jsonData);
 
-  console.log(commentID, commentContent);
-
   try {
     await editComment(commentID, commentContent);
   } catch (e) {

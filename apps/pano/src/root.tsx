@@ -6,11 +6,7 @@ import {
   useClientStyle,
   useTheme,
 } from "@kampus/ui";
-import type {
-  LinksFunction,
-  LoaderFunction,
-  MetaFunction,
-} from "@remix-run/node";
+import type { LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   Links,
@@ -22,40 +18,49 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { useEffect } from "react";
+import { favicons } from "./features/assets/favicons";
 import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
 import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
 import { Topnav } from "./features/topnav/Topnav";
 import { getUser, getUserTheme } from "./session.server";
 
-type LoaderData = {
-  user: Awaited<ReturnType<typeof getUser>>;
-  theme: Awaited<ReturnType<typeof getUserTheme>>;
-};
-
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: loadingIndicatorStyles }];
+  return [
+    { rel: "stylesheet", href: loadingIndicatorStyles },
+    { rel: "preconnect", href: "https://fonts.googleapis.com" },
+    {
+      rel: "preconnect",
+      href: "https://fonts.gstatic.com",
+      crossOrigin: "anonymous",
+    },
+    { rel: "apple-touch-icon", href: favicons.apple, sizes: "180x180" },
+    { rel: "icon", href: favicons[32], sizes: "32x32", type: "image/png" },
+    { rel: "icon", href: favicons[16], sizes: "16x16", type: "image/png" },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap",
+    },
+  ];
 };
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "kamp.us pano",
   viewport: "width=device-width,initial-scale=1",
+  "twitter:image": favicons.logo,
+  "og:image": favicons.logo,
 });
 
-export const loader: LoaderFunction = async ({ request }) => {
-  return json<LoaderData>({
+export const loader = async ({ request }: LoaderArgs) => {
+  return json({
     user: await getUser(request),
     theme: await getUserTheme(request),
   });
 };
 
-interface DocumentProps {
-  children: React.ReactNode;
-}
-
-const Document = ({ children }: DocumentProps) => {
-  const { theme: userTheme } = useLoaderData<LoaderData>();
+const Document = () => {
+  const { theme: userTheme } = useLoaderData<typeof loader>();
   const clientStyle = useClientStyle();
   const { theme, setTheme } = useTheme();
 
@@ -63,16 +68,8 @@ const Document = ({ children }: DocumentProps) => {
     if (userTheme) {
       setTheme(userTheme);
     }
-  }, [userTheme]);
+  }, [setTheme, userTheme]);
 
-  const apple_icon_url =
-    "https://kampus-logo.s3.eu-central-1.amazonaws.com/apple-touch-icon.png";
-  const favicon_16x16_url =
-    "https://kampus-logo.s3.eu-central-1.amazonaws.com/favicon-16x16.png";
-  const favicon_32x32_url =
-    "https://kampus-logo.s3.eu-central-1.amazonaws.com/favicon-32x32.png";
-  const kampus_logo_url =
-    "https://kampus-logo.s3.eu-central-1.amazonaws.com/kampus_logo.png";
   useLoadingIndicator();
 
   useEffect(() => {
@@ -82,35 +79,8 @@ const Document = ({ children }: DocumentProps) => {
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="twitter:image" content={kampus_logo_url}></meta>
-        <meta name="og:image" content={kampus_logo_url}></meta>
         <Meta />
         <Links />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="true"
-        />
-        <link rel="apple-touch-icon" sizes="180x180" href={apple_icon_url} />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href={favicon_32x32_url}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href={favicon_16x16_url}
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
         <style
           id="stitches"
           dangerouslySetInnerHTML={{ __html: clientStyle.sheet }}
@@ -130,28 +100,26 @@ const Document = ({ children }: DocumentProps) => {
         />
       </head>
       <body className={theme === "DARK" ? darkTheme : ""}>
-        {children}
+        <Topnav />
+        <ToastViewport />
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
-        {/* eslint-disable-next-line turbo/no-undeclared-env-vars */}
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        <LiveReload />
       </body>
     </html>
   );
 };
 
 export default function App() {
-  const { user } = useLoaderData<LoaderData>();
+  const { user } = useLoaderData<typeof loader>();
+
   return (
     <ThemeProvider>
       <ToastProvider swipeDirection="right">
-        <Document>
-          <UserContextManager user={user}>
-            <Topnav />
-            <ToastViewport />
-            <Outlet />
-          </UserContextManager>
-        </Document>
+        <UserContextManager user={user}>
+          <Document />
+        </UserContextManager>
       </ToastProvider>
     </ThemeProvider>
   );

@@ -1,15 +1,15 @@
-import { Box, ExternalLink, InternalLink, GappedBox, SmallLink, Text } from "@kampus/ui";
+import { Box, ExternalLink, GappedBox, SmallLink, Text } from "@kampus/ui";
+import type { SerializeFrom } from "@remix-run/node";
 import { useFetcher } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
+import { MoreOptionsDropdown } from "~/features/post/MoreOptionsDropdown";
 import type { PostWithCommentCount } from "~/models/post.server";
 import { useUserContext } from "../auth/user-context";
 import { UpvoteButton } from "../upvote/UpvoteButton";
-import { MoreOptionsDropdown } from "~/features/post/MoreOptionsDropdown";
-import type { Post } from "~/models/post.server";
 
 type PostItemProps = {
-  post: PostWithCommentCount;
+  post: SerializeFrom<PostWithCommentCount>;
   showContent?: boolean;
 };
 
@@ -39,7 +39,9 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
   const titleLink = post.url ? (
     <ExternalLink href={normalizeUrl(post.url)}>{post.title}</ExternalLink>
   ) : (
-    <InternalLink to={`/posts/${post.slug}-${post.id}`}>{post.title}</InternalLink>
+    <InternalLink to={`/posts/${post.slug}-${post.id}`}>
+      {post.title}
+    </InternalLink>
   );
 
   return (

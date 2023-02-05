@@ -59,7 +59,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const post = await createPost(title, userID, url, body);
-    return redirect(`/posts/${post.slug}-${post.id}`);
+    return redirect(`/posts/${post.slug}/${post.id}`);
   } catch (e) {
     return json(e, { status: 500 });
   }
