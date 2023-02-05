@@ -15,13 +15,7 @@
     "lint:fix": {
       "outputs": []
     },
-    "dev": {
-      "cache": false
-    },
-    "docker": {
-      "cache": false
-    },
-    "clean": {
+    "docker:dev": {
       "cache": false
     },
     "@kampus-apps/pano#*": {
