@@ -13,7 +13,11 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import type { FC } from "react";
-import { updatePassword } from "~/models/user.server";
+import {
+  updateEmail,
+  updatePassword,
+  updateUsername,
+} from "~/models/user.server";
 import { requireUser } from "~/session.server";
 import { useUser } from "~/utils";
 
@@ -21,6 +25,8 @@ export interface ActionData {
   errors?: {
     oldPassword?: string;
     newPassword?: string;
+    username?: string;
+    email?: string;
   };
   success?: true;
 }
@@ -31,29 +37,61 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export const action: ActionFunction = async ({ request }) => {
+  const user = await requireUser(request);
   const formData = await request.formData();
   const oldPassword = formData.get("oldPassword")?.toString() ?? "";
   const newPassword = formData.get("newPassword")?.toString() ?? "";
+  const username = formData.get("username")?.toString() ?? "";
+  const email = formData.get("email")?.toString() ?? "";
 
-  if (!oldPassword) {
+  let success = await updateEmail(user, email);
+  if (!success) {
     return json<ActionData>({
       errors: {
-        oldPassword: "Lütfen eski parola alanını doldurun.",
+        email: "Bu email adresi gecerli degil.",
+      },
+    });
+  }
+  success = await updateUsername(user, username);
+  if (!success) {
+    return json<ActionData>({
+      errors: {
+        username: "Bu kullanici adi gecerli degil.",
+      },
+    });
+  }
+  if (!oldPassword && newPassword) {
+    return json<ActionData>({
+      errors: {
+        oldPassword: "Eski parola boş olamaz.",
+      },
+    });
+  }
+  if (oldPassword && !newPassword) {
+    return json<ActionData>({
+      errors: {
+        newPassword: "Yeni parola boş olamaz.",
       },
     });
   }
 
-  if (newPassword.length < 6) {
-    return json<ActionData>({
-      errors: {
-        newPassword: "Yeni parola en az 6 karakter olmalıdır.",
-      },
-    });
+  if (oldPassword && newPassword) {
+    if (newPassword.length < 6) {
+      return json<ActionData>({
+        errors: {
+          newPassword: "Yeni parola en az 6 karakter olmalıdır.",
+        },
+      });
+    }
+    success = await updatePassword(user, oldPassword, newPassword);
+    if (!success) {
+      return json<ActionData>({
+        errors: {
+          oldPassword: "Eski parola yanlış.",
+        },
+      });
+    }
   }
-
-  const user = await requireUser(request);
-
-  await updatePassword(user, oldPassword, newPassword);
 
   return json<ActionData>({
     success: true,
@@ -66,76 +104,78 @@ const Settings = () => {
   const email = user.email;
 
   const actionData = useActionData<ActionData>();
+  const { errors, success } = actionData ?? {};
 
   return (
     <CenteredContainer>
-      <GappedBox
-        css={{ flexDirection: "column", alignItems: "flex-end", marginTop: 20 }}
-      >
-        <Text>{username}</Text>
-        <Text>{email}</Text>
-      </GappedBox>
-      <GappedBox css={{ flexDirection: "column", marginBottom: 20 }}>
-        <Text
-          size="5"
-          css={{
-            borderBottom: "1px $gray6 solid",
-            paddingBottom: 10,
-          }}
-        >
-          Parola
-        </Text>
-        <PasswordResetForm
-          errors={actionData?.errors}
-          success={actionData?.success}
-        />
+      <GappedBox css={{ flexDirection: "column", mt: 20 }}>
+        <Form method="post" css={{ width: "100%" }}>
+          <GappedBox css={{ flexDirection: "column" }}>
+            <Label htmlFor="username">Kullanici adi</Label>
+            <Input
+              id="username"
+              name="username"
+              placeholder="iron-man"
+              defaultValue={username}
+            />
+            {errors?.username ? (
+              <ValidationMessage error={errors.username} />
+            ) : null}
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              name="email"
+              placeholder="tony-stark@avengers.co"
+              defaultValue={email}
+            />
+            {errors?.email ? <ValidationMessage error={errors.email} /> : null}
+            <PasswordReset errors={errors} />
+            <Box>
+              <Button type="submit">Guncelle</Button>
+            </Box>
+          </GappedBox>
+        </Form>
+        {success && (
+          <Text css={{ color: "$amber11" }}>
+            Ayarlar basariyla guncellendi.
+          </Text>
+        )}
       </GappedBox>
     </CenteredContainer>
   );
 };
 
-const PasswordResetForm: FC<{
+const PasswordReset: FC<{
   errors: ActionData["errors"];
-  success: ActionData["success"];
-}> = ({ errors, success }) => {
+}> = ({ errors }) => {
   return (
-    <Form method="post" css={{ width: "100%" }}>
-      <GappedBox css={{ flexDirection: "column", marginTop: 10, gap: 10 }}>
-        <Label htmlFor="oldPassword">Eski Parola</Label>
-        <Input
-          id="oldPassword"
-          name="oldPassword"
-          type="password"
-          placeholder="eskimis-parola"
-          aria-errormessage={
-            errors?.oldPassword ? "old-password-error" : undefined
-          }
-        />
-        {errors?.oldPassword ? (
-          <ValidationMessage error={errors.oldPassword} />
-        ) : null}
+    <>
+      <Label htmlFor="oldPassword">Eski Parola</Label>
+      <Input
+        id="oldPassword"
+        name="oldPassword"
+        type="password"
+        placeholder="eskimis-parola"
+        aria-errormessage={
+          errors?.oldPassword ? "old-password-error" : undefined
+        }
+      />
+      {errors?.oldPassword ? (
+        <ValidationMessage error={errors.oldPassword} />
+      ) : null}
 
-        <Label htmlFor="newPassword">Yeni Parola</Label>
-        <Input
-          id="newPassword"
-          name="newPassword"
-          placeholder="cok-gizli-parola"
-          type="password"
-          aria-errormessage={errors?.newPassword ? "password-error" : undefined}
-        />
-        {errors?.newPassword ? (
-          <ValidationMessage error={errors.newPassword} />
-        ) : null}
-        <Box>
-          <Button type="submit">Parolanı Değiştir </Button>
-        </Box>
-        {success && (
-          <Text css={{ color: "$amber11" }}>
-            Şifreniz başarıyla değiştirildi.
-          </Text>
-        )}
-      </GappedBox>
-    </Form>
+      <Label htmlFor="newPassword">Yeni Parola</Label>
+      <Input
+        id="newPassword"
+        name="newPassword"
+        placeholder="cok-gizli-parola"
+        type="password"
+        aria-errormessage={errors?.newPassword ? "password-error" : undefined}
+      />
+      {errors?.newPassword ? (
+        <ValidationMessage error={errors.newPassword} />
+      ) : null}
+    </>
   );
 };
 

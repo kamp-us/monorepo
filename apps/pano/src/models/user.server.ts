@@ -1,9 +1,7 @@
 import { Password, Theme, User, UserPreference } from "@prisma/client";
 import bcrypt from "bcryptjs";
-
 import { prisma } from "~/db.server";
-
-export type { User } from "@prisma/client";
+import { validateEmail, validateUsername } from "~/utils";
 
 export async function getUserById(id: User["id"]) {
   return prisma.user.findUnique({ where: { id } });
@@ -72,6 +70,32 @@ export async function verifyLogin(
 
   return userWithoutPassword;
 }
+
+export const updateUsername = async (user: User, username: string) => {
+  if (!validateUsername(username)) {
+    return null;
+  }
+
+  return prisma.user.update({
+    where: { id: user.id },
+    data: {
+      username,
+    },
+  });
+};
+
+export const updateEmail = async (user: User, email?: string) => {
+  if (!validateEmail(email)) {
+    return null;
+  }
+
+  return prisma.user.update({
+    where: { id: user.id },
+    data: {
+      email,
+    },
+  });
+};
 
 export const updatePassword = async (
   user: User,
