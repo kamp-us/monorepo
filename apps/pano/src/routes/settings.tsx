@@ -53,7 +53,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 type ActionData = {
   fields: SettingsFields;
   errors?: SettingsFieldsErrors;
-  success?: boolean;
+  successful?: boolean;
 };
 const badRequest = (data: ActionData) => json(data, { status: 400 });
 
@@ -118,7 +118,7 @@ export const action: ActionFunction = async ({ request }) => {
     });
   }
 
-  return json({ fields, success: true });
+  return json({ fields, successful: true });
 };
 
 const Settings = () => {
@@ -127,7 +127,7 @@ const Settings = () => {
   const email = user.email;
 
   const actionData = useActionData<ActionData>();
-  const { errors, success } = actionData ?? {};
+  const { errors, successful } = actionData ?? {};
   const { fieldErrors } = errors ?? {};
 
   return (
@@ -161,7 +161,7 @@ const Settings = () => {
             </Box>
           </GappedBox>
         </Form>
-        {success && (
+        {successful && (
           <Text css={{ color: "$amber11" }}>
             Ayarlar basariyla guncellendi.
           </Text>
