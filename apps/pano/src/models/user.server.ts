@@ -72,10 +72,6 @@ export async function verifyLogin(
 }
 
 export const updateUsername = async (user: User, username: string) => {
-  if (!validateUsername(username)) {
-    return null;
-  }
-
   return prisma.user.update({
     where: { id: user.id },
     data: {
@@ -85,10 +81,6 @@ export const updateUsername = async (user: User, username: string) => {
 };
 
 export const updateEmail = async (user: User, email?: string) => {
-  if (!validateEmail(email)) {
-    return null;
-  }
-
   return prisma.user.update({
     where: { id: user.id },
     data: {

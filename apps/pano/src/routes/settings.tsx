@@ -13,6 +13,7 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import type { FC } from "react";
+import { z } from "zod";
 import {
   updateEmail,
   updatePassword,
@@ -21,81 +22,103 @@ import {
 import { requireUser } from "~/session.server";
 import { useUser } from "~/utils";
 
-export interface ActionData {
-  errors?: {
-    oldPassword?: string;
-    newPassword?: string;
-    username?: string;
-    email?: string;
+type inferSafeParseErrors<T extends z.ZodType<any, any, any>, U = string> = {
+  formErrors: U[];
+  fieldErrors: {
+    [P in keyof z.infer<T>]?: U[];
   };
-  success?: true;
-}
+};
+const SettingsSchema = z.object({
+  oldPassword: z.string().min(6, { message: "Parolanizi eksik doldurdunuz" }),
+  newPassword: z
+    .string()
+    .min(6, { message: "Yeni parola en az 6 karakterden olusmalidir" }),
+  username: z.string().min(2, { message: "Kullanici adi uygun degil" }),
+  email: z.string().email({ message: "Gecerli bir email adresi girin" }),
+});
+
+const SchemaWithoutPasswords = SettingsSchema.omit({
+  oldPassword: true,
+  newPassword: true,
+});
+
+type SettingsFields = z.infer<typeof SettingsSchema>;
+type SettingsFieldsErrors = inferSafeParseErrors<typeof SettingsSchema>;
 
 export const loader: LoaderFunction = async ({ request }) => {
   await requireUser(request);
   return true;
 };
 
+type ActionData = {
+  fields: SettingsFields;
+  errors?: SettingsFieldsErrors;
+  success?: boolean;
+};
+const badRequest = (data: ActionData) => json(data, { status: 400 });
+
 export const action: ActionFunction = async ({ request }) => {
   const user = await requireUser(request);
   const formData = await request.formData();
-  const oldPassword = formData.get("oldPassword")?.toString() ?? "";
-  const newPassword = formData.get("newPassword")?.toString() ?? "";
-  const username = formData.get("username")?.toString() ?? "";
-  const email = formData.get("email")?.toString() ?? "";
+  const fields = Object.fromEntries(formData.entries()) as SettingsFields;
+  const noPassword =
+    fields.oldPassword.length === 0 && fields.newPassword.length === 0;
 
-  let success = await updateEmail(user, email);
-  if (!success) {
-    return json<ActionData>({
-      errors: {
-        email: "Bu email adresi gecerli degil.",
-      },
-    });
-  }
-  success = await updateUsername(user, username);
-  if (!success) {
-    return json<ActionData>({
-      errors: {
-        username: "Bu kullanici adi gecerli degil.",
-      },
-    });
-  }
-  if (!oldPassword && newPassword) {
-    return json<ActionData>({
-      errors: {
-        oldPassword: "Eski parola boş olamaz.",
-      },
-    });
-  }
-  if (oldPassword && !newPassword) {
-    return json<ActionData>({
-      errors: {
-        newPassword: "Yeni parola boş olamaz.",
-      },
+  const schema = noPassword ? SchemaWithoutPasswords : SettingsSchema;
+
+  const result = schema.safeParse(fields);
+  if (!result.success) {
+    return badRequest({
+      fields,
+      errors: result.error.flatten(),
     });
   }
 
-  if (oldPassword && newPassword) {
-    if (newPassword.length < 6) {
-      return json<ActionData>({
-        errors: {
-          newPassword: "Yeni parola en az 6 karakter olmalıdır.",
-        },
-      });
-    }
-    success = await updatePassword(user, oldPassword, newPassword);
+  if (!noPassword) {
+    const success = await updatePassword(
+      user,
+      fields.oldPassword,
+      fields.newPassword
+    );
     if (!success) {
-      return json<ActionData>({
+      return badRequest({
+        fields,
         errors: {
-          oldPassword: "Eski parola yanlış.",
+          formErrors: [],
+          fieldErrors: {
+            newPassword: ["Parola guncellenemedi"],
+          },
         },
       });
     }
   }
 
-  return json<ActionData>({
-    success: true,
-  });
+  let success = await updateEmail(user, fields.email);
+  if (!success) {
+    return badRequest({
+      fields,
+      errors: {
+        formErrors: [],
+        fieldErrors: {
+          email: ["Bu email adresi kullanilamaz"],
+        },
+      },
+    });
+  }
+  success = await updateUsername(user, fields.username);
+  if (!success) {
+    return badRequest({
+      fields,
+      errors: {
+        formErrors: [],
+        fieldErrors: {
+          username: ["Bu kullanici adi kullanilamaz"],
+        },
+      },
+    });
+  }
+
+  return json({ fields, success: true });
 };
 
 const Settings = () => {
@@ -105,6 +128,7 @@ const Settings = () => {
 
   const actionData = useActionData<ActionData>();
   const { errors, success } = actionData ?? {};
+  const { fieldErrors } = errors ?? {};
 
   return (
     <CenteredContainer>
@@ -118,8 +142,8 @@ const Settings = () => {
               placeholder="iron-man"
               defaultValue={username}
             />
-            {errors?.username ? (
-              <ValidationMessage error={errors.username} />
+            {fieldErrors?.username ? (
+              <ValidationMessage error={fieldErrors.username[0]} />
             ) : null}
             <Label htmlFor="email">Email</Label>
             <Input
@@ -128,7 +152,9 @@ const Settings = () => {
               placeholder="tony-stark@avengers.co"
               defaultValue={email}
             />
-            {errors?.email ? <ValidationMessage error={errors.email} /> : null}
+            {fieldErrors?.email ? (
+              <ValidationMessage error={fieldErrors.email[0]} />
+            ) : null}
             <PasswordReset errors={errors} />
             <Box>
               <Button type="submit">Guncelle</Button>
@@ -157,11 +183,11 @@ const PasswordReset: FC<{
         type="password"
         placeholder="eskimis-parola"
         aria-errormessage={
-          errors?.oldPassword ? "old-password-error" : undefined
+          errors?.fieldErrors.oldPassword ? "old-password-error" : undefined
         }
       />
-      {errors?.oldPassword ? (
-        <ValidationMessage error={errors.oldPassword} />
+      {errors?.fieldErrors.oldPassword ? (
+        <ValidationMessage error={errors.fieldErrors.oldPassword[0]} />
       ) : null}
 
       <Label htmlFor="newPassword">Yeni Parola</Label>
@@ -170,10 +196,12 @@ const PasswordReset: FC<{
         name="newPassword"
         placeholder="cok-gizli-parola"
         type="password"
-        aria-errormessage={errors?.newPassword ? "password-error" : undefined}
+        aria-errormessage={
+          errors?.fieldErrors.newPassword ? "password-error" : undefined
+        }
       />
-      {errors?.newPassword ? (
-        <ValidationMessage error={errors.newPassword} />
+      {errors?.fieldErrors.newPassword ? (
+        <ValidationMessage error={errors.fieldErrors.newPassword[0]} />
       ) : null}
     </>
   );
