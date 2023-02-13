@@ -13,7 +13,11 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import type { FC } from "react";
-import { z } from "zod";
+import type {
+  SettingsFields,
+  SettingsFieldsErrors,
+} from "~/features/zod/schemas";
+import { SchemaWithoutPasswords, SettingsSchema } from "~/features/zod/schemas";
 import {
   updateEmail,
   updatePassword,
@@ -21,29 +25,6 @@ import {
 } from "~/models/user.server";
 import { requireUser } from "~/session.server";
 import { useUser } from "~/utils";
-
-type inferSafeParseErrors<T extends z.ZodType<any, any, any>, U = string> = {
-  formErrors: U[];
-  fieldErrors: {
-    [P in keyof z.infer<T>]?: U[];
-  };
-};
-const SettingsSchema = z.object({
-  oldPassword: z.string().min(6, { message: "Parolanizi eksik doldurdunuz" }),
-  newPassword: z
-    .string()
-    .min(6, { message: "Yeni parola en az 6 karakterden olusmalidir" }),
-  username: z.string().min(2, { message: "Kullanici adi uygun degil" }),
-  email: z.string().email({ message: "Gecerli bir email adresi girin" }),
-});
-
-const SchemaWithoutPasswords = SettingsSchema.omit({
-  oldPassword: true,
-  newPassword: true,
-});
-
-type SettingsFields = z.infer<typeof SettingsSchema>;
-type SettingsFieldsErrors = inferSafeParseErrors<typeof SettingsSchema>;
 
 export const loader: LoaderFunction = async ({ request }) => {
   await requireUser(request);
