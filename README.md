@@ -50,6 +50,14 @@ These folders are [registered as workspaces in package.json](package.json#L4-L7)
 
 ## Running the projects
 
+## Use Correct Node Version
+
+If you haven't already install [Volta](https://volta.sh), you can install install it with:
+
+```sh
+curl https://get.volta.sh | bash
+```
+
 ### Setup projects
 
 Install dependencies and build all projects.
