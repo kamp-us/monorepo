@@ -10,6 +10,7 @@
     "@remix-run/react": "1.7.5",
     "@remix-run/serve": "1.7.5",
     "bcryptjs": "^2.4.3",
+    "envsafe": "^2.0.3",
     "html-metadata-parser": "^2.0.4",
     "normalize-url": "^7.0.3",
     "nprogress": "^0.2.0",
