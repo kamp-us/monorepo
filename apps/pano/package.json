@@ -6,6 +6,7 @@
     "@kampus/ui": "*",
     "@prisma/client": "^4.2.1",
     "@radix-ui/react-icons": "^1.1.0",
+    "@radix-ui/react-separator": "^1.0.1",
     "@remix-run/node": "1.7.5",
     "@remix-run/react": "1.7.5",
     "@remix-run/serve": "1.7.5",
