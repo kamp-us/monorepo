@@ -2,6 +2,7 @@ export * from "./stitches.config";
 export * from "./AlertDialog";
 export * from "./ControlGroup";
 export * from "./Dialog";
+export * from "./Divider";
 export * from "./Dropdown";
 export * from "./ExternalLink";
 export * from "./Form";
