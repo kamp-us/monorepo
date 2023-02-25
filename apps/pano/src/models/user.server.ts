@@ -1,4 +1,4 @@
-import type { Password, User } from "@prisma/client";
+import type { Password, User, UserPreference } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 import { prisma } from "~/db.server";
@@ -119,3 +119,23 @@ export const isOwner = <T extends Entity>(
 ): entity is T => {
   return !!user && !!entity && entity.owner.id === user.id;
 };
+
+export async function changeTheme(user: User, theme: UserPreference["theme"]) {
+  // update or create user preference
+  await prisma.userPreference.upsert({
+    where: {
+      userID: user.id,
+    },
+    update: {
+      theme,
+    },
+    create: {
+      theme,
+      user: {
+        connect: {
+          id: user.id,
+        },
+      },
+    },
+  });
+}

@@ -5,15 +5,19 @@ import {
   IconButton,
   Link,
   ThemeToggle,
+  useTheme,
 } from "@kampus/ui";
 import { PlusIcon } from "@radix-ui/react-icons";
 import type { FC } from "react";
 import { SearchInput } from "./SearchInput";
 import { useUserContext } from "~/features/auth/user-context";
 import { UserDropdown } from "~/features/user-dropdown/UserDropdown";
+import { useFetcher } from "@remix-run/react";
 
 export const Topnav: FC = () => {
   const user = useUserContext();
+  const fetcher = useFetcher();
+  const { theme, setTheme } = useTheme();
 
   return (
     <Box css={{ px: "$2", backgroundColor: "$gray2" }}>
@@ -31,7 +35,10 @@ export const Topnav: FC = () => {
                 <IconButton as={Link} to="/send">
                   <PlusIcon />
                 </IconButton>
-                <ThemeToggle />
+                <fetcher.Form method="post" action="/change-theme">
+                  <input type="hidden" name="theme" value={theme.toUpperCase()} />
+                  <ThemeToggle />
+                </fetcher.Form>
                 <UserDropdown login={user.username} />
               </>
             ) : (
