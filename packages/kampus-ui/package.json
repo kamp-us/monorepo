@@ -48,5 +48,8 @@
     "@remix-run/react": "1.7.5",
     "@stitches/react": "1.2.8",
     "react": "18.2.0"
+  },
+  "volta": {
+    "node": "18.14.2"
   }
 }
