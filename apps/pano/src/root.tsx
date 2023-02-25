@@ -119,7 +119,7 @@ const Document = ({ children }: DocumentProps) => {
           }}
         />
       </head>
-      <body className={theme === "dark" ? darkTheme : ""}>
+      <body className={theme === "DARK" ? darkTheme : ""}>
         {children}
         <ScrollRestoration />
         <Scripts />
