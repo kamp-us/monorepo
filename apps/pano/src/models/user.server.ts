@@ -1,4 +1,4 @@
-import type { Password, User, UserPreference } from "@prisma/client";
+import { Password, Theme, User, UserPreference } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 import { prisma } from "~/db.server";
@@ -125,4 +125,12 @@ export async function updateTheme(user: User, theme: UserPreference["theme"]) {
     where: { userID: user.id },
     data: { theme },
   });
+}
+
+export async function getTheme(id: User["id"]) {
+  const userPreference = await prisma.userPreference.findUnique({
+    where: { userID: id },
+  });
+
+  return userPreference?.theme ?? Theme.DARK;
 }
