@@ -120,7 +120,7 @@ export const isOwner = <T extends Entity>(
   return !!user && !!entity && entity.owner.id === user.id;
 };
 
-export async function changeTheme(user: User, theme: UserPreference["theme"]) {
+export async function updateTheme(user: User, theme: UserPreference["theme"]) {
   // update or create user preference
   await prisma.userPreference.upsert({
     where: {
