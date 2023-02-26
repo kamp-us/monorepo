@@ -12,6 +12,7 @@ export * from "./InternalLink";
 export * from "./Label";
 export * from "./Link";
 export * from "./Select";
+export * from "./Separator";
 export * from "./SmallLink";
 export * from "./SmallText";
 export * from "./SocialMediaButtons";

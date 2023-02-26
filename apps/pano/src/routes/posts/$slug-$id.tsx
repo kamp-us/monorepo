@@ -4,6 +4,7 @@ import {
   CenteredContainer,
   Form,
   GappedBox,
+  Separator,
   Text,
   Textarea,
   ValidationMessage,
@@ -174,6 +175,7 @@ const SinglePost = () => {
   return (
     <CenteredContainer css={{ gap: 5, pt: 20 }}>
       <PostItem post={post} showContent />
+      <Separator css={{ mt: 10 }} />
       <Box css={{ mt: 10 }}>
         <Text size={5} css={{ fontWeight: 500, color: "$gray11" }}>
           Yorumlar
