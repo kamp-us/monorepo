@@ -40,6 +40,22 @@ async function seedAll(users: User[]) {
         },
       },
     });
+
+    const prismaUserPreferences = await prisma.userPreference.upsert({
+      where: {
+        userID: prismaUser.id,
+      },
+      update: {
+        userID: prismaUser.id,
+      },
+      create: {
+        user: {
+          connect: {
+            id: prismaUser.id,
+          },
+        },
+      },
+    });
   }
 }
 
