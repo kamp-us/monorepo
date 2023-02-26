@@ -121,21 +121,8 @@ export const isOwner = <T extends Entity>(
 };
 
 export async function updateTheme(user: User, theme: UserPreference["theme"]) {
-  // update or create user preference
-  await prisma.userPreference.upsert({
-    where: {
-      userID: user.id,
-    },
-    update: {
-      theme,
-    },
-    create: {
-      theme,
-      user: {
-        connect: {
-          id: user.id,
-        },
-      },
-    },
+  await prisma.userPreference.update({
+    where: { userID: user.id },
+    data: { theme },
   });
 }
