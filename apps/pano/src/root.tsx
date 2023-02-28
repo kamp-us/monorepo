@@ -26,10 +26,11 @@ import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
 import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
 import { Topnav } from "./features/topnav/Topnav";
-import { getUser } from "./session.server";
+import { getUser, getUserTheme } from "./session.server";
 
 type LoaderData = {
   user: Awaited<ReturnType<typeof getUser>>;
+  theme: Awaited<ReturnType<typeof getUserTheme>>;
 };
 
 export const links: LinksFunction = () => {
@@ -45,6 +46,7 @@ export const meta: MetaFunction = () => ({
 export const loader: LoaderFunction = async ({ request }) => {
   return json<LoaderData>({
     user: await getUser(request),
+    theme: await getUserTheme(request),
   });
 };
 
@@ -53,8 +55,16 @@ interface DocumentProps {
 }
 
 const Document = ({ children }: DocumentProps) => {
+  const { theme: userTheme } = useLoaderData<LoaderData>();
   const clientStyle = useClientStyle();
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    if (userTheme) {
+      setTheme(userTheme);
+    }
+  }, [userTheme]);
+
   const apple_icon_url =
     "https://kampus-logo.s3.eu-central-1.amazonaws.com/apple-touch-icon.png";
   const favicon_16x16_url =
@@ -119,7 +129,7 @@ const Document = ({ children }: DocumentProps) => {
           }}
         />
       </head>
-      <body className={theme === "dark" ? darkTheme : ""}>
+      <body className={theme === "DARK" ? darkTheme : ""}>
         {children}
         <ScrollRestoration />
         <Scripts />

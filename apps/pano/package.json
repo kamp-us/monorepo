@@ -28,6 +28,7 @@
     "build": "remix build",
     "external:dev": "cross-env NODE_ENV=development DATABASE_URL=postgresql://pgtest:pgtest@localhost:5555/pgtest?schema=public SESSION_SECRET=sessionsecret npm run migrate:start:dev",
     "external:migrate": "cross-env NODE_ENV=development DATABASE_URL=postgresql://pgtest:pgtest@localhost:5555/pgtest?schema=public SESSION_SECRET=sessionsecret npm run prisma:migrate:dev",
+    "external:studio": "cross-env NODE_ENV=development DATABASE_URL=postgresql://pgtest:pgtest@localhost:5555/pgtest?schema=public SESSION_SECRET=sessionsecret npx prisma studio",
     "prisma:seed": "ts-node ./prisma/seed.ts",
     "prisma:migrate": "prisma migrate deploy",
     "prisma:migrate:dev": "prisma migrate dev",

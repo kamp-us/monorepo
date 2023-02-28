@@ -2,7 +2,7 @@ import { createCookieSessionStorage, redirect } from "@remix-run/node";
 import invariant from "tiny-invariant";
 
 import { env } from "./utils/env.server";
-import type { User } from "~/models/user.server";
+import { getTheme, User } from "~/models/user.server";
 import { getUserById } from "~/models/user.server";
 
 invariant(env.SESSION_SECRET, "SESSION_SECRET must be set");
@@ -41,6 +41,15 @@ export async function getUser(request: Request) {
   if (user) return user;
 
   throw await logout(request);
+}
+
+export async function getUserTheme(request: Request) {
+  const userID = await getUserId(request);
+  if (userID === undefined) return null;
+
+  const theme = await getTheme(userID);
+
+  return theme;
 }
 
 export async function requireUserId(

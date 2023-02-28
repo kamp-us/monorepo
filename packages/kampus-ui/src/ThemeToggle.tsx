@@ -9,19 +9,21 @@ export const ThemeToggle: FC = () => {
   const { theme, setTheme } = useTheme();
 
   const onClick = () => {
-    if (theme === "dark") {
-      setTheme("light");
+    if (theme === "DARK") {
+      
+      setTheme("LIGHT");
     } else {
-      setTheme("dark");
+      setTheme("DARK");
     }
   };
 
-  const isDark = theme === "dark";
+  const isDark = theme === "DARK";
 
   return (
     <IconButton
       onClick={onClick}
       aria-label="toggle a light and dark color scheme"
+      type="submit"
     >
       {isDark ? <SunIcon /> : <MoonIcon />}
     </IconButton>

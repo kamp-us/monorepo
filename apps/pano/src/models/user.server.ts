@@ -1,4 +1,4 @@
-import type { Password, User } from "@prisma/client";
+import { Password, Theme, User, UserPreference } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 import { prisma } from "~/db.server";
@@ -119,3 +119,18 @@ export const isOwner = <T extends Entity>(
 ): entity is T => {
   return !!user && !!entity && entity.owner.id === user.id;
 };
+
+export async function updateTheme(user: User, theme: UserPreference["theme"]) {
+  await prisma.userPreference.update({
+    where: { userID: user.id },
+    data: { theme },
+  });
+}
+
+export async function getTheme(id: User["id"]) {
+  const userPreference = await prisma.userPreference.findUnique({
+    where: { userID: id },
+  });
+
+  return userPreference?.theme ?? Theme.DARK;
+}
