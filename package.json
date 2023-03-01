@@ -6,7 +6,9 @@
     "packages/*"
   ],
   "scripts": {
-    "prettier": "prettier --write ."
+    "build": "turbo run build",
+    "prettier": "prettier --write .",
+    "lint": "turbo run lint"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,8 @@
   "homepage": "https://github.com/kamp-us/monorepo#readme",
   "devDependencies": {
     "turbo": "^1.6.3"
+  },
+  "volta": {
+    "node": "18.14.2"
   }
 }

@@ -106,4 +106,22 @@ model User {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now())
   deletedAt DateTime?
+
+  preference UserPreference?
+}
+
+enum Theme {
+  LIGHT
+  DARK
+}
+
+model UserPreference {
+  theme Theme @default(DARK)
+  
+  user  User @relation(fields: [userID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userID String @unique
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  deletedAt DateTime?
 }

@@ -16,11 +16,11 @@ import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import CommentDeleteAlert from "./CommentDeleteAlert";
 import { canUserEdit } from "~/features/auth/can-user-edit";
 import { useUserContext } from "~/features/auth/user-context";
 import type { Comment } from "~/models/comment.server";
 import { getExternalCommentURL } from "~/utils";
+import CommentDeleteAlert from "./CommentDeleteAlert";
 
 const DotsButton = styled(IconButton, {
   borderRadius: 5,

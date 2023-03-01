@@ -6,10 +6,22 @@ created with remix.run
 
 # Development
 
-- Start the Application and Postgres Database in [Docker](https://www.docker.com/get-started):
+- Make sure you have copied most up-to-date version of `.env.example` to `.env` on your local:
+
+```sh
+cp .env.example .env
+```
+
+- Start the Application and Postgres Database in [Docker](https://www.docker.com/get-started) and keep it running:
 
 ```sh
 docker-compose up --build
+```
+
+- Open another terminal window and run:
+
+```sh
+npm run dev
 ```
 
 The database seed script creates a new user with some data you can use to get started:

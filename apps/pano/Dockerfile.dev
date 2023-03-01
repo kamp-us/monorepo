@@ -21,4 +21,4 @@ RUN npx --workspace=@kampus-apps/pano prisma generate
 
 EXPOSE 3000
 
-ENTRYPOINT ["npm", "run", "docker", "--workspace=@kampus-apps/pano"]
+ENTRYPOINT ["npm", "run", "dev", "--workspace=@kampus-apps/pano"]

@@ -1,7 +1,7 @@
 import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
-import type { PostWithCommentCount } from "~/models/post.server";
 import type { Comment } from "~/models/comment.server";
+import type { PostWithCommentCount } from "~/models/post.server";
 import type { User } from "~/models/user.server";
 
 const DEFAULT_REDIRECT = "/";
