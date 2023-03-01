@@ -14,10 +14,10 @@ import { useFetcher, useTransition } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
 import type { Comment } from "~/models/comment.server";
-import { useUserContext } from "../auth/user-context";
-import { CommentUpvoteButton } from "../upvote/UpvoteButton";
 import { EditCommentForm } from "./EditCommentForm";
 import { MoreOptionsDropdown } from "./MoreOptionsDropdown";
+import { useUserContext } from "../auth/user-context";
+import { CommentUpvoteButton } from "../upvote/UpvoteButton";
 type CommentProps = {
   comment: Comment;
   postID: string;
