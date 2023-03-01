@@ -1,4 +1,4 @@
-import { Box, ExternalLink, GappedBox, SmallLink, Text } from "@kampus/ui";
+import { Box, ExternalLink, InternalLink, GappedBox, SmallLink, Text } from "@kampus/ui";
 import type { SerializeFrom } from "@remix-run/node";
 import { useFetcher } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
@@ -39,7 +39,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
   const titleLink = post.url ? (
     <ExternalLink href={normalizeUrl(post.url)}>{post.title}</ExternalLink>
   ) : (
-    <InternalLink to={`/posts/${post.slug}-${post.id}`}>
+    <InternalLink to={`/posts/${post.slug}/${post.id}`}>
       {post.title}
     </InternalLink>
   );
@@ -71,7 +71,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
             }}
           >
             <Box>@{post.owner.username}</Box> |
-            <SmallLink to={`/posts/${post.slug}-${post.id}`}>
+            <SmallLink to={`/posts/${post.slug}/${post.id}`}>
               {post._count.comments} yorum
             </SmallLink>
             <>
