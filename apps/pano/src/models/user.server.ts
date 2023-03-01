@@ -1,9 +1,7 @@
-import { Password, Theme, User, UserPreference } from "@prisma/client";
+import type { Password, User, UserPreference } from "@prisma/client";
+import { Theme } from "@prisma/client";
 import bcrypt from "bcryptjs";
-
 import { prisma } from "~/db.server";
-
-export type { User } from "@prisma/client";
 
 export async function getUserById(id: User["id"]) {
   return prisma.user.findUnique({ where: { id } });
@@ -72,6 +70,24 @@ export async function verifyLogin(
 
   return userWithoutPassword;
 }
+
+export const updateUsername = async (user: User, username: string) => {
+  return prisma.user.update({
+    where: { id: user.id },
+    data: {
+      username,
+    },
+  });
+};
+
+export const updateEmail = async (user: User, email?: string) => {
+  return prisma.user.update({
+    where: { id: user.id },
+    data: {
+      email,
+    },
+  });
+};
 
 export const updatePassword = async (
   user: User,

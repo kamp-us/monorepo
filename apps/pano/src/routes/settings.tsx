@@ -13,51 +13,107 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import type { FC } from "react";
-import { updatePassword } from "~/models/user.server";
+import { z } from "zod";
+import type { inferSafeParseErrors } from "~/features/zod/utils";
+import {
+  updateEmail,
+  updatePassword,
+  updateUsername,
+} from "~/models/user.server";
 import { requireUser } from "~/session.server";
 import { useUser } from "~/utils";
 
-export interface ActionData {
-  errors?: {
-    oldPassword?: string;
-    newPassword?: string;
-  };
-  success?: true;
-}
+const SettingsSchema = z.object({
+  oldPassword: z.string().min(6, { message: "Parolanızı eksik doldurdunuz" }),
+  newPassword: z
+    .string()
+    .min(6, { message: "Yeni parola en az 6 karakterden oluşmalıdır" }),
+  username: z.string().min(2, { message: "Kullanıcı adı uygun değil" }),
+  email: z.string().email({ message: "Geçerli bir email adresi girin" }),
+});
+
+const SchemaWithoutPasswords = SettingsSchema.omit({
+  oldPassword: true,
+  newPassword: true,
+});
+
+type SettingsFields = z.infer<typeof SettingsSchema>;
+type SettingsFieldsErrors = inferSafeParseErrors<typeof SettingsSchema>;
 
 export const loader: LoaderFunction = async ({ request }) => {
   await requireUser(request);
   return true;
 };
 
+type ActionData = {
+  fields: SettingsFields;
+  errors?: SettingsFieldsErrors;
+  successful?: boolean;
+};
+const badRequest = (data: ActionData) => json(data, { status: 400 });
+
 export const action: ActionFunction = async ({ request }) => {
-  const formData = await request.formData();
-  const oldPassword = formData.get("oldPassword")?.toString() ?? "";
-  const newPassword = formData.get("newPassword")?.toString() ?? "";
-
-  if (!oldPassword) {
-    return json<ActionData>({
-      errors: {
-        oldPassword: "Lütfen eski parola alanını doldurun.",
-      },
-    });
-  }
-
-  if (newPassword.length < 6) {
-    return json<ActionData>({
-      errors: {
-        newPassword: "Yeni parola en az 6 karakter olmalıdır.",
-      },
-    });
-  }
-
   const user = await requireUser(request);
+  const formData = await request.formData();
+  const fields = Object.fromEntries(formData.entries()) as SettingsFields;
+  const noPassword =
+    fields.oldPassword.length === 0 && fields.newPassword.length === 0;
 
-  await updatePassword(user, oldPassword, newPassword);
+  const schema = noPassword ? SchemaWithoutPasswords : SettingsSchema;
 
-  return json<ActionData>({
-    success: true,
-  });
+  const result = schema.safeParse(fields);
+  if (!result.success) {
+    return badRequest({
+      fields,
+      errors: result.error.flatten(),
+    });
+  }
+
+  if (!noPassword) {
+    const success = await updatePassword(
+      user,
+      fields.oldPassword,
+      fields.newPassword
+    );
+    if (!success) {
+      return badRequest({
+        fields,
+        errors: {
+          formErrors: [],
+          fieldErrors: {
+            newPassword: ["Parola guncellenemedi"],
+          },
+        },
+      });
+    }
+  }
+
+  let success = await updateEmail(user, fields.email);
+  if (!success) {
+    return badRequest({
+      fields,
+      errors: {
+        formErrors: [],
+        fieldErrors: {
+          email: ["Bu email adresi kullanilamaz"],
+        },
+      },
+    });
+  }
+  success = await updateUsername(user, fields.username);
+  if (!success) {
+    return badRequest({
+      fields,
+      errors: {
+        formErrors: [],
+        fieldErrors: {
+          username: ["Bu kullanici adi kullanilamaz"],
+        },
+      },
+    });
+  }
+
+  return json({ fields, successful: true });
 };
 
 const Settings = () => {
@@ -66,76 +122,83 @@ const Settings = () => {
   const email = user.email;
 
   const actionData = useActionData<ActionData>();
+  const { errors, successful } = actionData ?? {};
+  const { fieldErrors } = errors ?? {};
 
   return (
     <CenteredContainer>
-      <GappedBox
-        css={{ flexDirection: "column", alignItems: "flex-end", marginTop: 20 }}
-      >
-        <Text>{username}</Text>
-        <Text>{email}</Text>
-      </GappedBox>
-      <GappedBox css={{ flexDirection: "column", marginBottom: 20 }}>
-        <Text
-          size="5"
-          css={{
-            borderBottom: "1px $gray6 solid",
-            paddingBottom: 10,
-          }}
-        >
-          Parola
-        </Text>
-        <PasswordResetForm
-          errors={actionData?.errors}
-          success={actionData?.success}
-        />
+      <GappedBox css={{ flexDirection: "column", mt: 20 }}>
+        <Form method="post" css={{ width: "100%" }}>
+          <GappedBox css={{ flexDirection: "column" }}>
+            <Label htmlFor="username">Kullanici adi</Label>
+            <Input
+              id="username"
+              name="username"
+              placeholder="iron-man"
+              defaultValue={username}
+            />
+            {fieldErrors?.username ? (
+              <ValidationMessage error={fieldErrors.username[0]} />
+            ) : null}
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              name="email"
+              placeholder="tony-stark@avengers.co"
+              defaultValue={email}
+            />
+            {fieldErrors?.email ? (
+              <ValidationMessage error={fieldErrors.email[0]} />
+            ) : null}
+            <PasswordReset errors={errors} />
+            <Box>
+              <Button type="submit">Guncelle</Button>
+            </Box>
+          </GappedBox>
+        </Form>
+        {successful && (
+          <Text css={{ color: "$amber11" }}>
+            Ayarlar basariyla guncellendi.
+          </Text>
+        )}
       </GappedBox>
     </CenteredContainer>
   );
 };
 
-const PasswordResetForm: FC<{
+const PasswordReset: FC<{
   errors: ActionData["errors"];
-  success: ActionData["success"];
-}> = ({ errors, success }) => {
+}> = ({ errors }) => {
   return (
-    <Form method="post" css={{ width: "100%" }}>
-      <GappedBox css={{ flexDirection: "column", marginTop: 10, gap: 10 }}>
-        <Label htmlFor="oldPassword">Eski Parola</Label>
-        <Input
-          id="oldPassword"
-          name="oldPassword"
-          type="password"
-          placeholder="eskimis-parola"
-          aria-errormessage={
-            errors?.oldPassword ? "old-password-error" : undefined
-          }
-        />
-        {errors?.oldPassword ? (
-          <ValidationMessage error={errors.oldPassword} />
-        ) : null}
+    <>
+      <Label htmlFor="oldPassword">Eski Parola</Label>
+      <Input
+        id="oldPassword"
+        name="oldPassword"
+        type="password"
+        placeholder="eskimis-parola"
+        aria-errormessage={
+          errors?.fieldErrors.oldPassword ? "old-password-error" : undefined
+        }
+      />
+      {errors?.fieldErrors.oldPassword ? (
+        <ValidationMessage error={errors.fieldErrors.oldPassword[0]} />
+      ) : null}
 
-        <Label htmlFor="newPassword">Yeni Parola</Label>
-        <Input
-          id="newPassword"
-          name="newPassword"
-          placeholder="cok-gizli-parola"
-          type="password"
-          aria-errormessage={errors?.newPassword ? "password-error" : undefined}
-        />
-        {errors?.newPassword ? (
-          <ValidationMessage error={errors.newPassword} />
-        ) : null}
-        <Box>
-          <Button type="submit">Parolanı Değiştir </Button>
-        </Box>
-        {success && (
-          <Text css={{ color: "$amber11" }}>
-            Şifreniz başarıyla değiştirildi.
-          </Text>
-        )}
-      </GappedBox>
-    </Form>
+      <Label htmlFor="newPassword">Yeni Parola</Label>
+      <Input
+        id="newPassword"
+        name="newPassword"
+        placeholder="cok-gizli-parola"
+        type="password"
+        aria-errormessage={
+          errors?.fieldErrors.newPassword ? "password-error" : undefined
+        }
+      />
+      {errors?.fieldErrors.newPassword ? (
+        <ValidationMessage error={errors.fieldErrors.newPassword[0]} />
+      ) : null}
+    </>
   );
 };
 
