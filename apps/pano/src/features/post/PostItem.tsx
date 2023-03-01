@@ -44,9 +44,25 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
     : null;
 
   const titleLink = post.url ? (
-    <ExternalLink href={normalizeUrl(post.url)}>{post.title}</ExternalLink>
+    <ExternalLink
+      style={{
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+      }}
+      href={normalizeUrl(post.url)}
+    >
+      {post.title}
+    </ExternalLink>
   ) : (
-    <InternalLink to={`/posts/${post.slug}/${post.id}`}>
+    <InternalLink
+      to={`/posts/${post.slug}/${post.id}`}
+      style={{
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+      }}
+    >
       {post.title}
     </InternalLink>
   );
@@ -63,7 +79,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
           />
           <input type="hidden" name="json" value={JSON.stringify(variables)} />
         </fetcher.Form>
-        <GappedBox css={{ flexDirection: "column" }}>
+        <GappedBox css={{ flexDirection: "column", width: "100%" }}>
           <GappedBox css={{ alignItems: "baseline" }}>
             {titleLink}
             {post.site && (
