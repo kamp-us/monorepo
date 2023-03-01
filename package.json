@@ -20,8 +20,8 @@
     "url": "https://github.com/kamp-us/monorepo/issues"
   },
   "homepage": "https://github.com/kamp-us/monorepo#readme",
-  "devDependencies": {
-    "turbo": "^1.6.3"
+  "dependencies": {
+    "turbo": "1.8.3"
   },
   "volta": {
     "node": "18.14.2"
