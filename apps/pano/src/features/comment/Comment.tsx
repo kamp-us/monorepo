@@ -14,10 +14,10 @@ import { useFetcher, useTransition } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
 import type { Comment } from "~/models/comment.server";
-import { useUserContext } from "../auth/user-context";
-import { CommentUpvoteButton } from "../upvote/UpvoteButton";
 import { EditCommentForm } from "./EditCommentForm";
 import { MoreOptionsDropdown } from "./MoreOptionsDropdown";
+import { useUserContext } from "../auth/user-context";
+import { CommentUpvoteButton } from "../upvote/UpvoteButton";
 type CommentProps = {
   comment: Comment;
   postID: string;
@@ -120,14 +120,14 @@ export const CommentItem: FC<CommentProps> = ({
           {(editOpen && (
             <EditCommentForm comment={comment} setEditOpen={setEditOpen} />
           )) || (
-              <Text
-                size="3"
-                lineHeight="2"
-                css={{ color: "$gray12", whiteSpace: "break-spaces" }}
-              >
-                {comment.content}
-              </Text>
-            )}
+            <Text
+              size="3"
+              lineHeight="2"
+              css={{ color: "$gray12", whiteSpace: "break-spaces" }}
+            >
+              {comment.content}
+            </Text>
+          )}
         </Box>
         <GappedBox css={{ alignItems: "center" }}>
           {user && (
