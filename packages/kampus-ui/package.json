@@ -46,9 +46,10 @@
     "@radix-ui/react-label": "2.0.0",
     "@radix-ui/react-separator": "^1.0.1",
     "@radix-ui/react-toast": "1.1.2",
-    "@remix-run/react": "1.7.5",
+    "@remix-run/react": "1.12.0",
     "@stitches/react": "1.2.8",
-    "react": "18.2.0"
+    "react": "18.2.0",
+    "react-share": "4.4.1"
   },
   "volta": {
     "node": "18.14.2"

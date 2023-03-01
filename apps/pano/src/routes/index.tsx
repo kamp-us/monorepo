@@ -3,22 +3,21 @@ import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { PostList } from "~/features/post/PostList";
-import type { PostWithCommentCount } from "~/models/post.server";
 import { getAllPosts } from "~/models/post.server";
 
-type LoaderData = {
-  data: PostWithCommentCount[];
-};
-
-export const loader: LoaderFunction = async () => {
+export const loader = async () => {
   const allPosts = await getAllPosts();
-  return json<LoaderData>({
+  return json({
     data: allPosts,
   });
 };
 
 export const Home = () => {
-  const { data } = useLoaderData<LoaderData>();
+  const { data } = useLoaderData<typeof loader>();
+
+  if (!data) {
+    return null;
+  }
 
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>
