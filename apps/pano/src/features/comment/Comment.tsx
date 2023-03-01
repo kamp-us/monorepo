@@ -120,14 +120,14 @@ export const CommentItem: FC<CommentProps> = ({
           {(editOpen && (
             <EditCommentForm comment={comment} setEditOpen={setEditOpen} />
           )) || (
-            <Text
-              size="3"
-              lineHeight="2"
-              css={{ color: "$gray12", whiteSpace: "break-spaces" }}
-            >
-              {comment.content}
-            </Text>
-          )}
+              <Text
+                size="3"
+                lineHeight="2"
+                css={{ color: "$gray12", whiteSpace: "break-spaces" }}
+              >
+                {comment.content}
+              </Text>
+            )}
         </Box>
         <GappedBox css={{ alignItems: "center" }}>
           {user && (

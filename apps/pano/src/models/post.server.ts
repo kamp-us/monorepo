@@ -26,8 +26,8 @@ export type PostWithUpvotes = Prisma.PostGetPayload<
 const selectPostWithCommentCount = Prisma.validator<Prisma.PostArgs>()({
   include: {
     _count: {
-      select: { comments: true }
-    }
+      select: { comments: true },
+    },
   },
 });
 
@@ -50,13 +50,76 @@ export type PostWithComments = Prisma.PostGetPayload<
   typeof selectPostWithComment
 >;
 
-export type Post = PostWithOwner & PostWithUpvotes & PostWithComments & _PostWithCommentCount;
+export type Post = PostWithOwner &
+  PostWithUpvotes &
+  PostWithComments &
+  _PostWithCommentCount;
 
-export type PostWithCommentCount = PostWithOwner & PostWithUpvotes & _PostWithCommentCount;
+export type PostWithCommentCount = PostWithOwner &
+  PostWithUpvotes &
+  _PostWithCommentCount;
 
 export const getAllPosts = () => {
   return prisma.post.findMany({
     orderBy: { createdAt: "desc" },
+    include: {
+      upvotes: true,
+      owner: true,
+      _count: {
+        select: { comments: true },
+      },
+    },
+  });
+};
+
+export const getActivePosts = async () => {
+  const data = await prisma.post.findMany({
+    include: {
+      upvotes: true,
+      owner: true,
+      comments: {
+        orderBy: {
+          createdAt: "asc",
+        },
+        include: {
+          owner: true,
+          upvotes: true,
+        },
+      },
+      _count: {
+        select: { comments: true },
+      },
+    },
+  });
+
+  const activePosts = sortLastCommentedPosts(data);
+  return activePosts;
+};
+
+export const getMostCommentedPosts = () => {
+  return prisma.post.findMany({
+    orderBy: {
+      comments: {
+        _count: "desc",
+      },
+    },
+    include: {
+      upvotes: true,
+      owner: true,
+      _count: {
+        select: { comments: true },
+      },
+    },
+  });
+};
+
+export const getMostUpvotedPosts = () => {
+  return prisma.post.findMany({
+    orderBy: {
+      upvotes: {
+        _count: "desc",
+      },
+    },
     include: {
       upvotes: true,
       owner: true,
@@ -221,4 +284,16 @@ export const deleteUpvote = (postID: string, userID: string) => {
       userID,
     },
   });
+};
+
+const sortLastCommentedPosts = (posts: Post[]) => {
+  const lastCommentedPosts = posts.sort((a, b) => {
+    const lastCommentA = a.comments[a.comments.length - 1];
+    const lastCommentB = b.comments[b.comments.length - 1];
+
+    if (!lastCommentA || !lastCommentB) return 0;
+
+    return lastCommentB.createdAt.getTime() - lastCommentA.createdAt.getTime();
+  });
+  return lastCommentedPosts;
 };

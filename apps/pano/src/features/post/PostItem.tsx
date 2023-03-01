@@ -1,4 +1,11 @@
-import { Box, ExternalLink, InternalLink, GappedBox, SmallLink, Text } from "@kampus/ui";
+import {
+  Box,
+  ExternalLink,
+  GappedBox,
+  InternalLink,
+  SmallLink,
+  Text,
+} from "@kampus/ui";
 import type { SerializeFrom } from "@remix-run/node";
 import { useFetcher } from "@remix-run/react";
 import normalizeUrl from "normalize-url";

@@ -1,8 +1,8 @@
 import { CenteredContainer } from "@kampus/ui";
-import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { PostList } from "~/features/post/PostList";
+import { PostSortFilters } from "~/features/post/PostSortFilters";
 import { getAllPosts } from "~/models/post.server";
 
 export const loader = async () => {
@@ -20,7 +20,8 @@ export const Home = () => {
   }
 
   return (
-    <CenteredContainer css={{ paddingTop: 20 }}>
+    <CenteredContainer css={{ mt: 20, gap: 20 }}>
+      <PostSortFilters />
       <PostList posts={data} />
     </CenteredContainer>
   );
