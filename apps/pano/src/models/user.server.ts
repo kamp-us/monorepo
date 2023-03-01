@@ -1,7 +1,7 @@
-import { Password, Theme, User, UserPreference } from "@prisma/client";
+import type { Password, User, UserPreference } from "@prisma/client";
+import { Theme } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { prisma } from "~/db.server";
-import { validateEmail, validateUsername } from "~/utils";
 
 export async function getUserById(id: User["id"]) {
   return prisma.user.findUnique({ where: { id } });
