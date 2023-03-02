@@ -24,10 +24,9 @@ RUN ls -la .
 
 ENV NODE_ENV production
 
-RUN npx --workspace=@kampus-apps/pano prisma migrate deploy
 RUN npx --workspace=@kampus-apps/pano prisma generate
 RUN npm --workspace=@kampus-apps/pano run build
 
 EXPOSE 8080
 
-ENTRYPOINT ["npm", "run","--workspace=@kampus-apps/pano", "start"]
+ENTRYPOINT ["npm", "run","--workspace=@kampus-apps/pano", "docker:start"]
