@@ -1,4 +1,4 @@
-FROM node:16.14.2 AS builder
+FROM node:18.14.2 AS builder
 
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
@@ -9,7 +9,8 @@ COPY . .
 RUN turbo prune --scope=@kampus-apps/pano --docker
 
 
-FROM node:16.14.2 AS runner
+FROM node:18.14.2 AS runner
+ENV NODE_ENV production
 WORKDIR /app
 COPY .gitignore .gitignore
 COPY --from=builder /app/out/json .
@@ -22,9 +23,10 @@ RUN npx turbo build
 
 RUN ls -la .
 
-# WORKDIR /app/apps/pano
+RUN npx --workspace=@kampus-apps/pano prisma deploy
 RUN npx --workspace=@kampus-apps/pano prisma generate
+RUN npm --workspace=@kampus-apps/pano run build
 
 EXPOSE 8080
 
-ENTRYPOINT ["npm", "run","--workspace=@kampus-apps/pano", "docker:start"]
+ENTRYPOINT ["npm", "run","--workspace=@kampus-apps/pano", "start"]
