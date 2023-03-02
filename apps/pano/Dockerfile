@@ -10,7 +10,6 @@ RUN turbo prune --scope=@kampus-apps/pano --docker
 
 
 FROM node:18.14.2 AS runner
-ENV NODE_ENV production
 WORKDIR /app
 COPY .gitignore .gitignore
 COPY --from=builder /app/out/json .
@@ -22,6 +21,8 @@ COPY turbo.json turbo.json
 RUN npx turbo build
 
 RUN ls -la .
+
+ENV NODE_ENV production
 
 RUN npx --workspace=@kampus-apps/pano prisma deploy
 RUN npx --workspace=@kampus-apps/pano prisma generate
