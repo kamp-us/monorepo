@@ -24,7 +24,7 @@ RUN ls -la .
 
 ENV NODE_ENV production
 
-RUN npx --workspace=@kampus-apps/pano prisma deploy
+RUN npx --workspace=@kampus-apps/pano prisma migrate deploy
 RUN npx --workspace=@kampus-apps/pano prisma generate
 RUN npm --workspace=@kampus-apps/pano run build
 
