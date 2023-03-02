@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=pgtest
       - POSTGRES_HOST=postgres
     ports:
-      - "8080:80"
+      - "8080:8080"
     volumes:
       - ./.:/app
     links:
@@ -25,7 +25,7 @@ services:
       - POSTGRES_DB=pgtest
       - POSTGRES_PASSWORD=pgtest
     ports:
-      - "15432:5432"
+      - "5432:5432"
     healthcheck:
       test: pg_isready -U pgtest -d pgtest
       interval: 10s
