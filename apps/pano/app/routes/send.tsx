@@ -14,7 +14,7 @@ import { useFetcher, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import { createPost } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
-import { validate, validateURL } from "~/utils";
+import { validate, validateURL, getPostSlugLink } from "~/utils";
 
 type ActionData = {
   error: {
@@ -59,7 +59,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const post = await createPost(title, userID, url, body);
-    return redirect(`/posts/${post.slug}/${post.id}`);
+    return redirect(getPostSlugLink(post));
   } catch (e) {
     return json(e, { status: 500 });
   }
@@ -77,9 +77,7 @@ const Send = () => {
       formData.set("url", url);
       fetcher.submit(formData, { method: "post", action: "/api/parse-meta" });
     }
-  }
-
-
+  };
 
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>
