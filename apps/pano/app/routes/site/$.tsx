@@ -25,7 +25,7 @@ export const loader = async ({ params }: LoaderArgs) => {
 };
 
 export const Search = () => {
-  const { posts } = useLoaderData<LoaderData>();
+  const { posts } = useLoaderData() as unknown as LoaderData;
   const sortedPosts = [...posts].sort((a, b) =>
     a.createdAt < b.createdAt ? 1 : -1
   );

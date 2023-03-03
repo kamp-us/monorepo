@@ -10,11 +10,7 @@ import {
   ValidationMessage,
 } from "@kampus/ui";
 import { PlusIcon } from "@radix-ui/react-icons";
-import type {
-  ActionFunction,
-  LoaderFunction,
-  MetaFunction,
-} from "@remix-run/node";
+import type { ActionArgs, LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   useActionData,
@@ -59,7 +55,7 @@ const toVisualTree = (comments: Comment[]) => {
   return tree;
 };
 
-export const loader: LoaderFunction = async ({ params }) => {
+export const loader = async ({ params }: LoaderArgs) => {
   if (typeof params.slug !== "string" || typeof params.id !== "string") {
     return json({ data: null }, { status: 404 });
   }
@@ -119,7 +115,7 @@ const errorMessage = (
   );
 };
 
-export const action: ActionFunction = async ({ request, params }) => {
+export const action = async ({ request, params }: ActionArgs) => {
   const formData = await request.formData();
   const content = formData.get("content")?.toString();
   const commentID = formData.get("commentID")?.toString();
@@ -150,7 +146,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 const SinglePost = () => {
   const user = useUserContext();
-  const { post } = useLoaderData<LoaderData>();
+  const { post } = useLoaderData() as unknown as LoaderData;
   const location = useLocation();
   const expanded = !!location.hash;
 

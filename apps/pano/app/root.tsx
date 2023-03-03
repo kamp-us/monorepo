@@ -112,7 +112,9 @@ const Document = () => {
 };
 
 export default function App() {
-  const { user } = useLoaderData<typeof loader>();
+  const { user } = useLoaderData() as {
+    user: Awaited<ReturnType<typeof getUser>>;
+  };
 
   return (
     <ThemeProvider>

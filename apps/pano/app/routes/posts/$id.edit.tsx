@@ -9,7 +9,7 @@ import {
   Textarea,
   ValidationMessage,
 } from "@kampus/ui";
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
@@ -33,7 +33,7 @@ type ActionData = {
   };
 };
 
-export const loader: LoaderFunction = async ({ request, params }) => {
+export const loader = async ({ request, params }: LoaderArgs) => {
   if (!params.id) return null;
 
   const user = await requireUser(request);
@@ -46,7 +46,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return json<LoaderData>({ post });
 };
 
-export const action: ActionFunction = async ({ request, params }) => {
+export const action = async ({ request, params }: ActionArgs) => {
   invariant(params.id, "Post id is required");
 
   const formData = await request.formData();
@@ -99,15 +99,22 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export const EditPost: FC = () => {
   const { post } = useLoaderData<LoaderData>();
+
   const transition = useTransition();
   const data = useActionData<ActionData>();
   const error = data?.error;
+
   return (
     <CenteredContainer>
       <Form method="post">
         <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
           <Label htmlFor="url">URL</Label>
-          <Input id="url" name="url" size="2" defaultValue={post.url} />
+          <Input
+            id="url"
+            name="url"
+            size="2"
+            defaultValue={post.url as string}
+          />
           <Label htmlFor="title">Başlık</Label>
           <Input id="title" name="title" size="2" defaultValue={post.title} />
           <Label htmlFor="content">İçerik</Label>
@@ -115,7 +122,7 @@ export const EditPost: FC = () => {
             css={{ width: "auto", cursor: "text" }}
             name="content"
             rows={4}
-            defaultValue={post.content}
+            defaultValue={post.content as string}
           />
           <Box>
             <Button size="2" type="submit" variant="green">

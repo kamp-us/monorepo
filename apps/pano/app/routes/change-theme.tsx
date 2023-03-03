@@ -9,8 +9,6 @@ export const action = async ({ request }: ActionArgs) => {
 
   const theme = formData.get("theme") as Theme;
 
-  // TODO: as theme or if not theme, return error?
-
   try {
     await updateTheme(user, theme);
     return {

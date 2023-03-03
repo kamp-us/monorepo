@@ -1,6 +1,5 @@
 import { CenteredContainer, Text } from "@kampus/ui";
-import type { LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { json, LoaderArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { PostList } from "~/features/post/PostList";
 import type { PostWithCommentCount } from "~/models/post.server";
@@ -22,7 +21,7 @@ const isError = (data: LoaderData): data is LoaderDataError => {
   return (data as LoaderDataError).error !== undefined;
 };
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
   const searchQuery = url.searchParams.get("q");
   if (!searchQuery) {
@@ -33,15 +32,15 @@ export const loader: LoaderFunction = async ({ request }) => {
     const posts = await searchPosts(searchQuery);
     return json({ data: posts, query: searchQuery });
   } catch (e) {
-    return {
+    return json<LoaderDataError>({
       status: 500,
-      error: e,
-    };
+      error: e as string,
+    });
   }
 };
 
 export const Search = () => {
-  const loaderData = useLoaderData<LoaderData>();
+  const loaderData = useLoaderData() as LoaderData;
 
   if (isError(loaderData)) {
     return (

@@ -6,7 +6,6 @@ import {
   SmallLink,
   Text,
 } from "@kampus/ui";
-import type { SerializeFrom } from "@remix-run/node";
 import { useFetcher } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
@@ -16,7 +15,7 @@ import { useUserContext } from "../auth/user-context";
 import { UpvoteButton } from "../upvote/UpvoteButton";
 
 type PostItemProps = {
-  post: SerializeFrom<PostWithCommentCount>;
+  post: PostWithCommentCount;
   showContent?: boolean;
 };
 
