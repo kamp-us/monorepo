@@ -79,7 +79,7 @@ export const getActivePosts = async () => {
       owner: true,
       comments: {
         orderBy: {
-          createdAt: "asc",
+          createdAt: "desc",
         },
         include: {
           owner: true,
@@ -89,6 +89,9 @@ export const getActivePosts = async () => {
       _count: {
         select: { comments: true },
       },
+    },
+    orderBy: {
+      createdAt: "desc",
     },
   });
 
