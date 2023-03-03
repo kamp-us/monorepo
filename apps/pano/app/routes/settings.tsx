@@ -9,7 +9,7 @@ import {
   Text,
   ValidationMessage,
 } from "@kampus/ui";
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { ActionArgs,  LoaderArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import type { FC } from "react";
@@ -40,7 +40,7 @@ const SchemaWithoutPasswords = SettingsSchema.omit({
 type SettingsFields = z.infer<typeof SettingsSchema>;
 type SettingsFieldsErrors = inferSafeParseErrors<typeof SettingsSchema>;
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = async ({ request }: LoaderArgs) => {
   await requireUser(request);
   return true;
 };
@@ -52,7 +52,7 @@ type ActionData = {
 };
 const badRequest = (data: ActionData) => json(data, { status: 400 });
 
-export const action: ActionFunction = async ({ request }) => {
+export const action = async ({ request }: ActionArgs) => {
   const user = await requireUser(request);
   const formData = await request.formData();
   const fields = Object.fromEntries(formData.entries()) as SettingsFields;

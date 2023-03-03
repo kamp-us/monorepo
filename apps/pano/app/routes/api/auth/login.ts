@@ -1,4 +1,4 @@
-import type { ActionFunction } from "@remix-run/node";
+import type { ActionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession } from "~/session.server";
@@ -11,7 +11,7 @@ export interface ActionData {
   };
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
   const username = formData.get("username");
   const password = formData.get("password");

@@ -1,5 +1,5 @@
 import { CenteredContainer } from "@kampus/ui";
-import type { LoaderFunction } from "@remix-run/node";
+import type { LoaderArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { PostList } from "~/features/post/PostList";
@@ -10,7 +10,7 @@ type LoaderData = {
   posts: PostWithCommentCount[];
 };
 
-export const loader: LoaderFunction = async ({ params }) => {
+export const loader = async ({ params }: LoaderArgs) => {
   const sitename = params["*"];
 
   if (!sitename) return json(null, { status: 400 });

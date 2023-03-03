@@ -1,4 +1,4 @@
-import type { ActionFunction } from "@remix-run/node";
+import type { ActionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { createUser, getUserByEmail } from "~/models/user.server";
 import {
@@ -17,7 +17,7 @@ export interface ActionData {
   };
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
   // const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
   const username = formData.get("username");

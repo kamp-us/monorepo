@@ -8,7 +8,7 @@ import {
   Textarea,
   ValidationMessage,
 } from "@kampus/ui";
-import type { ActionFunction } from "@remix-run/node";
+import type { ActionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useFetcher, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
@@ -22,7 +22,7 @@ type ActionData = {
   };
 };
 
-export const action: ActionFunction = async ({ request }) => {
+export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
   const title = formData.get("title")?.toString();
   const content = formData.get("content")?.toString();
@@ -77,9 +77,7 @@ const Send = () => {
       formData.set("url", url);
       fetcher.submit(formData, { method: "post", action: "/api/parse-meta" });
     }
-  }
-
-
+  };
 
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>
