@@ -106,7 +106,7 @@ const Send = () => {
           />
           <Label htmlFor="content">İçerik</Label>
           <Textarea
-            css={{ width: "auto", cursor: "text", resize: "both" }}
+            css={{ width: "auto", cursor: "text" }}
             name="content"
             rows={4}
           />
