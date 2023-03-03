@@ -1,13 +1,15 @@
-import { ActionFunction } from "@remix-run/node";
-import { useUserContext } from "~/features/auth/user-context";
+import { Theme } from "@prisma/client";
+import { ActionArgs } from "@remix-run/node";
 import { updateTheme } from "~/models/user.server";
 import { requireUser } from "~/session.server";
 
-export const action: ActionFunction = async ({ request }) => {
+export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
   const user = await requireUser(request);
 
-  const theme = formData.get("theme");
+  const theme = formData.get("theme") as Theme;
+
+  // TODO: as theme or if not theme, return error?
 
   try {
     await updateTheme(user, theme);
