@@ -2,7 +2,7 @@
  * @type {import('@remix-run/dev').AppConfig}
  */
 module.exports = {
-  appDirectory: "./src",
+  appDirectory: "./app",
   serverDependenciesToBundle: ["normalize-url"],
   assetsBuildDirectory: "public/build",
   publicPath: "/build/",
