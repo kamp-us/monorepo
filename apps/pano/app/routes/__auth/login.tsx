@@ -61,11 +61,11 @@ export const Login = () => {
               isSubmitting={!!fetcher.submission}
             />
           ) : null}
+          <Box>
+            <Button type="submit">Giriş yap</Button>
+          </Box>
+          <input type="hidden" name="redirectTo" value={redirectTo} />
         </GappedBox>
-        <Box>
-          <Button type="submit">Giriş yap</Button>
-        </Box>
-        <input type="hidden" name="redirectTo" value={redirectTo} />
       </fetcher.Form>
     </CenteredContainer>
   );
