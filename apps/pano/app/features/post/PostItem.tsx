@@ -10,10 +10,10 @@ import type { SerializeFrom } from "@remix-run/node";
 import { useFetcher } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
+import { useUserContext } from "../auth/user-context";
+import { UpvoteButton } from '../upvote/UpvoteButton';
 import { MoreOptionsDropdown } from "~/features/post/MoreOptionsDropdown";
 import type { PostWithCommentCount } from "~/models/post.server";
-import { useUserContext } from "../auth/user-context";
-import { UpvoteButton } from "../upvote/UpvoteButton";
 import { getPostLink, getSitePostsLink } from "~/utils";
 
 type PostItemProps = {
