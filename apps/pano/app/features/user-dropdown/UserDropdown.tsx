@@ -34,7 +34,12 @@ export const UserDropdown: FC<{ login: string }> = ({ login }) => {
       <DropdownMenuTrigger asChild>
         <Button
           color="transparent"
-          css={{ padding: 0, borderRadius: "9999px" }}
+          css={{
+            padding: 0,
+            borderRadius: "50%",
+            width: "auto",
+            height: "auto",
+          }}
         >
           <UserAvatar login={login} />
         </Button>
