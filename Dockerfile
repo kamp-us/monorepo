@@ -15,4 +15,4 @@ COPY --from=builder bin/pano-api pano-api
 
 CMD ["./pano-api"]
 
-EXPOSE 80
+EXPOSE 8080
