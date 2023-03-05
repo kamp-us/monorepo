@@ -15,4 +15,4 @@ COPY --from=builder bin/graphql graphql
 
 CMD ["./graphql"]
 
-EXPOSE 80
+EXPOSE 8000

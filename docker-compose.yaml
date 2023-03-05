@@ -5,6 +5,6 @@ services:
     image: cosmtrek/air
     working_dir: /app
     ports:
-      - "8000:80"
+      - "8000:8000"
     volumes:
       - ./.:/app
