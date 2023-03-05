@@ -14,7 +14,7 @@ import { useFetcher, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import { createPost } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
-import { validate, validateURL, getPostLink } from "~/utils";
+import { getPostLink, validate, validateURL } from "~/utils";
 
 type ActionData = {
   error: {
@@ -59,6 +59,8 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const post = await createPost(title, userID, url, body);
+    // FIXME: getPostLink required PostWithCommentCount,
+    // but createPost returns Post
     return redirect(getPostLink(post));
   } catch (e) {
     return json(e, { status: 500 });
