@@ -1,5 +1,5 @@
-import { ActionFunction } from "@remix-run/node";
-import { useUserContext } from "~/features/auth/user-context";
+import type { ActionFunction } from "@remix-run/node";
+import type { UserPreference } from "~/models/user.server";
 import { updateTheme } from "~/models/user.server";
 import { requireUser } from "~/session.server";
 
@@ -7,7 +7,7 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const user = await requireUser(request);
 
-  const theme = formData.get("theme");
+  const theme = formData.get("theme") as UserPreference["theme"];
 
   try {
     await updateTheme(user, theme);
