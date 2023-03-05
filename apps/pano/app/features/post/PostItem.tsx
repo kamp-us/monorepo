@@ -14,7 +14,7 @@ import { MoreOptionsDropdown } from "~/features/post/MoreOptionsDropdown";
 import type { PostWithCommentCount } from "~/models/post.server";
 import { useUserContext } from "../auth/user-context";
 import { UpvoteButton } from "../upvote/UpvoteButton";
-import { getPostSlugLink, getPostSiteLink } from "~/utils";
+import { getPostLink, getSitePostsLink } from "~/utils";
 
 type PostItemProps = {
   post: SerializeFrom<PostWithCommentCount>;
@@ -57,7 +57,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
     </ExternalLink>
   ) : (
     <InternalLink
-      to={getPostSlugLink(post)}
+      to={getPostLink(post)}
       style={{
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
@@ -84,7 +84,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
           <GappedBox css={{ alignItems: "baseline" }}>
             {titleLink}
             {post.site && (
-              <SmallLink to={getPostSiteLink(post)}>{post.site}</SmallLink>
+              <SmallLink to={getSitePostsLink(post)}>{post.site}</SmallLink>
             )}
           </GappedBox>
           <GappedBox
@@ -95,7 +95,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
             }}
           >
             <Box>@{post.owner.username}</Box> |
-            <SmallLink to={getPostSlugLink(post)}>
+            <SmallLink to={getPostLink(post)}>
               {post._count.comments} yorum
             </SmallLink>
             <>
