@@ -93,7 +93,7 @@ export function validatePassword(password: unknown): password is string {
 
 export function getExternalPostURL(post: PostWithCommentCount) {
   const location = global.location;
-  const postUrl = location.origin + getPostSlugLink(post);
+  const postUrl = location.origin + getPostLink(post);
   return postUrl;
 }
 export function getExternalCommentURL(comment: Comment) {
