@@ -14,7 +14,7 @@ import { useFetcher, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import { createPost } from "~/models/post.server";
 import { requireUserId } from "~/session.server";
-import { validate, validateURL, getPostSlugLink } from "~/utils";
+import { validate, validateURL, getPostLink } from "~/utils";
 
 type ActionData = {
   error: {
@@ -59,7 +59,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const post = await createPost(title, userID, url, body);
-    return redirect(getPostSlugLink(post));
+    return redirect(getPostLink(post));
   } catch (e) {
     return json(e, { status: 500 });
   }
