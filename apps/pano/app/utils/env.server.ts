@@ -12,4 +12,5 @@ export const env = parseEnv(process.env, {
       "postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public&connect_timeout=300"
     ),
   SESSION_SECRET: z.string().default("sessionsecret"),
+  SEND_IN_BLUE_API_KEY: z.string().optional(),
 });
