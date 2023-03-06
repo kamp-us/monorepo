@@ -12,8 +12,8 @@ import type { ActionFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useFetcher, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
+import { requireUser } from "~/authenticator.server";
 import { createPost } from "~/models/post.server";
-import { requireUserId } from "~/session.server";
 import { getPostLink, validate, validateURL } from "~/utils";
 
 type ActionData = {
@@ -27,7 +27,7 @@ export const action: ActionFunction = async ({ request }) => {
   const title = formData.get("title")?.toString();
   const content = formData.get("content")?.toString();
   const formUrl = formData.get("url")?.toString();
-  const userID = await requireUserId(request);
+  const user = await requireUser(request);
 
   if (!validate(title)) {
     return json<ActionData>({
@@ -58,7 +58,7 @@ export const action: ActionFunction = async ({ request }) => {
   let body = validate(content) ? content : null;
 
   try {
-    const post = await createPost(title, userID, url, body);
+    const post = await createPost(title, user.id, url, body);
     // FIXME: getPostLink required PostWithCommentCount,
     // but createPost returns Post
     return redirect(getPostLink(post));

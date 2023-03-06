@@ -17,7 +17,7 @@ import { UserDropdown } from "~/features/user-dropdown/UserDropdown";
 export const Topnav: FC = () => {
   const user = useUserContext();
   const fetcher = useFetcher();
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <Box css={{ px: "$2", backgroundColor: "$gray2" }}>

@@ -1,7 +1,7 @@
 import type { ActionFunction } from "@remix-run/node";
+import { requireUser } from "~/authenticator.server";
 import type { UserPreference } from "~/models/user.server";
 import { updateTheme } from "~/models/user.server";
-import { requireUser } from "~/session.server";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();

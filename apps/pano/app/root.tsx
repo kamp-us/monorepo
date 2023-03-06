@@ -18,12 +18,14 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { useEffect } from "react";
+import { authenticator } from "~/authenticator.server";
+import type { User } from "~/models/user.server";
+import { getTheme, getUserById } from "~/models/user.server";
 import { favicons } from "./features/assets/favicons";
 import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
 import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
 import { Topnav } from "./features/topnav/Topnav";
-import { getUser, getUserTheme } from "./session.server";
 
 export const links: LinksFunction = () => {
   return [
@@ -53,9 +55,14 @@ export const meta: MetaFunction = () => ({
 });
 
 export const loader = async ({ request }: LoaderArgs) => {
+  const sessionUser = (await authenticator.isAuthenticated(
+    request
+  )) as User | null;
+
+  const user = sessionUser ? await getUserById(sessionUser.id) : null;
   return json({
-    user: await getUser(request),
-    theme: await getUserTheme(request),
+    user,
+    theme: await getTheme(user?.id),
   });
 };
 
@@ -117,7 +124,16 @@ export default function App() {
   return (
     <ThemeProvider>
       <ToastProvider swipeDirection="right">
-        <UserContextManager user={user}>
+        <UserContextManager
+          user={
+            user && {
+              ...user,
+              createdAt: new Date(user.createdAt),
+              updatedAt: new Date(user.updatedAt),
+              deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
+            }
+          }
+        >
           <Document />
         </UserContextManager>
       </ToastProvider>

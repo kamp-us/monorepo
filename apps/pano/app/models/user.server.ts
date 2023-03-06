@@ -98,7 +98,7 @@ export const updateEmail = async (user: User, email?: string) => {
 
 export const updatePassword = async (
   user: User,
-  oldPassword: string,
+  oldPassword: string | null,
   newPassword: string
 ) => {
   const userWithPassword = await prisma.user.findUnique({
@@ -108,11 +108,14 @@ export const updatePassword = async (
     },
   });
 
-  if (!userWithPassword || !userWithPassword.password) {
+  if (!userWithPassword) {
     return null;
   }
 
-  const isValid = await verifyPassword(userWithPassword.password, oldPassword);
+  const isValid =
+    oldPassword && userWithPassword.password
+      ? await verifyPassword(userWithPassword.password, oldPassword)
+      : true;
 
   if (!isValid) {
     return null;
@@ -120,12 +123,16 @@ export const updatePassword = async (
 
   const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-  return prisma.user.update({
-    where: { id: user.id },
-    data: {
-      password: {
-        update: {
-          hash: hashedPassword,
+  return prisma.password.upsert({
+    where: { userID: userWithPassword.id },
+    update: {
+      hash: hashedPassword,
+    },
+    create: {
+      hash: hashedPassword,
+      user: {
+        connect: {
+          id: userWithPassword.id,
         },
       },
     },
@@ -150,10 +157,20 @@ export async function updateTheme(user: User, theme: UserPreference["theme"]) {
   });
 }
 
-export async function getTheme(id: User["id"]) {
+export async function getTheme(id?: User["id"]) {
+  if (!id) return Theme.DARK;
+
   const userPreference = await prisma.userPreference.findUnique({
     where: { userID: id },
   });
 
   return userPreference?.theme ?? Theme.DARK;
 }
+
+export const hasPassword = async (id: User["id"]) => {
+  const password = await prisma.password.findUnique({
+    where: { userID: id },
+  });
+
+  return !!password;
+};

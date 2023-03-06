@@ -5,7 +5,7 @@ export { AuthorizationError };
 
 type StrategyMap<TKey extends string, TUser = unknown> = Record<
   TKey,
-  Strategy<TUser, never>
+  Strategy<TUser, any>
 >;
 
 interface Props<

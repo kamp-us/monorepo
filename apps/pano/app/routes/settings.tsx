@@ -11,25 +11,31 @@ import {
 } from "@kampus/ui";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useActionData } from "@remix-run/react";
+import { useActionData, useLoaderData } from "@remix-run/react";
 import type { FC } from "react";
 import { z } from "zod";
+import { authenticator, requireUser } from "~/authenticator.server";
 import type { inferSafeParseErrors } from "~/features/zod/utils";
+import type { User } from "~/models/user.server";
 import {
+  hasPassword,
   updateEmail,
   updatePassword,
   updateUsername,
 } from "~/models/user.server";
-import { requireUser } from "~/session.server";
 import { useUser } from "~/utils";
 
 const SettingsSchema = z.object({
-  oldPassword: z.string().min(6, { message: "Parolanızı eksik doldurdunuz" }),
+  oldPassword: z
+    .string()
+    .min(6, { message: "Parolanızı eksik doldurdunuz" })
+    .optional(),
   newPassword: z
     .string()
     .min(6, { message: "Yeni parola en az 6 karakterden oluşmalıdır" }),
   username: z.string().min(2, { message: "Kullanıcı adı uygun değil" }),
   email: z.string().email({ message: "Geçerli bir email adresi girin" }),
+  hasPassword: z.string(),
 });
 
 const SchemaWithoutPasswords = SettingsSchema.omit({
@@ -41,8 +47,11 @@ type SettingsFields = z.infer<typeof SettingsSchema>;
 type SettingsFieldsErrors = inferSafeParseErrors<typeof SettingsSchema>;
 
 export const loader: LoaderFunction = async ({ request }) => {
-  await requireUser(request);
-  return true;
+  const user = await requireUser(request);
+
+  return json({
+    hasPassword: await hasPassword(user.id),
+  });
 };
 
 type ActionData = {
@@ -56,8 +65,9 @@ export const action: ActionFunction = async ({ request }) => {
   const user = await requireUser(request);
   const formData = await request.formData();
   const fields = Object.fromEntries(formData.entries()) as SettingsFields;
+  const hasPwd = fields.hasPassword === "true";
   const noPassword =
-    fields.oldPassword.length === 0 && fields.newPassword.length === 0;
+    fields.oldPassword?.length === 0 && fields.newPassword.length === 0;
 
   const schema = noPassword ? SchemaWithoutPasswords : SettingsSchema;
 
@@ -72,7 +82,7 @@ export const action: ActionFunction = async ({ request }) => {
   if (!noPassword) {
     const success = await updatePassword(
       user,
-      fields.oldPassword,
+      hasPwd && fields.oldPassword ? fields.oldPassword : null,
       fields.newPassword
     );
     if (!success) {
@@ -121,6 +131,8 @@ const Settings = () => {
   const username = user.username;
   const email = user.email;
 
+  const loaderData = useLoaderData<typeof loader>();
+
   const actionData = useActionData<ActionData>();
   const { errors, successful } = actionData ?? {};
   const { fieldErrors } = errors ?? {};
@@ -150,7 +162,15 @@ const Settings = () => {
             {fieldErrors?.email ? (
               <ValidationMessage error={fieldErrors.email[0]} />
             ) : null}
-            <PasswordReset errors={errors} />
+            <PasswordReset
+              errors={errors}
+              hasPassword={loaderData.hasPassword}
+            />
+            <input
+              name="hasPassword"
+              type="hidden"
+              value={loaderData.hasPassword}
+            />
             <Box>
               <Button type="submit">Guncelle</Button>
             </Box>
@@ -168,19 +188,22 @@ const Settings = () => {
 
 const PasswordReset: FC<{
   errors: ActionData["errors"];
-}> = ({ errors }) => {
+  hasPassword: boolean;
+}> = ({ errors, hasPassword }) => {
   return (
     <>
       <Label htmlFor="oldPassword">Eski Parola</Label>
-      <Input
-        id="oldPassword"
-        name="oldPassword"
-        type="password"
-        placeholder="eskimis-parola"
-        aria-errormessage={
-          errors?.fieldErrors.oldPassword ? "old-password-error" : undefined
-        }
-      />
+      {hasPassword && (
+        <Input
+          id="oldPassword"
+          name="oldPassword"
+          type="password"
+          placeholder="eskimis-parola"
+          aria-errormessage={
+            errors?.fieldErrors.oldPassword ? "old-password-error" : undefined
+          }
+        />
+      )}
       {errors?.fieldErrors.oldPassword ? (
         <ValidationMessage error={errors.fieldErrors.oldPassword[0]} />
       ) : null}
