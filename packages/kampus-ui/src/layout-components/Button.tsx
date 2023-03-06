@@ -64,6 +64,10 @@ export const Button = styled("button", {
     pointerEvents: "none",
   },
 
+  "&:hover": {
+    cursor: "pointer",
+  },
+
   variants: {
     size: {
       "1": {
