@@ -18,6 +18,7 @@ import { MoreOptionsDropdown } from "./MoreOptionsDropdown";
 import { useUserContext } from "../auth/user-context";
 import { CommentUpvoteButton } from "../upvote/UpvoteButton";
 import type { Comment } from "~/models/comment.server";
+
 type CommentProps = {
   comment: Comment;
   postID: string;
@@ -70,7 +71,6 @@ export const CommentItem: FC<CommentProps> = ({
 
   useEffect(() => {
     if (!isCommenting && formRef.current) {
-      setOpen(false);
       setShowComments(true);
       formRef.current.reset();
       formRef.current.focus();
