@@ -117,9 +117,21 @@ enum Theme {
 
 model UserPreference {
   theme Theme @default(DARK)
-  
+
   user  User @relation(fields: [userID], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userID String @unique
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  deletedAt DateTime?
+}
+
+model Otp {
+  id String @id @default(cuid())
+
+  code     String  @unique
+  active   Boolean @default(false)
+  attempts Int     @default(0)
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now())
