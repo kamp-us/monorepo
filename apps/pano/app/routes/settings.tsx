@@ -192,17 +192,20 @@ const PasswordReset: FC<{
 }> = ({ errors, hasPassword }) => {
   return (
     <>
-      <Label htmlFor="oldPassword">Eski Parola</Label>
       {hasPassword && (
-        <Input
-          id="oldPassword"
-          name="oldPassword"
-          type="password"
-          placeholder="eskimis-parola"
-          aria-errormessage={
-            errors?.fieldErrors.oldPassword ? "old-password-error" : undefined
-          }
-        />
+        <>
+          <Label htmlFor="oldPassword">Eski Parola</Label>
+
+          <Input
+            id="oldPassword"
+            name="oldPassword"
+            type="password"
+            placeholder="eskimis-parola"
+            aria-errormessage={
+              errors?.fieldErrors.oldPassword ? "old-password-error" : undefined
+            }
+          />
+        </>
       )}
       {errors?.fieldErrors.oldPassword ? (
         <ValidationMessage error={errors.fieldErrors.oldPassword[0]} />
