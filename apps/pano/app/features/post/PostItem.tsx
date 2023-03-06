@@ -5,13 +5,14 @@ import {
   InternalLink,
   SmallLink,
   Text,
+  Timeago,
 } from "@kampus/ui";
 import type { SerializeFrom } from "@remix-run/node";
 import { useFetcher } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
 import { useUserContext } from "../auth/user-context";
-import { UpvoteButton } from '../upvote/UpvoteButton';
+import { UpvoteButton } from "../upvote/UpvoteButton";
 import { MoreOptionsDropdown } from "~/features/post/MoreOptionsDropdown";
 import type { PostWithCommentCount } from "~/models/post.server";
 import { getPostLink, getSitePostsLink } from "~/utils";
@@ -98,6 +99,9 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
             <SmallLink to={getPostLink(post)}>
               {post._count.comments} yorum
             </SmallLink>
+            <Text size="1">
+              <Timeago date={new Date(post.createdAt)} />
+            </Text>
             <>
               | <MoreOptionsDropdown post={post} />
             </>
