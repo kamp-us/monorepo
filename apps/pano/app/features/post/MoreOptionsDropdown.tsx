@@ -17,11 +17,11 @@ import { useNavigate } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import PostDeleteAlert from "./PostDeleteAlert";
 import { canUserEdit } from "~/features/auth/can-user-edit";
 import { useUserContext } from "~/features/auth/user-context";
 import type { PostWithCommentCount } from "~/models/post.server";
 import { getExternalPostURL } from "~/utils";
-import PostDeleteAlert from "./PostDeleteAlert";
 
 const DotsButton = styled(IconButton, {
   borderRadius: 5,
@@ -69,6 +69,7 @@ export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
     ownerItems.push(<DropdownMenuSeparator key="separator" />);
   }
 
+  // FIXME: below appears to be redundant, is it?
   const menuItems = [...ownerItems];
 
   return (
