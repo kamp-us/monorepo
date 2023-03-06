@@ -16,10 +16,10 @@ import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
 import invariant from "tiny-invariant";
+import { requireUser } from "~/authenticator.server";
 import { canUserEdit } from "~/features/auth/can-user-edit";
 import type { PostWithCommentCount } from "~/models/post.server";
 import { editPost, getPostById } from "~/models/post.server";
-import { requireUser } from "~/session.server";
 import { validate, validateURL } from "~/utils";
 
 type LoaderData = {
@@ -106,7 +106,7 @@ export const EditPost: FC = () => {
       <Form method="post">
         <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
           <Label htmlFor="url">URL</Label>
-          <Input id="url" name="url" size="2" defaultValue={post.url} />
+          <Input id="url" name="url" size="2" defaultValue={post.url ?? ""} />
           <Label htmlFor="title">Başlık</Label>
           <Input id="title" name="title" size="2" defaultValue={post.title} />
           <Label htmlFor="content">İçerik</Label>
@@ -114,7 +114,7 @@ export const EditPost: FC = () => {
             css={{ width: "auto", cursor: "text" }}
             name="content"
             rows={4}
-            defaultValue={post.content}
+            defaultValue={post.content ?? ""}
           />
           <Box>
             <Button size="2" type="submit" variant="green">
