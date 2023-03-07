@@ -9,6 +9,8 @@ services:
       - POSTGRES_DB=pgtest
       - POSTGRES_PASSWORD=pgtest
       - POSTGRES_HOST=postgres
+    networks:
+      - kampus
     ports:
       - "8080:8080"
     volumes:
@@ -24,6 +26,8 @@ services:
       - POSTGRES_USER=pgtest
       - POSTGRES_DB=pgtest
       - POSTGRES_PASSWORD=pgtest
+    networks:
+      - kampus
     ports:
       - "5432:5432"
     healthcheck:
@@ -40,6 +44,8 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=secret
       - PGADMIN_LISTEN_PORT=80
       - PGADMIN_LOG_LEVEL=50
+    networks:
+      - kampus
     ports:
       - "8090:80"
     links:
@@ -57,6 +63,8 @@ services:
       - -database
       - postgres://pgtest:pgtest@postgres:5432/pgtest?sslmode=disable
       - up
+    networks:
+      - kampus
     links:
       - postgres
     depends_on:
@@ -65,3 +73,7 @@ services:
       - ./db/migrations:/migrations
     profiles:
       - tools
+
+networks:
+  kampus:
+    name: kampus
