@@ -232,6 +232,22 @@ export const { styled, createTheme, getCssText, config, keyframes, reset } =
         WebkitBackgroundClip: value,
         backgroundClip: value,
       }),
+
+      lineLimit: (value: {
+        count: number;
+        height: Stitches.PropertyValue<"lineHeight">;
+      }) => {
+        const { height, count } = value;
+        const lineH = typeof height === "number" ? `${height}em` : height;
+        return {
+          lineHeight: height,
+          maxHeight: `calc(${lineH} * ${count})`,
+          overflow: "hidden",
+          display: "-webkit-box",
+          "-webkit-line-clamp": count,
+          "-webkit-box-orient": "vertical",
+        };
+      },
     },
   });
 

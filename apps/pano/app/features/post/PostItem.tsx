@@ -49,13 +49,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
     <ExternalLink
       css={{
         wordBreak: "break-word",
-        "--line-clamp": 3,
-        lineHeight: "1.2",
-        maxHeight: "calc(1.2em * var(--line-clamp))",
-        overflow: "hidden",
-        display: "-webkit-box",
-        "-webkit-line-clamp": "var(--line-clamp)",
-        "-webkit-box-orient": "vertical",
+        lineLimit: { count: 3, height: 1.2 },
       }}
       href={normalizeUrl(post.url)}
     >
@@ -66,13 +60,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
       to={getPostLink(post)}
       css={{
         wordBreak: "break-word",
-        "--line-clamp": 3,
-        lineHeight: "1.2",
-        maxHeight: "calc(1.2em * var(--line-clamp))",
-        overflow: "hidden",
-        display: "-webkit-box",
-        "-webkit-line-clamp": "var(--line-clamp)",
-        "-webkit-box-orient": "vertical",
+        lineLimit: { count: 3, height: 1.2 },
       }}
     >
       {post.title}
@@ -99,13 +87,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
                 to={getSitePostsLink(post)}
                 css={{
                   wordBreak: "break-word",
-                  "--line-clamp": 1,
-                  lineHeight: "1.2",
-                  maxHeight: "calc(1.2em * var(--line-clamp))",
-                  overflow: "hidden",
-                  display: "-webkit-box",
-                  "-webkit-line-clamp": "var(--line-clamp)",
-                  "-webkit-box-orient": "vertical",
+                  lineLimit: { count: 1, height: 1.2 },
                 }}
               >
                 {post.site}
