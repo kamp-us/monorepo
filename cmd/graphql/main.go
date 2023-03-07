@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
@@ -14,7 +15,7 @@ import (
 )
 
 func main() {
-	panoapiClient := pano_api.NewPanoAPIProtobufClient("http://localhost:8080", &http.Client{})
+	panoapiClient := pano_api.NewPanoAPIProtobufClient(os.Getenv("PANOAPI_URI"), &http.Client{})
 
 	clients := resolver.Clients{
 		PanoAPI: panoapiClient,
