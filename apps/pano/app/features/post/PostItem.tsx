@@ -99,6 +99,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
             <SmallLink to={getPostLink(post)}>
               {post._count.comments} yorum
             </SmallLink>
+            |
             <Text size="1">
               <Timeago date={new Date(post.createdAt)} />
             </Text>
