@@ -13,4 +13,5 @@ export const env = parseEnv(process.env, {
     ),
   SESSION_SECRET: z.string().default("sessionsecret"),
   SEND_IN_BLUE_API_KEY: z.string().optional(),
+  GA_TRACKING_ID: z.string().optional(),
 });
