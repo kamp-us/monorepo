@@ -123,7 +123,11 @@ export const CommentItem: FC<CommentProps> = ({
             <Text
               size="3"
               lineHeight="2"
-              css={{ color: "$gray12", whiteSpace: "break-spaces" }}
+              css={{
+                color: "$gray12",
+                whiteSpace: "break-spaces",
+                wordBreak: "break-word",
+              }}
             >
               {comment.content}
             </Text>

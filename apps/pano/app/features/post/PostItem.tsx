@@ -47,10 +47,15 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
 
   const titleLink = post.url ? (
     <ExternalLink
-      style={{
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
+      css={{
+        wordBreak: "break-word",
+        "--line-clamp": 3,
+        lineHeight: "1.2",
+        maxHeight: "calc(1.2em * var(--line-clamp))",
         overflow: "hidden",
+        display: "-webkit-box",
+        "-webkit-line-clamp": "var(--line-clamp)",
+        "-webkit-box-orient": "vertical",
       }}
       href={normalizeUrl(post.url)}
     >
@@ -59,10 +64,15 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
   ) : (
     <InternalLink
       to={getPostLink(post)}
-      style={{
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
+      css={{
+        wordBreak: "break-word",
+        "--line-clamp": 3,
+        lineHeight: "1.2",
+        maxHeight: "calc(1.2em * var(--line-clamp))",
         overflow: "hidden",
+        display: "-webkit-box",
+        "-webkit-line-clamp": "var(--line-clamp)",
+        "-webkit-box-orient": "vertical",
       }}
     >
       {post.title}
@@ -82,10 +92,24 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
           <input type="hidden" name="json" value={JSON.stringify(variables)} />
         </fetcher.Form>
         <GappedBox css={{ flexDirection: "column", width: "100%" }}>
-          <GappedBox css={{ alignItems: "baseline" }}>
+          <GappedBox css={{ alignItems: "baseline", flexWrap: "wrap" }}>
             {titleLink}
             {post.site && (
-              <SmallLink to={getSitePostsLink(post)}>{post.site}</SmallLink>
+              <SmallLink
+                to={getSitePostsLink(post)}
+                css={{
+                  wordBreak: "break-word",
+                  "--line-clamp": 1,
+                  lineHeight: "1.2",
+                  maxHeight: "calc(1.2em * var(--line-clamp))",
+                  overflow: "hidden",
+                  display: "-webkit-box",
+                  "-webkit-line-clamp": "var(--line-clamp)",
+                  "-webkit-box-orient": "vertical",
+                }}
+              >
+                {post.site}
+              </SmallLink>
             )}
           </GappedBox>
           <GappedBox
@@ -115,6 +139,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
                 borderRadius: 4,
                 border: "1px solid $gray7",
                 backgroundColor: "$gray3",
+                wordBreak: "break-word",
               }}
             >
               <Text

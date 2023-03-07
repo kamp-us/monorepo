@@ -14,12 +14,24 @@ export const PostSortFilters = () => {
     location.pathname === url ? "$amber11" : "none";
 
   return (
-    <GappedBox>
-      {filters.map(({ url, text }) => {
+    <GappedBox
+      css={{
+        alignItems: "center",
+        color: "$gray9",
+        flexWrap: "wrap",
+      }}
+    >
+      {filters.map(({ url, text }, index) => {
         return (
-          <SmallLink key={url} to={url} css={{ color: paintIfActive(url) }}>
-            {text}
-          </SmallLink>
+          <>
+            <SmallLink
+              key={url}
+              to={url}
+              css={{ color: paintIfActive(url), whiteSpace: "nowrap" }}
+            >
+              {text}
+            </SmallLink>{`${index === filters.length -1 ? "" : " • "}`}            
+          </>
         );
       })}
     </GappedBox>
