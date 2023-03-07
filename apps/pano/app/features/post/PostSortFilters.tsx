@@ -1,5 +1,6 @@
 import { GappedBox, SmallLink } from "@kampus/ui";
 import { useLocation } from "@remix-run/react";
+import { Fragment } from "react";
 
 const filters = [
   { url: "/", text: "hepsi" },
@@ -23,15 +24,15 @@ export const PostSortFilters = () => {
     >
       {filters.map(({ url, text }, index) => {
         return (
-          <>
+          <Fragment key={url}>
             <SmallLink
-              key={url}
               to={url}
               css={{ color: paintIfActive(url), whiteSpace: "nowrap" }}
             >
               {text}
-            </SmallLink>{`${index === filters.length -1 ? "" : " • "}`}            
-          </>
+            </SmallLink>
+            {`${index === filters.length - 1 ? "" : " • "}`}
+          </Fragment>
         );
       })}
     </GappedBox>
