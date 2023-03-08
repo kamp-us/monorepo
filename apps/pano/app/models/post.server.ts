@@ -133,6 +133,22 @@ export const getMostUpvotedPosts = () => {
   });
 };
 
+export const getMythreads = (userID: string) => {
+  return prisma.post.findMany({
+    where: { userID },
+    include: {
+      upvotes: true,
+      owner: true,
+      _count: {
+        select: { comments: true },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+};
+
 export const getPostById = (id: string) => {
   return prisma.post.findFirst({
     where: { id },
