@@ -11,11 +11,12 @@ import type { SerializeFrom } from "@remix-run/node";
 import { useFetcher } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
-import { useUserContext } from "../auth/user-context";
-import { UpvoteButton } from "../upvote/UpvoteButton";
+import { useConfigContext } from "~/features/config/config-context";
 import { MoreOptionsDropdown } from "~/features/post/MoreOptionsDropdown";
 import type { PostWithCommentCount } from "~/models/post.server";
-import { getPostLink, getSitePostsLink } from "~/utils";
+import { getExternalPostURL, getPostLink, getSitePostsLink } from "~/utils";
+import { useUserContext } from "../auth/user-context";
+import { UpvoteButton } from "../upvote/UpvoteButton";
 
 type PostItemProps = {
   post: SerializeFrom<PostWithCommentCount>;
@@ -31,10 +32,12 @@ const getVariables = (
 
 export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
   const user = useUserContext();
+  const { baseUrl } = useConfigContext();
   const fetcher = useFetcher();
   const isLoading = !!fetcher.submission;
   const hasContent = !!post.content;
   const isContentVisible = hasContent && showContent;
+  const shareUrl = getExternalPostURL({ post, baseUrl });
 
   const isUpvoted =
     user && post ? post.upvotes.some((u) => u.userID === user.id) : false;
@@ -84,7 +87,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
             {titleLink}
             {post.site && (
               <SmallLink
-                to={getSitePostsLink(post)}
+                to={getSitePostsLink({ site: post.site })}
                 css={{
                   wordBreak: "break-word",
                   lineLimit: { count: 1, height: 1.2 },
@@ -110,7 +113,8 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
               <Timeago date={new Date(post.createdAt)} />
             </Text>
             <>
-              | <MoreOptionsDropdown post={post} />
+              |
+              <MoreOptionsDropdown post={post} shareUrl={shareUrl} />
             </>
           </GappedBox>
           {isContentVisible && (

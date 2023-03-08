@@ -10,17 +10,22 @@ import {
   Timeago,
   ValidationMessage,
 } from "@kampus/ui";
+import type { SerializeFrom } from "@remix-run/node";
 import { useFetcher, useTransition } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
+import { useConfigContext } from "~/features/config/config-context";
+import type { Comment } from "~/models/comment.server";
+import type { Post } from "~/models/post.server";
+import { getExternalCommentURL } from "~/utils";
 import { EditCommentForm } from "./EditCommentForm";
 import { MoreOptionsDropdown } from "./MoreOptionsDropdown";
 import { useUserContext } from "../auth/user-context";
 import { CommentUpvoteButton } from "../upvote/UpvoteButton";
-import type { Comment } from "~/models/comment.server";
+
 type CommentProps = {
   comment: Comment;
-  postID: string;
+  post: SerializeFrom<Post>;
   username: string;
   comments: Comment[];
   allComments: Record<string, { comment: Comment; comments: Comment[] }>;
@@ -40,7 +45,7 @@ const getVariables = (
 
 export const CommentItem: FC<CommentProps> = ({
   comment,
-  postID,
+  post,
   username,
   comments,
   allComments,
@@ -51,6 +56,7 @@ export const CommentItem: FC<CommentProps> = ({
   const [editOpen, setEditOpen] = useState(false);
   const [showComments, setShowComments] = useState(true);
   const user = useUserContext();
+  const { baseUrl } = useConfigContext();
   const transition = useTransition();
   const isCommenting =
     transition.state === "submitting" &&
@@ -59,6 +65,11 @@ export const CommentItem: FC<CommentProps> = ({
   const isLoading = !!fetcher.submission;
   const isUpvoted =
     user && comment ? comment.upvotes.some((u) => u.userID === user.id) : false;
+  const shareUrl = getExternalCommentURL({
+    baseUrl,
+    comment,
+    post,
+  });
 
   const variables = user
     ? isUpvoted
@@ -76,6 +87,7 @@ export const CommentItem: FC<CommentProps> = ({
       formRef.current.focus();
     }
   }, [isCommenting]);
+
   useEffect(() => {
     setShowComments(expanded);
   }, [expanded]);
@@ -114,7 +126,11 @@ export const CommentItem: FC<CommentProps> = ({
               value={JSON.stringify(variables)}
             />
           </fetcher.Form>
-          <MoreOptionsDropdown comment={comment} setEditOpen={setEditOpen} />
+          <MoreOptionsDropdown
+            comment={comment}
+            setEditOpen={setEditOpen}
+            shareUrl={shareUrl}
+          />
         </GappedBox>
         <Box>
           {(editOpen && (
@@ -190,7 +206,7 @@ export const CommentItem: FC<CommentProps> = ({
                   comment={c}
                   username={username}
                   comments={allComments[c.id]?.comments ?? []}
-                  postID={postID}
+                  post={post}
                   allComments={allComments}
                   error={error}
                 />

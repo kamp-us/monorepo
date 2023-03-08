@@ -159,6 +159,7 @@ const SinglePost = () => {
   const commentError = actionData?.error?.comment;
   const postError = actionData?.error?.post;
 
+  // @ts-ignore
   const visualTree = toVisualTree(post.comments);
 
   const postComments = Object.values(visualTree).filter(({ comment }) => {
@@ -224,7 +225,7 @@ const SinglePost = () => {
                 key={comment.id}
                 comment={comment}
                 comments={comments}
-                postID={post?.id as string}
+                post={post}
                 username={user?.username as string}
                 allComments={visualTree}
                 error={commentError ?? null}

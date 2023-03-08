@@ -13,15 +13,15 @@ import {
   TwitterShare,
 } from "@kampus/ui";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import type { SerializeFrom } from "@remix-run/node";
 import { useNavigate } from "@remix-run/react";
 import type { FC } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import PostDeleteAlert from "./PostDeleteAlert";
 import { canUserEdit } from "~/features/auth/can-user-edit";
 import { useUserContext } from "~/features/auth/user-context";
 import type { PostWithCommentCount } from "~/models/post.server";
-import { getExternalPostURL } from "~/utils";
+import PostDeleteAlert from "./PostDeleteAlert";
 
 const DotsButton = styled(IconButton, {
   borderRadius: 5,
@@ -36,19 +36,15 @@ const Item = styled(DropdownMenuItem, {
 });
 
 interface Props {
-  post: PostWithCommentCount;
+  post: SerializeFrom<PostWithCommentCount>;
+  shareUrl: string;
 }
 
-export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
+export const MoreOptionsDropdown: FC<Props> = ({ post, shareUrl }) => {
   const user = useUserContext();
   const [openAlert, setOpenAlert] = useState(false);
   const [openToast, setOpenToast] = useState(false);
   const navigate = useNavigate();
-  const [externalPostUrl, setExternalPostUrl] = useState("");
-
-  useEffect(() => {
-    setExternalPostUrl(getExternalPostURL(post));
-  }, [post]);
 
   const handleOpen = () => {
     setOpenAlert(true);
@@ -83,7 +79,7 @@ export const MoreOptionsDropdown: FC<Props> = ({ post }) => {
         <DropdownMenuContent>
           {ownerItems}
           <MoreOptionsShareButtons
-            postUrl={externalPostUrl}
+            postUrl={shareUrl}
             openToast={setOpenToast}
           />
         </DropdownMenuContent>
