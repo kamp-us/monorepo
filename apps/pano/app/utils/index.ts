@@ -1,7 +1,5 @@
 import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
-import type { Comment } from "~/models/comment.server";
-import type { PostWithCommentCount } from "~/models/post.server";
 import type { User } from "~/models/user.server";
 
 const DEFAULT_REDIRECT = "/";
@@ -91,30 +89,37 @@ export function validatePassword(password: unknown): password is string {
   return validate(password) && password.length > 8;
 }
 
-export function getExternalPostURL(post: PostWithCommentCount) {
-  const location = global.location;
-  const postUrl = location.origin + getPostLink(post);
-  return postUrl;
-}
-export function getExternalCommentURL(comment: Comment) {
-  const location = global.location;
-  const commentUrl = `${location.origin}${location.pathname}#c_${comment.id}`;
+export function getExternalCommentURL({
+  baseUrl,
+  post,
+  comment,
+}: {
+  baseUrl: string;
+  post: { slug: string; id: string };
+  comment: { id: string };
+}) {
+  const postURL = getExternalPostURL({ post, baseUrl });
+  const commentUrl = `${postURL}#c_${comment.id}`;
   return commentUrl;
 }
 
-export function getPostLink(post: PostWithCommentCount) {
+export function getExternalPostURL({
+  post,
+  baseUrl,
+}: {
+  post: { slug: string; id: string };
+  baseUrl: string;
+}) {
+  const postUrl = baseUrl + getPostLink(post);
+  return postUrl;
+}
+
+export function getPostLink(post: { slug: string; id: string }) {
   const postUrl = `/posts/${post.slug}/${post.id}`;
   return postUrl;
 }
 
-export function getSitePostsLink(post: PostWithCommentCount) {
+export function getSitePostsLink(post: { site: string }) {
   const postUrl = `/site/${post.site}`;
   return postUrl;
 }
-export declare type $ElementProps<T> = T extends React.ComponentType<
-  infer Props
->
-  ? Props extends object
-    ? Props
-    : never
-  : never;

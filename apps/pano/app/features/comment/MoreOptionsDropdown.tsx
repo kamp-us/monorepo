@@ -14,13 +14,12 @@ import {
 } from "@kampus/ui";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import type { FC } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import CommentDeleteAlert from "./CommentDeleteAlert";
 import { canUserEdit } from "~/features/auth/can-user-edit";
 import { useUserContext } from "~/features/auth/user-context";
 import type { Comment } from "~/models/comment.server";
-import { getExternalCommentURL } from "~/utils";
+import CommentDeleteAlert from "./CommentDeleteAlert";
 
 const DotsButton = styled(IconButton, {
   borderRadius: 5,
@@ -37,17 +36,17 @@ const Item = styled(DropdownMenuItem, {
 interface Props {
   comment: Comment;
   setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  shareUrl: string;
 }
 
-export const MoreOptionsDropdown: FC<Props> = ({ comment, setEditOpen }) => {
+export const MoreOptionsDropdown: FC<Props> = ({
+  comment,
+  setEditOpen,
+  shareUrl,
+}) => {
   const user = useUserContext();
   const [openAlert, setOpenAlert] = useState(false);
   const [openToast, setOpenToast] = useState(false);
-  const [externalCommentUrl, setExternalCommentUrl] = useState("");
-
-  useEffect(() => {
-    setExternalCommentUrl(getExternalCommentURL(comment));
-  }, [comment]);
 
   const handleOpen = () => {
     setOpenAlert(true);
@@ -83,7 +82,7 @@ export const MoreOptionsDropdown: FC<Props> = ({ comment, setEditOpen }) => {
         <DropdownMenuContent>
           {ownerItems}
           <MoreOptionsShareButtons
-            commentUrl={externalCommentUrl}
+            commentUrl={shareUrl}
             openToast={setOpenToast}
           />
         </DropdownMenuContent>

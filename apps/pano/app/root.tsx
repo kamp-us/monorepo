@@ -16,11 +16,18 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useLocation,
 } from "@remix-run/react";
 import { useEffect } from "react";
 import { authenticator } from "~/authenticator.server";
+import * as gtag from "~/features/analytics/gtag.client";
+import {
+  ConfigContextManager,
+  useConfigContext,
+} from "~/features/config/config-context";
 import type { User } from "~/models/user.server";
 import { getTheme, getUserById } from "~/models/user.server";
+import { env } from "~/utils/env.server";
 import { favicons } from "./features/assets/favicons";
 import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
@@ -60,16 +67,25 @@ export const loader = async ({ request }: LoaderArgs) => {
   )) as User | null;
 
   const user = sessionUser ? await getUserById(sessionUser.id) : null;
+
+  const gaTrackingID = env.GA_TRACKING_ID;
+  const baseUrl = env.BASE_URL;
+  const isDevelopment = env.NODE_ENV === "development";
   return json({
     user,
     theme: await getTheme(user?.id),
+    gaTrackingID,
+    baseUrl,
+    isDevelopment,
   });
 };
 
 const Document = () => {
-  const { theme: userTheme } = useLoaderData<typeof loader>();
+  const { theme: userTheme, gaTrackingID } = useLoaderData<typeof loader>();
   const clientStyle = useClientStyle();
   const { theme, setTheme } = useTheme();
+  const location = useLocation();
+  const { isDevelopment } = useConfigContext();
 
   useEffect(() => {
     if (userTheme) {
@@ -82,6 +98,12 @@ const Document = () => {
   useEffect(() => {
     clientStyle.reset();
   }, [clientStyle]);
+
+  useEffect(() => {
+    if (gaTrackingID) {
+      gtag.pageview(location.pathname, gaTrackingID);
+    }
+  }, [location, gaTrackingID]);
 
   return (
     <html lang="en">
@@ -107,6 +129,28 @@ const Document = () => {
         />
       </head>
       <body className={theme === "DARK" ? darkTheme : ""}>
+        {isDevelopment || !gaTrackingID ? null : (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingID}`}
+            />
+            <script
+              async
+              id="gtag-init"
+              dangerouslySetInnerHTML={{
+                __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaTrackingID}', {
+                  page_path: window.location.pathname,
+                });
+              `,
+              }}
+            />
+          </>
+        )}
         <Topnav />
         <ToastViewport />
         <Outlet />
@@ -119,23 +163,28 @@ const Document = () => {
 };
 
 export default function App() {
-  const { user } = useLoaderData<typeof loader>();
+  const { user, isDevelopment, baseUrl, gaTrackingID } =
+    useLoaderData<typeof loader>();
+
+  const config = { isDevelopment, baseUrl, gaTrackingID };
 
   return (
     <ThemeProvider>
       <ToastProvider swipeDirection="right">
-        <UserContextManager
-          user={
-            user && {
-              ...user,
-              createdAt: new Date(user.createdAt),
-              updatedAt: new Date(user.updatedAt),
-              deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
+        <ConfigContextManager config={config}>
+          <UserContextManager
+            user={
+              user && {
+                ...user,
+                createdAt: new Date(user.createdAt),
+                updatedAt: new Date(user.updatedAt),
+                deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
+              }
             }
-          }
-        >
-          <Document />
-        </UserContextManager>
+          >
+            <Document />
+          </UserContextManager>
+        </ConfigContextManager>
       </ToastProvider>
     </ThemeProvider>
   );
