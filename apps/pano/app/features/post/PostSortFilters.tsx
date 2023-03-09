@@ -6,7 +6,7 @@ const filters = [
   { url: "/posts/active", text: "en günceller" },
   { url: "/posts/hot", text: "en fazla yorum almışlar" },
   { url: "/posts/liked", text: "beğenilenler" },
-  { url: "/posts/mythreads", text: "başlıklarım" },
+  { url: "/posts/my-posts", text: "başlıklarım" },
 ];
 
 export const PostSortFilters = () => {

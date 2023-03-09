@@ -133,7 +133,7 @@ export const getMostUpvotedPosts = () => {
   });
 };
 
-export const getMythreads = (userID: string) => {
+export const getMyPosts = (userID: string) => {
   return prisma.post.findMany({
     where: { userID },
     include: {
