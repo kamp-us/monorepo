@@ -15,7 +15,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     await deletePost(postID);
-    return redirect("/");
+    return redirect(request.headers.get("Referer") ?? "/");
   } catch (e) {
     return json(e, { status: 500 });
   }

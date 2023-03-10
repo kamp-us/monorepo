@@ -5,7 +5,7 @@ const filters = [
   { url: "/", text: "hepsi" },
   { url: "/posts/active", text: "en günceller" },
   { url: "/posts/hot", text: "en fazla yorum almışlar" },
-  { url: "/posts/liked", text: "beğenilenler" },
+  { url: "/posts/liked", text: "en beğenilenler" },
   { url: "/posts/my-posts", text: "başlıklarım" },
 ];
 
