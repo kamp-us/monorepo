@@ -99,7 +99,6 @@ export const CommentItem: FC<CommentProps> = ({
         tabIndex={0}
         css={{
           flexDirection: "column",
-          gap: 20,
           transition: "background-color 0.3s",
           "&:target": {
             backgroundColor: "$amber4",
