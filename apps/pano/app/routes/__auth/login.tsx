@@ -89,7 +89,7 @@ export const Login = () => {
           </GappedBox>
         </Form>
         <Form method="post" action="/api/auth/discord" noValidate>
-          <Button>Login with Discord</Button>
+          <Button>Discord ile giriş yap</Button>
         </Form>
         <SmallLink to="/login-form">Şifreyle giriş yapmak için tıkla</SmallLink>
       </GappedBox>
