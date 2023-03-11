@@ -36,7 +36,7 @@ export class KampusAuthenticator<
     );
   }
 
-  public authenticate(name: TKey, request: Request, options: any) {
+  public authenticate(name: TKey, request: Request, options?: any) {
     return this.authenticator.authenticate(name, request, options);
   }
 
