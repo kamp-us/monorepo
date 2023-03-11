@@ -1,5 +1,6 @@
 import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
+import { Timeframe } from "~/models/post.server";
 import type { User } from "~/models/user.server";
 
 const DEFAULT_REDIRECT = "/";
@@ -122,4 +123,25 @@ export function getPostLink(post: { slug: string; id: string }) {
 export function getSitePostsLink(post: { site: string }) {
   const postUrl = `/site/${post.site}`;
   return postUrl;
+}
+
+export function getStartDate(timeframe: Timeframe) {
+  const now = new Date();
+  switch (timeframe) {
+    case "now":
+      // in 5 minutes
+      return new Date(now.getTime() - 5 * 60 * 1000);
+    case "today":
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    case "week":
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
+    case "month":
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate() - 30);
+    case "year":
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate() - 365);
+    case "all":
+      return new Date(0);
+    default:
+      return new Date(0);
+  }
 }

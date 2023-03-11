@@ -4,6 +4,7 @@ import { prisma } from "~/db.server";
 import { getSitename } from "~/features/url/get-sitename";
 import type { Comment } from "~/models/comment.server";
 import { normalizeComment } from "~/models/comment.server";
+import { getStartDate } from "~/utils";
 
 const selectPostWithOwner = Prisma.validator<Prisma.PostArgs>()({
   include: {
@@ -99,11 +100,17 @@ export const getActivePosts = async () => {
   return activePosts;
 };
 
-export const getMostCommentedPosts = () => {
+export type Timeframe = "now" | "today" | "week" | "month" | "year" | "all";
+export const getMostCommentedPosts = (timeframe: Timeframe) => {
   return prisma.post.findMany({
     orderBy: {
       comments: {
         _count: "desc",
+      },
+    },
+    where: {
+      createdAt: {
+        gte: getStartDate(timeframe),
       },
     },
     include: {

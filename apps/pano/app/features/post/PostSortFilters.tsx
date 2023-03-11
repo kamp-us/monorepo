@@ -1,5 +1,6 @@
 import { GappedBox, SmallLink } from "@kampus/ui";
 import { useLocation } from "@remix-run/react";
+import { PopularPostsTimeframeFilters } from "./PopularPostsTimeframeFilters";
 
 const filters = [
   { url: "/", text: "hepsi" },
@@ -11,12 +12,36 @@ const filters = [
 
 export const PostSortFilters = () => {
   const location = useLocation();
+
+  const isUrlActive = (url: string) => location.pathname === url;
   const paintIfActive = (url: string) =>
-    location.pathname === url ? "$amber11" : "none";
+    isUrlActive(url) ? "$amber11" : "none";
 
   return (
-    <GappedBox>
+    <GappedBox
+      style={{
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
       {filters.map(({ url, text }) => {
+        if (isUrlActive(url) && url === "/posts/hot") {
+          return (
+            <GappedBox
+              key={url}
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <SmallLink to={url} css={{ color: paintIfActive(url) }}>
+                {text}
+              </SmallLink>
+              <PopularPostsTimeframeFilters />
+            </GappedBox>
+          );
+        }
+
         return (
           <SmallLink key={url} to={url} css={{ color: paintIfActive(url) }}>
             {text}
