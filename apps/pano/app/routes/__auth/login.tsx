@@ -88,6 +88,9 @@ export const Login = () => {
             <input type="hidden" name="redirectTo" value={redirectTo} />
           </GappedBox>
         </Form>
+        <Form method="post" action="/api/auth/discord" noValidate>
+          <Button>Login with Discord</Button>
+        </Form>
         <SmallLink to="/login-form">Şifreyle giriş yapmak için tıkla</SmallLink>
       </GappedBox>
     </CenteredContainer>

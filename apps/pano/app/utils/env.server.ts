@@ -15,4 +15,6 @@ export const env = parseEnv(process.env, {
   SEND_IN_BLUE_API_KEY: z.string().optional(),
   GA_TRACKING_ID: z.string().optional(),
   BASE_URL: z.string().url(),
+  DISCORD_CLIENT_ID: z.string(),
+  DISCORD_CLIENT_SECRET: z.string(),
 });
