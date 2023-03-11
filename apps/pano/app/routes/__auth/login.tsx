@@ -7,7 +7,9 @@ import {
   Input,
   InternalLink,
   Label,
+  Separator,
   SmallLink,
+  Text,
 } from "@kampus/ui";
 import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
@@ -88,9 +90,16 @@ export const Login = () => {
             <input type="hidden" name="redirectTo" value={redirectTo} />
           </GappedBox>
         </Form>
-        <Form method="post" action="/api/auth/discord" noValidate>
-          <Button>Discord ile giriş yap</Button>
-        </Form>
+
+        <Text size="1" css={{ margin: "auto" }}>
+          ya da
+        </Text>
+        <Separator css={{ marginBottom: 4 }} />
+        <GappedBox>
+          <Form method="post" action="/api/auth/discord" noValidate>
+            <Button size="2">Discord ile giriş yap</Button>
+          </Form>
+        </GappedBox>
         <SmallLink to="/login-form">Şifreyle giriş yapmak için tıkla</SmallLink>
       </GappedBox>
     </CenteredContainer>
