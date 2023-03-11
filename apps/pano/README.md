@@ -12,7 +12,7 @@ created with remix.run
 cp .env.example .env
 ```
 
-- Then, make sure you have set `DISCORD_CLIENT_ID` and `DISCORD_CLIENT_SECRET` variables inside `.env` on your local. (refer to [discord oauth docs](https://discord.com/developers/docs/getting-started))
+- _`(Optional for discord authentication)`_ Then, make sure you have set `DISCORD_CLIENT_ID` and `DISCORD_CLIENT_SECRET` variables inside `.env` on your local. (refer to [discord oauth docs](https://discord.com/developers/docs/getting-started))
 
 - Start the Application and Postgres Database in [Docker](https://www.docker.com/get-started) and keep it running:
 
