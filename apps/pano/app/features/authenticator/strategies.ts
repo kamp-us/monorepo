@@ -99,8 +99,8 @@ export const strategies = {
   ),
   discord: new DiscordStrategy(
     {
-      clientID: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+      clientID: env.DISCORD_CLIENT_ID ?? "",
+      clientSecret: env.DISCORD_CLIENT_SECRET ?? "",
       callbackURL: `${env.BASE_URL}/api/auth/discord/callback`,
       scope: ["identify", "email"],
     },
