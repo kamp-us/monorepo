@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ExternalLink,
   Form,
   GappedBox,
   SmallLink,
@@ -79,6 +80,29 @@ export const CommentItem: FC<CommentProps> = ({
 
   const formRef = useRef<HTMLFormElement>(null);
 
+  const urlify = (content: string) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const splitted = content.split(urlRegex);
+
+    const urlified = splitted.map((part) => {
+      if (part.match(urlRegex)) {
+        return (
+          <ExternalLink
+            key={part}
+            href={part}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            {part}
+          </ExternalLink>
+        );
+      }
+      return part;
+    });
+
+    return urlified;
+  };
+
   useEffect(() => {
     if (!isCommenting && formRef.current) {
       setOpen(false);
@@ -140,7 +164,7 @@ export const CommentItem: FC<CommentProps> = ({
               lineHeight="2"
               css={{ color: "$gray12", whiteSpace: "break-spaces" }}
             >
-              {comment.content}
+              {urlify(comment.content)}
             </Text>
           )}
         </Box>
