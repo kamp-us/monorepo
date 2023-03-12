@@ -1,0 +1,34 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+input CreatePostInput {
+  title: String!
+  url: String!
+  content: String
+  userID: String!
+}
+
+input GetPostInput {
+  slug: String!
+  id: String!
+}
+
+type Post {
+  ID: ID!
+  title: String!
+  url: String!
+  content: String
+  slug: String!
+  userID: String!
+}
+
+type Query {
+  post(input: GetPostInput): Post!
+  posts(): [Post!]
+}
+
+type Mutation {
+  createPost(input: CreatePostInput): Post
+}
