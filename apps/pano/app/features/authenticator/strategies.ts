@@ -91,7 +91,7 @@ export const strategies = {
         });
       }
 
-      if (!user) throw new AuthorizationError("kullanici bulunamadi");
+      if (!user) throw new AuthorizationError("kullanıcı bulunamadı.");
 
       // Returns the user.
       return user;
@@ -117,7 +117,7 @@ export const strategies = {
         });
       }
 
-      if (!user) throw new AuthorizationError("kullanici bulunamadi");
+      if (!user) throw new AuthorizationError("kullanıcı bulunamadı.");
       return user;
     }
   ),
