@@ -1,5 +1,7 @@
 import { createElement } from "react";
 import { AuthorizationError } from "remix-auth";
+import type { DiscordProfile, PartialDiscordGuild } from "remix-auth-discord";
+import { DiscordStrategy } from "remix-auth-discord";
 import { FormStrategy } from "remix-auth-form";
 import { OTPStrategy } from "remix-auth-otp";
 import { prisma } from "~/db.server";
@@ -89,9 +91,33 @@ export const strategies = {
         });
       }
 
-      if (!user) throw new AuthorizationError("kullanici bulunamadi");
+      if (!user) throw new AuthorizationError("kullanıcı bulunamadı.");
 
       // Returns the user.
+      return user;
+    }
+  ),
+  discord: new DiscordStrategy(
+    {
+      clientID: env.DISCORD_CLIENT_ID ?? "",
+      clientSecret: env.DISCORD_CLIENT_SECRET ?? "",
+      callbackURL: `${env.BASE_URL}/api/auth/discord/callback`,
+      scope: ["identify", "email"],
+    },
+    async ({ accessToken, refreshToken, extraParams, profile }) => {
+      let user = await prisma.user.findFirst({
+        where: {
+          email: profile.__json.email!,
+        },
+      });
+
+      if (!user) {
+        user = await prisma.user.create({
+          data: { email: profile.__json.email!, username: profile.displayName },
+        });
+      }
+
+      if (!user) throw new AuthorizationError("kullanıcı bulunamadı.");
       return user;
     }
   ),
