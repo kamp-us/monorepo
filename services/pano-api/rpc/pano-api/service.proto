@@ -1,0 +1,189 @@
+syntax = "proto3";
+
+package kampus.panoapi;
+option go_package = "/rpc/pano-api";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+// import "google/protobuf/empty.proto";
+
+service PanoAPI {
+  // Post
+  rpc GetBatchPosts(GetBatchPostsRequest) returns (GetBatchPostsResponse);
+  rpc GetPosts(GetPostsRequest) returns (GetPostsResponse);
+
+  rpc CreatePost(CreatePostRequest) returns (CreatePostResponse);
+  rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
+  rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);  
+
+  // Comment
+  rpc GetBatchComments(GetBatchCommentsRequest) returns (GetBatchCommentsResponse);
+  rpc GetComments(GetCommentsRequest) returns (GetCommentsResponse);
+
+  rpc CreateComment(CreateCommentRequest) returns (CreateCommentResponse);
+  rpc UpdateComment(UpdateCommentRequest) returns (UpdateCommentResponse);
+  rpc DeleteComment(DeleteCommentRequest) returns (DeleteCommentResponse);  
+
+  // Upvote
+  rpc GetUpvotes(GetUpvotesRequest) returns (GetUpvotesResponse);
+
+  rpc CreateUpvote(CreateUpvoteRequest) returns (CreateUpvoteResponse);
+  rpc DeleteUpvote(DeleteUpvoteRequest) returns (DeleteUpvoteResponse);
+
+  rpc IsUpvoted(IsUpvotedRequest) returns (IsUpvotedResponse);
+}
+
+// Post Start
+message Post {
+  string id = 1;
+  string title = 2;
+  string url = 3;
+  string content = 4;
+  string slug = 5;
+  string user_id = 6;
+}
+
+message GetBatchPostsRequest {
+  repeated string ids = 1;
+}
+
+message GetBatchPostsResponse {
+  repeated Post posts = 1;
+}
+
+message GetPostsRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message GetPostsResponse {
+  repeated Post posts = 1;
+}
+
+message CreatePostRequest {
+  string title = 1;
+  string url = 2;
+  string content = 3;
+  string user_id = 4;
+}
+
+message CreatePostResponse {
+  Post post = 1;
+}
+
+message UpdatePostRequest {
+  string id = 1;
+  google.protobuf.StringValue title = 2;
+  google.protobuf.StringValue url = 3;
+  google.protobuf.StringValue content = 4;
+}
+
+message UpdatePostResponse {}
+
+message DeletePostRequest {
+  string id = 1;
+}
+
+message DeletePostResponse {}
+
+// Comment Start
+message Comment {
+  string id = 1;
+  string content = 2;
+  string user_id = 3;
+  string post_id = 4;
+  string parent_id = 5;
+
+  // upvotes?
+}
+
+message GetBatchCommentsRequest {
+  repeated string ids = 1; // required
+}
+
+message GetBatchCommentsResponse {
+  repeated Comment Comments = 1; 
+}
+
+message GetCommentsRequest {
+  int32 limit = 1;  // default( 10 )
+  int32 offset = 2; // default( 0 )
+}
+
+message GetCommentsResponse {
+  repeated Comment Comments = 1;
+}
+
+message CreateCommentRequest {
+  string content = 1; // required
+  string user_id = 2; // required
+  string post_id = 3;  // required
+  google.protobuf.StringValue parent_id = 4;
+  google.protobuf.Timestamp deletedAt = 5;
+}
+
+message CreateCommentResponse {
+  Comment Comment = 1;
+}
+
+message UpdateCommentRequest {
+  string id = 1; // required
+  string content = 2; // required
+}
+
+message UpdateCommentResponse {
+  Comment Comment = 1;
+}
+
+message DeleteCommentRequest {
+  string id = 1; // required
+}
+
+message DeleteCommentResponse {
+  Comment Comment = 1;
+}
+
+// Upvote Start
+message Upvote {
+  string id = 1;
+  string entity_id = 2;
+  string entity_type = 3;
+  string user_id = 4;
+}
+
+message GetUpvotesRequest {
+  string entity_id = 1;
+  string entity_type = 2;
+}
+
+message GetUpvotesResponse {
+  repeated Upvote upvotes = 1;
+}
+
+message CreateUpvoteRequest {
+  string entity_id = 1;
+  string entity_type = 2;
+  string user_id = 3;
+}
+
+message CreateUpvoteResponse {
+  Upvote upvote = 1;
+}
+
+message DeleteUpvoteRequest {
+  string entity_id = 1;
+  string entity_type = 2;
+  string user_id = 3;
+}
+
+message DeleteUpvoteResponse {}
+
+message IsUpvotedRequest {
+  string entity_id = 1;
+  string entity_type = 2;
+  string user_id = 3;
+}
+
+message IsUpvotedResponse {
+  bool is_upvoted = 1;
+}
