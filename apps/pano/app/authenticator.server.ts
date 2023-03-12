@@ -4,9 +4,13 @@ import { KampusAuthenticator, strategies } from "~/features/authenticator";
 import type { User } from "~/models/user.server";
 import { sessionStorage } from "~/session.server";
 
-export const Strategies: z.ZodType<keyof typeof strategies> = z.enum(
+const Strategies: z.ZodType<keyof typeof strategies> = z.enum(
   Object.keys(strategies) as any
 );
+
+export const validateProvider = (provider: string) => {
+  return Strategies.parse(provider);
+};
 
 export const authenticator = new KampusAuthenticator<
   // @ts-ignore
