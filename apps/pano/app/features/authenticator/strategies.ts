@@ -3,6 +3,7 @@ import { AuthorizationError } from "remix-auth";
 import type { DiscordProfile, PartialDiscordGuild } from "remix-auth-discord";
 import { DiscordStrategy } from "remix-auth-discord";
 import { FormStrategy } from "remix-auth-form";
+import { GitHubStrategy } from "remix-auth-github";
 import { OTPStrategy } from "remix-auth-otp";
 import { prisma } from "~/db.server";
 import { Registration } from "~/features/email/components/Registration";
@@ -114,6 +115,33 @@ export const strategies = {
       if (!user) {
         user = await prisma.user.create({
           data: { email: profile.__json.email!, username: profile.displayName },
+        });
+      }
+
+      if (!user) throw new AuthorizationError("kullanıcı bulunamadı.");
+      return user;
+    }
+  ),
+  github: new GitHubStrategy(
+    {
+      clientID: env.GITHUB_CLIENT_ID ?? "",
+      clientSecret: env.GITHUB_CLIENT_SECRET ?? "",
+      callbackURL: `${env.BASE_URL}/api/auth/github/callback`,
+    },
+    async ({ accessToken, extraParams, profile }) => {
+      // Get the user data from your DB or API using the tokens and profile
+      let user = await prisma.user.findFirst({
+        where: {
+          email: profile.emails[0].value,
+        },
+      });
+
+      if (!user) {
+        user = await prisma.user.create({
+          data: {
+            email: profile.emails[0].value,
+            username: profile.displayName,
+          },
         });
       }
 

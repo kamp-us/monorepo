@@ -99,6 +99,9 @@ export const Login = () => {
           <Form method="post" action="/api/auth/discord" noValidate>
             <Button size="2">Discord ile giriş yap</Button>
           </Form>
+          <Form method="post" action="/api/auth/github" noValidate>
+            <Button size="2">Github ile giriş yap</Button>
+          </Form>
         </GappedBox>
         <SmallLink to="/login-form">Şifreyle giriş yapmak için tıkla</SmallLink>
       </GappedBox>
