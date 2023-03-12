@@ -145,9 +145,6 @@ export const strategies = {
         });
       }
 
-      console.log("email :" + profile._json.email);
-      console.log("username :" + profile.displayName);
-
       if (!user) throw new AuthorizationError("kullanıcı bulunamadı.");
       return user;
     }
