@@ -106,20 +106,35 @@ export const strategies = {
       scope: ["identify", "email"],
     },
     async ({ accessToken, refreshToken, extraParams, profile }) => {
-      let user = await prisma.user.findFirst({
+      let identity = await prisma.socialIdentity.findFirst({
         where: {
-          email: profile.__json.email!,
+          provider: "DISCORD",
+          providerID: profile.id,
+        },
+        include: {
+          user: true,
         },
       });
 
-      if (!user) {
-        user = await prisma.user.create({
-          data: { email: profile.__json.email!, username: profile.displayName },
+      // Create identity if user exists but identity do not.
+      if (!identity) {
+        let user = await prisma.user.findFirst({
+          where: {
+            email: profile.__json.email!,
+          },
         });
-      }
 
-      if (!user) throw new AuthorizationError("kullanıcı bulunamadı.");
-      return user;
+        if (!user) throw new AuthorizationError("kullanıcı bulunamadı.");
+        await prisma.socialIdentity.create({
+          data: {
+            provider: "DISCORD",
+            providerID: profile.id,
+            userID: user.id,
+          },
+        });
+        return user;
+      }
+      return identity.user;
     }
   ),
   github: new GitHubStrategy(
@@ -130,23 +145,35 @@ export const strategies = {
     },
     async ({ accessToken, extraParams, profile }) => {
       // Get the user data from your DB or API using the tokens and profile
-      let user = await prisma.user.findFirst({
+      let identity = await prisma.socialIdentity.findFirst({
         where: {
-          email: profile.emails[0].value,
+          provider: "GITHUB",
+          providerID: profile.id,
+        },
+        include: {
+          user: true,
         },
       });
 
-      if (!user) {
-        user = await prisma.user.create({
-          data: {
+      // Create identity if user exists but identity do not.
+      if (!identity) {
+        let user = await prisma.user.findFirst({
+          where: {
             email: profile.emails[0].value,
-            username: profile.displayName,
           },
         });
-      }
 
-      if (!user) throw new AuthorizationError("kullanıcı bulunamadı.");
-      return user;
+        if (!user) throw new AuthorizationError("kullanıcı bulunamadı.");
+        await prisma.socialIdentity.create({
+          data: {
+            provider: "GITHUB",
+            providerID: profile.id,
+            userID: user.id,
+          },
+        });
+        return user;
+      }
+      return identity.user;
     }
   ),
 };
