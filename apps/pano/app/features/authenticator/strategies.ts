@@ -96,7 +96,7 @@ export const strategies = {
             },
           });
 
-          generatedUsername += Math.random() * 10000;
+          if (usernameConflict) generatedUsername += Math.random() * 10000;
         } while (usernameConflict);
         user = await prisma.user.create({
           data: { email, username: generatedUsername },
