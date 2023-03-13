@@ -27,11 +27,19 @@ export const Input = styled("input", {
   "&:-webkit-autofill": {
     boxShadow:
       "inset 0 0 0 1px $colors$amber6, inset 0 0 0 100px $colors$amber3",
+    transition: "background-color 600000s 0s, color 600000s 0s",
   },
 
   "&:-webkit-autofill::first-line": {
     fontFamily: "$inter",
     color: "$hiContrast",
+  },
+
+  "&:-webkit-autofill:focus": {
+    transition: "background-color 600000s 0s, color 600000s 0s",
+  },
+  "&[data-autocompleted]": {
+    backgroundColor: "transparent !important",
   },
 
   "&:focus": {
