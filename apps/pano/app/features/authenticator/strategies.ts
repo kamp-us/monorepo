@@ -118,7 +118,6 @@ export const strategies = {
 
       // Create identity if user exists but identity do not.
       if (!identity) {
-        console.log("identity does not exist");
         let user = await prisma.user.findFirst({
           where: {
             email: profile.__json.email!,
