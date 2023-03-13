@@ -97,10 +97,10 @@ export const strategies = {
           });
 
           generatedUsername += Math.random() * 10000;
-          user = await prisma.user.create({
-            data: { email, username: generatedUsername },
-          });
         } while (usernameConflict);
+        user = await prisma.user.create({
+          data: { email, username: generatedUsername },
+        });
       }
 
       if (!user) throw new AuthorizationError("kullanıcı bulunamadı.");
