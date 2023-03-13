@@ -88,15 +88,19 @@ export const strategies = {
 
       if (!user) {
         let generatedUsername = email.split("@")[0];
-        const usernameConflict = await prisma.user.findFirst({
-          where: {
-            username: generatedUsername,
-          },
-        });
-        if (usernameConflict) generatedUsername += Math.random() * 10000;
-        user = await prisma.user.create({
-          data: { email, username: generatedUsername },
-        });
+        let usernameConflict;
+        do {
+          usernameConflict = await prisma.user.findFirst({
+            where: {
+              username: generatedUsername,
+            },
+          });
+
+          generatedUsername += Math.random() * 10000;
+          user = await prisma.user.create({
+            data: { email, username: generatedUsername },
+          });
+        } while (usernameConflict);
       }
 
       if (!user) throw new AuthorizationError("kullanıcı bulunamadı.");
