@@ -88,12 +88,12 @@ export const strategies = {
 
       if (!user) {
         let generatedUsername = email.split("@")[0];
-        const userNameConflict = await prisma.user.findFirst({
+        const usernameConflict = await prisma.user.findFirst({
           where: {
             username: generatedUsername,
           },
         });
-        if (userNameConflict) generatedUsername += Math.random() * 10000;
+        if (usernameConflict) generatedUsername += Math.random() * 10000;
         user = await prisma.user.create({
           data: { email, username: generatedUsername },
         });
