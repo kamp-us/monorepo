@@ -10,13 +10,6 @@ body:
       description: A clear and concise description of what the bug is.
     validations:
       required: true
-  - type: input
-    id: browsers
-    attributes:
-      label: Browser(s)
-      description: List specific browser(s) the problem occurs on or leave blank if ALL browsers
-      placeholder: >
-        e.g. Safari 15, iOS 15.4, Chrome 90
   - type: textarea
     id: reproduce-steps
     attributes:
