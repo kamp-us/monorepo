@@ -6,7 +6,7 @@ type Props = {
   provider: Exclude<keyof typeof strategies, "otp" | "user-pass">;
 };
 
-const OAuthLoginForm: FC<Props> = ({ provider }) => {
+export const OAuthLoginForm: FC<Props> = ({ provider }) => {
   return (
     <Form method="post" action={`/api/auth/${provider}`} noValidate>
       <Button
@@ -23,5 +23,3 @@ const OAuthLoginForm: FC<Props> = ({ provider }) => {
     </Form>
   );
 };
-
-export default OAuthLoginForm;

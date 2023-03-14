@@ -5,7 +5,6 @@ import {
   Form,
   GappedBox,
   Input,
-  InternalLink,
   Label,
   Separator,
   SmallLink,
@@ -15,8 +14,7 @@ import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, useSearchParams } from "@remix-run/react";
 import { authenticator } from "~/authenticator.server";
-import { getAssetURL } from "~/features/assets/get-asset-url";
-import OAuthLoginForm from "~/features/oauth/OAuthLoginForm";
+import { OAuthLoginForm } from "~/features/oauth/OAuthLoginForm";
 import { commitSession, getSession } from "~/session.server";
 
 export const meta: MetaFunction = () => {
