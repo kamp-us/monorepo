@@ -103,7 +103,9 @@ export const Login = () => {
             <Button size="2">Github ile giriş yap</Button>
           </Form>
         </GappedBox>
-        <SmallLink to="/login-form">Şifreyle giriş yapmak için tıkla</SmallLink>
+        <SmallLink to="/login-form" css={{ width: "fit-content" }}>
+          Şifreyle giriş yapmak için tıkla
+        </SmallLink>
       </GappedBox>
     </CenteredContainer>
   );
