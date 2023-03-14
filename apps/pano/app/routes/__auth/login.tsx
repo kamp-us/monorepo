@@ -15,6 +15,8 @@ import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, useSearchParams } from "@remix-run/react";
 import { authenticator } from "~/authenticator.server";
+import { getAssetURL } from "~/features/assets/get-asset-url";
+import OAuthLoginForm from "~/features/oauth/OAuthLoginForm";
 import { commitSession, getSession } from "~/session.server";
 
 export const meta: MetaFunction = () => {
@@ -96,12 +98,8 @@ export const Login = () => {
         </Text>
         <Separator css={{ marginBottom: 4 }} />
         <GappedBox>
-          <Form method="post" action="/api/auth/discord" noValidate>
-            <Button size="2">Discord ile giriş yap</Button>
-          </Form>
-          <Form method="post" action="/api/auth/github" noValidate>
-            <Button size="2">Github ile giriş yap</Button>
-          </Form>
+          <OAuthLoginForm provider="discord" />
+          <OAuthLoginForm provider="github" />
         </GappedBox>
         <SmallLink to="/login-form" css={{ width: "fit-content" }}>
           Şifreyle giriş yapmak için tıkla
