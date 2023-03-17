@@ -23,6 +23,7 @@ import { EditCommentForm } from "./EditCommentForm";
 import { MoreOptionsDropdown } from "./MoreOptionsDropdown";
 import { useUserContext } from "../auth/user-context";
 import { CommentUpvoteButton } from "../upvote/UpvoteButton";
+import { z } from 'zod';
 
 type CommentProps = {
   comment: Comment;
@@ -83,9 +84,10 @@ export const CommentItem: FC<CommentProps> = ({
   const urlify = (content: string) => {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const splitted = content.split(urlRegex);
-
+    
     const urlified = splitted.map((part) => {
-      if (part.match(urlRegex)) {
+      const safeParseResponse = z.string().url().safeParse(part);
+      if (safeParseResponse.success) {
         return (
           <ExternalLink
             key={part}
