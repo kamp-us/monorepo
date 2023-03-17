@@ -3,7 +3,7 @@ package postgresql
 import (
 	"context"
 
-	"github.com/kamp-us/pano-api/internal/models"
+	"go.kamp.us/services/pano-api/internal/models"
 )
 
 func (b *PostgreSQLBackend) GetComments(ctx context.Context) ([]*models.Comment, error) {

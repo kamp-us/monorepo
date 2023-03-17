@@ -1,9 +1,9 @@
 package server
 
 import (
-	"github.com/twitchtv/twirp"
 	"context"
-	api "github.com/kamp-us/pano-api/rpc/pano-api"
+	"github.com/twitchtv/twirp"
+	api "go.kamp.us/services/pano-api/rpc/pano-api"
 )
 
 func (s *PanoAPIServer) IsUpvoted(ctx context.Context, req *api.IsUpvotedRequest) (*api.IsUpvotedResponse, error) {

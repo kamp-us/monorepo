@@ -1,10 +1,10 @@
 package server
 
 import (
-	"github.com/kamp-us/pano-api/server/helper"
-	"github.com/twitchtv/twirp"
 	"context"
-	api "github.com/kamp-us/pano-api/rpc/pano-api"
+	"github.com/twitchtv/twirp"
+	api "go.kamp.us/services/pano-api/rpc/pano-api"
+	"go.kamp.us/services/pano-api/server/helper"
 )
 
 func (s *PanoAPIServer) CreateUpvote(ctx context.Context, req *api.CreateUpvoteRequest) (*api.CreateUpvoteResponse, error) {

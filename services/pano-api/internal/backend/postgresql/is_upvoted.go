@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/kamp-us/pano-api/internal/models"
+	"go.kamp.us/services/pano-api/internal/models"
 	"gorm.io/gorm"
 )
 

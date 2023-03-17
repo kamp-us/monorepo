@@ -2,7 +2,7 @@ package postgresql
 
 import (
 	"context"
-	"github.com/kamp-us/pano-api/internal/models"
+	"go.kamp.us/services/pano-api/internal/models"
 )
 
 func (b *PostgreSQLBackend) GetUpvotes(ctx context.Context, entityId string, entityType string) ([]*models.Upvote, error) {
