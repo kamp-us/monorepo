@@ -1,17 +1,28 @@
 version: "3.9"
 
 services:
-  api-with-air:
-    image: cosmtrek/air
-    working_dir: /app
+  graphql:
+    build:
+      context: ../../
+      dockerfile: ./services/graphql/Dockerfile
     environment:
-      - PANOAPI_URI=http://pano-api-api-with-air-1:8080
+      - PORT=8080
+    ports:
+      - "8021:8080"
     networks:
       - kampus
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./.:/app
+
+  # api-with-air:
+  #   image: cosmtrek/air
+  #   working_dir: /app
+  #   environment:
+  #     - PANOAPI_URI=http://pano-api-api-with-air-1:8080
+  #   networks:
+  #     - kampus
+  #   ports:
+  #     - "8000:8000"
+  #   volumes:
+  #     - ./.:/app
 
 networks:
   kampus:

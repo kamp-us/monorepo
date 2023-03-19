@@ -1,18 +1,15 @@
-# Building the binary of the App
-FROM golang:latest AS builder
-RUN mkdir -p /app
+FROM golang:1.19-alpine AS builder
+
 WORKDIR /app
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /bin/graphql /app/cmd/graphql/main.go
 
-# Moving the binary to the 'final Image' to make it smaller
-FROM alpine
-RUN mkdir -p /app
-WORKDIR /app
-RUN apk add --no-cache nano git curl
-# COPY --from=builder /feedback-api/internal/configs/dev.env .env
-COPY --from=builder bin/graphql graphql
+ARG SERVICE_NAME
 
-CMD ["./graphql"]
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags "-s -w" -o /app/bin ./services/graphql/cmd/graphql/*.go
 
-EXPOSE 8000
+FROM scratch AS prod
+COPY --from=builder /app/bin bin
+
+EXPOSE 8080
+
+ENTRYPOINT ["./bin"]
