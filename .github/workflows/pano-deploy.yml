@@ -1,6 +1,8 @@
 name: Deploy Pano
 on:
   push:
+    paths:
+      - apps/pano/**
     branches:
       - main
       - dev
