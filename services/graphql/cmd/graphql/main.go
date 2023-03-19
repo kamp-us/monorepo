@@ -8,10 +8,10 @@ import (
 
 	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
-	"github.com/kamp-us/graphql/resolver"
-	"github.com/kamp-us/graphql/schema"
+	"go.kamp.us/services/graphql/resolver"
+	"go.kamp.us/services/graphql/schema"
 
-	pano_api "github.com/kamp-us/pano-api/rpc/pano-api"
+	pano_api "go.kamp.us/services/pano-api/rpc/pano-api"
 )
 
 func main() {

@@ -3,9 +3,9 @@ package server
 import (
 	"context"
 
-	api "github.com/kamp-us/pano-api/rpc/pano-api"
-	"github.com/kamp-us/pano-api/server/helper"
 	"github.com/twitchtv/twirp"
+	api "go.kamp.us/services/pano-api/rpc/pano-api"
+	"go.kamp.us/services/pano-api/server/helper"
 )
 
 func (s *PanoAPIServer) GetBatchPosts(ctx context.Context, req *api.GetBatchPostsRequest) (*api.GetBatchPostsResponse, error) {

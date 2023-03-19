@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/durmusrasit/kamp-us-html-metadata-parser/internal/backend"
-	"github.com/durmusrasit/kamp-us-html-metadata-parser/internal/server"
-	api "github.com/durmusrasit/kamp-us-html-metadata-parser/rpc/html-metadata-parser"
+	"go.kamp.us/services/html-metadata-parser/internal/backend"
+	"go.kamp.us/services/html-metadata-parser/internal/server"
+	api "go.kamp.us/services/html-metadata-parser/rpc/html-metadata-parser"
 )
 
 func main() {

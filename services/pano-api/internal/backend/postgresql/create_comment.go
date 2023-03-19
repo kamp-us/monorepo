@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/kamp-us/pano-api/internal/models"
+	"go.kamp.us/services/pano-api/internal/models"
 )
 
 func (b *PostgreSQLBackend) CreateComment(ctx context.Context, content string, postId string, userId string, parentId *string, deletedAt *time.Time) (*models.Comment, error) {

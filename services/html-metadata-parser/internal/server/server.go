@@ -3,10 +3,10 @@ package server
 import (
 	"context"
 
-	"github.com/durmusrasit/kamp-us-html-metadata-parser/internal/backend"
-	"github.com/durmusrasit/kamp-us-html-metadata-parser/internal/server/helper"
-	api "github.com/durmusrasit/kamp-us-html-metadata-parser/rpc/html-metadata-parser"
 	"github.com/twitchtv/twirp"
+	"go.kamp.us/services/html-metadata-parser/internal/backend"
+	"go.kamp.us/services/html-metadata-parser/internal/server/helper"
+	api "go.kamp.us/services/html-metadata-parser/rpc/html-metadata-parser"
 )
 
 type MetadataParserServer struct{ backend backend.Backender }

@@ -6,11 +6,11 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/kamp-us/pano-api/internal/backend/postgresql"
-	"github.com/kamp-us/pano-api/internal/db"
-	"github.com/kamp-us/pano-api/internal/models"
-	api "github.com/kamp-us/pano-api/rpc/pano-api"
-	"github.com/kamp-us/pano-api/server"
+	"go.kamp.us/services/pano-api/internal/backend/postgresql"
+	"go.kamp.us/services/pano-api/internal/db"
+	"go.kamp.us/services/pano-api/internal/models"
+	api "go.kamp.us/services/pano-api/rpc/pano-api"
+	"go.kamp.us/services/pano-api/server"
 )
 
 func main() {

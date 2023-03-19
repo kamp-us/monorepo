@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	api "github.com/durmusrasit/kamp-us-html-metadata-parser/rpc/html-metadata-parser"
+	api "go.kamp.us/services/html-metadata-parser/rpc/html-metadata-parser"
 )
 
 func main() {

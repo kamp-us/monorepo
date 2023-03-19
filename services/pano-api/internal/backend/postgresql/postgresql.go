@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/gosimple/slug"
-	"github.com/kamp-us/pano-api/internal/backend"
-	"github.com/kamp-us/pano-api/internal/models"
+	"go.kamp.us/services/pano-api/internal/backend"
+	"go.kamp.us/services/pano-api/internal/models"
 	"gorm.io/gorm"
 )
 

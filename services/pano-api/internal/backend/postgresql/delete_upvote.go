@@ -2,7 +2,7 @@ package postgresql
 
 import (
 	"context"
-	"github.com/kamp-us/pano-api/internal/models"
+	"go.kamp.us/services/pano-api/internal/models"
 )
 
 func (b *PostgreSQLBackend) DeleteUpvote(ctx context.Context, entityId string, entityType string, userId string) error {
@@ -11,7 +11,7 @@ func (b *PostgreSQLBackend) DeleteUpvote(ctx context.Context, entityId string, e
 	if result.Error != nil {
 		return result.Error
 	}
-	
+
 	result = b.DB.Delete(&upvote)
 	if result.Error != nil {
 		return result.Error

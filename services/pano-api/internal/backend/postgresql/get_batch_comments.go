@@ -3,7 +3,7 @@ package postgresql
 import (
 	"context"
 
-	"github.com/kamp-us/pano-api/internal/models"
+	"go.kamp.us/services/pano-api/internal/models"
 )
 
 // TODO: why do we return array of pointers?

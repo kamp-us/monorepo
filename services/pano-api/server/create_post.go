@@ -3,10 +3,10 @@ package server
 import (
 	"context"
 
-	"github.com/kamp-us/pano-api/internal/models"
-	api "github.com/kamp-us/pano-api/rpc/pano-api"
-	"github.com/kamp-us/pano-api/server/helper"
 	"github.com/twitchtv/twirp"
+	"go.kamp.us/services/pano-api/internal/models"
+	api "go.kamp.us/services/pano-api/rpc/pano-api"
+	"go.kamp.us/services/pano-api/server/helper"
 )
 
 func (s *PanoAPIServer) CreatePost(ctx context.Context, req *api.CreatePostRequest) (*api.CreatePostResponse, error) {

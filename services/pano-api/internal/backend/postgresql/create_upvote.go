@@ -2,14 +2,14 @@ package postgresql
 
 import (
 	"context"
-	"github.com/kamp-us/pano-api/internal/models"
+	"go.kamp.us/services/pano-api/internal/models"
 )
 
 func (b *PostgreSQLBackend) CreateUpvote(ctx context.Context, entityId string, entityType string, userId string) (*models.Upvote, error) {
 	upvote := models.Upvote{
-		EntityID: entityId,
+		EntityID:   entityId,
 		EntityType: entityType,
-		UserID: userId,
+		UserID:     userId,
 	}
 
 	result := b.DB.Create(&upvote)
