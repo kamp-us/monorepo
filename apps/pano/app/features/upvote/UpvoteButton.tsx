@@ -1,5 +1,6 @@
 import { Box, GappedBox, OldButton, styled, Text } from "@kampus/ui";
 import { TriangleUpIcon } from "@radix-ui/react-icons";
+import { NavigateFunction, useNavigate } from "@remix-run/react";
 import type { FC } from "react";
 
 type UpvoteProps = {
@@ -9,14 +10,22 @@ type UpvoteProps = {
   disabled?: boolean;
 };
 
+const navigateHandler = (disabled: boolean, navigate: NavigateFunction) => {
+  if (disabled) {
+    navigate("/login");
+  }
+};
+
 export const UpvoteButton: FC<UpvoteProps> = ({
   isUpvoted,
   upvoteCount,
   isVoting = false,
   disabled = false,
 }) => {
+  const navigate = useNavigate();
   return (
     <OldButton
+      onClick={() => navigateHandler(disabled, navigate)}
       color="transparent"
       title={`${upvoteCount} beğeni`}
       css={{
@@ -26,7 +35,6 @@ export const UpvoteButton: FC<UpvoteProps> = ({
         flexDirection: "column",
       }}
       type="submit"
-      disabled={disabled}
     >
       <Triangle
         css={{
@@ -49,8 +57,10 @@ export const CommentUpvoteButton: FC<UpvoteProps> = ({
   isVoting = false,
   disabled = false,
 }) => {
+  const navigate = useNavigate();
   return (
     <OldButton
+      onClick={() => navigateHandler(disabled, navigate)}
       color="transparent"
       title={`${upvoteCount} beğeni`}
       css={{
@@ -61,7 +71,6 @@ export const CommentUpvoteButton: FC<UpvoteProps> = ({
         padding: "2px 4px",
       }}
       type="submit"
-      disabled={disabled}
     >
       <GappedBox css={{ alignItems: "center", gap: 1 }}>
         <Triangle
