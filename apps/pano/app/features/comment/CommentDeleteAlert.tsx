@@ -32,7 +32,7 @@ const CommentDeleteAlert = ({ commentID, open, setOpen }: AlertDialogProps) => {
         </AlertDialogDescription>
         <GappedBox css={{ justifyContent: "flex-end" }}>
           <AlertDialogCancel asChild onClick={() => setOpen(false)}>
-            <Button variant="green" css={{ marginRight: 25 }}>
+            <Button variant="gray" css={{ marginRight: 25 }}>
               Hayır
             </Button>
           </AlertDialogCancel>
