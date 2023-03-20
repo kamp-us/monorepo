@@ -6,24 +6,39 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/graph-gophers/graphql-go"
-	"github.com/graph-gophers/graphql-go/relay"
-	"go.kamp.us/services/graphql/resolver"
-	"go.kamp.us/services/graphql/schema"
+	// "os"
 
-	pano_api "go.kamp.us/services/pano-api/rpc/pano-api"
+	graphql "github.com/graph-gophers/graphql-go"
+	"github.com/graph-gophers/graphql-go/relay"
+	// "go.kamp.us/services/graphql/resolver"
+	// "go.kamp.us/services/graphql/schema"
+	// pano_api "go.kamp.us/services/pano-api/rpc/pano-api"
 )
 
+type query struct{}
+
+func (_ *query) Hello() string { return "Hello, world!" }
+
 func main() {
-	panoapiClient := pano_api.NewPanoAPIProtobufClient(os.Getenv("PANOAPI_URI"), &http.Client{})
+	// panoapiClient := pano_api.NewPanoAPIProtobufClient(os.Getenv("PANOAPI_URI"), &http.Client{})
 
-	clients := resolver.Clients{
-		PanoAPI: panoapiClient,
-	}
+	// clients := resolver.Clients{
+	// 	PanoAPI: panoapiClient,
+	// }
 
-	schema := graphql.MustParseSchema(schema.Schema, &resolver.Resolver{Clients: &clients}, graphql.UseStringDescriptions())
+	// schema := graphql.MustParseSchema(schema.Schema, &resolver.Resolver{Clients: &clients}, graphql.UseStringDescriptions())
+
+	s := `
+    type Query {
+      hello: String!
+    }
+  `
+	schema := graphql.MustParseSchema(s, &query{})
+
 	http.Handle("/graphql", &relay.Handler{Schema: schema})
 
-	fmt.Println("Listening to :8000")
-	log.Fatal(http.ListenAndServe(":8000", nil))
+	port := os.Getenv("PORT")
+
+	fmt.Println("Listening to", port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
