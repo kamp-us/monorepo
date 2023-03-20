@@ -16,29 +16,6 @@ permissions:
   contents: read
 
 jobs:
-  # lint:
-  #   name: ESLint
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Cancel Previous Runs
-  #       uses: styfle/cancel-workflow-action@0.11.0
-  #
-  #     - name: Checkout repo
-  #       uses: actions/checkout@v3
-  #
-  #     - name: Setup node
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 16
-  #
-  #     - name: Download deps
-  #       uses: bahmutov/npm-install@v1
-  #       with:
-  #         useLockFile: false
-  #
-  #     - name: Lint
-  #       run: npm run lint
-
   build:
     name: Build
     # only build/deploy main branch on pushes
@@ -50,13 +27,6 @@ jobs:
 
       - name: Checkout repo
         uses: actions/checkout@v3
-
-      # - name: Read app name
-      #   uses: SebRollen/toml-action@v1.0.2
-      #   id: app_name
-      #   with:
-      #     file: "fly.toml"
-      #     field: "app"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -112,13 +82,6 @@ jobs:
 
       - name: Checkout repo
         uses: actions/checkout@v3
-
-      # - name: Read app name
-      #   uses: SebRollen/toml-action@v1.0.2
-      #   id: app_name
-      #   with:
-      #     file: "fly.toml"
-      #     field: "app"
 
       - name: Deploy Dev
         if: ${{ github.ref == 'refs/heads/dev' }}

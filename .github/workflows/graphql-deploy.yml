@@ -25,17 +25,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # - name: Read app name
-      #   uses: SebRollen/toml-action@v1.0.2
-      #   id: app_name
-      #   with:
-      #     file: "fly.toml"
-      #     field: "app"
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # Setup cache
       - name: Cache Docker layers
         uses: actions/cache@v3
         with:
@@ -86,13 +78,6 @@ jobs:
 
       - name: Checkout repo
         uses: actions/checkout@v3
-
-      # - name: Read app name
-      #   uses: SebRollen/toml-action@v1.0.2
-      #   id: app_name
-      #   with:
-      #     file: "fly.toml"
-      #     field: "app"
 
       - name: Deploy Dev
         if: ${{ github.ref == 'refs/heads/dev' }}
