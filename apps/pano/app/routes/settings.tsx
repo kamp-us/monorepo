@@ -91,7 +91,7 @@ export const action: ActionFunction = async ({ request }) => {
         errors: {
           formErrors: [],
           fieldErrors: {
-            newPassword: ["Parola guncellenemedi"],
+            newPassword: ["Parola güncellenemedi"],
           },
         },
       });
@@ -105,7 +105,7 @@ export const action: ActionFunction = async ({ request }) => {
       errors: {
         formErrors: [],
         fieldErrors: {
-          email: ["Bu email adresi kullanilamaz"],
+          email: ["Bu email adresi kullanılamaz"],
         },
       },
     });
@@ -117,7 +117,7 @@ export const action: ActionFunction = async ({ request }) => {
       errors: {
         formErrors: [],
         fieldErrors: {
-          username: ["Bu kullanici adi kullanilamaz"],
+          username: ["Bu kullanıcı adı kullanılamaz"],
         },
       },
     });
@@ -142,7 +142,7 @@ const Settings = () => {
       <GappedBox css={{ flexDirection: "column", mt: 20 }}>
         <Form method="post" css={{ width: "100%" }}>
           <GappedBox css={{ flexDirection: "column" }}>
-            <Label htmlFor="username">Kullanici adi</Label>
+            <Label htmlFor="username">Kullanıcı adı</Label>
             <Input
               id="username"
               name="username"
@@ -152,7 +152,7 @@ const Settings = () => {
             {fieldErrors?.username ? (
               <ValidationMessage error={fieldErrors.username[0]} />
             ) : null}
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">E-Posta</Label>
             <Input
               id="email"
               name="email"
@@ -172,13 +172,13 @@ const Settings = () => {
               value={loaderData.hasPassword}
             />
             <Box>
-              <Button type="submit">Guncelle</Button>
+              <Button type="submit">Güncelle</Button>
             </Box>
           </GappedBox>
         </Form>
         {successful && (
           <Text css={{ color: "$amber11" }}>
-            Ayarlar basariyla guncellendi.
+            Ayarlar başarıyla güncellendi.
           </Text>
         )}
       </GappedBox>
