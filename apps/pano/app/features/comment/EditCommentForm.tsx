@@ -1,4 +1,4 @@
-import { Button, Textarea } from "@kampus/ui";
+import { Button, GappedBox, Textarea } from "@kampus/ui";
 import { useFetcher } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect } from "react";
@@ -30,16 +30,20 @@ export const EditCommentForm: FC<EditCommentProps> = ({
 
   return (
     <fetcher.Form method="post" action="/commentEdit">
-      <Textarea
-        name="comment"
-        defaultValue={comment.content}
-        onChange={(event) => setEditedComment(event.target.value)}
-      />
-      <input type="hidden" name="json" value={JSON.stringify(variables)} />
-      <Button type="submit">
-        {isCommenting ? "Kaydediliyor..." : "Kaydet"}
-      </Button>
-      <Button onClick={() => setEditOpen(false)}>İptal</Button>
+      <GappedBox css={{ flexDirection: "column" }}>
+        <Textarea
+          name="comment"
+          defaultValue={comment.content}
+          onChange={(event) => setEditedComment(event.target.value)}
+        />
+        <input type="hidden" name="json" value={JSON.stringify(variables)} />
+        <GappedBox>
+          <Button type="submit">
+            {isCommenting ? "Kaydediliyor..." : "Kaydet"}
+          </Button>
+          <Button onClick={() => setEditOpen(false)}>İptal</Button>
+        </GappedBox>
+      </GappedBox>
     </fetcher.Form>
   );
 };
