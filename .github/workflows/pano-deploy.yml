@@ -3,6 +3,9 @@ on:
   push:
     paths:
       - apps/pano/**
+      - packages/kampus-ui/**
+      - packages/kampus-eslint-config/**
+      - packages/kampus-tsconfig/**
     branches:
       - main
       - dev
