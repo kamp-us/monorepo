@@ -29,10 +29,10 @@ func main() {
 	postgreSQLBackend := postgresql.NewPostgreSQLBackend(dbClient)
 
 	s := server.NewPanoAPIServer(postgreSQLBackend)
-	twirpHander := api.NewPanoAPIServer(s)
+	twirpHandler := api.NewPanoAPIServer(s)
 
 	mux := http.NewServeMux()
-	mux.Handle(twirpHander.PathPrefix(), twirpHander)
+	mux.Handle(twirpHandler.PathPrefix(), twirpHandler)
 	mux.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("OK"))
 		w.WriteHeader(http.StatusOK)
