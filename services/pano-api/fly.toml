@@ -6,9 +6,6 @@ kill_timeout = 5
 primary_region = "ams"
 processes = []
 
-[build]
-  dockerfile = "Dockerfile"
-
 [env]
 
 [experimental]
