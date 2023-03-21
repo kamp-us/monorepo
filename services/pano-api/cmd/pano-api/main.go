@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"os"
 
+	api "go.kamp.us/protos/pano-api"
 	"go.kamp.us/services/pano-api/internal/backend/postgresql"
 	"go.kamp.us/services/pano-api/internal/db"
 	"go.kamp.us/services/pano-api/internal/models"
-	api "go.kamp.us/services/pano-api/rpc/pano-api"
 	"go.kamp.us/services/pano-api/server"
 )
 

@@ -3,7 +3,7 @@ package resolver
 import (
 	"context"
 
-	pano_api "go.kamp.us/services/pano-api/rpc/pano-api"
+	pano "go.kamp.us/protos/pano-api"
 )
 
 type CreatePostInput struct {

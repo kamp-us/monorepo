@@ -5,7 +5,7 @@ import (
 
 	"github.com/twitchtv/twirp"
 	"go.kamp.us/services/pano-api/internal/models"
-	api "go.kamp.us/services/pano-api/rpc/pano-api"
+	api "go.kamp.us/protos/pano-api"
 	"go.kamp.us/services/pano-api/server/helper"
 )
 
