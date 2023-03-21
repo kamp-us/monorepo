@@ -1,0 +1,13 @@
+{
+  "extends": "@kampus/tsconfig/react-library.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": ".",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  },
+  "include": ["./src"],
+  "exclude": ["dist", "build", "node_modules"]
+}

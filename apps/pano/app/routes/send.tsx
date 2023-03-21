@@ -10,8 +10,10 @@ import {
 } from "@kampus/ui";
 import type { ActionFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
+import { useSearchParams } from "@remix-run/react";
 import { useFetcher, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
+import { useEffect } from "react";
 import { requireUser } from "~/authenticator.server";
 import { createPost } from "~/models/post.server";
 import { getPostLink, validate, validateURL } from "~/utils";
@@ -81,6 +83,13 @@ const Send = () => {
     }
   };
 
+  const [searchParams] = useSearchParams();
+  const queryUrl = searchParams.get("url");
+
+  useEffect(() => {
+    if (queryUrl) fetchMetaTags(queryUrl);
+  }, []);
+
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>
       <fetcher.Form method="post">
@@ -90,6 +99,7 @@ const Send = () => {
             id="url"
             name="url"
             size="2"
+            defaultValue={queryUrl ?? ""}
             onPaste={(e) => {
               fetchMetaTags(e.clipboardData.getData("text"));
             }}
