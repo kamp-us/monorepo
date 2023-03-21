@@ -9,7 +9,7 @@ import (
 
 type PostgreSQLConfig struct {
 	Host     string
-	Port     int
+	Port     string
 	Username string
 	Password string
 	DbName   string
@@ -26,5 +26,5 @@ func NewPostgreSQLConnect(c PostgreSQLConfig) (*gorm.DB, error) {
 }
 
 func (c PostgreSQLConfig) ToConnectionString() string {
-	return fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", c.Host, c.Port, c.Username, c.Password, c.DbName)
+	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", c.Host, c.Port, c.Username, c.Password, c.DbName)
 }

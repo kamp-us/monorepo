@@ -16,7 +16,7 @@ import (
 func main() {
 	dbClient, err := db.NewPostgreSQLConnect(db.PostgreSQLConfig{
 		Host:     os.Getenv("POSTGRES_HOST"),
-		Port:     5432,
+		Port:     os.Getenv("POSTGRES_PORT"),
 		Username: os.Getenv("POSTGRES_USER"),
 		Password: os.Getenv("POSTGRES_PASSWORD"),
 		DbName:   os.Getenv("POSTGRES_DB"),
