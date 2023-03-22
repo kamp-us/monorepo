@@ -1,24 +1,40 @@
 version: "3.9"
 
 services:
-  api-with-air:
-    image: cosmtrek/air
-    working_dir: /app
+  graphql:
+    build:
+      context: ../../
+      dockerfile: ./services/pano-api/Dockerfile
     environment:
-      - POSTGRES_USER=pgtest
-      - POSTGRES_DB=pgtest
-      - POSTGRES_PASSWORD=pgtest
-      - POSTGRES_HOST=postgres
-    networks:
-      - kampus
+      - PORT=8080
+      - DATABASE_URL=postgres://pgtest:pgtest@postgres:5432/pgtest
     ports:
-      - "8080:8080"
-    volumes:
-      - ./.:/app
+      - "8110:8080"
     links:
       - postgres
     depends_on:
       - postgres
+    networks:
+      - kampus
+
+  #  api-with-air:
+  #    image: cosmtrek/air
+  #    working_dir: /app
+  #    environment:
+  #      - POSTGRES_USER=pgtest
+  #      - POSTGRES_DB=pgtest
+  #      - POSTGRES_PASSWORD=pgtest
+  #      - POSTGRES_HOST=postgres
+  #    networks:
+  #      - kampus
+  #    ports:
+  #      - "8080:8080"
+  #    volumes:
+  #      - ./.:/app
+  #    links:
+  #      - postgres
+  #    depends_on:
+  #      - postgres
 
   postgres:
     image: postgres:13.3-alpine

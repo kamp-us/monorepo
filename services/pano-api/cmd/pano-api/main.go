@@ -15,11 +15,7 @@ import (
 
 func main() {
 	dbClient, err := db.NewPostgreSQLConnect(db.PostgreSQLConfig{
-		Host:     os.Getenv("POSTGRES_HOST"),
-		Port:     5432,
-		Username: os.Getenv("POSTGRES_USER"),
-		Password: os.Getenv("POSTGRES_PASSWORD"),
-		DbName:   os.Getenv("POSTGRES_DB"),
+		DatabaseURL: os.Getenv("DATABASE_URL"),
 	})
 
 	if err != nil {
@@ -42,6 +38,7 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 	}))
 
-	fmt.Println("Listening to :8080")
-	http.ListenAndServe(":8080", mux)
+	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
+	fmt.Printf("Listening to %s\n", port)
+	http.ListenAndServe(port, mux)
 }
