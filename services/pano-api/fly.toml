@@ -1,6 +1,6 @@
 # fly.toml file generated for pano-api on 2023-03-21T16:48:16+03:00
 
-app = "pano-api"
+app = "pano-api-dev"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "ams"
