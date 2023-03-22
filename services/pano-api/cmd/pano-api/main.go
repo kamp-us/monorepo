@@ -38,6 +38,7 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 	}))
 
-	fmt.Println("Listening to :8080")
-	http.ListenAndServe(":8080", mux)
+	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
+	fmt.Printf("Listening to %s\n", port)
+	http.ListenAndServe(port, mux)
 }
