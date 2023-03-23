@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 	"github.com/twitchtv/twirp"
-	api "go.kamp.us/services/pano-api/rpc/pano-api"
+	api "go.kamp.us/protos/pano-api"
 )
 
 func (s *PanoAPIServer) DeleteUpvote(ctx context.Context, req *api.DeleteUpvoteRequest) (*api.DeleteUpvoteResponse, error) {

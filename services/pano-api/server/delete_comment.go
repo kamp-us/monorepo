@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/twitchtv/twirp"
-	api "go.kamp.us/services/pano-api/rpc/pano-api"
+	api "go.kamp.us/protos/pano-api"
 )
 
 func (s *PanoAPIServer) DeleteComment(ctx context.Context, req *api.DeleteCommentRequest) (*api.DeleteCommentResponse, error) {

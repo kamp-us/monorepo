@@ -12,7 +12,7 @@ import (
 	"github.com/graph-gophers/graphql-go/relay"
 	// "go.kamp.us/services/graphql/resolver"
 	// "go.kamp.us/services/graphql/schema"
-	// pano_api "go.kamp.us/services/pano-api/rpc/pano-api"
+	// pano "go.kamp.us/protos/pano-api"
 )
 
 type query struct{}
