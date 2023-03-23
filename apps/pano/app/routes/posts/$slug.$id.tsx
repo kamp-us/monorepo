@@ -24,6 +24,7 @@ import {
 } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import invariant from "tiny-invariant";
+import { z } from "zod";
 import { requireUser } from "~/authenticator.server";
 import { useUserContext } from "~/features/auth/user-context";
 import { CommentItem } from "~/features/comment/Comment";
@@ -32,7 +33,6 @@ import type { Comment } from "~/models/comment.server";
 import { createComment } from "~/models/comment.server";
 import type { Post } from "~/models/post.server";
 import { getPostBySlugAndId } from "~/models/post.server";
-import { validate } from "~/utils";
 
 interface VisualTree {
   [key: string]: {
@@ -119,25 +119,36 @@ const errorMessage = (
   );
 };
 
+const CommentSchema = z.object({
+  content: z.string().min(1),
+  commentID: z.string().optional(),
+});
+
+type CommentFields = z.infer<typeof CommentSchema>;
+
 export const action: ActionFunction = async ({ request, params }) => {
-  const formData = await request.formData();
-  const content = formData.get("content")?.toString();
-  const commentID = formData.get("commentID")?.toString();
   const user = await requireUser(request);
+  const formData = await request.formData();
+  const fields = Object.fromEntries(formData.entries()) as CommentFields;
+  const result = CommentSchema.safeParse(fields);
 
   invariant(params.slug, "postSlug is required");
   invariant(params.id, "postId is required");
 
-  if (!validate(content)) {
-    if (commentID) {
-      return errorMessage("comment", "Cevap kısmı boş bırakılamaz.", commentID);
+  if (!result.success) {
+    if (fields.commentID) {
+      return errorMessage(
+        "comment",
+        "Cevap kısmı boş bırakılamaz.",
+        fields.commentID
+      );
     } else {
       return errorMessage("post", "Yorum boş gönderilemez.", params.id);
     }
   }
 
   try {
-    await createComment(content.toString(), params.id, user.id, commentID);
+    await createComment(fields.content, params.id, user.id, fields.commentID);
     return null;
   } catch {
     return json<ActionData>(
