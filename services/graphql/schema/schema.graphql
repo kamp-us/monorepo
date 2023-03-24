@@ -3,16 +3,33 @@ schema {
   mutation: Mutation
 }
 
-input CreatePostInput {
-  title: String!
-  url: String!
-  content: String
-  userID: String!
+type Query {
+  pano: PanoQuery
 }
 
-input GetPostInput {
+# PanoQuery contains all the fields related to pano-api
+type PanoQuery {
+  post(input: PanoPostInput): Post
+  posts(input: PanoPostsInput): PanoPostsConnection
+}
+
+input PanoPostInput {
   slug: String!
   id: String!
+}
+
+input PanoPostsInput {
+  cursor: Cursor
+}
+
+type PanoPostsConnection {
+  edges: PanoPostsConnectionEdge
+  pageInfo: PageInfo
+}
+
+type PanoPostsConnectionEdge {
+  cursor: String
+  node: PanoPost
 }
 
 type Post {
@@ -24,11 +41,13 @@ type Post {
   userID: String!
 }
 
-type Query {
-  post(input: GetPostInput): Post!
-  posts(): [Post!]
-}
-
 type Mutation {
   createPost(input: CreatePostInput): Post
+}
+
+input CreatePostInput {
+  title: String!
+  url: String!
+  content: String
+  userID: String!
 }
