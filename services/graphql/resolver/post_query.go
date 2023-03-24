@@ -18,7 +18,12 @@ type CreatePostArgs struct {
 }
 
 func (q *Resolver) CreatePost(ctx context.Context, args *CreatePostArgs) (*postResolver, error) {
-	createdPost, err := q.Clients.PanoAPI.CreatePost(ctx, &pano_api.CreatePostRequest{Title: args.Input.Title, Url: args.Input.Url, Content: *args.Input.Content, UserId: args.Input.UserId})
+	createdPost, err := q.Clients.PanoAPI.CreatePost(ctx, &pano.CreatePostRequest{
+		Title:   args.Input.Title,
+		Url:     args.Input.Url,
+		Content: *args.Input.Content,
+		UserId:  args.Input.UserId,
+	})
 
 	if err != nil {
 		return nil, err
@@ -37,7 +42,7 @@ type GetPostArgs struct {
 }
 
 func (q *Resolver) Post(ctx context.Context, args *GetPostArgs) (*postResolver, error) {
-	response, err := q.Clients.PanoAPI.GetBatchPosts(ctx, &pano_api.GetBatchPostsRequest{Ids: []string{args.Input.Id}})
+	response, err := q.Clients.PanoAPI.GetBatchPosts(ctx, &pano.GetBatchPostsRequest{Ids: []string{args.Input.Id}})
 
 	if err != nil {
 		return nil, err
@@ -47,7 +52,7 @@ func (q *Resolver) Post(ctx context.Context, args *GetPostArgs) (*postResolver, 
 }
 
 func (q *Resolver) Posts(ctx context.Context) (*[]*postResolver, error) {
-	response, err := q.Clients.PanoAPI.GetPosts(ctx, &pano_api.GetPostsRequest{})
+	response, err := q.Clients.PanoAPI.GetPosts(ctx, &pano.GetPostsRequest{})
 
 	if err != nil {
 		return nil, err

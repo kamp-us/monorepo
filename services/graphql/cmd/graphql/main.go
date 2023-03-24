@@ -6,34 +6,25 @@ import (
 	"net/http"
 	"os"
 
-	// "os"
-
 	graphql "github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
-	// "go.kamp.us/services/graphql/resolver"
-	// "go.kamp.us/services/graphql/schema"
-	// pano "go.kamp.us/protos/pano-api"
+	"go.kamp.us/services/graphql/clients"
+	"go.kamp.us/services/graphql/resolver"
+	"go.kamp.us/services/graphql/schema"
 )
 
-type query struct{}
-
-func (_ *query) Hello() string { return "Hello, world!" }
-
 func main() {
-	// panoapiClient := pano_api.NewPanoAPIProtobufClient(os.Getenv("PANOAPI_URI"), &http.Client{})
+	// create the api clients
+	c := clients.NewClients(clients.ClientsArgs{
+		PanoAPI: &clients.ClientConfig{
+			URL: os.Getenv("PANO_API_URL"),
+		},
+	})
 
-	// clients := resolver.Clients{
-	// 	PanoAPI: panoapiClient,
-	// }
+	// create the root resolver
+	r := resolver.NewResolver(c)
 
-	// schema := graphql.MustParseSchema(schema.Schema, &resolver.Resolver{Clients: &clients}, graphql.UseStringDescriptions())
-
-	s := `
-    type Query {
-      hello: String!
-    }
-  `
-	schema := graphql.MustParseSchema(s, &query{})
+	schema := graphql.MustParseSchema(schema.Schema, r, graphql.UseStringDescriptions())
 
 	http.Handle("/graphql", &relay.Handler{Schema: schema})
 
