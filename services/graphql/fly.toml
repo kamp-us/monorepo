@@ -7,7 +7,7 @@ processes = []
 
 [env]
   PORT=8080
-  PANO_API_URL=http://pano-api-dev.internal
+  PANO_API_URL="http://pano-api-dev.internal"
 
 [experimental]
   auto_rollback = true
