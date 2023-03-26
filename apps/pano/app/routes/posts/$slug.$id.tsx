@@ -202,7 +202,7 @@ const SinglePost = () => {
           name="content"
           disabled={!user}
           rows={4}
-          onChange={(event) => setComment(event.target.value)}
+          onChange={(event) => setComment(event.target.value.trim())}
           value={user ? comment : "Yorum yazmak için giriş yapmış olmalısın."}
         />
         <GappedBox css={{ padding: "$1 0 $2", alignItems: "center", gap: 10 }}>
