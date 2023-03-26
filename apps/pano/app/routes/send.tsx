@@ -12,6 +12,7 @@ import type { ActionFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useFetcher, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
+import { z } from "zod";
 import { requireUser } from "~/authenticator.server";
 import { createPost } from "~/models/post.server";
 import { getPostLink, validate, validateURL } from "~/utils";
@@ -22,43 +23,31 @@ type ActionData = {
   };
 };
 
+const PostSchema = z.object({
+  url: z.string().url("Lütfen geçerli bir URL adresi girin."),
+  title: z.string().min(2, "Başlık en az iki harfli olmalıdır."),
+  content: z.string().min(1, "İçerik en az 1 harften oluşmalıdır."),
+});
+
+type PostFields = z.infer<typeof PostSchema>;
+
 export const action: ActionFunction = async ({ request }) => {
-  const formData = await request.formData();
-  const title = formData.get("title")?.toString();
-  const content = formData.get("content")?.toString();
-  const formUrl = formData.get("url")?.toString();
   const user = await requireUser(request);
+  const formData = await request.formData();
+  const fields = Object.fromEntries(formData.entries()) as PostFields;
+  const result = PostSchema.safeParse(fields);
 
-  if (!validate(title)) {
+  if (!result.success) {
     return json<ActionData>({
-      error: { message: "Başlık en az iki harfli olmalıdır." },
-    });
-  }
-
-  if (!validate(content) && !validate(formUrl)) {
-    return json<ActionData>({
-      error: {
-        message:
-          "En az 1 harften oluşacak içerik veya URL adresi eklenmelidir.",
-      },
+      error: { message: result.error.errors[0].message },
     });
   }
 
   let url = null;
-  if (validate(formUrl)) {
-    if (!validateURL(formUrl)) {
-      return json<ActionData>({
-        error: { message: "Lütfen geçerli bir URL adresi girin." },
-      });
-    } else {
-      url = normalizeUrl(formUrl as string);
-    }
-  }
-
-  let body = validate(content) ? content : null;
+  url = normalizeUrl(fields.url as string);
 
   try {
-    const post = await createPost(title, user.id, url, body);
+    const post = await createPost(fields.title, user.id, url, fields.content);
     // FIXME: getPostLink required PostWithCommentCount,
     // but createPost returns Post
     return redirect(getPostLink(post));
