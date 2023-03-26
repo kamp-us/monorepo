@@ -15,7 +15,7 @@ import normalizeUrl from "normalize-url";
 import { z } from "zod";
 import { requireUser } from "~/authenticator.server";
 import { createPost } from "~/models/post.server";
-import { getPostLink, validate, validateURL } from "~/utils";
+import { getPostLink, validateURL } from "~/utils";
 
 type ActionData = {
   error: {

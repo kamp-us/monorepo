@@ -16,11 +16,11 @@ import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
 import invariant from "tiny-invariant";
+import { z } from "zod";
 import { requireUser } from "~/authenticator.server";
 import { canUserEdit } from "~/features/auth/can-user-edit";
 import type { PostWithCommentCount } from "~/models/post.server";
 import { editPost, getPostById } from "~/models/post.server";
-import { validate, validateURL } from "~/utils";
 
 type LoaderData = {
   post: PostWithCommentCount;
@@ -31,6 +31,12 @@ type ActionData = {
     message: string;
   };
 };
+const PostSchema = z.object({
+  url: z.string().url("Lütfen geçerli bir URL adresi girin."),
+  title: z.string().min(2, "Başlık en az iki harfli olmalıdır."),
+  content: z.string().min(1, "İçerik en az 1 harften oluşmalıdır."),
+});
+type PostFields = z.infer<typeof PostSchema>;
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   if (!params.id) return null;
@@ -49,37 +55,17 @@ export const action: ActionFunction = async ({ request, params }) => {
   invariant(params.id, "Post id is required");
 
   const formData = await request.formData();
-  const title = formData.get("title")?.toString();
-  const content = formData.get("content")?.toString();
-  const formUrl = formData.get("url")?.toString();
+  const fields = Object.fromEntries(formData.entries()) as PostFields;
+  const result = PostSchema.safeParse(fields);
 
-  if (!validate(title)) {
+  if (!result.success) {
     return json<ActionData>({
-      error: { message: "Başlık en az iki harfli olmalıdır." },
-    });
-  }
-
-  if (!validate(content) && !validate(formUrl)) {
-    return json<ActionData>({
-      error: {
-        message:
-          "En az 1 harften oluşacak içerik veya URL adresi eklenmelidir.",
-      },
+      error: { message: result.error.errors[0].message },
     });
   }
 
   let url = null;
-  if (validate(formUrl)) {
-    if (!validateURL(formUrl)) {
-      return json<ActionData>({
-        error: { message: "Lütfen geçerli bir URL adresi girin." },
-      });
-    } else {
-      url = normalizeUrl(formUrl);
-    }
-  }
-
-  let body = validate(content) ? content : null;
+  url = normalizeUrl(fields.url as string);
 
   const user = await requireUser(request);
   const post = await getPostById(params.id);
@@ -89,7 +75,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   }
 
   try {
-    await editPost(params.id, title, url, body);
+    await editPost(params.id, fields.title, url, fields.content);
     return redirect("/");
   } catch {
     return json("Bir hata oluştu.", { status: 500 });
