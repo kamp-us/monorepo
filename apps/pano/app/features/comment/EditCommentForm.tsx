@@ -1,4 +1,4 @@
-import { Button, GappedBox, Textarea } from "@kampus/ui";
+import { Button, GappedBox, Textarea, ValidationMessage } from "@kampus/ui";
 import { useFetcher } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect } from "react";
@@ -15,16 +15,21 @@ export const EditCommentForm: FC<EditCommentProps> = ({
 }) => {
   const [editedComment, setEditedComment] = useState(comment.content);
   const fetcher = useFetcher();
+  const error = fetcher.data?.error;
+  console.log(fetcher);
   const isCommenting =
     fetcher.state === "submitting" || fetcher.state === "loading";
+
   const variables = {
     commentID: comment.id,
-    commentContent: editedComment,
+    commentContent: editedComment.trim(),
   };
 
   useEffect(() => {
-    if (fetcher.type === "done") {
-      setEditOpen(false);
+    if (!fetcher.data?.error) {
+      if (fetcher.type === "done") {
+        setEditOpen(false);
+      }
     }
   }, [fetcher.type, setEditOpen]);
 
@@ -42,6 +47,12 @@ export const EditCommentForm: FC<EditCommentProps> = ({
             {isCommenting ? "Kaydediliyor..." : "Kaydet"}
           </Button>
           <Button onClick={() => setEditOpen(false)}>İptal</Button>
+          {error && (
+            <ValidationMessage
+              error={error.message}
+              isSubmitting={isCommenting}
+            />
+          )}
         </GappedBox>
       </GappedBox>
     </fetcher.Form>
