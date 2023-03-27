@@ -22,6 +22,7 @@ func NewPostgreSQLBackend(db *gorm.DB) backend.Backender {
 func (b *PostgreSQLBackend) GetBatchPosts(ctx context.Context, ids []string) ([]*models.Post, error) {
 	var posts []*models.Post
 	result := b.DB.Find(&posts, ids)
+
 	if result.Error != nil {
 		return nil, result.Error
 	}
@@ -29,10 +30,11 @@ func (b *PostgreSQLBackend) GetBatchPosts(ctx context.Context, ids []string) ([]
 	return posts, nil
 }
 
-func (b *PostgreSQLBackend) GetPosts(ctx context.Context) ([]*models.Post, error) {
+func (b *PostgreSQLBackend) GetPosts(ctx context.Context, args models.GetPostsArgs) ([]*models.Post, error) {
 	var posts []*models.Post
-	result := b.DB.Find(&posts)
-	if result == nil {
+	result := b.DB.Limit(int(args.Limit)).Offset(int(args.Offset)).Find(&posts)
+
+	if result.Error != nil {
 		return nil, result.Error
 	}
 

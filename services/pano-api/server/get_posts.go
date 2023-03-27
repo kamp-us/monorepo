@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"go.kamp.us/services/pano-api/internal/models"
 
 	"github.com/twitchtv/twirp"
 	api "go.kamp.us/protos/pano-api"
@@ -9,7 +10,11 @@ import (
 )
 
 func (s *PanoAPIServer) GetPosts(ctx context.Context, req *api.GetPostsRequest) (*api.GetPostsResponse, error) {
-	posts, err := s.backend.GetPosts(ctx)
+	posts, err := s.backend.GetPosts(ctx, models.GetPostsArgs{
+		Limit:  req.Limit,
+		Offset: req.Offset,
+	})
+
 	if err != nil {
 		return nil, twirp.InternalErrorWith(err)
 	}
