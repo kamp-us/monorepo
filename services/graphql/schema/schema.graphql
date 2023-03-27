@@ -1,7 +1,8 @@
 schema {
   query: Query
-  mutation: Mutation
 }
+
+scalar Cursor
 
 type Query {
   pano: PanoQuery
@@ -9,7 +10,7 @@ type Query {
 
 # PanoQuery contains all the fields related to pano-api
 type PanoQuery {
-  post(input: PanoPostInput): Post
+  post(input: PanoPostInput): PanoPost
   posts(input: PanoPostsInput): PanoPostsConnection
 }
 
@@ -19,12 +20,11 @@ input PanoPostInput {
 }
 
 input PanoPostsInput {
-  cursor: Cursor
+  first: Int = 100
 }
 
 type PanoPostsConnection {
-  edges: PanoPostsConnectionEdge
-  pageInfo: PageInfo
+  edges: [PanoPostsConnectionEdge]
 }
 
 type PanoPostsConnectionEdge {
@@ -32,22 +32,11 @@ type PanoPostsConnectionEdge {
   node: PanoPost
 }
 
-type Post {
+type PanoPost {
   ID: ID!
   title: String!
   url: String!
   content: String
   slug: String!
-  userID: String!
-}
-
-type Mutation {
-  createPost(input: CreatePostInput): Post
-}
-
-input CreatePostInput {
-  title: String!
-  url: String!
-  content: String
   userID: String!
 }
