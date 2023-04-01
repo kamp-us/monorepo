@@ -6,20 +6,16 @@ import (
 	"net/http"
 	"os"
 
+	api "go.kamp.us/protos/pano-api"
 	"go.kamp.us/services/pano-api/internal/backend/postgresql"
 	"go.kamp.us/services/pano-api/internal/db"
 	"go.kamp.us/services/pano-api/internal/models"
-	api "go.kamp.us/services/pano-api/rpc/pano-api"
 	"go.kamp.us/services/pano-api/server"
 )
 
 func main() {
 	dbClient, err := db.NewPostgreSQLConnect(db.PostgreSQLConfig{
-		Host:     os.Getenv("POSTGRES_HOST"),
-		Port:     5432,
-		Username: os.Getenv("POSTGRES_USER"),
-		Password: os.Getenv("POSTGRES_PASSWORD"),
-		DbName:   os.Getenv("POSTGRES_DB"),
+		DatabaseURL: os.Getenv("DATABASE_URL"),
 	})
 
 	if err != nil {
@@ -33,15 +29,16 @@ func main() {
 	postgreSQLBackend := postgresql.NewPostgreSQLBackend(dbClient)
 
 	s := server.NewPanoAPIServer(postgreSQLBackend)
-	twirpHander := api.NewPanoAPIServer(s)
+	twirpHandler := api.NewPanoAPIServer(s)
 
 	mux := http.NewServeMux()
-	mux.Handle(twirpHander.PathPrefix(), twirpHander)
+	mux.Handle(twirpHandler.PathPrefix(), twirpHandler)
 	mux.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("OK"))
 		w.WriteHeader(http.StatusOK)
 	}))
 
-	fmt.Println("Listening to :8080")
-	http.ListenAndServe(":8080", mux)
+	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
+	fmt.Printf("Listening to %s\n", port)
+	http.ListenAndServe(port, mux)
 }

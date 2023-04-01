@@ -1,5 +1,10 @@
 package models
 
+type GetPostsArgs struct {
+	Limit  int32
+	Offset int32
+}
+
 type CreatePostArgs struct {
 	Title   string
 	Url     string

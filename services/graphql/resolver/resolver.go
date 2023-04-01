@@ -1,11 +1,21 @@
 package resolver
 
-import pano_api "go.kamp.us/services/pano-api/rpc/pano-api"
+import (
+	"context"
 
-type Clients struct {
-	PanoAPI pano_api.PanoAPI
-}
+	"go.kamp.us/services/graphql/clients"
+)
 
 type Resolver struct {
-	Clients *Clients
+	Clients *clients.Clients
+}
+
+func NewResolver(clients *clients.Clients) *Resolver {
+	return &Resolver{
+		Clients: clients,
+	}
+}
+
+func (r *Resolver) Pano(ctx context.Context) *PanoResolver {
+	return NewPanoResolver(r.Clients)
 }

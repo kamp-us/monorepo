@@ -5,7 +5,7 @@ import (
 
 	"github.com/golang/protobuf/ptypes/timestamp"
 	"go.kamp.us/services/pano-api/internal/models"
-	api "go.kamp.us/services/pano-api/rpc/pano-api"
+	api "go.kamp.us/protos/pano-api"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 

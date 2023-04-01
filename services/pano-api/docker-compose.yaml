@@ -1,24 +1,22 @@
 version: "3.9"
 
 services:
-  api-with-air:
-    image: cosmtrek/air
-    working_dir: /app
+  pano-api:
+    build:
+      context: ../../
+      dockerfile: ./services/pano-api/Dockerfile
     environment:
-      - POSTGRES_USER=pgtest
-      - POSTGRES_DB=pgtest
-      - POSTGRES_PASSWORD=pgtest
-      - POSTGRES_HOST=postgres
-    networks:
-      - kampus
+      - PORT=8080
+      - DATABASE_URL=postgres://pgtest:pgtest@postgres:5432/pgtest
     ports:
-      - "8080:8080"
-    volumes:
-      - ./.:/app
+      - "8110:8080"
     links:
       - postgres
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+    networks:
+      - kampus
 
   postgres:
     image: postgres:13.3-alpine
@@ -28,13 +26,11 @@ services:
       - POSTGRES_PASSWORD=pgtest
     networks:
       - kampus
-    ports:
-      - "5432:5432"
     healthcheck:
       test: pg_isready -U pgtest -d pgtest
-      interval: 10s
-      timeout: 3s
-      retries: 5
+      interval: 1s
+      timeout: 5s
+      retries: 10
 
   pgadmin:
     image: dpage/pgadmin4
@@ -54,25 +50,6 @@ services:
       driver: "none"
     volumes:
       - ./scripts/servers.json:/pgadmin4/servers.json
-
-  db-migrator:
-    image: migrate/migrate
-    command:
-      - -path
-      - /migrations/
-      - -database
-      - postgres://pgtest:pgtest@postgres:5432/pgtest?sslmode=disable
-      - up
-    networks:
-      - kampus
-    links:
-      - postgres
-    depends_on:
-      - postgres
-    volumes:
-      - ./db/migrations:/migrations
-    profiles:
-      - tools
 
 networks:
   kampus:
