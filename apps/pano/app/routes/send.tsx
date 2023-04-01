@@ -13,6 +13,7 @@ import { json, redirect } from "@remix-run/node";
 import { useFetcher, useLoaderData, useTransition } from "@remix-run/react";
 import parser from "html-metadata-parser";
 import normalizeUrl from "normalize-url";
+import { useEffect, useRef } from "react";
 import { requireUser } from "~/authenticator.server";
 import { createPost } from "~/models/post.server";
 import { getPostLink, validate, validateURL } from "~/utils";
@@ -97,7 +98,8 @@ const Send = () => {
   const fetcher = useFetcher();
   const meta = fetcher.data?.meta;
   const error = fetcher.data?.error;
-  const metaData = useLoaderData<typeof loader>();
+  const loaderData = useLoaderData<typeof loader>();
+  const titleRef = useRef<HTMLInputElement>(null);
 
   const fetchMetaTags = (url: string) => {
     if (validateURL(url)) {
@@ -106,6 +108,15 @@ const Send = () => {
       fetcher.submit(formData, { method: "post", action: "/api/parse-meta" });
     }
   };
+
+  useEffect(() => {
+    // Special case: if a meta title fetched using url query param,
+    // and a newer meta title value is being fetched, title input's
+    // value needs to be updated manually since default value
+    // comes populated on server-side therefore will not update.
+    if (loaderData.meta?.title && titleRef.current && meta?.title)
+      titleRef.current.value = meta?.title;
+  }, [meta?.title, loaderData.meta?.title]);
 
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>
@@ -116,7 +127,7 @@ const Send = () => {
             id="url"
             name="url"
             size="2"
-            defaultValue={metaData.url ?? ""}
+            defaultValue={loaderData.url ?? ""}
             onPaste={(e) => {
               fetchMetaTags(e.clipboardData.getData("text"));
             }}
@@ -126,10 +137,11 @@ const Send = () => {
           />
           <Label htmlFor="title">Başlık</Label>
           <Input
+            ref={titleRef}
             id="title"
             name="title"
             size="2"
-            defaultValue={meta?.title ?? metaData.meta?.title}
+            defaultValue={loaderData.meta?.title ?? meta?.title}
           />
           <Label htmlFor="content">İçerik</Label>
           <Textarea
