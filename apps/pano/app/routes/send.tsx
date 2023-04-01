@@ -113,7 +113,8 @@ const Send = () => {
     // Special case: if a meta title fetched using url query param,
     // and a newer meta title value is being fetched, title input's
     // value needs to be updated manually since default value
-    // comes populated on server-side therefore will not update.
+    // comes populated on server-side before the fetcher fetches
+    // meta title therefore will not update.
     if (loaderData.meta?.title && titleRef.current && meta?.title)
       titleRef.current.value = meta?.title;
   }, [meta?.title, loaderData.meta?.title]);
