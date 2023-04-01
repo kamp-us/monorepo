@@ -8,12 +8,11 @@ import {
   Textarea,
   ValidationMessage,
 } from "@kampus/ui";
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useFetcher, useLoaderData, useTransition } from "@remix-run/react";
 import parser from "html-metadata-parser";
 import normalizeUrl from "normalize-url";
-import { useEffect } from "react";
 import { requireUser } from "~/authenticator.server";
 import { createPost } from "~/models/post.server";
 import { getPostLink, validate, validateURL } from "~/utils";
@@ -24,22 +23,25 @@ type ActionData = {
   };
 };
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
   const urlParam = url.searchParams.get("url");
 
-  if (urlParam === null) return json({ meta: "", url: "", status: 200 });
   try {
-    const metaTags = await parser(urlParam);
+    const metaTags = await parser(urlParam ?? "");
     return json(
-      { url: urlParam, ...metaTags },
+      { error: "", url: urlParam, ...metaTags },
       {
         status: 200,
       }
     );
   } catch (error) {
     return json(
-      { error: "Linkten meta bilgileri alınamadı." },
+      {
+        error: "Linkten meta bilgileri alınamadı.",
+        url: urlParam,
+        meta: { title: "" },
+      },
       { status: 500 }
     );
   }
