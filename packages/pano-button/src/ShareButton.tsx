@@ -16,5 +16,5 @@ export const ShareButton: FC<Props> = ({ url }) => {
     window.open(shareUrl, "_blank");
   };
 
-  return <Button onClick={handleClick}>Share this on kamp-us pano</Button>;
+  return <Button onClick={handleClick}>Bunu Kamp.us Pano'da paylaş</Button>;
 };

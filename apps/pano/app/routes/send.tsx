@@ -8,10 +8,10 @@ import {
   Textarea,
   ValidationMessage,
 } from "@kampus/ui";
-import type { ActionFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useSearchParams } from "@remix-run/react";
-import { useFetcher, useTransition } from "@remix-run/react";
+import { useFetcher, useLoaderData, useTransition } from "@remix-run/react";
+import parser from "html-metadata-parser";
 import normalizeUrl from "normalize-url";
 import { useEffect } from "react";
 import { requireUser } from "~/authenticator.server";
@@ -22,6 +22,27 @@ type ActionData = {
   error: {
     message: string;
   };
+};
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const url = new URL(request.url);
+  const urlParam = url.searchParams.get("url");
+
+  if (urlParam === null) return json({ meta: "", url: "", status: 200 });
+  try {
+    const metaTags = await parser(urlParam);
+    return json(
+      { url: urlParam, ...metaTags },
+      {
+        status: 200,
+      }
+    );
+  } catch (error) {
+    return json(
+      { error: "Linkten meta bilgileri alınamadı." },
+      { status: 500 }
+    );
+  }
 };
 
 export const action: ActionFunction = async ({ request }) => {
@@ -74,6 +95,7 @@ const Send = () => {
   const fetcher = useFetcher();
   const meta = fetcher.data?.meta;
   const error = fetcher.data?.error;
+  const metaData = useLoaderData<typeof loader>();
 
   const fetchMetaTags = (url: string) => {
     if (validateURL(url)) {
@@ -82,13 +104,6 @@ const Send = () => {
       fetcher.submit(formData, { method: "post", action: "/api/parse-meta" });
     }
   };
-
-  const [searchParams] = useSearchParams();
-  const queryUrl = searchParams.get("url");
-
-  useEffect(() => {
-    if (queryUrl) fetchMetaTags(queryUrl);
-  }, []);
 
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>
@@ -99,7 +114,7 @@ const Send = () => {
             id="url"
             name="url"
             size="2"
-            defaultValue={queryUrl ?? ""}
+            defaultValue={metaData.url ?? ""}
             onPaste={(e) => {
               fetchMetaTags(e.clipboardData.getData("text"));
             }}
@@ -112,7 +127,7 @@ const Send = () => {
             id="title"
             name="title"
             size="2"
-            defaultValue={meta ? meta.title : ""}
+            defaultValue={meta?.title ?? metaData.meta?.title}
           />
           <Label htmlFor="content">İçerik</Label>
           <Textarea
