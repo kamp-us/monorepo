@@ -8,7 +8,7 @@ import {
   Timeago,
 } from "@kampus/ui";
 import type { SerializeFrom } from "@remix-run/node";
-import { useFetcher } from "@remix-run/react";
+import { Form, useFetcher } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
 import type { FC } from "react";
 import { useConfigContext } from "~/features/config/config-context";
@@ -80,10 +80,11 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
             isUpvoted={isUpvoted}
             upvoteCount={post.upvotes.length}
             isVoting={isLoading}
-            disabled={!user}
+            form={user ? undefined : "login-required"}
           />
           <input type="hidden" name="json" value={JSON.stringify(variables)} />
         </fetcher.Form>
+        <Form hidden id="login-required" action="/login"/>
         <GappedBox css={{ flexDirection: "column", width: "100%" }}>
           <GappedBox css={{ alignItems: "baseline" }}>
             {titleLink}

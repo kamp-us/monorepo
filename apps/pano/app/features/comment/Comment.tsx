@@ -117,7 +117,7 @@ export const CommentItem: FC<CommentProps> = ({
               isUpvoted={isUpvoted}
               upvoteCount={comment.upvotes.length}
               isVoting={isLoading}
-              disabled={!user}
+              form={user ? undefined : "login-required"}
             />
             <input
               type="hidden"
@@ -125,6 +125,7 @@ export const CommentItem: FC<CommentProps> = ({
               value={JSON.stringify(variables)}
             />
           </fetcher.Form>
+          <Form hidden id="login-required" action="/login"/>
           <MoreOptionsDropdown
             comment={comment}
             setEditOpen={setEditOpen}
