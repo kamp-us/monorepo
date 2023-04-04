@@ -2,9 +2,9 @@
 This document describes the process for running this application on your local computer.
 
 ## Getting started
-You'll need Volta to run the site.
+You'll need [Volta](https://volta.sh/) to run the site.
 
-Once you've installed Volta, open Terminal and run the following:
+Once you've installed [Volta](https://volta.sh/), open Terminal and run the following:
 ```console
 git clone https://github.com/kamp-us/monorepo.git
 cd monorepo
