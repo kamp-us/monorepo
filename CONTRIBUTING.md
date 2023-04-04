@@ -6,7 +6,7 @@ Read our Code of Conduct to keep our community approachable and respectable.
 In this guide you will get an overview of the contribution workflow from opening an issue, creating a PR, reviewing, and merging the PR.
 
 ## New contributor guide
-To get an overview of the project, read the README. Here are some resources to help you get started with open source contributions:
+To get an overview of the project, read the [README](./README.md). Here are some resources to help you get started with open source contributions:
 
 - Finding ways to contribute to open source on GitHub
 - Set up Git
@@ -30,7 +30,7 @@ Scan through our existing issues to find one that interests you. You can narrow 
 Once Desktop is set up, you can use it to fork the repo!
 - Using the command line:
   - Fork the repo so that you can make your changes without affecting the original project until you're ready to merge them.
-- Install Volta. For more information, see the development guide.
+- Install Volta and setup the project. For more information, see the [development guide](./DEVELOPMENT.md).
 - Create a working branch and start with your changes!
 
 ### Commit your update
