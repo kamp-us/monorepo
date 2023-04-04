@@ -7,7 +7,6 @@ type UpvoteProps = {
   upvoteCount: number;
   isVoting: boolean;
   disabled?: boolean;
-  form?: string;
 };
 
 export const UpvoteButton: FC<UpvoteProps> = ({
@@ -15,7 +14,6 @@ export const UpvoteButton: FC<UpvoteProps> = ({
   upvoteCount,
   isVoting = false,
   disabled = false,
-  form = undefined
 }) => {
   return (
     <OldButton
@@ -29,7 +27,6 @@ export const UpvoteButton: FC<UpvoteProps> = ({
       }}
       type="submit"
       disabled={disabled}
-      form={form}
     >
       <Triangle
         css={{
@@ -51,7 +48,6 @@ export const CommentUpvoteButton: FC<UpvoteProps> = ({
   upvoteCount,
   isVoting = false,
   disabled = false,
-  form = undefined
 }) => {
   return (
     <OldButton
@@ -66,7 +62,6 @@ export const CommentUpvoteButton: FC<UpvoteProps> = ({
       }}
       type="submit"
       disabled={disabled}
-      form={form}
     >
       <GappedBox css={{ alignItems: "center", gap: 1 }}>
         <Triangle
