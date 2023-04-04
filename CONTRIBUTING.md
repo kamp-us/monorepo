@@ -26,10 +26,10 @@ Scan through our existing issues to find one that interests you. You can narrow 
 
 - Fork the repository.
 - Using GitHub Desktop:
-  - Getting started with GitHub Desktop will guide you through setting up Desktop.
+  - [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/overview/getting-started-with-github-desktop) will guide you through setting up Desktop.
 Once Desktop is set up, you can use it to fork the repo!
 - Using the command line:
-  - Fork the repo so that you can make your changes without affecting the original project until you're ready to merge them.
+  - [Fork the repo](https://docs.github.com/en/get-started/quickstart/fork-a-repo#fork-an-example-repository) so that you can make your changes without affecting the original project until you're ready to merge them.
 - Install [Volta](https://volta.sh/) and setup the project. For more information, see the [development guide](./DEVELOPMENT.md).
 - Create a working branch and start with your changes!
 
