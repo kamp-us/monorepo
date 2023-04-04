@@ -17,7 +17,7 @@ docker-compose up -d
 npm run dev
 ```
 
-You should now have a running server! Visit localhost:3000 in your browser.
+You should now have a running server! Visit [localhost:3000](http://localhost:3000) in your browser.
 
 You can find user credentials in seed.ts
 
