@@ -1,6 +1,5 @@
 import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import invariant from "tiny-invariant";
 import { z } from "zod";
 import { editComment } from "~/models/comment.server";
 
@@ -8,6 +7,7 @@ const CommentSchema = z.object({
   commentID: z.string(),
   commentContent: z.string().min(1),
 });
+
 type ActionData = {
   error: {
     message: string;
@@ -32,9 +32,7 @@ type CommentFields = z.infer<typeof CommentSchema>;
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const jsonData = formData.get("json") as string | null;
-
-  invariant(jsonData, "Missing json data");
+  const jsonData = formData.get("json") as string;
 
   const parsedFields = JSON.parse(jsonData) as CommentFields;
   const result = CommentSchema.safeParse(parsedFields);

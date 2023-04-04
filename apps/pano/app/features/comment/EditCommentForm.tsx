@@ -16,7 +16,7 @@ export const EditCommentForm: FC<EditCommentProps> = ({
   const [editedComment, setEditedComment] = useState(comment.content);
   const fetcher = useFetcher();
   const error = fetcher.data?.error;
-  console.log(fetcher);
+
   const isCommenting =
     fetcher.state === "submitting" || fetcher.state === "loading";
 

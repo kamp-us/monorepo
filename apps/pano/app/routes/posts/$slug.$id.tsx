@@ -23,7 +23,6 @@ import {
   useTransition,
 } from "@remix-run/react";
 import { useEffect, useState } from "react";
-import invariant from "tiny-invariant";
 import { z } from "zod";
 import { requireUser } from "~/authenticator.server";
 import { useUserContext } from "~/features/auth/user-context";
@@ -102,7 +101,7 @@ type ActionData = {
 };
 
 const errorMessage = (
-  type: "comment" | "post",
+  type: "comment" | "post" | "params",
   message: string,
   id: string
 ) => {
@@ -110,7 +109,6 @@ const errorMessage = (
     {
       error: {
         [type]: { message, id },
-        [type === "comment" ? "post" : "comment"]: null,
       },
     },
     {
@@ -126,14 +124,22 @@ const CommentSchema = z.object({
 
 type CommentFields = z.infer<typeof CommentSchema>;
 
+const ParamsSchema = z.object({
+  slug: z.string().min(1, "Slug is required"),
+  id: z.string().min(1, "Id is required"),
+});
+
 export const action: ActionFunction = async ({ request, params }) => {
   const user = await requireUser(request);
   const formData = await request.formData();
   const fields = Object.fromEntries(formData.entries()) as CommentFields;
+  const paramsField = ParamsSchema.parse(params);
   const result = CommentSchema.safeParse(fields);
+  const paramsResult = ParamsSchema.safeParse(params);
 
-  invariant(params.slug, "postSlug is required");
-  invariant(params.id, "postId is required");
+  if (!paramsResult.success) {
+    return errorMessage("params", paramsResult.error.message, paramsField.id);
+  }
 
   if (!result.success) {
     if (fields.commentID) {
@@ -143,12 +149,17 @@ export const action: ActionFunction = async ({ request, params }) => {
         fields.commentID
       );
     } else {
-      return errorMessage("post", "Yorum boş gönderilemez.", params.id);
+      return errorMessage("post", "Yorum boş gönderilemez.", paramsField.id);
     }
   }
 
   try {
-    await createComment(fields.content, params.id, user.id, fields.commentID);
+    await createComment(
+      fields.content,
+      paramsField.id,
+      user.id,
+      fields.commentID
+    );
     return null;
   } catch {
     return json<ActionData>(
