@@ -12,7 +12,7 @@ type EditCommentProps = {
 };
 
 const commentSchema = z.object({
-  content: z.string().min(1, "Yorum alanı boş bırakılamaz."),
+  content: z.string().min(1, "Yorum boş gönderilemez."),
 });
 
 export const EditCommentForm: FC<EditCommentProps> = ({
