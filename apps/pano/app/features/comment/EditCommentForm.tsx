@@ -3,20 +3,23 @@ import { useFetcher } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { z } from "zod";
 import type { Comment } from "~/models/comment.server";
-import { validate } from "~/utils";
 
 type EditCommentProps = {
   comment: Comment;
   setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+const commentSchema = z.object({
+  content: z.string().min(1, "Yorum alanı boş bırakılamaz."),
+});
+
 export const EditCommentForm: FC<EditCommentProps> = ({
   comment,
   setEditOpen,
 }) => {
   const [editedComment, setEditedComment] = useState(comment.content);
-  const [error, setError] = useState("");
   const fetcher = useFetcher();
   const isCommenting =
     fetcher.state === "submitting" || fetcher.state === "loading";
@@ -25,23 +28,16 @@ export const EditCommentForm: FC<EditCommentProps> = ({
     commentContent: editedComment,
   };
 
+  const validationResult = commentSchema.safeParse({ content: editedComment });
+  const errorMessage = validationResult.success
+    ? undefined
+    : validationResult.error?.errors[0].message;
+
   useEffect(() => {
     if (fetcher.type === "done") {
       setEditOpen(false);
     }
   }, [fetcher.type, setEditOpen]);
-
-  const handleCommentChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const value = event.target.value;
-    if (validate(value)) {
-      setEditedComment(value);
-      setError("");
-    } else {
-      setError("Yorum boş gönderilemez.");
-    }
-  };
 
   return (
     <fetcher.Form method="post" action="/commentEdit">
@@ -49,16 +45,19 @@ export const EditCommentForm: FC<EditCommentProps> = ({
         <Textarea
           name="comment"
           defaultValue={comment.content}
-          onChange={handleCommentChange}
+          onChange={(event) => setEditedComment(event.target.value)}
         />
         <input type="hidden" name="json" value={JSON.stringify(variables)} />
         <GappedBox>
-          <Button type="submit" disabled={error ? true : false}>
+          <Button type="submit" disabled={!!errorMessage}>
             {isCommenting ? "Kaydediliyor..." : "Kaydet"}
           </Button>
           <Button onClick={() => setEditOpen(false)}>İptal</Button>
-          {error && (
-            <ValidationMessage error={error} isSubmitting={isCommenting} />
+          {errorMessage && (
+            <ValidationMessage
+              error={errorMessage}
+              isSubmitting={isCommenting}
+            />
           )}
         </GappedBox>
       </GappedBox>
