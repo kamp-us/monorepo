@@ -12,7 +12,7 @@ type EditCommentProps = {
 };
 
 const commentSchema = z.object({
-  content: z.string().min(1, "Yorum boş gönderilemez."),
+  content: z.string().trim().min(1, "Yorum boş gönderilemez."),
 });
 
 export const EditCommentForm: FC<EditCommentProps> = ({
@@ -30,7 +30,7 @@ export const EditCommentForm: FC<EditCommentProps> = ({
 
   const validationResult = commentSchema.safeParse({ content: editedComment });
   const errorMessage = validationResult.success
-    ? undefined
+    ? null
     : validationResult.error?.errors[0].message;
 
   useEffect(() => {
@@ -40,7 +40,14 @@ export const EditCommentForm: FC<EditCommentProps> = ({
   }, [fetcher.type, setEditOpen]);
 
   return (
-    <fetcher.Form method="post" action="/commentEdit">
+    <fetcher.Form
+      method="post"
+      action="/commentEdit"
+      onSubmit={(event) => {
+        event.preventDefault();
+        !errorMessage && fetcher.submit(event.currentTarget);
+      }}
+    >
       <GappedBox css={{ flexDirection: "column" }}>
         <Textarea
           name="comment"
