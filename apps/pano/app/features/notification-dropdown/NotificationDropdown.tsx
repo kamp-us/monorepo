@@ -25,41 +25,34 @@ const MenuLink = styled(Link, {
   textDecoration: "none",
 });
 
-interface Props {
-  user: User;
-}
+interface Props {}
 
 export const NotificationDropdown: FC<Props> = (props) => {
   const fetcher = useFetcher();
-
-  useEffect(() => {
-    console.log(fetcher);
-    if (fetcher.state === "idle" && fetcher.data == null) {
-      fetcher.load("/notifications/my-notifications");
-    }
-  }, [fetcher]);
 
   useEffect(() => {
     console.log(fetcher.data);
   }, [fetcher.data]);
 
   return (
-    <DropdownMenu>
-      <fetcher.Form method="get" action="/notification/my-notifications">
-        <DropdownMenuTrigger asChild>
-          <IconButton
-            color="transparent"
-            css={{
-              padding: 0,
-              borderRadius: "50%",
-              width: "auto",
-              height: "auto",
-            }}
-          >
-            <PlusIcon />
-          </IconButton>
-        </DropdownMenuTrigger>
-      </fetcher.Form>
+    <DropdownMenu
+      onOpenChange={(open) => {
+        if (open) fetcher.load("/notifications/my-notifications");
+      }}
+    >
+      <DropdownMenuTrigger asChild>
+        <IconButton
+          color="transparent"
+          css={{
+            padding: 0,
+            borderRadius: "50%",
+            width: "auto",
+            height: "auto",
+          }}
+        >
+          <PlusIcon />
+        </IconButton>
+      </DropdownMenuTrigger>
 
       <DropdownMenuContent sideOffset={5}>
         {fetcher.data?.notifications.map((notif: Notification) => (
