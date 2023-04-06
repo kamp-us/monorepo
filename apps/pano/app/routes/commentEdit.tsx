@@ -42,8 +42,7 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   try {
-    const fields = CommentSchema.parse(parsedFields);
-    await editComment(fields.commentID, fields.commentContent);
+    await editComment(parsedFields.commentID, parsedFields.commentContent);
   } catch (e) {
     return {
       status: 500,
