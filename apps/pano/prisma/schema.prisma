@@ -173,10 +173,12 @@ model Notification {
   postID String?
   comment Comment? @relation(fields: [commentID], references: [id], onDelete: Cascade, onUpdate: Cascade)
   commentID String?
+  read Boolean @default(false)
 }
 
 enum NotificationType {
-  UPVOTE
+  UPVOTECOMMENT
+  UPVOTEPOST
   COMMENT
   REPLY
 }

@@ -5,6 +5,8 @@ import slugify from "slugify";
 const users = [
   { username: "admin", email: "admin@kamp.us", password: "123123" },
   { username: "testuser", email: "user1a@kamp.us", password: "123123123" },
+  { username: "berke", email: "andyanday33@gmail.com", password: "123123" },
+  { username: "anday", email: "nzl33_anday@hotmail.com", password: "123123" },
 ];
 const posts = [
   {

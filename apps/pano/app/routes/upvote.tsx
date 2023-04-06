@@ -1,5 +1,6 @@
 import type { ActionFunction } from "@remix-run/node";
 import invariant from "tiny-invariant";
+import { createNotification } from "~/models/notification.server";
 import { createUpvote, deleteUpvote } from "~/models/post.server";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -14,6 +15,12 @@ export const action: ActionFunction = async ({ request }) => {
     case "create":
       try {
         await createUpvote(input.postID, input.userID);
+        await createNotification(
+          "UPVOTEPOST",
+          input.userID,
+          input.postID,
+          null
+        );
       } catch (e) {
         return {
           status: 500,
