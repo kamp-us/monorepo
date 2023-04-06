@@ -31,28 +31,28 @@ export const NotificationDropdown: FC<Props> = (props) => {
   const fetcher = useFetcher();
 
   useEffect(() => {
-    console.log(fetcher.data);
-  }, [fetcher.data]);
+    if (fetcher.state === "idle" && fetcher.data == null) {
+      fetcher.load("/notifications/my-notifications");
+    }
+  }, [fetcher]);
 
   return (
-    <DropdownMenu
-      onOpenChange={(open) => {
-        if (open) fetcher.load("/notifications/my-notifications");
-      }}
-    >
-      <DropdownMenuTrigger asChild>
-        <IconButton
-          color="transparent"
-          css={{
-            padding: 0,
-            borderRadius: "50%",
-            width: "auto",
-            height: "auto",
-          }}
-        >
-          <PlusIcon />
-        </IconButton>
-      </DropdownMenuTrigger>
+    <DropdownMenu>
+      <fetcher.Form method="get" action="/notification/my-notifications">
+        <DropdownMenuTrigger asChild>
+          <IconButton
+            color="transparent"
+            css={{
+              padding: 0,
+              borderRadius: "50%",
+              width: "auto",
+              height: "auto",
+            }}
+          >
+            <PlusIcon />
+          </IconButton>
+        </DropdownMenuTrigger>
+      </fetcher.Form>
 
       <DropdownMenuContent sideOffset={5}>
         {fetcher.data?.notifications.map((notif: Notification) => (
