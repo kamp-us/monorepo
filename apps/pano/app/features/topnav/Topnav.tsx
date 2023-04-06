@@ -11,6 +11,7 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import { useFetcher } from "@remix-run/react";
 import type { FC } from "react";
 import { SearchInput } from "./SearchInput";
+import { NotificationDropdown } from "../notification-dropdown/NotificationDropdown";
 import { useUserContext } from "~/features/auth/user-context";
 import { UserDropdown } from "~/features/user-dropdown/UserDropdown";
 
@@ -43,6 +44,7 @@ export const Topnav: FC = () => {
                   />
                   <ThemeToggle />
                 </fetcher.Form>
+                <NotificationDropdown user={user} />
                 <UserDropdown login={user.username} />
               </>
             ) : (

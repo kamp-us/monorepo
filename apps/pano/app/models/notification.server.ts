@@ -52,13 +52,16 @@ export const createNotification = async (
     );
   }
 
-  return prisma.notification.create({
-    data: {
-      notifiesUserID: sourceData.userID,
-      triggeredByUserID: triggerUserID,
-      type,
-      postID,
-      commentID,
-    },
-  });
+  // Can't notify if self
+  if (sourceData.userID !== triggerUserID)
+    return prisma.notification.create({
+      data: {
+        notifiesUserID: sourceData.userID,
+        triggeredByUserID: triggerUserID,
+        type,
+        postID,
+        commentID,
+      },
+    });
+  return null;
 };
