@@ -7,6 +7,12 @@ export type NotificationType =
   | "COMMENT"
   | "REPLY";
 
+export type NotificationDeleteReason =
+  | "UPVOTE_REMOVED_ON_POST"
+  | "UPVOTE_REMOVED_ON_COMMENT"
+  | "POST_DELETED"
+  | "COMMENT_DELETED";
+
 export const getMyNotifications = (userID: string) => {
   return prisma.notification.findMany({
     where: {
@@ -87,4 +93,52 @@ export const createNotification = async (
       },
     });
   return null;
+};
+
+export const deleteNotifications = async (
+  type: NotificationDeleteReason,
+  userID: string,
+  parentID: string
+) => {
+  if (type === "UPVOTE_REMOVED_ON_POST") {
+    const relevantUserData = await prisma.post.findFirst({
+      select: {
+        userID: true,
+      },
+      where: {
+        id: parentID,
+      },
+    });
+
+    if (relevantUserData)
+      return await prisma.notification.deleteMany({
+        where: {
+          notifiesUserID: relevantUserData.userID,
+          triggeredByUserID: userID,
+          postID: parentID,
+          type: "UPVOTEPOST",
+        },
+      });
+    return null;
+  } else if (type === "UPVOTE_REMOVED_ON_COMMENT") {
+    const relevantUserData = await prisma.comment.findFirst({
+      select: {
+        userID: true,
+      },
+      where: {
+        id: parentID,
+      },
+    });
+
+    if (relevantUserData)
+      return await prisma.notification.deleteMany({
+        where: {
+          notifiesUserID: relevantUserData.userID,
+          triggeredByUserID: userID,
+          commentID: parentID,
+          type: "UPVOTECOMMENT",
+        },
+      });
+    return null;
+  }
 };

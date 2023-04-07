@@ -1,6 +1,9 @@
 import type { ActionFunction } from "@remix-run/node";
 import invariant from "tiny-invariant";
-import { createNotification } from "~/models/notification.server";
+import {
+  createNotification,
+  deleteNotifications,
+} from "~/models/notification.server";
 import { createUpvote, deleteUpvote } from "~/models/post.server";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -31,6 +34,11 @@ export const action: ActionFunction = async ({ request }) => {
     case "delete":
       try {
         await deleteUpvote(input.postID, input.userID);
+        await deleteNotifications(
+          "UPVOTE_REMOVED_ON_POST",
+          input.userID,
+          input.postID
+        );
       } catch (e) {
         return {
           status: 500,
