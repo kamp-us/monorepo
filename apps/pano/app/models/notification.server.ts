@@ -10,8 +10,8 @@ export type MyNotification = Pick<
   "id" | "url" | "type" | "read" | "createdAt"
 > & {
   triggeredBy: { username: string };
-  post: { title: string };
-  comment: { content: string; id: string };
+  post: { title: string } | null;
+  comment: { content: string; id: string } | null;
 };
 
 export type NotificationDeleteReason =
@@ -53,6 +53,20 @@ export const getMyNotifications = (userID: string, page: number) => {
     },
     take: 10 * page,
   });
+};
+
+export const readMyNotifications = async (userID: string, page: number) => {
+  await prisma.notification.updateMany({
+    where: {
+      notifiesUserID: userID,
+      read: false,
+    },
+    data: {
+      read: true,
+    },
+  });
+
+  return await getMyNotifications(userID, page);
 };
 
 export const createNotification = async (

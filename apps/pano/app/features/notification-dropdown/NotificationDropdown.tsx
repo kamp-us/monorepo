@@ -2,6 +2,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
   IconButton,
   Link,
@@ -34,6 +35,13 @@ export const NotificationDropdown: FC<Props> = (props) => {
     string[]
   >([]);
 
+  const handleRead = () => {
+    fetcher.submit(
+      {},
+      { method: "post", action: "/notifications/my-notifications" }
+    );
+  };
+
   useEffect(() => {
     if (fetcher.state === "idle" && fetcher.data == null) {
       fetcher.load("/notifications/my-notifications");
@@ -46,34 +54,38 @@ export const NotificationDropdown: FC<Props> = (props) => {
       (fetcher.data.notifications as MyNotification[]).forEach((notif) => {
         switch (notif.type) {
           case "REPLY":
-            messageArray.push(
-              `${
-                notif.triggeredBy.username
-              } isimli kullanıcı şu yorumunuzu yanıtladı: "${notif.comment.content.substring(
-                0,
-                30
-              )}..."`
-            );
+            if (notif.comment)
+              messageArray.push(
+                `${
+                  notif.triggeredBy.username
+                } isimli kullanıcı şu yorumunuzu yanıtladı: "${notif.comment.content.substring(
+                  0,
+                  30
+                )}..."`
+              );
             break;
           case "COMMENT":
-            messageArray.push(
-              `${notif.triggeredBy.username} isimli kullanıcı "${notif.post.title}" paylaşımınıza bir yorum yaptı.`
-            );
+            if (notif.post)
+              messageArray.push(
+                `${notif.triggeredBy.username} isimli kullanıcı "${notif.post.title}" paylaşımınıza bir yorum yaptı.`
+              );
             break;
           case "UPVOTEPOST":
-            messageArray.push(
-              `${notif.triggeredBy.username} isimli kullanıcı "${notif.post.title}" paylaşımınızı beğendi.`
-            );
+            if (notif.post)
+              messageArray.push(
+                `${notif.triggeredBy.username} isimli kullanıcı "${notif.post.title}" paylaşımınızı beğendi.`
+              );
             break;
           case "UPVOTECOMMENT":
-            messageArray.push(
-              `${
-                notif.triggeredBy.username
-              } isimli kullanıcı şu yorumunuzu beğendi: "${notif.comment.content.substring(
-                0,
-                30
-              )}"`
-            );
+            if (notif.comment)
+              messageArray.push(
+                `${
+                  notif.triggeredBy.username
+                } isimli kullanıcı şu yorumunuzu beğendi: "${notif.comment.content.substring(
+                  0,
+                  30
+                )}"`
+              );
             break;
         }
         setProcessedNotifications(messageArray);
@@ -99,6 +111,10 @@ export const NotificationDropdown: FC<Props> = (props) => {
       </fetcher.Form>
 
       <MenuContent sideOffset={10}>
+        <MenuItem onClick={() => handleRead()}>
+          Hepsini okundu olarak işaretle
+        </MenuItem>
+        <DropdownMenuSeparator />
         {processedNotifications &&
           fetcher.data?.notifications.map(
             (notif: MyNotification, index: number) => (
@@ -107,7 +123,16 @@ export const NotificationDropdown: FC<Props> = (props) => {
                   to={notif.url}
                   state={{ targetHash: notif.comment?.id }}
                 >
-                  <MenuItem>{processedNotifications[index]}</MenuItem>
+                  <MenuItem
+                    className={!notif.read ? "unread" : ""}
+                    css={{
+                      "&.unread:not(:hover)": {
+                        backgroundColor: "$amber4",
+                      },
+                    }}
+                  >
+                    {processedNotifications[index]}
+                  </MenuItem>
                 </MenuLink>
               </Fragment>
             )
