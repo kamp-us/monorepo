@@ -9,7 +9,7 @@ export type NotificationDeleteReason =
   | "POST_DELETED"
   | "COMMENT_DELETED";
 
-export const getMyNotifications = (userID: string) => {
+export const getMyNotifications = (userID: string, page: number) => {
   return prisma.notification.findMany({
     where: {
       notifiesUserID: userID,
@@ -17,6 +17,7 @@ export const getMyNotifications = (userID: string) => {
     orderBy: {
       createdAt: "desc",
     },
+    take: 10 * page,
   });
 };
 

@@ -11,7 +11,7 @@ type LoaderData = {
 export const loader: LoaderFunction = async ({ request }) => {
   try {
     const user = await requireUser(request);
-    const notifications = await getMyNotifications(user.id);
+    const notifications = await getMyNotifications(user.id, 1);
     return json<LoaderData>({ notifications });
   } catch (e) {
     return json<LoaderData>({ notifications: [] });
