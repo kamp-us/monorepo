@@ -106,7 +106,6 @@ export const NotificationDropdown: FC<Props> = (props) => {
                 <MenuLink to={notif.url}>
                   <MenuItem>{processedNotifications[index]}</MenuItem>
                 </MenuLink>
-                <DropdownMenuSeparator />
               </Fragment>
             )
           )}
