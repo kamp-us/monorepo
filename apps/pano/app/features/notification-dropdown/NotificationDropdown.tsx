@@ -1,17 +1,12 @@
 import {
-  Button,
   DropdownMenu,
-  DropdownMenuArrow,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
   IconButton,
   Link,
   styled,
-  UserAvatar,
 } from "@kampus/ui";
-import { Notification, User } from "@prisma/client";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { useFetcher } from "@remix-run/react";
 import { FC, Fragment, useEffect, useState } from "react";
