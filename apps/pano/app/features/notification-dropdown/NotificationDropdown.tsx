@@ -103,7 +103,10 @@ export const NotificationDropdown: FC<Props> = (props) => {
           fetcher.data?.notifications.map(
             (notif: MyNotification, index: number) => (
               <Fragment key={notif.id}>
-                <MenuLink to={notif.url}>
+                <MenuLink
+                  to={notif.url}
+                  state={{ targetHash: notif.comment.id }}
+                >
                   <MenuItem>{processedNotifications[index]}</MenuItem>
                 </MenuLink>
               </Fragment>

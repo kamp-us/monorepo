@@ -11,7 +11,7 @@ export type MyNotification = Pick<
 > & {
   triggeredBy: { username: string };
   post: { title: string };
-  comment: { content: string };
+  comment: { content: string; id: string };
 };
 
 export type NotificationDeleteReason =
@@ -40,6 +40,7 @@ export const getMyNotifications = (userID: string, page: number) => {
       },
       comment: {
         select: {
+          id: true,
           content: true,
         },
       },

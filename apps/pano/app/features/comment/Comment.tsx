@@ -11,7 +11,7 @@ import {
   ValidationMessage,
 } from "@kampus/ui";
 import type { SerializeFrom } from "@remix-run/node";
-import { useFetcher, useTransition } from "@remix-run/react";
+import { useFetcher, useLocation, useTransition } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
 import { useConfigContext } from "~/features/config/config-context";
@@ -70,6 +70,8 @@ export const CommentItem: FC<CommentProps> = ({
     comment,
     post,
   });
+  const location = useLocation();
+  const targetHash = location.state?.targetHash;
 
   const variables = user
     ? isUpvoted
@@ -96,11 +98,12 @@ export const CommentItem: FC<CommentProps> = ({
     <GappedBox css={{ flexDirection: "column" }}>
       <GappedBox
         id={`c_${comment.id}`}
+        className={targetHash === comment.id ? "target" : ""}
         tabIndex={0}
         css={{
           flexDirection: "column",
           transition: "background-color 0.3s",
-          "&:target": {
+          "&:target, &.target": {
             backgroundColor: "$amber4",
             borderRadius: "8px",
             padding: "5px",
