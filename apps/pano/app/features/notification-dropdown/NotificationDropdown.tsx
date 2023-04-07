@@ -49,7 +49,8 @@ export const NotificationDropdown: FC<Props> = (props) => {
             messageArray.push(
               `${
                 notif.triggeredBy.username
-              } isimli kullanıcı şu yorumunuzu yanıtladı: "${notif.comment.content.slice(
+              } isimli kullanıcı şu yorumunuzu yanıtladı: "${notif.comment.content.substring(
+                0,
                 30
               )}..."`
             );
@@ -68,7 +69,8 @@ export const NotificationDropdown: FC<Props> = (props) => {
             messageArray.push(
               `${
                 notif.triggeredBy.username
-              } isimli kullanıcı şu yorumunuzu beğendi: "${notif.comment.content.slice(
+              } isimli kullanıcı şu yorumunuzu beğendi: "${notif.comment.content.substring(
+                0,
                 30
               )}"`
             );
