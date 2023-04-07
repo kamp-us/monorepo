@@ -1,11 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "~/db.server";
 
-export type NotificationType =
-  | "UPVOTECOMMENT"
-  | "UPVOTEPOST"
-  | "COMMENT"
-  | "REPLY";
+export type NotificationType = "UPVOTECOMMENT" | "UPVOTEPOST" | "COMMENT";
 
 export type NotificationDeleteReason =
   | "UPVOTE_REMOVED_ON_POST"
@@ -30,12 +26,11 @@ export const createNotification = async (
   postID: string | null | undefined,
   commentID: string | null | undefined
 ) => {
-  let sourceData;
-
-  // if the post owner is the replied comment owner,
-  // do not send the comment notification
-  if (commentID && postID && type === "COMMENT") {
-    const postData = await prisma.comment.findFirst({
+  let commentData;
+  // comment id may not exist
+  // eg. when upvoted to a post
+  if (commentID) {
+    commentData = await prisma.comment.findFirst({
       select: {
         userID: true,
       },
@@ -43,7 +38,11 @@ export const createNotification = async (
         id: commentID,
       },
     });
-    const commentData = await prisma.post.findFirst({
+  }
+
+  let postData;
+  if (postID)
+    postData = await prisma.post.findFirst({
       select: {
         userID: true,
       },
@@ -52,47 +51,39 @@ export const createNotification = async (
       },
     });
 
-    if (postData?.userID === commentData?.userID) {
-      return null;
-    }
-  } else if (commentID) {
-    sourceData = await prisma.comment.findFirst({
-      select: {
-        userID: true,
-      },
-      where: {
-        id: commentID,
-      },
-    });
-  } else if (postID) {
-    sourceData = await prisma.post.findFirst({
-      select: {
-        userID: true,
-      },
-      where: {
-        id: postID,
-      },
-    });
-  }
+  // create notification for the reply
+  // or comment upvote
+  if (commentData)
+    if (commentData.userID !== triggerUserID)
+      await prisma.notification.create({
+        data: {
+          notifiesUserID: commentData.userID,
+          triggeredByUserID: triggerUserID,
+          type: type === "UPVOTECOMMENT" ? type : "REPLY",
+          postID,
+          commentID,
+        },
+      });
 
-  if (sourceData == undefined) {
-    throw new Error(
-      "Both postID and commentID could not be null at the same time"
-    );
+  // create notification for the post owner.
+  if (postData) {
+    // don't create notification for comment
+    // if reply notification was for
+    // the same user.
+    if (postData?.userID === commentData?.userID) return null;
+    if (postData.userID !== triggerUserID)
+      return await prisma.notification.create({
+        data: {
+          notifiesUserID: postData.userID,
+          triggeredByUserID: triggerUserID,
+          type: type,
+          postID,
+          commentID,
+        },
+      });
+    return null;
   }
-
-  // Can't notify if self
-  if (sourceData.userID !== triggerUserID)
-    return prisma.notification.create({
-      data: {
-        notifiesUserID: sourceData.userID,
-        triggeredByUserID: triggerUserID,
-        type,
-        postID,
-        commentID,
-      },
-    });
-  return null;
+  throw new Error("Invalid post id");
 };
 
 export const deleteNotifications = async (

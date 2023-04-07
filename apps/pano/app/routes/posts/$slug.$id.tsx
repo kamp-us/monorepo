@@ -140,8 +140,6 @@ export const action: ActionFunction = async ({ request, params }) => {
   try {
     await createComment(content.toString(), params.id, user.id, commentID);
     await createNotification("COMMENT", user.id, params.id, commentID);
-    if (commentID)
-      await createNotification("REPLY", user.id, params.id, commentID);
     return null;
   } catch {
     return json<ActionData>(
