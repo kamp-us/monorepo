@@ -21,13 +21,23 @@ export const getMyNotifications = (userID: string) => {
 export const createNotification = async (
   type: NotificationType,
   triggerUserID: string,
-  postID: string | null,
-  commentID: string | null
+  postID: string | null | undefined,
+  commentID: string | null | undefined
 ) => {
   let sourceData;
 
-  if (postID) {
-    sourceData = await prisma.post.findFirst({
+  // if the post owner is the replied comment owner,
+  // do not send the comment notification
+  if (commentID && postID && type === "COMMENT") {
+    const postData = await prisma.comment.findFirst({
+      select: {
+        userID: true,
+      },
+      where: {
+        id: commentID,
+      },
+    });
+    const commentData = await prisma.post.findFirst({
       select: {
         userID: true,
       },
@@ -35,6 +45,10 @@ export const createNotification = async (
         id: postID,
       },
     });
+
+    if (postData?.userID === commentData?.userID) {
+      return null;
+    }
   } else if (commentID) {
     sourceData = await prisma.comment.findFirst({
       select: {
@@ -42,6 +56,15 @@ export const createNotification = async (
       },
       where: {
         id: commentID,
+      },
+    });
+  } else if (postID) {
+    sourceData = await prisma.post.findFirst({
+      select: {
+        userID: true,
+      },
+      where: {
+        id: postID,
       },
     });
   }

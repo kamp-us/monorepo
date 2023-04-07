@@ -30,6 +30,7 @@ import { CommentItem } from "~/features/comment/Comment";
 import { PostItem } from "~/features/post/PostItem";
 import type { Comment } from "~/models/comment.server";
 import { createComment } from "~/models/comment.server";
+import { createNotification } from "~/models/notification.server";
 import type { Post } from "~/models/post.server";
 import { getPostBySlugAndId } from "~/models/post.server";
 import { validate } from "~/utils";
@@ -138,6 +139,9 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   try {
     await createComment(content.toString(), params.id, user.id, commentID);
+    await createNotification("COMMENT", user.id, params.id, commentID);
+    if (commentID)
+      await createNotification("REPLY", user.id, params.id, commentID);
     return null;
   } catch {
     return json<ActionData>(
