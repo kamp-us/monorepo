@@ -1,7 +1,18 @@
-import { Prisma } from "@prisma/client";
+import { Notification, Prisma } from "@prisma/client";
 import { prisma } from "~/db.server";
+import { getExternalCommentURL, getExternalPostURL } from "~/utils";
+import { env } from "~/utils/env.server";
 
 export type NotificationType = "UPVOTECOMMENT" | "UPVOTEPOST" | "COMMENT";
+
+export type MyNotification = Pick<
+  Notification,
+  "id" | "url" | "type" | "read" | "createdAt"
+> & {
+  triggeredBy: { username: string };
+  post: { title: string };
+  comment: { content: string };
+};
 
 export type NotificationDeleteReason =
   | "UPVOTE_REMOVED_ON_POST"
@@ -11,6 +22,28 @@ export type NotificationDeleteReason =
 
 export const getMyNotifications = (userID: string, page: number) => {
   return prisma.notification.findMany({
+    select: {
+      id: true,
+      type: true,
+      url: true,
+      read: true,
+      createdAt: true,
+      triggeredBy: {
+        select: {
+          username: true,
+        },
+      },
+      post: {
+        select: {
+          title: true,
+        },
+      },
+      comment: {
+        select: {
+          content: true,
+        },
+      },
+    },
     where: {
       notifiesUserID: userID,
     },
@@ -34,6 +67,13 @@ export const createNotification = async (
     commentData = await prisma.comment.findFirst({
       select: {
         userID: true,
+        id: true,
+        post: {
+          select: {
+            id: true,
+            slug: true,
+          },
+        },
       },
       where: {
         id: commentID,
@@ -46,6 +86,8 @@ export const createNotification = async (
     postData = await prisma.post.findFirst({
       select: {
         userID: true,
+        slug: true,
+        id: true,
       },
       where: {
         id: postID,
@@ -55,7 +97,12 @@ export const createNotification = async (
   // create notification for the reply
   // or comment upvote
   if (commentData)
-    if (commentData.userID !== triggerUserID)
+    if (commentData.userID !== triggerUserID) {
+      const commentUrl = getExternalCommentURL({
+        baseUrl: env.BASE_URL,
+        post: commentData.post,
+        comment: commentData,
+      });
       await prisma.notification.create({
         data: {
           notifiesUserID: commentData.userID,
@@ -63,15 +110,24 @@ export const createNotification = async (
           type: type === "UPVOTECOMMENT" ? type : "REPLY",
           postID,
           commentID,
+          url: commentUrl,
         },
       });
+    }
 
   // create notification for the post owner.
   if (postData) {
+    console.log("HERE");
+    const postUrl = getExternalPostURL({
+      post: postData,
+      baseUrl: env.BASE_URL,
+    });
+    console.log("POSTURL");
+    console.log(postUrl);
     // don't create notification for comment
     // if reply notification was for
     // the same user.
-    if (postData?.userID === commentData?.userID) return null;
+    if (postData.userID === commentData?.userID) return null;
     if (postData.userID !== triggerUserID)
       return await prisma.notification.create({
         data: {
@@ -80,6 +136,7 @@ export const createNotification = async (
           type: type,
           postID,
           commentID,
+          url: postUrl,
         },
       });
     return null;
