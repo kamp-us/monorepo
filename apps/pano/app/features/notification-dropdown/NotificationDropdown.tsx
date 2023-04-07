@@ -60,12 +60,12 @@ export const NotificationDropdown: FC<Props> = (props) => {
               `${notif.triggeredBy.username} isimli kullanıcı "${notif.post.title}" paylaşımınıza bir yorum yaptı.`
             );
             break;
-          case "UPVOTECOMMENT":
+          case "UPVOTEPOST":
             messageArray.push(
               `${notif.triggeredBy.username} isimli kullanıcı "${notif.post.title}" paylaşımınızı beğendi.`
             );
             break;
-          case "UPVOTEPOST":
+          case "UPVOTECOMMENT":
             messageArray.push(
               `${
                 notif.triggeredBy.username
@@ -105,7 +105,7 @@ export const NotificationDropdown: FC<Props> = (props) => {
               <Fragment key={notif.id}>
                 <MenuLink
                   to={notif.url}
-                  state={{ targetHash: notif.comment.id }}
+                  state={{ targetHash: notif.comment?.id }}
                 >
                   <MenuItem>{processedNotifications[index]}</MenuItem>
                 </MenuLink>
