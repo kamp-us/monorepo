@@ -17,8 +17,13 @@ import { useFetcher } from "@remix-run/react";
 import { FC, Fragment, useEffect, useState } from "react";
 import { MyNotification } from "~/models/notification.server";
 
+const MenuContent = styled(DropdownMenuContent, {
+  maxWidth: "$9",
+});
+
 const MenuItem = styled(DropdownMenuItem, {
-  width: "auto",
+  height: "auto",
+  padding: "$2",
   cursor: "pointer",
 });
 
@@ -98,7 +103,7 @@ export const NotificationDropdown: FC<Props> = (props) => {
         </DropdownMenuTrigger>
       </fetcher.Form>
 
-      <DropdownMenuContent sideOffset={5}>
+      <MenuContent sideOffset={10}>
         {processedNotifications &&
           fetcher.data?.notifications.map(
             (notif: MyNotification, index: number) => (
@@ -112,7 +117,7 @@ export const NotificationDropdown: FC<Props> = (props) => {
               </Fragment>
             )
           )}
-      </DropdownMenuContent>
+      </MenuContent>
     </DropdownMenu>
   );
 };
