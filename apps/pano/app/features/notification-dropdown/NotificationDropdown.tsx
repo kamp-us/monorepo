@@ -8,7 +8,7 @@ import {
   Link,
   styled,
 } from "@kampus/ui";
-import { PlusIcon } from "@radix-ui/react-icons";
+import { BellIcon, PlusIcon } from "@radix-ui/react-icons";
 import { useFetcher } from "@remix-run/react";
 import { FC, Fragment, useEffect, useState } from "react";
 import { MyNotification } from "~/models/notification.server";
@@ -27,6 +27,22 @@ const MenuLink = styled(Link, {
   textDecoration: "none",
 });
 
+const MenuIconButton = styled(IconButton, {
+  padding: 0,
+  borderRadius: "50%",
+  position: "relative",
+});
+
+const MenuIconChip = styled("div", {
+  borderRadius: "50%",
+  width: "$2",
+  height: "$2",
+  backgroundColor: "$amber9",
+  position: "absolute",
+  top: "0",
+  right: "0",
+});
+
 interface Props {}
 
 export const NotificationDropdown: FC<Props> = (props) => {
@@ -34,6 +50,7 @@ export const NotificationDropdown: FC<Props> = (props) => {
   const [processedNotifications, setProcessedNotifications] = useState<
     string[]
   >([]);
+  const [haveUnread, setHaveUnread] = useState(false);
 
   const handleReadAll = () => {
     fetcher.submit(
@@ -57,8 +74,10 @@ export const NotificationDropdown: FC<Props> = (props) => {
 
   useEffect(() => {
     const messageArray: string[] = [];
-    if (fetcher.data)
+    setHaveUnread(false);
+    if (fetcher.data) {
       (fetcher.data.notifications as MyNotification[])?.forEach((notif) => {
+        // process fetcher data into meaningful messages
         switch (notif.type) {
           case "REPLY":
             if (notif.comment)
@@ -95,24 +114,21 @@ export const NotificationDropdown: FC<Props> = (props) => {
               );
             break;
         }
-        setProcessedNotifications(messageArray);
+
+        // check if any unread
+        if (!notif.read) setHaveUnread(true);
       });
+      setProcessedNotifications(messageArray);
+    }
   }, [fetcher.data]);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <IconButton
-          color="transparent"
-          css={{
-            padding: 0,
-            borderRadius: "50%",
-            width: "auto",
-            height: "auto",
-          }}
-        >
-          <PlusIcon />
-        </IconButton>
+        <MenuIconButton>
+          {haveUnread && <MenuIconChip />}
+          <BellIcon />
+        </MenuIconButton>
       </DropdownMenuTrigger>
 
       <MenuContent sideOffset={10}>
