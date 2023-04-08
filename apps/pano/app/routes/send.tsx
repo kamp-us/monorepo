@@ -8,10 +8,12 @@ import {
   Textarea,
   ValidationMessage,
 } from "@kampus/ui";
-import type { ActionFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useFetcher, useTransition } from "@remix-run/react";
+import { useFetcher, useLoaderData, useTransition } from "@remix-run/react";
+import parser from "html-metadata-parser";
 import normalizeUrl from "normalize-url";
+import { useEffect, useRef } from "react";
 import { requireUser } from "~/authenticator.server";
 import { createPost } from "~/models/post.server";
 import { getPostLink, validate, validateURL } from "~/utils";
@@ -20,6 +22,30 @@ type ActionData = {
   error: {
     message: string;
   };
+};
+
+export const loader = async ({ request }: LoaderArgs) => {
+  const url = new URL(request.url);
+  const urlParam = url.searchParams.get("url");
+
+  try {
+    const metaTags = await parser(urlParam ?? "");
+    return json(
+      { error: "", url: urlParam, ...metaTags },
+      {
+        status: 200,
+      }
+    );
+  } catch (error) {
+    return json(
+      {
+        error: "Linkten meta bilgileri alınamadı.",
+        url: urlParam,
+        meta: { title: "" },
+      },
+      { status: 500 }
+    );
+  }
 };
 
 export const action: ActionFunction = async ({ request }) => {
@@ -72,6 +98,8 @@ const Send = () => {
   const fetcher = useFetcher();
   const meta = fetcher.data?.meta;
   const error = fetcher.data?.error;
+  const loaderData = useLoaderData<typeof loader>();
+  const titleRef = useRef<HTMLInputElement>(null);
 
   const fetchMetaTags = (url: string) => {
     if (validateURL(url)) {
@@ -80,6 +108,16 @@ const Send = () => {
       fetcher.submit(formData, { method: "post", action: "/api/parse-meta" });
     }
   };
+
+  useEffect(() => {
+    // Special case: if a meta title fetched using url query param,
+    // and a newer meta title value is being fetched, title input's
+    // value needs to be updated manually since default value
+    // comes populated on server-side before the fetcher fetches
+    // meta title therefore will not update.
+    if (loaderData.meta?.title && titleRef.current && meta?.title)
+      titleRef.current.value = meta?.title;
+  }, [meta?.title, loaderData.meta?.title]);
 
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>
@@ -90,6 +128,7 @@ const Send = () => {
             id="url"
             name="url"
             size="2"
+            defaultValue={loaderData.url ?? ""}
             onPaste={(e) => {
               fetchMetaTags(e.clipboardData.getData("text"));
             }}
@@ -99,10 +138,11 @@ const Send = () => {
           />
           <Label htmlFor="title">Başlık</Label>
           <Input
+            ref={titleRef}
             id="title"
             name="title"
             size="2"
-            defaultValue={meta ? meta.title : ""}
+            defaultValue={loaderData.meta?.title ?? meta?.title}
           />
           <Label htmlFor="content">İçerik</Label>
           <Textarea

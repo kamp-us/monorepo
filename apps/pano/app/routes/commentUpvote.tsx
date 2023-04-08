@@ -1,5 +1,6 @@
 import type { ActionFunction } from "@remix-run/node";
 import invariant from "tiny-invariant";
+import { requireUser } from "~/authenticator.server";
 import { createUpvote, deleteUpvote } from "~/models/comment.server";
 import {
   createNotification,
@@ -7,6 +8,7 @@ import {
 } from "~/models/notification.server";
 
 export const action: ActionFunction = async ({ request }) => {
+  await requireUser(request)
   const formData = await request.formData();
   const jsonData = formData.get("json") as string | null;
 

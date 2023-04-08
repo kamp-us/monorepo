@@ -80,7 +80,6 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
             isUpvoted={isUpvoted}
             upvoteCount={post.upvotes.length}
             isVoting={isLoading}
-            disabled={!user}
           />
           <input type="hidden" name="json" value={JSON.stringify(variables)} />
         </fetcher.Form>

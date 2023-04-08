@@ -126,7 +126,6 @@ export const CommentItem: FC<CommentProps> = ({
               isUpvoted={isUpvoted}
               upvoteCount={comment.upvotes.length}
               isVoting={isLoading}
-              disabled={!user}
             />
             <input
               type="hidden"
