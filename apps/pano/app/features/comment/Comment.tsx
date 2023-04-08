@@ -72,7 +72,6 @@ export const CommentItem: FC<CommentProps> = ({
   });
   const location = useLocation();
   const targetHash = location.state?.targetHash;
-
   const variables = user
     ? isUpvoted
       ? getVariables("delete", { commentID: comment.id, userID: user.id })
@@ -103,7 +102,14 @@ export const CommentItem: FC<CommentProps> = ({
         css={{
           flexDirection: "column",
           transition: "background-color 0.3s",
-          "&:target, &.target": {
+          "&:target": !targetHash
+            ? {
+                backgroundColor: "$amber4",
+                borderRadius: "8px",
+                padding: "5px",
+              }
+            : {},
+          "&.target": {
             backgroundColor: "$amber4",
             borderRadius: "8px",
             padding: "5px",
