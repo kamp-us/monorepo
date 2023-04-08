@@ -1,4 +1,4 @@
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { requireUser } from "~/authenticator.server";
 import type { MyNotification } from "~/models/notification.server";

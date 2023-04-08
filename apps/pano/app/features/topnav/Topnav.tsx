@@ -10,7 +10,6 @@ import {
 import { PlusIcon } from "@radix-ui/react-icons";
 import { useFetcher } from "@remix-run/react";
 import type { FC } from "react";
-import { useEffect } from "react";
 import { SearchInput } from "./SearchInput";
 import { NotificationDropdown } from "../notification-dropdown/NotificationDropdown";
 import { useUserContext } from "~/features/auth/user-context";

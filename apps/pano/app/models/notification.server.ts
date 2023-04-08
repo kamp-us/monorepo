@@ -1,4 +1,4 @@
-import { Notification, Prisma } from "@prisma/client";
+import type { Notification } from "@prisma/client";
 import { prisma } from "~/db.server";
 import { getExternalCommentURL, getExternalPostURL } from "~/utils";
 import { env } from "~/utils/env.server";

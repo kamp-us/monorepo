@@ -14,14 +14,14 @@ import type { SerializeFrom } from "@remix-run/node";
 import { useFetcher, useLocation, useTransition } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
-import { useConfigContext } from "~/features/config/config-context";
-import type { Comment } from "~/models/comment.server";
-import type { Post } from "~/models/post.server";
-import { getExternalCommentURL } from "~/utils";
 import { EditCommentForm } from "./EditCommentForm";
 import { MoreOptionsDropdown } from "./MoreOptionsDropdown";
 import { useUserContext } from "../auth/user-context";
 import { CommentUpvoteButton } from "../upvote/UpvoteButton";
+import { useConfigContext } from "~/features/config/config-context";
+import type { Comment } from "~/models/comment.server";
+import type { Post } from "~/models/post.server";
+import { getExternalCommentURL } from "~/utils";
 
 type CommentProps = {
   comment: Comment;

@@ -8,10 +8,11 @@ import {
   Link,
   styled,
 } from "@kampus/ui";
-import { BellIcon, PlusIcon } from "@radix-ui/react-icons";
+import { BellIcon } from "@radix-ui/react-icons";
 import { useFetcher } from "@remix-run/react";
-import { FC, Fragment, useEffect, useState } from "react";
-import { MyNotification } from "~/models/notification.server";
+import type { FC } from "react";
+import { Fragment, useEffect, useState } from "react";
+import type { MyNotification } from "~/models/notification.server";
 
 const MenuContent = styled(DropdownMenuContent, {
   maxWidth: "$9",
