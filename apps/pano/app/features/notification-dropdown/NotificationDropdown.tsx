@@ -137,7 +137,7 @@ export const NotificationDropdown: FC<Props> = (props) => {
           Hepsini okundu olarak işaretle
         </MenuItem>
         <DropdownMenuSeparator />
-        {processedNotifications &&
+        {processedNotifications.length > 0 ? (
           fetcher.data?.notifications?.map(
             (notif: MyNotification, index: number) => (
               <Fragment key={notif.id}>
@@ -161,7 +161,10 @@ export const NotificationDropdown: FC<Props> = (props) => {
                 </MenuLink>
               </Fragment>
             )
-          )}
+          )
+        ) : (
+          <MenuItem>Görülen o ki burası boş.</MenuItem>
+        )}
       </MenuContent>
     </DropdownMenu>
   );
