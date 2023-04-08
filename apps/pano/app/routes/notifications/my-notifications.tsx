@@ -2,8 +2,10 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { requireUser } from "~/authenticator.server";
 import type { MyNotification } from "~/models/notification.server";
-import { readMyNotifications } from "~/models/notification.server";
-import { getMyNotifications } from "~/models/notification.server";
+import {
+  getMyNotifications,
+  readMyNotifications,
+} from "~/models/notification.server";
 
 type LoaderData = {
   notifications: MyNotification[];

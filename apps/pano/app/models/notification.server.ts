@@ -16,9 +16,7 @@ export type MyNotification = Pick<
 
 export type NotificationDeleteReason =
   | "UPVOTE_REMOVED_ON_POST"
-  | "UPVOTE_REMOVED_ON_COMMENT"
-  | "POST_DELETED"
-  | "COMMENT_DELETED";
+  | "UPVOTE_REMOVED_ON_COMMENT";
 
 export const getMyNotifications = (userID: string, page: number) => {
   return prisma.notification.findMany({
