@@ -35,10 +35,17 @@ export const NotificationDropdown: FC<Props> = (props) => {
     string[]
   >([]);
 
-  const handleRead = () => {
+  const handleReadAll = () => {
     fetcher.submit(
       {},
-      { method: "post", action: "/notifications/my-notifications" }
+      { method: "put", action: "/notifications/my-notifications" }
+    );
+  };
+
+  const handleReadSingle = (id: string) => {
+    fetcher.submit(
+      {},
+      { method: "put", action: `/notifications/my-notifications/${id}` }
     );
   };
 
@@ -51,7 +58,7 @@ export const NotificationDropdown: FC<Props> = (props) => {
   useEffect(() => {
     const messageArray: string[] = [];
     if (fetcher.data)
-      (fetcher.data.notifications as MyNotification[]).forEach((notif) => {
+      (fetcher.data.notifications as MyNotification[])?.forEach((notif) => {
         switch (notif.type) {
           case "REPLY":
             if (notif.comment)
@@ -94,33 +101,34 @@ export const NotificationDropdown: FC<Props> = (props) => {
 
   return (
     <DropdownMenu>
-      <fetcher.Form method="get" action="/notification/my-notifications">
-        <DropdownMenuTrigger asChild>
-          <IconButton
-            color="transparent"
-            css={{
-              padding: 0,
-              borderRadius: "50%",
-              width: "auto",
-              height: "auto",
-            }}
-          >
-            <PlusIcon />
-          </IconButton>
-        </DropdownMenuTrigger>
-      </fetcher.Form>
+      <DropdownMenuTrigger asChild>
+        <IconButton
+          color="transparent"
+          css={{
+            padding: 0,
+            borderRadius: "50%",
+            width: "auto",
+            height: "auto",
+          }}
+        >
+          <PlusIcon />
+        </IconButton>
+      </DropdownMenuTrigger>
 
       <MenuContent sideOffset={10}>
-        <MenuItem onClick={() => handleRead()}>
+        <MenuItem onClick={() => handleReadAll()}>
           Hepsini okundu olarak işaretle
         </MenuItem>
         <DropdownMenuSeparator />
         {processedNotifications &&
-          fetcher.data?.notifications.map(
+          fetcher.data?.notifications?.map(
             (notif: MyNotification, index: number) => (
               <Fragment key={notif.id}>
                 <MenuLink
                   to={notif.url}
+                  onClick={() => {
+                    handleReadSingle(notif.id);
+                  }}
                   state={{ targetHash: notif.comment?.id }}
                 >
                   <MenuItem

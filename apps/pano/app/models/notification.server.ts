@@ -55,7 +55,7 @@ export const getMyNotifications = (userID: string, page: number) => {
   });
 };
 
-export const readMyNotifications = async (userID: string, page: number) => {
+export const readMyNotifications = async (userID: string) => {
   await prisma.notification.updateMany({
     where: {
       notifiesUserID: userID,
@@ -66,7 +66,20 @@ export const readMyNotifications = async (userID: string, page: number) => {
     },
   });
 
-  return await getMyNotifications(userID, page);
+  return await getMyNotifications(userID, 1);
+};
+
+export const readMyNotification = async (userID: string, id: string) => {
+  await prisma.notification.update({
+    where: {
+      id,
+    },
+    data: {
+      read: true,
+    },
+  });
+
+  return await getMyNotifications(userID, 1);
 };
 
 export const createNotification = async (
