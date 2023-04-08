@@ -54,6 +54,8 @@ model Comment {
   comments Comment[]       @relation("CommentComments")
   upvotes  CommentUpvote[]
 
+  notifications Notification[]
+
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
@@ -76,6 +78,8 @@ model Post {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+
+  notifications Notification[]
 
   @@index([site])
 }
@@ -109,6 +113,8 @@ model User {
   deletedAt DateTime?
 
   preference UserPreference?
+  notifications Notification[] @relation("Notification")
+  notifies Notification[] @relation("Notifies")
 }
 
 enum Theme {
@@ -153,4 +159,27 @@ model SocialIdentity {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+}
+
+model Notification {
+  id String @id @default(cuid())
+  notifies User @relation(name: "Notification", fields: [notifiesUserID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  notifiesUserID String
+  triggeredBy User @relation(name: "Notifies", fields: [triggeredByUserID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  triggeredByUserID String
+  createdAt DateTime @default(now())
+  type NotificationType
+  post Post? @relation(fields: [postID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  postID String?
+  comment Comment? @relation(fields: [commentID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  commentID String?
+  read Boolean @default(false)
+  url String
+}
+
+enum NotificationType {
+  UPVOTECOMMENT
+  UPVOTEPOST
+  COMMENT
+  REPLY
 }

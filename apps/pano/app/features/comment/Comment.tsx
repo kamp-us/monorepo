@@ -11,17 +11,17 @@ import {
   ValidationMessage,
 } from "@kampus/ui";
 import type { SerializeFrom } from "@remix-run/node";
-import { useFetcher, useTransition } from "@remix-run/react";
+import { useFetcher, useLocation, useTransition } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
-import { useConfigContext } from "~/features/config/config-context";
-import type { Comment } from "~/models/comment.server";
-import type { Post } from "~/models/post.server";
-import { getExternalCommentURL } from "~/utils";
 import { EditCommentForm } from "./EditCommentForm";
 import { MoreOptionsDropdown } from "./MoreOptionsDropdown";
 import { useUserContext } from "../auth/user-context";
 import { CommentUpvoteButton } from "../upvote/UpvoteButton";
+import { useConfigContext } from "~/features/config/config-context";
+import type { Comment } from "~/models/comment.server";
+import type { Post } from "~/models/post.server";
+import { getExternalCommentURL } from "~/utils";
 
 type CommentProps = {
   comment: Comment;
@@ -70,7 +70,8 @@ export const CommentItem: FC<CommentProps> = ({
     comment,
     post,
   });
-
+  const location = useLocation();
+  const targetHash = location.state?.targetHash;
   const variables = user
     ? isUpvoted
       ? getVariables("delete", { commentID: comment.id, userID: user.id })
@@ -96,11 +97,19 @@ export const CommentItem: FC<CommentProps> = ({
     <GappedBox css={{ flexDirection: "column" }}>
       <GappedBox
         id={`c_${comment.id}`}
+        className={targetHash === comment.id ? "target" : ""}
         tabIndex={0}
         css={{
           flexDirection: "column",
           transition: "background-color 0.3s",
-          "&:target": {
+          "&:target": !targetHash
+            ? {
+                backgroundColor: "$amber4",
+                borderRadius: "8px",
+                padding: "5px",
+              }
+            : {},
+          "&.target": {
             backgroundColor: "$amber4",
             borderRadius: "8px",
             padding: "5px",

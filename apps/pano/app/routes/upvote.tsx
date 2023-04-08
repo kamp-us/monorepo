@@ -1,6 +1,10 @@
 import type { ActionFunction } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { requireUser } from "~/authenticator.server";
+import {
+  createNotification,
+  deleteNotifications,
+} from "~/models/notification.server";
 import { createUpvote, deleteUpvote } from "~/models/post.server";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -16,6 +20,12 @@ export const action: ActionFunction = async ({ request }) => {
     case "create":
       try {
         await createUpvote(input.postID, input.userID);
+        await createNotification(
+          "UPVOTEPOST",
+          input.userID,
+          input.postID,
+          null
+        );
       } catch (e) {
         return {
           status: 500,
@@ -26,6 +36,11 @@ export const action: ActionFunction = async ({ request }) => {
     case "delete":
       try {
         await deleteUpvote(input.postID, input.userID);
+        await deleteNotifications(
+          "UPVOTE_REMOVED_ON_POST",
+          input.userID,
+          input.postID
+        );
       } catch (e) {
         return {
           status: 500,
