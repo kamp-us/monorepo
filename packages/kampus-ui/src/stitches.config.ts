@@ -234,11 +234,11 @@ export const { styled, createTheme, getCssText, config, keyframes, reset } =
       }),
     },
     media: {
-      sm: '(min-width: 640px)',
-      md: '(min-width: 768px)',
-      lg: '(min-width: 1024px)',
-      xl: '(min-width: 1200px)',
-      xxl: '(min-width: 1536px)',
+      sm: "(min-width: 640px)",
+      md: "(min-width: 768px)",
+      lg: "(min-width: 1024px)",
+      xl: "(min-width: 1200px)",
+      xxl: "(min-width: 1536px)",
     },
   });
 
