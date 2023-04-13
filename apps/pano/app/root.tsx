@@ -163,13 +163,13 @@ const Document = () => {
 };
 
 export default function App() {
-  const { user, isDevelopment, baseUrl, gaTrackingID } =
+  const { user, isDevelopment, baseUrl, gaTrackingID, theme } =
     useLoaderData<typeof loader>();
 
   const config = { isDevelopment, baseUrl, gaTrackingID };
 
   return (
-    <ThemeProvider>
+    <ThemeProvider initialTheme={theme}>
       <ToastProvider swipeDirection="right">
         <ConfigContextManager config={config}>
           <UserContextManager
