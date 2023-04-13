@@ -205,9 +205,9 @@ export const searchPosts = (query: string) => {
   return prisma.post.findMany({
     where: {
       OR: [
-        { title: { contains: query } },
+        { title: { contains: query, mode: "insensitive" } },
         { site: { contains: query } },
-        { content: { contains: query } },
+        { content: { contains: query, mode: "insensitive" } },
       ],
     },
     include: {
