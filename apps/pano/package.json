@@ -9,7 +9,7 @@
     "dev:remix": "remix dev",
     "dev:prisma": "prisma migrate deploy && prisma generate && prisma db seed",
     "build": "remix build",
-    "start": "NODE_ENV=production remix-serve ./build",
+    "start": "cross-env NODE_ENV=production remix-serve ./build",
     "docker:start": "prisma migrate deploy && npm run start"
   },
   "prisma": {
