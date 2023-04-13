@@ -12,6 +12,8 @@ export const OAuthLoginForm: FC<Props> = ({ provider }) => {
       <Button
         size="2"
         css={{
+          width: "100%",
+          "@md": { width: "auto" },
           display: "flex",
           alignContent: "center",
           gap: "0.5rem",
