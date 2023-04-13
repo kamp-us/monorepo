@@ -95,7 +95,11 @@ export const Login = () => {
           ya da
         </Text>
         <Separator css={{ marginBottom: 4 }} />
-        <GappedBox>
+        <GappedBox
+          css={{
+            "@media (max-width: 400px)": { flexDirection: "column" },
+          }}
+        >
           <OAuthLoginForm provider="discord" />
           <OAuthLoginForm provider="github" />
         </GappedBox>

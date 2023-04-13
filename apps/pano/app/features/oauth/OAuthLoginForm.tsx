@@ -15,6 +15,7 @@ export const OAuthLoginForm: FC<Props> = ({ provider }) => {
           display: "flex",
           alignContent: "center",
           gap: "0.5rem",
+          "@media (max-width: 400px)": { width: "100%" },
         }}
       >
         <OAuthProviderLogo provider={provider} height={20} />
