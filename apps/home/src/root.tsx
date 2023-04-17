@@ -11,7 +11,6 @@ import type {
   LoaderFunction,
   MetaFunction,
 } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -19,14 +18,11 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
 } from "@remix-run/react";
 import { useEffect } from "react";
-import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
 import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
 import { Topnav } from "./features/topnav/Topnav";
-
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: loadingIndicatorStyles }];
@@ -39,7 +35,7 @@ export const meta: MetaFunction = () => ({
 });
 
 export const loader: LoaderFunction = async ({ request }) => {
-  return null
+  return null;
 };
 
 interface DocumentProps {
@@ -76,7 +72,7 @@ const Document = ({ children }: DocumentProps) => {
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossOrigin="true"
+          crossOrigin=""
         />
         <link rel="apple-touch-icon" sizes="180x180" href={apple_icon_url} />
         <link
@@ -113,7 +109,7 @@ const Document = ({ children }: DocumentProps) => {
           }}
         />
       </head>
-      <body className={theme === "dark" ? darkTheme : ""}>
+      <body className={theme === "DARK" ? darkTheme : ""}>
         {children}
         <ScrollRestoration />
         <Scripts />

@@ -1,11 +1,23 @@
-import { Box, CenteredContainer, ExternalLink, GappedBox, Label, Text } from "@kampus/ui";
+import {
+  Box,
+  CenteredContainer,
+  ExternalLink,
+  GappedBox,
+  Label,
+  Text,
+} from "@kampus/ui";
 import type { LoaderFunction } from "@remix-run/node";
-import { DiscordLink, GithubLink, TwitchLink, TwitterLink } from "~/features/link/Link";
+import {
+  DiscordLink,
+  GithubLink,
+  KampusGithubLink,
+  TwitchLink,
+  TwitterLink,
+} from "~/features/link/Link";
 import { Logo } from "~/features/logo/Logo";
 
-
 export const loader: LoaderFunction = async () => {
-  return null
+  return null;
 };
 
 export const Home = () => {
@@ -15,8 +27,9 @@ export const Home = () => {
         <GappedBox css={{ flexDirection: "column", alignItems: "center" }}>
           <Logo width={400} height={300} />
           <Text css={{ color: "$gray12" }}>
-            ortamlardaki pek $ukela yazilim toplulugu. bol pozitivite, motivasyon ve beraber gelisme mottolari.
-            discord.kamp.us diye bir discord sunuculari var, icerisi adeta sampiyonlar ligi.
+            ortamlardaki pek $ukela yazilim toplulugu. bol pozitivite,
+            motivasyon ve beraber gelisme mottolari. discord.kamp.us diye bir
+            discord sunuculari var, icerisi adeta sampiyonlar ligi.
           </Text>
         </GappedBox>
         <GappedBox css={{ flexDirection: "column", mt: 12, gap: 12 }}>
@@ -25,7 +38,7 @@ export const Home = () => {
               <DiscordLink />
             </Box>
             <Box css={{ flex: 1 }}>
-              <GithubLink username="kampus" />
+              <KampusGithubLink />
             </Box>
           </GappedBox>
         </GappedBox>
@@ -44,24 +57,16 @@ export const Home = () => {
           </GappedBox>
         </GappedBox>
         <GappedBox css={{ flexDirection: "column", mt: 12, gap: 12 }}>
-          <Text css={{ color: "$gray12", fontSize: "36px" }}>Kamp.us yayıncıları</Text>
+          <Text css={{ color: "$gray12", fontSize: "36px" }}>
+            Kamp.us yayıncıları
+          </Text>
           <GappedBox css={{ flexWrap: "wrap" }}>
             <TwitchLink username="cansirin" />
           </GappedBox>
         </GappedBox>
       </GappedBox>
-    </CenteredContainer >
+    </CenteredContainer>
   );
 };
 
 export default Home;
-
-          // <GappedBox css={{ justifyContent: "center", flexDirection: "column", width: "100%" }}>
-          //   <DiscordLink />
-          //   <TwitchLink username="cansdlkjasklfjaslkfjaslkfjsaflk" />
-          //   <TwitterLink username="can" />
-          //   <GappedBox css={{ flex: 1 }}>
-          //     <GithubLink username="can" />
-          //     <GithubLink username="usirin" />
-          //   </GappedBox>
-          // </GappedBox>
