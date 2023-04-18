@@ -3,10 +3,10 @@ import {
   CenteredContainer,
   ExternalLink,
   GappedBox,
-  Label,
   Text,
 } from "@kampus/ui";
-import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import {
   DiscordLink,
   GithubLink,
@@ -15,21 +15,50 @@ import {
   TwitterLink,
 } from "~/features/link/Link";
 import { Logo } from "~/features/logo/Logo";
+import { twitchApiClient } from "~/features/twitch.server";
 
-export const loader: LoaderFunction = async () => {
-  return null;
+type Streamer = {
+  username: string;
+  live: boolean;
+  startedAt: string;
+  viewerCount: number;
+};
+
+export const loader = async () => {
+  const streamers: Streamer[] =
+    await twitchApiClient.returnStreamersWithLiveStatus();
+
+  return json({ streamers });
 };
 
 export const Home = () => {
+  const { streamers } = useLoaderData<typeof loader>();
+  const [usirin, ...kampusStreamers] = streamers;
+
   return (
-    <CenteredContainer css={{ paddingTop: 20 }}>
-      <GappedBox css={{ flexDirection: "column" }}>
-        <GappedBox css={{ flexDirection: "column", alignItems: "center" }}>
+    <CenteredContainer css={{ paddingTop: 28 }}>
+      <GappedBox css={{ flexDirection: "column", gap: 16 }}>
+        <GappedBox
+          css={{
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            gap: 16,
+          }}
+        >
+          <Text css={{ color: "$gray12" }} lineHeight={3}>
+            ortamlardaki pek $ukela yazılım topluluğu
+          </Text>
           <Logo width={400} height={300} />
-          <Text css={{ color: "$gray12" }}>
-            ortamlardaki pek $ukela yazilim toplulugu. bol pozitivite,
-            motivasyon ve beraber gelisme mottolari. discord.kamp.us diye bir
-            discord sunuculari var, icerisi adeta sampiyonlar ligi.
+          <Text css={{ color: "$gray12" }} lineHeight={3}>
+            bol pozitivite, motivasyon ve beraber gelismek mottolari...
+          </Text>
+          <Text css={{ color: "$gray12" }} lineHeight={3}>
+            <ExternalLink href={"https://discord.kamp.us"}>
+              discord.kamp.us
+            </ExternalLink>{" "}
+            diye bir discord sunucuları var, içerisi adeta şampiyonlar ligi
+            gibi.
           </Text>
         </GappedBox>
         <GappedBox css={{ flexDirection: "column", mt: 12, gap: 12 }}>
@@ -46,7 +75,7 @@ export const Home = () => {
           <Text css={{ color: "$gray12", fontSize: "36px" }}>usirin</Text>
           <GappedBox>
             <Box css={{ flex: 1 }}>
-              <TwitchLink username="usirin" />
+              <TwitchLink streamer={usirin} />
             </Box>
             <Box css={{ flex: 1 }}>
               <GithubLink username="usirin" />
@@ -61,7 +90,9 @@ export const Home = () => {
             Kamp.us yayıncıları
           </Text>
           <GappedBox css={{ flexWrap: "wrap" }}>
-            <TwitchLink username="cansirin" />
+            {kampusStreamers.map((streamer: Streamer, index: number) => (
+              <TwitchLink streamer={streamer} key={index} />
+            ))}
           </GappedBox>
         </GappedBox>
       </GappedBox>

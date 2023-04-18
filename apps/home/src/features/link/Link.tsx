@@ -1,31 +1,56 @@
-import { ExternalLink, GappedBox, Text } from "@kampus/ui";
+import { Box, ExternalLink, GappedBox, Text } from "@kampus/ui";
 import {
   DiscordLogoIcon,
   GitHubLogoIcon,
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
 
-export const TwitchLink = ({ username }: { username: string }) => {
+type TwitchLinkProps = {
+  streamer: {
+    username: string;
+    live: boolean;
+    startedAt: string;
+    viewerCount: number;
+  };
+};
+
+export const TwitchLink = ({ streamer }: TwitchLinkProps) => {
   return (
-    <ExternalLink
-      href={`https://twitch.tv/${username}`}
-      css={{ color: "#efefef" }}
+    <GappedBox
+      css={{
+        backgroundColor: "#643FA6",
+        padding: 20,
+        justifyContent: "space-between",
+        gap: 24,
+      }}
     >
-      <GappedBox
-        css={{
-          backgroundColor: "#643FA6",
-          padding: 20,
-          justifyContent: "space-between",
-        }}
+      <ExternalLink
+        href={`https://twitch.tv/${streamer.username}`}
+        css={{ color: "#efefef" }}
       >
-        {username}
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Twitch_Glitch_Logo_Black.svg/878px-Twitch_Glitch_Logo_Black.svg.png"
-          alt="twitch logo"
-          style={{ height: 20, width: 20 }}
-        />
-      </GappedBox>
-    </ExternalLink>
+        <GappedBox css={{ alignItems: "center" }}>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Twitch_Glitch_Logo_Black.svg/878px-Twitch_Glitch_Logo_Black.svg.png"
+            alt="twitch logo"
+            style={{ height: 20, width: 20 }}
+          />
+          {streamer.username}
+        </GappedBox>
+      </ExternalLink>
+      {streamer.live && (
+        <GappedBox css={{ alignItems: "center" }}>
+          <Text css={{ color: "$gray12" }}>{streamer.viewerCount}</Text>
+          <Box
+            css={{
+              width: 12,
+              height: 12,
+              borderRadius: "50%",
+              backgroundColor: "$red9",
+            }}
+          />
+        </GappedBox>
+      )}
+    </GappedBox>
   );
 };
 
@@ -39,11 +64,11 @@ export const TwitterLink = ({ username }: { username: string }) => {
         css={{
           backgroundColor: "#1C95E7",
           padding: 20,
-          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
-        {username}
         <TwitterLogoIcon />
+        {username}
       </GappedBox>
     </ExternalLink>
   );
@@ -73,11 +98,11 @@ export const GithubLink = ({ username }: { username: string }) => {
         css={{
           backgroundColor: "$gray3",
           padding: 20,
-          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
-        {username}
         <GitHubLogoIcon />
+        {username}
       </GappedBox>
     </ExternalLink>
   );
