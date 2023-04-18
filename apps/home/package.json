@@ -26,7 +26,8 @@
     "lint:fix": "npm run lint -- --fix",
     "build": "remix build",
     "dev:remix": "remix dev",
-    "docker": "run-p dev:remix"
+    "docker": "run-p dev:remix",
+    "start": "cross-env NODE_ENV=production remix-serve ./build"
   },
   "eslintIgnore": [
     "/node_modules",

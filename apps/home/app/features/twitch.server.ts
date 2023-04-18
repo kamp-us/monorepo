@@ -1,5 +1,5 @@
 import { env } from "./env.server";
-import { streamers } from "~/streamers";
+import { streamers } from "app/streamers";
 
 type TwitchApiClient = {
   clientId: string;

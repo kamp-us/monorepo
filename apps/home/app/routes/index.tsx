@@ -13,9 +13,9 @@ import {
   KampusGithubLink,
   TwitchLink,
   TwitterLink,
-} from "~/features/link/Link";
-import { Logo } from "~/features/logo/Logo";
-import { twitchApiClient } from "~/features/twitch.server";
+} from "app/features/link/Link";
+import { Logo } from "app/features/logo/Logo";
+import { twitchApiClient } from "app/features/twitch.server";
 
 type Streamer = {
   username: string;

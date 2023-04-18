@@ -1,51 +1,31 @@
-# base node image
-FROM node:16-bullseye-slim as base
+FROM node:18.14.2 AS builder
 
-# set for base and all that inherit from it
-ENV NODE_ENV=production
+# set for base and all layer that inherit from it
+ENV NODE_ENV production
 
-# Install all node_modules, including dev dependencies
-FROM base as deps
-
-RUN mkdir /app
 WORKDIR /app
+RUN npm install --global turbo
+COPY . .
+RUN turbo prune --scope=@kampus-apps/home --docker
 
-ADD package.json package-lock.json ./
-RUN npm install --production=false --legacy-peer-deps
 
-# Setup production node_modules
-FROM base as production-deps
-
-RUN mkdir /app
+FROM node:18.14.2 AS runner
 WORKDIR /app
+COPY .gitignore .gitignore
+COPY --from=builder /app/out/json .
+COPY --from=builder /app/out/package-lock.json ./package-lock.json
+RUN npm install --global turbo
+RUN npm ci
+COPY --from=builder /app/out/full/ .
+COPY turbo.json turbo.json
+RUN npx turbo build
 
-COPY --from=deps /app/node_modules /app/node_modules
-ADD package.json package-lock.json ./
-RUN npm prune --production --legacy-peer-deps
+RUN ls -la .
 
-# Build the app
-FROM base as build
+ENV NODE_ENV production
 
-RUN mkdir /app
-WORKDIR /app
+RUN npm --workspace=@kampus-apps/home run build
 
-COPY --from=deps /app/node_modules /app/node_modules
+EXPOSE 8080
 
-ADD . .
-RUN npm run build
-
-# Finally, build the production image with minimal footprint
-FROM base
-
-ENV NODE_ENV=production
-
-RUN mkdir /app
-WORKDIR /app
-
-COPY --from=production-deps /app/node_modules /app/node_modules
-
-COPY --from=build /app/build /app/build
-COPY --from=build /app/public /app/public
-ADD . .
-
-CMD ["node", "node_modules/.bin/remix-serve", "build"]
+ENTRYPOINT ["npm", "run","--workspace=@kampus-apps/home", "docker:start"]
