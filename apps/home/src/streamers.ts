@@ -1,1 +1,4 @@
-export const streamers = [{ username: "usirin" }, { username: "cansirin" }];
+export const streamers = [
+  { username: "usirin" },
+  { username: "cansirin" }
+];
