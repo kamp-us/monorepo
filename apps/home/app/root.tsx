@@ -126,7 +126,7 @@ const Document = ({ children }: DocumentProps) => {
         />
       </head>
       <body className={theme === "DARK" ? darkTheme : ""}>
-        {!gaTrackingID ? null : (
+        {isDevelopment || !gaTrackingID ? null : (
           <>
             <script
               async
