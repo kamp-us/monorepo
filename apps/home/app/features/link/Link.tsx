@@ -39,7 +39,6 @@ export const TwitchLink = ({ streamer }: TwitchLinkProps) => {
       </ExternalLink>
       {streamer.live && (
         <GappedBox css={{ alignItems: "center" }}>
-          <Text css={{ color: "$gray12" }}>{streamer.viewerCount}</Text>
           <Box
             css={{
               width: 12,
@@ -48,6 +47,7 @@ export const TwitchLink = ({ streamer }: TwitchLinkProps) => {
               backgroundColor: "$red9",
             }}
           />
+          <Text css={{ color: "$gray12" }}>{streamer.viewerCount}</Text>
         </GappedBox>
       )}
     </GappedBox>

@@ -86,9 +86,16 @@ export const Home = () => {
           </GappedBox>
         </GappedBox>
         <GappedBox css={{ flexDirection: "column", mt: 12, gap: 12 }}>
-          <Text css={{ color: "$gray12", fontSize: "36px" }}>
-            Kamp.us yayıncıları
-          </Text>
+          <GappedBox
+            css={{ alignItems: "center", textAlign: "center", gap: 16 }}
+          >
+            <Text css={{ color: "$gray12", fontSize: "36px" }}>
+              Kamp.us yayıncıları
+            </Text>
+            <Text size={3} css={{ fontStyle: "italic" }}>
+              yayında olan yayıncıları buradan takip edebilirsiniz
+            </Text>
+          </GappedBox>
           <GappedBox css={{ flexWrap: "wrap" }}>
             {kampusStreamers.map((streamer: Streamer, index: number) => (
               <TwitchLink streamer={streamer} key={index} />
