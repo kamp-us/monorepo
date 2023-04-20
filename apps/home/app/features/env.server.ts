@@ -8,4 +8,5 @@ export const env = parseEnv(process.env, {
   SESSION_SECRET: z.string().default("sessionsecret"),
   TWITCH_CLIENT_ID: z.string().optional(),
   TWITCH_CLIENT_SECRET: z.string().optional(),
+  GA_TRACKING_ID: z.string().optional(),
 });

@@ -6,7 +6,8 @@ import {
   useClientStyle,
   useTheme,
 } from "@kampus/ui";
-import type {
+import {
+  json,
   LinksFunction,
   LoaderFunction,
   MetaFunction,
@@ -18,11 +19,15 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
+  useLocation,
 } from "@remix-run/react";
 import { useEffect } from "react";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
 import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
 import { Topnav } from "./features/topnav/Topnav";
+import { env } from "./features/env.server";
+import * as gtag from "~/features/analytics/gtag.client";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: loadingIndicatorStyles }];
@@ -35,7 +40,10 @@ export const meta: MetaFunction = () => ({
 });
 
 export const loader: LoaderFunction = async ({ request }) => {
-  return null;
+  const gaTrackingID = env.GA_TRACKING_ID;
+  const isDevelopment = env.NODE_ENV === "development";
+
+  return json({ gaTrackingID, isDevelopment });
 };
 
 interface DocumentProps {
@@ -45,6 +53,8 @@ interface DocumentProps {
 const Document = ({ children }: DocumentProps) => {
   const clientStyle = useClientStyle();
   const { theme } = useTheme();
+  const location = useLocation();
+  const { gaTrackingID, isDevelopment } = useLoaderData();
   const apple_icon_url =
     "https://kampus-logo.s3.eu-central-1.amazonaws.com/apple-touch-icon.png";
   const favicon_16x16_url =
@@ -54,6 +64,12 @@ const Document = ({ children }: DocumentProps) => {
   const kampus_logo_url =
     "https://kampus-logo.s3.eu-central-1.amazonaws.com/kampus_logo.png";
   useLoadingIndicator();
+
+  useEffect(() => {
+    if (gaTrackingID) {
+      gtag.pageview(location.pathname, gaTrackingID);
+    }
+  }, [location, gaTrackingID]);
 
   useEffect(() => {
     clientStyle.reset();
@@ -110,11 +126,33 @@ const Document = ({ children }: DocumentProps) => {
         />
       </head>
       <body className={theme === "DARK" ? darkTheme : ""}>
+        {!gaTrackingID ? null : (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingID}`}
+            />
+            <script
+              async
+              id="gtag-init"
+              dangerouslySetInnerHTML={{
+                __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaTrackingID}', {
+                  page_path: window.location.pathname,
+                });
+              `,
+              }}
+            />
+          </>
+        )}
         {children}
         <ScrollRestoration />
         <Scripts />
         {/* eslint-disable-next-line turbo/no-undeclared-env-vars */}
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        {isDevelopment && <LiveReload />}
       </body>
     </html>
   );
