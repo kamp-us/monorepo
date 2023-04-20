@@ -2,9 +2,11 @@ import {
   Box,
   CenteredContainer,
   GappedBox,
+  IconButton,
   Link,
   ThemeToggle,
 } from "@kampus/ui";
+import { PlusIcon } from "@radix-ui/react-icons";
 import type { FC } from "react";
 
 export const Topnav: FC = () => {
@@ -17,6 +19,9 @@ export const Topnav: FC = () => {
           </Link>
           <Box css={{ px: 10, flex: 1 }}></Box>
           <Box css={{ display: "flex", gap: 10, alignItems: "center" }}>
+            <IconButton as={Link} to="/send">
+              <PlusIcon />
+            </IconButton>
             <ThemeToggle />
           </Box>
         </GappedBox>
