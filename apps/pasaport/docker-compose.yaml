@@ -1,0 +1,26 @@
+version: "3.3"
+services:
+  postgres:
+    # match the version to the RDS
+    image: postgres:14.2-alpine
+    environment:
+      - POSTGRES_USER=pgtest
+      - POSTGRES_DB=pgtest
+      - POSTGRES_PASSWORD=pgtest
+      - PGDATA=/var/lib/postgresql/data
+    ports:
+      - "${COMPOSE_POSTGRES_PORT}:5432"
+    healthcheck:
+      test: pg_isready -U pgtest -d pgtest
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - pasaport
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+networks:
+  pasaport:
