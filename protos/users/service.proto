@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package kampus.users;
+
+import "google/protobuf/timestamp.proto";
+
+service Users {
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  rpc GetBatchUsers(GetBatchUsersRequest) returns (GetBatchUsersResponse);
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+
+message GetBatchUsersRequest {
+  repeated string ids = 1;
+}
+
+message GetBatchUsersResponse {
+  repeated User users = 1;
+}
+
+message User {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  google.protobuf.Timestamp createdAt = 4;
+  google.protobuf.Timestamp updatedAt = 5;
+}
