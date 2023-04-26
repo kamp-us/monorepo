@@ -4,7 +4,11 @@ import { env } from "./env";
 import { prisma } from "./prisma/client";
 import { User } from "@prisma/client";
 import { TwirpContext } from "twirp-ts";
-import { GetBatchUsersRequest, GetUserRequest } from "@kampus-protos/users/service";
+import {
+  CreateUserRequest,
+  GetBatchUsersRequest,
+  GetUserRequest,
+} from "@kampus-protos/users/service";
 
 function dateToTimestamp(date: Date): { seconds: bigint; nanos: number } {
   const seconds = BigInt(Math.floor(date.getTime() / 1000));
@@ -23,9 +27,21 @@ const toProtoUser = (user: User) => ({
 const GetUser = async (ctx: TwirpContext, request: GetUserRequest) => {
   console.log({ ctx });
 
-  const user = await prisma.user.findUnique({
-    where: { id: request.id },
-  });
+  let user: User | null = null;
+
+  if (request.identifier.oneofKind === "id") {
+    user = await prisma.user.findUnique({
+      where: { id: request.identifier.id },
+    });
+  } else if (request.identifier.oneofKind === "username") {
+    user = await prisma.user.findUnique({
+      where: { username: request.identifier.username },
+    });
+  } else if (request.identifier.oneofKind === "email") {
+    user = await prisma.user.findUnique({
+      where: { email: request.identifier.email },
+    });
+  }
 
   if (!user) {
     throw new Error("User not found");
@@ -44,7 +60,11 @@ const GetBatchUsers = async (ctx: TwirpContext, request: GetBatchUsersRequest) =
   console.log({ ctx });
   const users = await prisma.user.findMany({
     where: {
-      id: { in: request.ids },
+      OR: [
+        { id: { in: request.ids } },
+        { username: { in: request.usernames } },
+        { email: { in: request.emails } },
+      ],
       deletedAt: null,
     },
   });
@@ -54,9 +74,22 @@ const GetBatchUsers = async (ctx: TwirpContext, request: GetBatchUsersRequest) =
   };
 };
 
+const CreateUser = async (ctx: TwirpContext, { username, email }: CreateUserRequest) => {
+  console.log({ ctx });
+
+  const user = await prisma.user.upsert({
+    where: { username },
+    update: { username, email },
+    create: { username, email },
+  });
+
+  return { user: toProtoUser(user) };
+};
+
 const server = createUsersServer({
   GetUser,
   GetBatchUsers,
+  CreateUser,
 });
 
 const app = express();

@@ -7,10 +7,15 @@ import "google/protobuf/timestamp.proto";
 service Users {
   rpc GetUser(GetUserRequest) returns (GetUserResponse);
   rpc GetBatchUsers(GetBatchUsersRequest) returns (GetBatchUsersResponse);
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
 }
 
 message GetUserRequest {
-  string id = 1;
+  oneof identifier {
+    string id = 1;
+    string username = 2;
+    string email = 3;
+  }
 }
 
 message GetUserResponse {
@@ -19,10 +24,21 @@ message GetUserResponse {
 
 message GetBatchUsersRequest {
   repeated string ids = 1;
+  repeated string usernames = 2;
+  repeated string emails = 3;
 }
 
 message GetBatchUsersResponse {
   repeated User users = 1;
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string email = 2;
+}
+
+message CreateUserResponse {
+  User user = 1;
 }
 
 message User {

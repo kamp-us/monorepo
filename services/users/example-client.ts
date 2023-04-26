@@ -8,11 +8,27 @@ const main = async () => {
     })
   );
 
-  console.log(await client.GetUser({ id: "clgvgsetc00001k5fwnudyakr" }));
+  const user = await client.CreateUser({
+    email: "umut@usir.in",
+    username: "usirin",
+  });
+
+  console.log("created user", user);
+
+  console.log(
+    await client.GetUser({
+      identifier: {
+        oneofKind: "username",
+        username: "usirin",
+      },
+    })
+  );
 
   console.log(
     await client.GetBatchUsers({
-      ids: ["clgvgsetc00001k5fwnudyakr", "clgvgsetn00021k5ffw3s1h4d"],
+      ids: [],
+      emails: [],
+      usernames: ["admin", "testuser", "usirin"],
     })
   );
 };
