@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=pgtest
       - PGDATA=/var/lib/postgresql/data
     ports:
-      - "5555:5432"
+      - "${COMPOSE_POSTGRES_PORT}:5432"
     healthcheck:
       test: pg_isready -U pgtest -d pgtest
       interval: 10s
