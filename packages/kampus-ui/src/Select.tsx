@@ -16,8 +16,7 @@ const SelectWrapper = styled("div", {
 
   "&:focus-within": {
     zIndex: 1,
-    boxShadow:
-      "inset 0px 0px 0px 1px $colors$blue8, 0px 0px 0px 1px $colors$blue8",
+    boxShadow: "inset 0px 0px 0px 1px $colors$blue8, 0px 0px 0px 1px $colors$blue8",
   },
 });
 
@@ -96,15 +95,14 @@ const StyledCaretSortIcon = styled(CaretSortIcon, {
 
 type SelectProps = React.ComponentProps<typeof StyledSelect> & { css?: CSS };
 
-export const Select = forwardRef<
-  React.ElementRef<typeof StyledSelect>,
-  SelectProps
->(({ css, size, ...props }, forwardedRef) => (
-  <SelectWrapper css={css}>
-    <StyledSelect ref={forwardedRef} size={size} {...props} />
-    <StyledCaretSortIcon size={size} />
-  </SelectWrapper>
-));
+export const Select = forwardRef<React.ElementRef<typeof StyledSelect>, SelectProps>(
+  ({ css, size, ...props }, forwardedRef) => (
+    <SelectWrapper css={css}>
+      <StyledSelect ref={forwardedRef} size={size} {...props} />
+      <StyledCaretSortIcon size={size} />
+    </SelectWrapper>
+  )
+);
 
 Select.toString = () => `.${SelectWrapper.className}`;
 

@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  CenteredContainer,
-  Form,
-  GappedBox,
-  Input,
-  Label,
-  Textarea,
-  ValidationMessage,
-} from "@kampus/ui";
+import { Box, Button, CenteredContainer, Form, GappedBox, Input, Label, Textarea, ValidationMessage } from "@kampus/ui";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
@@ -62,8 +52,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   if (!validate(content) && !validate(formUrl)) {
     return json<ActionData>({
       error: {
-        message:
-          "En az 1 harften oluşacak içerik veya URL adresi eklenmelidir.",
+        message: "En az 1 harften oluşacak içerik veya URL adresi eklenmelidir.",
       },
     });
   }
@@ -110,24 +99,14 @@ export const EditPost: FC = () => {
           <Label htmlFor="title">Başlık</Label>
           <Input id="title" name="title" size="2" defaultValue={post.title} />
           <Label htmlFor="content">İçerik</Label>
-          <Textarea
-            css={{ width: "auto", cursor: "text" }}
-            name="content"
-            rows={4}
-            defaultValue={post.content ?? ""}
-          />
+          <Textarea css={{ width: "auto", cursor: "text" }} name="content" rows={4} defaultValue={post.content ?? ""} />
           <Box>
             <Button size="2" type="submit" variant="green">
               {transition.submission ? "Gönderiliyor..." : "Gönder"}
             </Button>
           </Box>
         </GappedBox>
-        {error && (
-          <ValidationMessage
-            error={error.message}
-            isSubmitting={transition.state === "submitting"}
-          />
-        )}
+        {error && <ValidationMessage error={error.message} isSubmitting={transition.state === "submitting"} />}
       </Form>
     </CenteredContainer>
   );

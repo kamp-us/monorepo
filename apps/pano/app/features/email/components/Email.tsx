@@ -19,11 +19,7 @@ export const EmailHeading: FC<{ children: string }> = ({ children }) => {
   return <Heading style={h1}>{children}</Heading>;
 };
 
-export const Email: FC<PropsWithChildren<EmailProps>> = ({
-  heading,
-  preview,
-  children,
-}) => {
+export const Email: FC<PropsWithChildren<EmailProps>> = ({ heading, preview, children }) => {
   return (
     <Html>
       <Head />

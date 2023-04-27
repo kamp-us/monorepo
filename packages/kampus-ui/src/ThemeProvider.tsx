@@ -15,14 +15,9 @@ const ThemeContext = createContext<ThemeContextProps>({
 
 export const useTheme = () => useContext(ThemeContext);
 
-export const ThemeProvider: FC<{ initialTheme?: ThemeVariants }> = ({
-  children,
-  initialTheme = "DARK",
-}) => {
+export const ThemeProvider: FC<{ initialTheme?: ThemeVariants }> = ({ children, initialTheme = "DARK" }) => {
   const [theme, setTheme] = useState<ThemeVariants>(initialTheme);
   const context = useMemo(() => ({ theme, setTheme }), [theme]);
 
-  return (
-    <ThemeContext.Provider value={context}>{children}</ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={context}>{children}</ThemeContext.Provider>;
 };

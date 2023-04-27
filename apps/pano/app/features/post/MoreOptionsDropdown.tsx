@@ -78,23 +78,11 @@ export const MoreOptionsDropdown: FC<Props> = ({ post, shareUrl }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           {ownerItems}
-          <MoreOptionsShareButtons
-            postUrl={shareUrl}
-            openToast={setOpenToast}
-          />
+          <MoreOptionsShareButtons postUrl={shareUrl} openToast={setOpenToast} />
         </DropdownMenuContent>
       </DropdownMenu>
-      <PostDeleteAlert
-        open={openAlert}
-        setOpen={setOpenAlert}
-        postID={post.id}
-      />
-      <Toast
-        open={openToast}
-        setOpen={setOpenToast}
-        duration={5000}
-        title="Link kopyalandı"
-      />
+      <PostDeleteAlert open={openAlert} setOpen={setOpenAlert} postID={post.id} />
+      <Toast open={openToast} setOpen={setOpenToast} duration={5000} title="Link kopyalandı" />
     </>
   );
 };
@@ -114,10 +102,7 @@ type MoreOptionsShareButtonsProps = {
   openToast: (value: boolean) => void;
 };
 
-const MoreOptionsShareButtons = ({
-  postUrl,
-  openToast,
-}: MoreOptionsShareButtonsProps) => {
+const MoreOptionsShareButtons = ({ postUrl, openToast }: MoreOptionsShareButtonsProps) => {
   const onCopySelect = () => {
     openToast(true);
   };

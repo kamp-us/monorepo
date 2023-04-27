@@ -1,11 +1,4 @@
-import {
-  darkTheme,
-  ThemeProvider,
-  ToastProvider,
-  ToastViewport,
-  useClientStyle,
-  useTheme,
-} from "@kampus/ui";
+import { darkTheme, ThemeProvider, ToastProvider, ToastViewport, useClientStyle, useTheme } from "@kampus/ui";
 import type { LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
@@ -21,10 +14,7 @@ import {
 import { useEffect } from "react";
 import { authenticator } from "~/authenticator.server";
 import * as gtag from "~/features/analytics/gtag.client";
-import {
-  ConfigContextManager,
-  useConfigContext,
-} from "~/features/config/config-context";
+import { ConfigContextManager, useConfigContext } from "~/features/config/config-context";
 import type { User } from "~/models/user.server";
 import { getTheme, getUserById } from "~/models/user.server";
 import { env } from "~/utils/env.server";
@@ -62,9 +52,7 @@ export const meta: MetaFunction = () => ({
 });
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const sessionUser = (await authenticator.isAuthenticated(
-    request
-  )) as User | null;
+  const sessionUser = (await authenticator.isAuthenticated(request)) as User | null;
 
   const user = sessionUser ? await getUserById(sessionUser.id) : null;
 
@@ -110,11 +98,7 @@ const Document = () => {
       <head>
         <Meta />
         <Links />
-        <style
-          id="stitches"
-          dangerouslySetInnerHTML={{ __html: clientStyle.sheet }}
-          suppressHydrationWarning
-        />
+        <style id="stitches" dangerouslySetInnerHTML={{ __html: clientStyle.sheet }} suppressHydrationWarning />
         <style
           id="global"
           dangerouslySetInnerHTML={{
@@ -131,10 +115,7 @@ const Document = () => {
       <body className={theme === "DARK" ? darkTheme : ""}>
         {isDevelopment || !gaTrackingID ? null : (
           <>
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingID}`}
-            />
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingID}`} />
             <script
               async
               id="gtag-init"
@@ -163,8 +144,7 @@ const Document = () => {
 };
 
 export default function App() {
-  const { user, isDevelopment, baseUrl, gaTrackingID, theme } =
-    useLoaderData<typeof loader>();
+  const { user, isDevelopment, baseUrl, gaTrackingID, theme } = useLoaderData<typeof loader>();
 
   const config = { isDevelopment, baseUrl, gaTrackingID };
 

@@ -39,11 +39,7 @@ interface Props {
   shareUrl: string;
 }
 
-export const MoreOptionsDropdown: FC<Props> = ({
-  comment,
-  setEditOpen,
-  shareUrl,
-}) => {
+export const MoreOptionsDropdown: FC<Props> = ({ comment, setEditOpen, shareUrl }) => {
   const user = useUserContext();
   const [openAlert, setOpenAlert] = useState(false);
   const [openToast, setOpenToast] = useState(false);
@@ -81,23 +77,11 @@ export const MoreOptionsDropdown: FC<Props> = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           {ownerItems}
-          <MoreOptionsShareButtons
-            commentUrl={shareUrl}
-            openToast={setOpenToast}
-          />
+          <MoreOptionsShareButtons commentUrl={shareUrl} openToast={setOpenToast} />
         </DropdownMenuContent>
       </DropdownMenu>
-      <CommentDeleteAlert
-        open={openAlert}
-        setOpen={setOpenAlert}
-        commentID={comment.id}
-      />
-      <Toast
-        open={openToast}
-        setOpen={setOpenToast}
-        duration={5000}
-        title="Link kopyalandı"
-      />
+      <CommentDeleteAlert open={openAlert} setOpen={setOpenAlert} commentID={comment.id} />
+      <Toast open={openToast} setOpen={setOpenToast} duration={5000} title="Link kopyalandı" />
     </>
   );
 };
@@ -117,10 +101,7 @@ type MoreOptionsShareButtonsProps = {
   openToast: (value: boolean) => void;
 };
 
-const MoreOptionsShareButtons = ({
-  commentUrl,
-  openToast,
-}: MoreOptionsShareButtonsProps) => {
+const MoreOptionsShareButtons = ({ commentUrl, openToast }: MoreOptionsShareButtonsProps) => {
   const onCopySelect = () => {
     openToast(true);
   };

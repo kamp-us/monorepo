@@ -25,32 +25,20 @@ export const action: ActionFunction = async ({ request }) => {
   const email = formData.get("email");
 
   if (!validateUsername(username)) {
-    return json<ActionData>(
-      { errors: { username: "Username is invalid" } },
-      { status: 400 }
-    );
+    return json<ActionData>({ errors: { username: "Username is invalid" } }, { status: 400 });
   }
 
   if (!validateEmail(email)) {
-    return json<ActionData>(
-      { errors: { email: "Email is invalid" } },
-      { status: 400 }
-    );
+    return json<ActionData>({ errors: { email: "Email is invalid" } }, { status: 400 });
   }
 
   if (!validatePassword(password)) {
-    return json<ActionData>(
-      { errors: { password: "Password can't be less than 8 characters" } },
-      { status: 400 }
-    );
+    return json<ActionData>({ errors: { password: "Password can't be less than 8 characters" } }, { status: 400 });
   }
 
   const existingUser = await getUserByEmail(email);
   if (existingUser) {
-    return json<ActionData>(
-      { errors: { email: "A user already exists with this email" } },
-      { status: 400 }
-    );
+    return json<ActionData>({ errors: { email: "A user already exists with this email" } }, { status: 400 });
   }
 
   const user = await createUser({ username, email, password });

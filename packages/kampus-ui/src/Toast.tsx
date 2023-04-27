@@ -103,13 +103,7 @@ type ToastProps = {
   description?: string;
 };
 
-export const Toast: FC<ToastProps> = ({
-  open,
-  setOpen,
-  duration,
-  title,
-  description,
-}) => {
+export const Toast: FC<ToastProps> = ({ open, setOpen, duration, title, description }) => {
   return (
     <ToastBase open={open} onOpenChange={setOpen} duration={duration}>
       <ToastTitle>{title}</ToastTitle>
