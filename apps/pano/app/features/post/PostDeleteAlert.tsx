@@ -27,9 +27,7 @@ const PostDeleteAlert = ({ postID, open, setOpen }: AlertDialogProps) => {
     <AlertDialogBase open={open}>
       <AlertDialogContent>
         <AlertDialogTitle>Silmek istediğine emin misin?</AlertDialogTitle>
-        <AlertDialogDescription>
-          Eğer bu gönderiyi silersen, bu işlemi geri alamazsın.
-        </AlertDialogDescription>
+        <AlertDialogDescription>Eğer bu gönderiyi silersen, bu işlemi geri alamazsın.</AlertDialogDescription>
         <GappedBox css={{ justifyContent: "flex-end" }}>
           <AlertDialogCancel asChild onClick={() => setOpen(false)}>
             <Button variant="gray" css={{ marginRight: 25 }}>
@@ -48,11 +46,7 @@ const PostDeleteAlert = ({ postID, open, setOpen }: AlertDialogProps) => {
                 Evet
               </Button>
             </AlertDialogAction>
-            <input
-              type="hidden"
-              name="json"
-              value={JSON.stringify(variables)}
-            />
+            <input type="hidden" name="json" value={JSON.stringify(variables)} />
           </fetcher.Form>
         </GappedBox>
       </AlertDialogContent>

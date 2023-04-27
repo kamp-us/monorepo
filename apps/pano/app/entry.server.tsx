@@ -9,9 +9,10 @@ export default function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
-  const markup = renderToString(
-    <RemixServer context={remixContext} url={request.url} />
-  ).replace(/<\/head>/, `<style id="stitches">${getCssText()}</style></head>`);
+  const markup = renderToString(<RemixServer context={remixContext} url={request.url} />).replace(
+    /<\/head>/,
+    `<style id="stitches">${getCssText()}</style></head>`
+  );
 
   responseHeaders.set("Content-Type", "text/html");
 

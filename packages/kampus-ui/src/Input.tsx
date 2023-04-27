@@ -25,8 +25,7 @@ export const Input = styled("input", {
   fontVariantNumeric: "tabular-nums",
 
   "&:-webkit-autofill": {
-    boxShadow:
-      "inset 0 0 0 1px $colors$amber6, inset 0 0 0 100px $colors$amber3",
+    boxShadow: "inset 0 0 0 1px $colors$amber6, inset 0 0 0 100px $colors$amber3",
     transition: "background-color 600000s 0s, color 600000s 0s",
   },
 
@@ -43,8 +42,7 @@ export const Input = styled("input", {
   },
 
   "&:focus": {
-    boxShadow:
-      "inset 0px 0px 0px 1px $colors$amber8, 0px 0px 0px 1px $colors$amber8",
+    boxShadow: "inset 0px 0px 0px 1px $colors$amber8, 0px 0px 0px 1px $colors$amber8",
     "&:-webkit-autofill": {
       boxShadow:
         "inset 0px 0px 0px 1px $colors$amber8, 0px 0px 0px 1px $colors$amber8, inset 0 0 0 100px $colors$amber3",
@@ -103,8 +101,7 @@ export const Input = styled("input", {
         },
         "&:focus": {
           backgroundColor: "$loContrast",
-          boxShadow:
-            "inset 0px 0px 0px 1px $colors$amber8, 0px 0px 0px 1px $colors$amber8",
+          boxShadow: "inset 0px 0px 0px 1px $colors$amber8, 0px 0px 0px 1px $colors$amber8",
         },
         "&:disabled": {
           backgroundColor: "transparent",
@@ -118,15 +115,13 @@ export const Input = styled("input", {
       invalid: {
         boxShadow: "inset 0 0 0 1px $colors$red7",
         "&:focus": {
-          boxShadow:
-            "inset 0px 0px 0px 1px $colors$red8, 0px 0px 0px 1px $colors$red8",
+          boxShadow: "inset 0px 0px 0px 1px $colors$red8, 0px 0px 0px 1px $colors$red8",
         },
       },
       valid: {
         boxShadow: "inset 0 0 0 1px $colors$green7",
         "&:focus": {
-          boxShadow:
-            "inset 0px 0px 0px 1px $colors$green8, 0px 0px 0px 1px $colors$green8",
+          boxShadow: "inset 0px 0px 0px 1px $colors$green8, 0px 0px 0px 1px $colors$green8",
         },
       },
     },

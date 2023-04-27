@@ -7,10 +7,7 @@ type ValidationMessageProps = {
   isSubmitting?: boolean;
 };
 
-export const ValidationMessage: FC<ValidationMessageProps> = ({
-  error,
-  isSubmitting = false,
-}) => {
+export const ValidationMessage: FC<ValidationMessageProps> = ({ error, isSubmitting = false }) => {
   const [show, setShow] = useState(!!error);
 
   useEffect(() => {

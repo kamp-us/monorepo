@@ -32,14 +32,9 @@ export function safeRedirect(
  * @param {string} id The route id
  * @returns {JSON|undefined} The router data or undefined if not found
  */
-export function useMatchesData(
-  id: string
-): Record<string, unknown> | undefined {
+export function useMatchesData(id: string): Record<string, unknown> | undefined {
   const matchingRoutes = useMatches();
-  const route = useMemo(
-    () => matchingRoutes.find((route) => route.id === id),
-    [matchingRoutes, id]
-  );
+  const route = useMemo(() => matchingRoutes.find((route) => route.id === id), [matchingRoutes, id]);
   return route?.data;
 }
 
@@ -103,13 +98,7 @@ export function getExternalCommentURL({
   return commentUrl;
 }
 
-export function getExternalPostURL({
-  post,
-  baseUrl,
-}: {
-  post: { slug: string; id: string };
-  baseUrl: string;
-}) {
+export function getExternalPostURL({ post, baseUrl }: { post: { slug: string; id: string }; baseUrl: string }) {
   const postUrl = baseUrl + getPostLink(post);
   return postUrl;
 }

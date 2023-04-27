@@ -13,13 +13,9 @@ const selectCommentWithUpvotes = Prisma.validator<Prisma.CommentArgs>()({
   },
 });
 
-export type CommentWithOwner = Prisma.CommentGetPayload<
-  typeof selectCommentWithOwner
->;
+export type CommentWithOwner = Prisma.CommentGetPayload<typeof selectCommentWithOwner>;
 
-export type CommentWithUpvotes = Prisma.CommentGetPayload<
-  typeof selectCommentWithUpvotes
->;
+export type CommentWithUpvotes = Prisma.CommentGetPayload<typeof selectCommentWithUpvotes>;
 
 export type Comment = CommentWithOwner & CommentWithUpvotes;
 
