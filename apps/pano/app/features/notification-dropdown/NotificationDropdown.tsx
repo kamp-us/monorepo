@@ -48,23 +48,15 @@ interface Props {}
 
 export const NotificationDropdown: FC<Props> = (props) => {
   const fetcher = useFetcher();
-  const [processedNotifications, setProcessedNotifications] = useState<
-    string[]
-  >([]);
+  const [processedNotifications, setProcessedNotifications] = useState<string[]>([]);
   const [haveUnread, setHaveUnread] = useState(false);
 
   const handleReadAll = () => {
-    fetcher.submit(
-      {},
-      { method: "put", action: "/notifications/my-notifications" }
-    );
+    fetcher.submit({}, { method: "put", action: "/notifications/my-notifications" });
   };
 
   const handleReadSingle = (id: string) => {
-    fetcher.submit(
-      {},
-      { method: "put", action: `/notifications/my-notifications/${id}` }
-    );
+    fetcher.submit({}, { method: "put", action: `/notifications/my-notifications/${id}` });
   };
 
   useEffect(() => {
@@ -85,10 +77,7 @@ export const NotificationDropdown: FC<Props> = (props) => {
               messageArray.push(
                 `${
                   notif.triggeredBy.username
-                } isimli kullanıcı şu yorumunuzu yanıtladı: "${notif.comment.content.substring(
-                  0,
-                  30
-                )}..."`
+                } isimli kullanıcı şu yorumunuzu yanıtladı: "${notif.comment.content.substring(0, 30)}..."`
               );
             break;
           case "COMMENT":
@@ -108,10 +97,7 @@ export const NotificationDropdown: FC<Props> = (props) => {
               messageArray.push(
                 `${
                   notif.triggeredBy.username
-                } isimli kullanıcı şu yorumunuzu beğendi: "${notif.comment.content.substring(
-                  0,
-                  30
-                )}"`
+                } isimli kullanıcı şu yorumunuzu beğendi: "${notif.comment.content.substring(0, 30)}"`
               );
             break;
         }
@@ -133,35 +119,31 @@ export const NotificationDropdown: FC<Props> = (props) => {
       </DropdownMenuTrigger>
 
       <MenuContent sideOffset={10}>
-        <MenuItem onClick={() => handleReadAll()}>
-          Hepsini okundu olarak işaretle
-        </MenuItem>
+        <MenuItem onClick={() => handleReadAll()}>Hepsini okundu olarak işaretle</MenuItem>
         <DropdownMenuSeparator />
         {processedNotifications.length > 0 ? (
-          fetcher.data?.notifications?.map(
-            (notif: MyNotification, index: number) => (
-              <Fragment key={notif.id}>
-                <MenuLink
-                  to={notif.url}
-                  onClick={() => {
-                    handleReadSingle(notif.id);
+          fetcher.data?.notifications?.map((notif: MyNotification, index: number) => (
+            <Fragment key={notif.id}>
+              <MenuLink
+                to={notif.url}
+                onClick={() => {
+                  handleReadSingle(notif.id);
+                }}
+                state={{ targetHash: notif.comment?.id }}
+              >
+                <MenuItem
+                  className={!notif.read ? "unread" : ""}
+                  css={{
+                    "&.unread:not(:hover)": {
+                      backgroundColor: "$amber4",
+                    },
                   }}
-                  state={{ targetHash: notif.comment?.id }}
                 >
-                  <MenuItem
-                    className={!notif.read ? "unread" : ""}
-                    css={{
-                      "&.unread:not(:hover)": {
-                        backgroundColor: "$amber4",
-                      },
-                    }}
-                  >
-                    {processedNotifications[index]}
-                  </MenuItem>
-                </MenuLink>
-              </Fragment>
-            )
-          )
+                  {processedNotifications[index]}
+                </MenuItem>
+              </MenuLink>
+            </Fragment>
+          ))
         ) : (
           <MenuItem>Görülen o ki burası boş.</MenuItem>
         )}

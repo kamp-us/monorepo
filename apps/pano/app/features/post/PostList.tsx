@@ -11,11 +11,7 @@ type PostListProps = {
 
 export const PostList: FC<PostListProps> = ({ posts }) => {
   return (
-    <GappedBox
-      css={{ flexDirection: "column", gap: 10 }}
-      as="section"
-      aria-label="Gönderi Listesi"
-    >
+    <GappedBox css={{ flexDirection: "column", gap: 10 }} as="section" aria-label="Gönderi Listesi">
       {posts.map((post) => {
         return <PostItem key={post.id} post={post} />;
       })}

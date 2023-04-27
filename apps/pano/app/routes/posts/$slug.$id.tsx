@@ -10,18 +10,9 @@ import {
   ValidationMessage,
 } from "@kampus/ui";
 import { PlusIcon } from "@radix-ui/react-icons";
-import type {
-  ActionFunction,
-  LoaderFunction,
-  MetaFunction,
-} from "@remix-run/node";
+import type { ActionFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import {
-  useActionData,
-  useLoaderData,
-  useLocation,
-  useTransition,
-} from "@remix-run/react";
+import { useActionData, useLoaderData, useLocation, useTransition } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import invariant from "tiny-invariant";
 import { requireUser } from "~/authenticator.server";
@@ -69,11 +60,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   return json({ post });
 };
 
-export const meta: MetaFunction = ({
-  data,
-}: {
-  data: LoaderData | undefined;
-}) => {
+export const meta: MetaFunction = ({ data }: { data: LoaderData | undefined }) => {
   if (!data) {
     return {
       title: "No post",
@@ -102,11 +89,7 @@ type ActionData = {
   };
 };
 
-const errorMessage = (
-  type: "comment" | "post",
-  message: string,
-  id: string
-) => {
+const errorMessage = (type: "comment" | "post", message: string, id: string) => {
   return json<ActionData>(
     {
       error: {
@@ -142,10 +125,7 @@ export const action: ActionFunction = async ({ request, params }) => {
     await createNotification("COMMENT", user.id, params.id, commentID);
     return null;
   } catch {
-    return json<ActionData>(
-      { error: { comment: null, post: null } },
-      { status: 500 }
-    );
+    return json<ActionData>({ error: { comment: null, post: null } }, { status: 500 });
   }
 };
 
@@ -211,10 +191,7 @@ const SinglePost = () => {
             Cevap yaz
           </Button>
           {postError && (
-            <ValidationMessage
-              error={postError.message}
-              isSubmitting={transition.state === "submitting"}
-            />
+            <ValidationMessage error={postError.message} isSubmitting={transition.state === "submitting"} />
           )}
         </GappedBox>
       </Form>

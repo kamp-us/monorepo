@@ -20,7 +20,5 @@ export const useConfigContext = (): Config => {
 type Props = PropsWithChildren<{ config: Config | null }>;
 
 export const ConfigContextManager: FC<Props> = ({ config, children }) => {
-  return (
-    <ConfigContext.Provider value={config}>{children}</ConfigContext.Provider>
-  );
+  return <ConfigContext.Provider value={config}>{children}</ConfigContext.Provider>;
 };

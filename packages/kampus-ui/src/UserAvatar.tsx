@@ -6,10 +6,7 @@ export interface UserAvatarProps {
   login: string;
 }
 
-export const UserAvatar: FC<UserAvatarProps> = forwardRef<
-  HTMLSpanElement,
-  UserAvatarProps
->(({ login }, ref) => {
+export const UserAvatar: FC<UserAvatarProps> = forwardRef<HTMLSpanElement, UserAvatarProps>(({ login }, ref) => {
   const firstLetter = login.charAt(0).toUpperCase();
 
   return (

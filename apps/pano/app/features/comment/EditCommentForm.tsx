@@ -9,14 +9,10 @@ type EditCommentProps = {
   setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const EditCommentForm: FC<EditCommentProps> = ({
-  comment,
-  setEditOpen,
-}) => {
+export const EditCommentForm: FC<EditCommentProps> = ({ comment, setEditOpen }) => {
   const [editedComment, setEditedComment] = useState(comment.content);
   const fetcher = useFetcher();
-  const isCommenting =
-    fetcher.state === "submitting" || fetcher.state === "loading";
+  const isCommenting = fetcher.state === "submitting" || fetcher.state === "loading";
   const variables = {
     commentID: comment.id,
     commentContent: editedComment,
@@ -38,9 +34,7 @@ export const EditCommentForm: FC<EditCommentProps> = ({
         />
         <input type="hidden" name="json" value={JSON.stringify(variables)} />
         <GappedBox>
-          <Button type="submit">
-            {isCommenting ? "Kaydediliyor..." : "Kaydet"}
-          </Button>
+          <Button type="submit">{isCommenting ? "Kaydediliyor..." : "Kaydet"}</Button>
           <Button onClick={() => setEditOpen(false)}>İptal</Button>
         </GappedBox>
       </GappedBox>

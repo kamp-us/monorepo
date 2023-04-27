@@ -1,9 +1,5 @@
 import { render } from "@react-email/render";
-import {
-  SendSmtpEmail,
-  TransactionalEmailsApi,
-  TransactionalEmailsApiApiKeys,
-} from "@sendinblue/client";
+import { SendSmtpEmail, TransactionalEmailsApi, TransactionalEmailsApiApiKeys } from "@sendinblue/client";
 import invariant from "tiny-invariant";
 import { env } from "~/utils/env.server";
 
@@ -20,10 +16,7 @@ interface EmailOptions {
   email: string;
 }
 
-export const sendEmail = async (
-  options: EmailOptions,
-  element: JSX.Element
-) => {
+export const sendEmail = async (options: EmailOptions, element: JSX.Element) => {
   invariant(env.SEND_IN_BLUE_API_KEY, "sendinblue api key is required");
 
   const apiInstance = createClient(env.SEND_IN_BLUE_API_KEY);
@@ -36,9 +29,7 @@ export const sendEmail = async (
 
   try {
     const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
-    console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
-    );
+    console.log("API called successfully. Returned data: " + JSON.stringify(data));
     return data;
   } catch (error) {
     console.error(error);

@@ -26,9 +26,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export const Search = () => {
   const { posts } = useLoaderData<LoaderData>();
-  const sortedPosts = [...posts].sort((a, b) =>
-    a.createdAt < b.createdAt ? 1 : -1
-  );
+  const sortedPosts = [...posts].sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
 
   return (
     <CenteredContainer css={{ paddingTop: 20 }}>

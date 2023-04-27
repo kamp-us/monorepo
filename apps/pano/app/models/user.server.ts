@@ -1,8 +1,4 @@
-import type {
-  Password,
-  User as PrismaUser,
-  UserPreference as PrismaUserPreference,
-} from "@prisma/client";
+import type { Password, User as PrismaUser, UserPreference as PrismaUserPreference } from "@prisma/client";
 import { Theme } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { prisma } from "~/db.server";
@@ -24,11 +20,7 @@ type CreateUserArgs = {
   username: User["username"];
 };
 
-export async function createUser({
-  username,
-  email,
-  password,
-}: CreateUserArgs) {
+export async function createUser({ username, email, password }: CreateUserArgs) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   return prisma.user.create({
@@ -52,10 +44,7 @@ const verifyPassword = async (password: Password, passwordToVerify: string) => {
   return await bcrypt.compare(passwordToVerify, password.hash);
 };
 
-export async function verifyLogin(
-  username: User["username"],
-  password: Password["hash"]
-) {
+export async function verifyLogin(username: User["username"], password: Password["hash"]) {
   const userWithPassword = await prisma.user.findUnique({
     where: { username },
     include: {
@@ -96,11 +85,7 @@ export const updateEmail = async (user: User, email?: string) => {
   });
 };
 
-export const updatePassword = async (
-  user: User,
-  oldPassword: string | null,
-  newPassword: string
-) => {
+export const updatePassword = async (user: User, oldPassword: string | null, newPassword: string) => {
   const userWithPassword = await prisma.user.findUnique({
     where: { id: user.id },
     include: {
@@ -113,9 +98,7 @@ export const updatePassword = async (
   }
 
   const isValid =
-    oldPassword && userWithPassword.password
-      ? await verifyPassword(userWithPassword.password, oldPassword)
-      : true;
+    oldPassword && userWithPassword.password ? await verifyPassword(userWithPassword.password, oldPassword) : true;
 
   if (!isValid) {
     return null;
@@ -143,10 +126,7 @@ interface Entity {
   owner: User;
 }
 
-export const isOwner = <T extends Entity>(
-  user: User | null,
-  entity?: T | null
-): entity is T => {
+export const isOwner = <T extends Entity>(user: User | null, entity?: T | null): entity is T => {
   return !!user && !!entity && entity.owner.id === user.id;
 };
 

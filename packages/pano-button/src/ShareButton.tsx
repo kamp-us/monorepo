@@ -11,10 +11,8 @@ export const ShareButton: FC<Props> = ({ url, environment }) => {
   const handleClick = () => {
     let shareUrl;
 
-    if (environment === "development")
-      shareUrl = `http://pano-dev.kamp.us/send?url=${encodeURIComponent(url)}`;
-    if (environment === "production")
-      shareUrl = `http://pano.kamp.us/send?url=${encodeURIComponent(url)}`;
+    if (environment === "development") shareUrl = `http://pano-dev.kamp.us/send?url=${encodeURIComponent(url)}`;
+    if (environment === "production") shareUrl = `http://pano.kamp.us/send?url=${encodeURIComponent(url)}`;
 
     if (typeof window === "undefined") return;
     window.open(shareUrl, "_blank");

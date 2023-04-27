@@ -45,10 +45,7 @@ export const strategies = {
         });
       },
       sendCode: async ({ email, code, magicLink }) => {
-        await sendEmail(
-          { email, subject: "kamp.us giriş linki" },
-          createElement(Registration, { code, magicLink })
-        );
+        await sendEmail({ email, subject: "kamp.us giriş linki" }, createElement(Registration, { code, magicLink }));
       },
       validateCode: async (code) => {
         const otp = await prisma.otp.findUnique({
@@ -96,8 +93,7 @@ export const strategies = {
             },
           });
 
-          if (usernameConflict)
-            generatedUsername += Math.floor(Math.random() * 10000);
+          if (usernameConflict) generatedUsername += Math.floor(Math.random() * 10000);
         } while (usernameConflict);
         user = await prisma.user.create({
           data: { email, username: generatedUsername },

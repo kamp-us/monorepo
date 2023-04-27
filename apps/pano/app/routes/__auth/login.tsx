@@ -1,15 +1,4 @@
-import {
-  Box,
-  Button,
-  CenteredContainer,
-  Form,
-  GappedBox,
-  Input,
-  Label,
-  Separator,
-  SmallLink,
-  Text,
-} from "@kampus/ui";
+import { Box, Button, CenteredContainer, Form, GappedBox, Input, Label, Separator, SmallLink, Text } from "@kampus/ui";
 import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, useSearchParams } from "@remix-run/react";
@@ -52,34 +41,17 @@ export const Login = () => {
   return (
     <CenteredContainer>
       <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
-        <Form
-          style={{ flex: 1 }}
-          method="post"
-          action="/api/auth/otp"
-          noValidate
-        >
+        <Form style={{ flex: 1 }} method="post" action="/api/auth/otp" noValidate>
           <GappedBox css={{ flexDirection: "column" }}>
             {hasSentEmail ? (
               <>
                 <Label htmlFor="code">Giriş kodu</Label>
-                <Input
-                  id="code"
-                  name="code"
-                  type="text"
-                  placeholder="123456"
-                  size="2"
-                />
+                <Input id="code" name="code" type="text" placeholder="123456" size="2" />
               </>
             ) : (
               <>
                 <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="text"
-                  placeholder="iron-man@avengers.co"
-                  size="2"
-                />
+                <Input id="email" name="email" type="text" placeholder="iron-man@avengers.co" size="2" />
               </>
             )}
             <Box>
@@ -95,9 +67,7 @@ export const Login = () => {
           ya da
         </Text>
         <Separator css={{ marginBottom: 4 }} />
-        <GappedBox
-          css={{ flexDirection: "column", "@md": { flexDirection: "row" } }}
-        >
+        <GappedBox css={{ flexDirection: "column", "@md": { flexDirection: "row" } }}>
           <OAuthLoginForm provider="discord" />
           <OAuthLoginForm provider="github" />
         </GappedBox>

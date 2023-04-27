@@ -15,9 +15,6 @@ export const action: ActionFunction = async ({ request }) => {
       status: 200,
     });
   } catch (error) {
-    return json(
-      { error: "Linkten meta bilgileri alınamadı." },
-      { status: 500 }
-    );
+    return json({ error: "Linkten meta bilgileri alınamadı." }, { status: 500 });
   }
 };

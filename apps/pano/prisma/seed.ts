@@ -50,8 +50,7 @@ const posts = [
       { content: "Kampüs discord sunucusu" },
       { content: "Discorda gelin" },
       {
-        content:
-          "Kampüsteki yazılımcıların motivasyonu o kadar yüksek ki, bazen hiç uyumuyorlar.",
+        content: "Kampüsteki yazılımcıların motivasyonu o kadar yüksek ki, bazen hiç uyumuyorlar.",
       },
     ],
   },
@@ -73,8 +72,7 @@ const posts = [
     content: "aynen öyle",
     comments: [
       {
-        content:
-          "'Yarın kampusa gidiyorum' - 'Hangi kampa?' - 'Yok ya, kampus, yazılım topluluğu oraya gidiyorum.'",
+        content: "'Yarın kampusa gidiyorum' - 'Hangi kampa?' - 'Yok ya, kampus, yazılım topluluğu oraya gidiyorum.'",
       },
       {
         content:
@@ -186,9 +184,7 @@ async function seedAll(users: User[], posts: Post[]) {
               content: comment.content,
               owner: {
                 connect: {
-                  id: postOwnerIDs[
-                    Math.floor(Math.random() * postOwnerIDs.length)
-                  ],
+                  id: postOwnerIDs[Math.floor(Math.random() * postOwnerIDs.length)],
                 },
               },
             };
