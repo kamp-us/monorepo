@@ -19,6 +19,13 @@ import {
   useLocation,
 } from "@remix-run/react";
 import { useEffect } from "react";
+import { AbilityProvider } from "./features/ability/AbilityProvider";
+import { AppAbility, buildAbilityFor } from "./features/ability/ability";
+import { favicons } from "./features/assets/favicons";
+import { UserContextManager } from "./features/auth/user-context";
+import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
+import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
+import { Topnav } from "./features/topnav/Topnav";
 import { authenticator } from "~/authenticator.server";
 import * as gtag from "~/features/analytics/gtag.client";
 import {
@@ -28,11 +35,6 @@ import {
 import type { User } from "~/models/user.server";
 import { getTheme, getUserById } from "~/models/user.server";
 import { env } from "~/utils/env.server";
-import { favicons } from "./features/assets/favicons";
-import { UserContextManager } from "./features/auth/user-context";
-import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
-import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
-import { Topnav } from "./features/topnav/Topnav";
 
 export const links: LinksFunction = () => {
   return [
@@ -165,6 +167,7 @@ const Document = () => {
 export default function App() {
   const { user, isDevelopment, baseUrl, gaTrackingID, theme } =
     useLoaderData<typeof loader>();
+  const ability = buildAbilityFor(user);
 
   const config = { isDevelopment, baseUrl, gaTrackingID };
 
@@ -182,7 +185,9 @@ export default function App() {
               }
             }
           >
-            <Document />
+            <AbilityProvider ability={ability}>
+              <Document />
+            </AbilityProvider>
           </UserContextManager>
         </ConfigContextManager>
       </ToastProvider>

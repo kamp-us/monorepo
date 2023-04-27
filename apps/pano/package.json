@@ -25,6 +25,7 @@
     "/build"
   ],
   "dependencies": {
+    "@casl/ability": "6.4.0",
     "@kampus/ui": "*",
     "@prisma/client": "4.9.0",
     "@radix-ui/react-icons": "1.1.1",
