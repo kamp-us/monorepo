@@ -3,7 +3,9 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "protos/*",
+    "services/*"
   ],
   "scripts": {
     "build": "turbo run build",
