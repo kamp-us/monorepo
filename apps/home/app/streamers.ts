@@ -4,4 +4,5 @@ export const streamers = [
   { username: "alicangunduzdev" },
   { username: "corefunctionsinitiated" },
   { username: "geeksofdata" }
+  { username: "notdepressedeveloper" }
 ];
