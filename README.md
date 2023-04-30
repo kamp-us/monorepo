@@ -37,7 +37,6 @@ cd monorepo
 ├── package.json
 ├── packages
 │   ├── kampus-eslint-config
-│   ├── kampus-jest-presets
 │   ├── kampus-tsconfig
 │   └── kampus-ui
 └── turbo.json

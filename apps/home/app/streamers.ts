@@ -3,5 +3,5 @@ export const streamers = [
   { username: "cansirin" },
   { username: "alicangunduzdev" },
   { username: "corefunctionsinitiated" },
-  { username: "geeksofdata" }
+  { username: "geeksofdata" },
 ];

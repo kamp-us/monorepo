@@ -1,10 +1,4 @@
-import {
-  Box,
-  CenteredContainer,
-  GappedBox,
-  Link,
-  ThemeToggle,
-} from "@kampus/ui";
+import { Box, CenteredContainer, GappedBox, Link, ThemeToggle } from "@kampus/ui";
 import type { FC } from "react";
 
 export const Topnav: FC = () => {

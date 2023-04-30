@@ -1,6 +1,5 @@
+import { json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import type { LoaderFunction } from "react-router-dom";
-import { json } from "react-router-dom";
 import { requireUser } from "~/authenticator.server";
 import { PostList } from "~/features/post/PostList";
 import type { PostWithCommentCount } from "~/models/post.server";
