@@ -10,18 +10,34 @@ import {
 } from "@kampus/ui";
 import type { ActionFunction, LoaderArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useFetcher, useLoaderData, useTransition } from "@remix-run/react";
+import { useActionData, useFetcher, useLoaderData, useTransition } from "@remix-run/react";
 import parser from "html-metadata-parser";
-import normalizeUrl from "normalize-url";
 import { useEffect, useRef } from "react";
+import { z } from "zod";
 import { requireUser } from "~/authenticator.server";
+import type { inferSafeParseErrors } from "~/features/zod/utils";
 import { createPost } from "~/models/post.server";
-import { getPostLink, validate, validateURL } from "~/utils";
+import { getPostLink, validateURL } from "~/utils";
+
+const SendSchema = z
+  .object({
+    title: z.string().min(2, { message: "Başlık en az iki harfli olmalıdır." }),
+    content: z.string().nullable(),
+    url: z.union([
+      z.string().url({ message: "Lütfen geçerli bir URL adresi girin." }).nullable(),
+      z.literal(""),
+    ]),
+  })
+  .refine((obj) => obj.content || obj.url, {
+    message: "Bir içerik veya URL adresi eklenmelidir.",
+  });
+
+type SendFields = z.infer<typeof SendSchema>;
+type SendFieldsErrors = inferSafeParseErrors<typeof SendSchema>;
 
 type ActionData = {
-  error: {
-    message: string;
-  };
+  fields: SendFields;
+  errors?: SendFieldsErrors;
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
@@ -47,43 +63,25 @@ export const loader = async ({ request }: LoaderArgs) => {
     );
   }
 };
+const badRequest = (data: ActionData) => json(data, { status: 400 });
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const title = formData.get("title")?.toString();
-  const content = formData.get("content")?.toString();
-  const formUrl = formData.get("url")?.toString();
+  const fields = Object.fromEntries(formData.entries()) as SendFields;
+
   const user = await requireUser(request);
 
-  if (!validate(title)) {
-    return json<ActionData>({
-      error: { message: "Başlık en az iki harfli olmalıdır." },
+  const result = SendSchema.safeParse(fields);
+
+  if (!result.success) {
+    return badRequest({
+      fields,
+      errors: result.error.flatten(),
     });
   }
-
-  if (!validate(content) && !validate(formUrl)) {
-    return json<ActionData>({
-      error: {
-        message: "En az 1 harften oluşacak içerik veya URL adresi eklenmelidir.",
-      },
-    });
-  }
-
-  let url = null;
-  if (validate(formUrl)) {
-    if (!validateURL(formUrl)) {
-      return json<ActionData>({
-        error: { message: "Lütfen geçerli bir URL adresi girin." },
-      });
-    } else {
-      url = normalizeUrl(formUrl as string);
-    }
-  }
-
-  let body = validate(content) ? content : null;
 
   try {
-    const post = await createPost(title, user.id, url, body);
+    const post = await createPost(fields.title, user.id, fields.url, fields.content);
     // FIXME: getPostLink required PostWithCommentCount,
     // but createPost returns Post
     return redirect(getPostLink(post));
@@ -96,8 +94,11 @@ const Send = () => {
   const transition = useTransition();
   const fetcher = useFetcher();
   const meta = fetcher.data?.meta;
-  const error = fetcher.data?.error;
   const loaderData = useLoaderData<typeof loader>();
+  const actionData = fetcher.data as ActionData;
+  const { errors } = actionData ?? {};
+
+  const { fieldErrors, formErrors } = errors ?? {};
   const titleRef = useRef<HTMLInputElement>(null);
 
   const fetchMetaTags = (url: string) => {
@@ -135,6 +136,12 @@ const Send = () => {
               fetchMetaTags(e.target.value);
             }}
           />
+          {fieldErrors?.url && (
+            <ValidationMessage
+              error={fieldErrors.url[0]}
+              isSubmitting={transition.state === "submitting"}
+            />
+          )}
           <Label htmlFor="title">Başlık</Label>
           <Input
             ref={titleRef}
@@ -143,16 +150,28 @@ const Send = () => {
             size="2"
             defaultValue={loaderData.meta?.title ?? meta?.title}
           />
+          {fieldErrors?.title && (
+            <ValidationMessage
+              error={fieldErrors.title[0]}
+              isSubmitting={transition.state === "submitting"}
+            />
+          )}
           <Label htmlFor="content">İçerik</Label>
           <Textarea css={{ width: "auto", cursor: "text" }} name="content" rows={4} />
+          {fieldErrors?.content && (
+            <ValidationMessage
+              error={fieldErrors.content[0]}
+              isSubmitting={transition.state === "submitting"}
+            />
+          )}
           <Box>
             <Button size="2" type="submit" variant="green">
               {transition.submission ? "Gönderiliyor..." : "Gönder"}
             </Button>
           </Box>
-          {error && (
+          {formErrors && (
             <ValidationMessage
-              error={error.message}
+              error={formErrors[0]}
               isSubmitting={transition.state === "submitting"}
             />
           )}
