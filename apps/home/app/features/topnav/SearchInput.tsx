@@ -5,11 +5,7 @@ const hasCollections = () => false;
 
 export const SearchInput: FC = () => {
   return (
-    <Form
-      method="get"
-      action="/search"
-      css={{ display: "flex", justifyContent: "center" }}
-    >
+    <Form method="get" action="/search" css={{ display: "flex", justifyContent: "center" }}>
       <ControlGroup css={{ flex: 1, maxWidth: 400 }}>
         {hasCollections() && (
           <Select size="2">

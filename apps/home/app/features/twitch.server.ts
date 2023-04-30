@@ -53,15 +53,12 @@ export const twitchApiClient: TwitchApiClient = {
   async getTwitchLiveStatus(username: string) {
     const { access_token } = await this.authenticate();
 
-    const response = await fetch(
-      `https://api.twitch.tv/helix/streams?user_login=${username}`,
-      {
-        headers: {
-          "Client-ID": this.clientId,
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
-    );
+    const response = await fetch(`https://api.twitch.tv/helix/streams?user_login=${username}`, {
+      headers: {
+        "Client-ID": this.clientId,
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`Failed to fetch Twitch live status for ${username}`);
@@ -77,9 +74,7 @@ export const twitchApiClient: TwitchApiClient = {
   async returnStreamersWithLiveStatus() {
     const streamersWithLiveStatus = await Promise.all(
       streamers.map(async (streamer) => {
-        const { live, viewerCount, startedAt } = await this.getTwitchLiveStatus(
-          streamer.username
-        );
+        const { live, viewerCount, startedAt } = await this.getTwitchLiveStatus(streamer.username);
 
         return {
           ...streamer,

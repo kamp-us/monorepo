@@ -1,9 +1,5 @@
 import { Box, ExternalLink, GappedBox, Text } from "@kampus/ui";
-import {
-  DiscordLogoIcon,
-  GitHubLogoIcon,
-  TwitterLogoIcon,
-} from "@radix-ui/react-icons";
+import { DiscordLogoIcon, GitHubLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 
 type TwitchLinkProps = {
   streamer: {
@@ -24,10 +20,7 @@ export const TwitchLink = ({ streamer }: TwitchLinkProps) => {
         gap: 24,
       }}
     >
-      <ExternalLink
-        href={`https://twitch.tv/${streamer.username}`}
-        css={{ color: "#efefef" }}
-      >
+      <ExternalLink href={`https://twitch.tv/${streamer.username}`} css={{ color: "#efefef" }}>
         <GappedBox css={{ alignItems: "center" }}>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Twitch_Glitch_Logo_Black.svg/878px-Twitch_Glitch_Logo_Black.svg.png"
@@ -56,10 +49,7 @@ export const TwitchLink = ({ streamer }: TwitchLinkProps) => {
 
 export const TwitterLink = ({ username }: { username: string }) => {
   return (
-    <ExternalLink
-      href={`https://twitter.com/${username}`}
-      css={{ color: "#efefef" }}
-    >
+    <ExternalLink href={`https://twitter.com/${username}`} css={{ color: "#efefef" }}>
       <GappedBox
         css={{
           backgroundColor: "#1C95E7",
