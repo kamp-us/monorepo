@@ -18,8 +18,7 @@
     "clean": "rm -rf dist",
     "dev": "npm run build:tsup -- --watch",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
-    "lint:fix": "TIMING=1 npm run lint -- --fix",
-    "test": "jest"
+    "lint:fix": "TIMING=1 npm run lint -- --fix"
   },
   "author": "",
   "dependencies": {
