@@ -1,13 +1,10 @@
-# fly.toml file generated for graphql-dev on 2023-03-19T00:50:19-07:00
-
-app = "graphql-dev"
+app = "gql-dev"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
 [env]
   PORT=8080
-  PANO_API_URL="http://pano-api-dev.internal"
 
 [experimental]
   auto_rollback = true
