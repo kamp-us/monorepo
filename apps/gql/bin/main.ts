@@ -6,13 +6,14 @@ import { Resolvers } from "../src/schema/types.generated";
 import { join } from "node:path";
 import { NodeHttpRPC } from "twirp-ts";
 import { GetUserResponse } from "@kampus-protos/users/service";
+import { env } from "../env";
 
 const typeDefs = readFileSync(join(__dirname, "../src/schema/schema.graphql"), "utf8").toString();
 
 const clients = {
   users: new UsersClientProtobuf(
     NodeHttpRPC({
-      baseUrl: "http://localhost:8200/twirp",
+      baseUrl: env.USERS_TWIRP_HOST,
     })
   ),
 };
