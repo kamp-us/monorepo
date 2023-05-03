@@ -1,17 +1,53 @@
+import { UsersClientProtobuf } from "@kampus-protos/users/service.twirp";
 import express from "express";
 import { createSchema, createYoga } from "graphql-yoga";
 import { readFileSync } from "node:fs";
 import { Resolvers } from "../src/schema/types.generated";
 import { join } from "node:path";
+import { NodeHttpRPC } from "twirp-ts";
+import { GetUserResponse } from "@kampus-protos/users/service";
 
 const typeDefs = readFileSync(join(__dirname, "../src/schema/schema.graphql"), "utf8").toString();
 
+const clients = {
+  users: new UsersClientProtobuf(
+    NodeHttpRPC({
+      baseUrl: "http://localhost:8200/twirp",
+    })
+  ),
+};
+
 const resolvers: Resolvers = {
   Query: {
-    user: (_, { input }) => {
+    user: async (_, { input }) => {
+      if (!input) {
+        throw new Error("input is required");
+      }
+
+      if (!input.id && !input.username) {
+        throw new Error("id or username is required");
+      }
+
+      let response: GetUserResponse;
+      if (input.id) {
+        response = await clients.users.GetUser({
+          identifier: { oneofKind: "id", id: input.id },
+        });
+      } else if (input.username) {
+        response = await clients.users.GetUser({
+          identifier: { oneofKind: "username", username: input.username },
+        });
+      } else {
+        return null;
+      }
+
+      if (!response.user) {
+        return null;
+      }
+
       return {
-        id: input.id ?? "1",
-        username: input.username ?? "test",
+        id: response.user.id,
+        username: response.user.username,
       };
     },
   },
