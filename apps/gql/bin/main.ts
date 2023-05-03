@@ -1,21 +1,16 @@
-import { UsersClientProtobuf } from "@kampus-protos/users/service.twirp";
 import express from "express";
 import { createSchema, createYoga } from "graphql-yoga";
 import { readFileSync } from "node:fs";
 import { Resolvers } from "../src/schema/types.generated";
 import { join } from "node:path";
 import { NodeHttpRPC } from "twirp-ts";
-import { GetUserResponse } from "@kampus-protos/users/service";
 import { env } from "../env";
+import { GetUserResponse, UsersClientProtobuf } from "@kampus-protos/users";
 
 const typeDefs = readFileSync(join(__dirname, "../src/schema/schema.graphql"), "utf8").toString();
 
 const clients = {
-  users: new UsersClientProtobuf(
-    NodeHttpRPC({
-      baseUrl: env.USERS_TWIRP_HOST,
-    })
-  ),
+  users: new UsersClientProtobuf(NodeHttpRPC({ baseUrl: env.USERS_TWIRP_HOST })),
 };
 
 const resolvers: Resolvers = {

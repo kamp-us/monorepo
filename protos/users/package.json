@@ -2,6 +2,7 @@
   "name": "@kampus-protos/users",
   "version": "0.0.0",
   "description": "twirp client & server helpers for users service",
+  "main": "./typescript/index.ts",
   "scripts": {
     "build:dts": "tsc --emitDeclarationOnly --declaration",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,6 +15,6 @@
     "typescript": "4.9.5"
   },
   "volta": {
-    "node": "18.16.0"
+    "node": "18.14.2"
   }
 }

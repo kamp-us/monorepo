@@ -1,14 +1,9 @@
 import express from "express";
-import { createUsersServer } from "@kampus-protos/users/service.twirp";
 import { env } from "./env";
 import { prisma } from "./prisma/client";
 import { User } from "@prisma/client";
 import { TwirpContext } from "twirp-ts";
-import {
-  CreateUserRequest,
-  GetBatchUsersRequest,
-  GetUserRequest,
-} from "@kampus-protos/users/service";
+import { CreateUserRequest, GetBatchUsersRequest, GetUserRequest, createUsersServer } from "@kampus-protos/users";
 
 function dateToTimestamp(date: Date): { seconds: bigint; nanos: number } {
   const seconds = BigInt(Math.floor(date.getTime() / 1000));
@@ -60,11 +55,7 @@ const GetBatchUsers = async (ctx: TwirpContext, request: GetBatchUsersRequest) =
   console.log({ ctx });
   const users = await prisma.user.findMany({
     where: {
-      OR: [
-        { id: { in: request.ids } },
-        { username: { in: request.usernames } },
-        { email: { in: request.emails } },
-      ],
+      OR: [{ id: { in: request.ids } }, { username: { in: request.usernames } }, { email: { in: request.emails } }],
       deletedAt: null,
     },
   });
