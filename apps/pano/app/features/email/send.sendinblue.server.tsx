@@ -1,5 +1,9 @@
 import { render } from "@react-email/render";
-import { SendSmtpEmail, TransactionalEmailsApi, TransactionalEmailsApiApiKeys } from "@sendinblue/client";
+import {
+  SendSmtpEmail,
+  TransactionalEmailsApi,
+  TransactionalEmailsApiApiKeys,
+} from "@sendinblue/client";
 import invariant from "tiny-invariant";
 import { env } from "~/utils/env.server";
 

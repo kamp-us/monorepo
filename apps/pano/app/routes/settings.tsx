@@ -1,4 +1,14 @@
-import { Box, Button, CenteredContainer, Form, GappedBox, Input, Label, Text, ValidationMessage } from "@kampus/ui";
+import {
+  Box,
+  Button,
+  CenteredContainer,
+  Form,
+  GappedBox,
+  Input,
+  Label,
+  Text,
+  ValidationMessage,
+} from "@kampus/ui";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
@@ -125,7 +135,12 @@ const Settings = () => {
             <Input id="username" name="username" placeholder="iron-man" defaultValue={username} />
             {fieldErrors?.username ? <ValidationMessage error={fieldErrors.username[0]} /> : null}
             <Label htmlFor="email">E-Posta</Label>
-            <Input id="email" name="email" placeholder="tony-stark@avengers.co" defaultValue={email} />
+            <Input
+              id="email"
+              name="email"
+              placeholder="tony-stark@avengers.co"
+              defaultValue={email}
+            />
             {fieldErrors?.email ? <ValidationMessage error={fieldErrors.email[0]} /> : null}
             <PasswordReset errors={errors} hasPassword={loaderData.hasPassword} />
             <input name="hasPassword" type="hidden" value={loaderData.hasPassword} />
@@ -159,7 +174,9 @@ const PasswordReset: FC<{
           />
         </>
       )}
-      {errors?.fieldErrors.oldPassword ? <ValidationMessage error={errors.fieldErrors.oldPassword[0]} /> : null}
+      {errors?.fieldErrors.oldPassword ? (
+        <ValidationMessage error={errors.fieldErrors.oldPassword[0]} />
+      ) : null}
 
       <Label htmlFor="newPassword">Yeni Parola</Label>
       <Input
@@ -169,7 +186,9 @@ const PasswordReset: FC<{
         type="password"
         aria-errormessage={errors?.fieldErrors.newPassword ? "password-error" : undefined}
       />
-      {errors?.fieldErrors.newPassword ? <ValidationMessage error={errors.fieldErrors.newPassword[0]} /> : null}
+      {errors?.fieldErrors.newPassword ? (
+        <ValidationMessage error={errors.fieldErrors.newPassword[0]} />
+      ) : null}
     </>
   );
 };

@@ -109,10 +109,11 @@ export const Button = styled("button", {
         "&:focus": {
           boxShadow: "inset 0 0 0 1px $colors$gray8, 0 0 0 1px $colors$gray8",
         },
-        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]': {
-          backgroundColor: "$gray4",
-          boxShadow: "inset 0 0 0 1px $colors$gray8",
-        },
+        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]':
+          {
+            backgroundColor: "$gray4",
+            boxShadow: "inset 0 0 0 1px $colors$gray8",
+          },
       },
       blue: {
         backgroundColor: "$blue2",
@@ -130,10 +131,11 @@ export const Button = styled("button", {
         "&:focus": {
           boxShadow: "inset 0 0 0 1px $colors$blue8, 0 0 0 1px $colors$blue8",
         },
-        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]': {
-          backgroundColor: "$blue4",
-          boxShadow: "inset 0 0 0 1px $colors$blue8",
-        },
+        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]':
+          {
+            backgroundColor: "$blue4",
+            boxShadow: "inset 0 0 0 1px $colors$blue8",
+          },
       },
       green: {
         backgroundColor: "$green2",
@@ -151,10 +153,11 @@ export const Button = styled("button", {
         "&:focus": {
           boxShadow: "inset 0 0 0 1px $colors$green8, 0 0 0 1px $colors$green8",
         },
-        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]': {
-          backgroundColor: "$green4",
-          boxShadow: "inset 0 0 0 1px $colors$green8",
-        },
+        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]':
+          {
+            backgroundColor: "$green4",
+            boxShadow: "inset 0 0 0 1px $colors$green8",
+          },
       },
       red: {
         backgroundColor: "$red2",
@@ -172,10 +175,11 @@ export const Button = styled("button", {
         "&:focus": {
           boxShadow: "inset 0 0 0 1px $colors$red8, 0 0 0 1px $colors$red8",
         },
-        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]': {
-          backgroundColor: "$red4",
-          boxShadow: "inset 0 0 0 1px $colors$red8",
-        },
+        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]':
+          {
+            backgroundColor: "$red4",
+            boxShadow: "inset 0 0 0 1px $colors$red8",
+          },
       },
       transparentWhite: {
         backgroundColor: "hsla(0,100%,100%,.2)",
@@ -271,10 +275,11 @@ export const Button = styled("button", {
         "&:focus": {
           boxShadow: "inset 0 0 0 1px $colors$grayA8, 0 0 0 1px $colors$grayA8",
         },
-        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]': {
-          backgroundColor: "$grayA4",
-          boxShadow: "none",
-        },
+        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]':
+          {
+            backgroundColor: "$grayA4",
+            boxShadow: "none",
+          },
       },
     },
     {
@@ -294,10 +299,11 @@ export const Button = styled("button", {
         "&:focus": {
           boxShadow: "inset 0 0 0 1px $colors$amber8, 0 0 0 1px $colors$amber8",
         },
-        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]': {
-          backgroundColor: "$amber4",
-          boxShadow: "none",
-        },
+        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]':
+          {
+            backgroundColor: "$amber4",
+            boxShadow: "none",
+          },
       },
     },
     {
@@ -317,10 +323,11 @@ export const Button = styled("button", {
         "&:focus": {
           boxShadow: "inset 0 0 0 1px $colors$greenA8, 0 0 0 1px $colors$greenA8",
         },
-        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]': {
-          backgroundColor: "$greenA4",
-          boxShadow: "none",
-        },
+        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]':
+          {
+            backgroundColor: "$greenA4",
+            boxShadow: "none",
+          },
       },
     },
     {
@@ -340,10 +347,11 @@ export const Button = styled("button", {
         "&:focus": {
           boxShadow: "inset 0 0 0 1px $colors$redA8, 0 0 0 1px $colors$redA8",
         },
-        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]': {
-          backgroundColor: "$redA4",
-          boxShadow: "none",
-        },
+        '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]':
+          {
+            backgroundColor: "$redA4",
+            boxShadow: "none",
+          },
       },
     },
   ],

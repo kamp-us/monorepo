@@ -1,4 +1,12 @@
-import { Box, CenteredContainer, GappedBox, IconButton, Link, ThemeToggle, useTheme } from "@kampus/ui";
+import {
+  Box,
+  CenteredContainer,
+  GappedBox,
+  IconButton,
+  Link,
+  ThemeToggle,
+  useTheme,
+} from "@kampus/ui";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { useFetcher } from "@remix-run/react";
 import type { FC } from "react";

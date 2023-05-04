@@ -191,7 +191,10 @@ const SinglePost = () => {
             Cevap yaz
           </Button>
           {postError && (
-            <ValidationMessage error={postError.message} isSubmitting={transition.state === "submitting"} />
+            <ValidationMessage
+              error={postError.message}
+              isSubmitting={transition.state === "submitting"}
+            />
           )}
         </GappedBox>
       </Form>

@@ -40,7 +40,15 @@ const getVariables = (type: "create" | "delete", input: { commentID: string; use
   return { type, input };
 };
 
-export const CommentItem: FC<CommentProps> = ({ comment, post, username, comments, allComments, expanded, error }) => {
+export const CommentItem: FC<CommentProps> = ({
+  comment,
+  post,
+  username,
+  comments,
+  allComments,
+  expanded,
+  error,
+}) => {
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [showComments, setShowComments] = useState(true);
@@ -48,7 +56,8 @@ export const CommentItem: FC<CommentProps> = ({ comment, post, username, comment
   const { baseUrl } = useConfigContext();
   const transition = useTransition();
   const isCommenting =
-    transition.state === "submitting" && transition.submission?.formData.get("commentID") === comment.id;
+    transition.state === "submitting" &&
+    transition.submission?.formData.get("commentID") === comment.id;
   const fetcher = useFetcher();
   const isLoading = !!fetcher.submission;
   const isUpvoted = user && comment ? comment.upvotes.some((u) => u.userID === user.id) : false;
@@ -109,7 +118,11 @@ export const CommentItem: FC<CommentProps> = ({ comment, post, username, comment
             <Timeago date={new Date(comment.createdAt)} />
           </Text>
           <fetcher.Form method="post" action="/commentUpvote">
-            <CommentUpvoteButton isUpvoted={isUpvoted} upvoteCount={comment.upvotes.length} isVoting={isLoading} />
+            <CommentUpvoteButton
+              isUpvoted={isUpvoted}
+              upvoteCount={comment.upvotes.length}
+              isVoting={isLoading}
+            />
             <input type="hidden" name="json" value={JSON.stringify(variables)} />
           </fetcher.Form>
           <MoreOptionsDropdown comment={comment} setEditOpen={setEditOpen} shareUrl={shareUrl} />
@@ -155,7 +168,10 @@ export const CommentItem: FC<CommentProps> = ({ comment, post, username, comment
                 {isCommenting ? "Kaydediliyor..." : "Cevapla"}
               </Button>
               {error && error.id === comment.id && (
-                <ValidationMessage error={error.message} isSubmitting={transition.state === "submitting"} />
+                <ValidationMessage
+                  error={error.message}
+                  isSubmitting={transition.state === "submitting"}
+                />
               )}
             </GappedBox>
           </Form>

@@ -72,7 +72,8 @@ const posts = [
     content: "aynen öyle",
     comments: [
       {
-        content: "'Yarın kampusa gidiyorum' - 'Hangi kampa?' - 'Yok ya, kampus, yazılım topluluğu oraya gidiyorum.'",
+        content:
+          "'Yarın kampusa gidiyorum' - 'Hangi kampa?' - 'Yok ya, kampus, yazılım topluluğu oraya gidiyorum.'",
       },
       {
         content:

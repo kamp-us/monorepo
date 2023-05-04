@@ -1,4 +1,8 @@
-import type { Password, User as PrismaUser, UserPreference as PrismaUserPreference } from "@prisma/client";
+import type {
+  Password,
+  User as PrismaUser,
+  UserPreference as PrismaUserPreference,
+} from "@prisma/client";
 import { Theme } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { prisma } from "~/db.server";
@@ -85,7 +89,11 @@ export const updateEmail = async (user: User, email?: string) => {
   });
 };
 
-export const updatePassword = async (user: User, oldPassword: string | null, newPassword: string) => {
+export const updatePassword = async (
+  user: User,
+  oldPassword: string | null,
+  newPassword: string
+) => {
   const userWithPassword = await prisma.user.findUnique({
     where: { id: user.id },
     include: {
@@ -98,7 +106,9 @@ export const updatePassword = async (user: User, oldPassword: string | null, new
   }
 
   const isValid =
-    oldPassword && userWithPassword.password ? await verifyPassword(userWithPassword.password, oldPassword) : true;
+    oldPassword && userWithPassword.password
+      ? await verifyPassword(userWithPassword.password, oldPassword)
+      : true;
 
   if (!isValid) {
     return null;

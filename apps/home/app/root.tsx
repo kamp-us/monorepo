@@ -1,4 +1,11 @@
-import { darkTheme, ThemeProvider, ToastProvider, ToastViewport, useClientStyle, useTheme } from "@kampus/ui";
+import {
+  darkTheme,
+  ThemeProvider,
+  ToastProvider,
+  ToastViewport,
+  useClientStyle,
+  useTheme,
+} from "@kampus/ui";
 import { json, LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
@@ -77,7 +84,11 @@ const Document = ({ children }: DocumentProps) => {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
-        <style id="stitches" dangerouslySetInnerHTML={{ __html: clientStyle.sheet }} suppressHydrationWarning />
+        <style
+          id="stitches"
+          dangerouslySetInnerHTML={{ __html: clientStyle.sheet }}
+          suppressHydrationWarning
+        />
         <style
           id="global"
           dangerouslySetInnerHTML={{

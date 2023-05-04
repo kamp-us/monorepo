@@ -1,7 +1,13 @@
 import { Box, CenteredContainer, ExternalLink, GappedBox, Text } from "@kampus/ui";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { DiscordLink, GithubLink, KampusGithubLink, TwitchLink, TwitterLink } from "app/features/link/Link";
+import {
+  DiscordLink,
+  GithubLink,
+  KampusGithubLink,
+  TwitchLink,
+  TwitterLink,
+} from "app/features/link/Link";
 import { Logo } from "app/features/logo/Logo";
 import { twitchApiClient } from "app/features/twitch.server";
 
@@ -41,8 +47,8 @@ export const Home = () => {
             bol pozitivite, motivasyon ve beraber gelismek mottolari...
           </Text>
           <Text css={{ color: "$gray12" }} lineHeight={3}>
-            <ExternalLink href={"https://discord.kamp.us"}>discord.kamp.us</ExternalLink> diye bir discord sunucuları
-            var, içerisi adeta şampiyonlar ligi gibi.
+            <ExternalLink href={"https://discord.kamp.us"}>discord.kamp.us</ExternalLink> diye bir
+            discord sunucuları var, içerisi adeta şampiyonlar ligi gibi.
           </Text>
         </GappedBox>
         <GappedBox css={{ flexDirection: "column", mt: 12, gap: 12 }}>
