@@ -1,4 +1,15 @@
-import { Box, Button, CenteredContainer, Form, GappedBox, Input, Label, Separator, SmallLink, Text } from "@kampus/ui";
+import {
+  Box,
+  Button,
+  CenteredContainer,
+  Form,
+  GappedBox,
+  Input,
+  Label,
+  Separator,
+  SmallLink,
+  Text,
+} from "@kampus/ui";
 import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, useSearchParams } from "@remix-run/react";
@@ -51,7 +62,13 @@ export const Login = () => {
             ) : (
               <>
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" name="email" type="text" placeholder="iron-man@avengers.co" size="2" />
+                <Input
+                  id="email"
+                  name="email"
+                  type="text"
+                  placeholder="iron-man@avengers.co"
+                  size="2"
+                />
               </>
             )}
             <Box>

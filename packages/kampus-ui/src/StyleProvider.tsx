@@ -20,5 +20,7 @@ export const ClientCacheProvider: FC = ({ children }) => {
     setSheet(getCssText());
   }, []);
 
-  return <ClientStyleContext.Provider value={{ reset, sheet }}>{children}</ClientStyleContext.Provider>;
+  return (
+    <ClientStyleContext.Provider value={{ reset, sheet }}>{children}</ClientStyleContext.Provider>
+  );
 };

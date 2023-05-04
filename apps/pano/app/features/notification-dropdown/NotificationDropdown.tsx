@@ -77,7 +77,10 @@ export const NotificationDropdown: FC<Props> = (props) => {
               messageArray.push(
                 `${
                   notif.triggeredBy.username
-                } isimli kullanıcı şu yorumunuzu yanıtladı: "${notif.comment.content.substring(0, 30)}..."`
+                } isimli kullanıcı şu yorumunuzu yanıtladı: "${notif.comment.content.substring(
+                  0,
+                  30
+                )}..."`
               );
             break;
           case "COMMENT":
@@ -97,7 +100,10 @@ export const NotificationDropdown: FC<Props> = (props) => {
               messageArray.push(
                 `${
                   notif.triggeredBy.username
-                } isimli kullanıcı şu yorumunuzu beğendi: "${notif.comment.content.substring(0, 30)}"`
+                } isimli kullanıcı şu yorumunuzu beğendi: "${notif.comment.content.substring(
+                  0,
+                  30
+                )}"`
               );
             break;
         }

@@ -5,7 +5,11 @@ export { AuthorizationError };
 
 type StrategyMap<TKey extends string, TUser = unknown> = Record<TKey, Strategy<TUser, any>>;
 
-interface Props<TStrategies extends StrategyMap<TKey, TUser>, TKey extends string = string, TUser = unknown> {
+interface Props<
+  TStrategies extends StrategyMap<TKey, TUser>,
+  TKey extends string = string,
+  TUser = unknown
+> {
   readonly strategies: TStrategies;
   readonly authenticator: Authenticator<TUser>;
 }

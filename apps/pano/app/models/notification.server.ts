@@ -165,7 +165,11 @@ export const createNotification = async (
   throw new Error("Invalid post id");
 };
 
-export const deleteNotifications = async (type: NotificationDeleteReason, userID: string, parentID: string) => {
+export const deleteNotifications = async (
+  type: NotificationDeleteReason,
+  userID: string,
+  parentID: string
+) => {
   if (type === "UPVOTE_REMOVED_ON_POST") {
     const relevantUserData = await prisma.post.findFirst({
       select: {

@@ -1,4 +1,11 @@
-import { darkTheme, ThemeProvider, ToastProvider, ToastViewport, useClientStyle, useTheme } from "@kampus/ui";
+import {
+  darkTheme,
+  ThemeProvider,
+  ToastProvider,
+  ToastViewport,
+  useClientStyle,
+  useTheme,
+} from "@kampus/ui";
 import type { LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
@@ -98,7 +105,11 @@ const Document = () => {
       <head>
         <Meta />
         <Links />
-        <style id="stitches" dangerouslySetInnerHTML={{ __html: clientStyle.sheet }} suppressHydrationWarning />
+        <style
+          id="stitches"
+          dangerouslySetInnerHTML={{ __html: clientStyle.sheet }}
+          suppressHydrationWarning
+        />
         <style
           id="global"
           dangerouslySetInnerHTML={{

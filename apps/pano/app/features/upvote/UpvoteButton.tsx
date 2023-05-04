@@ -9,7 +9,12 @@ type UpvoteProps = {
   disabled?: boolean;
 };
 
-export const UpvoteButton: FC<UpvoteProps> = ({ isUpvoted, upvoteCount, isVoting = false, disabled = false }) => {
+export const UpvoteButton: FC<UpvoteProps> = ({
+  isUpvoted,
+  upvoteCount,
+  isVoting = false,
+  disabled = false,
+}) => {
   return (
     <OldButton
       color="transparent"

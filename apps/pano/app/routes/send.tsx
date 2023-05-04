@@ -1,4 +1,13 @@
-import { Box, Button, CenteredContainer, GappedBox, Input, Label, Textarea, ValidationMessage } from "@kampus/ui";
+import {
+  Box,
+  Button,
+  CenteredContainer,
+  GappedBox,
+  Input,
+  Label,
+  Textarea,
+  ValidationMessage,
+} from "@kampus/ui";
 import type { ActionFunction, LoaderArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useFetcher, useLoaderData, useTransition } from "@remix-run/react";
@@ -105,7 +114,8 @@ const Send = () => {
     // value needs to be updated manually since default value
     // comes populated on server-side before the fetcher fetches
     // meta title therefore will not update.
-    if (loaderData.meta?.title && titleRef.current && meta?.title) titleRef.current.value = meta?.title;
+    if (loaderData.meta?.title && titleRef.current && meta?.title)
+      titleRef.current.value = meta?.title;
   }, [meta?.title, loaderData.meta?.title]);
 
   return (
@@ -126,7 +136,13 @@ const Send = () => {
             }}
           />
           <Label htmlFor="title">Başlık</Label>
-          <Input ref={titleRef} id="title" name="title" size="2" defaultValue={loaderData.meta?.title ?? meta?.title} />
+          <Input
+            ref={titleRef}
+            id="title"
+            name="title"
+            size="2"
+            defaultValue={loaderData.meta?.title ?? meta?.title}
+          />
           <Label htmlFor="content">İçerik</Label>
           <Textarea css={{ width: "auto", cursor: "text" }} name="content" rows={4} />
           <Box>
@@ -134,7 +150,12 @@ const Send = () => {
               {transition.submission ? "Gönderiliyor..." : "Gönder"}
             </Button>
           </Box>
-          {error && <ValidationMessage error={error.message} isSubmitting={transition.state === "submitting"} />}
+          {error && (
+            <ValidationMessage
+              error={error.message}
+              isSubmitting={transition.state === "submitting"}
+            />
+          )}
         </GappedBox>
       </fetcher.Form>
     </CenteredContainer>

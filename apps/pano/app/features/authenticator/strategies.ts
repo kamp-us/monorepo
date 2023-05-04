@@ -45,7 +45,10 @@ export const strategies = {
         });
       },
       sendCode: async ({ email, code, magicLink }) => {
-        await sendEmail({ email, subject: "kamp.us giriş linki" }, createElement(Registration, { code, magicLink }));
+        await sendEmail(
+          { email, subject: "kamp.us giriş linki" },
+          createElement(Registration, { code, magicLink })
+        );
       },
       validateCode: async (code) => {
         const otp = await prisma.otp.findUnique({

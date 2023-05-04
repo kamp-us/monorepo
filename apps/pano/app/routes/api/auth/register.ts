@@ -33,12 +33,18 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   if (!validatePassword(password)) {
-    return json<ActionData>({ errors: { password: "Password can't be less than 8 characters" } }, { status: 400 });
+    return json<ActionData>(
+      { errors: { password: "Password can't be less than 8 characters" } },
+      { status: 400 }
+    );
   }
 
   const existingUser = await getUserByEmail(email);
   if (existingUser) {
-    return json<ActionData>({ errors: { email: "A user already exists with this email" } }, { status: 400 });
+    return json<ActionData>(
+      { errors: { email: "A user already exists with this email" } },
+      { status: 400 }
+    );
   }
 
   const user = await createUser({ username, email, password });

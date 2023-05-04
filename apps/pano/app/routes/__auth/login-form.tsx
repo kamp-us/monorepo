@@ -20,7 +20,12 @@ export const Login = () => {
           <Input id="username" name="username" type="text" placeholder="iron-man" />
 
           <Label htmlFor="password">Parola</Label>
-          <Input id="password" name="password" placeholder="super-secret-password" type="password" />
+          <Input
+            id="password"
+            name="password"
+            placeholder="super-secret-password"
+            type="password"
+          />
           <Box>
             <Button type="submit">Giriş yap</Button>
           </Box>

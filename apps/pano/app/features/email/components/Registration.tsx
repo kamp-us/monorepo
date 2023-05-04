@@ -10,7 +10,10 @@ interface EmailProps {
 
 export const Registration: FC<EmailProps> = ({ code, magicLink }) => {
   return (
-    <Email heading={<EmailHeading>Selam!</EmailHeading>} preview={<EmailPreview>kamp.us'e hoşgeldin</EmailPreview>}>
+    <Email
+      heading={<EmailHeading>Selam!</EmailHeading>}
+      preview={<EmailPreview>kamp.us'e hoşgeldin</EmailPreview>}
+    >
       {magicLink && (
         <Link
           href={magicLink}

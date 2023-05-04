@@ -209,7 +209,12 @@ export const searchPosts = (query: string) => {
   });
 };
 
-export const createPost = (title: string, userID: string, url: string | null, content: string | null) => {
+export const createPost = (
+  title: string,
+  userID: string,
+  url: string | null,
+  content: string | null
+) => {
   let site;
   if (url) {
     const postURL = new URL(url);

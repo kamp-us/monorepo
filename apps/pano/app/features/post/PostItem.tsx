@@ -64,13 +64,19 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
     <GappedBox css={{ flexDirection: "column" }}>
       <GappedBox>
         <fetcher.Form method="post" action="/upvote">
-          <UpvoteButton isUpvoted={isUpvoted} upvoteCount={post.upvotes.length} isVoting={isLoading} />
+          <UpvoteButton
+            isUpvoted={isUpvoted}
+            upvoteCount={post.upvotes.length}
+            isVoting={isLoading}
+          />
           <input type="hidden" name="json" value={JSON.stringify(variables)} />
         </fetcher.Form>
         <GappedBox css={{ flexDirection: "column", width: "100%" }}>
           <GappedBox css={{ alignItems: "baseline" }}>
             {titleLink}
-            {post.site && <SmallLink to={getSitePostsLink({ site: post.site })}>{post.site}</SmallLink>}
+            {post.site && (
+              <SmallLink to={getSitePostsLink({ site: post.site })}>{post.site}</SmallLink>
+            )}
           </GappedBox>
           <GappedBox
             css={{
