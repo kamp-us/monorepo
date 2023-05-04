@@ -1,6 +1,6 @@
 ### Giriş
 
-Web geliştiricinin görevi nedir? Bir bakıma, websitesi yapar ve onun bakımını yaparlar.
+Web geliştiricinin görevi nedir? Bir bakıma, websitesi yapma ve onun bakımından sorumludurlar.
 
 Web geliştiriciler genelde ürününü veya hizmetini web'e taşımaya çalışan müşteriler için çalışırlar. Çalışma genelde proje odaklıdır ve müşterinin ihtiyaçlarını son ürüne koordine eden bir ekip ile işbirliği yapmayı içerir. Müşteri bir teknoloji şirketi, bir organizasyon veya bir hükümet olabilir. Çalışma Frontend, Backend veya FullStack web geliştirme içerebilir.
 
