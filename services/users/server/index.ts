@@ -1,6 +1,4 @@
-import express from "express";
-import { env } from "./env";
-import { prisma } from "./prisma/client";
+import { prisma } from "../prisma/client";
 import { User } from "@prisma/client";
 import { TwirpContext } from "twirp-ts";
 import { CreateUserRequest, GetBatchUsersRequest, GetUserRequest, createUsersServer } from "@kampus-protos/users";
@@ -19,21 +17,19 @@ const toProtoUser = (user: User) => ({
   updatedAt: dateToTimestamp(user.updatedAt),
 });
 
-const GetUser = async (ctx: TwirpContext, request: GetUserRequest) => {
-  console.log({ ctx });
-
+const GetUser = async (ctx: UsersTwirpContext, request: GetUserRequest) => {
   let user: User | null = null;
 
   if (request.identifier.oneofKind === "id") {
-    user = await prisma.user.findUnique({
+    user = await ctx.prisma.user.findUnique({
       where: { id: request.identifier.id },
     });
   } else if (request.identifier.oneofKind === "username") {
-    user = await prisma.user.findUnique({
+    user = await ctx.prisma.user.findUnique({
       where: { username: request.identifier.username },
     });
   } else if (request.identifier.oneofKind === "email") {
-    user = await prisma.user.findUnique({
+    user = await ctx.prisma.user.findUnique({
       where: { email: request.identifier.email },
     });
   }
@@ -51,9 +47,8 @@ const GetUser = async (ctx: TwirpContext, request: GetUserRequest) => {
   };
 };
 
-const GetBatchUsers = async (ctx: TwirpContext, request: GetBatchUsersRequest) => {
-  console.log({ ctx });
-  const users = await prisma.user.findMany({
+const GetBatchUsers = async (ctx: UsersTwirpContext, request: GetBatchUsersRequest) => {
+  const users = await ctx.prisma.user.findMany({
     where: {
       OR: [{ id: { in: request.ids } }, { username: { in: request.usernames } }, { email: { in: request.emails } }],
       deletedAt: null,
@@ -65,10 +60,8 @@ const GetBatchUsers = async (ctx: TwirpContext, request: GetBatchUsersRequest) =
   };
 };
 
-const CreateUser = async (ctx: TwirpContext, { username, email }: CreateUserRequest) => {
-  console.log({ ctx });
-
-  const user = await prisma.user.upsert({
+const CreateUser = async (ctx: UsersTwirpContext, { username, email }: CreateUserRequest) => {
+  const user = await ctx.prisma.user.upsert({
     where: { username },
     update: { username, email },
     create: { username, email },
@@ -77,18 +70,22 @@ const CreateUser = async (ctx: TwirpContext, { username, email }: CreateUserRequ
   return { user: toProtoUser(user) };
 };
 
-const server = createUsersServer({
+interface UsersTwirpContext extends TwirpContext {
+  prisma: typeof prisma;
+}
+
+export const server = createUsersServer<UsersTwirpContext>({
   GetUser,
   GetBatchUsers,
   CreateUser,
 });
 
-const app = express();
+server.use(async (ctx, req, next) => {
+  console.log("attaching prisma client to context");
+  ctx.prisma = prisma;
+  const response = await next(ctx, req);
 
-console.log("twirp server is gonna be routed to: ", server.matchingPath());
+  console.log("assigned prisma to context: ", !!ctx.prisma);
 
-app.post(server.matchingPath(), server.httpHandler());
-
-app.listen(env.PORT, () => {
-  console.log(`server is running at ${env.PORT}`);
+  return response;
 });

@@ -6,7 +6,7 @@
   "scripts": {
     "build:dts": "tsc --emitDeclarationOnly --declaration",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node server.ts"
+    "dev": "ts-node example-server.ts"
   },
   "keywords": [],
   "author": "Umut Sirin <umut@kamp.us> (https://umut.co/)",
