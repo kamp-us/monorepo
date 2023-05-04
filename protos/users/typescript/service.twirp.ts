@@ -45,21 +45,51 @@ export class UsersClientJSON implements UsersClient {
     this.CreateUser.bind(this);
   }
   GetUser(request: GetUserRequest): Promise<GetUserResponse> {
-    const data = GetUserRequest.toJson(request, { useProtoFieldName: true, emitDefaultValues: false });
-    const promise = this.rpc.request("kampus.users.Users", "GetUser", "application/json", data as object);
-    return promise.then((data) => GetUserResponse.fromJson(data as any, { ignoreUnknownFields: true }));
+    const data = GetUserRequest.toJson(request, {
+      useProtoFieldName: true,
+      emitDefaultValues: false,
+    });
+    const promise = this.rpc.request(
+      "kampus.users.Users",
+      "GetUser",
+      "application/json",
+      data as object
+    );
+    return promise.then((data) =>
+      GetUserResponse.fromJson(data as any, { ignoreUnknownFields: true })
+    );
   }
 
   GetBatchUsers(request: GetBatchUsersRequest): Promise<GetBatchUsersResponse> {
-    const data = GetBatchUsersRequest.toJson(request, { useProtoFieldName: true, emitDefaultValues: false });
-    const promise = this.rpc.request("kampus.users.Users", "GetBatchUsers", "application/json", data as object);
-    return promise.then((data) => GetBatchUsersResponse.fromJson(data as any, { ignoreUnknownFields: true }));
+    const data = GetBatchUsersRequest.toJson(request, {
+      useProtoFieldName: true,
+      emitDefaultValues: false,
+    });
+    const promise = this.rpc.request(
+      "kampus.users.Users",
+      "GetBatchUsers",
+      "application/json",
+      data as object
+    );
+    return promise.then((data) =>
+      GetBatchUsersResponse.fromJson(data as any, { ignoreUnknownFields: true })
+    );
   }
 
   CreateUser(request: CreateUserRequest): Promise<CreateUserResponse> {
-    const data = CreateUserRequest.toJson(request, { useProtoFieldName: true, emitDefaultValues: false });
-    const promise = this.rpc.request("kampus.users.Users", "CreateUser", "application/json", data as object);
-    return promise.then((data) => CreateUserResponse.fromJson(data as any, { ignoreUnknownFields: true }));
+    const data = CreateUserRequest.toJson(request, {
+      useProtoFieldName: true,
+      emitDefaultValues: false,
+    });
+    const promise = this.rpc.request(
+      "kampus.users.Users",
+      "CreateUser",
+      "application/json",
+      data as object
+    );
+    return promise.then((data) =>
+      CreateUserResponse.fromJson(data as any, { ignoreUnknownFields: true })
+    );
   }
 }
 
@@ -79,13 +109,23 @@ export class UsersClientProtobuf implements UsersClient {
 
   GetBatchUsers(request: GetBatchUsersRequest): Promise<GetBatchUsersResponse> {
     const data = GetBatchUsersRequest.toBinary(request);
-    const promise = this.rpc.request("kampus.users.Users", "GetBatchUsers", "application/protobuf", data);
+    const promise = this.rpc.request(
+      "kampus.users.Users",
+      "GetBatchUsers",
+      "application/protobuf",
+      data
+    );
     return promise.then((data) => GetBatchUsersResponse.fromBinary(data as Uint8Array));
   }
 
   CreateUser(request: CreateUserRequest): Promise<CreateUserResponse> {
     const data = CreateUserRequest.toBinary(request);
-    const promise = this.rpc.request("kampus.users.Users", "CreateUser", "application/protobuf", data);
+    const promise = this.rpc.request(
+      "kampus.users.Users",
+      "CreateUser",
+      "application/protobuf",
+      data
+    );
     return promise.then((data) => CreateUserResponse.fromBinary(data as Uint8Array));
   }
 }
@@ -106,7 +146,11 @@ export enum UsersMethod {
   CreateUser = "CreateUser",
 }
 
-export const UsersMethodList = [UsersMethod.GetUser, UsersMethod.GetBatchUsers, UsersMethod.CreateUser];
+export const UsersMethodList = [
+  UsersMethod.GetUser,
+  UsersMethod.GetBatchUsers,
+  UsersMethod.CreateUser,
+];
 
 export function createUsersServer<T extends TwirpContext = TwirpContext>(service: UsersTwirp<T>) {
   return new TwirpServer<UsersTwirp, T>({
@@ -118,7 +162,10 @@ export function createUsersServer<T extends TwirpContext = TwirpContext>(service
   });
 }
 
-function matchUsersRoute<T extends TwirpContext = TwirpContext>(method: string, events: RouterEvents<T>) {
+function matchUsersRoute<T extends TwirpContext = TwirpContext>(
+  method: string,
+  events: RouterEvents<T>
+) {
   switch (method) {
     case "GetUser":
       return async (
@@ -230,7 +277,11 @@ async function handleUsersGetUserJSON<T extends TwirpContext = TwirpContext>(
   }
 
   if (interceptors && interceptors.length > 0) {
-    const interceptor = chainInterceptors(...interceptors) as Interceptor<T, GetUserRequest, GetUserResponse>;
+    const interceptor = chainInterceptors(...interceptors) as Interceptor<
+      T,
+      GetUserRequest,
+      GetUserResponse
+    >;
     response = await interceptor(ctx, request!, (ctx, inputReq) => {
       return service.GetUser(ctx, inputReq);
     });
@@ -239,7 +290,10 @@ async function handleUsersGetUserJSON<T extends TwirpContext = TwirpContext>(
   }
 
   return JSON.stringify(
-    GetUserResponse.toJson(response, { useProtoFieldName: true, emitDefaultValues: false }) as string
+    GetUserResponse.toJson(response, {
+      useProtoFieldName: true,
+      emitDefaultValues: false,
+    }) as string
   );
 }
 
@@ -276,7 +330,10 @@ async function handleUsersGetBatchUsersJSON<T extends TwirpContext = TwirpContex
   }
 
   return JSON.stringify(
-    GetBatchUsersResponse.toJson(response, { useProtoFieldName: true, emitDefaultValues: false }) as string
+    GetBatchUsersResponse.toJson(response, {
+      useProtoFieldName: true,
+      emitDefaultValues: false,
+    }) as string
   );
 }
 
@@ -300,7 +357,11 @@ async function handleUsersCreateUserJSON<T extends TwirpContext = TwirpContext>(
   }
 
   if (interceptors && interceptors.length > 0) {
-    const interceptor = chainInterceptors(...interceptors) as Interceptor<T, CreateUserRequest, CreateUserResponse>;
+    const interceptor = chainInterceptors(...interceptors) as Interceptor<
+      T,
+      CreateUserRequest,
+      CreateUserResponse
+    >;
     response = await interceptor(ctx, request!, (ctx, inputReq) => {
       return service.CreateUser(ctx, inputReq);
     });
@@ -309,7 +370,10 @@ async function handleUsersCreateUserJSON<T extends TwirpContext = TwirpContext>(
   }
 
   return JSON.stringify(
-    CreateUserResponse.toJson(response, { useProtoFieldName: true, emitDefaultValues: false }) as string
+    CreateUserResponse.toJson(response, {
+      useProtoFieldName: true,
+      emitDefaultValues: false,
+    }) as string
   );
 }
 async function handleUsersGetUserProtobuf<T extends TwirpContext = TwirpContext>(
@@ -331,7 +395,11 @@ async function handleUsersGetUserProtobuf<T extends TwirpContext = TwirpContext>
   }
 
   if (interceptors && interceptors.length > 0) {
-    const interceptor = chainInterceptors(...interceptors) as Interceptor<T, GetUserRequest, GetUserResponse>;
+    const interceptor = chainInterceptors(...interceptors) as Interceptor<
+      T,
+      GetUserRequest,
+      GetUserResponse
+    >;
     response = await interceptor(ctx, request!, (ctx, inputReq) => {
       return service.GetUser(ctx, inputReq);
     });
@@ -395,7 +463,11 @@ async function handleUsersCreateUserProtobuf<T extends TwirpContext = TwirpConte
   }
 
   if (interceptors && interceptors.length > 0) {
-    const interceptor = chainInterceptors(...interceptors) as Interceptor<T, CreateUserRequest, CreateUserResponse>;
+    const interceptor = chainInterceptors(...interceptors) as Interceptor<
+      T,
+      CreateUserRequest,
+      CreateUserResponse
+    >;
     response = await interceptor(ctx, request!, (ctx, inputReq) => {
       return service.CreateUser(ctx, inputReq);
     });
