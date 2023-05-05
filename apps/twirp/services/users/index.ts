@@ -1,5 +1,4 @@
-import { prisma } from "../prisma/client";
-import { User } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 import { TwirpContext } from "twirp-ts";
 import {
   CreateUserRequest,
@@ -80,21 +79,23 @@ const CreateUser = async (ctx: UsersTwirpContext, { username, email }: CreateUse
 };
 
 interface UsersTwirpContext extends TwirpContext {
-  prisma: typeof prisma;
+  prisma: PrismaClient;
 }
 
-export const server = createUsersServer<UsersTwirpContext>({
-  GetUser,
-  GetBatchUsers,
-  CreateUser,
-});
+export const createServer = ({ prisma }: { prisma: PrismaClient }) => {
+  const server = createUsersServer<UsersTwirpContext>({
+    GetUser,
+    GetBatchUsers,
+    CreateUser,
+  });
 
-server.use(async (ctx, req, next) => {
-  console.log("attaching prisma client to context");
-  ctx.prisma = prisma;
-  const response = await next(ctx, req);
+  server.use(async (ctx, req, next) => {
+    console.log("attaching prisma client to context");
+    ctx.prisma = prisma;
+    const response = await next(ctx, req);
+    console.log("assigned prisma to context: ", !!ctx.prisma);
+    return response;
+  });
 
-  console.log("assigned prisma to context: ", !!ctx.prisma);
-
-  return response;
-});
+  return server;
+};

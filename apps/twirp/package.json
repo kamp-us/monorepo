@@ -1,30 +1,33 @@
 {
-  "name": "@kampus-services/users",
+  "name": "@kampus-apps/twirp",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build:dts": "tsc --emitDeclarationOnly --declaration",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node example-server.ts"
+    "dev": "cross-env NODE_ENV=development ts-node-dev --exit-child --respawn bin/main.ts"
   },
   "keywords": [],
-  "author": "Umut Sirin <umut@kamp.us> (https://umut.co/)",
-  "license": "ISC",
+  "author": "kamp.us <infra@kamp.us> (https://kamp.us/)",
+  "license": "MIT",
   "volta": {
     "node": "18.14.2"
   },
   "dependencies": {
     "@kampus-protos/users": "0.0.0",
-    "@prisma/client": "^4.9.0",
+    "@prisma/client": "4.9.0",
     "dotenv": "16.0.3",
     "express": "4.18.2",
+    "slugify": "1.6.5",
     "twirp-ts": "2.5.0",
     "znv": "0.3.2",
     "zod": "3.20.6"
   },
   "devDependencies": {
     "@types/express": "4.17.17",
-    "prisma": "4.9.0"
+    "prisma": "4.9.0",
+    "ts-node": "10.9.1",
+    "ts-node-dev": "2.0.0"
   }
 }

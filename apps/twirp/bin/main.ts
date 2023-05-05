@@ -1,26 +1,9 @@
 import { PrismaClient } from "@prisma/client";
+import express from "express";
 import { env } from "../env";
+import { createServer as createUsersService } from "../services/users";
 
-let prisma: PrismaClient;
-
-declare global {
-  var __db__: PrismaClient;
-}
-
-// this is needed because in development we don't want to restart
-// the server with every change, but we want to make sure we don't
-// create a new connection to the DB with every change either.
-// in production we'll have a single connection to the DB.
-if (env.NODE_ENV === "production") {
-  prisma = getClient();
-} else {
-  if (!global.__db__) {
-    global.__db__ = getClient();
-  }
-  prisma = global.__db__;
-}
-
-function getClient() {
+function getPrismaClient() {
   const { DATABASE_URL, NODE_ENV } = env;
 
   const databaseUrl = new URL(DATABASE_URL);
@@ -39,10 +22,17 @@ function getClient() {
     },
   });
 
-  // connect eagerly
-  client.$connect();
-
   return client;
 }
 
-export { prisma };
+const usersService = createUsersService({ prisma: getPrismaClient() });
+
+const app = express();
+
+console.log("twirp server is gonna be routed to: ", usersService.matchingPath());
+
+app.post(usersService.matchingPath(), usersService.httpHandler());
+
+app.listen(env.PORT, () => {
+  console.log(`server is running at ${env.PORT}`);
+});
