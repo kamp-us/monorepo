@@ -7,13 +7,9 @@
     "lint:fix": "npm run lint -- --fix",
     "dev": "run-p dev:*",
     "dev:remix": "remix dev",
-    "dev:prisma": "prisma migrate deploy && prisma generate && prisma db seed",
     "build": "remix build",
     "start": "cross-env NODE_ENV=production remix-serve ./build",
     "docker:start": "prisma migrate deploy && npm run start"
-  },
-  "prisma": {
-    "seed": "ts-node ./prisma/seed.ts"
   },
   "volta": {
     "node": "18.14.2"
@@ -25,8 +21,8 @@
     "/build"
   ],
   "dependencies": {
+    "@kampus-db/pano-prisma": "^0.0.0",
     "@kampus/ui": "*",
-    "@prisma/client": "4.9.0",
     "@radix-ui/react-icons": "1.1.1",
     "@react-email/container": "0.0.7",
     "@react-email/head": "0.0.4",
@@ -74,7 +70,6 @@
     "cross-env": "7.0.3",
     "npm-run-all": "4.1.5",
     "prettier": "2.8.3",
-    "prisma": "4.9.0",
     "ts-node": "10.9.1",
     "typescript": "4.9.5"
   }
