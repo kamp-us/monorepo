@@ -1,52 +1,25 @@
 import express from "express";
 import { createSchema, createYoga } from "graphql-yoga";
 import { readFileSync } from "node:fs";
-import { Resolvers } from "../src/schema/types.generated";
 import { join } from "node:path";
-import { NodeHttpRPC } from "twirp-ts";
 import { env } from "../env";
-import { GetBatchUsersRequest, UsersClientProtobuf } from "@kampus-protos/users";
-import DataLoader from "dataloader";
+import type { Resolvers } from "../src/schema";
+import { createUsersLoader, UsersLoader } from "../src/loaders";
+import { createTwirpClients, TwirpClients } from "../src/clients";
 
 const typeDefs = readFileSync(join(__dirname, "../src/schema/schema.graphql"), "utf8").toString();
 
-const clients = {
-  users: new UsersClientProtobuf(NodeHttpRPC({ baseUrl: env.USERS_TWIRP_HOST })),
+type DataLoaders = {
+  users: UsersLoader;
 };
 
-type UserLoaderKeyIdentifier = "id" | "username" | "email";
-
-type UserLoaderKey = `${UserLoaderKeyIdentifier}_${string}`;
-
-const loaders = {
-  users: new DataLoader(async (keys: readonly UserLoaderKey[]) => {
-    const request: GetBatchUsersRequest = {
-      ids: [],
-      usernames: [],
-      emails: [],
-    };
-
-    keys.forEach((key) => {
-      const [identifier, value] = key.split("_") as [UserLoaderKeyIdentifier, string];
-      if (identifier === "id") {
-        request.ids.push(value);
-      } else if (identifier === "username") {
-        request.usernames.push(value);
-      }
-    });
-
-    const response = await clients.users.GetBatchUsers(request);
-
-    const users = response.users || [];
-
-    return users.map((user) => ({
-      id: user.id,
-      username: user.username,
-    }));
-  }),
+const createLoaders = (clients: TwirpClients): DataLoaders => {
+  return {
+    users: createUsersLoader(clients),
+  };
 };
 
-const resolvers: Resolvers<{ loaders: typeof loaders }> = {
+const resolvers: Resolvers<{ loaders: DataLoaders }> = {
   Query: {
     user: async (_, { input }, context) => {
       if (!input) {
@@ -69,13 +42,14 @@ const resolvers: Resolvers<{ loaders: typeof loaders }> = {
 
 function main() {
   const app = express();
+  const twirpClients = createTwirpClients();
 
   const yoga = createYoga({
     schema: createSchema({ typeDefs, resolvers }),
     logging: "debug",
     graphiql: true,
     context: async () => ({
-      loaders,
+      loaders: createLoaders(twirpClients),
     }),
   });
 
