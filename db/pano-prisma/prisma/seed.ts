@@ -1,40 +1,43 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import slugify from "slugify";
 
 const users = [
   { username: "admin", email: "admin@kamp.us", password: "123123" },
   { username: "testuser", email: "user1a@kamp.us", password: "123123123" },
-  { username: "berke", email: "andyanday33@gmail.com", password: "123123" },
-  { username: "anday", email: "nzl33_anday@hotmail.com", password: "123123" },
 ];
+
 const posts = [
   {
     title: "Hacker News",
+    slug: "hacker-news",
     url: "https://news.ycombinator.com",
     site: "news.ycombinator.com",
     content: "Code",
   },
   {
     title: "Reddit",
+    slug: "reddit",
     url: "https://reddit.com",
     site: "reddit.com",
     content: "The front page of the internet",
   },
   {
     title: "Twitter",
+    slug: "twitter",
     url: "https://twitter.com",
     site: "twitter.com",
     content: "What's happening?",
   },
   {
     title: "Facebook",
+    slug: "facebook",
     url: "https://facebook.com",
     site: "facebook.com",
     content: "Connect with friends, family and other people you know.",
   },
   {
     title: "Kampus Twitch",
+    slug: "kampus-twitch",
     url: "https://twitch.tv/usirin",
     site: "twitch.tv/usirin",
     content: "Twitch",
@@ -42,6 +45,7 @@ const posts = [
   },
   {
     title: "discord.kamp.us",
+    slug: "discord-kamp-us",
     url: "discord.kamp.us",
     site: "discord.kamp.us",
     content:
@@ -56,6 +60,7 @@ const posts = [
   },
   {
     title: "Github",
+    slug: "github",
     url: "https://github.com/kamp-us/monorepo",
     site: "github.com/kamp-us/monorepo",
     content: "Dünyanın en iyi monoreposu",
@@ -68,6 +73,7 @@ const posts = [
   },
   {
     title: "Yüksek dozajlı şakalar",
+    slug: "yuksek-dozajli-sakalar",
     site: "kamp.us",
     content: "aynen öyle",
     comments: [
@@ -88,13 +94,14 @@ const posts = [
 ];
 
 type User = { username: string; email: string; password: string };
+
 type Post = {
   title: string;
+  slug: string;
   url?: string;
   content?: string;
   site?: string;
   comments?: { content: string }[];
-  slug?: string;
 };
 
 const prisma = new PrismaClient();
@@ -132,7 +139,7 @@ async function seedAll(users: User[], posts: Post[]) {
     });
     postOwnerIDs.push(prismaUser.id);
 
-    const prismaUserPreferences = await prisma.userPreference.upsert({
+    await prisma.userPreference.upsert({
       where: {
         userID: prismaUser.id,
       },
@@ -151,9 +158,9 @@ async function seedAll(users: User[], posts: Post[]) {
 
   for (const post of posts) {
     const title: string = post.title;
+    const slug: string = post.slug;
     const url: string | null = post.url || null;
     const site: string | null = post.site || null;
-    const slug = slugify(title) as string;
     const content: string | null = post.content || null;
     const comments: any[] = post.comments || [];
     const findPrismaPost = await prisma.post.findFirst({
@@ -167,7 +174,8 @@ async function seedAll(users: User[], posts: Post[]) {
     if (findPrismaPost) {
       return;
     }
-    const prismaPost = await prisma.post.create({
+
+    await prisma.post.create({
       data: {
         title,
         url,

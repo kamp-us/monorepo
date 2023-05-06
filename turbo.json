@@ -2,11 +2,27 @@
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "build": {
-      "outputs": ["dist/**", "build/**", "api/**", "public/build/**"],
-      "dependsOn": ["^build"]
+      "outputs": [
+        "dist/**",
+        "build/**",
+        "api/**",
+        "public/build/**"
+      ],
+      "dependsOn": [
+        "^prisma:generate",
+        "^build"
+      ]
+    },
+    "prisma:generate": {
+      "cache": false
+    },
+    "prisma:push": {
+      "cache": false
     },
     "test": {
-      "outputs": ["coverage/**"],
+      "outputs": [
+        "coverage/**"
+      ],
       "dependsOn": []
     },
     "lint": {
@@ -19,10 +35,19 @@
       "cache": false
     },
     "@kampus-apps/pano#*": {
-      "env": ["NODE_ENV", "DATABASE_URL", "SESSION_SECRET"]
+      "env": [
+        "NODE_ENV",
+        "DATABASE_URL",
+        "SESSION_SECRET"
+      ]
     },
     "@kampus-apps/home#*": {
-      "env": ["NODE_ENV", "SESSION_SECRET", "TWITCH_CLIENT_ID", "TWITCH_CLIENT_SECRET"]
+      "env": [
+        "NODE_ENV",
+        "SESSION_SECRET",
+        "TWITCH_CLIENT_ID",
+        "TWITCH_CLIENT_SECRET"
+      ]
     }
   }
 }
