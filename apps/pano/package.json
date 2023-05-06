@@ -9,7 +9,7 @@
     "dev:remix": "remix dev",
     "build": "remix build",
     "start": "cross-env NODE_ENV=production remix-serve ./build",
-    "docker:start": "prisma migrate deploy && npm run start"
+    "docker:start": "npm run start"
   },
   "volta": {
     "node": "18.14.2"
