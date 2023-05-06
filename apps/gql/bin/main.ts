@@ -3,8 +3,8 @@ import { createSchema, createYoga } from "graphql-yoga";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { env } from "../env";
-import type { Resolvers } from "../src/schema";
-import { createUsersLoader, UsersLoader } from "../src/loaders";
+import type { Resolvers, UserInput } from "../src/schema";
+import { createUsersLoader, UserLoaderKey, UsersLoader } from "../src/loaders";
 import { createTwirpClients, TwirpClients } from "../src/clients";
 
 const typeDefs = readFileSync(join(__dirname, "../src/schema/schema.graphql"), "utf8").toString();
@@ -19,6 +19,9 @@ const createLoaders = (clients: TwirpClients): DataLoaders => {
   };
 };
 
+const getUserLoaderKey = (input: UserInput): UserLoaderKey =>
+  input.id ? `id_${input.id}` : `username_${input.username}`;
+
 const resolvers: Resolvers<{ loaders: DataLoaders }> = {
   Query: {
     user: async (_, { input }, context) => {
@@ -30,7 +33,7 @@ const resolvers: Resolvers<{ loaders: DataLoaders }> = {
         throw new Error("id or username is required");
       }
 
-      return context.loaders.users.load(input.id ? `id_${input.id}` : `username_${input.username}`);
+      return context.loaders.users.load(getUserLoaderKey(input));
     },
   },
 

@@ -3,7 +3,7 @@ import DataLoader from "dataloader";
 import { User } from "../schema";
 
 type UserLoaderKeyIdentifier = "id" | "username" | "email";
-type UserLoaderKey = `${UserLoaderKeyIdentifier}_${string}`;
+export type UserLoaderKey = `${UserLoaderKeyIdentifier}_${string}`;
 
 const parseUserLoaderKey = (key: string): [UserLoaderKeyIdentifier, string] => {
   return key.split("_") as [UserLoaderKeyIdentifier, string];
