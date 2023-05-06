@@ -1,4 +1,4 @@
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient, User } from "@kampus-db/pano-prisma";
 import { TwirpContext } from "twirp-ts";
 import {
   CreateUserRequest,
