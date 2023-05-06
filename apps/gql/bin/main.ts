@@ -64,8 +64,8 @@ function main() {
   });
 
   app.use("/graphql", yoga);
-  app.listen(4000, () => {
-    console.info("Server is running on http://localhost:4000/graphql");
+  app.listen(env.PORT, () => {
+    console.info(`Server is running on http://localhost:${env.PORT}/graphql`);
   });
 }
 
