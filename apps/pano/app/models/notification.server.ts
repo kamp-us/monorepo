@@ -5,18 +5,13 @@ import { env } from "~/utils/env.server";
 
 export type NotificationType = "UPVOTECOMMENT" | "UPVOTEPOST" | "COMMENT";
 
-export type MyNotification = Pick<
-  Notification,
-  "id" | "url" | "type" | "read" | "createdAt"
-> & {
+export type MyNotification = Pick<Notification, "id" | "url" | "type" | "read" | "createdAt"> & {
   triggeredBy: { username: string };
   post: { title: string } | null;
   comment: { content: string; id: string } | null;
 };
 
-export type NotificationDeleteReason =
-  | "UPVOTE_REMOVED_ON_POST"
-  | "UPVOTE_REMOVED_ON_COMMENT";
+export type NotificationDeleteReason = "UPVOTE_REMOVED_ON_POST" | "UPVOTE_REMOVED_ON_COMMENT";
 
 export const getMyNotifications = (userID: string, page: number) => {
   return prisma.notification.findMany({

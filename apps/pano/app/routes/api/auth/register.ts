@@ -25,17 +25,11 @@ export const action: ActionFunction = async ({ request }) => {
   const email = formData.get("email");
 
   if (!validateUsername(username)) {
-    return json<ActionData>(
-      { errors: { username: "Username is invalid" } },
-      { status: 400 }
-    );
+    return json<ActionData>({ errors: { username: "Username is invalid" } }, { status: 400 });
   }
 
   if (!validateEmail(email)) {
-    return json<ActionData>(
-      { errors: { email: "Email is invalid" } },
-      { status: 400 }
-    );
+    return json<ActionData>({ errors: { email: "Email is invalid" } }, { status: 400 });
   }
 
   if (!validatePassword(password)) {

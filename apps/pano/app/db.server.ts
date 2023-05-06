@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@kampus-db/pano-prisma";
 import invariant from "tiny-invariant";
 import { env } from "./utils/env.server";
 

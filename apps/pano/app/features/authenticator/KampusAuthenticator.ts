@@ -3,10 +3,7 @@ import { AuthorizationError } from "remix-auth";
 
 export { AuthorizationError };
 
-type StrategyMap<TKey extends string, TUser = unknown> = Record<
-  TKey,
-  Strategy<TUser, any>
->;
+type StrategyMap<TKey extends string, TUser = unknown> = Record<TKey, Strategy<TUser, any>>;
 
 interface Props<
   TStrategies extends StrategyMap<TKey, TUser>,
@@ -29,11 +26,9 @@ export class KampusAuthenticator<
     this.strategies = strategies;
     this.authenticator = authenticator;
 
-    Object.entries<Strategy<TUser, never>>(this.strategies).forEach(
-      ([name, strategy]) => {
-        this.authenticator.use(strategy, name);
-      }
-    );
+    Object.entries<Strategy<TUser, never>>(this.strategies).forEach(([name, strategy]) => {
+      this.authenticator.use(strategy, name);
+    });
   }
 
   public authenticate(name: TKey, request: Request, options?: any) {

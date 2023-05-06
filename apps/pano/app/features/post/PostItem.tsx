@@ -1,12 +1,4 @@
-import {
-  Box,
-  ExternalLink,
-  GappedBox,
-  InternalLink,
-  SmallLink,
-  Text,
-  Timeago,
-} from "@kampus/ui";
+import { Box, ExternalLink, GappedBox, InternalLink, SmallLink, Text, Timeago } from "@kampus/ui";
 import type { SerializeFrom } from "@remix-run/node";
 import { useFetcher } from "@remix-run/react";
 import normalizeUrl from "normalize-url";
@@ -23,10 +15,7 @@ type PostItemProps = {
   showContent?: boolean;
 };
 
-const getVariables = (
-  type: "create" | "delete",
-  input: { postID: string; userID: string }
-) => {
+const getVariables = (type: "create" | "delete", input: { postID: string; userID: string }) => {
   return { type, input };
 };
 
@@ -39,8 +28,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
   const isContentVisible = hasContent && showContent;
   const shareUrl = getExternalPostURL({ post, baseUrl });
 
-  const isUpvoted =
-    user && post ? post.upvotes.some((u) => u.userID === user.id) : false;
+  const isUpvoted = user && post ? post.upvotes.some((u) => u.userID === user.id) : false;
 
   const variables = user
     ? isUpvoted
@@ -87,9 +75,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
           <GappedBox css={{ alignItems: "baseline" }}>
             {titleLink}
             {post.site && (
-              <SmallLink to={getSitePostsLink({ site: post.site })}>
-                {post.site}
-              </SmallLink>
+              <SmallLink to={getSitePostsLink({ site: post.site })}>{post.site}</SmallLink>
             )}
           </GappedBox>
           <GappedBox
@@ -100,10 +86,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
             }}
           >
             <Box>@{post.owner.username}</Box> |
-            <SmallLink to={getPostLink(post)}>
-              {post._count.comments} yorum
-            </SmallLink>
-            |
+            <SmallLink to={getPostLink(post)}>{post._count.comments} yorum</SmallLink>|
             <Text size="1">
               <Timeago date={new Date(post.createdAt)} />
             </Text>
@@ -122,11 +105,7 @@ export const PostItem: FC<PostItemProps> = ({ post, showContent = false }) => {
                 backgroundColor: "$gray3",
               }}
             >
-              <Text
-                size="3"
-                lineHeight="2"
-                css={{ color: "$gray12", whiteSpace: "break-spaces" }}
-              >
+              <Text size="3" lineHeight="2" css={{ color: "$gray12", whiteSpace: "break-spaces" }}>
                 {post.content}
               </Text>
             </GappedBox>

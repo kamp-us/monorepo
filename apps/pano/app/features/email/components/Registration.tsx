@@ -27,9 +27,7 @@ export const Registration: FC<EmailProps> = ({ code, magicLink }) => {
           Giriş yapmak icin tikla
         </Link>
       )}
-      <Text style={{ ...text, marginBottom: "14px" }}>
-        Ya da asagidaki giris kodunu kopyala
-      </Text>
+      <Text style={{ ...text, marginBottom: "14px" }}>Ya da asagidaki giris kodunu kopyala</Text>
       <code style={codeStyles}>{code}</code>
       <Text
         style={{

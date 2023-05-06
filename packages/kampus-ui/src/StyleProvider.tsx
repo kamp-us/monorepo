@@ -21,8 +21,6 @@ export const ClientCacheProvider: FC = ({ children }) => {
   }, []);
 
   return (
-    <ClientStyleContext.Provider value={{ reset, sheet }}>
-      {children}
-    </ClientStyleContext.Provider>
+    <ClientStyleContext.Provider value={{ reset, sheet }}>{children}</ClientStyleContext.Provider>
   );
 };

@@ -64,8 +64,7 @@ export const action: ActionFunction = async ({ request }) => {
   if (!validate(content) && !validate(formUrl)) {
     return json<ActionData>({
       error: {
-        message:
-          "En az 1 harften oluşacak içerik veya URL adresi eklenmelidir.",
+        message: "En az 1 harften oluşacak içerik veya URL adresi eklenmelidir.",
       },
     });
   }
@@ -145,11 +144,7 @@ const Send = () => {
             defaultValue={loaderData.meta?.title ?? meta?.title}
           />
           <Label htmlFor="content">İçerik</Label>
-          <Textarea
-            css={{ width: "auto", cursor: "text" }}
-            name="content"
-            rows={4}
-          />
+          <Textarea css={{ width: "auto", cursor: "text" }} name="content" rows={4} />
           <Box>
             <Button size="2" type="submit" variant="green">
               {transition.submission ? "Gönderiliyor..." : "Gönder"}

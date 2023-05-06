@@ -37,11 +37,7 @@ export const Topnav: FC = () => {
                   <PlusIcon />
                 </IconButton>
                 <fetcher.Form method="post" action="/change-theme">
-                  <input
-                    type="hidden"
-                    name="theme"
-                    value={theme.toUpperCase()}
-                  />
+                  <input type="hidden" name="theme" value={theme.toUpperCase()} />
                   <ThemeToggle />
                 </fetcher.Form>
                 <NotificationDropdown />

@@ -7,8 +7,8 @@ kamp.us web projects & packages
 - The languages we use in this repo:
   - Typescript
     - [remix.run](https://remix.run) - a react web application framework
-  - Golang
     - [Twirp](https://github.com/twitchtv/twirp)
+    - [twirp-ts](https://github.com/hopin-team/twirp-ts)
 - Join our discord at https://discord.kamp.us
 - We use `#kampus-projects` channel for onboarding people to the project.
 - Talk to us so we can figure out a plan together what would be the best way
@@ -37,7 +37,6 @@ cd monorepo
 ├── package.json
 ├── packages
 │   ├── kampus-eslint-config
-│   ├── kampus-jest-presets
 │   ├── kampus-tsconfig
 │   └── kampus-ui
 └── turbo.json

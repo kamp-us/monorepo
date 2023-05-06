@@ -62,8 +62,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   if (!validate(content) && !validate(formUrl)) {
     return json<ActionData>({
       error: {
-        message:
-          "En az 1 harften oluşacak içerik veya URL adresi eklenmelidir.",
+        message: "En az 1 harften oluşacak içerik veya URL adresi eklenmelidir.",
       },
     });
   }

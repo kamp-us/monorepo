@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  CenteredContainer,
-  Form,
-  GappedBox,
-  Input,
-  Label,
-} from "@kampus/ui";
+import { Box, Button, CenteredContainer, Form, GappedBox, Input, Label } from "@kampus/ui";
 import type { MetaFunction } from "@remix-run/node";
 import { useSearchParams } from "@remix-run/react";
 
@@ -25,12 +17,7 @@ export const Login = () => {
       <Form method="post" action="/api/auth/login" noValidate>
         <GappedBox css={{ flexDirection: "column", marginTop: 10 }}>
           <Label htmlFor="username">Kullanıcı Adı</Label>
-          <Input
-            id="username"
-            name="username"
-            type="text"
-            placeholder="iron-man"
-          />
+          <Input id="username" name="username" type="text" placeholder="iron-man" />
 
           <Label htmlFor="password">Parola</Label>
           <Input

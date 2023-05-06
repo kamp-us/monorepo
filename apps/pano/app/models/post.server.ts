@@ -19,9 +19,7 @@ const selectPostWithUpvote = Prisma.validator<Prisma.PostArgs>()({
   },
 });
 
-export type PostWithUpvotes = Prisma.PostGetPayload<
-  typeof selectPostWithUpvote
->;
+export type PostWithUpvotes = Prisma.PostGetPayload<typeof selectPostWithUpvote>;
 
 const selectPostWithCommentCount = Prisma.validator<Prisma.PostArgs>()({
   include: {
@@ -31,9 +29,7 @@ const selectPostWithCommentCount = Prisma.validator<Prisma.PostArgs>()({
   },
 });
 
-export type _PostWithCommentCount = Prisma.PostGetPayload<
-  typeof selectPostWithCommentCount
->;
+export type _PostWithCommentCount = Prisma.PostGetPayload<typeof selectPostWithCommentCount>;
 
 const selectPostWithComment = Prisma.validator<Prisma.PostArgs>()({
   include: {
@@ -46,18 +42,11 @@ const selectPostWithComment = Prisma.validator<Prisma.PostArgs>()({
   },
 });
 
-export type PostWithComments = Prisma.PostGetPayload<
-  typeof selectPostWithComment
->;
+export type PostWithComments = Prisma.PostGetPayload<typeof selectPostWithComment>;
 
-export type Post = PostWithOwner &
-  PostWithUpvotes &
-  PostWithComments &
-  _PostWithCommentCount;
+export type Post = PostWithOwner & PostWithUpvotes & PostWithComments & _PostWithCommentCount;
 
-export type PostWithCommentCount = PostWithOwner &
-  PostWithUpvotes &
-  _PostWithCommentCount;
+export type PostWithCommentCount = PostWithOwner & PostWithUpvotes & _PostWithCommentCount;
 
 export const getAllPosts = () => {
   return prisma.post.findMany({
@@ -256,12 +245,7 @@ export const deletePost = (id: string) => {
   });
 };
 
-export const editPost = (
-  id: string,
-  title: string,
-  url: string | null,
-  content: string | null
-) => {
+export const editPost = (id: string, title: string, url: string | null, content: string | null) => {
   let site;
   if (url) {
     const postURL = new URL(url);
@@ -282,9 +266,7 @@ export const editPost = (
 };
 
 export const isPostUpvoted = (post: Post, userID: string) => {
-  return post.upvotes.some(
-    (upvote: { userID: string }) => upvote.userID === userID
-  );
+  return post.upvotes.some((upvote: { userID: string }) => upvote.userID === userID);
 };
 
 export const createUpvote = (postID: string, userID: string) => {

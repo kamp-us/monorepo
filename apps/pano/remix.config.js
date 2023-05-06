@@ -3,7 +3,7 @@
  */
 module.exports = {
   appDirectory: "./app",
-  serverDependenciesToBundle: ["normalize-url"],
+  serverDependenciesToBundle: ["normalize-url", "@kampus-db/pano-prisma"],
   assetsBuildDirectory: "public/build",
   publicPath: "/build/",
   serverBuildDirectory: "build",

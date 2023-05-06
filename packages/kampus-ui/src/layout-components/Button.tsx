@@ -193,8 +193,7 @@ export const Button = styled("button", {
           backgroundColor: "hsla(0,100%,100%,.3)",
         },
         "&:focus": {
-          boxShadow:
-            "inset 0 0 0 1px hsla(0,100%,100%,.35), 0 0 0 1px hsla(0,100%,100%,.35)",
+          boxShadow: "inset 0 0 0 1px hsla(0,100%,100%,.35), 0 0 0 1px hsla(0,100%,100%,.35)",
         },
       },
       transparentBlack: {
@@ -209,8 +208,7 @@ export const Button = styled("button", {
           backgroundColor: "hsla(0,0%,0%,.3)",
         },
         "&:focus": {
-          boxShadow:
-            "inset 0 0 0 1px hsla(0,0%,0%,.35), 0 0 0 1px hsla(0,0%,0%,.35)",
+          boxShadow: "inset 0 0 0 1px hsla(0,0%,0%,.35), 0 0 0 1px hsla(0,0%,0%,.35)",
         },
       },
     },
@@ -323,8 +321,7 @@ export const Button = styled("button", {
           backgroundColor: "$greenA4",
         },
         "&:focus": {
-          boxShadow:
-            "inset 0 0 0 1px $colors$greenA8, 0 0 0 1px $colors$greenA8",
+          boxShadow: "inset 0 0 0 1px $colors$greenA8, 0 0 0 1px $colors$greenA8",
         },
         '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]':
           {

@@ -1,0 +1,14 @@
+{
+  "include": ["./service.twirp.ts", "./service.ts"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}

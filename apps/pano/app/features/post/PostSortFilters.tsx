@@ -11,8 +11,7 @@ const filters = [
 
 export const PostSortFilters = () => {
   const location = useLocation();
-  const paintIfActive = (url: string) =>
-    location.pathname === url ? "$amber11" : "none";
+  const paintIfActive = (url: string) => (location.pathname === url ? "$amber11" : "none");
 
   return (
     <GappedBox>

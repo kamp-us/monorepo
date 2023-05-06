@@ -30,8 +30,7 @@ const contentShow = keyframes({
 const StyledContent = styled(DialogPrimitive.Content, {
   backgroundColor: "$gray3",
   borderRadius: 6,
-  boxShadow:
-    "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
+  boxShadow: "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
   position: "fixed",
   top: "50%",
   left: "50%",
@@ -46,22 +45,21 @@ const StyledContent = styled(DialogPrimitive.Content, {
   "&:focus": { outline: "none" },
 });
 
-export const DialogContent = React.forwardRef<
-  HTMLDivElement,
-  DialogContentProps
->(({ children, disableClose, ...props }, forwardedRef) => (
-  <DialogPrimitive.Portal>
-    <StyledOverlay />
-    <StyledContent {...props} ref={forwardedRef}>
-      {children}
-      {!disableClose && (
-        <DialogPrimitive.Close aria-label="Close">
-          <Cross1Icon />
-        </DialogPrimitive.Close>
-      )}
-    </StyledContent>
-  </DialogPrimitive.Portal>
-));
+export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
+  ({ children, disableClose, ...props }, forwardedRef) => (
+    <DialogPrimitive.Portal>
+      <StyledOverlay />
+      <StyledContent {...props} ref={forwardedRef}>
+        {children}
+        {!disableClose && (
+          <DialogPrimitive.Close aria-label="Close">
+            <Cross1Icon />
+          </DialogPrimitive.Close>
+        )}
+      </StyledContent>
+    </DialogPrimitive.Portal>
+  )
+);
 
 DialogContent.displayName = "DialogContent";
 

@@ -48,11 +48,7 @@ const PostDeleteAlert = ({ postID, open, setOpen }: AlertDialogProps) => {
                 Evet
               </Button>
             </AlertDialogAction>
-            <input
-              type="hidden"
-              name="json"
-              value={JSON.stringify(variables)}
-            />
+            <input type="hidden" name="json" value={JSON.stringify(variables)} />
           </fetcher.Form>
         </GappedBox>
       </AlertDialogContent>

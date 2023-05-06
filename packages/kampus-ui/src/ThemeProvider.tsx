@@ -22,7 +22,5 @@ export const ThemeProvider: FC<{ initialTheme?: ThemeVariants }> = ({
   const [theme, setTheme] = useState<ThemeVariants>(initialTheme);
   const context = useMemo(() => ({ theme, setTheme }), [theme]);
 
-  return (
-    <ThemeContext.Provider value={context}>{children}</ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={context}>{children}</ThemeContext.Provider>;
 };

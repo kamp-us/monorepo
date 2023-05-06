@@ -36,10 +36,7 @@ type CommentProps = {
   } | null;
 };
 
-const getVariables = (
-  type: "create" | "delete",
-  input: { commentID: string; userID: string }
-) => {
+const getVariables = (type: "create" | "delete", input: { commentID: string; userID: string }) => {
   return { type, input };
 };
 
@@ -63,8 +60,7 @@ export const CommentItem: FC<CommentProps> = ({
     transition.submission?.formData.get("commentID") === comment.id;
   const fetcher = useFetcher();
   const isLoading = !!fetcher.submission;
-  const isUpvoted =
-    user && comment ? comment.upvotes.some((u) => u.userID === user.id) : false;
+  const isUpvoted = user && comment ? comment.upvotes.some((u) => u.userID === user.id) : false;
   const shareUrl = getExternalCommentURL({
     baseUrl,
     comment,
@@ -127,27 +123,13 @@ export const CommentItem: FC<CommentProps> = ({
               upvoteCount={comment.upvotes.length}
               isVoting={isLoading}
             />
-            <input
-              type="hidden"
-              name="json"
-              value={JSON.stringify(variables)}
-            />
+            <input type="hidden" name="json" value={JSON.stringify(variables)} />
           </fetcher.Form>
-          <MoreOptionsDropdown
-            comment={comment}
-            setEditOpen={setEditOpen}
-            shareUrl={shareUrl}
-          />
+          <MoreOptionsDropdown comment={comment} setEditOpen={setEditOpen} shareUrl={shareUrl} />
         </GappedBox>
         <Box>
-          {(editOpen && (
-            <EditCommentForm comment={comment} setEditOpen={setEditOpen} />
-          )) || (
-            <Text
-              size="3"
-              lineHeight="2"
-              css={{ color: "$gray12", whiteSpace: "break-spaces" }}
-            >
+          {(editOpen && <EditCommentForm comment={comment} setEditOpen={setEditOpen} />) || (
+            <Text size="3" lineHeight="2" css={{ color: "$gray12", whiteSpace: "break-spaces" }}>
               {comment.content}
             </Text>
           )}
@@ -172,9 +154,7 @@ export const CommentItem: FC<CommentProps> = ({
                 setShowComments(!showComments);
               }}
             >
-              {showComments
-                ? "Gizle"
-                : `Göster (${comments.length ?? 0} yorum)`}
+              {showComments ? "Gizle" : `Göster (${comments.length ?? 0} yorum)`}
             </SmallLink>
           )}
         </GappedBox>
@@ -183,9 +163,7 @@ export const CommentItem: FC<CommentProps> = ({
         <GappedBox css={{ flexDirection: "column" }}>
           <Form ref={formRef} method="post" css={{ width: "100%" }}>
             <Textarea css={{ width: "100%" }} rows={6} name="content" />
-            <GappedBox
-              css={{ padding: "$1 0 $2", gap: 10, alignItems: "center" }}
-            >
+            <GappedBox css={{ padding: "$1 0 $2", gap: 10, alignItems: "center" }}>
               <Button value={comment.id} name="commentID" type="submit">
                 {isCommenting ? "Kaydediliyor..." : "Cevapla"}
               </Button>

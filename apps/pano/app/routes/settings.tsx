@@ -17,22 +17,12 @@ import { z } from "zod";
 import { authenticator, requireUser } from "~/authenticator.server";
 import type { inferSafeParseErrors } from "~/features/zod/utils";
 import type { User } from "~/models/user.server";
-import {
-  hasPassword,
-  updateEmail,
-  updatePassword,
-  updateUsername,
-} from "~/models/user.server";
+import { hasPassword, updateEmail, updatePassword, updateUsername } from "~/models/user.server";
 import { useUser } from "~/utils";
 
 const SettingsSchema = z.object({
-  oldPassword: z
-    .string()
-    .min(6, { message: "Parolanızı eksik doldurdunuz" })
-    .optional(),
-  newPassword: z
-    .string()
-    .min(6, { message: "Yeni parola en az 6 karakterden oluşmalıdır" }),
+  oldPassword: z.string().min(6, { message: "Parolanızı eksik doldurdunuz" }).optional(),
+  newPassword: z.string().min(6, { message: "Yeni parola en az 6 karakterden oluşmalıdır" }),
   username: z.string().min(2, { message: "Kullanıcı adı uygun değil" }),
   email: z.string().email({ message: "Geçerli bir email adresi girin" }),
   hasPassword: z.string(),
@@ -66,8 +56,7 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const fields = Object.fromEntries(formData.entries()) as SettingsFields;
   const hasPwd = fields.hasPassword === "true";
-  const noPassword =
-    fields.oldPassword?.length === 0 && fields.newPassword.length === 0;
+  const noPassword = fields.oldPassword?.length === 0 && fields.newPassword.length === 0;
 
   const schema = noPassword ? SchemaWithoutPasswords : SettingsSchema;
 
@@ -143,15 +132,8 @@ const Settings = () => {
         <Form method="post" css={{ width: "100%" }}>
           <GappedBox css={{ flexDirection: "column" }}>
             <Label htmlFor="username">Kullanıcı adı</Label>
-            <Input
-              id="username"
-              name="username"
-              placeholder="iron-man"
-              defaultValue={username}
-            />
-            {fieldErrors?.username ? (
-              <ValidationMessage error={fieldErrors.username[0]} />
-            ) : null}
+            <Input id="username" name="username" placeholder="iron-man" defaultValue={username} />
+            {fieldErrors?.username ? <ValidationMessage error={fieldErrors.username[0]} /> : null}
             <Label htmlFor="email">E-Posta</Label>
             <Input
               id="email"
@@ -159,28 +141,15 @@ const Settings = () => {
               placeholder="tony-stark@avengers.co"
               defaultValue={email}
             />
-            {fieldErrors?.email ? (
-              <ValidationMessage error={fieldErrors.email[0]} />
-            ) : null}
-            <PasswordReset
-              errors={errors}
-              hasPassword={loaderData.hasPassword}
-            />
-            <input
-              name="hasPassword"
-              type="hidden"
-              value={loaderData.hasPassword}
-            />
+            {fieldErrors?.email ? <ValidationMessage error={fieldErrors.email[0]} /> : null}
+            <PasswordReset errors={errors} hasPassword={loaderData.hasPassword} />
+            <input name="hasPassword" type="hidden" value={loaderData.hasPassword} />
             <Box>
               <Button type="submit">Güncelle</Button>
             </Box>
           </GappedBox>
         </Form>
-        {successful && (
-          <Text css={{ color: "$amber11" }}>
-            Ayarlar başarıyla güncellendi.
-          </Text>
-        )}
+        {successful && <Text css={{ color: "$amber11" }}>Ayarlar başarıyla güncellendi.</Text>}
       </GappedBox>
     </CenteredContainer>
   );
@@ -201,9 +170,7 @@ const PasswordReset: FC<{
             name="oldPassword"
             type="password"
             placeholder="eskimis-parola"
-            aria-errormessage={
-              errors?.fieldErrors.oldPassword ? "old-password-error" : undefined
-            }
+            aria-errormessage={errors?.fieldErrors.oldPassword ? "old-password-error" : undefined}
           />
         </>
       )}
@@ -217,9 +184,7 @@ const PasswordReset: FC<{
         name="newPassword"
         placeholder="cok-gizli-parola"
         type="password"
-        aria-errormessage={
-          errors?.fieldErrors.newPassword ? "password-error" : undefined
-        }
+        aria-errormessage={errors?.fieldErrors.newPassword ? "password-error" : undefined}
       />
       {errors?.fieldErrors.newPassword ? (
         <ValidationMessage error={errors.fieldErrors.newPassword[0]} />
