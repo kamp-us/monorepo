@@ -50,7 +50,7 @@ Aşağıda yaygın olarak kullanılan bazı araçlar var. Şu anda ne oldukları
 
 Kod yazmayı öğrenmek inanılmaz derecede ödüllendirici olduğu kadar zor ve sinir bozucu da olabilir. Bir öğrenci olarak sahip olabileceğiniz en güçlü özellikler; bir şeyler inşa etme isteği, problem çözme yeteneği ve engeller karşısında kararlı olmaktır.
 
-Web geliştirme endüstrisi, farklı geçmişlere sahip başarılı geliştiricilerin uzun bir geçmişine sahiptir, bu nedenle insanlar genellikle oraya nasıl geldiğinizden daha çok ne yaptığınızı önemser.
+Web geliştirme endüstrisi tarihinde, farklı geçmişlere sahip onlarca başarılı geliştirici vardır. Bu nedenle, genellikle insanlar oraya nasıl geldiğinizden ziyade **ne yaptığınızı ** önemser.
 
 ### Why Odin?
 
