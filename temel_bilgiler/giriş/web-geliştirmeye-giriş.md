@@ -6,7 +6,7 @@ Web geliştiriciler, genelde ürünlerini veya hizmetlerini internet ağına ta�
 
 Eğer mantıksal problemleri çözmeyi, yararlı şeyler inşa etmeyi ve yeni teknolojiler deneyimlemeyi seviyorsanız; web geliştirme sizin için iyi bir meslek olabilir. Web geliştiriciler genelde iyi bir iş-yaşam dengesine sahiptir, dolgun maaş alırlar ve yüksek talep görürler. Yaşadığınız yerdeki web geliştirme işi fırsatları hakkında daha iyi fikir sahibi olmak için Google'da arama yapın.
 
-Daha fazla bilgi için, Wikipedia da [bu blog yazısını](https://en.wikipedia.org/wiki/Web_design) okuyabilirsiniz.
+Daha fazla bilgi için [bu blog yazısını](https://tr.wix.com/blog/makale/web-tasarim-nedir) okuyabilirsiniz.
 
 ### Web Geliştirici Türleri
 
