@@ -1,38 +1,38 @@
 ### Giriş
 
-Web geliştiricinin görevi nedir? Bir bakıma, websitesi yapma ve onun bakımından sorumludurlar.
+Web geliştiricileri ne yapar? Kısaca, websitesi oluşturur ve bakımını yaparlar.
 
-Web geliştiriciler genelde ürününü veya hizmetini web'e taşımaya çalışan müşteriler için çalışırlar. Çalışma genelde proje odaklıdır ve müşterinin ihtiyaçlarını son ürüne koordine eden bir ekip ile işbirliği yapmayı içerir. Müşteri bir teknoloji şirketi, bir organizasyon veya bir hükümet olabilir. Çalışma Frontend, Backend veya FullStack web geliştirme içerebilir.
+Web geliştiriciler, genelde ürünlerini veya hizmetlerini internet ağına taşımaya çalışan müşteriler için çalışırlar. Çalışma genelde proje odaklıdır ve müşterinin ihtiyaçlarını son ürüne uyarlamakla sorumlu bir takımla çalışmayı gerektirir. Müşteri bir teknoloji şirketi, bir organizasyon veya bir hükümet olabilir. İş önyüz, arkayüz veya full stack alanlarında web geliştirmeyi gerektirebilir.
 
-Web geliştirme eğer mantıksal problemleri çözmeyi seviyor, yeni kullanışlı şeyler yapmayı seviyor ve yeni teknolojileri denemeyi seviyorsanız sizin için iyi bir meslek olabilir. Web geliştiriciler genelde iyi bir iş/yaşam dengesine sahiptir, diğer iş alanlarına göre daha dolgun maaş alırlar ve yüksek talep görürler. Web geliştirme iş fırsatlarınızı daha iyi anlamak için özel konumunuzu Google'da aratın.
+Eğer mantıksal problemleri çözmeyi, yararlı şeyler inşa etmeyi ve yeni teknolojiler deneyimlemeyi seviyorsanız; web geliştirme sizin için iyi bir meslek olabilir. Web geliştiriciler genelde iyi bir iş-yaşam dengesine sahiptir, dolgun maaş alırlar ve yüksek talep görürler. Yaşadığınız yerdeki web geliştirme işi fırsatları hakkında daha iyi fikir sahibi olmak için Google'da arama yapın.
 
-Web geliştirme hakkında daha fazla bilgi için, Wikipedia da [web dizayn a giriş](https://en.wikipedia.org/wiki/Web_design)'e bakabilirsiniz .
+Daha fazla bilgi için, Wikipedia da [bu blog yazısını](https://en.wikipedia.org/wiki/Web_design) okuyabilirsiniz.
 
-### Web Geliştirme Türleri
+### Web Geliştirici Türleri
 
-Önceden, web geliştirme işinin Frontend, Backend veya FullStack olabileceğinden bahsetmiştik. Bu terimler tam olarak ne anlama geliyor?
+Biraz önce web geliştirme işinin önyüz, arkayüz veya full stack olabileceğinden bahsettik. Bu terimler tam olarak ne anlama geliyor?
 
-Frontend, tarayıcınızda gördüğünüz website'deki içerik ve kullanıcı arayüzü elemanları, örneğin navigasyon barı gibi şeylerin sunumunu içerir. Frontend geliştiricileri HTML, CSS, JavaScript ve ilgili framework'leri kullanarak içeriğin etkili bir şekilde sunulmasını ve kullanıcıların mükemmel bir deneyim yaşamasını sağlar.
+Önyüz, tarayıcınızda açık olan internet sitesinde sunulan içeriğin yanı sıra, gezinti çubuğu gibi kullanıcı arayüzü elemanları da dahil olmak üzere gördüğünüz her şeydir. Önyüz geliştiricileri HTML, CSS, JavaScript ve ilgili uygulama çatılarını (framework) kullanarak içeriğin etkili bir şekilde sunulduğundan ve kullanıcıların kusursuz bir deneyim yaşadığından emin olurlar.
 
-Backend, uygulamanın iç kısmını ifade eder, bu kısım sunucuda bulunur. Backend, ön uçun ihtiyaç duyduğu şeyleri sağlamak için program verilerini depolar ve sunar. Bu süreç, bir website'nin milyonlarca kullanıcısı olduğunda çok karmaşık hale gelebilir. Backend geliştiricileri veri ile çalışmak için Java, Python, Ruby ve JavaScript gibi programlama dillerini kullanır.
+Arkayüz, uygulamanın sunucuda yaşayan iç kısmını ifade eder. Arkayüz, önyüzün ihtiyaç duyduğu şeyleri sağlamak için program verilerini depolar ve sunar. Bir internet sitesinin milyonlarca kullanıcısı olduğunda bu süreç çok karmaşıklaşabilir. Arkayüz geliştiricileri verilerle çalışmak için Java, Python, Ruby ve JavaScript gibi programlama dillerini kullanır.
 
-FullStack geliştiriciler hem ön uç hem de arka uç ile rahat çalışırlar. The Odin Project'te, web geliştirme ile ilgili tüm yönleri kapsayan tam yığın geliştirme öğretmeye odaklanıyoruz.
+Full stack geliştiricileri hem önyüz hem de arkayüz ile çalışmaya alışıktır. Odin Projesi'nde, web geliştirmenin tüm yönlerini ele alan full stack geliştirmeyi öğretmeye odaklanıyoruz .
 
-Daha fazla detay için, Udacity'nin bu konu hakkında harika bir blog yazısı var:[3 Web Dev kariyer çözümlemesi: Front-End vs Back-End vs Full Stack](https://www.udacity.com/blog/2020/12/front-end-vs-back-end-vs-full-stack-web-developers.html)
+Daha fazla detay için, Udacity'nin bu konu hakkında İngilizce yazılmış harika bir blog yazısı var:[3 Web Dev Careers Decoded: Front-End vs Back-End vs Full Stack](https://www.udacity.com/blog/2020/12/front-end-vs-back-end-vs-full-stack-web-developers.html)
 
 ### Kariyer Türleri
 
-Şimdi farklı web geliştirme türlerini bildiğinize göre, daha önce bahsettiğimiz farklı müşteri ve işveren türlerini kapsayan şeylerden bahsedelim.
+Farklı web geliştirme türlerini öğrenmiş olduğunuza göre önceden bahsettiğimiz üzere çalışabileceğiniz müşteri ve işveren türlerine bir bakalım
 
-Büyük teknoloji şirketleri, Google, Meta ve Amazon gibi, çok sıkı işe alım gereksinimlerine sahiptir. Bu beklentileri başarıyla karşılarsanız, mükemmel maaş, yan haklar ve fırsatlar sunarlar.
+Google, Meta ve Amazon gibi büyük teknoloji şirketleri çok zorlu işe alım kriterlerine sahiptir. Bu beklentileri karşılarsanız mükemmel maaş, yan haklar ve fırsatlar sunarlar.
 
-Küçük teknoloji şirketleri, startup'lar, biraz vahşi batıya benzer. Bir junior geliştirici için, geliştirme hızı nedeniyle bir ateşleme denemesi gibi hissedebilir. Startup'lar genelde biraz daha düşük maaş sunar ve daha uzun saatler gerektirir, ama aynı zamanda şirkett hisseleri ve benzersiz çalışma ortamları sunabilirler.
+Girişim şirketleri vahşi batıyı andırır. Uygulama geliştirme hızları yüzünden, bir junior geliştirici için zorlayıcı olabilir. Girişim şirketleri, çoğu zaman bir tık daha düşük maaş sunar ve mesai saati daha fazladır. Ama aynı zamanda şirket hissesi ve benzersiz çalışma ortamı sunabilirler.
 
-Freelanse olarak çalışmak, iyi bir saatlik ücret ve kendi ürünlerinizi planlama ve tasarlama özgürlüğüne sahip olmanızı sağlar. Ancak, kendi işinizi bulmak (bu da daha az kodlama zamanı anlamına gelebilir), müşterilerden faturalandırmayı yönetmek (bu süreç zorlayucı olabilir) için tek sorumlu siz olursunuz. Bu yol için güçlü insan becerilerine ihtiyacınız var.
+Freelancer olarak serbest çalışırsanız; iyi bir saatlik ücret talep edebilir, çalışma saatinizi kendiniz belirleyebilir ve kendi ürünlerinizi üretebilirsiniz. Ancak işinizi kendiniz bulmanız gerekir (bu daha az kod yazma anlamına gelir), müşteri faturalandırmayla uğraşırsınız (zorlayıcı olabilir) ve sorumlu tek kişi olursunuz. Bu rota için güçlü sosyal becerilere ihtiyacınız var.
 
-Bir web danışmanlık şirketi için çalışmak, freelance ücret potansiyelinizin bir kısmından vazgeçmenizi ama kod üzerinde daha fazla odaklanmanızı sağlar. Bu seçenek aynı zamanda iyi bir iş/yaşam dengesi ve ücret sunar.
+Bir web danışmanlık şirketi için danışman olarak çalışmak, freelance kazanç potansiyelinizin bir kısmından vazgeçmeniz ama kod yazmaya daha çok odaklanmanız anlamına gelir. Bu seçenek aynı zamanda iyi bir iş-yaşam dengesi ve maaş sunar.
 
-Son olarak, büyük, eski şirketler hala web geliştiricilere ihtiyaç duyar. Bu şirketler iyi bir iş/yaşam dengesi, ücret ve yan haklar sunar, ancak teknolojiye çok odaklanan bir şirketten daha yavaş aksiyon alabilirler.
+Son olarak büyük, eski şirketler daima web geliştiricilere ihtiyaç duyar. Bu şirketler iyi bir iş-yaşam dengesi, maaş ve yan haklar sunar ancak genellikle, teknoloji odaklı bir şirkete kıyasla daha yavaş aksiyon alırlar.
 
 ### Araçlar
 
@@ -40,15 +40,15 @@ Aşağıda yaygın olarak kullanılan bazı araçlar var. Şu anda ne oldukları
 
 - **Bilgisayar**
 - **[Google](https://www.google.com/)**
-- **Text Editor**
-- **Command Line Interface (CLI)**
+- **Metin Düzenleyici**
+- **Komut Satırı Arayüzü**
 - **[Stack Overflow](http://stackoverflow.com/)**
 - **[Git](https://git-scm.com/)**
 - **[GitHub](https://github.com/)**
 
-### Motivation
+### Motivasyon
 
-Kod yazmayı öğrenmek inanılmaz derecede ödüllendirici olduğu kadar zor ve sinir bozucu da olabilir. Bir öğrenci olarak sahip olabileceğiniz en güçlü özellik, bir şeyler inşa etme isteği, problem çözme yeteneği ve engellerle karşılaştığınızda ısrarla üstüne gitmektir.
+Kod yazmayı öğrenmek inanılmaz derecede ödüllendirici olduğu kadar zor ve sinir bozucu da olabilir. Bir öğrenci olarak sahip olabileceğiniz en güçlü özellikler; bir şeyler inşa etme isteği, problem çözme yeteneği ve engeller karşısında kararlı olmaktır.
 
 Web geliştirme endüstrisi, farklı geçmişlere sahip başarılı geliştiricilerin uzun bir geçmişine sahiptir, bu nedenle insanlar genellikle oraya nasıl geldiğinizden daha çok ne yaptığınızı önemser.
 
