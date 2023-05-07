@@ -52,9 +52,9 @@ Kod yazmayı öğrenmek inanılmaz derecede ödüllendirici olduğu kadar zor ve
 
 Web geliştirme endüstrisi tarihinde, farklı geçmişlere sahip onlarca başarılı geliştirici vardır. Bu nedenle, genellikle insanlar oraya nasıl geldiğinizden ziyade **ne yaptığınızı ** önemser.
 
-### Why Odin?
+### Neden Odin?
 
-Şunu bilmenizi isterim ki, bu kolay olmayacak.
+Şunu bilmenizi isterim ki bu kolay olmayacak.
 
 Birçok online öğrenme içeriği var, ancak çoğu, çok izole ve kontrol edilen bir ortamda öğretiliyor ve sadece belirli bir konuyu kapsıyor.
 
@@ -66,9 +66,9 @@ Odin Projesi, web geliştirme endüstrisindeki en iyi uygulamaları öğretir ve
 
 Kendinizi bir araçta rahat hisseetmeye başladığınızda bir açık kaynaklı projeye katkıda bulunmaya başlayın [(Odin Projesinin kendisi gibi](/contributing). Ne yapabileceğiniz hakkında ne kadar çok şey öğrenirseniz, işe alınmanıza o kadar yaklaşırsınız. Bu projeler ayrıca özgeçmişinizde harika görünecek!
 
-### Conclusion
+### Sonuç
 
-Imarım bir web geliştiricisinin aslında ne yaptığını ve bunu bir kariyer olarak seçerseniz hayatınızın nasıl olacağını daha iyi anlamışsınızdır. Bu, web geliştirme dünyasına bir ön gösterim oldu.
+Umarım bir web geliştiricisinin aslında ne yaptığını ve bunu bir kariyer olarak seçerseniz hayatınızın nasıl olacağını daha iyi anlamışsınızdır. Bu, web geliştirme dünyasına bir ön gösterim oldu.
 
 Bu "Temeller" kursunda, sonunda bilmeniz gereken konuların tüm yelpazesinde bir yolculuğa çıkacaksınız. Bu kurs, tamamen yabancı olabileceğiniz birçok konuya atlayarak, her birine küçük örnekler vererek ve sonra derinleşerek ilerliyor.
 
@@ -84,7 +84,7 @@ Ve belki de hayatınızı değiştirecek.
 
 Ne bekliyorsun?
 
-### Additional Resources
+### Ek kaynaklar
 
 Bu alan ilgili içeriklere bağlantılar içerir. Zorunlu değildir, bu yüzden ek kaynaklar olarak düşünebilirsiniz.
 
