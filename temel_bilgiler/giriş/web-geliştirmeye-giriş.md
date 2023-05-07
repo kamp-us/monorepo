@@ -58,35 +58,35 @@ Web geliştirme endüstrisi tarihinde, farklı geçmişlere sahip onlarca başar
 
 Yeni başlayanlar için sürüyle online içerik var ancak bunların çoğu oldukça izole ve sabit ortamlarda öğretiliyor ve de yalnızca belirli bir konuyu kapsıyor.
 
-Odin Projesi, neye ihtiyacınız olduğunu ve bir işe başlamak için ne yapmanuz gerektiğini gerçekçi bir şekilde ele alır ve bir işe başladığınızda yapacağınız şeylere benzer bir ortamda çalışmanızı sağlar.
+Odin Projesi gerçekçi bir bakış açısıyla, bir işe girdiğinizde biliyor olmanız gerekenleri ve sahip olmanız gereken çalışma ortamını sağlar. İşe alınabilir seviyeye ulaşmak için geniş bir beceri yelpazesi ve programlama bilmeniz gerektiğini göz önünde bulundurur.
 
-Sektöre girebilmeniz için geniş bir beceri yelpazesine ve dillere ihtiyacınız olduğunu kabul eder.
+İşe alınabilir seviyeye ulaşmak için geniş bir beceri yelpazesi ve programlama bilgisine sahip olmanız gerektiğini göz önünde bulundurur.
 
-Odin Projesi, web geliştirme endüstrisindeki en iyi uygulamaları öğretir ve size gerçek dünyadaki geliştiricilerin kullandığı araçları kullanma fırsatı verir.
+Öğrenme sürecinde oldukça ilerlemiş sizin gibi insanların, kendilerine yapılan iyiliği ödemek amacıyla içeriğimizi her geçen gün geliştirmesiyle, Odin Projesi sürekli olarak büyüyor.
 
-Kendinizi bir araçta rahat hisseetmeye başladığınızda bir açık kaynaklı projeye katkıda bulunmaya başlayın [(Odin Projesinin kendisi gibi](/contributing). Ne yapabileceğiniz hakkında ne kadar çok şey öğrenirseniz, işe alınmanıza o kadar yaklaşırsınız. Bu projeler ayrıca özgeçmişinizde harika görünecek!
+Araç gereçlere alıştığınızda açık kaynak projelere katkıda bulunmaya başlayın [(Odin Projesi gibi](/contributing). Ne kadar çok katkıda bulunursanız, yapabilecekleriniz konusunda o kadar çok gelişirsiniz. Ayrıca bu projeler özgeçmişinizde harika görünür!
 
 ### Sonuç
 
-Umarım bir web geliştiricisinin aslında ne yaptığını ve bunu bir kariyer olarak seçerseniz hayatınızın nasıl olacağını daha iyi anlamışsınızdır. Bu, web geliştirme dünyasına bir ön gösterim oldu.
+Umarız ki bir web geliştiricisinin ne yaptığı ve kariyer olarak seçerseniz hayatınızın nasıl olacağı hakkında fikir sahibi olmuşsunuzdur. Bu yalnızca web geliştirme dünyasına dair bir ön gösterimdi.
 
-Bu "Temeller" kursunda, sonunda bilmeniz gereken konuların tüm yelpazesinde bir yolculuğa çıkacaksınız. Bu kurs, tamamen yabancı olabileceğiniz birçok konuya atlayarak, her birine küçük örnekler vererek ve sonra derinleşerek ilerliyor.
+Bu "Temel Bilgiler" kursunda, eninde sonuna bilmeniz gereken konulara doğru bir yolculuğa çıkacaksınız. Bu kurs tamamen yabancı olabileceğiniz birçok konuya değinerek, her birinden küçük örnekler sağlayıp sıradakine geçiyor.
 
-Bu kursu tamamladıktan sonra, aşağıdaki kurslar bu konulara derinlemesine dalacak. İşe alınmanızı sağlayacak becerileri sağlamlaştırmak için onlarca satır kod yazacak, projeler gelitştirecek ve web sitesi oluşturacaksınız.
+Sonraki kurslar da bu konulara derinlemesine dalacak. İşe alınmanızı sağlayacak becerileri sağlamlaştırmak için onlarca satır kod yazacak, proje geliştirecek ve web sitesi oluşturacaksınız.
 
-Bunların hepsi gerçekten zorlu olacak. Aslında, yolunuzun ne kadar zor olacağını anlamanız için ["Kod yazmayı öğrenmeyi neden **Zor Buluyorum**"](https://www.thinkful.com/blog/why-learning-to-code-is-so-damn-hard/) başlıklı yazıyı okumanızı öneririm. Ancak, gerçekten değerli olan şey kolay olur mu?
+Tüm bunları bitirmek zorlu olacak. Aslında önünüzdeki maceranın nasıl olacağını anlamanız için bu blog yazısını ["Why Learning to Code is So Damn Hard"](https://www.thinkful.com/blog/why-learning-to-code-is-so-damn-hard/) okusanız iyi olur. Sonuçta öğrenmeye değer olup da kolay olan şey var mı hiç?
 
-Evet, zorlayıcı olacak.
+Evet, zorlu olacak.
 
 Ama aynı zamanda eğlenceli olacak.
 
-Ve belki de hayatınızı değiştirecek.
+Ve belki de hayatınızı bile değiştirebilir .
 
-Ne bekliyorsun?
+Neyi bekliyorsun?
 
 ### Ek kaynaklar
 
-Bu alan ilgili içeriklere bağlantılar içerir. Zorunlu değildir, bu yüzden ek kaynaklar olarak düşünebilirsiniz.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
 - [Quora: How can I Become a Really Good Web Developer?](http://www.quora.com/Computer-Programming/How-can-I-become-a-really-good-Web-Developer-starting-from-now-at-age-20-before-age-25)
 - [Quora: What makes a great web developer?](http://www.quora.com/What-makes-a-great-web-developer)
