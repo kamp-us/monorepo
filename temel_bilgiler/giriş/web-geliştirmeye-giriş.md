@@ -12,13 +12,13 @@ Daha fazla bilgi için, Wikipedia da [bu blog yazısını](https://en.wikipedia.
 
 Biraz önce web geliştirme işinin önyüz, arkayüz veya full stack olabileceğinden bahsettik. Bu terimler tam olarak ne anlama geliyor?
 
-Önyüz, tarayıcınızda açık olan internet sitesinde sunulan içeriğin yanı sıra, gezinti çubuğu gibi kullanıcı arayüzü elemanları da dahil olmak üzere gördüğünüz her şeydir. Önyüz geliştiricileri HTML, CSS, JavaScript ve ilgili uygulama çatılarını (framework) kullanarak içeriğin etkili bir şekilde sunulduğundan ve kullanıcıların kusursuz bir deneyim yaşadığından emin olurlar.
+**Önyüz**, tarayıcınızda açık olan internet sitesinde sunulan içeriğin yanı sıra, gezinti çubuğu gibi kullanıcı arayüzü elemanları da dahil olmak üzere gördüğünüz her şeydir. Önyüz geliştiricileri HTML, CSS, JavaScript ve ilgili uygulama çatılarını (framework) kullanarak içeriğin etkili bir şekilde sunulduğundan ve kullanıcıların kusursuz bir deneyim yaşadığından emin olurlar.
 
-Arkayüz, uygulamanın sunucuda yaşayan iç kısmını ifade eder. Arkayüz, önyüzün ihtiyaç duyduğu şeyleri sağlamak için program verilerini depolar ve sunar. Bir internet sitesinin milyonlarca kullanıcısı olduğunda bu süreç çok karmaşıklaşabilir. Arkayüz geliştiricileri verilerle çalışmak için Java, Python, Ruby ve JavaScript gibi programlama dillerini kullanır.
+**Arkayüz**, uygulamanın sunucuda yaşayan iç kısmını ifade eder. Arkayüz, önyüzün ihtiyaç duyduğu şeyleri sağlamak için program verilerini depolar ve sunar. Bir internet sitesinin milyonlarca kullanıcısı olduğunda bu süreç çok karmaşıklaşabilir. Arkayüz geliştiricileri verilerle çalışmak için Java, Python, Ruby ve JavaScript gibi programlama dillerini kullanır.
 
-Full stack geliştiricileri hem önyüz hem de arkayüz ile çalışmaya alışıktır. Odin Projesi'nde, web geliştirmenin tüm yönlerini ele alan full stack geliştirmeyi öğretmeye odaklanıyoruz .
+**Full stack** geliştiricileri hem önyüz hem de arkayüz ile çalışmaya alışıktır. Odin Projesi'nde, web geliştirmenin tüm yönlerini ele alan full stack geliştirmeyi öğretmeye odaklanıyoruz .
 
-Daha fazla detay için, Udacity'nin bu konu hakkında İngilizce yazılmış harika bir blog yazısı var:[3 Web Dev Careers Decoded: Front-End vs Back-End vs Full Stack](https://www.udacity.com/blog/2020/12/front-end-vs-back-end-vs-full-stack-web-developers.html)
+Daha fazla detay için, Udacity'nin bu konu hakkında İngilizce yazılmış harika bir blog yazısı var: [3 Web Dev Careers Decoded: Front-End vs Back-End vs Full Stack](https://www.udacity.com/blog/2020/12/front-end-vs-back-end-vs-full-stack-web-developers.html)
 
 ### Kariyer Türleri
 
@@ -50,7 +50,7 @@ Aşağıda yaygın olarak kullanılan bazı araçlar var. Şu anda ne oldukları
 
 Kod yazmayı öğrenmek inanılmaz derecede ödüllendirici olduğu kadar zor ve sinir bozucu da olabilir. Bir öğrenci olarak sahip olabileceğiniz en güçlü özellikler; bir şeyler inşa etme isteği, problem çözme yeteneği ve engeller karşısında kararlı olmaktır.
 
-Web geliştirme endüstrisi tarihinde, farklı geçmişlere sahip onlarca başarılı geliştirici vardır. Bu nedenle, genellikle insanlar oraya nasıl geldiğinizden ziyade **ne yaptığınızı ** önemser.
+Web geliştirme endüstrisi tarihinde, farklı geçmişlere sahip onlarca başarılı geliştirici vardır. Bu nedenle, genellikle insanlar oraya nasıl geldiğinizden ziyade **ne yaptığınızı** önemser.
 
 ### Neden Odin?
 
@@ -82,7 +82,7 @@ Ama aynı zamanda eğlenceli olacak.
 
 Ve belki de hayatınızı bile değiştirebilir .
 
-Neyi bekliyorsun?
+_Neyi bekliyorsun?_
 
 ### Ek kaynaklar
 
