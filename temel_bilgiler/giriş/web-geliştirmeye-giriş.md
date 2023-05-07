@@ -56,9 +56,9 @@ Web geliştirme endüstrisi tarihinde, farklı geçmişlere sahip onlarca başar
 
 Şunu bilmenizi isterim ki bu kolay olmayacak.
 
-Birçok online öğrenme içeriği var, ancak çoğu, çok izole ve kontrol edilen bir ortamda öğretiliyor ve sadece belirli bir konuyu kapsıyor.
+Yeni başlayanlar için sürüyle online içerik var ancak bunların çoğu oldukça izole ve sabit ortamlarda öğretiliyor ve de yalnızca belirli bir konuyu kapsıyor.
 
-Odin Projesi, neye ihtiyacınız olduğunu ve bir işe başlamak için neye ihtiyacınız olduğunu gerçekçi bir şekilde ele alır ve bir işe başladığınızda yapacağınız şeylere benzer bir ortamda çalışmanızı sağlar.
+Odin Projesi, neye ihtiyacınız olduğunu ve bir işe başlamak için ne yapmanuz gerektiğini gerçekçi bir şekilde ele alır ve bir işe başladığınızda yapacağınız şeylere benzer bir ortamda çalışmanızı sağlar.
 
 Sektöre girebilmeniz için geniş bir beceri yelpazesine ve dillere ihtiyacınız olduğunu kabul eder.
 
