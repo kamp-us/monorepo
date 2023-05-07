@@ -63,15 +63,15 @@
 
 ---
 
-### Maintainer/Editör Takımı
+### Maintainer / Editör Takımı
 
 - [ ] [Umut Berkay Soydan](https://github.com/ubsoydan) <br/>
 - [ ] [Can Şirin](https://github.com/cansirin)
 
 ---
 
-## Katkı Sağlayanlar
-- @kullanıcıadı
+## Katkı Sağlayanlar / Contributors
+- [@batuhanbaybas](https://www.github.com/batuhanbaybas)
 
 ---
 Lisans için license.md dosyasına bakınız.
