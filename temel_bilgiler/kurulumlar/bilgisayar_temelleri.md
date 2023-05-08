@@ -1,10 +1,10 @@
 ### Giriş
 
-Söylemeye gerek yok, kodlamayı öğrenirken zamanınızın çoğunu bilgisayar başında geçireceksiniz. Bu nedenle, bilgisayarınızla nasıl çalışacağınızı anlamak çok önemlidir. Bu derste, sizi hızlı bir şekilde bilgisayar temelleri konusunda bilgilendirecek bir kaynak tanıtacağız.
+Söylemeye gerek yok, kodlamayı öğrenirken zamanınızın çoğunu bilgisayar başında geçireceksiniz. Bu nedenle, bilgisayarınızla nasıl çalışacağınızı anlamak çok önemlidir. Bu derste, bilgisayar temelleri konusunda sizi hızlıca bilgilendirecek bir kaynağa değineceğiz.
 
-### Derse Genel Bakış
+### Ders Özeti
 
-Bu bölüm, bu derste öğreneceğiniz konulara genel bir bakış içerir.
+Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
 * Bilgisayar yazılımı ve donanımı
 * Ekran görüntüleri nasıl alınır
@@ -14,7 +14,7 @@ Bu bölüm, bu derste öğreneceğiniz konulara genel bir bakış içerir.
 
 <div class="lesson-content__panel" markdown="1">
 
-İyi niyet topluluğu vakfı (GCF) kaynakları, temel bilgileri öğrenmeniz için mükemmeldir. Vakfın eşlik eden videoları, çizimleri vardır ve okunması kolaydır. Aşağıdaki okumalar yeterli olacaktır, ancak GCF'nin diğer kaynaklarına da bakabilirsiniz.
+İyi Niyet Topluluğu Vakfı'nın (GCF) kaynakları, temel bilgilere aşinalık kazanmak için mükemmel kaynaklardır. Size yardımcı olacak videolar ve çizimler barındırmasının yanı sıra okunmaları kolaydır. Aşağıdaki okumalar yeterli olacaktır ancak GCF'nin diğer kaynaklarına da bakabilirsiniz.
 
 1. [What is a computer?](https://edu.gcfglobal.org/en/computerbasics/what-is-a-computer/1/)
 2. [What is an operating system?](https://edu.gcfglobal.org/en/computerbasics/understanding-operating-systems/1/)
@@ -26,7 +26,7 @@ Bu bölüm, bu derste öğreneceğiniz konulara genel bir bakış içerir.
 </div>
 
 
-### Bilgi kontrolü
+### Bilgi Ölçme
 
 Bu bölüm, bu dersi anlayıp anlamadığınızı kendi başınıza kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta sorun yaşıyorsanız, soruya tıklayın ve bağlantının verdiği materyali inceleyin.
 
@@ -35,10 +35,10 @@ Bu bölüm, bu dersi anlayıp anlamadığınızı kendi başınıza kontrol etme
 * [What are some use cases of a screenshot?](https://edu.gcfglobal.org/en/techsavvy/taking-screenshots/1/)
 * [Give an example of a weak and a strong password.](https://edu.gcfglobal.org/en/techsavvy/password-tips/1/)
 
-### Ek kaynaklar
+### Ek Kaynaklar
 
-Bu bölüm, ilgili içeriğe yardımcı olacak bağlantılar içerir. Zorunlu değil, ek kaynak olarak düşünün.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-- Bilgisayarınızı verimli bir şekilde kullanmak için bu özelliklerden nasıl yararlanabileceğinizi öğrenmek için [GCF's page on "What are accessibility features"](https://edu.gcfglobal.org/en/computerbasics/using-accessibility-features/1/) göz atın.
+- Bilgisayarınızı verimli bir şekilde kullanmak için erişilebilirlik özelliklerinden nasıl yararlanabileceğinizi öğrenmek için GCF'nin bu sayfasına ["What are accessibility features"](https://edu.gcfglobal.org/en/computerbasics/using-accessibility-features/1/) göz atın.
 - Bu konuyu öğrenmek için daha fazla zaman harcamak istiyorsanız, [FreeCodeCamp's excellent course on computer basics](https://youtu.be/y2kg3MOk1sY) göz atın.
 
