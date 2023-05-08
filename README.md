@@ -72,6 +72,7 @@
 
 ## Katkı Sağlayanlar / Contributors
 - [@batuhanbaybas](https://www.github.com/batuhanbaybas)
+- [@huseyingulec](https://www.github.com/huseyingulec)
 
 ---
 Lisans için license.md dosyasına bakınız.
