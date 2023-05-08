@@ -2,7 +2,7 @@
 
 Söylemeye gerek yok, kodlamayı öğrenirken zamanınızın çoğunu bilgisayar başında geçireceksiniz. Bu nedenle, bilgisayarınızla nasıl çalışacağınızı anlamak çok önemlidir. Bu derste, bilgisayar temelleri konusunda sizi hızlıca bilgilendirecek bir kaynağa değineceğiz.
 
-### Ders Özeti
+### Derse Genel Bakış
 
 Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
