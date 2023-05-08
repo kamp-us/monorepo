@@ -29,7 +29,7 @@
 
 >_İstisna olduğunu düşündüğünüz, Türkçe karşılığından şüphe duyduğunuz veya çevrilip çevrilmemesi gerektiğinden emin olamadığınız sözcük ve ifadeler için_ **referans listesi: **[Türkçe Odin Projesi-Sözcük Referans Listesi](https://docs.google.com/spreadsheets/d/1zJPo19TCgb4aYEMrX-wP_n3_OWEY9CzSTVj633fOBZs/edit?usp=sharing)
 
->_Her sayfada görülen ve tekrar eden sabit ifadeleri ("lesson overview" gibi başlıklar) çevirmekle vakit kaybetmemeniz için ortak çevirilerine buradan ulaşabilirsiniz._ **referans listesi: **[Türkçe Odin Projesi-Tekrar Eden İfadeler]([https://docs.google.com/spreadsheets/d/1zJPo19TCgb4aYEMrX-wP_n3_OWEY9CzSTVj633fOBZs/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1zJPo19TCgb4aYEMrX-wP_n3_OWEY9CzSTVj633fOBZs/edit#gid=1175334419))
+>_Her sayfada görülen ve tekrar eden sabit ifadeleri ("lesson overview" gibi başlıklar) çevirmekle vakit kaybetmemeniz için ortak çevirilerine buradan ulaşabilirsiniz._ **referans listesi: **[Türkçe Odin Projesi-Tekrar Eden İfadeler](https://docs.google.com/spreadsheets/d/1zJPo19TCgb4aYEMrX-wP_n3_OWEY9CzSTVj633fOBZs/edit#gid=1175334419)
 
 ### DİKKAT EDİLMESİ GEREKENLER
 
