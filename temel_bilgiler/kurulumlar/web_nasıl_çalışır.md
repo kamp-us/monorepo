@@ -4,7 +4,7 @@ Web'i nasıl programlayacağınızı anlamadan önce, web'in kendisini muhtemele
 
 ### Derse Genel Bakış
 
-Bu bölüm, bu derste öğreneceğiniz konulara genel bir bakış içerir.
+Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
 * İnternetin ne olduğunu açıklayınız.
 * Paketlerin ne olduğunu ve veri aktarımı için nasıl kullanıldığını açıklayınız.
@@ -25,9 +25,9 @@ Bu bölüm, bu derste öğreneceğiniz konulara genel bir bakış içerir.
   6. Web'in bir bölümünün nasıl [diğeriyle etkileşime girdiğini](https://developer.mozilla.org/en-US/Learn/Getting_started_with_the_web/How_the_Web_works#Clients_and_servers) ve bir DNS isteğini nasıl [okuduğunu](https://developer.mozilla.org/en-US/Learn/Common_questions/What_is_a_domain_name#How_does_a_DNS_request_work) veya [izlediğini](https://www.youtube.com/watch?v=72snZctFFtA&feature=youtu.be&t=45s) okuyun.  
 </div>
 
-  ### Bilgi kontrolü
+### Bilgi Ölçme
 
-  Bu bölüm, bu dersi anlayıp anlamadığınızı kendi başınıza kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta sorun yaşıyorsanız, soruya tıklayın ve bağlantının verdiği materyali inceleyin.
+Bu bölüm, bu dersi anlayıp anlamadığınızı kendi başınıza kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta sorun yaşıyorsanız, soruya tıklayın ve bağlantının verdiği materyali inceleyin.
 
 *   [What is a web server?](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Pages_sites_servers_and_search_engines)
 *   [What is a network?](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/How_does_the_Internet_work)
@@ -45,9 +45,9 @@ Bu bölüm, bu derste öğreneceğiniz konulara genel bir bakış içerir.
 *   [Which browser are you currently using?](https://www.whatsmybrowser.org/)
 *   [In your own words, explain what happens when you run a search on google.com.](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Pages_sites_servers_and_search_engines)
 
-### Ek kaynaklar
+### Ek Kaynaklar
 
-Bu bölüm, ilgili içeriğe yardımcı olacak bağlantılar içerir. Zorunlu değil, ek kaynak olarak düşünün.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
 *   Security Now Podcast'in *Web nasıl çalışır* serisinin [Bölüm 1](https://twit.tv/shows/security-now/episodes/25?autostart=false) (8:30 civarında başlar) ve [Bölüm 2](https://twit.tv/shows/security-now/episodes/26?autostart=false)'sini dinleyin.
 *   [A packet's journey](https://www.youtube.com/watch?v=ewrBalT_eBM&feature) izleyin.
