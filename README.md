@@ -29,6 +29,7 @@
 
 >_İstisna olduğunu düşündüğünüz, Türkçe karşılığından şüphe duyduğunuz veya çevrilip çevrilmemesi gerektiğinden emin olamadığınız sözcük ve ifadeler için_ **referans listesi: **[Türkçe Odin Projesi-Sözcük Referans Listesi](https://docs.google.com/spreadsheets/d/1zJPo19TCgb4aYEMrX-wP_n3_OWEY9CzSTVj633fOBZs/edit?usp=sharing)
 
+>_Her sayfada görülen ve tekrar eden sabit ifadeleri ("lesson overview" gibi başlıklar) çevirmekle vakit kaybetmemeniz için ortak çevirilerine buradan ulaşabilirsiniz._ **referans listesi: **[Türkçe Odin Projesi-Tekrar Eden İfadeler](https://docs.google.com/spreadsheets/d/1zJPo19TCgb4aYEMrX-wP_n3_OWEY9CzSTVj633fOBZs/edit#gid=1175334419)
 
 ### DİKKAT EDİLMESİ GEREKENLER
 
@@ -63,15 +64,16 @@
 
 ---
 
-### Maintainer/Editör Takımı
+### Maintainer / Editör Takımı
 
 - [ ] [Umut Berkay Soydan](https://github.com/ubsoydan) <br/>
 - [ ] [Can Şirin](https://github.com/cansirin)
 
 ---
 
-## Katkı Sağlayanlar
-- @kullanıcıadı
+## Katkı Sağlayanlar / Contributors
+- [@batuhanbaybas](https://www.github.com/batuhanbaybas)
+- [@huseyingulec](https://www.github.com/huseyingulec)
 
 ---
 Lisans için license.md dosyasına bakınız.
