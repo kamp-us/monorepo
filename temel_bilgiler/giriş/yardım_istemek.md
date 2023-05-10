@@ -2,10 +2,9 @@
 
 Programlama yolculuğunuz boyunca, Odin topluluğu gibi bir çevrimiçi kodlama topluluğunda veya iş arkadaşlarınızla yaptığınız konuşmalarda kaçınılmaz olarak soru sormanız gerekecek. Soru sormak oldukça basit görünse de, bir programlama ortamında, yardım istemekten en iyi şekilde yararlanabilmeniz için gerektiği kadar ayrıntılı olan iyi biçimlendirilmiş sorular sormak çok önemlidir. Asıl amacımız, "başkalarının size yardım etmesine yardım etmektir!" Bu ders, Discord sunucumuz, Stack Overflow gibi topluluklarda ve işyerinizde etkili bir şekilde soru sormanız için size araçlar sağlayacaktır!
 
-### Ders Özeti
+### Derse Genel Bakış
 
-Bu bölüm, bu derste öğreneceğiniz konulara genel bir özet içerir.
-
+Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 *   Programlama soruları sorma tekniklerini açıklayın
 *   "Kötü" soruların niteliklerini açıklayın ve bunlardan kaçının
 *   Etkili ve iyi biçimlendirilmiş sorular sorun
@@ -43,16 +42,16 @@ Kodlama topluluklarında gönüllü olan kişiler yardım etmek için oradalar! 
 4.  Yardım istemek teşvik edilirken, bir "yardım vampiri" olmaktan kaçınmak ve yardım istediğiniz topluluklara veya kişilere saygılı olmak önemlidir. [Bu kaynak](https://slash7.com/2006/12/22/vampires/) "yardım vampiri"in ne olduğunu ayrıntılı bir şekilde tanımlar, başkalarına yardım edenlere, insanları etkili bir şekilde soru sormaya ve "yardım vampirine" etkili bir şekilde yardım etmeye teşvik edecek araçlar veriyor.  
 </div>
 
-### Bilgi Kontrolü
+### Bilgi Ölçme
 
 Bu bölüm, bu dersi anlayıp anlamadığınızı kendi başınıza kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta sorun yaşıyorsanız, soruya tıklayın ve bağlantının verdiği materyali inceleyin.
 
-*   [Name at least one thing your question should always include.](#provide-code-knowledge-check)
-*   [Describe the “XY Problem”.](https://xyproblem.info/)
-*   [Describe three attributes of a "help vampire".](https://slash7.com/2006/12/22/vampires/)
+*   [Sorunuzda her zaman olması gereken en az bir şeyi belirtin.](#provide-code-knowledge-check)
+*   [“XY Problem”'ini tanımlayın.](https://xyproblem.info/)
+*   [Bir "yardım vampirinin" üç özelliğini tanımlayın.](https://slash7.com/2006/12/22/vampires/)
 
 ### Ek Kaynaklar
 
-Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
 * Görünüşe göre bu derste henüz herhangi bir ek kaynak yok. Müfredatımıza katkıda bulunarak bu bölümü genişletmemize yardımcı olabilirsiniz.
