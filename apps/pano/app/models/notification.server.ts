@@ -1,4 +1,4 @@
-import type { Notification } from "@prisma/client";
+import type { Notification } from "@kampus-db/pano-prisma";
 import { prisma } from "~/db.server";
 import { getExternalCommentURL, getExternalPostURL } from "~/utils";
 import { env } from "~/utils/env.server";

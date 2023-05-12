@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@kampus-db/pano-prisma";
 import slugify from "slugify";
 import { prisma } from "~/db.server";
 import { getSitename } from "~/features/url/get-sitename";
