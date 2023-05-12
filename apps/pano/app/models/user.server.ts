@@ -1,14 +1,8 @@
-import type {
-  Password,
-  User as PrismaUser,
-  UserPreference as PrismaUserPreference,
-} from "@prisma/client";
-import { Theme } from "@prisma/client";
+import type { Password, User, UserPreference } from "@kampus-db/pano-prisma";
 import bcrypt from "bcryptjs";
 import { prisma } from "~/db.server";
 
-export type User = PrismaUser;
-export type UserPreference = PrismaUserPreference;
+export type { User, UserPreference };
 
 export async function getUserById(id: User["id"]) {
   return prisma.user.findUnique({ where: { id } });
@@ -148,13 +142,13 @@ export async function updateTheme(user: User, theme: UserPreference["theme"]) {
 }
 
 export async function getTheme(id?: User["id"]) {
-  if (!id) return Theme.DARK;
+  if (!id) return "DARK";
 
   const userPreference = await prisma.userPreference.findUnique({
     where: { userID: id },
   });
 
-  return userPreference?.theme ?? Theme.DARK;
+  return userPreference?.theme ?? "DARK";
 }
 
 export const hasPassword = async (id: User["id"]) => {

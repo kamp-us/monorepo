@@ -1,4 +1,4 @@
-import type { User } from "@prisma/client";
+import type { User } from "@kampus-db/pano-prisma";
 import type { FC, PropsWithChildren } from "react";
 import { createContext, useContext } from "react";
 

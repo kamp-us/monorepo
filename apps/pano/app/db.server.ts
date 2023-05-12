@@ -1,5 +1,4 @@
 import { PrismaClient } from "@kampus-db/pano-prisma";
-import invariant from "tiny-invariant";
 import { env } from "./utils/env.server";
 
 let prisma: PrismaClient;
@@ -23,7 +22,6 @@ if (env.NODE_ENV === "production") {
 
 function getClient() {
   const { DATABASE_URL, NODE_ENV } = env;
-  invariant(typeof DATABASE_URL === "string", "DATABASE_URL env var not set");
 
   const databaseUrl = new URL(DATABASE_URL);
 

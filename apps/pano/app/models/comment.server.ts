@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@kampus-db/pano-prisma";
 import { prisma } from "~/db.server";
 
 const selectCommentWithOwner = Prisma.validator<Prisma.CommentArgs>()({

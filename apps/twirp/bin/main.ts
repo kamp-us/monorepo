@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@kampus-db/pano-prisma";
 import express from "express";
 import { env } from "../env";
 import { createServer as createUsersService } from "../services/users";
