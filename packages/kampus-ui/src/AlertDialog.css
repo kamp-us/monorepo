@@ -1,0 +1,37 @@
+.AlertDialogOverlay {
+  background-color: var(--blackA9);
+  position: fixed;
+  inset: 0;
+}
+
+.AlertDialogContent {
+  background-color: var(--gray1);
+  border-radius: 6px;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 500px;
+  max-height: 85vh;
+  padding: 25px;
+}
+
+.AlertDialogContent:focus {
+  outline: none;
+}
+
+.AlertDialogTitle {
+  margin: 0;
+  color: var(--gray12);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.AlertDialogDescription {
+  margin-bottom: var(--space-4);
+  color: var(--gray11);
+  font-size: var(--font-size-4);
+  line-height: 1.5;
+}
