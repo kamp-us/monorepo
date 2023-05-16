@@ -265,19 +265,19 @@ export const Button = styled("button", {
         color: "$hiContrast",
         "@hover": {
           "&:hover": {
-            backgroundColor: "$grayA3",
+            backgroundColor: "$gray3",
             boxShadow: "none",
           },
         },
         "&:active": {
-          backgroundColor: "$grayA4",
+          backgroundColor: "$gray4",
         },
         "&:focus": {
-          boxShadow: "inset 0 0 0 1px $colors$grayA8, 0 0 0 1px $colors$grayA8",
+          boxShadow: "inset 0 0 0 1px $colors$gray8, 0 0 0 1px $colors$gray8",
         },
         '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]':
           {
-            backgroundColor: "$grayA4",
+            backgroundColor: "$gray4",
             boxShadow: "none",
           },
       },
@@ -313,19 +313,19 @@ export const Button = styled("button", {
         backgroundColor: "transparent",
         "@hover": {
           "&:hover": {
-            backgroundColor: "$greenA3",
+            backgroundColor: "$green3",
             boxShadow: "none",
           },
         },
         "&:active": {
-          backgroundColor: "$greenA4",
+          backgroundColor: "$green4",
         },
         "&:focus": {
-          boxShadow: "inset 0 0 0 1px $colors$greenA8, 0 0 0 1px $colors$greenA8",
+          boxShadow: "inset 0 0 0 1px $colors$green8, 0 0 0 1px $colors$greenA8",
         },
         '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]':
           {
-            backgroundColor: "$greenA4",
+            backgroundColor: "$green4",
             boxShadow: "none",
           },
       },

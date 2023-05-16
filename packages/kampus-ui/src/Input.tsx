@@ -96,7 +96,7 @@ export const Input = styled("input", {
         backgroundColor: "transparent",
         "@hover": {
           "&:hover": {
-            boxShadow: "inset 0 0 0 1px $colors$grayA7",
+            boxShadow: "inset 0 0 0 1px $colors$gray7",
           },
         },
         "&:focus": {
