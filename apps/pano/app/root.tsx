@@ -30,10 +30,12 @@ import { UserContextManager } from "./features/auth/user-context";
 import loadingIndicatorStyles from "./features/loading-indicator/loading-indicator.css";
 import { useLoadingIndicator } from "./features/loading-indicator/useLoadingIndicator";
 import { Topnav } from "./features/topnav/Topnav";
+import kampusUIStyles from "@kampus/ui/dist/index.css";
 
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: loadingIndicatorStyles },
+    { rel: "stylesheet", href: kampusUIStyles },
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
     {
       rel: "preconnect",
@@ -123,7 +125,7 @@ const Document = () => {
           }}
         />
       </head>
-      <body className={theme === "DARK" ? darkTheme : ""}>
+      <body className={theme === "DARK" ? darkTheme + " dark-theme" : ""}>
         {isDevelopment || !gaTrackingID ? null : (
           <>
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingID}`} />

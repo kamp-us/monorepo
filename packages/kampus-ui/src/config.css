@@ -1,0 +1,55 @@
+@import "@radix-ui/colors/amber.css";
+@import "@radix-ui/colors/amberDark.css";
+@import "@radix-ui/colors/gray.css";
+@import "@radix-ui/colors/grayDark.css";
+@import "@radix-ui/colors/blue.css";
+@import "@radix-ui/colors/blueDark.css";
+@import "@radix-ui/colors/red.css";
+@import "@radix-ui/colors/redDark.css";
+@import "@radix-ui/colors/green.css";
+@import "@radix-ui/colors/greenDark.css";
+@import "@radix-ui/colors/purple.css";
+@import "@radix-ui/colors/purpleDark.css";
+@import "@radix-ui/colors/purple.css";
+@import "@radix-ui/colors/purpleDark.css";
+@import "@radix-ui/colors/blackA.css";
+
+:root {
+  --hiContrast: var(--gray12);
+  --loContrast: var(--gray1);
+
+  --font-size-1: 12px;
+  --font-size-2: 13px;
+  --font-size-3: 14px;
+  --font-size-4: 15px;
+  --font-size-5: 16px;
+
+  --size-1: 5px;
+  --size-2: 10px;
+  --size-3: 15px;
+  --size-4: 20px;
+  --size-5: 25px;
+  --size-6: 35px;
+  --size-7: 45px;
+  --size-8: 65px;
+  --size-9: 80px;
+
+  --space-1: 5px;
+  --space-2: 10px;
+  --space-3: 15px;
+  --space-4: 20px;
+  --space-5: 25px;
+  --space-6: 35px;
+  --space-7: 45px;
+  --space-8: 65px;
+  --space-9: 80px;
+
+  --radius-1: 4px;
+  --radius-2: 6px;
+  --radius-3: 8px;
+  --radius-4: 8px;
+  --radius-round: 50%;
+  --radius-pill: 9999px;
+
+  --font-inter: "Inter", sans-serif;
+}

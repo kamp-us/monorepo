@@ -1,3 +1,5 @@
+import "./config.css";
+
 export * from "./stitches.config";
 export * from "./AlertDialog";
 export * from "./ControlGroup";
