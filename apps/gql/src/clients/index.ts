@@ -1,13 +1,34 @@
-import { UsersClient, UsersClientProtobuf } from "@kampus-protos/users";
-import { NodeHttpRPC } from "twirp-ts";
+import { PrismaClient } from "@kampus-db/pano-prisma";
 import { env } from "../../env";
 
-export type TwirpClients = {
-  users: UsersClient;
+export type Clients = {
+  prisma: PrismaClient;
 };
 
-export const createTwirpClients = (): TwirpClients => {
+export const createClients = (): Clients => {
   return {
-    users: new UsersClientProtobuf(NodeHttpRPC({ baseUrl: env.USERS_TWIRP_HOST })),
+    prisma: createPrismaClient(),
   };
 };
+
+export function createPrismaClient() {
+  const { DATABASE_URL, NODE_ENV } = env;
+
+  const databaseUrl = new URL(DATABASE_URL);
+
+  console.log(`🔌 setting up prisma client to ${databaseUrl.host}`);
+  // NOTE: during development if you change anything in this function, remember
+  // that this only runs once per server restart and won't automatically be
+  // re-run per request like everything else is. So if you need to change
+  // something in this file, you'll need to manually restart the server.
+  const client = new PrismaClient({
+    log: NODE_ENV === "development" ? ["query", "info", "warn", "error"] : [],
+    datasources: {
+      db: {
+        url: databaseUrl.toString(),
+      },
+    },
+  });
+
+  return client;
+}

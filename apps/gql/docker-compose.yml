@@ -16,11 +16,11 @@ services:
       timeout: 3s
       retries: 5
     networks:
-      - gql
+      - pasaport
     volumes:
       - pgdata:/var/lib/postgresql/data
 
 volumes:
   pgdata:
 networks:
-  gql:
+  pasaport:
