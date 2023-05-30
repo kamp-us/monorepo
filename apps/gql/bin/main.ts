@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { env } from "../env";
 import type { Resolvers, UserInput } from "../src/schema";
 import { createUsersLoader, UserLoaderKey, UsersLoader } from "../src/loaders";
-import { createTwirpClients, TwirpClients } from "../src/clients";
+import { createClients, Clients } from "../src/clients";
 
 const typeDefs = readFileSync(join(__dirname, "../src/schema/schema.graphql"), "utf8").toString();
 
@@ -13,7 +13,7 @@ type DataLoaders = {
   users: UsersLoader;
 };
 
-const createLoaders = (clients: TwirpClients): DataLoaders => {
+const createLoaders = (clients: Clients): DataLoaders => {
   return {
     users: createUsersLoader(clients),
   };
@@ -45,7 +45,7 @@ const resolvers: Resolvers<{ loaders: DataLoaders }> = {
 
 function main() {
   const app = express();
-  const twirpClients = createTwirpClients();
+  const twirpClients = createClients();
 
   const yoga = createYoga({
     schema: createSchema({ typeDefs, resolvers }),
