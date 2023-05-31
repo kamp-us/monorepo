@@ -17,8 +17,7 @@
     "eslint-config-turbo": "^0.0.4"
   },
   "devDependencies": {
-    "@types/eslint": "^8.4.10",
-    "typescript": "4.7.4"
+    "@types/eslint": "^8.4.10"
   },
   "volta": {
     "node": "18.14.2"

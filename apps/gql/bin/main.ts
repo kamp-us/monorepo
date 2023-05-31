@@ -45,14 +45,14 @@ const resolvers: Resolvers<{ loaders: DataLoaders }> = {
 
 function main() {
   const app = express();
-  const twirpClients = createClients();
+  const clients = createClients();
 
   const yoga = createYoga({
     schema: createSchema({ typeDefs, resolvers }),
     logging: "debug",
     graphiql: true,
     context: async () => ({
-      loaders: createLoaders(twirpClients),
+      loaders: createLoaders(clients),
     }),
   });
 

@@ -5,7 +5,6 @@ processes = []
 
 [env]
   PORT=8080
-  USERS_TWIRP_HOST="http://twirp-dev.internal/twirp"
 
 [experimental]
   auto_rollback = true
