@@ -24,7 +24,14 @@
   "dependencies": {
     "turbo": "1.8.3"
   },
+  "packageManager": "npm@9.5.0",
   "volta": {
     "node": "18.14.2"
+  },
+  "devDependencies": {
+    "cross-env": "7.0.3",
+    "prettier": "2.8.8",
+    "ts-node": "10.9.1",
+    "ts-node-dev": "2.0.0"
   }
 }
