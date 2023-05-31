@@ -6,9 +6,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "devDependencies": {
-    "typescript": "4.7.4"
-  },
   "volta": {
     "node": "18.14.2"
   }
