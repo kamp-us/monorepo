@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from "graphql";
+import { KampusGQLContext } from "./types";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -16,7 +17,7 @@ export type Scalars = {
 
 export type Query = {
   __typename?: "Query";
-  user?: Maybe<User>;
+  user: Maybe<User>;
 };
 
 export type QueryUserArgs = {
@@ -30,8 +31,8 @@ export type User = {
 };
 
 export type UserInput = {
-  id?: InputMaybe<Scalars["ID"]>;
-  username?: InputMaybe<Scalars["String"]>;
+  id: InputMaybe<Scalars["ID"]>;
+  username: InputMaybe<Scalars["String"]>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -137,10 +138,10 @@ export type ResolversParentTypes = {
 };
 
 export type QueryResolvers<
-  ContextType = any,
+  ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
-  user?: Resolver<
+  user: Resolver<
     Maybe<ResolversTypes["User"]>,
     ParentType,
     ContextType,
@@ -149,15 +150,15 @@ export type QueryResolvers<
 };
 
 export type UserResolvers<
-  ContextType = any,
+  ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
 > = {
-  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  username?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  username: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Resolvers<ContextType = any> = {
-  Query?: QueryResolvers<ContextType>;
-  User?: UserResolvers<ContextType>;
+export type Resolvers<ContextType = KampusGQLContext> = {
+  Query: QueryResolvers<ContextType>;
+  User: UserResolvers<ContextType>;
 };

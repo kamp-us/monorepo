@@ -1,10 +1,27 @@
 /**
- * @type {import('@types/eslint').Linter.BaseConfig}
+ * @type {import('eslint').Linter.Config}
  */
-module.exports = {
-  extends: ["prettier", "turbo"],
+const config = {
+  extends: [
+    "turbo",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-require-type-checking",
+    "prettier",
+  ],
   rules: {
-    "@typescript-eslint/consistent-type-imports": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+      },
+    ],
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { prefer: "type-imports", fixStyle: "inline-type-imports" },
+    ],
     "sort-imports": ["error", { ignoreCase: true, ignoreDeclarationSort: true }],
     "import/order": [
       "error",
@@ -15,3 +32,5 @@ module.exports = {
     ],
   },
 };
+
+module.exports = config;
