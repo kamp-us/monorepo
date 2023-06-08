@@ -1,13 +1,9 @@
 {
   "extends": "@kampus/tsconfig/nextjs.json",
   "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
     "paths": {
-      "~/*": [
+      "basePath": ".",
+      "@/*": [
         "./*"
       ]
     }
@@ -19,6 +15,8 @@
     ".next/types/**/*.ts"
   ],
   "exclude": [
+    "dist",
+    "build",
     "node_modules"
   ]
 }

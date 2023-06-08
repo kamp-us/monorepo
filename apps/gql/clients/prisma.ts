@@ -1,15 +1,5 @@
 import { PrismaClient } from "@kampus-db/pano-prisma";
-import { env } from "../../env";
-
-export type Clients = {
-  prisma: PrismaClient;
-};
-
-export const createClients = (): Clients => {
-  return {
-    prisma: createPrismaClient(),
-  };
-};
+import { env } from "~/env";
 
 export function createPrismaClient() {
   const { DATABASE_URL, NODE_ENV } = env;

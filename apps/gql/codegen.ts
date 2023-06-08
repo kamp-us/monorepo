@@ -1,10 +1,14 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
-  schema: "src/schema/schema.graphql",
+  schema: "schema/schema.graphql",
   generates: {
-    "./src/schema/types.generated.ts": {
+    "./schema/types.generated.ts": {
       plugins: ["typescript", "typescript-resolvers"],
+      config: {
+        avoidOptionals: true,
+        contextType: "./types#KampusGQLContext",
+      },
     },
   },
   hooks: { afterAllFileWrite: ["prettier --write"] },

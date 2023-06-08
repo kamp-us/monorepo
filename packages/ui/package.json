@@ -1,0 +1,21 @@
+{
+  "name": "@kampus/ui-next",
+  "version": "0.0.0",
+  "description": "0",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@kampus/tailwind-config": "0.0.0",
+    "@kampus/tsconfig": "0.0.0"
+  },
+  "dependencies": {
+    "@radix-ui/react-alert-dialog": "^1.0.4",
+    "@radix-ui/react-avatar": "^1.0.3",
+    "@radix-ui/react-slot": "^1.0.2"
+  }
+}

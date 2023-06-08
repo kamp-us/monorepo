@@ -1,11 +1,7 @@
-import dotenv from "dotenv";
 import { parseEnv, port } from "znv";
 import { z } from "zod";
 
-dotenv.config();
-
 export const env = parseEnv(process.env, {
   NODE_ENV: z.enum(["development", "test", "production"]),
-  DATABASE_URL: z.string().url(),
-  PORT: port(),
+  DATABASE_URL: z.string().url().default("postgresql://pgtest:pgtest@localhost:5555/pgtest?schema=public"),
 });
