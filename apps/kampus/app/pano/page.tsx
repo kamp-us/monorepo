@@ -1,3 +1,5 @@
+import { Random } from "./random";
+
 export default function PanoHome() {
-  return <div>hello pano!</div>;
+  return <Random />;
 }
