@@ -7,7 +7,7 @@ const config = {
         // if the host is `pano.*`,
         // this rewrite will be applied
         {
-          source: "/:path((?!_next/|_static/|[\\w-]+\\.\\w+).*)",
+          source: "/(?!_next/|_static/|[\\w-]+\\.\\w+).*",
           has: [
             {
               type: "host",
@@ -19,7 +19,7 @@ const config = {
         // if the host is `sozluk.*`,
         // this rewrite will be applied
         {
-          source: "/:path((?!_next/|_static/|[\\w-]+\\.\\w+).*)",
+          source: "/(?!_next/|_static/|[\\w-]+\\.\\w+).*",
           has: [
             {
               type: "host",
