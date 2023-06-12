@@ -1,10 +1,9 @@
 "use client";
 
-import * as React from "react";
-import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
-
-import { cn } from "@kampus/ui-next/utils";
 import { buttonVariants } from "@kampus/ui-next/components/button";
+import { cn } from "@kampus/ui-next/utils";
+import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
+import * as React from "react";
 
 const AlertDialog = AlertDialogPrimitive.Root;
 
@@ -26,7 +25,7 @@ AlertDialogPortal.displayName = AlertDialogPrimitive.Portal.displayName;
 const AlertDialogOverlay = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>
->(({ className, children, ...props }, ref) => (
+>(({ className, children: _children, ...props }, ref) => (
   <AlertDialogPrimitive.Overlay
     className={cn(
       "bg-background/80 animate-in fade-in fixed inset-0 z-50 backdrop-blur-sm transition-opacity",
