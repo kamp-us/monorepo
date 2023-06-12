@@ -13,6 +13,7 @@ import {
 import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, useSearchParams } from "@remix-run/react";
+import { useState } from "react";
 import { authenticator } from "~/authenticator.server";
 import { OAuthLoginForm } from "~/features/oauth/OAuthLoginForm";
 import { commitSession, getSession } from "~/session.server";
@@ -48,6 +49,11 @@ export const Login = () => {
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") ?? "/";
   const { hasSentEmail } = useLoaderData<typeof loader>();
+  const [code, setCode] = useState("");
+
+  function handleChange(e: React.FormEvent<HTMLInputElement>) {
+    setCode(e.currentTarget.value);
+  }
 
   return (
     <CenteredContainer>
@@ -57,7 +63,15 @@ export const Login = () => {
             {hasSentEmail ? (
               <>
                 <Label htmlFor="code">Giriş kodu</Label>
-                <Input id="code" name="code" type="text" placeholder="123456" size="2" />
+                <Input
+                  id="code"
+                  name="code"
+                  type="text"
+                  placeholder="123456"
+                  size="2"
+                  onChange={handleChange}
+                  value={code}
+                />
               </>
             ) : (
               <>
