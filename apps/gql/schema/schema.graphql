@@ -1,5 +1,7 @@
 type Query {
   user(input: UserInput!): User
+
+  sozluk: SozlukQuery!
 }
 
 type User {
@@ -10,4 +12,25 @@ type User {
 input UserInput {
   id: ID
   username: String
+}
+
+type SozlukQuery {
+  term(input: SozlukTermInput!): SozlukTerm
+}
+
+input SozlukTermInput {
+  id: ID!
+}
+
+type SozlukTerm {
+  id: ID!
+  title: String!
+  tags: [String!]
+  body: SozlukTermBody!
+}
+
+type SozlukTermBody {
+  raw: String!
+  code: String!
+  html: String!
 }
