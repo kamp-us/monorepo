@@ -11,5 +11,9 @@
   "devDependencies": {
     "@kampus/tailwind-config": "*",
     "@kampus/tsconfig": "*"
+  },
+  "dependencies": {
+    "znv": "0.3.2",
+    "zod": "3.21.4"
   }
 }
