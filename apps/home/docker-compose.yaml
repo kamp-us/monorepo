@@ -1,0 +1,18 @@
+version: "3.3"
+services:
+  app:
+    build:
+      context: ../../
+      dockerfile: ./apps/home/Dockerfile.dev
+    entrypoint: ["turbo", "run", "docker", "--scope=@kampus-apps/home"]
+    ports:
+      - "3000:3000"
+      - "8002:8002"
+    environment:
+      - SESSION_SECRET=sessionsecret
+      - NODE_ENV=development
+    volumes:
+      - ./src:/app/apps/home/src
+      - ./public:/app/apps/home/public
+      - ./remix.config.js:/app/apps/home/remix.config.js
+      - ./tsconfig.json:/app/apps/home/tsconfig.json

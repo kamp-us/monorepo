@@ -3,7 +3,17 @@
   "pipeline": {
     "build": {
       "outputs": ["dist/**", "build/**", "api/**", "public/build/**"],
-      "dependsOn": ["^build"]
+      "dependsOn": ["^prisma:generate", "^build"]
+    },
+    "dev": {
+      "dependsOn": ["^prisma:generate"],
+      "cache": false
+    },
+    "prisma:generate": {
+      "cache": false
+    },
+    "prisma:push": {
+      "cache": false
     },
     "test": {
       "outputs": ["coverage/**"],
@@ -18,8 +28,14 @@
     "docker:dev": {
       "cache": false
     },
+    "@kampus-apps/kampus#*": {
+      "env": ["NODE_ENV", "GQL_URL"]
+    },
     "@kampus-apps/pano#*": {
       "env": ["NODE_ENV", "DATABASE_URL", "SESSION_SECRET"]
+    },
+    "@kampus-apps/home#*": {
+      "env": ["NODE_ENV", "SESSION_SECRET", "TWITCH_CLIENT_ID", "TWITCH_CLIENT_SECRET"]
     }
   }
 }

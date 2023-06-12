@@ -1,0 +1,36 @@
+{
+  "name": "@kampus/pano-button",
+  "version": "0.0.0",
+  "description": "embedable share button for kampus pano",
+  "private": true,
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build:tsup": "tsup src/index.tsx --format esm,cjs",
+    "build:dts": "tsc --emitDeclarationOnly --declaration",
+    "build": "npm run build:tsup && npm run build:dts",
+    "clean": "rm -rf dist",
+    "dev": "npm run build:tsup -- --watch",
+    "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
+    "lint:fix": "TIMING=1 npm run lint -- --fix"
+  },
+  "author": "",
+  "dependencies": {
+    "@kampus/ui": "*"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "eslint": "8.36.0",
+    "react": "18.2.0"
+  },
+  "volta": {
+    "node": "18.14.2"
+  }
+}

@@ -1,0 +1,7 @@
+node_modules
+
+.next
+
+build
+public/build
+.env

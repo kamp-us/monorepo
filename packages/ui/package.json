@@ -1,0 +1,29 @@
+{
+  "name": "@kampus/ui-next",
+  "version": "0.0.0",
+  "description": "0",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@kampus/tailwind-config": "0.0.0",
+    "@kampus/tsconfig": "0.0.0"
+  },
+  "dependencies": {
+    "@radix-ui/react-alert-dialog": "^1.0.4",
+    "@radix-ui/react-avatar": "^1.0.3",
+    "@radix-ui/react-dialog": "^1.0.4",
+    "@radix-ui/react-dropdown-menu": "^2.0.5",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-select": "^1.2.2",
+    "@radix-ui/react-separator": "^1.0.3",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.4",
+    "class-variance-authority": "0.6.0",
+    "lucide-react": "0.241.0"
+  }
+}

@@ -12,6 +12,10 @@ created with remix.run
 cp .env.example .env
 ```
 
+- _`(Optional for discord authentication)`_ Make sure you have set `DISCORD_CLIENT_ID` and `DISCORD_CLIENT_SECRET` variables inside `.env` on your local. (refer to [discord oauth docs](https://discord.com/developers/docs/getting-started))
+
+- _`(Optional for github authentication)`_ Make sure you have set `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` variables inside `.env` on your local. (refer to [github oauth docs](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app))
+
 - Start the Application and Postgres Database in [Docker](https://www.docker.com/get-started) and keep it running:
 
 ```sh

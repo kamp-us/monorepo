@@ -1,0 +1,20 @@
+{
+  "name": "@kampus/sozluk-content",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "build": "contentlayer build",
+    "dev": "contentlayer dev"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "contentlayer": "0.3.3",
+    "mdx-bundler": "9.2.1"
+  },
+  "devDependencies": {
+    "@kampus/tsconfig": "^0.0.0"
+  }
+}

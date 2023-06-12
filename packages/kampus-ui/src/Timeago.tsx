@@ -22,10 +22,7 @@ export function formatTimeAgo(date: Date) {
   for (let i = 0; i <= DIVISIONS.length; i++) {
     const division = DIVISIONS[i];
     if (Math.abs(duration) < division.amount) {
-      return formatter.format(
-        Math.round(duration),
-        division.name as Intl.RelativeTimeFormatUnit
-      );
+      return formatter.format(Math.round(duration), division.name as Intl.RelativeTimeFormatUnit);
     }
     duration /= division.amount;
   }

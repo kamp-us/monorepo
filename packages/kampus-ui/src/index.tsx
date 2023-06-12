@@ -11,6 +11,7 @@ export * from "./Input";
 export * from "./InternalLink";
 export * from "./Label";
 export * from "./Link";
+export * from "./OAuthProviderLogo";
 export * from "./Select";
 export * from "./Separator";
 export * from "./SmallLink";

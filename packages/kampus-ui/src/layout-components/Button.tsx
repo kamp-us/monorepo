@@ -64,6 +64,10 @@ export const Button = styled("button", {
     pointerEvents: "none",
   },
 
+  "&:hover": {
+    cursor: "pointer",
+  },
+
   variants: {
     size: {
       "1": {
@@ -156,12 +160,12 @@ export const Button = styled("button", {
           },
       },
       red: {
-        backgroundColor: "$loContrast",
-        boxShadow: "inset 0 0 0 1px $colors$gray7",
+        backgroundColor: "$red2",
+        boxShadow: "inset 0 0 0 1px $colors$red7",
         color: "$red11",
         "@hover": {
           "&:hover": {
-            boxShadow: "inset 0 0 0 1px $colors$gray8",
+            boxShadow: "inset 0 0 0 1px $colors$red8",
           },
         },
         "&:active": {
@@ -189,8 +193,7 @@ export const Button = styled("button", {
           backgroundColor: "hsla(0,100%,100%,.3)",
         },
         "&:focus": {
-          boxShadow:
-            "inset 0 0 0 1px hsla(0,100%,100%,.35), 0 0 0 1px hsla(0,100%,100%,.35)",
+          boxShadow: "inset 0 0 0 1px hsla(0,100%,100%,.35), 0 0 0 1px hsla(0,100%,100%,.35)",
         },
       },
       transparentBlack: {
@@ -205,8 +208,7 @@ export const Button = styled("button", {
           backgroundColor: "hsla(0,0%,0%,.3)",
         },
         "&:focus": {
-          boxShadow:
-            "inset 0 0 0 1px hsla(0,0%,0%,.35), 0 0 0 1px hsla(0,0%,0%,.35)",
+          boxShadow: "inset 0 0 0 1px hsla(0,0%,0%,.35), 0 0 0 1px hsla(0,0%,0%,.35)",
         },
       },
     },
@@ -319,8 +321,7 @@ export const Button = styled("button", {
           backgroundColor: "$greenA4",
         },
         "&:focus": {
-          boxShadow:
-            "inset 0 0 0 1px $colors$greenA8, 0 0 0 1px $colors$greenA8",
+          boxShadow: "inset 0 0 0 1px $colors$greenA8, 0 0 0 1px $colors$greenA8",
         },
         '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]':
           {
