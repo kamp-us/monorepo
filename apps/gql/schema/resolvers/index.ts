@@ -1,5 +1,5 @@
-import { Resolvers } from "../types.generated";
 import { Query } from "./Query";
+import { type Resolvers } from "../types.generated";
 
 export const resolvers = {
   Query,

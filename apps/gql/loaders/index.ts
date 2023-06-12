@@ -1,6 +1,6 @@
-import { Clients } from "~/clients/types";
-import { DataLoaders } from "./types";
+import { type DataLoaders } from "./types";
 import { createUsersLoader } from "./users";
+import { type Clients } from "~/clients/types";
 
 export const createLoaders = (clients: Clients): DataLoaders => {
   return {

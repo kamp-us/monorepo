@@ -1,5 +1,5 @@
 import { createPrismaClient } from "./prisma";
-import { Clients } from "./types";
+import { type Clients } from "./types";
 
 export const createClients = (): Clients => {
   return {

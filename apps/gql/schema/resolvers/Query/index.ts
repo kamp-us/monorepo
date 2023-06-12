@@ -1,5 +1,5 @@
-import { QueryResolvers } from "~/schema/types.generated";
 import { user } from "./user";
+import { type QueryResolvers } from "~/schema/types.generated";
 
 export const Query = {
   user,

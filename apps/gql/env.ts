@@ -1,4 +1,4 @@
-import { parseEnv, port } from "znv";
+import { parseEnv } from "znv";
 import { z } from "zod";
 
 export const env = parseEnv(process.env, {
