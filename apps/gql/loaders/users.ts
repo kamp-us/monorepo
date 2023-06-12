@@ -1,7 +1,7 @@
 import DataLoader from "dataloader";
-import { Clients } from "~/clients/types";
-import { User } from "~/schema/types.generated";
 import { LoaderKey } from "./utils/loader-key";
+import { type Clients } from "~/clients/types";
+import { type User } from "~/schema/types.generated";
 
 export type UsersLoader = DataLoader<UserLoaderKey, User>;
 

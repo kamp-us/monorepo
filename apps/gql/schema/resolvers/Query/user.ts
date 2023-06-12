@@ -1,5 +1,5 @@
 import { UserLoaderKey } from "~/loaders/users";
-import { QueryResolvers } from "~/schema/types.generated";
+import { type QueryResolvers } from "~/schema/types.generated";
 
 export const user: QueryResolvers["user"] = (_, { input }, { loaders }) => {
   if (!input) {

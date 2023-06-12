@@ -2,12 +2,7 @@
  * @type {import('eslint').Linter.Config}
  */
 const config = {
-  extends: [
-    "turbo",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-require-type-checking",
-    "prettier",
-  ],
+  extends: ["turbo", "plugin:@typescript-eslint/recommended", "prettier"],
   rules: {
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/no-unused-vars": [

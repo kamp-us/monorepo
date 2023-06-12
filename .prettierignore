@@ -1,5 +1,7 @@
 node_modules
 
-/build
-/public/build
+.next
+
+build
+public/build
 .env
