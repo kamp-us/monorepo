@@ -1,5 +1,5 @@
 import { PrismaClient } from "@kampus-db/pano-prisma";
-import { env } from "~/env";
+import { env } from "~/env.mjs";
 
 export function createPrismaClient() {
   const { DATABASE_URL, NODE_ENV } = env;
