@@ -28,6 +28,9 @@
     "docker:dev": {
       "cache": false
     },
+    "@kampus-apps/kampus#*": {
+      "env": ["NODE_ENV", "GQL_URL"]
+    },
     "@kampus-apps/pano#*": {
       "env": ["NODE_ENV", "DATABASE_URL", "SESSION_SECRET"]
     },
