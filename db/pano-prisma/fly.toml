@@ -1,0 +1,46 @@
+# fly.toml app configuration file generated for pano-dev-db on 2023-06-12T16:11:51-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "pano-dev-db"
+primary_region = "fra"
+
+[env]
+  PRIMARY_REGION = "fra"
+
+[[mounts]]
+  source = "pg_data"
+  destination = "/data"
+
+[[services]]
+  internal_port = 5432 # Postgres instance
+  protocol = "tcp"
+
+[[services.ports]]
+  handlers = ["pg_tls"]
+  port = 5432
+
+[checks]
+  [checks.pg]
+    port = 5500
+    type = "http"
+    interval = "15s"
+    timeout = "10s"
+    path = "/flycheck/pg"
+  [checks.role]
+    port = 5500
+    type = "http"
+    interval = "15s"
+    timeout = "10s"
+    path = "/flycheck/role"
+  [checks.vm]
+    port = 5500
+    type = "http"
+    interval = "1m0s"
+    timeout = "10s"
+    path = "/flycheck/vm"
+
+[metrics]
+  port = 9187
+  path = "/metrics"
