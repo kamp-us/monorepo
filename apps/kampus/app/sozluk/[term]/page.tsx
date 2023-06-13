@@ -1,4 +1,4 @@
-import { env } from "~/env";
+import { env } from "~/env.mjs";
 
 export default async function SozlukTermPage({ params }: { params: { term: string } }) {
   const {

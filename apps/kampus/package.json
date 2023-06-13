@@ -13,7 +13,10 @@
     "@kampus/tsconfig": "*"
   },
   "dependencies": {
-    "znv": "0.3.2",
+    "@t3-oss/env-nextjs": "^0.4.0",
     "zod": "3.21.4"
+  },
+  "imports": {
+    "~/*": "./*.mjs"
   }
 }

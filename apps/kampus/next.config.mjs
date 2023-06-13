@@ -1,3 +1,6 @@
+/** Env variables gets validated on build */
+import "./env.mjs";
+
 /** @type {import('next').NextConfig} */
 const config = {
   transpilePackages: ["@kampus/tailwind-config", "@kampus/ui-next"],
