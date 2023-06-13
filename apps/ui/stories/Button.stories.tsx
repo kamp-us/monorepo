@@ -1,11 +1,17 @@
 import { Button } from "@kampus/ui-next/components/button";
 import type { Meta, StoryObj } from "@storybook/react";
+import { Loader2, Mail } from "lucide-react";
 
 const meta = {
   component: Button,
   tags: ["autodocs"],
   args: {
     children: "Button text",
+  },
+  argTypes: {
+    disabled: {
+      control: "boolean",
+    },
   },
 } as Meta<typeof Button>;
 
@@ -49,7 +55,33 @@ export const Link: Story = {
 };
 
 export const WithIcon: Story = {
+  render: ({ children, ...props }) => (
+    <Button {...props}>
+      <Mail className="mr-2 h-4 w-4" />
+      {children}
+    </Button>
+  ),
+};
+
+export const Loading: Story = {
   args: {
-    variant: "link",
+    disabled: true,
   },
+  render: ({ children, ...props }) => (
+    <Button {...props}>
+      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+      {children}
+    </Button>
+  ),
+};
+
+export const AsChild: Story = {
+  args: {
+    asChild: true,
+  },
+  render: ({ children, ...props }) => (
+    <Button {...props}>
+      <a href="javascript:;">{children}</a>
+    </Button>
+  ),
 };
