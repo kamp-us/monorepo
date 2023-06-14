@@ -29,7 +29,7 @@
       "cache": false
     },
     "@kampus-apps/kampus#*": {
-      "env": ["NODE_ENV", "GQL_URL"]
+      "env": ["NODE_ENV", "GQL_URL", "DISCORD_CLIENT_ID", "DISCORD_CLIENT_SECRET", "NEXTAUTH_SECRET"]
     },
     "@kampus-apps/pano#*": {
       "env": ["NODE_ENV", "DATABASE_URL", "SESSION_SECRET"]
