@@ -13,6 +13,7 @@
     "@kampus/tsconfig": "*"
   },
   "dependencies": {
+    "next-auth": "^4.22.1",
     "znv": "0.3.2",
     "zod": "3.21.4"
   }
