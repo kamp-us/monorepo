@@ -1,19 +1,18 @@
-import {Avatar, AvatarFallback, AvatarImage} from "@kampus/ui-next/components/avatar";
-import type {Meta, StoryObj} from "@storybook/react";
+import { Avatar, AvatarFallback, AvatarImage } from "@kampus/ui-next/components/avatar";
+import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
-    component: Avatar,
+  component: Avatar,
 } as Meta<typeof Avatar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default = {
-    args: {
-        children: <>
-            <AvatarImage src="https://github.com/kamp-us.png" alt="@kampus"/>
-            <AvatarFallback>K</AvatarFallback>
-        </>
-    }
-} satisfies Story;
-
+export const Default: Story = {
+  render: () => (
+    <Avatar>
+      <AvatarImage src="https://github.com/kamp-us.png" alt="@kampus" />
+      <AvatarFallback>K</AvatarFallback>
+    </Avatar>
+  ),
+};
