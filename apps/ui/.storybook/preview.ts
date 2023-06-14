@@ -1,6 +1,5 @@
 import "@kampus/kampus/app/globals.css";
 import "../styles.css";
-import {Preview} from "@storybook/react";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
