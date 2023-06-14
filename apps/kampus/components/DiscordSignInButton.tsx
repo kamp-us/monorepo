@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react";
 
 const DiscordSignInButton = () => {
   const searchParams = useSearchParams();
-  const callbackUrl: any = searchParams?.get("callbackUrl");
+  const callbackUrl: string = searchParams?.get("callbackUrl") ?? "/";
 
   return (
     <button
