@@ -1,7 +1,3 @@
-@tailwind base;
-
-@layer base {
-  :root {
-    --font-sans: "Inter";
-  }
+:root {
+  --font-sans: "Inter";
 }
