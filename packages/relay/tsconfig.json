@@ -1,0 +1,8 @@
+{
+  "extends": "@kampus/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["dist", "build", "node_modules"]
+}
