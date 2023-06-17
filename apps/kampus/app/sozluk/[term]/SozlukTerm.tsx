@@ -1,14 +1,19 @@
-import { Suspense } from "react";
-import { graphql, type PreloadedQuery, usePreloadedQuery } from "react-relay";
+"use client";
+
+import { type SerializablePreloadedQuery } from "@kampus/relay";
+import useSerializablePreloadedQuery from "@kampus/relay/use-serializable-preloaded-query";
+import { graphql, usePreloadedQuery } from "react-relay";
 import { SozlukTermBody } from "./SozlukTermBody";
 import { SozlukTermTitle } from "./SozlukTermTitle";
 import { type SozlukTermQuery } from "./__generated__/SozlukTermQuery.graphql";
 
 interface Props {
-  queryRef: PreloadedQuery<SozlukTermQuery>;
+  preloadedQuery: SerializablePreloadedQuery<SozlukTermQuery>;
 }
 
 export const SozlukTermContainer = (props: Props) => {
+  const queryRef = useSerializablePreloadedQuery(props.preloadedQuery);
+
   const data = usePreloadedQuery(
     graphql`
       query SozlukTermQuery($id: ID!) {
@@ -22,15 +27,15 @@ export const SozlukTermContainer = (props: Props) => {
         }
       }
     `,
-    props.queryRef
+    queryRef
   );
 
   const term = data.sozluk.term;
 
   return (
-    <Suspense fallback="loading ...">
+    <>
       <SozlukTermTitle term={data.sozluk.term} />
       <SozlukTermBody body={term?.body ?? null} />
-    </Suspense>
+    </>
   );
 };
