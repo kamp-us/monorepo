@@ -1,11 +1,11 @@
 // Convert preloaded query object (with raw GraphQL Response) into
 // Relay's PreloadedQuery.
 
-import {useMemo} from "react";
-import {type PreloadedQuery, type PreloadFetchPolicy, useRelayEnvironment} from "react-relay";
-import {type OperationType} from "relay-runtime";
-import {responseCache} from "./environment";
-import {type SerializablePreloadedQuery} from "./load-serializable-query";
+import { useMemo } from "react";
+import { type PreloadedQuery, type PreloadFetchPolicy, useRelayEnvironment } from "react-relay";
+import { type OperationType } from "relay-runtime";
+import { responseCache } from "./environment";
+import { type SerializablePreloadedQuery } from "./load-serializable-query"; // This hook convert serializable preloaded query
 
 // This hook convert serializable preloaded query
 // into Relay's PreloadedQuery object.

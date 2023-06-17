@@ -1,9 +1,9 @@
 import {
-  ConcreteRequest,
-  GraphQLResponse,
-  OperationType,
-  RequestParameters,
-  VariablesOf,
+  type ConcreteRequest,
+  type GraphQLResponse,
+  type OperationType,
+  type RequestParameters,
+  type VariablesOf,
 } from "relay-runtime";
 import { networkFetch } from "./environment";
 
@@ -16,11 +16,9 @@ export interface SerializablePreloadedQuery<TQuery extends OperationType> {
 // Call into raw network fetch to get serializable GraphQL query response
 // This response will be sent to the client to "warm" the QueryResponseCache
 // to avoid the client fetches.
-export default async function loadSerializableQuery<
-    TQuery extends OperationType
->(
-    query: ConcreteRequest,
-    variables: VariablesOf<TQuery>
+export default async function loadSerializableQuery<TQuery extends OperationType>(
+  query: ConcreteRequest,
+  variables: VariablesOf<TQuery>
 ): Promise<SerializablePreloadedQuery<TQuery>> {
   const response = await networkFetch(query.params, variables);
   return {
