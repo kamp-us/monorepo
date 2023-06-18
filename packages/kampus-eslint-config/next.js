@@ -21,6 +21,7 @@ const config = {
     "import/order": [
       "error",
       {
+        pathGroups: [{ pattern: "~/**", group: "external" }],
         groups: [["external", "builtin"], "internal", ["parent", "sibling", "index"]],
         alphabetize: { order: "asc" },
       },
