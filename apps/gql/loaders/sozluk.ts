@@ -1,7 +1,5 @@
+import { Term, allTerms } from "@kampus/sozluk-content";
 import DataLoader from "dataloader";
-
-import { allTerms } from "@kampus/sozluk-content";
-
 import { type Clients } from "~/clients/types";
 import { type SozlukTerm } from "~/schema/types.generated";
 import { LoaderKey } from "./utils/loader-key";
@@ -11,31 +9,42 @@ export class SozlukTermLoaderKey extends LoaderKey<"id", string> { }
 
 export const createSozlukLoaders = (clients: Clients) => {
   return {
+    term: createTermLoader(clients),
     terms: createTermsLoader(clients),
   };
 };
 
-function createTermsLoader(_: Clients) {
-  // eslint-disable-next-line @typescript-eslint/require-await
-  return new DataLoader<SozlukTermLoaderKey, SozlukTerm>(async (keys) => {
+export type SozlukTermLoader = ReturnType<typeof createTermLoader>;
+export type SozlukTermsLoader = ReturnType<typeof createTermsLoader>;
 
-    return keys
-      .map((key) => {
-        const term = allTerms.find((term) => term.id === key.value);
-        if (!term) {
-          return new Error(`Term not found: ${key.value}`);
-        }
+const transformTerm = (term: Term) => {
+  return {
+    id: term.id,
+    title: term.title,
+    tags: term.tags,
+    body: {
+      raw: term.body.raw,
+      code: term.body.code,
+      html: term.mdxHtml,
+    },
+  };
+};
 
-        return {
-          id: term.id,
-          title: term.title,
-          tags: term.tags,
-          body: {
-            raw: term.body.raw,
-            code: term.body.code,
-            html: term.mdxHtml,
-          },
-        };
-      });
+const createTermLoader = (_: Clients) =>
+  new DataLoader<string, SozlukTerm>(
+    async (keys) =>
+      keys
+        .map((key) => {
+          const term = allTerms.find((term) => term.id === key);
+          if (!term) {
+            return null;
+          }
+          return transformTerm(term);
+        })
+        .filter(Boolean) as SozlukTerm[]
+  );
+
+const createTermsLoader = (_: Clients) =>
+  new DataLoader<string, SozlukTerm[]>(async () => {
+    return [allTerms.map(transformTerm)];
   });
-}
