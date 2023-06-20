@@ -6,25 +6,24 @@ import { type Clients } from "~/clients/types";
 import { type SozlukTerm } from "~/schema/types.generated";
 import { LoaderKey } from "./utils/loader-key";
 
+export type SozlukTermsLoader = DataLoader<SozlukTermLoaderKey, SozlukTerm>;
+export class SozlukTermLoaderKey extends LoaderKey<"id", string> { }
+
 export const createSozlukLoaders = (clients: Clients) => {
   return {
     terms: createTermsLoader(clients),
   };
 };
 
-export type SozlukTermsLoader = DataLoader<SozlukTermLoaderKey, SozlukTerm>;
-export class SozlukTermLoaderKey extends LoaderKey<"id", string> {}
-
 function createTermsLoader(_: Clients) {
   // eslint-disable-next-line @typescript-eslint/require-await
   return new DataLoader<SozlukTermLoaderKey, SozlukTerm>(async (keys) => {
-    console.log({ keys });
 
     return keys
       .map((key) => {
         const term = allTerms.find((term) => term.id === key.value);
         if (!term) {
-          return null;
+          return new Error(`Term not found: ${key.value}`);
         }
 
         return {
@@ -37,7 +36,6 @@ function createTermsLoader(_: Clients) {
             html: term.mdxHtml,
           },
         };
-      })
-      .filter(Boolean) as SozlukTerm[];
+      });
   });
 }
