@@ -1,8 +1,7 @@
-import { beforeAll, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import { UserLoaderKey, createUsersLoader } from "./users";
 
-import prisma from "../clients/__mocks__/prisma";
 import { _clients } from "../clients/__mocks__/clients";
 
 
@@ -17,7 +16,7 @@ describe("Users  Loader", () => {
   it("should load defined user with id", async () => {
     const loader = createUsersLoader(_clients);
 
-    prisma.user.findMany.mockResolvedValueOnce([{
+    _clients.prisma.user.findMany.mockResolvedValueOnce([{
       username: "test",
       id: "1",
       createdAt: new Date(),
@@ -42,7 +41,7 @@ describe("Users  Loader", () => {
   it("should load defined user with username", async () => {
     const loader = createUsersLoader(_clients);
 
-    prisma.user.findMany.mockResolvedValueOnce([{
+    _clients.prisma.user.findMany.mockResolvedValueOnce([{
       username: "test",
       id: "1",
       createdAt: new Date(),
