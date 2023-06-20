@@ -1,11 +1,7 @@
 {
-  "extends": "@kampus/tsconfig/nextjs.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "plugins": [{ "name": "next" }],
     "baseUrl": ".",
     "paths": {
       "~/*": ["./*"]

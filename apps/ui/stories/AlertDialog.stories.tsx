@@ -1,3 +1,5 @@
+import type { Meta, StoryObj } from "@storybook/react";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,7 +12,6 @@ import {
   AlertDialogTrigger,
   Button,
 } from "@kampus/ui-next";
-import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
   title: "Alert Dialog",

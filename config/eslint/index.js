@@ -1,9 +1,14 @@
-/**
- * @type {import('eslint').Linter.Config}
- */
+/** @type {import("eslint").Linter.Config} */
 const config = {
-  extends: ["turbo", "plugin:@typescript-eslint/recommended", "prettier"],
+  extends: [
+    "next",
+    "turbo",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier",
+  ],
   rules: {
+    "@next/next/no-html-link-for-pages": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
@@ -17,15 +22,9 @@ const config = {
       "error",
       { prefer: "type-imports", fixStyle: "inline-type-imports" },
     ],
-    "sort-imports": ["error", { ignoreCase: true, ignoreDeclarationSort: true }],
-    "import/order": [
-      "error",
-      {
-        groups: [["external", "builtin"], "internal", ["parent", "sibling", "index"]],
-        alphabetize: { order: "asc" },
-      },
-    ],
   },
+  ignorePatterns: ["**/*.config.js", "**/*.config.cjs", "config/**"],
+  reportUnusedDisableDirectives: true,
 };
 
 module.exports = config;

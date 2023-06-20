@@ -13,8 +13,5 @@
   "dependencies": {
     "contentlayer": "0.3.3",
     "mdx-bundler": "9.2.1"
-  },
-  "devDependencies": {
-    "@kampus/tsconfig": "^0.0.0"
   }
 }

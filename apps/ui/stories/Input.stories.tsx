@@ -1,7 +1,8 @@
+import type { Meta, StoryObj } from "@storybook/react";
+
 import { Button, InputWithButton } from "@kampus/ui-next";
 import { Input } from "@kampus/ui-next/components/input";
 import { Label } from "@kampus/ui-next/components/label";
-import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
   component: Input,
@@ -62,7 +63,7 @@ export const WithText = {
     <div className="grid w-full max-w-sm items-center gap-1.5">
       <Label>{label}</Label>
       <Input placeholder={placeholder} disabled={disabled} />
-      <p className="text-muted-foreground text-sm">{text}</p>
+      <p className="text-sm text-muted-foreground">{text}</p>
     </div>
   ),
 } as Story;
