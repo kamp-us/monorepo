@@ -1,3 +1,9 @@
+import {
+  applyCursors,
+  applyFirstAndLast,
+  applyPagination,
+  generatePageInfo,
+} from "@kampus/relay/pagination";
 import { allTerms, type Term } from "@kampus/sozluk-content";
 import DataLoader from "dataloader";
 import hash from "object-hash";
@@ -7,7 +13,6 @@ import {
   type SozlukTerm,
   type SozlukTermConnection,
 } from "~/schema/types.generated";
-import { applyCursorsToData, hasNextPage, hasPreviousPage } from "./utils/pagination";
 
 export const createSozlukLoaders = (clients: Clients) => {
   return {
