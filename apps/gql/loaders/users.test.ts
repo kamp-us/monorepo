@@ -2,18 +2,11 @@ import { beforeAll, describe, expect, it } from "vitest";
 
 import { UserLoaderKey, createUsersLoader } from "./users";
 
-import { type Clients } from "../clients/types";
 import prisma from "../clients/__mocks__/prisma";
+import { _clients } from "../clients/__mocks__/clients";
 
 
 describe("Users  Loader", () => {
-  let _clients: Clients;
-
-  beforeAll(() => {
-    _clients = {
-      prisma
-    }
-  });
 
   it("should create users loader", () => {
     const loader = createUsersLoader(_clients);

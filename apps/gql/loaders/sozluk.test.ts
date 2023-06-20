@@ -1,8 +1,8 @@
-import { beforeAll, describe, expect, it, vi } from "vitest";
-import { type Clients } from "../clients/types";
-import prisma from "../clients/__mocks__/prisma";
+import { describe, expect, it, vi } from "vitest";
+
 import { SozlukTermLoaderKey, createSozlukLoaders } from "./sozluk";
 import { type Term } from "@kampus/sozluk-content";
+import { _clients } from "../clients/__mocks__/clients";
 
 vi.mock('@kampus/sozluk-content', () => {
   return {
@@ -30,14 +30,6 @@ vi.mock('@kampus/sozluk-content', () => {
 })
 
 describe("Sozluk Loader", () => {
-  let _clients: Clients;
-
-  beforeAll(() => {
-    _clients = {
-      prisma
-    }
-  });
-
 
   it("should create sozluk loader", () => {
     const loader = createSozlukLoaders(_clients);

@@ -1,6 +1,6 @@
 import DataLoader from "dataloader";
 
-import { type Term, allTerms } from "@kampus/sozluk-content";
+import { allTerms } from "@kampus/sozluk-content";
 
 import { type Clients } from "~/clients/types";
 import { type SozlukTerm } from "~/schema/types.generated";
