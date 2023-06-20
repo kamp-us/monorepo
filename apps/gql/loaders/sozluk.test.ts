@@ -26,31 +26,29 @@ describe("Sozluk Loader", () => {
       new SozlukTermLoaderKey("id", "1")
     );
 
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "body": {
-          "code": "code",
-          "html": "mdxHtml",
-          "raw": "raw",
-        },
-        "id": "1",
-        "tags": [
-          "tag1",
-          "tag2",
-        ],
-        "title": "title",
-      }
-    `)
+    expect(result).toMatchObject({
+      "body": {
+        "code": "code",
+        "html": "mdxHtml",
+        "raw": "raw",
+      },
+      "id": "1",
+      "tags": [
+        "tag1",
+        "tag2",
+      ],
+      "title": "title",
+    })
   });
 
-  it("should return null if term not found", async () => {
+  it("should return null if term not found", () => {
     const loader = createSozlukLoaders(mockedClients);
 
-    const result = await loader.terms.load(
-      new SozlukTermLoaderKey("id", "2")
-    );
-
-    expect(result).toMatchInlineSnapshot('null')
+    expect(async () => {
+      await loader.terms.load(
+        new SozlukTermLoaderKey("id", "2")
+      )
+    }).rejects.toThrowError("Term not found: 2");
   });
 
 });

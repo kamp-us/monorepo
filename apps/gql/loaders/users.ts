@@ -6,7 +6,7 @@ import { LoaderKey } from "./utils/loader-key";
 
 export type UsersLoader = DataLoader<UserLoaderKey, User>;
 
-export class UserLoaderKey extends LoaderKey<"id" | "username", string> {}
+export class UserLoaderKey extends LoaderKey<"id" | "username", string> { }
 
 export const createUsersLoader = (clients: Clients): UsersLoader =>
   new DataLoader<UserLoaderKey, User>(async (keys) => {
@@ -27,10 +27,16 @@ export const createUsersLoader = (clients: Clients): UsersLoader =>
         OR: [{ id: { in: ids } }, { username: { in: usernames } }],
         deletedAt: null,
       },
-    });
+    }) || []; // For some reason, prisma when no user found returns undefined instead of empty array.
 
-    return users.map((user) => ({
-      id: user.id,
-      username: user.username,
-    }));
+    return keys.map((key) => {
+      const dbUser = users.find((u) => u?.[key.identifier] === key.value);
+      if (!dbUser) {
+        return new Error(`User not found: ${key.value}`);
+      }
+      return {
+        id: dbUser.id,
+        username: dbUser.username,
+      }
+    });
   });

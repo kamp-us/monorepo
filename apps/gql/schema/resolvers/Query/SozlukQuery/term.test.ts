@@ -39,14 +39,15 @@ describe("Term Query", () => {
     `);
   });
 
-  it("should not return any searched term", async () => {
-    const result = await term(undefined, {
-      input: {
-        id: '356',
-      }
-    }, { loaders });
+  it("should not return any searched term", () => {
 
-    expect(result).toMatchInlineSnapshot('null')
+    expect(async () => {
+      await term(undefined, {
+        input: {
+          id: '356',
+        }
+      }, { loaders })
+    }).rejects.toThrowError('Term not found: 356');
   });
 
   it("should throw error when no input is passed", () => {

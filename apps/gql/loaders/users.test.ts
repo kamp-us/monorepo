@@ -62,19 +62,23 @@ describe("Users  Loader", () => {
     `);
   });
 
-  it("should throw error if user not found with id", async () => {
+  it("should throw error if user not found with id", () => {
     const loader = createUsersLoader(mockedClients);
 
-    await expect(loader.load(
-      new UserLoaderKey("id", "2")
-    )).rejects.toThrowError();
+    expect(async () => {
+      await loader.load(
+        new UserLoaderKey("id", "2")
+      )
+    }).rejects.toThrowError(`User not found: 2`);
   });
 
-  it("should throw error if user not found with username", async () => {
+  it("should throw error if user not found with username", () => {
     const loader = createUsersLoader(mockedClients);
 
-    await expect(loader.load(
-      new UserLoaderKey("username", "mock")
-    )).rejects.toThrowError();
+    expect(async () => {
+      await loader.load(
+        new UserLoaderKey("username", "mock")
+      )
+    }).rejects.toThrowError(`User not found: mock`);
   });
 });

@@ -23,7 +23,7 @@ function createTermsLoader(_: Clients) {
       .map((key) => {
         const term = allTerms.find((term) => term.id === key.value);
         if (!term) {
-          return null;
+          return new Error(`Term not found: ${key.value}`);
         }
 
         return {
