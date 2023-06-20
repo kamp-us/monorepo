@@ -1,6 +1,7 @@
-import { createSchema, createYoga } from "graphql-yoga";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { createSchema, createYoga } from "graphql-yoga";
+
 import { createClients } from "~/clients";
 import { createLoaders } from "~/loaders";
 import { resolvers } from "~/schema/resolvers";

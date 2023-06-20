@@ -1,6 +1,7 @@
-import { Button } from "@kampus/ui-next/components/button";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Loader2, Mail } from "lucide-react";
+
+import { Button } from "@kampus/ui-next/components/button";
 
 const meta = {
   component: Button,

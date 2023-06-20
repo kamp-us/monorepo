@@ -1,4 +1,5 @@
 import { PrismaClient } from "@kampus-db/pano-prisma";
+
 import { env } from "~/env";
 
 export function createPrismaClient() {

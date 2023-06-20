@@ -1,5 +1,7 @@
 import { Inter } from "next/font/google";
+
 import { RelayEnvironmentProvider } from "~/features/relay/RelayEnvironmentProvider";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });

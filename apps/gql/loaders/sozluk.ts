@@ -1,8 +1,10 @@
-import { allTerms } from "@kampus/sozluk-content";
 import DataLoader from "dataloader";
-import { LoaderKey } from "./utils/loader-key";
+
+import { allTerms } from "@kampus/sozluk-content";
+
 import { type Clients } from "~/clients/types";
 import { type SozlukTerm } from "~/schema/types.generated";
+import { LoaderKey } from "./utils/loader-key";
 
 export const createSozlukLoaders = (clients: Clients) => {
   return {
