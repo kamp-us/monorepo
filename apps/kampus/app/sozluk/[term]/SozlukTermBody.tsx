@@ -1,4 +1,5 @@
 import { graphql, useFragment } from "react-relay";
+
 import { type SozlukTermBody_body$key } from "./__generated__/SozlukTermBody_body.graphql";
 
 interface Props {

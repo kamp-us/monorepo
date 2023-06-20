@@ -1,6 +1,6 @@
+import { type Resolvers } from "../types.generated";
 import { term } from "./Query/SozlukQuery/term";
 import { user } from "./Query/user";
-import { type Resolvers } from "../types.generated";
 
 export const resolvers = {
   Query: {

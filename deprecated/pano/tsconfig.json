@@ -1,5 +1,5 @@
 {
-  "extends": "@kampus/tsconfig/remix.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

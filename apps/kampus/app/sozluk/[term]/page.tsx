@@ -1,4 +1,5 @@
 import loadSerializableQuery from "@kampus/relay/load-serializable-query";
+
 import { SozlukTermContainer } from "~/app/sozluk/[term]/SozlukTerm";
 import SozlukTermQueryNode, { type SozlukTermQuery } from "./__generated__/SozlukTermQuery.graphql";
 

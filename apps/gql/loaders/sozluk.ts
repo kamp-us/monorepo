@@ -1,8 +1,10 @@
-import { allTerms } from "@kampus/sozluk-content";
 import DataLoader from "dataloader";
-import { LoaderKey } from "./utils/loader-key";
+
+import { allTerms } from "@kampus/sozluk-content";
+
 import { type Clients } from "~/clients/types";
 import { type SozlukTerm } from "~/schema/types.generated";
+import { LoaderKey } from "./utils/loader-key";
 
 export const createSozlukLoaders = (clients: Clients) => {
   return {
@@ -14,6 +16,7 @@ export type SozlukTermsLoader = DataLoader<SozlukTermLoaderKey, SozlukTerm>;
 export class SozlukTermLoaderKey extends LoaderKey<"id", string> {}
 
 function createTermsLoader(_: Clients) {
+  // eslint-disable-next-line @typescript-eslint/require-await
   return new DataLoader<SozlukTermLoaderKey, SozlukTerm>(async (keys) => {
     console.log({ keys });
 

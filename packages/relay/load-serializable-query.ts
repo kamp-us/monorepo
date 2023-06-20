@@ -5,6 +5,7 @@ import {
   type RequestParameters,
   type VariablesOf,
 } from "relay-runtime";
+
 import { networkFetch } from "./environment";
 
 export interface SerializablePreloadedQuery<TQuery extends OperationType> {

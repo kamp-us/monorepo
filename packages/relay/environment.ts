@@ -1,12 +1,12 @@
 import {
-  type CacheConfig,
   Environment,
-  type GraphQLResponse,
   Network,
   QueryResponseCache,
   RecordSource,
-  type RequestParameters,
   Store,
+  type CacheConfig,
+  type GraphQLResponse,
+  type RequestParameters,
   type Variables,
 } from "relay-runtime";
 
