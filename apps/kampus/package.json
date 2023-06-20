@@ -11,7 +11,6 @@
   },
   "devDependencies": {
     "@kampus/tailwind-config": "*",
-    "@kampus/tsconfig": "*",
     "@types/react-relay": "14.1.4",
     "relay-compiler": "15.0.0"
   },

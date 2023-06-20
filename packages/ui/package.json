@@ -10,8 +10,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@kampus/tailwind-config": "0.0.0",
-    "@kampus/tsconfig": "0.0.0"
+    "@kampus/tailwind-config": "0.0.0"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.4",
