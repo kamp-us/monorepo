@@ -3,6 +3,7 @@ const config = {
   root: true,
   extends: ["@kampus/eslint-config"], // uses the config in `config/eslint`
   parser: "@typescript-eslint/parser",
+  ignorePatterns: ["**/*.generated.ts"],
   parserOptions: {
     ecmaVersion: "latest",
     tsconfigRootDir: __dirname,
@@ -10,7 +11,7 @@ const config = {
   },
   settings: {
     next: {
-      rootDir: ["apps/nextjs", "apps/gql"],
+      rootDir: ["apps/kampus", "apps/gql"],
     },
   },
 };
