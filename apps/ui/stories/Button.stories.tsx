@@ -14,57 +14,57 @@ const meta = {
       control: "boolean",
     },
   },
-} as Meta<typeof Button>;
+} satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Primary = {
   args: {
     variant: "default",
   },
-};
+} satisfies Story;
 
-export const Secondary: Story = {
+export const Secondary = {
   args: {
     variant: "secondary",
   },
-};
+} satisfies Story;
 
-export const Destructive: Story = {
+export const Destructive = {
   args: {
     variant: "destructive",
   },
-};
+} satisfies Story;
 
-export const Outline: Story = {
+export const Outline = {
   args: {
     variant: "outline",
   },
-};
+} satisfies Story;
 
-export const Ghost: Story = {
+export const Ghost = {
   args: {
     variant: "ghost",
   },
-};
+} satisfies Story;
 
-export const Link: Story = {
+export const Link = {
   args: {
     variant: "link",
   },
-};
+} satisfies Story;
 
-export const WithIcon: Story = {
+export const WithIcon = {
   render: ({ children, ...props }) => (
     <Button {...props}>
       <Mail className="mr-2 h-4 w-4" />
       {children}
     </Button>
   ),
-};
+} satisfies Story;
 
-export const Loading: Story = {
+export const Loading = {
   args: {
     disabled: true,
   },
@@ -74,9 +74,9 @@ export const Loading: Story = {
       {children}
     </Button>
   ),
-};
+} satisfies Story;
 
-export const AsChild: Story = {
+export const AsChild = {
   args: {
     asChild: true,
   },
@@ -85,4 +85,4 @@ export const AsChild: Story = {
       <a href="javascript:;">{children}</a>
     </Button>
   ),
-};
+} satisfies Story;

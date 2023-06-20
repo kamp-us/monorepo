@@ -16,12 +16,12 @@ import {
 const meta = {
   title: "Alert Dialog",
   component: AlertDialog,
-} as Meta<typeof AlertDialog>;
+} satisfies Meta<typeof AlertDialog>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   render: () => (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -42,4 +42,4 @@ export const Default: Story = {
       </AlertDialogContent>
     </AlertDialog>
   ),
-};
+} satisfies Story;
