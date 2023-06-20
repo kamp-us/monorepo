@@ -36,7 +36,6 @@ function createTermsLoader(_: Clients) {
             html: term.mdxHtml,
           },
         };
-      })
-      .filter(Boolean) as SozlukTerm[];
+      });
   });
 }

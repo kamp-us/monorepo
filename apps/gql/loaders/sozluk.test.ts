@@ -1,31 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 
 import { SozlukTermLoaderKey, createSozlukLoaders } from "./sozluk";
-import { type Term } from "@kampus/sozluk-content";
 import { mockedClients } from "../clients/__mocks__/clients";
 
-vi.mock('@kampus/sozluk-content', () => {
+// mock runs before everything so import needs to be handled here.
+vi.mock('@kampus/sozluk-content', async () => {
+  const { mockedTerms } = await import('./__mocks__/sozluk');
   return {
-    allTerms: [{
-      _id: "1",
-      id: "1",
-      type: "Term",
-      tags: ["tag1", "tag2"],
-      title: "title",
-      body: {
-        raw: "raw",
-        code: "code",
-      },
-      _raw: {
-        contentType: "data",
-        flattenedPath: 'term/1',
-        sourceFileDir: 'term',
-        sourceFileName: '1',
-        sourceFilePath: 'term/1',
-      },
-      mdxHtml: "mdxHtml"
-
-    } satisfies Term]
+    allTerms: mockedTerms
   }
 })
 
@@ -44,16 +26,31 @@ describe("Sozluk Loader", () => {
       new SozlukTermLoaderKey("id", "1")
     );
 
-    expect(result).toBeDefined();
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "body": {
+          "code": "code",
+          "html": "mdxHtml",
+          "raw": "raw",
+        },
+        "id": "1",
+        "tags": [
+          "tag1",
+          "tag2",
+        ],
+        "title": "title",
+      }
+    `)
   });
 
-  it("should throw error if term not found", async () => {
+  it("should return null if term not found", async () => {
     const loader = createSozlukLoaders(mockedClients);
 
-    await expect(loader.terms.load(
+    const result = await loader.terms.load(
       new SozlukTermLoaderKey("id", "2")
-    )).rejects.toThrowError();
+    );
 
+    expect(result).toMatchInlineSnapshot('null')
   });
 
 });

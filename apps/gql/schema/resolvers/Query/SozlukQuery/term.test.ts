@@ -1,72 +1,60 @@
 import { describe, expect, it, vi } from "vitest";
 import { term } from "./term";
-import { SozlukTermLoaderKey } from "../../../../loaders/sozluk";
-import { type DataLoaders } from "../../../../loaders/types";
+import { createLoaders } from "~/loaders";
+import { type DataLoaders } from "~/loaders/types";
+import { mockedClients } from "../../../../clients/__mocks__/clients";
 
-const loaders: Partial<DataLoaders> = {
-  sozluk: {
-    terms: {
-      load: vi.fn().mockReturnValue(),
-    }
+vi.mock('@kampus/sozluk-content', async () => {
+  const { mockedTerms } = await import('~/loaders/__mocks__/sozluk');
+  return {
+    allTerms: mockedTerms
   }
-};
+})
 
 describe("Term Query", () => {
+  const loaders: DataLoaders = createLoaders(mockedClients);
 
-  it("should find searched term", () => {
-    const spy = vi.spyOn(loaders.sozluk?.terms, 'load');
-
-    spy.mockReturnValueOnce(new SozlukTermLoaderKey('id', '1'));
-    const result = term(undefined, {
+  it("should find searched term", async () => {
+    const result = await term(undefined, {
       input: {
         id: '1',
       }
     }, { loaders });
 
 
-    expect(spy).toHaveBeenCalledTimes(1);
     expect(result).toMatchInlineSnapshot(`
-      SozlukTermLoaderKey {
-        "identifier": "id",
-        "value": "1",
+      {
+        "body": {
+          "code": "code",
+          "html": "mdxHtml",
+          "raw": "raw",
+        },
+        "id": "1",
+        "tags": [
+          "tag1",
+          "tag2",
+        ],
+        "title": "title",
       }
     `);
   });
 
-  it("should fail searched term", () => {
-    const spy = vi.spyOn(loaders.sozluk?.terms, 'load');
-
-    const result = term(undefined, {
+  it("should not return any searched term", async () => {
+    const result = await term(undefined, {
       input: {
-        id: '1',
+        id: '356',
       }
     }, { loaders });
 
-
-    expect(spy).toHaveBeenCalledTimes(1);
-    expect(result).toMatchInlineSnapshot('undefined');
-  });
-
-  it("should not find searched term", () => {
-    const spy = vi.spyOn(loaders.sozluk?.terms, 'load');
-
-    const result = term(undefined, {
-      input: {
-        id: '1',
-      }
-    }, { loaders });
-
-
-    expect(spy).toHaveBeenCalledTimes(1);
-    expect(result).toMatchInlineSnapshot('undefined');
+    expect(result).toMatchInlineSnapshot('null')
   });
 
   it("should throw error when no input is passed", () => {
-    expect(() => {
-      term(undefined, {
+    expect(async () => {
+      await term(undefined, {
         input: undefined
       }, { loaders })
-    }).toThrowError('input is required');
+    }).rejects.toThrowError('input is required');
   });
 
 });
