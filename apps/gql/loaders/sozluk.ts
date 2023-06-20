@@ -52,50 +52,26 @@ const createTermLoader = (_: Clients) =>
   );
 
 const createTermsLoader = (_: Clients) =>
-  new DataLoader<Partial<SozlukQueryTermsArgs>, SozlukTermConnection, string>(
-    async (keys) => {
-      return termsLoaderBatchFn(keys);
-    },
-    {
-      cacheKeyFn: (key) => hash(key),
-    }
-  );
+  new DataLoader<Partial<SozlukQueryTermsArgs>, SozlukTermConnection, string>(termsLoaderBatchFn, {
+    cacheKeyFn: (key) => hash(key),
+  });
 
-const termsLoaderBatchFn = (keys: readonly Partial<SozlukQueryTermsArgs>[]) => {
+const termsLoaderBatchFn = async (keys: readonly Partial<SozlukQueryTermsArgs>[]) => {
   const results: SozlukTermConnection[] = [];
 
   for (const key of keys) {
     const { before, after, first, last } = key;
 
-    let terms = applyCursorsToData(allTerms, before, after);
-
-    // Apply pagination filters
-    if (first) {
-      if (first < 0) {
-        throw new Error('Invalid value for "first".');
-      }
-      terms = terms.slice(0, first);
-    } else if (last) {
-      if (last < 0) {
-        throw new Error('Invalid value for "last".');
-      }
-      terms = terms.slice(-last);
-    }
+    const terms = applyPagination(allTerms, before, after, first, last);
 
     const edges = terms.map((term) => ({ cursor: term.id, node: transformTerm(term) }));
 
-    const startCursor = terms.length > 0 ? terms[0].id : null;
-    const endCursor = terms.length > 0 ? terms[terms.length - 1].id : null;
     const totalCount = allTerms.length;
 
     const result = {
       edges,
-      pageInfo: {
-        startCursor,
-        endCursor,
-        hasNextPage: hasNextPage({ data: terms, before, first }),
-        hasPreviousPage: hasPreviousPage({ data: terms, after, last }),
-      },
+      // need to pass the same args to generatePageInfo
+      pageInfo: generatePageInfo({ data: allTerms, before, after, first, last }),
       totalCount,
     };
 
