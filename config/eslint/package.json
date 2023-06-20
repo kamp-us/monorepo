@@ -1,28 +1,19 @@
 {
   "name": "@kampus/eslint-config",
   "version": "0.0.0",
-  "description": "Shared eslint config package for kamp.us web projects",
   "main": "index.js",
-  "author": "kamp.us <infra@kamp.us> (https://kamp.us)",
   "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
   "dependencies": {
-    "@remix-run/eslint-config": "^1.7.5",
     "@types/eslint": "8.40.0",
     "@typescript-eslint/eslint-plugin": "5.59.8",
     "@typescript-eslint/parser": "5.59.8",
     "eslint-config-next": "13.4.4",
     "eslint-config-prettier": "8.8.0",
-    "eslint-config-react": "1.1.7",
-    "eslint-config-turbo": "1.10.1",
+    "eslint-config-turbo": "1.9.8",
     "eslint-plugin-react": "7.32.2"
   },
-  "volta": {
-    "node": "18.14.2"
-  },
   "devDependencies": {
-    "eslint": "8.42.0"
+    "eslint": "8.42.0",
+    "typescript": "5.0.4"
   }
 }
