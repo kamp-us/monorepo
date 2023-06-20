@@ -16,6 +16,7 @@ export type SozlukTermsLoader = DataLoader<SozlukTermLoaderKey, SozlukTerm>;
 export class SozlukTermLoaderKey extends LoaderKey<"id", string> {}
 
 function createTermsLoader(_: Clients) {
+  // eslint-disable-next-line @typescript-eslint/require-await
   return new DataLoader<SozlukTermLoaderKey, SozlukTerm>(async (keys) => {
     console.log({ keys });
 

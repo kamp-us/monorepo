@@ -13,7 +13,7 @@ const { handleRequest } = createYoga({
   schema: createSchema({ typeDefs, resolvers }),
   logging: "debug",
   graphiql: true,
-  context: async () => ({
+  context: () => ({
     loaders: createLoaders(clients),
   }),
 
