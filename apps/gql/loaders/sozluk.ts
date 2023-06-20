@@ -21,7 +21,7 @@ function createTermsLoader(_: Clients) {
 
     return keys
       .map((key) => {
-        const term = (allTerms as unknown as Term[]).find((term) => term.id === key.value);
+        const term = allTerms.find((term) => term.id === key.value);
         if (!term) {
           return null;
         }
