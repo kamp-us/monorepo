@@ -2,21 +2,21 @@ import { describe, expect, it } from "vitest";
 
 import { UserLoaderKey, createUsersLoader } from "./users";
 
-import { _clients } from "../clients/__mocks__/clients";
+import { mockedClients } from "../clients/__mocks__/clients";
 
 
 describe("Users  Loader", () => {
 
   it("should create users loader", () => {
-    const loader = createUsersLoader(_clients);
+    const loader = createUsersLoader(mockedClients);
 
     expect(loader).toBeDefined();
   });
 
   it("should load defined user with id", async () => {
-    const loader = createUsersLoader(_clients);
+    const loader = createUsersLoader(mockedClients);
 
-    _clients.prisma.user.findMany.mockResolvedValueOnce([{
+    mockedClients.prisma.user.findMany.mockResolvedValueOnce([{
       username: "test",
       id: "1",
       createdAt: new Date(),
@@ -39,9 +39,9 @@ describe("Users  Loader", () => {
   });
 
   it("should load defined user with username", async () => {
-    const loader = createUsersLoader(_clients);
+    const loader = createUsersLoader(mockedClients);
 
-    _clients.prisma.user.findMany.mockResolvedValueOnce([{
+    mockedClients.prisma.user.findMany.mockResolvedValueOnce([{
       username: "test",
       id: "1",
       createdAt: new Date(),
@@ -63,7 +63,7 @@ describe("Users  Loader", () => {
   });
 
   it("should throw error if user not found with id", async () => {
-    const loader = createUsersLoader(_clients);
+    const loader = createUsersLoader(mockedClients);
 
     await expect(loader.load(
       new UserLoaderKey("id", "2")
@@ -71,7 +71,7 @@ describe("Users  Loader", () => {
   });
 
   it("should throw error if user not found with username", async () => {
-    const loader = createUsersLoader(_clients);
+    const loader = createUsersLoader(mockedClients);
 
     await expect(loader.load(
       new UserLoaderKey("username", "mock")

@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { SozlukTermLoaderKey, createSozlukLoaders } from "./sozluk";
 import { type Term } from "@kampus/sozluk-content";
-import { _clients } from "../clients/__mocks__/clients";
+import { mockedClients } from "../clients/__mocks__/clients";
 
 vi.mock('@kampus/sozluk-content', () => {
   return {
@@ -32,13 +32,13 @@ vi.mock('@kampus/sozluk-content', () => {
 describe("Sozluk Loader", () => {
 
   it("should create sozluk loader", () => {
-    const loader = createSozlukLoaders(_clients);
+    const loader = createSozlukLoaders(mockedClients);
 
     expect(loader.terms).toBeDefined();
   });
 
   it("should load terms", async () => {
-    const loader = createSozlukLoaders(_clients);
+    const loader = createSozlukLoaders(mockedClients);
 
     const result = await loader.terms.load(
       new SozlukTermLoaderKey("id", "1")
@@ -48,7 +48,7 @@ describe("Sozluk Loader", () => {
   });
 
   it("should throw error if term not found", async () => {
-    const loader = createSozlukLoaders(_clients);
+    const loader = createSozlukLoaders(mockedClients);
 
     await expect(loader.terms.load(
       new SozlukTermLoaderKey("id", "2")
