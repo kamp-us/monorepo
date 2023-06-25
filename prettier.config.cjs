@@ -13,7 +13,7 @@ const config = {
   tabWidth: 2,
   // pluginSearchDirs: false,
   plugins: ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
-  tailwindConfig: "./packages/tailwind-config",
+  tailwindConfig: "./packages/tailwind/index.ts",
   tailwindFunctions: ["cn", "cva"],
   importOrder: [
     "^(react/(.*)$)|^(react$)|^(react-native(.*)$)",

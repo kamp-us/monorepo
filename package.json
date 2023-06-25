@@ -42,7 +42,6 @@
     "react-dom": "18.2.0",
     "tailwind-merge": "1.13.1",
     "tailwindcss": "3.3.2",
-    "tailwindcss-animate": "1.0.5",
     "ts-node": "10.9.1",
     "ts-node-dev": "2.0.0",
     "turbo": "1.10.3",
