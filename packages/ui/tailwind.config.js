@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const kampusConfig = require("@kampus/tailwind-config");
+const kampusConfig = require("@kampus/tailwind");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
