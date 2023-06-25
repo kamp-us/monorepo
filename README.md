@@ -40,7 +40,7 @@ cd monorepo
 - `/packages`: internal (and maybe external in the future) npm packages
   - `/relay`: common relay configuration
   - `/sozluk-content`: where contents of sozluk are
-  - `/tailwind-config`: common tailwind configuration
+  - `/tailwind`: common tailwind configuration as a tailwind plugin
   - `/ui`: common ui elements
 
 These folders are [registered as workspaces in package.json](package.json#L4-L7)
