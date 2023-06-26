@@ -14,7 +14,6 @@ export const authOptions: AuthOptions = (
   {
     adapter: prismaAdapter,
     secret: env.SECRET,
-    debug: true,
     providers: [
       {
         id: 'vercel-email',

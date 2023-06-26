@@ -2,7 +2,7 @@
 const config = {
   reactStrictMode: true,
   swcMinify: true,
-  transpilePackages: ["@kampus/tailwind", "@kampus/ui-next"],
+  transpilePackages: ["@kampus/tailwind", "@kampus/ui-next", "@kampus/next-auth"],
 
   compiler: {
     relay: {
