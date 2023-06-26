@@ -5,8 +5,13 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
+    "prisma:migrate:save": "prisma migrate dev --create-only",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate",
-    "prisma:push": "prisma db push --skip-generate"
+    "prisma:push": "prisma db push --skip-generate",
+    "db:local": "docker-compose up -d"
   },
   "keywords": [],
   "author": "kamp.us <infra@kamp.us>",
