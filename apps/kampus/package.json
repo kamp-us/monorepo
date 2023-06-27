@@ -15,6 +15,7 @@
     "relay-compiler": "15.0.0"
   },
   "dependencies": {
+    "@kampus/email": "0.0.0",
     "@kampus/relay": "0.0.0",
     "react-relay": "15.0.0",
     "znv": "0.3.2",
