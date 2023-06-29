@@ -1,6 +1,6 @@
 ### Giriş
 
-Şimdiye kadar flexbox ile dokunduğumuz her şey, tüm flex öğelerde `flex: 1` kuralını kullandı; bu, öğelerin mevcut tüm alanı doldurmak için eşit şekilde büyümesini veya küçülmesini sağlar. Ancak çoğu zaman bu istenen etki değildir. Flex, belirli bir boyuta sahip öğeleri düzenlemek için de çok kullanışlıdır.
+Şimdiye kadar flexbox ile değindiğimiz her şey, tüm flex öğelerde `flex: 1` kuralını kullandı; bu, öğelerin mevcut tüm alanı doldurmak için eşit şekilde büyümesini veya küçülmesini sağlar, ancak çoğu zaman bu istenen etki değildir. Flex, belirli bir boyuta sahip öğeleri düzenlemek için de çok kullanışlıdır.
 
 ### Derse Genel Bakış
 
@@ -27,13 +27,13 @@ Bir örneğe bakalım.
 
 ![space between](https://cdn.statically.io/gh/TheOdinProject/curriculum/495704c6eb6bf33bc927534f231533a82b27b2ac/html_css/v2/foundations/flexbox/imgs/07.png)
 
-`justify-content` değeri, öğeleri **ana eksen** üzerinde hizalar. Burada kullanabileceğiniz birkaç değer var. Geri kalanını okuma ödevlerinde öğreneceksiniz, ancak şimdilik, kutuları ana eksen boyunca ortalayacak şekilde `center`(merkez) değerini kullanarak değiştirmeyi deneyin.
+`justify-content` değeri, öğeleri **ana eksen** üzerinde hizalar. Burada kullanabileceğiniz birkaç değer var. Geri kalanını okuma ödevlerinde öğreneceksiniz, ancak şimdilik, kutuları ana eksen'de ortalayacak `center`(merkez) değerini kullanarak değiştirmeyi deneyin.
 
-**Çapraz eksen** boyunca öğelerin yerleşimini değiştirmek için `align-items` değerini kullanın. `.container`a `align-items: center` ekleyerek kutuları konteynerin merkezine getirmeyi deneyin. İstenen sonuç şöyle görünür:
+**Çapraz eksen**'de öğelerin yerleşimini değiştirmek için `align-items` değerini kullanın. `.container`a `align-items: center` ekleyerek kutuları konteynerin merkezine getirmeyi deneyin. İstenen sonuç şöyle görünür:
 
 ![centered](https://cdn.statically.io/gh/TheOdinProject/curriculum/495704c6eb6bf33bc927534f231533a82b27b2ac/html_css/v2/foundations/flexbox/imgs/08.png)
 
-`justify-content` ve `align-items` konteynerinizin ana ve çapraz eksenini temel aldığından, bir flex-container'ın flex-direction'nını değiştirdiğinizde davranışları değişir. Örneğin, `flex-direction`'ı `column` olarak değiştirdiğinizde, `justify-content` dikey olarak hizalanır ve `align-items` yatay olarak hizalanır. Bununla birlikte, en yaygın davranış varsayılandır, yani `justify-content` öğeleri yatay olarak hizalar (çünkü ana eksen varsayılan olarak yataydır) ve `align-items` öğeleri dikey olarak hizalar. Yeni başlayanların flexbox ile yaşadığı en büyük anlaşmazlık noktalarından biri, bu davranış değiştiğinde kafa karışıklığıdır.
+`justify-content` ve `align-items` konteynerinizin ana ve çapraz eksenini temel aldığından, bir flex-container'ın flex-direction'nını değiştirdiğinizde davranışları değişir. Örneğin, `flex-direction`'ı `column` olarak değiştirdiğinizde, `justify-content` dikey olarak hizalar ve `align-items` yatay olarak hizalar. Bununla birlikte, en yaygın davranış varsayılandır, yani `justify-content` öğeleri yatay olarak hizalar (çünkü ana eksen varsayılan olarak yataydır) ve `align-items` öğeleri dikey olarak hizalar. Yeni başlayanların flexbox ile en çok karşılaştığı zorluklardan biri, bu davranış değişikliğidir.
 
 `justify-content` ve farklı özelliklerinin nasıl davrandığına dair etkileşimli bir demo için bu kısa video(Scrim)'ya göz atın:
 
@@ -57,7 +57,7 @@ Flex'in çok kullanışlı bir özelliği de `gap` özelliğidir. Flex konteyner
 
 Aşağıdaki bölümde öğreneceğiniz daha çok şey var, ancak bu noktada kesinlikle flexbox'ın ne kadar yararlı olduğunu görebilirsiniz. Yalnızca daha önce ele aldığımız özellikleri kullanarak bazı etkileyici düzenleri bir araya getirebilirsiniz!
 
-Okumaya ihtiyaç duyduğunuz kadar zaman ayırabilirsiniz. Burada zaten ele aldığımız konuların bir kısmı gözden geçirilecek, ancak daha derine inecek ve henüz bahsedilmeyen birkaç şeye değinilecek. Henüz her küçük ayrıntıyı ezberlemeye çalışmak konusunda çok fazla strese girmeyin; sadece örneklerle birlikte kodlayın ve flexbox ile _yapılabilen_ her şeyi oturtmak için elinizden gelenin en iyisini yapın. Alıştırma egzersizlerine geldiğinizde bu kaynaklara tekrar ulaşmanız gerekecek, ancak kesinlikle kabul edilebilir. Bir şeyi ne kadar çok kullanırsan, aklında o kadar iyi kalacak... ve onu _sürekli_ kullanıyor olacaksın. İyi eğlenceler!
+Okumaya ihtiyaç duyduğunuz kadar zaman ayırabilirsiniz. Burada zaten ele aldığımız konuların bir kısmı gözden geçirilecek, ancak daha derine inecek ve henüz bahsedilmeyen birkaç şeye değinilecek. Henüz her küçük ayrıntıyı ezberlemeye çalışmak konusunda çok fazla strese girmeyin; sadece örneklerle birlikte kodlayın ve flexbox ile _yapılabilen_ her şeyi oturtmak için elinizden gelenin en iyisini yapın. Alıştırma egzersizlerine geldiğinizde bu kaynaklara tekrar ulaşmanız gerekecek, ancak bu kesinlikle kabul edilebilir. Bir şeyi ne kadar çok kullanırsan, aklında o kadar iyi kalacak... ve onu _sürekli_ kullanıyor olacaksın. İyi eğlenceler!
 
 ### Ödev
 
