@@ -24,7 +24,7 @@
   "homepage": "https://github.com/kamp-us/monorepo#readme",
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "4.0.2",
-    "@kampus/eslint-config": "0.0.0",
+    "@kampus/eslint-config": "*",
     "@types/node": "20.2.5",
     "@types/prettier": "2.7.3",
     "@types/react": "18.2.7",

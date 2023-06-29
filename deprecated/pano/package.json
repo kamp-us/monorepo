@@ -21,7 +21,7 @@
     "/build"
   ],
   "dependencies": {
-    "@kampus-db/pano-prisma": "^0.0.0",
+    "@kampus-db/pano-prisma": "*",
     "@kampus/ui": "*",
     "@radix-ui/react-icons": "1.1.1",
     "@react-email/container": "0.0.8",
@@ -55,7 +55,7 @@
     "zod": "3.20.6"
   },
   "devDependencies": {
-    "@kampus/eslint-config": "0.0.0",
+    "@kampus/eslint-config": "*",
     "@remix-run/dev": "1.12.0",
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "14.4.3",

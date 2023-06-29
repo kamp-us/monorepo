@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "@graphql-tools/schema": "9.0.19",
-    "@kampus-db/pano-prisma": "0.0.0",
-    "@kampus/sozluk-content": "0.0.0",
+    "@kampus-db/pano-prisma": "*",
+    "@kampus/sozluk-content": "*",
     "dataloader": "2.2.2",
     "graphql": "16.6.0",
     "graphql-config": "4.5.0",
