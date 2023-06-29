@@ -16,7 +16,7 @@ export const MagicLink = ({ url = "https://pasaport.kamp.us/magic-link" }: Magic
       <div className="flex flex-col gap-4">
         {url && (
           <Link href={url} target="_blank" className="font-sans text-sm text-purple-700 underline">
-            kamp.us&apos;e giriş yapmak icin tıkla
+            kamp.us&apos;e giriş yapmak için tıkla
           </Link>
         )}
         <Text className="m-0 text-gray-400">eğer sen değilsen discorddan ulaş bize</Text>
