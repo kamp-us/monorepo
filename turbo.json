@@ -28,7 +28,7 @@
     "docker:dev": {
       "cache": false
     },
-    "@kampus-apps/kampus#*": {
+    "@kampus/kampus#*": {
       "env": ["NODE_ENV", "GQL_URL", "RESEND_API_KEY"]
     },
     "@kampus/next-auth#*": {
@@ -41,6 +41,9 @@
         "TWITCH_SECRET",
         "SECRET"
       ]
+    },
+    "@kampus/gql#*": {
+      "env": ["NODE_ENV", "DATABASE_URL"]
     }
   }
 }
