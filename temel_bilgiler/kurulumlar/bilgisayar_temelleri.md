@@ -30,10 +30,10 @@ Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
 Bu bölüm, bu dersi anlayıp anlamadığınızı kendi başınıza kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta sorun yaşıyorsanız, soruya tıklayın ve bağlantının verdiği materyali inceleyin.
 
-* [Is Windows an operating system or an application?](https://edu.gcfglobal.org/en/computerbasics/understanding-operating-systems/1/)
-* [What's the difference between open source and closed source software?](https://edu.gcfglobal.org/en/basic-computer-skills/open-source-vs-closed-source-software/1/)
-* [What are some use cases of a screenshot?](https://edu.gcfglobal.org/en/techsavvy/taking-screenshots/1/)
-* [Give an example of a weak and a strong password.](https://edu.gcfglobal.org/en/techsavvy/password-tips/1/)
+* [Windows bir işletim sistemi midir uygulama mıdır?](https://edu.gcfglobal.org/en/computerbasics/understanding-operating-systems/1/)
+* [Açık kaynak ve kapalı kaynak yazılım arasındaki fark nedir?](https://edu.gcfglobal.org/en/basic-computer-skills/open-source-vs-closed-source-software/1/)
+* [Ekran görüntülerinin kullanılma şekilleri nedir?](https://edu.gcfglobal.org/en/techsavvy/taking-screenshots/1/)
+* [Zayıf ve güçlü parolalara birer örnek veriniz.](https://edu.gcfglobal.org/en/techsavvy/password-tips/1/)
 
 ### Ek Kaynaklar
 
