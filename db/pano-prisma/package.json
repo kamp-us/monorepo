@@ -11,6 +11,9 @@
   "keywords": [],
   "author": "kamp.us <infra@kamp.us>",
   "license": "ISC",
+  "volta": {
+    "extends": "../../package.json"
+  },
   "dependencies": {
     "@prisma/client": "4.9.0"
   },

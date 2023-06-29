@@ -10,6 +10,9 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "volta": {
+    "extends": "../../package.json"
+  },
   "dependencies": {
     "tailwindcss-animate": "1.0.6"
   }

@@ -9,6 +9,9 @@
   },
   "author": "",
   "license": "MIT",
+  "volta": {
+    "extends": "../../package.json"
+  },
   "devDependencies": {
     "@kampus/tailwind": "*"
   },

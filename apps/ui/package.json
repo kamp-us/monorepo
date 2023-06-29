@@ -11,6 +11,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "volta": {
+    "extends": "../../package.json"
+  },
   "devDependencies": {
     "@kampus/kampus": "*",
     "@kampus/tailwind": "*",
