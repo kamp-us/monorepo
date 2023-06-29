@@ -9,6 +9,9 @@
     "lint": "next lint",
     "relay": "relay-compiler"
   },
+  "volta": {
+    "extends": "../../package.json"
+  },
   "devDependencies": {
     "@kampus/tailwind": "*",
     "@types/react-relay": "14.1.4",
