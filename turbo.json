@@ -69,7 +69,7 @@
         "GITHUB_SECRET",
         "DISCORD_ID",
         "DISCORD_SECRET",
-        "SECRET",
+        "SECRET"
       ]
     }
   }

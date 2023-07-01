@@ -9,7 +9,6 @@ import { env } from "../lib/env";
 
 const prismaAdapter = PrismaAdapter(prisma);
 
-
 export const authOptions: AuthOptions = (
   {
     adapter: prismaAdapter,
