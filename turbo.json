@@ -2,11 +2,22 @@
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "build": {
-      "outputs": ["dist/**", "build/**", "api/**", "public/build/**", "storybook-static/**"],
-      "dependsOn": ["^prisma:generate", "^build"]
+      "outputs": [
+        "dist/**",
+        "build/**",
+        "api/**",
+        "public/build/**",
+        "storybook-static/**"
+      ],
+      "dependsOn": [
+        "^prisma:generate",
+        "^build"
+      ]
     },
     "dev": {
-      "dependsOn": ["^prisma:generate"],
+      "dependsOn": [
+        "^prisma:generate"
+      ],
       "cache": false
     },
     "prisma:generate": {
@@ -16,7 +27,9 @@
       "cache": false
     },
     "test": {
-      "outputs": ["coverage/**"],
+      "outputs": [
+        "coverage/**"
+      ],
       "dependsOn": []
     },
     "lint": {
@@ -29,13 +42,35 @@
       "cache": false
     },
     "@kampus-apps/kampus#*": {
-      "env": ["NODE_ENV", "GQL_URL", "RESEND_API_KEY"]
+      "env": [
+        "NODE_ENV",
+        "GQL_URL",
+        "RESEND_API_KEY"
+      ]
     },
     "@kampus-apps/pano#*": {
-      "env": ["NODE_ENV", "DATABASE_URL", "SESSION_SECRET"]
+      "env": [
+        "NODE_ENV",
+        "DATABASE_URL",
+        "SESSION_SECRET"
+      ]
     },
     "@kampus-apps/home#*": {
-      "env": ["NODE_ENV", "SESSION_SECRET", "TWITCH_CLIENT_ID", "TWITCH_CLIENT_SECRET"]
+      "env": [
+        "NODE_ENV",
+        "SESSION_SECRET",
+        "TWITCH_CLIENT_ID",
+        "TWITCH_CLIENT_SECRET"
+      ]
+    },
+    "@kampus/next-auth#*": {
+      "env": [
+        "GITHUB_ID",
+        "GITHUB_SECRET",
+        "DISCORD_ID",
+        "DISCORD_SECRET",
+        "SECRET",
+      ]
     }
   }
 }

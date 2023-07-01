@@ -29,14 +29,14 @@ export const authOptions: AuthOptions = (
         clientId: env.GITHUB_ID,
         clientSecret: env.GITHUB_SECRET,
       }),
-      // DiscordProvider({
-      //   clientId: env.DISCORD_ID,
-      //   clientSecret: env.DISCORD_SECRET,
-      // }),
-      // TwitchProvider({
-      //   clientId: env.TWITCH_ID,
-      //   clientSecret: env.TWITCH_SECRET,
-      // })
+      DiscordProvider({
+        clientId: env.DISCORD_ID,
+        clientSecret: env.DISCORD_SECRET,
+      }),
+      TwitchProvider({
+        clientId: env.TWITCH_ID,
+        clientSecret: env.TWITCH_SECRET,
+      })
     ]
   }
 )
