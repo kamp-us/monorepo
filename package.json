@@ -44,7 +44,7 @@
     "tailwindcss": "3.3.2",
     "ts-node": "10.9.1",
     "ts-node-dev": "2.0.0",
-    "turbo": "1.10.3",
+    "turbo": "1.10.7",
     "turbo-ignore": "1.10.3",
     "typescript": "5.0.4"
   },
