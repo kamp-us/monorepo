@@ -33,17 +33,14 @@ const transformTerm = (term: Term) => {
 };
 
 const createTermLoader = (_: Clients) =>
-  new DataLoader<string, SozlukTerm>(
-    async (keys) =>
-      keys
-        .map((key) => {
-          const term = allTerms.find((term) => term.id === key);
-          if (!term) {
-            return null;
-          }
-          return transformTerm(term);
-        })
-        .filter(Boolean) as SozlukTerm[]
+  new DataLoader<string, SozlukTerm>(async (keys) =>
+    keys.map((key) => {
+      const term = allTerms.find((term) => term.id === key);
+      if (!term) {
+        return new Error(`Term not found for: ${key}`);
+      }
+      return transformTerm(term);
+    })
   );
 
 const createTermsLoader = (_: Clients) =>
