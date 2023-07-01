@@ -1,4 +1,5 @@
 import { type PropsWithChildren } from "react";
+
 import { MainNav, MainNavBrand, MainNavLink } from "~/features/main-nav";
 
 export default function SozlukRootLayout({ children }: PropsWithChildren) {
