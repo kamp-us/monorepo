@@ -1,5 +1,6 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { type AuthOptions } from "next-auth";
+import { Adapter } from "next-auth/adapters";
 import DiscordProvider from "next-auth/providers/discord";
 import GithubProvider from "next-auth/providers/github";
 import TwitchProvider from "next-auth/providers/twitch";
@@ -8,7 +9,7 @@ import { prisma } from "@kampus-db/pano-prisma";
 
 import { env } from "../lib/env";
 
-const prismaAdapter = PrismaAdapter(prisma);
+const prismaAdapter = PrismaAdapter(prisma) as Adapter;
 
 export const authOptions: AuthOptions = {
   adapter: prismaAdapter,
