@@ -27,8 +27,8 @@ export function applyPagination<T extends { id: string }>(
   first?: number | null,
   last?: number | null
 ) {
-  let copy = applyCursors(data, before, after);
-  copy = applyFirstAndLast({ data: copy, first, last });
+  let copy = applyCursors<T>(data, before, after);
+  copy = applyFirstAndLast<T>({ data: copy, first, last });
   return copy;
 }
 
@@ -87,10 +87,10 @@ export function hasPreviousPage<T extends { id: string }>({
 export const generatePageInfo = <T extends { id: string }>(args: PaginationArgs<T>) => {
   const { data, before, after, first, last } = args;
 
-  const items = applyPagination(data, before, after, first, last);
+  const items = applyPagination<T>(data, before, after, first, last);
 
-  const startCursor = items.length > 0 ? items[0].id : null;
-  const endCursor = items.length > 0 ? items[items.length - 1].id : null;
+  const startCursor = items[0]?.id ?? null;
+  const endCursor = items[items.length - 1]?.id ?? null;
 
   return {
     startCursor,
