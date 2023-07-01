@@ -1,9 +1,4 @@
-import {
-  applyCursors,
-  applyFirstAndLast,
-  applyPagination,
-  generatePageInfo,
-} from "@kampus/relay/pagination";
+import { applyPagination, generatePageInfo } from "@kampus/relay/pagination";
 import { allTerms, type Term } from "@kampus/sozluk-content";
 import DataLoader from "dataloader";
 import hash from "object-hash";
