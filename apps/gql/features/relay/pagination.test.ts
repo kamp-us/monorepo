@@ -86,11 +86,11 @@ describe("pagination", () => {
     });
 
     it("applies first arg first when there is both first and last", () => {
-      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }, { id: "5" }];
 
-      const result = applyFirstAndLast({ data, first: 1, last: 2 });
+      const result = applyFirstAndLast({ data, first: 3, last: 2 });
 
-      expect(result).toEqual([{ id: "1" }]);
+      expect(result).toEqual([{ id: "2" }, { id: "3" }]);
     });
 
     it("returns same data when there is first but it is bigger than data length", () => {
