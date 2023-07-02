@@ -1,7 +1,9 @@
-import { applyPagination, generatePageInfo } from "@kampus/relay/pagination";
-import { allTerms, type Term } from "@kampus/sozluk-content";
 import DataLoader from "dataloader";
 import hash from "object-hash";
+
+import { applyPagination, generatePageInfo } from "@kampus/relay/pagination";
+import { allTerms, type Term } from "@kampus/sozluk-content";
+
 import { type Clients } from "~/clients/types";
 import {
   type SozlukQueryTermsArgs,
@@ -32,16 +34,27 @@ const transformTerm = (term: Term) => {
   };
 };
 
+// eslint-disable-next-line @typescript-eslint/require-await
+const loadTerm = async (id: string) => {
+  const term = allTerms.find((term) => term.id === id);
+  if (!term) {
+    return null;
+  }
+  return transformTerm(term);
+};
+
 const createTermLoader = (_: Clients) =>
-  new DataLoader<string, SozlukTerm>(async (keys) =>
-    keys.map((key) => {
-      const term = allTerms.find((term) => term.id === key);
-      if (!term) {
-        return new Error(`Term not found for: ${key}`);
-      }
-      return transformTerm(term);
-    })
-  );
+  new DataLoader<string, SozlukTerm>(async (keys) => {
+    return await Promise.all(
+      keys.map(async (key) => {
+        const term = await loadTerm(key);
+        if (!term) {
+          return new Error(`Term not found for: ${key}`);
+        }
+        return term;
+      })
+    );
+  });
 
 const createTermsLoader = (_: Clients) =>
   new DataLoader<Partial<SozlukQueryTermsArgs>, SozlukTermConnection, string>(termsLoaderBatchFn, {
