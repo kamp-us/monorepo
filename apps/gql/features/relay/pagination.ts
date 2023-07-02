@@ -25,13 +25,21 @@ export function applyCursors<T extends { id: string }>(args: ApplyCursorsArgs<T>
   return data;
 }
 
-export function applyPagination<T extends { id: string }>(
-  data: T[],
-  before?: string | null,
-  after?: string | null,
-  first?: number | null,
-  last?: number | null
-) {
+interface ApplyPaginationArgs<T> {
+  data: T[];
+  before?: string | null;
+  after?: string | null;
+  first?: number | null;
+  last?: number | null;
+}
+
+export function applyPagination<T extends { id: string }>({
+  data,
+  before,
+  after,
+  first,
+  last,
+}: ApplyPaginationArgs<T>) {
   let copy = applyCursors<T>({ data, before, after });
   copy = applyFirstAndLast<T>({ data: copy, first, last });
   return copy;
