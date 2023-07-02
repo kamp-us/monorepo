@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { applyCursors } from "./pagination";
+import { applyCursors, applyFirstAndLast } from "./pagination";
 
 describe("pagination", () => {
   describe("applyCursors", () => {
@@ -58,6 +58,62 @@ describe("pagination", () => {
       const result = applyCursors(data, "2", "2");
 
       expect(result).toEqual([{ id: "3" }]);
+    });
+  });
+  describe("applyFirstAndLast", () => {
+    it("returns given data when there is no first and last", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = applyFirstAndLast({ data });
+
+      expect(result).toEqual(data);
+    });
+
+    it("returns correct data when there is first and no last", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = applyFirstAndLast({ data, first: 2 });
+
+      expect(result).toEqual([{ id: "1" }, { id: "2" }]);
+    });
+
+    it("returns correct data when there is last and no first", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = applyFirstAndLast({ data, last: 2 });
+
+      expect(result).toEqual([{ id: "2" }, { id: "3" }]);
+    });
+
+    it("applies first arg first when there is both first and last", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = applyFirstAndLast({ data, first: 1, last: 2 });
+
+      expect(result).toEqual([{ id: "1" }]);
+    });
+
+    it("returns same data when there is first but it is bigger than data length", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = applyFirstAndLast({ data, first: 4 });
+
+      expect(result).toEqual(data);
+    });
+
+    it("returns same data when there is last but it is bigger than data length", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = applyFirstAndLast({ data, last: 4 });
+
+      expect(result).toEqual(data);
+    });
+
+    it("throws error when the first or last arg is negative", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      expect(() => applyFirstAndLast({ data, first: -1 })).toThrow('Invalid value for "first".');
+      expect(() => applyFirstAndLast({ data, last: -1 })).toThrow('Invalid value for "last".');
     });
   });
 });
