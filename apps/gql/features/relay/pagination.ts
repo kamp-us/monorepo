@@ -1,8 +1,13 @@
-export function applyCursors<T extends { id: string }>(
-  data: T[],
-  before?: string | null,
-  after?: string | null
-) {
+interface ApplyCursorsArgs<T> {
+  data: T[];
+  before?: string | null;
+  after?: string | null;
+}
+
+export function applyCursors<T extends { id: string }>(args: ApplyCursorsArgs<T>) {
+  const { before, after } = args;
+  let { data } = args;
+
   if (after) {
     const afterIndex = data.findIndex((item) => item.id === after);
     if (afterIndex !== -1) {
@@ -27,7 +32,7 @@ export function applyPagination<T extends { id: string }>(
   first?: number | null,
   last?: number | null
 ) {
-  let copy = applyCursors<T>(data, before, after);
+  let copy = applyCursors<T>({ data, before, after });
   copy = applyFirstAndLast<T>({ data: copy, first, last });
   return copy;
 }
@@ -47,7 +52,7 @@ export function hasNextPage<T extends { id: string }>({
   after,
 }: PaginationArgs<T>) {
   if (first) {
-    const items = applyCursors(data, before, after);
+    const items = applyCursors({ data, before, after });
     return items.length > first;
   }
 
@@ -69,7 +74,7 @@ export function hasPreviousPage<T extends { id: string }>({
   before,
 }: PaginationArgs<T>) {
   if (last) {
-    const items = applyCursors(data, before, after);
+    const items = applyCursors({ data, before, after });
     return items.length > last;
   }
 

@@ -7,7 +7,7 @@ describe("pagination", () => {
     it("returns given data when there is no after and before", () => {
       const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
 
-      const result = applyCursors(data);
+      const result = applyCursors({ data });
 
       expect(result).toEqual(data);
     });
@@ -15,7 +15,7 @@ describe("pagination", () => {
     it("returns correct data when there is after and no before", () => {
       const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
 
-      const result = applyCursors(data, null, "2");
+      const result = applyCursors({ data, after: "2", before: null });
 
       expect(result).toEqual([{ id: "3" }]);
     });
@@ -23,7 +23,7 @@ describe("pagination", () => {
     it("returns same data when there is after but it is not in the data", () => {
       const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
 
-      const result = applyCursors(data, null, "4");
+      const result = applyCursors({ data, after: "4", before: null });
 
       expect(result).toEqual(data);
     });
@@ -31,7 +31,7 @@ describe("pagination", () => {
     it("returns correct data when there is before and no after", () => {
       const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
 
-      const result = applyCursors(data, "2", null);
+      const result = applyCursors({ data, before: "2", after: null });
 
       expect(result).toEqual([{ id: "1" }]);
     });
@@ -39,7 +39,7 @@ describe("pagination", () => {
     it("returns same data when there is before but it is not in the data", () => {
       const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
 
-      const result = applyCursors(data, "4", null);
+      const result = applyCursors({ data, before: "4", after: null });
 
       expect(result).toEqual(data);
     });
@@ -47,7 +47,7 @@ describe("pagination", () => {
     it("returns correct data when there is both after and before", () => {
       const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
 
-      const result = applyCursors(data, "3", "1");
+      const result = applyCursors({ data, after: "1", before: "3" });
 
       expect(result).toEqual([{ id: "2" }]);
     });
@@ -55,7 +55,7 @@ describe("pagination", () => {
     it("applies after first when there is after and before", () => {
       const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
 
-      const result = applyCursors(data, "2", "2");
+      const result = applyCursors({ data, after: "2", before: "2" });
 
       expect(result).toEqual([{ id: "3" }]);
     });
