@@ -13,7 +13,6 @@ export function applyCursors<T extends { id: string }>(
   if (before) {
     const beforeIndex = data.findIndex((item) => item.id === before);
     if (beforeIndex !== -1) {
-      console.log("YUX IS HERE");
       data = data.slice(0, beforeIndex);
     }
   }
