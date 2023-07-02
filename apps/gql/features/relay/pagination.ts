@@ -116,7 +116,9 @@ export const applyFirstAndLast = <T>(args: ApplyFirstAndLastArgs<T>) => {
       throw new Error('Invalid value for "first".');
     }
     copy = copy.slice(0, first);
-  } else if (last) {
+  }
+
+  if (last) {
     if (last < 0) {
       throw new Error('Invalid value for "last".');
     }
