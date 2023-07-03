@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { applyCursors, applyFirstAndLast } from "./pagination";
+import { applyCursors, applyFirstAndLast, applyPagination } from "./pagination";
 
 describe("pagination", () => {
   describe("applyCursors", () => {
@@ -114,6 +114,32 @@ describe("pagination", () => {
 
       expect(() => applyFirstAndLast({ data, first: -1 })).toThrow('Invalid value for "first".');
       expect(() => applyFirstAndLast({ data, last: -1 })).toThrow('Invalid value for "last".');
+    });
+  });
+
+  describe("applyPagination", () => {
+    it("returns given data when there is no first, last, after and before", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = applyPagination({ data });
+
+      expect(result).toEqual(data);
+    });
+
+    it("applies {after, before} first and then {first, last}", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
+
+      const result = applyPagination({ data, first: 2, after: "1" });
+
+      expect(result).toEqual([{ id: "2" }, { id: "3" }]);
+    });
+
+    it("returns same data when there is first but it is bigger than data length", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = applyPagination({ data, first: 4 });
+
+      expect(result).toEqual(data);
     });
   });
 });
