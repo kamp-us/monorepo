@@ -1,0 +1,21 @@
+name: Create a new epic
+description: Create a new big ticket to track multiple related issues
+title: "epic: "
+labels: ["epic"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What is this epic about?
+      description: Describe what we want to do & give as much context as possible
+    validations:
+      required: true
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks for this epic
+      description: Create a list of tasks in markdown checkbox format
+      placeholder: "- [ ] Create your first epic task in this format"
+      value: "- [ ] "
+    validations:
+      required: true
