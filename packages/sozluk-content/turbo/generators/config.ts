@@ -35,11 +35,4 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       ];
     },
   });
-
-  plop.setHelper("commaSeparated", (text: string) => {
-    return text
-      .split(",")
-      .map((tag) => tag.trim())
-      .join('", "');
-  });
 }
