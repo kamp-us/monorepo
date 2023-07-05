@@ -11,7 +11,7 @@ const config = {
   },
   settings: {
     next: {
-      rootDir: ["apps/kampus", "apps/gql"],
+      rootDir: ["apps/kampus", "apps/gql", "apps/pasaport"],
     },
   },
 };

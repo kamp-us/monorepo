@@ -2,7 +2,7 @@
 const config = {
   reactStrictMode: true,
   swcMinify: true,
-  transpilePackages: ["@kampus/tailwind", "@kampus/ui-next", "@kampus/next-auth"],
+  transpilePackages: ["@kampus/tailwind", "@kampus/ui-next", "@kampus/next-auth", "@kampus/email"],
 
   compiler: {
     relay: {
@@ -11,7 +11,8 @@ const config = {
     },
   },
 
-  rewrites() {
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async rewrites() {
     return {
       beforeFiles: [
         // if the host is `pano.*`,
@@ -39,6 +40,8 @@ const config = {
           destination: "/sozluk/:path",
         },
       ],
+      afterFiles: [],
+      fallback: [],
     };
   },
 };
