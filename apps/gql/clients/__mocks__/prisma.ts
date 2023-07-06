@@ -1,10 +1,10 @@
-import { type PrismaClient } from '@kampus-db/pano-prisma'
+import { beforeEach } from "vitest";
+import { mockDeep, mockReset } from "vitest-mock-extended";
 
-import { beforeEach } from 'vitest'
-import { mockDeep, mockReset } from 'vitest-mock-extended'
+import { type PrismaClient } from "@kampus/prisma";
 
 beforeEach(() => {
-  mockReset(mockedPrisma)
-})
+  mockReset(mockedPrisma);
+});
 
 export const mockedPrisma = mockDeep<PrismaClient>();
