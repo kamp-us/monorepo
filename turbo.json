@@ -42,7 +42,7 @@
         "SECRET"
       ]
     },
-    "@kampus/gql#*": {
+    "@kampus-apps/gql#*": {
       "env": ["NODE_ENV", "DATABASE_URL"]
     }
   }
