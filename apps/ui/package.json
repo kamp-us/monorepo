@@ -15,7 +15,6 @@
     "extends": "../../package.json"
   },
   "devDependencies": {
-    "@kampus/kampus": "*",
     "@kampus/tailwind": "*",
     "@storybook/addon-a11y": "^7.0.20",
     "@storybook/addon-essentials": "^7.0.20",

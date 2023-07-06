@@ -1,3 +1,4 @@
+import { NextResponse, type NextRequest } from "next/server";
 import { Resend } from "resend";
 
 import { renderEmail } from "../render";
@@ -6,7 +7,7 @@ import { sendEmailSchema } from "../schemas";
 export const createHandler = (apiKey: string) => {
   const resend = new Resend(apiKey);
 
-  const KampusEmailResendHandler = async (request: Request) => {
+  const KampusEmailResendHandler = async (request: NextRequest) => {
     const result = sendEmailSchema.safeParse(await request.json());
 
     if (!result.success) {
@@ -22,9 +23,9 @@ export const createHandler = (apiKey: string) => {
         subject: email.subject,
         react: renderEmail(kampusEmail),
       });
-      return new Response("success", { status: 200 });
+      return NextResponse.json({ success: true }, { status: 200 });
     } catch (error: unknown) {
-      return new Response(JSON.stringify({ error: error as Error }), { status: 500 });
+      return NextResponse.json({ success: false, error: error as Error }, { status: 500 });
     }
   };
 
