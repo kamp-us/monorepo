@@ -18,9 +18,8 @@
     "relay-compiler": "15.0.0"
   },
   "dependencies": {
-    "@kampus/relay": "*",
     "@kampus/next-auth": "*",
-    "next-auth": "4.22.1",
+    "@kampus/relay": "*",
     "react-relay": "15.0.0",
     "znv": "0.3.2",
     "zod": "3.21.4"
