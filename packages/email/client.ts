@@ -8,6 +8,9 @@ export const sendEmail = async (
 
   const res = await fetch(baseUrl + "/postaci/send", {
     method: "POST",
+    headers: {
+      Accept: "application/json",
+    },
     body: JSON.stringify(options),
   });
 
