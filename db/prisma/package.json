@@ -6,7 +6,9 @@
   "types": "./index.ts",
   "scripts": {
     "prisma:generate": "prisma generate --schema ./schema.prisma",
-    "prisma:push": "prisma db push --skip-generate"
+    "prisma:push": "prisma db push --skip-generate --schema ./schema.prisma",
+    "prisma:migrate:dev": "prisma migrate dev --schema ./schema.prisma",
+    "prisma:migrate:deploy": "prisma migrate deploy --schema ./schema.prisma"
   },
   "keywords": [],
   "author": "kamp.us <infra@kamp.us>",

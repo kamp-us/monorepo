@@ -1,21 +1,15 @@
 version: "3.3"
 services:
   mysql:
-    image: mysql:8.0
-    environment:
-      - MYSQL_ROOT_PASSWORD=kampus
-      - MYSQL_DATABASE=kampus
-      - MYSQL_USER=kampus
-      - MYSQL_PASSWORD=kampus
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
     ports:
       - "3306:3306"
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-u", "root", "--password=kampus"]
-      interval: 10s
-      timeout: 3s
-      retries: 5
-    networks:
-      - kampus
+    environment:
+      MYSQL_ROOT_PASSWORD: kampus
+      MYSQL_DATABASE: kampus
+      MYSQL_USER: kampus
+      MYSQL_PASSWORD: kampus
     volumes:
       - mysqldata:/var/lib/mysql
 
