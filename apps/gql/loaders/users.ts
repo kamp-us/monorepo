@@ -1,7 +1,8 @@
 import DataLoader from "dataloader";
-import { LoaderKey } from "./utils/loader-key";
+
 import { type Clients } from "~/clients/types";
 import { type User } from "~/schema/types.generated";
+import { LoaderKey } from "./utils/loader-key";
 
 export type UsersLoader = DataLoader<UserLoaderKey, User>;
 
@@ -9,29 +10,34 @@ export class UserLoaderKey extends LoaderKey<"id" | "username", string> {}
 
 export const createUsersLoader = (clients: Clients): UsersLoader =>
   new DataLoader<UserLoaderKey, User>(async (keys) => {
-    const request: Record<string, string[]> = {
-      ids: [],
-      usernames: [],
-    };
+    const ids: string[] = [];
+    const usernames: string[] = [];
 
     keys.forEach((key) => {
       const { identifier, value } = key;
       if (identifier === "id") {
-        request.ids.push(value);
+        ids.push(value);
       } else if (identifier === "username") {
-        request.usernames.push(value);
+        usernames.push(value);
       }
     });
 
-    const users = await clients.prisma.user.findMany({
-      where: {
-        OR: [{ id: { in: request.ids } }, { username: { in: request.usernames } }],
-        deletedAt: null,
-      },
-    });
+    const users =
+      (await clients.prisma.user.findMany({
+        where: {
+          OR: [{ id: { in: ids } }, { username: { in: usernames } }],
+          deletedAt: null,
+        },
+      })) ?? []; // For some reason, prisma when no user found returns undefined instead of empty array.
 
-    return users.map((user) => ({
-      id: user.id,
-      username: user.username,
-    }));
+    return keys.map((key) => {
+      const dbUser = users.find((u) => u?.[key.identifier] === key.value);
+      if (!dbUser) {
+        return new Error(`User not found: ${key.value}`);
+      }
+      return {
+        id: dbUser.id,
+        username: dbUser.username,
+      } as User;
+    });
   });

@@ -1,0 +1,21 @@
+{
+  "name": "@kampus/relay",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {},
+  "author": "",
+  "license": "MIT",
+  "volta": {
+    "extends": "../../package.json"
+  },
+  "dependencies": {
+    "react-relay": "15.0.0",
+    "relay-runtime": "15.0.0"
+  },
+  "devDependencies": {
+    "@types/react-relay": "14.1.4",
+    "@types/relay-runtime": "14.1.10"
+  }
+}

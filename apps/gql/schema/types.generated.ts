@@ -1,5 +1,7 @@
 import { GraphQLResolveInfo } from "graphql";
+
 import { KampusGQLContext } from "./types";
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -15,6 +17,14 @@ export type Scalars = {
   Float: number;
 };
 
+export type PageInfo = {
+  __typename?: "PageInfo";
+  endCursor: Maybe<Scalars["String"]>;
+  hasNextPage: Scalars["Boolean"];
+  hasPreviousPage: Scalars["Boolean"];
+  startCursor: Maybe<Scalars["String"]>;
+};
+
 export type Query = {
   __typename?: "Query";
   sozluk: SozlukQuery;
@@ -28,10 +38,18 @@ export type QueryUserArgs = {
 export type SozlukQuery = {
   __typename?: "SozlukQuery";
   term: Maybe<SozlukTerm>;
+  terms: Maybe<SozlukTermConnection>;
 };
 
 export type SozlukQueryTermArgs = {
   input: SozlukTermInput;
+};
+
+export type SozlukQueryTermsArgs = {
+  after: InputMaybe<Scalars["String"]>;
+  before: InputMaybe<Scalars["String"]>;
+  first: InputMaybe<Scalars["Int"]>;
+  last: InputMaybe<Scalars["Int"]>;
 };
 
 export type SozlukTerm = {
@@ -47,6 +65,19 @@ export type SozlukTermBody = {
   code: Scalars["String"];
   html: Scalars["String"];
   raw: Scalars["String"];
+};
+
+export type SozlukTermConnection = {
+  __typename?: "SozlukTermConnection";
+  edges: Maybe<Array<Maybe<SozlukTermEdge>>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars["Int"];
+};
+
+export type SozlukTermEdge = {
+  __typename?: "SozlukTermEdge";
+  cursor: Scalars["String"];
+  node: Maybe<SozlukTerm>;
 };
 
 export type SozlukTermInput = {
@@ -150,10 +181,14 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   ID: ResolverTypeWrapper<Scalars["ID"]>;
+  Int: ResolverTypeWrapper<Scalars["Int"]>;
+  PageInfo: ResolverTypeWrapper<PageInfo>;
   Query: ResolverTypeWrapper<{}>;
   SozlukQuery: ResolverTypeWrapper<SozlukQuery>;
   SozlukTerm: ResolverTypeWrapper<SozlukTerm>;
   SozlukTermBody: ResolverTypeWrapper<SozlukTermBody>;
+  SozlukTermConnection: ResolverTypeWrapper<SozlukTermConnection>;
+  SozlukTermEdge: ResolverTypeWrapper<SozlukTermEdge>;
   SozlukTermInput: SozlukTermInput;
   String: ResolverTypeWrapper<Scalars["String"]>;
   User: ResolverTypeWrapper<User>;
@@ -164,14 +199,29 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
   ID: Scalars["ID"];
+  Int: Scalars["Int"];
+  PageInfo: PageInfo;
   Query: {};
   SozlukQuery: SozlukQuery;
   SozlukTerm: SozlukTerm;
   SozlukTermBody: SozlukTermBody;
+  SozlukTermConnection: SozlukTermConnection;
+  SozlukTermEdge: SozlukTermEdge;
   SozlukTermInput: SozlukTermInput;
   String: Scalars["String"];
   User: User;
   UserInput: UserInput;
+};
+
+export type PageInfoResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["PageInfo"] = ResolversParentTypes["PageInfo"]
+> = {
+  endCursor: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  hasNextPage: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  hasPreviousPage: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  startCursor: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<
@@ -197,6 +247,12 @@ export type SozlukQueryResolvers<
     ContextType,
     RequireFields<SozlukQueryTermArgs, "input">
   >;
+  terms: Resolver<
+    Maybe<ResolversTypes["SozlukTermConnection"]>,
+    ParentType,
+    ContextType,
+    Partial<SozlukQueryTermsArgs>
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -221,6 +277,25 @@ export type SozlukTermBodyResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type SozlukTermConnectionResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["SozlukTermConnection"] = ResolversParentTypes["SozlukTermConnection"]
+> = {
+  edges: Resolver<Maybe<Array<Maybe<ResolversTypes["SozlukTermEdge"]>>>, ParentType, ContextType>;
+  pageInfo: Resolver<ResolversTypes["PageInfo"], ParentType, ContextType>;
+  totalCount: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SozlukTermEdgeResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["SozlukTermEdge"] = ResolversParentTypes["SozlukTermEdge"]
+> = {
+  cursor: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  node: Resolver<Maybe<ResolversTypes["SozlukTerm"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type UserResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
@@ -231,9 +306,12 @@ export type UserResolvers<
 };
 
 export type Resolvers<ContextType = KampusGQLContext> = {
+  PageInfo: PageInfoResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
   SozlukQuery: SozlukQueryResolvers<ContextType>;
   SozlukTerm: SozlukTermResolvers<ContextType>;
   SozlukTermBody: SozlukTermBodyResolvers<ContextType>;
+  SozlukTermConnection: SozlukTermConnectionResolvers<ContextType>;
+  SozlukTermEdge: SozlukTermEdgeResolvers<ContextType>;
   User: UserResolvers<ContextType>;
 };

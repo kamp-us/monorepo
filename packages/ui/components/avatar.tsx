@@ -1,9 +1,9 @@
 "use client";
 
-import { cn } from "@kampus/ui-next/utils";
-import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import * as React from "react";
+import * as AvatarPrimitive from "@radix-ui/react-avatar";
 
+import { cn } from "@kampus/ui-next/utils";
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
@@ -36,7 +36,7 @@ const AvatarFallback = React.forwardRef<
   <AvatarPrimitive.Fallback
     ref={ref}
     className={cn(
-      "bg-muted flex h-full w-full items-center justify-center rounded-full",
+      "flex h-full w-full items-center justify-center rounded-full bg-muted",
       className
     )}
     {...props}

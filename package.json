@@ -3,6 +3,7 @@
   "private": true,
   "workspaces": [
     "apps/*",
+    "config/*",
     "db/*",
     "packages/*"
   ],
@@ -22,7 +23,10 @@
   },
   "homepage": "https://github.com/kamp-us/monorepo#readme",
   "dependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "4.0.2",
+    "@kampus/eslint-config": "*",
     "@types/node": "20.2.5",
+    "@types/prettier": "2.7.3",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
@@ -38,10 +42,9 @@
     "react-dom": "18.2.0",
     "tailwind-merge": "1.13.1",
     "tailwindcss": "3.3.2",
-    "tailwindcss-animate": "1.0.5",
     "ts-node": "10.9.1",
     "ts-node-dev": "2.0.0",
-    "turbo": "1.10.3",
+    "turbo": "1.10.7",
     "turbo-ignore": "1.10.3",
     "typescript": "5.0.4"
   },

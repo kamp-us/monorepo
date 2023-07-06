@@ -9,9 +9,11 @@
   },
   "author": "",
   "license": "MIT",
+  "volta": {
+    "extends": "../../package.json"
+  },
   "devDependencies": {
-    "@kampus/tailwind-config": "0.0.0",
-    "@kampus/tsconfig": "0.0.0"
+    "@kampus/tailwind": "*"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.4",

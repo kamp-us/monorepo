@@ -1,7 +1,18 @@
 /** @type {import('next').NextConfig} */
 const config = {
-  transpilePackages: ["@kampus/tailwind-config", "@kampus/ui-next"],
-  rewrites() {
+  reactStrictMode: true,
+  swcMinify: true,
+  transpilePackages: ["@kampus/tailwind", "@kampus/ui-next", "@kampus/next-auth", "@kampus/email"],
+
+  compiler: {
+    relay: {
+      src: "./",
+      language: "typescript",
+    },
+  },
+
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async rewrites() {
     return {
       beforeFiles: [
         // if the host is `pano.*`,
@@ -29,6 +40,8 @@ const config = {
           destination: "/sozluk/:path",
         },
       ],
+      afterFiles: [],
+      fallback: [],
     };
   },
 };

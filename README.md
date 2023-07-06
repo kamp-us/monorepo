@@ -7,6 +7,7 @@ kamp.us web projects & packages
 - The languages we use in this repo:
   - Typescript
     - [remix.run](https://remix.run) - a react web application framework
+    - [next.js](https://nextjs.org/) - a react framework.
 - Join our discord at https://discord.kamp.us
 - We use `#kampus-projects` channel for onboarding people to the project.
 - Talk to us so we can figure out a plan together what would be the best way
@@ -20,14 +21,27 @@ kamp.us web projects & packages
 - Clone the project to your local computer:
 
 ```
+// Download Repository
 git clone git@github.com:kamp-us/monorepo.git
+// Move into repository
 cd monorepo
 ```
 
 ## Structure
 
 - `/apps`: services & apps
+  - `/gql`: backend service for the applications
+  - `/kampus`: home of kampus, where you can find sozluk and pano
+  - `/ui`: all the ui elements source with storybook
+- `/db`: packages that is relevant to database
+  - `/pano-prisma`: pano application's database
+- '/config': packages that is relevant to configuration
+  - `/eslint`: common eslint configuration.
 - `/packages`: internal (and maybe external in the future) npm packages
+  - `/relay`: common relay configuration
+  - `/sozluk-content`: where contents of sozluk are
+  - `/tailwind`: common tailwind configuration as a tailwind plugin
+  - `/ui`: common ui elements
 
 These folders are [registered as workspaces in package.json](package.json#L4-L7)
 
@@ -46,7 +60,9 @@ curl https://get.volta.sh | bash
 Install dependencies and build all projects.
 
 ```
+// Install all the dependencies use -w or --workspace for workspace specific installs
 npm install
+// Builds all the applications in the monorepo
 npx turbo build
 ```
 

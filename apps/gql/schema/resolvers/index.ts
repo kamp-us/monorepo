@@ -1,6 +1,7 @@
-import { term } from "./Query/SozlukQuery/term";
-import { user } from "./Query/user";
 import { type Resolvers } from "../types.generated";
+import { term } from "./Query/SozlukQuery/term";
+import { terms } from "./Query/SozlukQuery/terms";
+import { user } from "./Query/user";
 
 export const resolvers = {
   Query: {
@@ -9,11 +10,13 @@ export const resolvers = {
     sozluk: () => {
       return {
         term: null,
+        terms: null,
       };
     },
   },
   SozlukQuery: {
     term,
+    terms,
   },
   SozlukTerm: {
     id: (term) => term.id,
@@ -25,6 +28,21 @@ export const resolvers = {
     raw: (body) => body.raw,
     code: (body) => body.code,
     html: (body) => body.html,
+  },
+  SozlukTermConnection: {
+    edges: (connection) => connection.edges,
+    pageInfo: (connection) => connection.pageInfo,
+    totalCount: (connection) => connection.totalCount,
+  },
+  SozlukTermEdge: {
+    node: (edge) => edge.node,
+    cursor: (edge) => edge.cursor,
+  },
+  PageInfo: {
+    hasNextPage: (pageInfo) => pageInfo.hasNextPage,
+    hasPreviousPage: (pageInfo) => pageInfo.hasPreviousPage,
+    startCursor: (pageInfo) => pageInfo.startCursor,
+    endCursor: (pageInfo) => pageInfo.endCursor,
   },
   User: {
     id: (u) => u.id,

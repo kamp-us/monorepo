@@ -13,17 +13,17 @@ export const parameters = {
     clearable: false,
     list: [
       {
-        name: 'Light',
+        name: "Light",
         class: [],
-        color: '#ffffff',
-        default: true
+        color: "#ffffff",
+        default: true,
       },
       {
-        name: 'Dark',
+        name: "Dark",
         // The class dark will be added to the body tag
-        class: ['dark'],
-        color: '#000000'
-      }
-    ]
-  }
+        class: ["dark"],
+        color: "#000000",
+      },
+    ],
+  },
 };
