@@ -4,6 +4,7 @@ import {
   applyCursors,
   applyFirstAndLast,
   applyPagination,
+  generatePageInfo,
   hasNextPage,
   hasPreviousPage,
 } from "./pagination";
@@ -66,6 +67,7 @@ describe("pagination", () => {
       expect(result).toEqual([{ id: "3" }]);
     });
   });
+
   describe("applyFirstAndLast", () => {
     it("returns given data when there is no first and last", () => {
       const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
@@ -240,6 +242,99 @@ describe("pagination", () => {
       const result = hasPreviousPage({ data, after: "1" });
 
       expect(result).toEqual(false);
+    });
+  });
+
+  describe("generatePageInfo", () => {
+    it("returns correct pageInfo when there is no first, last, after and before", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const pageInfo = generatePageInfo({ data });
+
+      expect(pageInfo).toEqual({
+        startCursor: "1",
+        endCursor: "3",
+        hasNextPage: false,
+        hasPreviousPage: false,
+      });
+    });
+
+    it("returns correct pageInfo when there is first and no after", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
+
+      const pageInfo = generatePageInfo({ data, first: 2 });
+
+      expect(pageInfo).toEqual({
+        startCursor: "1",
+        endCursor: "2",
+        hasNextPage: true,
+        hasPreviousPage: false,
+      });
+    });
+
+    it("returns correct pageInfo when there is last and no before", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
+
+      const pageInfo = generatePageInfo({ data, last: 2 });
+
+      expect(pageInfo).toEqual({
+        startCursor: "3",
+        endCursor: "4",
+        hasNextPage: false,
+        hasPreviousPage: true,
+      });
+    });
+
+    it("returns correct pageInfo when there is after and no first", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
+
+      const pageInfo = generatePageInfo({ data, after: "1" });
+
+      expect(pageInfo).toEqual({
+        startCursor: "2",
+        endCursor: "4",
+        hasNextPage: false,
+        hasPreviousPage: false,
+      });
+    });
+
+    it("returns correct pageInfo when there is before and no last", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
+
+      const pageInfo = generatePageInfo({ data, before: "4" });
+
+      expect(pageInfo).toEqual({
+        startCursor: "1",
+        endCursor: "3",
+        hasNextPage: false,
+        hasPreviousPage: false,
+      });
+    });
+
+    it("returns correct pageInfo when there is first and after", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
+
+      const pageInfo = generatePageInfo({ data, first: 2, after: "1" });
+
+      expect(pageInfo).toEqual({
+        startCursor: "2",
+        endCursor: "3",
+        hasNextPage: true,
+        hasPreviousPage: false,
+      });
+    });
+
+    it("returns null as startCursor or endCursor if data is empty", () => {
+      const data = [];
+
+      const pageInfo = generatePageInfo({ data });
+
+      expect(pageInfo).toEqual({
+        startCursor: null,
+        endCursor: null,
+        hasNextPage: false,
+        hasPreviousPage: false,
+      });
     });
   });
 });
