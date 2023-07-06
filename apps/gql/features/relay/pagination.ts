@@ -60,16 +60,8 @@ export function hasNextPage<T extends { id: string }>({
   after,
 }: PaginationArgs<T>) {
   if (first) {
-    const items = applyCursors({ data, before, after });
-    return items.length > first;
-  }
-
-  if (before) {
-    const beforeIndex = data.findIndex((item) => item.id === before);
-    if (beforeIndex !== -1) {
-      const remainingItems = data.slice(beforeIndex + 1);
-      return remainingItems.length > 0;
-    }
+    data = applyCursors({ data, before, after });
+    return data.length > first;
   }
 
   return false;

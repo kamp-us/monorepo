@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { applyCursors, applyFirstAndLast, applyPagination } from "./pagination";
+import {
+  applyCursors,
+  applyFirstAndLast,
+  applyPagination,
+  hasNextPage,
+} from "./pagination";
 
 describe("pagination", () => {
   describe("applyCursors", () => {
@@ -140,6 +145,58 @@ describe("pagination", () => {
       const result = applyPagination({ data, first: 4 });
 
       expect(result).toEqual(data);
+    });
+  });
+
+  describe("hasNextPage", () => {
+    it("returns false when there is no first, last, after and before", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = hasNextPage({ data });
+
+      expect(result).toEqual(false);
+    });
+
+    it("returns false when there is first and it is bigger than data length", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = hasNextPage({ data, first: 4 });
+
+      expect(result).toEqual(false);
+    });
+
+    it("returns true if there is first and data length is bigger than first", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
+
+      const result = hasNextPage({ data, first: 2 });
+
+      expect(result).toEqual(true);
+    });
+
+    it("returns false when there is before and it is not in the data", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = hasNextPage({ data, before: "4" });
+
+      expect(result).toEqual(false);
+    });
+
+    it("returns false when there is before and there is no data before that", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
+
+      const result = hasNextPage({ data, before: "1" });
+
+      expect(result).toEqual(false);
+    });
+
+    it("returns false if there is only after or last", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
+
+      const withAfter = hasNextPage({ data, after: "1" });
+      const withLast = hasNextPage({ data, last: 2 });
+
+      expect(withAfter).toEqual(false);
+      expect(withLast).toEqual(false);
     });
   });
 });
