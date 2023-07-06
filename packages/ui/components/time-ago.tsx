@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState, type FC } from "react";
 
 const formatter = new Intl.RelativeTimeFormat("tr", {
