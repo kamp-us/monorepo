@@ -78,14 +78,6 @@ export function hasPreviousPage<T extends { id: string }>({
     return items.length > last;
   }
 
-  if (after) {
-    const afterIndex = data.findIndex((item) => item.id === after);
-    if (afterIndex !== -1) {
-      const remainingItems = data.slice(0, afterIndex);
-      return remainingItems.length > 0;
-    }
-  }
-
   return false;
 }
 

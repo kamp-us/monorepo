@@ -5,6 +5,7 @@ import {
   applyFirstAndLast,
   applyPagination,
   hasNextPage,
+  hasPreviousPage,
 } from "./pagination";
 
 describe("pagination", () => {
@@ -197,6 +198,48 @@ describe("pagination", () => {
 
       expect(withAfter).toEqual(false);
       expect(withLast).toEqual(false);
+    });
+  });
+
+  describe("hasPreviousPage", () => {
+    it("returns false when there is no first, last, after and before", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = hasPreviousPage({ data });
+
+      expect(result).toEqual(false);
+    });
+
+    it("returns false when there is last and it is bigger than data length", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = hasPreviousPage({ data, last: 4 });
+
+      expect(result).toEqual(false);
+    });
+
+    it("returns true if there is last and data length is bigger than last", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
+
+      const result = hasPreviousPage({ data, last: 2 });
+
+      expect(result).toEqual(true);
+    });
+
+    it("returns false when there is after and it is not in the data", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+      const result = hasPreviousPage({ data, after: "4" });
+
+      expect(result).toEqual(false);
+    });
+
+    it("returns false when there is after and no data before", () => {
+      const data = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
+
+      const result = hasPreviousPage({ data, after: "1" });
+
+      expect(result).toEqual(false);
     });
   });
 });
