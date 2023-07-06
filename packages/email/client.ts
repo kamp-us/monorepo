@@ -13,7 +13,5 @@ export const sendEmail = async (
 
   const result = (await res.json()) as unknown as { success: boolean; error: Error };
 
-  console.log({ error: result.error });
-
-  return res.json() as unknown as { success: boolean };
+  return result;
 };

@@ -16,7 +16,6 @@ export const PostaciProvider = (options: PostaciUserConfig = {}): PostaciConfig 
     server: "",
     from,
     async sendVerificationRequest(props) {
-      console.log("kampus-auth:postaci-provider:", "sending email with", props);
       await sendEmail(
         {
           email: { from, to: props.identifier, subject: "kamp.us'e giriş yap" },

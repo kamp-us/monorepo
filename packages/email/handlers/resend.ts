@@ -9,8 +9,6 @@ export const createHandler = (apiKey: string) => {
   const KampusEmailResendHandler = async (request: Request) => {
     const result = sendEmailSchema.safeParse(await request.json());
 
-    console.log({ result: result.error });
-
     if (!result.success) {
       return new Response("input error, check request body", { status: 400 });
     }

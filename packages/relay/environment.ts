@@ -18,7 +18,6 @@ export async function networkFetch(
   request: RequestParameters,
   variables: Variables
 ): Promise<GraphQLResponse> {
-  console.log("yoo", { request, variables });
   const resp = await fetch(HTTP_ENDPOINT, {
     method: "POST",
     headers: {
