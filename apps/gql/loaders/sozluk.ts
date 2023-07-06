@@ -67,7 +67,7 @@ const termsLoaderBatchFn = async (keys: readonly Partial<SozlukQueryTermsArgs>[]
   for (const key of keys) {
     const { before, after, first, last } = key;
 
-    const terms = applyPagination(allTerms, before, after, first, last);
+    const terms = applyPagination<Term>({ data: allTerms, before, after, first, last });
 
     const edges = terms.map((term) => ({ cursor: term.id, node: transformTerm(term) }));
 
