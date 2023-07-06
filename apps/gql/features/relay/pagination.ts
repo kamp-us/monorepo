@@ -84,7 +84,7 @@ export function hasPreviousPage<T extends { id: string }>({
 export const generatePageInfo = <T extends { id: string }>(args: PaginationArgs<T>) => {
   const { data, before, after, first, last } = args;
 
-  const items = applyPagination<T>(data, before, after, first, last);
+  const items = applyPagination<T>({ data, before, after, first, last });
 
   const startCursor = items[0]?.id ?? null;
   const endCursor = items[items.length - 1]?.id ?? null;
