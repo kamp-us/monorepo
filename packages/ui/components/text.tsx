@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
@@ -28,7 +30,7 @@ export interface TextProps extends React.ComponentProps<"p">, VariantProps<typeo
   children?: React.ReactNode;
 }
 
-export const Text = ({ className, children, lineHeight, size, ...props }: TextProps) => {
+const Text = ({ className, children, lineHeight, size, ...props }: TextProps) => {
   return (
     <p className={cn(textVariants({ lineHeight, size, className }))} {...props}>
       {children}
@@ -37,3 +39,5 @@ export const Text = ({ className, children, lineHeight, size, ...props }: TextPr
 };
 
 Text.displayName = "Text";
+
+export { Text };

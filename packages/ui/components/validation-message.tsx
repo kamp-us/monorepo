@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useState, type FC } from "react";
+import { useEffect, useState } from "react";
 
-type ValidationMessageProps = {
+interface ValidationMessageProps {
   error: string;
   isSubmitting?: boolean;
-};
+}
 
-export const ValidationMessage: FC<ValidationMessageProps> = ({ error, isSubmitting = false }) => {
+export const ValidationMessage = (props: ValidationMessageProps) => {
+  const { error, isSubmitting } = props;
   const [show, setShow] = useState(!!error);
 
   useEffect(() => {

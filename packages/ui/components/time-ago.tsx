@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FC } from "react";
+import { useEffect, useState } from "react";
 
 const formatter = new Intl.RelativeTimeFormat("tr", {
   // numeric: "auto",
@@ -29,16 +29,20 @@ export function formatTimeAgo(date: Date) {
   }
 }
 
-export const Timeago: FC<{ date: Date }> = ({ date }) => {
-  const [timeAgo, setTimeAgo] = useState(formatTimeAgo(date));
+interface TimeagoProps {
+  date: Date;
+}
+
+export const Timeago = (props: TimeagoProps) => {
+  const [timeAgo, setTimeAgo] = useState(formatTimeAgo(props.date));
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeAgo(formatTimeAgo(date));
+      setTimeAgo(formatTimeAgo(props.date));
     }, 10000);
 
     return () => clearInterval(timer);
-  }, [date]);
+  }, [props.date]);
 
   return <>{timeAgo}</>;
 };

@@ -1,9 +1,11 @@
 "use client";
 
 import * as React from "react";
+import { cva } from "class-variance-authority";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
+import { cn } from "../utils";
 import { Button } from "./button";
 import {
   DropdownMenu,
@@ -12,15 +14,19 @@ import {
   DropdownMenuTrigger,
 } from "./dropdown-menu";
 
-export function ModeToggle() {
+export function ThemeToggle() {
   const { setTheme } = useTheme();
+
+  const baseClasses = "h-[1.2rem] w-[1.2rem] transition all";
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <Sun className={cn(baseClasses, "rotate-0 scale-100 dark:-rotate-90 dark:scale-0")} />
+          <Moon
+            className={cn(baseClasses, "absolute rotate-90 scale-0 dark:rotate-0 dark:scale-100")}
+          />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
