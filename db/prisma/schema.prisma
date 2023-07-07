@@ -3,12 +3,13 @@
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Upvote {
@@ -23,13 +24,16 @@ model Upvote {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+
+  @@index([postID])
+  @@index([userID])
 }
 
 model CommentUpvote {
   id String @id @default(cuid())
 
   commentID String
-  comment   Comment @relation(fields: [commentID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  comment   Comment @relation(fields: [commentID], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   userID String
   owner  User   @relation(fields: [userID], references: [id], onDelete: Cascade, onUpdate: Cascade)
@@ -37,6 +41,9 @@ model CommentUpvote {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+
+  @@index([commentID])
+  @@index([userID])
 }
 
 model Comment {
@@ -50,7 +57,7 @@ model Comment {
   post   Post   @relation(fields: [postID], references: [id], onDelete: Cascade)
 
   parentID String?
-  parent   Comment?        @relation("CommentComments", fields: [parentID], references: [id])
+  parent   Comment?        @relation("CommentComments", fields: [parentID], references: [id], onDelete: NoAction, onUpdate: NoAction)
   comments Comment[]       @relation("CommentComments")
   upvotes  CommentUpvote[]
 
@@ -59,6 +66,10 @@ model Comment {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+
+  @@index([userID])
+  @@index([postID])
+  @@index([parentID])
 }
 
 model Post {
@@ -82,6 +93,7 @@ model Post {
   notifications Notification[]
 
   @@index([site])
+  @@index([userID])
 }
 
 model User {
@@ -140,6 +152,11 @@ model Notification {
   commentID         String?
   read              Boolean          @default(false)
   url               String
+
+  @@index([commentID])
+  @@index([notifiesUserID])
+  @@index([triggeredByUserID])
+  @@index([postID])
 }
 
 enum NotificationType {
@@ -167,6 +184,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -175,6 +193,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model VerificationToken {
