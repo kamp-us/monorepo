@@ -27,6 +27,7 @@
     "@radix-ui/react-toast": "^1.1.4",
     "class-variance-authority": "0.6.0",
     "lucide-react": "0.241.0",
-    "next-themes": "0.2.1"
+    "next-themes": "0.2.1",
+    "react-share": "4.4.1"
   }
 }
