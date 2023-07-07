@@ -34,7 +34,7 @@ cd monorepo
   - `/kampus`: home of kampus, where you can find sozluk and pano
   - `/ui`: all the ui elements source with storybook
 - `/db`: packages that is relevant to database
-  - `/pano-prisma`: pano application's database
+  - `/prisma`: prisma client for kampus mysql db
 - '/config': packages that is relevant to configuration
   - `/eslint`: common eslint configuration.
 - `/packages`: internal (and maybe external in the future) npm packages

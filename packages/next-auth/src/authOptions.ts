@@ -5,7 +5,7 @@ import DiscordProvider from "next-auth/providers/discord";
 import GithubProvider from "next-auth/providers/github";
 import TwitchProvider from "next-auth/providers/twitch";
 
-import { prisma } from "@kampus-db/pano-prisma";
+import { prisma } from "@kampus/prisma";
 
 import { env } from "../lib/env";
 import { PostaciProvider } from "./providers/postaci";
