@@ -6,6 +6,14 @@ on:
   pull_request:
     types: [opened, synchronize]
 
+env:
+  GITHUB_ID: "fake"
+  GITHUB_SECRET: "fake"
+  TWITCH_ID: "fake"
+  TWITCH_SECRET: "fake"
+  DISCORD_ID: "fake"
+  DISCORD_SECRET: "fake"
+
 jobs:
   build:
     name: Build and Test
