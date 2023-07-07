@@ -1,0 +1,30 @@
+{
+  "name": "@kampus/prisma",
+  "version": "0.0.0",
+  "description": "",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "scripts": {
+    "prisma:generate": "prisma generate --schema ./schema.prisma",
+    "prisma:push": "prisma db push --skip-generate --schema ./schema.prisma",
+    "prisma:migrate:dev": "prisma migrate dev --schema ./schema.prisma",
+    "prisma:migrate:deploy": "prisma migrate deploy --schema ./schema.prisma"
+  },
+  "keywords": [],
+  "author": "kamp.us <infra@kamp.us>",
+  "license": "ISC",
+  "volta": {
+    "extends": "../../package.json"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "4.9.0",
+    "bcryptjs": "2.4.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "2.4.2",
+    "prisma": "4.9.0"
+  }
+}

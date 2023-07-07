@@ -1,4 +1,4 @@
-import { PrismaClient } from "@kampus-db/pano-prisma";
+import { PrismaClient } from "@kampus/prisma";
 
 import { env } from "~/env";
 
