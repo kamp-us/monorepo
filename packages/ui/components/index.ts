@@ -9,4 +9,5 @@ export * from "./theme-toggle";
 export * from "./user-avatar";
 export * from "./validation-message";
 export * from "./time-ago";
+export * from "./link";
 export * from "./social-media-buttons";
