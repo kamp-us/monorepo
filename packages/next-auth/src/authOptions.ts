@@ -12,6 +12,8 @@ import { PostaciProvider } from "./providers/postaci";
 
 const prismaAdapter = PrismaAdapter(prisma) as Adapter;
 
+const useSecureCookies = !!process.env.VERCEL_URL;
+
 export const authOptions: AuthOptions = {
   adapter: prismaAdapter,
   secret: env.SECRET,
@@ -30,4 +32,16 @@ export const authOptions: AuthOptions = {
       clientSecret: env.TWITCH_SECRET,
     }),
   ],
+  cookies: {
+    sessionToken: {
+      name: `${useSecureCookies ? "__Secure-" : ""}next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        domain: env.AUTH_COOKIE_DOMAIN,
+        secure: useSecureCookies,
+      },
+    },
+  },
 };
