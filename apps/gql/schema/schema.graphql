@@ -4,6 +4,13 @@ type Query {
   sozluk: SozlukQuery!
 }
 
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
 type User {
   id: ID!
   username: String!
@@ -16,6 +23,7 @@ input UserInput {
 
 type SozlukQuery {
   term(input: SozlukTermInput!): SozlukTerm
+  terms(after: String, before: String, first: Int, last: Int): SozlukTermConnection
 }
 
 input SozlukTermInput {
@@ -33,4 +41,15 @@ type SozlukTermBody {
   raw: String!
   code: String!
   html: String!
+}
+
+type SozlukTermConnection {
+  edges: [SozlukTermEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type SozlukTermEdge {
+  cursor: String!
+  node: SozlukTerm
 }

@@ -47,7 +47,7 @@ describe("Term Query", () => {
           id: '356',
         }
       }, { loaders })
-    }).rejects.toThrowError('Term not found: 356');
+    }).rejects.toThrowError('Term not found for: 356');
   });
 
   it("should throw error when no input is passed", () => {

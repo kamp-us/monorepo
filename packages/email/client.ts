@@ -1,10 +1,20 @@
 import { type SendEmailOptions } from "./schemas";
 
-export const sendEmail = async (options: SendEmailOptions) => {
-  const res = await fetch("/postaci/send", {
+export const sendEmail = async (
+  options: SendEmailOptions,
+  postaciOptions?: { baseUrl?: string }
+) => {
+  const baseUrl = postaciOptions?.baseUrl ?? "";
+
+  const res = await fetch(baseUrl + "/postaci/send", {
     method: "POST",
+    headers: {
+      Accept: "application/json",
+    },
     body: JSON.stringify(options),
   });
 
-  return res.json() as unknown as { success: boolean };
+  const result = (await res.json()) as unknown as { success: boolean; error: Error };
+
+  return result;
 };

@@ -28,14 +28,22 @@
     "docker:dev": {
       "cache": false
     },
-    "@kampus-apps/kampus#*": {
+    "@kampus/kampus#*": {
       "env": ["NODE_ENV", "GQL_URL", "RESEND_API_KEY"]
     },
-    "@kampus-apps/pano#*": {
-      "env": ["NODE_ENV", "DATABASE_URL", "SESSION_SECRET"]
+    "@kampus/next-auth#*": {
+      "env": [
+        "GITHUB_ID",
+        "GITHUB_SECRET",
+        "DISCORD_ID",
+        "DISCORD_SECRET",
+        "TWITCH_ID",
+        "TWITCH_SECRET",
+        "SECRET"
+      ]
     },
-    "@kampus-apps/home#*": {
-      "env": ["NODE_ENV", "SESSION_SECRET", "TWITCH_CLIENT_ID", "TWITCH_CLIENT_SECRET"]
+    "@kampus-apps/gql#*": {
+      "env": ["NODE_ENV", "DATABASE_URL"]
     }
   }
 }

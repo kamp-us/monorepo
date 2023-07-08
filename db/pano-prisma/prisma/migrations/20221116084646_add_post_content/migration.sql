@@ -1,4 +1,0 @@
--- AlterTable
-ALTER TABLE "Post" ADD COLUMN     "content" TEXT,
-ALTER COLUMN "url" DROP NOT NULL,
-ALTER COLUMN "site" DROP NOT NULL;

@@ -6,7 +6,7 @@ export const env = parseEnv(process.env, {
   DATABASE_URL: z
     .string()
     .url()
-    .default("postgresql://pgtest:pgtest@postgres:5432/pgtest?schema=public&connect_timeout=300"),
+    .default("mysql://kampus:kampus@localhost:5432/kampus?schema=public&connect_timeout=300"),
   SESSION_SECRET: z.string().default("sessionsecret"),
   SEND_IN_BLUE_API_KEY: z.string().optional(),
   GA_TRACKING_ID: z.string().optional(),
