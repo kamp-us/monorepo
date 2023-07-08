@@ -2,7 +2,7 @@ import { parseEnv, z } from "znv";
 
 export const env = parseEnv(
   {
-    AUTH_COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
+    AUTH_COOKIE_DOMAIN: process.env.AUTH_COOKIE_DOMAIN,
     GITHUB_ID: process.env.GITHUB_ID,
     GITHUB_SECRET: process.env.GITHUB_SECRET,
     DISCORD_ID: process.env.DISCORD_ID,
