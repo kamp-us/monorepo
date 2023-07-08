@@ -20,6 +20,7 @@ jobs:
     name: Build and Test
     timeout-minutes: 15
     runs-on: ubuntu-latest
+
     # To use Remote Caching, uncomment the next lines and follow the steps below.
     # env:
     #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -27,21 +28,39 @@ jobs:
     #  TURBO_REMOTE_ONLY: true
 
     steps:
-      - name: Check out code
+      - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
 
-      - name: Setup Node.js environment
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
           node-version-file: "package.json"
 
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Build
-        run: npm run build
+        run: pnpm run -r build
 
       # - name: Test
       #   run: npm run test
