@@ -27,7 +27,7 @@ Bir örneğe bakalım.
 
 ![space between](https://cdn.statically.io/gh/TheOdinProject/curriculum/495704c6eb6bf33bc927534f231533a82b27b2ac/html_css/v2/foundations/flexbox/imgs/07.png)
 
-`justify-content` değeri, öğeleri **ana eksen** üzerinde hizalar. Burada kullanabileceğiniz birkaç değer var. Geri kalanını okuma ödevlerinde öğreneceksiniz, ancak şimdilik, kutuları ana eksen'de ortalayacak `center`(merkez) değerini kullanarak değiştirmeyi deneyin.
+`justify-content` değeri, öğeleri **ana eksen** üzerinde hizalar. Burada kullanabileceğiniz birkaç değer var. Geri kalanını okuma ödevlerinde öğreneceksiniz, ancak şimdilik, kutuları ana eksende ortalayacak `center`(merkez) değerini kullanarak değiştirmeyi deneyin.
 
 **Çapraz eksen**'de öğelerin yerleşimini değiştirmek için `align-items` değerini kullanın. `.container`a `align-items: center` ekleyerek kutuları konteynerin merkezine getirmeyi deneyin. İstenen sonuç şöyle görünür:
 
