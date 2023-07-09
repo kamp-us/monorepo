@@ -33,7 +33,7 @@ Bir örneğe bakalım.
 
 ![centered](https://cdn.statically.io/gh/TheOdinProject/curriculum/495704c6eb6bf33bc927534f231533a82b27b2ac/html_css/v2/foundations/flexbox/imgs/08.png)
 
-`justify-content` ve `align-items` konteynerinizin ana ve çapraz eksenini temel aldığından, bir flex-container'ın flex-direction'nını değiştirdiğinizde davranışları değişir. Örneğin, `flex-direction`'ı `column` olarak değiştirdiğinizde, `justify-content` dikey olarak hizalar ve `align-items` yatay olarak hizalar. Bununla birlikte, en yaygın davranış varsayılandır, yani `justify-content` öğeleri yatay olarak hizalar (çünkü ana eksen varsayılan olarak yataydır) ve `align-items` öğeleri dikey olarak hizalar. Yeni başlayanların flexbox ile en çok karşılaştığı zorluklardan biri, bu davranış değişikliğidir.
+`justify-content` ve `align-items` konteynerinizin ana ve çapraz eksenini temel aldığından, bir flex konteynerın `flex-direction`'nını değiştirdiğinizde davranışları değişir. Örneğin, `flex-direction`'ı `column` olarak değiştirdiğinizde, `justify-content` dikey olarak hizalar ve `align-items` yatay olarak hizalar. Bununla birlikte, en yaygın davranış varsayılandır, yani `justify-content` öğeleri yatay olarak hizalar (çünkü ana eksen varsayılan olarak yataydır) ve `align-items` öğeleri dikey olarak hizalar. Yeni başlayanların flexbox ile en çok karşılaştığı zorluklardan biri, bu davranış değişikliğidir.
 
 `justify-content` ve farklı özelliklerinin nasıl davrandığına dair etkileşimli bir demo için bu kısa video(Scrim)'ya göz atın:
 
