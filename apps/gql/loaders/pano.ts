@@ -1,8 +1,6 @@
 import DataLoader from "dataloader";
 import hash from "object-hash";
 
-import { type Term } from "@kampus/sozluk-content";
-
 import { applyPagination, generatePageInfo, validateCursorArgs } from "~/features/relay/pagination";
 import { type Clients } from "~/clients/types";
 import { PanoPost, PanoPostsConnection, PanoQueryPostsArgs } from "~/schema/types.generated";
@@ -16,19 +14,6 @@ export const createPanoLoaders = (clients: Clients) => {
 
 export type PanoPostLoader = ReturnType<typeof createPostLoader>;
 export type PanoPostsLoader = ReturnType<typeof createPostsLoader>;
-
-const transformTerm = (term: Term) => {
-  return {
-    id: term.id,
-    title: term.title,
-    tags: term.tags,
-    body: {
-      raw: term.body.raw,
-      code: term.body.code,
-      html: term.mdxHtml,
-    },
-  };
-};
 
 // eslint-disable-next-line @typescript-eslint/require-await
 const loadPost = async (clients: Clients, id: string) => {
