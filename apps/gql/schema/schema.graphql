@@ -58,16 +58,16 @@ type SozlukTermEdge {
 
 type PanoQuery {
   post(input: PanoPostInput!): PanoPost
-  posts(after: String, before: String, first: Int, last: Int): SozlukTermConnection
+  posts(after: String, before: String, first: Int, last: Int): PanoPostsConnection
 }
 
 input PanoPostInput {
   slug: String!
-  id: String!
+  id: ID!
 }
 
 type PanoPost {
-  ID: ID!
+  id: ID!
   title: String!
   url: String!
   content: String

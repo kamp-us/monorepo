@@ -25,8 +25,54 @@ export type PageInfo = {
   startCursor: Maybe<Scalars["String"]>;
 };
 
+export type PanoPost = {
+  __typename?: "PanoPost";
+  content: Maybe<Scalars["String"]>;
+  id: Scalars["ID"];
+  slug: Scalars["String"];
+  title: Scalars["String"];
+  url: Scalars["String"];
+  userID: Scalars["String"];
+};
+
+export type PanoPostInput = {
+  id: Scalars["String"];
+  slug: Scalars["String"];
+};
+
+export type PanoPostsConnection = {
+  __typename?: "PanoPostsConnection";
+  edges: Maybe<Array<Maybe<PanoPostsEdge>>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars["Int"];
+};
+
+export type PanoPostsEdge = {
+  __typename?: "PanoPostsEdge";
+  cursor: Scalars["String"];
+  node: Maybe<PanoPost>;
+};
+
+export type PanoQuery = {
+  __typename?: "PanoQuery";
+  post: Maybe<PanoPost>;
+  posts: Maybe<PanoPostsConnection>;
+};
+
+export type PanoQueryPostArgs = {
+  input: PanoPostInput;
+};
+
+export type PanoQueryPostsArgs = {
+  after: InputMaybe<Scalars["String"]>;
+  before: InputMaybe<Scalars["String"]>;
+  first: InputMaybe<Scalars["Int"]>;
+  last: InputMaybe<Scalars["Int"]>;
+};
+
 export type Query = {
   __typename?: "Query";
+  pano: PanoQuery;
   sozluk: SozlukQuery;
   user: Maybe<User>;
 };
@@ -183,6 +229,11 @@ export type ResolversTypes = {
   ID: ResolverTypeWrapper<Scalars["ID"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
+  PanoPost: ResolverTypeWrapper<PanoPost>;
+  PanoPostInput: PanoPostInput;
+  PanoPostsConnection: ResolverTypeWrapper<PanoPostsConnection>;
+  PanoPostsEdge: ResolverTypeWrapper<PanoPostsEdge>;
+  PanoQuery: ResolverTypeWrapper<PanoQuery>;
   Query: ResolverTypeWrapper<{}>;
   SozlukQuery: ResolverTypeWrapper<SozlukQuery>;
   SozlukTerm: ResolverTypeWrapper<SozlukTerm>;
@@ -201,6 +252,11 @@ export type ResolversParentTypes = {
   ID: Scalars["ID"];
   Int: Scalars["Int"];
   PageInfo: PageInfo;
+  PanoPost: PanoPost;
+  PanoPostInput: PanoPostInput;
+  PanoPostsConnection: PanoPostsConnection;
+  PanoPostsEdge: PanoPostsEdge;
+  PanoQuery: PanoQuery;
   Query: {};
   SozlukQuery: SozlukQuery;
   SozlukTerm: SozlukTerm;
@@ -224,10 +280,62 @@ export type PageInfoResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PanoPostResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["PanoPost"] = ResolversParentTypes["PanoPost"]
+> = {
+  content: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  slug: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  userID: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PanoPostsConnectionResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["PanoPostsConnection"] = ResolversParentTypes["PanoPostsConnection"]
+> = {
+  edges: Resolver<Maybe<Array<Maybe<ResolversTypes["PanoPostsEdge"]>>>, ParentType, ContextType>;
+  pageInfo: Resolver<ResolversTypes["PageInfo"], ParentType, ContextType>;
+  totalCount: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PanoPostsEdgeResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["PanoPostsEdge"] = ResolversParentTypes["PanoPostsEdge"]
+> = {
+  cursor: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  node: Resolver<Maybe<ResolversTypes["PanoPost"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PanoQueryResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["PanoQuery"] = ResolversParentTypes["PanoQuery"]
+> = {
+  post: Resolver<
+    Maybe<ResolversTypes["PanoPost"]>,
+    ParentType,
+    ContextType,
+    RequireFields<PanoQueryPostArgs, "input">
+  >;
+  posts: Resolver<
+    Maybe<ResolversTypes["PanoPostsConnection"]>,
+    ParentType,
+    ContextType,
+    Partial<PanoQueryPostsArgs>
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
+  pano: Resolver<ResolversTypes["PanoQuery"], ParentType, ContextType>;
   sozluk: Resolver<ResolversTypes["SozlukQuery"], ParentType, ContextType>;
   user: Resolver<
     Maybe<ResolversTypes["User"]>,
@@ -307,6 +415,10 @@ export type UserResolvers<
 
 export type Resolvers<ContextType = KampusGQLContext> = {
   PageInfo: PageInfoResolvers<ContextType>;
+  PanoPost: PanoPostResolvers<ContextType>;
+  PanoPostsConnection: PanoPostsConnectionResolvers<ContextType>;
+  PanoPostsEdge: PanoPostsEdgeResolvers<ContextType>;
+  PanoQuery: PanoQueryResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
   SozlukQuery: SozlukQueryResolvers<ContextType>;
   SozlukTerm: SozlukTermResolvers<ContextType>;
