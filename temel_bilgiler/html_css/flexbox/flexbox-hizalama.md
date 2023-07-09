@@ -90,7 +90,7 @@ Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir,
 * [Flexbox Froggy](https://flexboxfroggy.com/), nesneleri flexbox ile hareket ettirme alıştırması yapmak için eğlenceli küçük bir oyundur.
 * [Flexbox Zombies](https://mastery.games/flexboxzombies/), flexbox'ın başka bir oyunlaştırılmış versiyonudur. Ücretsiz, ancak bir hesap gerektirir.
 * MDN'deki [Flexbox'ın Temel Kavramları](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox) İngilizce makalesi bir başka iyi başlangıç noktasıdır. Yararlı örnekler ve etkileşimli bölümler var.
-* [Flex konteyner'deki Öğeleri Hizalama](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container), eksenler ve `align-items` ve `justify-content` konularını daha derinlemesine ele alıyor.
+* [Flex konteynerdeki Öğeleri Hizalama](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container), eksenler ve `align-items` ve `justify-content` konularını daha derinlemesine ele alıyor.
 * Freecodecamp'tan bu İngilizce [Flexbox Eğitimi](https://www.freecodecamp.org/news/css-flexbox-tutorial-with-cheatsheet/) başka bir iyi kaynaktır.
 * [Flexbox Crash Course](https://www.youtube.com/watch?v=3YW65K6LcIA), Traversy Media tarafından hazırlanan güzel bir kaynaktır.
 * Kevin Powell'ın [flexbox'ı kolay yoldan öğrenin](https://www.youtube.com/watch?v=u044iM9xsWU) adlı videosu flexbox'ı çok iyi açıklıyor.
