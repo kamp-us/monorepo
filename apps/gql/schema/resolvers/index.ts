@@ -1,3 +1,5 @@
+import { post } from "~/schema/resolvers/Query/PanoQuery/post";
+import { posts } from "~/schema/resolvers/Query/PanoQuery/posts";
 import { type Resolvers } from "../types.generated";
 import { term } from "./Query/SozlukQuery/term";
 import { terms } from "./Query/SozlukQuery/terms";
@@ -11,6 +13,12 @@ export const resolvers = {
       return {
         term: null,
         terms: null,
+      };
+    },
+    pano: () => {
+      return {
+        post: null,
+        posts: null,
       };
     },
   },
@@ -47,5 +55,26 @@ export const resolvers = {
   User: {
     id: (u) => u.id,
     username: (u) => u.username,
+  },
+  PanoQuery: {
+    post,
+    posts,
+  },
+  PanoPost: {
+    id: (post) => post.id,
+    title: (post) => post.title,
+    url: (post) => post.url,
+    content: (post) => post.content,
+    slug: (post) => post.slug,
+    userID: (post) => post.userID,
+  },
+  PanoPostsConnection: {
+    edges: (connection) => connection.edges,
+    pageInfo: (connection) => connection.pageInfo,
+    totalCount: (connection) => connection.totalCount,
+  },
+  PanoPostsEdge: {
+    node: (edge) => edge.node,
+    cursor: (edge) => edge.cursor,
   },
 } satisfies Resolvers;
