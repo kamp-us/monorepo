@@ -1,9 +1,9 @@
 import { type PanoQueryResolvers } from "~/schema/types.generated";
 
-export const post: PanoQueryResolvers["post"] = (_, { input }, { loaders }) => {
-  if (!input) {
+export const post: PanoQueryResolvers["post"] = (_, args, { loaders }) => {
+  if (!args.input) {
     throw new Error("input is required");
   }
 
-  return loaders.pano.post.load(input.id);
+  return loaders.pano.post.load(args);
 };

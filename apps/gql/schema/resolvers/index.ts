@@ -66,7 +66,16 @@ export const resolvers = {
     url: (post) => post.url,
     content: (post) => post.content,
     slug: (post) => post.slug,
-    userID: (post) => post.userID,
+    owner: (post) => post.owner,
+  },
+  PanoPostWithComment: {
+    id: (post) => post.id,
+    title: (post) => post.title,
+    url: (post) => post.url,
+    content: (post) => post.content,
+    slug: (post) => post.slug,
+    owner: (post) => post.owner,
+    comments: (post) => post.comments,
   },
   PanoPostsConnection: {
     edges: (connection) => connection.edges,
@@ -76,5 +85,16 @@ export const resolvers = {
   PanoPostsEdge: {
     node: (edge) => edge.node,
     cursor: (edge) => edge.cursor,
+  },
+  PanoComment: {
+    id: (comment) => comment.id,
+    content: (comment) => comment.content,
+    owner: (comment) => comment.owner,
+    parentID: (comment) => comment.parentID,
+    upvotes: (comment) => comment.upvotes,
+  },
+  PanoCommentUpvote: {
+    id: (upvote) => upvote.id,
+    owner: (upvote) => upvote.owner,
   },
 } satisfies Resolvers;

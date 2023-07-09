@@ -3,7 +3,13 @@ import hash from "object-hash";
 
 import { applyPagination, generatePageInfo, validateCursorArgs } from "~/features/relay/pagination";
 import { type Clients } from "~/clients/types";
-import { PanoPost, PanoPostsConnection, PanoQueryPostsArgs } from "~/schema/types.generated";
+import {
+  PanoPost,
+  PanoPostsConnection,
+  PanoPostWithComment,
+  PanoQueryPostArgs,
+  PanoQueryPostsArgs,
+} from "~/schema/types.generated";
 
 export const createPanoLoaders = (clients: Clients) => {
   return {
@@ -15,28 +21,32 @@ export const createPanoLoaders = (clients: Clients) => {
 export type PanoPostLoader = ReturnType<typeof createPostLoader>;
 export type PanoPostsLoader = ReturnType<typeof createPostsLoader>;
 
-// eslint-disable-next-line @typescript-eslint/require-await
-const loadPost = async (clients: Clients, id: string) => {
-  const post = await clients.prisma.post.findFirst({
-    where: { id },
-  });
-
-  if (!post) {
-    return null;
-  }
-
-  return post as PanoPost;
-};
-
 const createPostLoader = (clients: Clients) =>
-  new DataLoader<string, PanoPost>(async (keys) => {
+  new DataLoader<PanoQueryPostArgs, PanoPostWithComment>(async (keys) => {
     return await Promise.all(
-      keys.map(async (key) => {
-        const post = await loadPost(clients, key);
+      keys.map(async (args) => {
+        const post = await clients.prisma.post.findFirst({
+          where: { id: args.input.id },
+          include: {
+            comments: {
+              include: {
+                owner: true,
+                upvotes: {
+                  include: {
+                    owner: true,
+                  },
+                },
+              },
+            },
+            owner: true,
+          },
+        });
+
         if (!post) {
-          return new Error(`Post not found for: ${key}`);
+          return new Error(`Post not found for: ${args.input.id}`);
         }
-        return post;
+
+        return post as PanoPostWithComment;
       })
     );
   });
@@ -68,6 +78,9 @@ const postsLoaderBatchFn = async (
             id: after,
           }
         : undefined,
+      include: {
+        owner: true,
+      },
     })) as PanoPost[];
 
     const paginatedPosts = applyPagination<PanoPost>({ data: posts, before, after, first, last });

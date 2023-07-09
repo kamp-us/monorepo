@@ -57,7 +57,7 @@ type SozlukTermEdge {
 }
 
 type PanoQuery {
-  post(input: PanoPostInput!): PanoPost
+  post(input: PanoPostInput!): PanoPostWithComment
   posts(after: String, before: String, first: Int, last: Int): PanoPostsConnection
 }
 
@@ -72,7 +72,17 @@ type PanoPost {
   url: String!
   content: String
   slug: String!
-  userID: String!
+  owner: User
+}
+
+type PanoPostWithComment {
+  id: ID!
+  title: String!
+  url: String!
+  content: String
+  slug: String!
+  owner: User
+  comments: [PanoComment]
 }
 
 type PanoPostsConnection {
@@ -84,4 +94,17 @@ type PanoPostsConnection {
 type PanoPostsEdge {
   cursor: String!
   node: PanoPost
+}
+
+type PanoComment {
+  id: ID!
+  content: String!
+  owner: User
+  parentID: String
+  upvotes: [PanoCommentUpvote]
+}
+
+type PanoCommentUpvote {
+  id: ID!
+  owner: User
 }
