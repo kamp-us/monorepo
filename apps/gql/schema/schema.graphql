@@ -2,6 +2,8 @@ type Query {
   user(input: UserInput!): User
 
   sozluk: SozlukQuery!
+
+  pano: PanoQuery!
 }
 
 type PageInfo {
@@ -52,4 +54,34 @@ type SozlukTermConnection {
 type SozlukTermEdge {
   cursor: String!
   node: SozlukTerm
+}
+
+type PanoQuery {
+  post(input: PanoPostInput!): PanoPost
+  posts(after: String, before: String, first: Int, last: Int): SozlukTermConnection
+}
+
+input PanoPostInput {
+  slug: String!
+  id: String!
+}
+
+type PanoPost {
+  ID: ID!
+  title: String!
+  url: String!
+  content: String
+  slug: String!
+  userID: String!
+}
+
+type PanoPostsConnection {
+  edges: [PanoPostsEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PanoPostsEdge {
+  cursor: String!
+  node: PanoPost
 }
