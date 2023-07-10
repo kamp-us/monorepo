@@ -7,15 +7,15 @@ type Query {
 }
 
 type PageInfo {
-  endCursor: String
+  endCursor: String!
   hasNextPage: Boolean!
   hasPreviousPage: Boolean!
-  startCursor: String
+  startCursor: String!
 }
 
 type User {
   id: ID!
-  username: String!
+  username: String
 }
 
 input UserInput {
@@ -57,7 +57,7 @@ type SozlukTermEdge {
 }
 
 type PanoQuery {
-  post(input: PanoPostInput!): PanoPostWithComment
+  post(input: PanoPostInput!): PanoPost
   posts(after: String, before: String, first: Int, last: Int): PanoPostsConnection
 }
 
@@ -69,23 +69,14 @@ input PanoPostInput {
 type PanoPost {
   id: ID!
   title: String!
-  url: String!
+  url: String
   content: String
   slug: String!
   owner: User
-}
-
-type PanoPostWithComment {
-  id: ID!
-  title: String!
-  url: String!
-  content: String
-  slug: String!
-  owner: User
-  comments: [PanoComment]
 }
 
 type PanoPostsConnection {
+  nodes: [PanoPost]
   edges: [PanoPostsEdge]
   pageInfo: PageInfo!
   totalCount: Int!
@@ -100,7 +91,7 @@ type PanoComment {
   id: ID!
   content: String!
   owner: User
-  parentID: String
+  parent: PanoComment
   upvotes: [PanoCommentUpvote]
 }
 

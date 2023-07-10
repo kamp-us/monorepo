@@ -19,10 +19,10 @@ export type Scalars = {
 
 export type PageInfo = {
   __typename?: "PageInfo";
-  endCursor: Maybe<Scalars["String"]>;
+  endCursor: Scalars["String"];
   hasNextPage: Scalars["Boolean"];
   hasPreviousPage: Scalars["Boolean"];
-  startCursor: Maybe<Scalars["String"]>;
+  startCursor: Scalars["String"];
 };
 
 export type PanoComment = {
@@ -30,7 +30,7 @@ export type PanoComment = {
   content: Scalars["String"];
   id: Scalars["ID"];
   owner: Maybe<User>;
-  parentID: Maybe<Scalars["String"]>;
+  parent: Maybe<PanoComment>;
   upvotes: Maybe<Array<Maybe<PanoCommentUpvote>>>;
 };
 
@@ -47,7 +47,7 @@ export type PanoPost = {
   owner: Maybe<User>;
   slug: Scalars["String"];
   title: Scalars["String"];
-  url: Scalars["String"];
+  url: Maybe<Scalars["String"]>;
 };
 
 export type PanoPostInput = {
@@ -55,20 +55,10 @@ export type PanoPostInput = {
   slug: Scalars["String"];
 };
 
-export type PanoPostWithComment = {
-  __typename?: "PanoPostWithComment";
-  comments: Maybe<Array<Maybe<PanoComment>>>;
-  content: Maybe<Scalars["String"]>;
-  id: Scalars["ID"];
-  owner: Maybe<User>;
-  slug: Scalars["String"];
-  title: Scalars["String"];
-  url: Scalars["String"];
-};
-
 export type PanoPostsConnection = {
   __typename?: "PanoPostsConnection";
   edges: Maybe<Array<Maybe<PanoPostsEdge>>>;
+  nodes: Maybe<Array<Maybe<PanoPost>>>;
   pageInfo: PageInfo;
   totalCount: Scalars["Int"];
 };
@@ -81,7 +71,7 @@ export type PanoPostsEdge = {
 
 export type PanoQuery = {
   __typename?: "PanoQuery";
-  post: Maybe<PanoPostWithComment>;
+  post: Maybe<PanoPost>;
   posts: Maybe<PanoPostsConnection>;
 };
 
@@ -159,7 +149,7 @@ export type SozlukTermInput = {
 export type User = {
   __typename?: "User";
   id: Scalars["ID"];
-  username: Scalars["String"];
+  username: Maybe<Scalars["String"]>;
 };
 
 export type UserInput = {
@@ -259,7 +249,6 @@ export type ResolversTypes = {
   PanoCommentUpvote: ResolverTypeWrapper<PanoCommentUpvote>;
   PanoPost: ResolverTypeWrapper<PanoPost>;
   PanoPostInput: PanoPostInput;
-  PanoPostWithComment: ResolverTypeWrapper<PanoPostWithComment>;
   PanoPostsConnection: ResolverTypeWrapper<PanoPostsConnection>;
   PanoPostsEdge: ResolverTypeWrapper<PanoPostsEdge>;
   PanoQuery: ResolverTypeWrapper<PanoQuery>;
@@ -285,7 +274,6 @@ export type ResolversParentTypes = {
   PanoCommentUpvote: PanoCommentUpvote;
   PanoPost: PanoPost;
   PanoPostInput: PanoPostInput;
-  PanoPostWithComment: PanoPostWithComment;
   PanoPostsConnection: PanoPostsConnection;
   PanoPostsEdge: PanoPostsEdge;
   PanoQuery: PanoQuery;
@@ -305,10 +293,10 @@ export type PageInfoResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["PageInfo"] = ResolversParentTypes["PageInfo"]
 > = {
-  endCursor: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  endCursor: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   hasNextPage: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
   hasPreviousPage: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
-  startCursor: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  startCursor: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -319,7 +307,7 @@ export type PanoCommentResolvers<
   content: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   owner: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
-  parentID: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  parent: Resolver<Maybe<ResolversTypes["PanoComment"]>, ParentType, ContextType>;
   upvotes: Resolver<
     Maybe<Array<Maybe<ResolversTypes["PanoCommentUpvote"]>>>,
     ParentType,
@@ -346,21 +334,7 @@ export type PanoPostResolvers<
   owner: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
   slug: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PanoPostWithCommentResolvers<
-  ContextType = KampusGQLContext,
-  ParentType extends ResolversParentTypes["PanoPostWithComment"] = ResolversParentTypes["PanoPostWithComment"]
-> = {
-  comments: Resolver<Maybe<Array<Maybe<ResolversTypes["PanoComment"]>>>, ParentType, ContextType>;
-  content: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  owner: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
-  slug: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  url: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -369,6 +343,7 @@ export type PanoPostsConnectionResolvers<
   ParentType extends ResolversParentTypes["PanoPostsConnection"] = ResolversParentTypes["PanoPostsConnection"]
 > = {
   edges: Resolver<Maybe<Array<Maybe<ResolversTypes["PanoPostsEdge"]>>>, ParentType, ContextType>;
+  nodes: Resolver<Maybe<Array<Maybe<ResolversTypes["PanoPost"]>>>, ParentType, ContextType>;
   pageInfo: Resolver<ResolversTypes["PageInfo"], ParentType, ContextType>;
   totalCount: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -388,7 +363,7 @@ export type PanoQueryResolvers<
   ParentType extends ResolversParentTypes["PanoQuery"] = ResolversParentTypes["PanoQuery"]
 > = {
   post: Resolver<
-    Maybe<ResolversTypes["PanoPostWithComment"]>,
+    Maybe<ResolversTypes["PanoPost"]>,
     ParentType,
     ContextType,
     RequireFields<PanoQueryPostArgs, "input">
@@ -480,7 +455,7 @@ export type UserResolvers<
   ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
 > = {
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  username: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  username: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -489,7 +464,6 @@ export type Resolvers<ContextType = KampusGQLContext> = {
   PanoComment: PanoCommentResolvers<ContextType>;
   PanoCommentUpvote: PanoCommentUpvoteResolvers<ContextType>;
   PanoPost: PanoPostResolvers<ContextType>;
-  PanoPostWithComment: PanoPostWithCommentResolvers<ContextType>;
   PanoPostsConnection: PanoPostsConnectionResolvers<ContextType>;
   PanoPostsEdge: PanoPostsEdgeResolvers<ContextType>;
   PanoQuery: PanoQueryResolvers<ContextType>;

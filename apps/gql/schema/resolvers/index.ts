@@ -68,16 +68,8 @@ export const resolvers = {
     slug: (post) => post.slug,
     owner: (post) => post.owner,
   },
-  PanoPostWithComment: {
-    id: (post) => post.id,
-    title: (post) => post.title,
-    url: (post) => post.url,
-    content: (post) => post.content,
-    slug: (post) => post.slug,
-    owner: (post) => post.owner,
-    comments: (post) => post.comments,
-  },
   PanoPostsConnection: {
+    nodes: (connection) => connection.nodes,
     edges: (connection) => connection.edges,
     pageInfo: (connection) => connection.pageInfo,
     totalCount: (connection) => connection.totalCount,
@@ -90,7 +82,7 @@ export const resolvers = {
     id: (comment) => comment.id,
     content: (comment) => comment.content,
     owner: (comment) => comment.owner,
-    parentID: (comment) => comment.parentID,
+    parent: (comment) => comment.parent,
     upvotes: (comment) => comment.upvotes,
   },
   PanoCommentUpvote: {
