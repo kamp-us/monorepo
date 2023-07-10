@@ -33,6 +33,7 @@
     },
     "@kampus/next-auth#*": {
       "env": [
+        "AUTH_COOKIE_DOMAIN",
         "GITHUB_ID",
         "GITHUB_SECRET",
         "DISCORD_ID",
