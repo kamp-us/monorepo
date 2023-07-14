@@ -50,7 +50,6 @@ export const Login = () => {
   const { hasSentEmail } = useLoaderData<typeof loader>();
 
   const clearEmail = () => {
-    // Bu fonksiyon, e-posta alanını temizler.
     const emailInput = document.getElementById("email") as HTMLInputElement;
     if (emailInput) {
       emailInput.value = "";
@@ -81,7 +80,7 @@ export const Login = () => {
             )}
             <Box>
               <Button size="2" type="submit" onClick={hasSentEmail ? undefined : clearEmail}>
-                {hasSentEmail ? "Giriş yap" : "Giriş linki gönder"}
+                {hasSentEmail ? "Giriş yap" : "Giriş linki gonder"}
               </Button>
             </Box>
             <input type="hidden" name="redirectTo" value={redirectTo} />
