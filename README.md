@@ -2,46 +2,38 @@
 
 kamp.us web projects & packages
 
-## Before starting
+- sozluk: turkce terimler sozlugu - https://sozluk.dev.kamp.us
+- pano: link & bilgi & soru cevap paylasim platformu - https://pano.dev.kamp.us
+- gql: https://gql.dev.kamp.us/graphql
+- pasaport: kampus icin kullanici bilgileri & [centralized auth](https://sozluk.dev.kamp.us/centralized-auth) servisi - https://pasaport.dev.kamp.us
+- storybook: @kampus/ui paketi icin hosted storybook - https://ui.dev.kamp.us
 
-- The languages we use in this repo:
-  - Typescript
-    - [remix.run](https://remix.run) - a react web application framework
-    - [next.js](https://nextjs.org/) - a react framework.
-- Join our discord at https://discord.kamp.us
-- We use `#kampus-projects` channel for onboarding people to the project.
-- Talk to us so we can figure out a plan together what would be the best way
-  for you to contribute to the project.
-- For any questions use this channel so we can help you.
+## IMPORTANT NOTE
 
-## How to start
+This repository is under heavy development, if you want to contribute either go
+through `package.json` file of each workspace and start familiarizing yourself
+with the technologies we are using or join our [discord server](https://discord.gg/kampus)
+and say hi to us at #kampus-projects channel.
+
+## Getting started
 
 - Fork `kamp-us/monorepo` under your personal account.
   - eg: `usirin/monorepo`
 - Clone the project to your local computer:
 
-```
-// Download Repository
+```sh
+# Download Repository
 git clone git@github.com:kamp-us/monorepo.git
-// Move into repository
+# Move into repository
 cd monorepo
 ```
 
 ## Structure
 
 - `/apps`: services & apps
-  - `/gql`: backend service for the applications
-  - `/kampus`: home of kampus, where you can find sozluk and pano
-  - `/ui`: all the ui elements source with storybook
 - `/db`: packages that is relevant to database
-  - `/prisma`: prisma client for kampus mysql db
-- '/config': packages that is relevant to configuration
-  - `/eslint`: common eslint configuration.
+- `/config`: packages that is relevant to configuration
 - `/packages`: internal (and maybe external in the future) npm packages
-  - `/relay`: common relay configuration
-  - `/sozluk-content`: where contents of sozluk are
-  - `/tailwind`: common tailwind configuration as a tailwind plugin
-  - `/ui`: common ui elements
 
 These folders are [registered as workspaces in package.json](package.json#L4-L7)
 
@@ -59,19 +51,9 @@ curl https://get.volta.sh | bash
 
 Install dependencies and build all projects.
 
-```
-// Install all the dependencies use -w or --workspace for workspace specific installs
+```sh
+# Install all the dependencies use -w or --workspace for workspace specific installs
 npm install
-// Builds all the applications in the monorepo
+# Builds all the applications in the monorepo
 npx turbo build
 ```
-
-## Documentation for each app & package
-
-### Apps
-
-- [pano](./apps/pano/README.md)
-
-### Packages
-
-- [kampus-ui](./packages/kampus-ui/README.md)
