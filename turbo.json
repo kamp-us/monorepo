@@ -2,11 +2,36 @@
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "build": {
-      "outputs": ["dist/**", "build/**", "api/**", "public/build/**", "storybook-static/**"],
-      "dependsOn": ["^prisma:generate", "^build"]
+      "outputs": [
+        "dist/**",
+        "build/**",
+        "api/**",
+        "public/build/**",
+        "storybook-static/**",
+        ".contentlayer/**"
+      ],
+      "dependsOn": [
+        "@kampus/prisma#prisma:generate",
+        "^build"
+      ]
+    },
+    "@kampus-apps/gql#dev": {
+      "dependsOn": [
+        "@kampus/prisma#prisma:generate",
+        "@kampus/sozluk-content#build"
+      ]
+    },
+    "@kampus-apps/gql#build": {
+      "cache": false,
+      "dependsOn": [
+        "@kampus/prisma#prisma:generate",
+        "@kampus/sozluk-content#build"
+      ]
     },
     "dev": {
-      "dependsOn": ["^prisma:generate"],
+      "dependsOn": [
+        "@kampus/prisma#prisma:generate"
+      ],
       "cache": false
     },
     "prisma:generate": {
@@ -16,7 +41,9 @@
       "cache": false
     },
     "test": {
-      "outputs": ["coverage/**"],
+      "outputs": [
+        "coverage/**"
+      ],
       "dependsOn": []
     },
     "lint": {
@@ -29,7 +56,11 @@
       "cache": false
     },
     "@kampus/kampus#*": {
-      "env": ["NODE_ENV", "GQL_URL", "RESEND_API_KEY"]
+      "env": [
+        "NODE_ENV",
+        "GQL_URL",
+        "RESEND_API_KEY"
+      ]
     },
     "@kampus/next-auth#*": {
       "env": [
@@ -44,7 +75,10 @@
       ]
     },
     "@kampus-apps/gql#*": {
-      "env": ["NODE_ENV", "DATABASE_URL"]
+      "env": [
+        "NODE_ENV",
+        "DATABASE_URL"
+      ]
     }
   }
 }
