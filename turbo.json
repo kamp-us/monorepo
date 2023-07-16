@@ -11,24 +11,26 @@
         ".contentlayer/**"
       ],
       "dependsOn": [
-        "^prisma:generate",
+        "@kampus/prisma#prisma:generate",
         "^build"
       ]
     },
     "@kampus-apps/gql#dev": {
       "dependsOn": [
+        "@kampus/prisma#prisma:generate",
         "@kampus/sozluk-content#build"
       ]
     },
     "@kampus-apps/gql#build": {
       "cache": false,
       "dependsOn": [
+        "@kampus/prisma#prisma:generate",
         "@kampus/sozluk-content#build"
       ]
     },
     "dev": {
       "dependsOn": [
-        "^prisma:generate"
+        "@kampus/prisma#prisma:generate"
       ],
       "cache": false
     },
