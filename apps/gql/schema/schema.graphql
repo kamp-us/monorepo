@@ -1,3 +1,6 @@
+scalar Date
+scalar DateTime
+
 type Query {
   user(input: UserInput!): User
 
@@ -7,15 +10,17 @@ type Query {
 }
 
 type PageInfo {
-  endCursor: String!
+  endCursor: String
   hasNextPage: Boolean!
   hasPreviousPage: Boolean!
-  startCursor: String!
+  startCursor: String
 }
 
 type User {
   id: ID!
   username: String
+
+  panoPosts(after: String, before: String, first: Int, last: Int): PanoPostsConnection
 }
 
 input UserInput {
@@ -62,7 +67,6 @@ type PanoQuery {
 }
 
 input PanoPostInput {
-  slug: String!
   id: ID!
 }
 
@@ -72,6 +76,8 @@ type PanoPost {
   url: String
   content: String
   slug: String!
+  createdAt: DateTime!
+
   owner: User
 }
 

@@ -9,6 +9,7 @@ const mdxToHtml = async (mdxSource: string) => {
   // TODO add your own components here
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const element = MDXLayout({ components: {} })!;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const html = ReactDOMServer.renderToString(element);
   return html;
 };

@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcryptjs";
 
 const users = [
   { username: "admin", email: "admin@kamp.us", password: "123123" },
@@ -107,12 +106,10 @@ type Post = {
 const prisma = new PrismaClient();
 
 async function seedAll(users: User[], posts: Post[]) {
-  let postOwnerIDs: string[] = [];
+  const postOwnerIDs: string[] = [];
   for (const user of users) {
     const email: string = user.email;
     const username: string = user.username;
-
-    const hashedPassword = await bcrypt.hash(user.password, 10);
 
     const prismaUser = await prisma.user.upsert({
       where: {
@@ -121,20 +118,10 @@ async function seedAll(users: User[], posts: Post[]) {
       update: {
         username,
         email,
-        password: {
-          update: {
-            hash: hashedPassword,
-          },
-        },
       },
       create: {
         username,
         email,
-        password: {
-          create: {
-            hash: hashedPassword,
-          },
-        },
       },
     });
     postOwnerIDs.push(prismaUser.id);
@@ -162,16 +149,14 @@ async function seedAll(users: User[], posts: Post[]) {
     const url: string | null = post.url || null;
     const site: string | null = post.site || null;
     const content: string | null = post.content || null;
-    const comments: any[] = post.comments || [];
-    const findPrismaPost = await prisma.post.findFirst({
-      where: {
-        slug,
-      },
-      select: {
-        id: true,
-      },
+    const comments = post.comments || [];
+
+    const dbPost = await prisma.post.findFirst({
+      where: { slug },
+      select: { id: true },
     });
-    if (findPrismaPost) {
+
+    if (dbPost) {
       return;
     }
 
@@ -209,6 +194,6 @@ seedAll(users, posts)
     console.error(e);
     process.exit(1);
   })
-  .finally(async () => {
-    await prisma.$disconnect();
+  .finally(() => {
+    void prisma.$disconnect();
   });

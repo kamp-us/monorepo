@@ -4,9 +4,9 @@ import hash from "object-hash";
 import { allTerms, type Term } from "@kampus/sozluk-content";
 
 import { applyPagination, generatePageInfo } from "~/features/relay/pagination";
-import { type Clients } from "~/clients/types";
+import { type Clients } from "~/clients";
 import {
-  type SozlukQueryTermsArgs,
+  type ConnectionInput,
   type SozlukTerm,
   type SozlukTermConnection,
 } from "~/schema/types.generated";
@@ -21,7 +21,7 @@ export const createSozlukLoaders = (clients: Clients) => {
 export type SozlukTermLoader = ReturnType<typeof createTermLoader>;
 export type SozlukTermsLoader = ReturnType<typeof createTermsLoader>;
 
-const transformTerm = (term: Term) => {
+const transformTerm = (term: Term): SozlukTerm => {
   return {
     id: term.id,
     title: term.title,
@@ -56,12 +56,15 @@ const createTermLoader = (_: Clients) =>
     );
   });
 
+type TermsLoaderKey = Partial<ConnectionInput>;
+
 const createTermsLoader = (_: Clients) =>
-  new DataLoader<Partial<SozlukQueryTermsArgs>, SozlukTermConnection, string>(termsLoaderBatchFn, {
+  new DataLoader<Partial<TermsLoaderKey>, SozlukTermConnection, string>(termsLoaderBatchFn, {
     cacheKeyFn: (key) => hash(key),
   });
 
-const termsLoaderBatchFn = async (keys: readonly Partial<SozlukQueryTermsArgs>[]) => {
+// eslint-disable-next-line @typescript-eslint/require-await
+const termsLoaderBatchFn = async (keys: readonly TermsLoaderKey[]) => {
   const results: SozlukTermConnection[] = [];
 
   for (const key of keys) {

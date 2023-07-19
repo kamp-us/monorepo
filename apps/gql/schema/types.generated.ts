@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from "graphql";
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from "graphql";
 
 import { KampusGQLContext } from "./types";
 
@@ -15,14 +15,16 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Date: string;
+  DateTime: string;
 };
 
 export type PageInfo = {
   __typename?: "PageInfo";
-  endCursor: Scalars["String"];
+  endCursor: Maybe<Scalars["String"]>;
   hasNextPage: Scalars["Boolean"];
   hasPreviousPage: Scalars["Boolean"];
-  startCursor: Scalars["String"];
+  startCursor: Maybe<Scalars["String"]>;
 };
 
 export type PanoComment = {
@@ -43,6 +45,7 @@ export type PanoCommentUpvote = {
 export type PanoPost = {
   __typename?: "PanoPost";
   content: Maybe<Scalars["String"]>;
+  createdAt: Scalars["DateTime"];
   id: Scalars["ID"];
   owner: Maybe<User>;
   slug: Scalars["String"];
@@ -52,7 +55,6 @@ export type PanoPost = {
 
 export type PanoPostInput = {
   id: Scalars["ID"];
-  slug: Scalars["String"];
 };
 
 export type PanoPostsConnection = {
@@ -149,7 +151,15 @@ export type SozlukTermInput = {
 export type User = {
   __typename?: "User";
   id: Scalars["ID"];
+  panoPosts: Maybe<PanoPostsConnection>;
   username: Maybe<Scalars["String"]>;
+};
+
+export type UserPanoPostsArgs = {
+  after: InputMaybe<Scalars["String"]>;
+  before: InputMaybe<Scalars["String"]>;
+  first: InputMaybe<Scalars["Int"]>;
+  last: InputMaybe<Scalars["Int"]>;
 };
 
 export type UserInput = {
@@ -242,6 +252,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
+  Date: ResolverTypeWrapper<Scalars["Date"]>;
+  DateTime: ResolverTypeWrapper<Scalars["DateTime"]>;
   ID: ResolverTypeWrapper<Scalars["ID"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
@@ -267,6 +279,8 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
+  Date: Scalars["Date"];
+  DateTime: Scalars["DateTime"];
   ID: Scalars["ID"];
   Int: Scalars["Int"];
   PageInfo: PageInfo;
@@ -289,14 +303,23 @@ export type ResolversParentTypes = {
   UserInput: UserInput;
 };
 
+export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes["Date"], any> {
+  name: "Date";
+}
+
+export interface DateTimeScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
+  name: "DateTime";
+}
+
 export type PageInfoResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["PageInfo"] = ResolversParentTypes["PageInfo"]
 > = {
-  endCursor: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  endCursor: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   hasNextPage: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
   hasPreviousPage: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
-  startCursor: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  startCursor: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -330,6 +353,7 @@ export type PanoPostResolvers<
   ParentType extends ResolversParentTypes["PanoPost"] = ResolversParentTypes["PanoPost"]
 > = {
   content: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  createdAt: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   owner: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
   slug: Resolver<ResolversTypes["String"], ParentType, ContextType>;
@@ -455,11 +479,19 @@ export type UserResolvers<
   ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
 > = {
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  panoPosts: Resolver<
+    Maybe<ResolversTypes["PanoPostsConnection"]>,
+    ParentType,
+    ContextType,
+    Partial<UserPanoPostsArgs>
+  >;
   username: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = KampusGQLContext> = {
+  Date: GraphQLScalarType;
+  DateTime: GraphQLScalarType;
   PageInfo: PageInfoResolvers<ContextType>;
   PanoComment: PanoCommentResolvers<ContextType>;
   PanoCommentUpvote: PanoCommentUpvoteResolvers<ContextType>;

@@ -1,13 +1,26 @@
-import { post } from "~/schema/resolvers/Query/PanoQuery/post";
+import { DateResolver, DateTimeResolver } from "graphql-scalars";
+
+import { transformPost } from "~/loaders/pano";
+import { transformUser } from "~/loaders/user";
+import { ConnectionKey } from "~/loaders/utils/prisma-data-loader";
 import { posts } from "~/schema/resolvers/Query/PanoQuery/posts";
-import { type Resolvers } from "../types.generated";
+import { type PanoPostsConnection, type Resolvers } from "~/schema/types.generated";
 import { term } from "./Query/SozlukQuery/term";
 import { terms } from "./Query/SozlukQuery/terms";
-import { user } from "./Query/user";
 
 export const resolvers = {
   Query: {
-    user,
+    user: async (_, { input }, { loaders }) => {
+      if (input.id) {
+        return transformUser(await loaders.user.byID.load(input.id));
+      }
+
+      if (input.username) {
+        return transformUser(await loaders.user.byUsername.load(input.username));
+      }
+
+      throw new Error("id or username is required");
+    },
     // fix-me(@umut): wtf is this??
     sozluk: () => {
       return {
@@ -22,6 +35,31 @@ export const resolvers = {
       };
     },
   },
+  PageInfo: {
+    hasNextPage: (pageInfo) => pageInfo.hasNextPage,
+    hasPreviousPage: (pageInfo) => pageInfo.hasPreviousPage,
+    startCursor: (pageInfo) => pageInfo.startCursor,
+    endCursor: (pageInfo) => pageInfo.endCursor,
+  },
+  User: {
+    id: (u) => u.id,
+    username: (u) => u.username,
+
+    panoPosts: (parent, args, { loaders }) =>
+      loaders.pano.post.byUserID.load(ConnectionKey(parent.id, args)).then((connection) => {
+        return {
+          nodes: connection.nodes.map(transformPost),
+          edges: connection.edges.map((edge) => ({
+            ...edge,
+            node: transformPost(edge.node),
+          })),
+          pageInfo: connection.pageInfo,
+          totalCount: connection.totalCount,
+        } as PanoPostsConnection;
+      }),
+  },
+
+  // Sozluk
   SozlukQuery: {
     term,
     terms,
@@ -46,18 +84,11 @@ export const resolvers = {
     node: (edge) => edge.node,
     cursor: (edge) => edge.cursor,
   },
-  PageInfo: {
-    hasNextPage: (pageInfo) => pageInfo.hasNextPage,
-    hasPreviousPage: (pageInfo) => pageInfo.hasPreviousPage,
-    startCursor: (pageInfo) => pageInfo.startCursor,
-    endCursor: (pageInfo) => pageInfo.endCursor,
-  },
-  User: {
-    id: (u) => u.id,
-    username: (u) => u.username,
-  },
+
+  // Pano
   PanoQuery: {
-    post,
+    post: async (_, { input }, { loaders }) =>
+      transformPost(await loaders.pano.post.byID.load(input.id)),
     posts,
   },
   PanoPost: {
@@ -66,7 +97,12 @@ export const resolvers = {
     url: (post) => post.url,
     content: (post) => post.content,
     slug: (post) => post.slug,
-    owner: (post) => post.owner,
+    owner: async (parent, _, { loaders }) => {
+      const post = await loaders.pano.post.byID.load(parent.id);
+      const user = await loaders.user.byID.load(post.userID);
+      return transformUser(user);
+    },
+    createdAt: (post) => post.createdAt,
   },
   PanoPostsConnection: {
     nodes: (connection) => connection.nodes,
@@ -89,4 +125,6 @@ export const resolvers = {
     id: (upvote) => upvote.id,
     owner: (upvote) => upvote.owner,
   },
+  DateTime: DateTimeResolver,
+  Date: DateResolver,
 } satisfies Resolvers;

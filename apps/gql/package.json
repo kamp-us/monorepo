@@ -17,8 +17,10 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "3.3.1",
+    "@graphql-codegen/introspection": "4.0.0",
     "@graphql-codegen/typescript": "3.0.4",
     "@graphql-codegen/typescript-resolvers": "3.2.1",
+    "@types/lodash.groupby": "4.6.7",
     "@types/object-hash": "3.0.2",
     "@vitest/coverage-v8": "0.32.2",
     "@vitest/ui": "0.32.2",
@@ -36,6 +38,7 @@
     "graphql-config": "4.5.0",
     "graphql-scalars": "1.21.3",
     "graphql-yoga": "3.9.1",
+    "lodash.groupby": "4.6.0",
     "object-hash": "3.0.0",
     "znv": "0.3.2",
     "zod": "3.21.4"

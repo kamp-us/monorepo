@@ -1,7 +1,8 @@
 import { createPrismaClient } from "./prisma";
-import { type Clients } from "./types";
 
-export const createClients = (): Clients => {
+export type Clients = ReturnType<typeof createClients>;
+
+export const createClients = () => {
   return {
     prisma: createPrismaClient(),
   };

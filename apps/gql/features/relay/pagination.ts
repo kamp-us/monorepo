@@ -124,5 +124,3 @@ export const applyFirstAndLast = <T>(args: ApplyFirstAndLastArgs<T>) => {
 
   return copy;
 };
-
-type CursorValidationArgs<T> = Omit<ApplyPaginationArgs<T>, "data">;

@@ -1,12 +1,13 @@
-import { type Clients } from "~/clients/types";
-import { createPanoLoaders } from "~/loaders/pano";
+import { type Clients } from "~/clients";
+import { createPanoLoaders } from "./pano";
 import { createSozlukLoaders } from "./sozluk";
-import { type DataLoaders } from "./types";
-import { createUsersLoader } from "./users";
+import { createUserLoader } from "./user";
 
-export const createLoaders = (clients: Clients): DataLoaders => {
+export type DataLoaders = ReturnType<typeof createLoaders>;
+
+export const createLoaders = (clients: Clients) => {
   return {
-    users: createUsersLoader(clients),
+    user: createUserLoader(clients),
     sozluk: createSozlukLoaders(clients),
     pano: createPanoLoaders(clients),
   };
