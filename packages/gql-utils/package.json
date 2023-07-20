@@ -14,7 +14,10 @@
   "volta": {
     "extends": "../../package.json"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@devoxa/prisma-relay-cursor-connection": "2.2.3",
+    "object-hash": "3.0.0"
+  },
   "devDependencies": {
     "@vitest/coverage-v8": "0.32.2",
     "@vitest/ui": "0.32.2",
