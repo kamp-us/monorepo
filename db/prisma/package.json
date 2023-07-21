@@ -5,6 +5,7 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
+    "prisma:studio": "prisma studio --schema ./schema.prisma",
     "prisma:generate": "prisma generate --schema ./schema.prisma",
     "prisma:push": "prisma db push --skip-generate --schema ./schema.prisma",
     "prisma:migrate:dev": "prisma migrate dev --schema ./schema.prisma",
@@ -23,6 +24,8 @@
     "@prisma/client": "4.9.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "8.0.2",
+    "enforce-unique": "1.1.1",
     "prisma": "4.9.0"
   }
 }

@@ -1,42 +1,62 @@
+import { faker } from "@faker-js/faker";
 import { PrismaClient } from "@prisma/client";
+import { UniqueEnforcer } from "enforce-unique";
 
-const users = [
-  { username: "admin", email: "admin@kamp.us" },
-  { username: "testuser", email: "user1a@kamp.us" },
-];
+interface User {
+  username: string;
+  email: string;
+}
+
+interface Post {
+  title: string;
+  url?: string;
+  site?: string;
+  content?: string;
+  comments?: Comment[];
+}
+
+interface Comment {
+  content: string;
+}
+
+const unique = new UniqueEnforcer();
+
+const fake = {
+  user: (firstName = faker.person.firstName(), lastName = faker.person.lastName()): User => ({
+    username: unique.enforce(() => faker.internet.userName({ firstName, lastName })),
+    email: unique.enforce(() => faker.internet.email({ firstName, lastName })),
+  }),
+};
+
+const users = [fake.user("admin", "kampus"), fake.user("test", "user")];
 
 const posts = [
   {
     title: "Hacker News",
-    slug: "hacker-news",
     url: "https://news.ycombinator.com",
     site: "news.ycombinator.com",
     content: "Code",
   },
   {
     title: "Reddit",
-    slug: "reddit",
     url: "https://reddit.com",
     site: "reddit.com",
     content: "The front page of the internet",
   },
   {
     title: "Twitter",
-    slug: "twitter",
     url: "https://twitter.com",
     site: "twitter.com",
     content: "What's happening?",
   },
   {
     title: "Facebook",
-    slug: "facebook",
     url: "https://facebook.com",
     site: "facebook.com",
     content: "Connect with friends, family and other people you know.",
   },
   {
     title: "Kampus Twitch",
-    slug: "kampus-twitch",
     url: "https://twitch.tv/usirin",
     site: "twitch.tv/usirin",
     content: "Twitch",
@@ -44,7 +64,6 @@ const posts = [
   },
   {
     title: "discord.kamp.us",
-    slug: "discord-kamp-us",
     url: "discord.kamp.us",
     site: "discord.kamp.us",
     content:
@@ -59,7 +78,6 @@ const posts = [
   },
   {
     title: "Github",
-    slug: "github",
     url: "https://github.com/kamp-us/monorepo",
     site: "github.com/kamp-us/monorepo",
     content: "Dünyanın en iyi monoreposu",
@@ -92,17 +110,6 @@ const posts = [
   },
 ];
 
-type User = { username: string; email: string };
-
-type Post = {
-  title: string;
-  slug: string;
-  url?: string;
-  content?: string;
-  site?: string;
-  comments?: { content: string }[];
-};
-
 const prisma = new PrismaClient();
 
 async function seedAll(users: User[], posts: Post[]) {
@@ -127,32 +134,24 @@ async function seedAll(users: User[], posts: Post[]) {
   }
 
   for (const post of posts) {
-    const findPrismaPost = await prisma.post.findFirst({
-      where: { slug: post.slug },
+    const prismaPost = await prisma.post.findFirst({
+      where: { title: post.title },
       select: { id: true },
     });
 
-    if (findPrismaPost) {
+    if (prismaPost) {
       return;
     }
 
     await prisma.post.create({
       data: {
         ...post,
-        owner: {
-          connect: {
-            id: randomFrom(postOwnerIDs),
-          },
-        },
+        owner: { connect: { id: randomFrom(postOwnerIDs) } },
         comments: {
           create: (post.comments ?? []).map((comment) => {
             return {
               content: comment.content,
-              owner: {
-                connect: {
-                  id: randomFrom(postOwnerIDs),
-                },
-              },
+              owner: { connect: { id: randomFrom(postOwnerIDs) } },
             };
           }),
         },
