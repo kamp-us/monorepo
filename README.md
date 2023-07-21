@@ -5,10 +5,10 @@ Müfredatın birebir orijinali takip edilmekte ve çevrilmekte olup her iki proj
 
 ### NASIL KATKI SAĞLAYABİLİRİM? 
 İngilizce ve Türkçe dil yeterliğiniz iyiyse yardımınıza ihtiyacımız var! <br/> <br/>
-	1. _Issue_ kısmında çevrilmeyi bekleyen metinlerden birini seçin. <br/>
+	1. _Issues_ kısmındaki çeviri listelerinden bir metin seçin. <br/>
 	2. _Issue_ altına çeviriyi üstlendiğinizi belirten bir yorumda bulunun. <br/>
 	3. Bu repoyu bilgisayarınıza klonlayın. <br/>
-	4. Çeviriye başlamadan önce aşağıda yer alan çeviri rehberimizi okuduğunuza emin olun.<br/> 
+	4. Çeviriye başlamadan önce [çeviri rehberini](https://github.com/kamp-us/turkce-odin-project/issues/28) okuduğunuza emin olun.<br/> 
 	5. Çeviriyi tamamladıktan sonra son halini kontrol edin ve gerekli düzenlemeleri yapın. <br/>
 	6. Bitmiş çeviriyi _commit_ edip _pull request_ olarak gönderin veya _issue_ altına yoruma iliştirerek yollayın. <br/>
 	7. Editör çevirinizi kontrol etsin ve yayına hazırlasın. <br/>
