@@ -1,4 +1,7 @@
 # Türkçe Odin Projesi
+Türkçe Odin Projesi, web geliştirmeyi öğretmeyi amaçlayan ücretsiz ve oldukça kapsamlı bir açık kaynak müfredatı olan [The Odin Project](https://www.theodinproject.com/)'in gönüllüler aracılığıyla başlatılan Türkçe halidir.
+
+Müfredatın birebir orijinali takip edilmekte ve çevrilmekte olup her iki proje de sürekli büyüyüp gelişmektedir. Dersler, deneyimli kişilerce yazılmış hazırlanmış ve hazırlanmış içeriklerin yanı sıra dikkatlice seçilmiş müfredat dışı çeşitli kaynaklardan oluşmaktadır.     
 
 ### NASIL KATKI SAĞLAYABİLİRİM? 
 İngilizce ve Türkçe dil yeterliğiniz iyiyse yardımınıza ihtiyacımız var! <br/> <br/>
@@ -19,52 +22,8 @@
 
 ---
 
-# ÇEVİRİ REHBERİ
 
-
->**_Referans olarak kullanılabilecek sözlükler_**
->+ [TDK Türkçe Sözlük](https://sozluk.gov.tr) <br> _(örn. black kelimesi için siyahın eş anlamlısını (kara) arıyorsanız buraya bakabilirsiniz. )_
->+ [Tureng - İngilizce-Türkçe Kelime Sözlüğü](https://tureng.com) <br> _(örn. variable kelimesinin Türkçe karşılığını arıyorsanız ilk sonuçlara veya "bilgisayar" kategorisindeki sonuçlara bakabilirsiniz.)_
-
-
->_İstisna olduğunu düşündüğünüz, Türkçe karşılığından şüphe duyduğunuz veya çevrilip çevrilmemesi gerektiğinden emin olamadığınız sözcük ve ifadeler için_ **referans listesi: **[Türkçe Odin Projesi-Sözcük Referans Listesi](https://docs.google.com/spreadsheets/d/1zJPo19TCgb4aYEMrX-wP_n3_OWEY9CzSTVj633fOBZs/edit?usp=sharing)
-
->_Her sayfada görülen ve tekrar eden sabit ifadeleri ("lesson overview" gibi başlıklar) çevirmekle vakit kaybetmemeniz için ortak çevirilerine buradan ulaşabilirsiniz._ **referans listesi: **[Türkçe Odin Projesi-Tekrar Eden İfadeler](https://docs.google.com/spreadsheets/d/1zJPo19TCgb4aYEMrX-wP_n3_OWEY9CzSTVj633fOBZs/edit#gid=1175334419)
-
-### DİKKAT EDİLMESİ GEREKENLER
-
-+ **İngilizce metindeki paragraf düzenlemesi olduğu gibi korunmalıdır.**
-
-+ **İngilizce metindeki markdown etiketleri olduğu gibi korunmalıdır.** <br> _(örn. ####, **, ``` )_
-
-+ **Anlamayı zorlaştırabileceği için devrik cümlelerden olabildiğince kaçınılmalıdır.**
-
-- **İngilizcedeki _you_ zamirini "siz" olarak çeviriniz.**
-
-+ **Deyim ve özdeyiş gibi kültürel ifadeler, Türkçede aynı anlamı sağlayan eşdeğerleriyle değiştirilmelidir.** <br> _(örn. "It's raining cats and dogs" --> :x: "Kedi ve köpek yağıyor" :heavy_check_mark: "Bardaktan boşanırcasına yağmur yağıyor")_
-
-+ **Türkçe noktalama işaretleri esas alınmalıdır. Kaynak metinde görülen noktalama işaretleri yanıltıcı olabilir.** <br>**Sık yapılan bir hata --> ~~Edat ve bağlaçtan önce veya sonra virgül kullanmak.~~** <br> _(örn. ...söz vermişti ~~**fakat,**~~ tutmadı.)_
-
-+ **Bir sözcüğün karşılığını sözlüklerde bulamadıysanız [Türkçe Odin Projesi-Sözcük Referans Listesi](https://docs.google.com/spreadsheets/d/1zJPo19TCgb4aYEMrX-wP_n3_OWEY9CzSTVj633fOBZs/edit?usp=sharing)ne bakınız. Aradığınızı yine bulamadıysanız, İngilizce sözcüğün sonuna "türkçe" ifadesini ekleyerek Google araması yapınız.** <br>_(örn. object relational mapping türkçe)_ <br>**Google aramasından da sonuç alamazsanız editörlere danışınız.** 
-
-
-### ÇEVRİLMEYECEKLER LİSTESİ
-
-+ **HTML etiketlerini, olaylarını, JS metotlarını vb. özellikleri çevirmeyiniz.** <br> _(örn. <button.>, onClick, .map(), preventDefault )_ 
-
-+ **Terminal komutlarını çevirmeyiniz.** <br> _(örn. npm install, git push)_
-
-+ **Browser/web API isimlerini çevirmeyiniz.** <br> _(örn. localStorage)_      
-
-+ **Sayfa sonlarında verilen dış linkleri çevirmeyiniz.** <br> _(örn. [Go deep into Javascript events with this video](https://www.youtube.com/watch?v=8aGhZQkoFbQ))_
-
-+ **Web geliştirme dünyasında birçok ürün ve bunlara dair terim bulunmaktadır. Çeviride anlamı koruyabilmek için bunların çevrilmemesine dikkat edilmelidir. Gerektiği yerde orijinal haliyle, çevrilmeden verilmelidir.**<br>_(örn. webpack, react, CRUD)_    ***Referans için: [Türkçe Odin Projesi-Sözcük Referans Listesi](https://docs.google.com/spreadsheets/d/1zJPo19TCgb4aYEMrX-wP_n3_OWEY9CzSTVj633fOBZs/edit?usp=sharing)
-
-+ **Bir istisna olarak yazılım/bilgisayar terimi olan kısaltmalar, mümkün olduğunca orijinal halinde verilmeye çalışılmalıdır. Kısaltmanın Türkçe bir karşılığı varsa İngilizcesinin yanına parantez içinde yazılmalıdır.** <br> _(örn. USA(ABD) )_      ***Referans için: [Türkçe Odin Projesi-Sözcük Referans Listesi](https://docs.google.com/spreadsheets/d/1zJPo19TCgb4aYEMrX-wP_n3_OWEY9CzSTVj633fOBZs/edit?usp=sharing)
-
----
-
-### Maintainer / Editör Takımı
+### Geliştirenler / Maintainers
 
 - [ ] [Umut Berkay Soydan](https://github.com/ubsoydan) <br/>
 - [ ] [Can Şirin](https://github.com/cansirin)
