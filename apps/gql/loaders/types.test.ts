@@ -1,7 +1,7 @@
 import { describe, it, expectTypeOf } from "vitest";
 
 import { type SozlukTermsLoader } from "./sozluk";
-import { type UsersLoader } from "./users";
+import { type UsersLoader } from "./user";
 import { type DataLoaders } from "./types";
 
 describe("Types of DataLoader", () => {

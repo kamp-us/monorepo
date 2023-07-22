@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { UserLoaderKey, createUsersLoader } from "./users";
+import { UserLoaderKey, createUsersLoader } from "./user";
 
 import { mockedClients } from "../clients/__mocks__/clients";
 
