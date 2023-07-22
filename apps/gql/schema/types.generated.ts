@@ -1,4 +1,4 @@
-import type { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from "graphql";
 
 import type { KampusGQLContext } from "./types";
 
@@ -15,6 +15,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Date: string;
+  DateTime: string;
 };
 
 export type PageInfo = {
@@ -180,6 +182,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
+  Date: ResolverTypeWrapper<Scalars["Date"]>;
+  DateTime: ResolverTypeWrapper<Scalars["DateTime"]>;
   ID: ResolverTypeWrapper<Scalars["ID"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
@@ -197,6 +201,8 @@ export type ResolversTypes = ResolversObject<{
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars["Boolean"];
+  Date: Scalars["Date"];
+  DateTime: Scalars["DateTime"];
   ID: Scalars["ID"];
   Int: Scalars["Int"];
   PageInfo: PageInfo;
@@ -210,6 +216,15 @@ export type ResolversParentTypes = ResolversObject<{
   User: User;
   UserInput: UserInput;
 }>;
+
+export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes["Date"], any> {
+  name: "Date";
+}
+
+export interface DateTimeScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
+  name: "DateTime";
+}
 
 export type PageInfoResolvers<
   ContextType = KampusGQLContext,
@@ -299,6 +314,8 @@ export type UserResolvers<
 }>;
 
 export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
+  Date: GraphQLScalarType;
+  DateTime: GraphQLScalarType;
   PageInfo: PageInfoResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
   SozlukQuery: SozlukQueryResolvers<ContextType>;

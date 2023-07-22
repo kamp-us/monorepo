@@ -1,5 +1,7 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
 
+const scalars = { Date: "string", DateTime: "string" };
+
 const config: CodegenConfig = {
   schema: "schema/schema.graphql",
   generates: {
@@ -13,6 +15,9 @@ const config: CodegenConfig = {
         makeResolverTypeCallable: true,
         optionalInfoArgument: true,
         useTypeImports: true,
+
+        // scalars config
+        scalars,
       },
     },
   },

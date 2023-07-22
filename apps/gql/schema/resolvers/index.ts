@@ -1,7 +1,11 @@
+import { DateResolver, DateTimeResolver } from "graphql-scalars";
+
 import { UserLoaderKey } from "~/loaders/user";
 import { type Resolvers } from "../types.generated";
 
 export const resolvers = {
+  Date: DateResolver,
+  DateTime: DateTimeResolver,
   Query: {
     user: (_, args, { loaders }) =>
       args.id
