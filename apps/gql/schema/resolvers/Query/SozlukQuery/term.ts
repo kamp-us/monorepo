@@ -1,9 +1,5 @@
 import { type SozlukQueryResolvers } from "~/schema/types.generated";
 
-export const term: SozlukQueryResolvers["term"] = (_, { input }, { loaders }) => {
-  if (!input) {
-    throw new Error("input is required");
-  }
-
-  return loaders.sozluk.term.load(input.id);
+export const term: SozlukQueryResolvers["term"] = (_, args, { loaders }) => {
+  return loaders.sozluk.term.load(args.id);
 };

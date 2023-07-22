@@ -1,6 +1,5 @@
 type Query {
-  user(input: UserInput!): User
-
+  user(id: ID, username: String): User
   sozluk: SozlukQuery!
 }
 
@@ -22,18 +21,14 @@ input UserInput {
 }
 
 type SozlukQuery {
-  term(input: SozlukTermInput!): SozlukTerm
+  term(id: ID!): SozlukTerm
   terms(after: String, before: String, first: Int, last: Int): SozlukTermConnection
-}
-
-input SozlukTermInput {
-  id: ID!
 }
 
 type SozlukTerm {
   id: ID!
   title: String!
-  tags: [String!]
+  tags: [String!]!
   body: SozlukTermBody!
 }
 
@@ -44,7 +39,7 @@ type SozlukTermBody {
 }
 
 type SozlukTermConnection {
-  edges: [SozlukTermEdge]
+  edges: [SozlukTermEdge!]
   pageInfo: PageInfo!
   totalCount: Int!
 }

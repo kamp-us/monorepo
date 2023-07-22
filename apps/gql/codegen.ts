@@ -6,7 +6,6 @@ const config: CodegenConfig = {
     "./schema/types.generated.ts": {
       plugins: ["typescript", "typescript-resolvers"],
       config: {
-        avoidOptionals: true,
         contextType: "./types#KampusGQLContext",
       },
     },
