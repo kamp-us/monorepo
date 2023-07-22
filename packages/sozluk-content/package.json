@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "contentlayer": "0.3.3",
-    "mdx-bundler": "9.2.1"
+    "mdx-bundler": "9.2.1",
+    "remark-wiki-link-plus": "1.1.1"
   },
   "devDependencies": {
     "@turbo/gen": "1.10.7"
