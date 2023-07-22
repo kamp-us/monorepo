@@ -44,5 +44,7 @@ export const Timeago = (props: TimeagoProps) => {
     return () => clearInterval(timer);
   }, [props.date]);
 
-  return <>{timeAgo}</>;
+  // If we don't suppress the hydration warning, we get this error: https://nextjs.org/docs/messages/react-hydration-error
+  // https://nextjs.org/docs/messages/react-hydration-error#solution-3-using-suppresshydrationwarning
+  return <div suppressHydrationWarning>{timeAgo}</div>;
 };
