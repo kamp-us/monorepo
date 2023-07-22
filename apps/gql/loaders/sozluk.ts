@@ -4,7 +4,7 @@ import hash from "object-hash";
 import { allTerms, type Term } from "@kampus/sozluk-content";
 
 import { applyPagination, generatePageInfo } from "~/features/relay/pagination";
-import { type Clients } from "~/clients/types";
+import { type Clients } from "~/clients";
 import {
   type SozlukQueryTermsArgs,
   type SozlukTerm,

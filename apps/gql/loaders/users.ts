@@ -1,6 +1,6 @@
 import DataLoader from "dataloader";
 
-import { type Clients } from "~/clients/types";
+import { type Clients } from "~/clients";
 import { type User } from "~/schema/types.generated";
 import { LoaderKey } from "./utils/loader-key";
 

@@ -1,4 +1,4 @@
-import { type Clients } from "~/clients/types";
+import { type Clients } from "~/clients";
 import { createSozlukLoaders } from "./sozluk";
 import { type DataLoaders } from "./types";
 import { createUsersLoader } from "./users";
