@@ -16,12 +16,10 @@ describe("Term Query", () => {
 
   it("should find searched term", async () => {
     const result = await term(
-      undefined,
-      {
-        input: {
-          id: "1",
-        },
-      },
+      // need to inject this
+      { term: null, terms: null },
+      // this is the args
+      { id: "1" },
       { loaders }
     );
 
@@ -42,29 +40,9 @@ describe("Term Query", () => {
     `);
   });
 
-  it("should not return any searched term", () => {
-    expect(async () => {
-      await term(
-        undefined,
-        {
-          input: {
-            id: "356",
-          },
-        },
-        { loaders }
-      );
-    }).rejects.toThrowError("Term not found for: 356");
-  });
-
-  it("should throw error when no input is passed", () => {
-    expect(async () => {
-      await term(
-        undefined,
-        {
-          input: undefined,
-        },
-        { loaders }
-      );
-    }).rejects.toThrowError("input is required");
+  it("should not return any searched term", async () => {
+    await expect(() =>
+      term({ term: null, terms: null }, { id: "356" }, { loaders })
+    ).rejects.toThrowError("Term not found for: 356");
   });
 });
