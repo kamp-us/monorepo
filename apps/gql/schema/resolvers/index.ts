@@ -1,11 +1,14 @@
+import { UserLoaderKey } from "~/loaders/user";
 import { type Resolvers } from "../types.generated";
-import { term } from "./Query/SozlukQuery/term";
-import { terms } from "./Query/SozlukQuery/terms";
-import { user } from "./Query/user";
 
 export const resolvers = {
   Query: {
-    user,
+    user: (_, args, { loaders }) =>
+      args.id
+        ? loaders.user.load(new UserLoaderKey("id", args.id))
+        : args.username
+        ? loaders.user.load(new UserLoaderKey("username", args.username))
+        : null,
     sozluk: () => {
       return {
         term: null,
@@ -14,8 +17,8 @@ export const resolvers = {
     },
   },
   SozlukQuery: {
-    term,
-    terms,
+    term: (_, args, { loaders }) => loaders.sozluk.term.load(args.id),
+    terms: (_, args, { loaders }) => loaders.sozluk.terms.load(args),
   },
   SozlukTerm: {
     id: (term) => term.id,
