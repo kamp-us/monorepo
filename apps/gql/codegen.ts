@@ -7,6 +7,8 @@ const config: CodegenConfig = {
       plugins: ["typescript", "typescript-resolvers"],
       config: {
         contextType: "./types#KampusGQLContext",
+        avoidOptionals: true,
+        enumsAsTypes: true,
         makeResolverTypeCallable: true,
         optionalInfoArgument: true,
         useTypeImports: true,
