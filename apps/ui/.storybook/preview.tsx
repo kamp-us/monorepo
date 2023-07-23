@@ -1,6 +1,11 @@
 import "@kampus/kampus/app/globals.css";
 import "../styles.css";
 
+import React from "react";
+import type { StoryContext, StoryFn } from "@storybook/react";
+
+import { ThemeProvider } from "@kampus/ui-next/components/theme-provider";
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -27,3 +32,13 @@ export const parameters = {
     ],
   },
 };
+
+const withThemeProvider = (StoryFn: StoryFn) => {
+  return (
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <StoryFn />
+    </ThemeProvider>
+  );
+};
+
+export const decorators = [withThemeProvider];
