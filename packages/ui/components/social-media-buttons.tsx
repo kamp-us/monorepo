@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -7,12 +9,13 @@ import {
   TwitterShareButton,
 } from "react-share";
 
-type SocialMediaButtonProps = {
+interface SocialMediaButtonProps {
   postUrl: string;
   size: number;
-};
+}
 
-export const FacebookShare = ({ postUrl, size }: SocialMediaButtonProps) => {
+export const FacebookShare = (props: SocialMediaButtonProps) => {
+  const { postUrl, size } = props;
   return (
     <FacebookShareButton url={postUrl}>
       <FacebookIcon round size={size} />
@@ -20,7 +23,8 @@ export const FacebookShare = ({ postUrl, size }: SocialMediaButtonProps) => {
   );
 };
 
-export const TwitterShare = ({ postUrl, size }: SocialMediaButtonProps) => {
+export const TwitterShare = (props: SocialMediaButtonProps) => {
+  const { postUrl, size } = props;
   return (
     <TwitterShareButton url={postUrl}>
       <TwitterIcon round size={size} />
@@ -28,7 +32,8 @@ export const TwitterShare = ({ postUrl, size }: SocialMediaButtonProps) => {
   );
 };
 
-export const RedditShare = ({ postUrl, size }: SocialMediaButtonProps) => {
+export const RedditShare = (props: SocialMediaButtonProps) => {
+  const { postUrl, size } = props;
   return (
     <RedditShareButton url={postUrl}>
       <RedditIcon round size={size} />

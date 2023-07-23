@@ -3,3 +3,8 @@ export * from "./input-with-button";
 export * from "./input";
 export * from "./button";
 export * from "./top-nav";
+export * from "./theme-provider";
+export * from "./theme-toggle";
+export * from "./user-avatar";
+export * from "./time-ago";
+export * from "./social-media-buttons";
