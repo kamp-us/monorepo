@@ -33,7 +33,7 @@ interface TimeagoProps {
   date: Date;
 }
 
-export const Timeago = (props: TimeagoProps) => {
+export const TimeAgo = (props: TimeagoProps) => {
   const [timeAgo, setTimeAgo] = useState(formatTimeAgo(props.date));
 
   useEffect(() => {

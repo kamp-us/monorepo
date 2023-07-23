@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { cva } from "class-variance-authority";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
