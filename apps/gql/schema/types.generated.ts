@@ -235,7 +235,6 @@ export type NodeResolvers<
   ParentType extends ResolversParentTypes["Node"] = ResolversParentTypes["Node"]
 > = ResolversObject<{
   __resolveType: TypeResolveFn<"SozlukTerm" | "User", ParentType, ContextType>;
-  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
 }>;
 
 export type PageInfoResolvers<

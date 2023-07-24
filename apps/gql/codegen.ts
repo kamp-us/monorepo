@@ -9,6 +9,11 @@ const config: CodegenConfig = {
       plugins: ["typescript", "typescript-resolvers"],
       config: {
         useIndexSignature: true,
+
+        // interfaces are only responsible for defining a __resolveType resolver
+        // and implementing types are responsible for returning the fields.
+        onlyResolveTypeForInterfaces: true,
+
         contextType: "./types#KampusGQLContext",
         avoidOptionals: true,
         enumsAsTypes: true,
