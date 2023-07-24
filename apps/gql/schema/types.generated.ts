@@ -7,28 +7,34 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = {
+  [_ in K]?: never;
+};
+export type Incremental<T> =
+  | T
+  | { [P in keyof T]?: P extends " $fragmentName" | "__typename" ? T[P] : never };
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  Date: string;
-  DateTime: string;
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  Date: { input: string; output: string };
+  DateTime: { input: string; output: string };
 };
 
 export type Node = {
-  id: Scalars["ID"];
+  id: Scalars["ID"]["output"];
 };
 
 export type PageInfo = {
   __typename?: "PageInfo";
-  endCursor: Maybe<Scalars["String"]>;
-  hasNextPage: Scalars["Boolean"];
-  hasPreviousPage: Scalars["Boolean"];
-  startCursor: Maybe<Scalars["String"]>;
+  endCursor: Maybe<Scalars["String"]["output"]>;
+  hasNextPage: Scalars["Boolean"]["output"];
+  hasPreviousPage: Scalars["Boolean"]["output"];
+  startCursor: Maybe<Scalars["String"]["output"]>;
 };
 
 export type Query = {
@@ -39,12 +45,12 @@ export type Query = {
 };
 
 export type QueryNodeArgs = {
-  id: Scalars["ID"];
+  id: Scalars["ID"]["input"];
 };
 
 export type QueryUserArgs = {
-  id: InputMaybe<Scalars["ID"]>;
-  username: InputMaybe<Scalars["String"]>;
+  id: InputMaybe<Scalars["ID"]["input"]>;
+  username: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type SozlukQuery = {
@@ -54,48 +60,48 @@ export type SozlukQuery = {
 };
 
 export type SozlukQueryTermArgs = {
-  id: Scalars["ID"];
+  id: Scalars["ID"]["input"];
 };
 
 export type SozlukQueryTermsArgs = {
-  after: InputMaybe<Scalars["String"]>;
-  before: InputMaybe<Scalars["String"]>;
-  first: InputMaybe<Scalars["Int"]>;
-  last: InputMaybe<Scalars["Int"]>;
+  after: InputMaybe<Scalars["String"]["input"]>;
+  before: InputMaybe<Scalars["String"]["input"]>;
+  first: InputMaybe<Scalars["Int"]["input"]>;
+  last: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type SozlukTerm = Node & {
   __typename?: "SozlukTerm";
   body: SozlukTermBody;
-  id: Scalars["ID"];
-  tags: Array<Scalars["String"]>;
-  title: Scalars["String"];
+  id: Scalars["ID"]["output"];
+  tags: Array<Scalars["String"]["output"]>;
+  title: Scalars["String"]["output"];
 };
 
 export type SozlukTermBody = {
   __typename?: "SozlukTermBody";
-  code: Scalars["String"];
-  html: Scalars["String"];
-  raw: Scalars["String"];
+  code: Scalars["String"]["output"];
+  html: Scalars["String"]["output"];
+  raw: Scalars["String"]["output"];
 };
 
 export type SozlukTermConnection = {
   __typename?: "SozlukTermConnection";
   edges: Maybe<Array<SozlukTermEdge>>;
   pageInfo: PageInfo;
-  totalCount: Scalars["Int"];
+  totalCount: Scalars["Int"]["output"];
 };
 
 export type SozlukTermEdge = {
   __typename?: "SozlukTermEdge";
-  cursor: Scalars["String"];
+  cursor: Scalars["String"]["output"];
   node: Maybe<SozlukTerm>;
 };
 
 export type User = Node & {
   __typename?: "User";
-  id: Scalars["ID"];
-  username: Scalars["String"];
+  id: Scalars["ID"]["output"];
+  username: Scalars["String"]["output"];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -183,14 +189,19 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
   info?: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
+/** Mapping of interface types */
+export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = ResolversObject<{
+  Node: SozlukTerm | User;
+}>;
+
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
-  Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
-  Date: ResolverTypeWrapper<Scalars["Date"]>;
-  DateTime: ResolverTypeWrapper<Scalars["DateTime"]>;
-  ID: ResolverTypeWrapper<Scalars["ID"]>;
-  Int: ResolverTypeWrapper<Scalars["Int"]>;
-  Node: ResolversTypes["SozlukTerm"] | ResolversTypes["User"];
+  Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
+  Date: ResolverTypeWrapper<Scalars["Date"]["output"]>;
+  DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
+  ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
+  Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
+  Node: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>["Node"]>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
   Query: ResolverTypeWrapper<{}>;
   SozlukQuery: ResolverTypeWrapper<SozlukQuery>;
@@ -198,18 +209,18 @@ export type ResolversTypes = ResolversObject<{
   SozlukTermBody: ResolverTypeWrapper<SozlukTermBody>;
   SozlukTermConnection: ResolverTypeWrapper<SozlukTermConnection>;
   SozlukTermEdge: ResolverTypeWrapper<SozlukTermEdge>;
-  String: ResolverTypeWrapper<Scalars["String"]>;
+  String: ResolverTypeWrapper<Scalars["String"]["output"]>;
   User: ResolverTypeWrapper<User>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
-  Boolean: Scalars["Boolean"];
-  Date: Scalars["Date"];
-  DateTime: Scalars["DateTime"];
-  ID: Scalars["ID"];
-  Int: Scalars["Int"];
-  Node: ResolversParentTypes["SozlukTerm"] | ResolversParentTypes["User"];
+  Boolean: Scalars["Boolean"]["output"];
+  Date: Scalars["Date"]["output"];
+  DateTime: Scalars["DateTime"]["output"];
+  ID: Scalars["ID"]["output"];
+  Int: Scalars["Int"]["output"];
+  Node: ResolversInterfaceTypes<ResolversParentTypes>["Node"];
   PageInfo: PageInfo;
   Query: {};
   SozlukQuery: SozlukQuery;
@@ -217,7 +228,7 @@ export type ResolversParentTypes = ResolversObject<{
   SozlukTermBody: SozlukTermBody;
   SozlukTermConnection: SozlukTermConnection;
   SozlukTermEdge: SozlukTermEdge;
-  String: Scalars["String"];
+  String: Scalars["String"]["output"];
   User: User;
 }>;
 
@@ -235,6 +246,7 @@ export type NodeResolvers<
   ParentType extends ResolversParentTypes["Node"] = ResolversParentTypes["Node"]
 > = ResolversObject<{
   __resolveType: TypeResolveFn<"SozlukTerm" | "User", ParentType, ContextType>;
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
 }>;
 
 export type PageInfoResolvers<
