@@ -8,3 +8,4 @@ export * from "./theme-toggle";
 export * from "./user-avatar";
 export * from "./time-ago";
 export * from "./social-media-buttons";
+export * from "./loading";
