@@ -1,20 +1,23 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { PanoFilterLink } from "~/app/pano/features/post/PanoFilterLink";
 
-import { PanoLink } from "~/app/pano/features/link/PanoLink";
+const links = [
+  { href: "/", label: "hepsi" },
+  { href: "/posts/active", label: "en günceller" },
+  { href: "/posts/hot", label: "en fazla yorum almışlar" },
+  { href: "/posts/liked", label: "en begenilenler" },
+  { href: "/posts/my-posts", label: "başlıklarım" },
+];
 
 export const PostSortFilters = () => {
-  const pathname = usePathname();
-  const paintIfActive = (url: string) => (pathname === url ? "$amber11" : "none");
-
   return (
     <div className={"flex space-x-2"}>
-      <PanoLink href={"/"}>hepsi</PanoLink>
-      <PanoLink href={"/posts/active"}>en günceller</PanoLink>
-      <PanoLink href={"/posts/hot"}>en fazla yorum almışlar</PanoLink>
-      <PanoLink href={"/posts/liked"}>en begenilenler</PanoLink>
-      <PanoLink href={"/posts/my-posts"}>başlıklarım</PanoLink>
+      {links.map((link) => (
+        <PanoFilterLink key={link.href} href={link.href}>
+          {link.label}
+        </PanoFilterLink>
+      ))}
     </div>
   );
 };
