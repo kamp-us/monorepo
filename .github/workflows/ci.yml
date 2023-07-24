@@ -60,7 +60,9 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm run -r build
+        run: |
+          pnpm run -C ./db/prisma/ prisma:generate
+          pnpm run -r build
 
       # - name: Test
       #   run: npm run test
