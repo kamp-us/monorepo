@@ -191,7 +191,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = ResolversObject<{
-  Node: SozlukTerm | User;
+  Node: (SozlukTerm & { __typename: "SozlukTerm" }) | (User & { __typename: "User" });
 }>;
 
 /** Mapping between all available schema types and the resolvers types */
@@ -245,8 +245,7 @@ export type NodeResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["Node"] = ResolversParentTypes["Node"]
 > = ResolversObject<{
-  __resolveType: TypeResolveFn<"SozlukTerm" | "User", ParentType, ContextType>;
-  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  __resolveType?: TypeResolveFn<"SozlukTerm" | "User", ParentType, ContextType>;
 }>;
 
 export type PageInfoResolvers<
