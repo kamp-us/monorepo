@@ -19,6 +19,10 @@ export type Scalars = {
   DateTime: string;
 };
 
+export type Node = {
+  id: Scalars["ID"];
+};
+
 export type PageInfo = {
   __typename?: "PageInfo";
   endCursor: Maybe<Scalars["String"]>;
@@ -29,8 +33,13 @@ export type PageInfo = {
 
 export type Query = {
   __typename?: "Query";
+  node: Maybe<Node>;
   sozluk: SozlukQuery;
   user: Maybe<User>;
+};
+
+export type QueryNodeArgs = {
+  id: Scalars["ID"];
 };
 
 export type QueryUserArgs = {
@@ -55,7 +64,7 @@ export type SozlukQueryTermsArgs = {
   last: InputMaybe<Scalars["Int"]>;
 };
 
-export type SozlukTerm = {
+export type SozlukTerm = Node & {
   __typename?: "SozlukTerm";
   body: SozlukTermBody;
   id: Scalars["ID"];
@@ -83,15 +92,10 @@ export type SozlukTermEdge = {
   node: Maybe<SozlukTerm>;
 };
 
-export type User = {
+export type User = Node & {
   __typename?: "User";
   id: Scalars["ID"];
   username: Scalars["String"];
-};
-
-export type UserInput = {
-  id: InputMaybe<Scalars["ID"]>;
-  username: InputMaybe<Scalars["String"]>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -186,6 +190,7 @@ export type ResolversTypes = ResolversObject<{
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]>;
   ID: ResolverTypeWrapper<Scalars["ID"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
+  Node: ResolversTypes["SozlukTerm"] | ResolversTypes["User"];
   PageInfo: ResolverTypeWrapper<PageInfo>;
   Query: ResolverTypeWrapper<{}>;
   SozlukQuery: ResolverTypeWrapper<SozlukQuery>;
@@ -195,7 +200,6 @@ export type ResolversTypes = ResolversObject<{
   SozlukTermEdge: ResolverTypeWrapper<SozlukTermEdge>;
   String: ResolverTypeWrapper<Scalars["String"]>;
   User: ResolverTypeWrapper<User>;
-  UserInput: UserInput;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -205,6 +209,7 @@ export type ResolversParentTypes = ResolversObject<{
   DateTime: Scalars["DateTime"];
   ID: Scalars["ID"];
   Int: Scalars["Int"];
+  Node: ResolversParentTypes["SozlukTerm"] | ResolversParentTypes["User"];
   PageInfo: PageInfo;
   Query: {};
   SozlukQuery: SozlukQuery;
@@ -214,7 +219,6 @@ export type ResolversParentTypes = ResolversObject<{
   SozlukTermEdge: SozlukTermEdge;
   String: Scalars["String"];
   User: User;
-  UserInput: UserInput;
 }>;
 
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes["Date"], any> {
@@ -225,6 +229,14 @@ export interface DateTimeScalarConfig
   extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
   name: "DateTime";
 }
+
+export type NodeResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["Node"] = ResolversParentTypes["Node"]
+> = ResolversObject<{
+  __resolveType: TypeResolveFn<"SozlukTerm" | "User", ParentType, ContextType>;
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+}>;
 
 export type PageInfoResolvers<
   ContextType = KampusGQLContext,
@@ -241,6 +253,12 @@ export type QueryResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = ResolversObject<{
+  node: Resolver<
+    Maybe<ResolversTypes["Node"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryNodeArgs, "id">
+  >;
   sozluk: Resolver<ResolversTypes["SozlukQuery"], ParentType, ContextType>;
   user: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType, Partial<QueryUserArgs>>;
 }>;
@@ -316,6 +334,7 @@ export type UserResolvers<
 export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   Date: GraphQLScalarType;
   DateTime: GraphQLScalarType;
+  Node: NodeResolvers<ContextType>;
   PageInfo: PageInfoResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
   SozlukQuery: SozlukQueryResolvers<ContextType>;

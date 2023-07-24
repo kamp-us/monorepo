@@ -2,8 +2,16 @@ scalar Date
 scalar DateTime
 
 type Query {
+  # we need to have a way to encode the typename into id
+  # so that `Query.node` can decode it and figure out what to resolve
+  node(id: ID!): Node
+
   user(id: ID, username: String): User
   sozluk: SozlukQuery!
+}
+
+interface Node {
+  id: ID!
 }
 
 type PageInfo {
@@ -13,14 +21,9 @@ type PageInfo {
   startCursor: String
 }
 
-type User {
+type User implements Node {
   id: ID!
   username: String!
-}
-
-input UserInput {
-  id: ID
-  username: String
 }
 
 type SozlukQuery {
@@ -28,7 +31,7 @@ type SozlukQuery {
   terms(after: String, before: String, first: Int, last: Int): SozlukTermConnection
 }
 
-type SozlukTerm {
+type SozlukTerm implements Node {
   id: ID!
   title: String!
   tags: [String!]!
