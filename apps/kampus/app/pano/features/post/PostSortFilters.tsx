@@ -1,21 +1,29 @@
-"use client";
-
 import { PanoFilterLink } from "~/app/pano/features/post/PanoFilterLink";
 
-const links = [
-  { href: "/", label: "hepsi" },
-  { href: "/posts/active", label: "en günceller" },
-  { href: "/posts/hot", label: "en fazla yorum almışlar" },
-  { href: "/posts/liked", label: "en begenilenler" },
-  { href: "/posts/my-posts", label: "başlıklarım" },
-];
+const filters = [
+  { query: "all", label: "hepsi" },
+  { query: "active", label: "en günceller" },
+  { query: "hot", label: "en fazla yorum almışlar" },
+  { query: "liked", label: "en begenilenler" },
+  { query: "my-posts", label: "başlıklarım" },
+] as const;
 
-export const PostSortFilters = () => {
+export const DEFAULT_FILTER_PATH = "/pano/posts?filter=all";
+
+export type PanoPostFilterType = (typeof filters)[number]["query"];
+export const isPanoPostSortFilter = (x: any): x is PanoPostFilterType =>
+  filters.some((filter) => filter.query === x);
+
+type PostSortFiltersProps = {
+  activeFilter: PanoPostFilterType;
+};
+
+export const PostSortFilters = (props: PostSortFiltersProps) => {
   return (
     <div className={"flex space-x-2"}>
-      {links.map((link) => (
-        <PanoFilterLink key={link.href} href={link.href}>
-          {link.label}
+      {filters.map((filter) => (
+        <PanoFilterLink key={filter.query} query={filter.query} activeQuery={props.activeFilter}>
+          {filter.label}
         </PanoFilterLink>
       ))}
     </div>

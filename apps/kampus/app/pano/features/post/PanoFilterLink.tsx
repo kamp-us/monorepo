@@ -1,18 +1,30 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-export function PanoFilterLink({ href, children }: { href: string; children: React.ReactNode }) {
-  // pathname is like /pano/posts/active
-  const pathname = usePathname();
-  // we need to do this if "/" is the href because otherwise the link will be /pano/
-  const literalHref = href === "/" ? "" : href;
-  // isActive is true if the current pathname is the same as the link's href
-  const isActive = pathname === "/pano" + literalHref;
+import { type PanoPostFilterType } from "~/app/pano/features/post/PostSortFilters";
+
+const createQueryString = (key: string, value: string) => {
+  const searchParams = new URLSearchParams();
+  searchParams.set(key, value);
+
+  return searchParams.toString();
+};
+
+export function PanoFilterLink({
+  query,
+  children,
+  activeQuery,
+}: {
+  query: string;
+  activeQuery: PanoPostFilterType;
+  children: React.ReactNode;
+}) {
+  const isActive = query === activeQuery;
 
   return (
-    <Link href={"/pano" + href} style={{ fontWeight: isActive ? "bold" : "normal" }}>
+    <Link
+      href={"/pano/posts?" + createQueryString("filter", query)}
+      style={{ fontWeight: isActive ? "bold" : "normal" }}
+    >
       {children}
     </Link>
   );
