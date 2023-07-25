@@ -1,20 +1,6 @@
-"use client";
-
-import { redirect, useSearchParams } from "next/navigation";
-
-import {
-  DEFAULT_FILTER_PATH,
-  isPanoPostSortFilter,
-  PostSortFilters,
-} from "~/app/pano/features/post/PostSortFilters";
+import { PostSortFilters } from "~/app/pano/features/post/PostSortFilters";
 
 export default function PostsPage() {
-  const searchParams = useSearchParams();
-  const filter = searchParams.get("filter");
-  if (!isPanoPostSortFilter(filter)) {
-    redirect(DEFAULT_FILTER_PATH);
-  }
-
   const posts = [
     { id: 1, title: "Post1" },
     { id: 2, title: "Post2" },
@@ -23,7 +9,7 @@ export default function PostsPage() {
 
   return (
     <div>
-      <PostSortFilters activeFilter={filter} />
+      <PostSortFilters />
       {posts.map((post) => {
         return (
           <div key={post.id}>

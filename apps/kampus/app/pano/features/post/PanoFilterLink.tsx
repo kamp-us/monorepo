@@ -14,7 +14,7 @@ export function PanoFilterLink({
   children,
   activeQuery,
 }: {
-  query: string;
+  query: PanoPostFilterType;
   activeQuery: PanoPostFilterType;
   children: React.ReactNode;
 }) {

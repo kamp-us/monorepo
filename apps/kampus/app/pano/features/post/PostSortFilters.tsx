@@ -1,3 +1,7 @@
+"use client";
+
+import { redirect, useSearchParams } from "next/navigation";
+
 import { PanoFilterLink } from "~/app/pano/features/post/PanoFilterLink";
 
 const filters = [
@@ -14,16 +18,19 @@ export type PanoPostFilterType = (typeof filters)[number]["query"];
 export const isPanoPostSortFilter = (x: any): x is PanoPostFilterType =>
   filters.some((filter) => filter.query === x);
 
-type PostSortFiltersProps = {
-  activeFilter: PanoPostFilterType;
-};
+export const PostSortFilters = () => {
+  const searchParams = useSearchParams();
+  const filterQuery = searchParams.get("filter");
 
-export const PostSortFilters = (props: PostSortFiltersProps) => {
+  if (!isPanoPostSortFilter(filterQuery)) {
+    redirect(DEFAULT_FILTER_PATH);
+  }
+
   return (
     <div className={"flex space-x-2"}>
-      {filters.map((filter) => (
-        <PanoFilterLink key={filter.query} query={filter.query} activeQuery={props.activeFilter}>
-          {filter.label}
+      {filters.map((f) => (
+        <PanoFilterLink key={f.query} query={f.query} activeQuery={filterQuery}>
+          {f.label}
         </PanoFilterLink>
       ))}
     </div>
