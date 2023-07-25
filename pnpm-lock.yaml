@@ -175,6 +175,9 @@ importers:
       '@kampus/tailwind':
         specifier: '*'
         version: link:../../packages/tailwind
+      '@kampus/ui-next':
+        specifier: '*'
+        version: link:../../packages/ui
       '@types/react-relay':
         specifier: 14.1.4
         version: 14.1.4
