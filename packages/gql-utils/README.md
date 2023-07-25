@@ -27,6 +27,97 @@ Group of tools that we write to help working with our [`@kampus-apps/gql`]
 application living at https://gql.dev.kamp.us/graphql (click to link to
 discover our graphql schema)
 
+## Global Object Identification
+
+**Related documents:**
+
+- https://relay.dev/docs/guides/graphql-server-specification/#object-identification
+- https://graphql.org/learn/global-object-identification/
+
+### Story
+
+In order for relay to work properly,
+a graphql server needs to implement a `Node` interface and `Query.node` resolver:
+
+```graphql
+interface Node {
+  id: ID!
+}
+
+type User implements Node {
+  id: ID!
+  username: String!
+}
+
+type SozlukTerm implements Node {
+  id: ID!
+  title: String!
+}
+
+type Query {
+  node(id: ID!): Node
+}
+```
+
+This way relay client can use the `Query.node` resolver to resolve any
+type that implements the `Node` interface:
+
+```graphql
+query UserWithQueryNode {
+  # since both User and Post types implement the Node interface
+  # we can use the inline fragment syntax to fetch different types
+  node(id: "base-64-opaque-id") {
+    id
+    ... on User {
+      username
+    }
+
+    ... on SozlukTerm {
+      title
+    }
+  }
+}
+```
+
+The `id` argument itself is actually responsible for storing the type we want
+to fetch: It's a `base64` representation of `__typename:id` pair:
+`User:clkd3h9hi0000q1ebwf2j6bfc`, `PanoPost:clkd3h9is0004q1ebid1prq8z`,
+`SozlukTerm:deployment`, etc.
+
+### [`@kampus/gql-utils/global-id`](./global-id)
+
+Set of utilities to work with global ids in a graphql server.
+
+#### Glossary
+
+- `GlobalID`: an opaque `base64` string created from combining `__typename` and `id`
+- `ResolvedGlobalID`: An object representation of a `GlobalID` after we `parse` it.
+
+#### **`stringify`**
+
+Takes a `__typename` and an `id` for that type, and returns a `GlobalID`:
+
+```typescript
+import { stringify } from "@kampus/gql-utils/global-id";
+
+const id = stringify("SozlukTerm", "deployment");
+// => U296bHVrVGVybTpkZXBsb3ltZW50
+```
+
+#### **`parse`**
+
+Takes a `__typename` and an `id` for that type, and returns a `GlobalID`:
+
+```typescript
+import { parse, stringify } from "@kampus/gql-utils/global-id";
+
+const id = stringify("SozlukTerm", "deployment");
+// => U296bHVrVGVybTpkZXBsb3ltZW50
+
+const resolvedID = parse(id);
+// => { type: "SozlukTerm", value: "deployment" }
+```
+
 ## Prisma tools
 
 ### `createPrismaLoader`
