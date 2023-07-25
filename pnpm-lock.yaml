@@ -162,6 +162,9 @@ importers:
       '@kampus/relay':
         specifier: '*'
         version: link:../../packages/relay
+      '@kampus/ui-next':
+        specifier: '*'
+        version: link:../../packages/ui
       react-relay:
         specifier: 15.0.0
         version: 15.0.0(react@18.2.0)
@@ -175,9 +178,6 @@ importers:
       '@kampus/tailwind':
         specifier: '*'
         version: link:../../packages/tailwind
-      '@kampus/ui-next':
-        specifier: '*'
-        version: link:../../packages/ui
       '@types/react-relay':
         specifier: 14.1.4
         version: 14.1.4
