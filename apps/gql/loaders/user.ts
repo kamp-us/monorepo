@@ -1,43 +1,27 @@
-import DataLoader from "dataloader";
+import { createPrismaLoader } from "@kampus/gql-utils";
 
 import { type Clients } from "~/clients";
-import { type User } from "~/schema/types.generated";
 import { LoaderKey } from "./utils/loader-key";
-
-export type UsersLoader = DataLoader<UserLoaderKey, User>;
 
 export class UserLoaderKey extends LoaderKey<"id" | "username", string> {}
 
-export const createUsersLoader = (clients: Clients): UsersLoader =>
-  new DataLoader<UserLoaderKey, User>(async (keys) => {
-    const ids: string[] = [];
-    const usernames: string[] = [];
-
-    keys.forEach((key) => {
-      const { identifier, value } = key;
-      if (identifier === "id") {
-        ids.push(value);
-      } else if (identifier === "username") {
-        usernames.push(value);
+export function createUserLoaders(clients: Clients) {
+  const byID = createPrismaLoader(clients.prisma.user, "id", (users) => {
+    users.forEach((user) => {
+      if (user.username) {
+        byUsername.prime(user.username, user);
       }
-    });
-
-    const users =
-      (await clients.prisma.user.findMany({
-        where: {
-          OR: [{ id: { in: ids } }, { username: { in: usernames } }],
-          deletedAt: null,
-        },
-      })) ?? []; // For some reason, prisma when no user found returns undefined instead of empty array.
-
-    return keys.map((key) => {
-      const dbUser = users.find((u) => u?.[key.identifier] === key.value);
-      if (!dbUser) {
-        return new Error(`User not found: ${key.value}`);
-      }
-      return {
-        id: dbUser.id,
-        username: dbUser.username,
-      } as User;
     });
   });
+
+  const byUsername = createPrismaLoader(clients.prisma.user, "username", (users) => {
+    users.forEach((user) => {
+      byUsername.prime(user.id, user);
+    });
+  });
+
+  return {
+    byID,
+    byUsername,
+  };
+}

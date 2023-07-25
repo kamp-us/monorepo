@@ -1,12 +1,12 @@
 import { type Clients } from "~/clients";
 import { createSozlukLoaders } from "./sozluk";
-import { createUsersLoader } from "./user";
+import { createUserLoaders } from "./user";
 
 export type DataLoaders = ReturnType<typeof createLoaders>;
 
 export const createLoaders = (clients: Clients) => {
   return {
-    user: createUsersLoader(clients),
+    user: createUserLoaders(clients),
     sozluk: createSozlukLoaders(clients),
   };
 };
