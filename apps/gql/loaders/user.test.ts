@@ -1,84 +1,56 @@
-import { describe, expect, it } from "vitest";
-
-import { UserLoaderKey, createUsersLoader } from "./user";
+import { beforeEach, describe, expect, it } from "vitest";
 
 import { mockedClients } from "../clients/__mocks__/clients";
+import { createUserLoaders } from "./user";
 
-
-describe("Users  Loader", () => {
-
-  it("should create users loader", () => {
-    const loader = createUsersLoader(mockedClients);
-
-    expect(loader).toBeDefined();
-  });
-
-  it("should load defined user with id", async () => {
-    const loader = createUsersLoader(mockedClients);
-
-    mockedClients.prisma.user.findMany.mockResolvedValueOnce([{
-      username: "test",
-      id: "1",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      deletedAt: null,
-      email: "mock@email.com"
-    }])
-
-    const result = await loader.load(
-      new UserLoaderKey('id', '1')
-    );
-
-    expect(result).toBeDefined();
-    expect(result).toMatchInlineSnapshot(`
+describe(createUserLoaders, () => {
+  beforeEach(() => {
+    mockedClients.prisma.user.findMany.mockResolvedValueOnce([
       {
-        "id": "1",
-        "username": "test",
-      }
-    `);
+        username: "test",
+        emailVerified: new Date(),
+        name: "test",
+        image: null,
+        id: "1",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        deletedAt: null,
+        email: "mock@email.com",
+      },
+    ]);
   });
 
-  it("should load defined user with username", async () => {
-    const loader = createUsersLoader(mockedClients);
+  describe("byID", () => {
+    it("fetches users by id", async () => {
+      const { byID } = createUserLoaders(mockedClients);
 
-    mockedClients.prisma.user.findMany.mockResolvedValueOnce([{
-      username: "test",
-      id: "1",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      deletedAt: null,
-      email: "mock@email.com"
-    }])
+      const result = await byID.load("1");
 
-    const result = await loader.load(
-      new UserLoaderKey('username', 'test')
-    );
-    expect(result).toBeDefined();
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "id": "1",
-        "username": "test",
-      }
-    `);
+      expect(result.id).toBe("1");
+      expect(result.username).toBe("test");
+      expect(result.email).toBe("mock@email.com");
+    });
+
+    it("should throw error if user not found with id", async () => {
+      const { byID } = createUserLoaders(mockedClients);
+      await expect(() => byID.load("2")).rejects.toThrowError(/not found/);
+    });
   });
 
-  it("should throw error if user not found with id", () => {
-    const loader = createUsersLoader(mockedClients);
+  describe("byUsername", () => {
+    it("fetches users by username", async () => {
+      const { byUsername } = createUserLoaders(mockedClients);
 
-    expect(async () => {
-      await loader.load(
-        new UserLoaderKey("id", "2")
-      )
-    }).rejects.toThrowError(`User not found: 2`);
-  });
+      const result = await byUsername.load("test");
 
-  it("should throw error if user not found with username", () => {
-    const loader = createUsersLoader(mockedClients);
+      expect(result.id).toBe("1");
+      expect(result.username).toBe("test");
+      expect(result.email).toBe("mock@email.com");
+    });
 
-    expect(async () => {
-      await loader.load(
-        new UserLoaderKey("username", "mock")
-      )
-    }).rejects.toThrowError(`User not found: mock`);
+    it("should throw error if user not found with username", async () => {
+      const { byUsername } = createUserLoaders(mockedClients);
+      await expect(() => byUsername.load("mock")).rejects.toThrowError(/not found/);
+    });
   });
 });

@@ -1,6 +1,5 @@
-import { type Clients } from "../";
 import { mockedPrisma } from "./prisma";
 
-export const mockedClients: Clients = {
+export const mockedClients = {
   prisma: mockedPrisma,
 };
