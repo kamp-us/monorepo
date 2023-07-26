@@ -7,9 +7,12 @@ export interface ConnectionArguments {
   before?: string | null;
 }
 
-export interface Connection<T extends Dictionary> {
-  nodes: T[];
-  edges: ConnectionEdge<T>[];
+export interface Connection<
+  TNode extends Dictionary,
+  TEdge extends ConnectionEdge<TNode> = ConnectionEdge<TNode>
+> {
+  nodes: TNode[];
+  edges: TEdge[];
   pageInfo: PageInfo;
   totalCount: number;
 }
@@ -22,6 +25,6 @@ export interface ConnectionEdge<T> {
 export interface PageInfo {
   hasNextPage: boolean;
   hasPreviousPage: boolean;
-  startCursor: string | null;
-  endCursor: string | null;
+  startCursor?: string | null;
+  endCursor?: string | null;
 }

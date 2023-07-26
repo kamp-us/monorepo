@@ -1,6 +1,7 @@
-import { findManyCursorConnection, type Connection } from "@devoxa/prisma-relay-cursor-connection";
+import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import DataLoader from "dataloader";
 
+import { type Connection } from "../connection";
 import { type ConnectionKey } from "./connection-key";
 import { type PrismaModel } from "./types";
 

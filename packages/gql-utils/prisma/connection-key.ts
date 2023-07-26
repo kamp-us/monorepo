@@ -1,5 +1,6 @@
-import { type ConnectionArguments } from "@devoxa/prisma-relay-cursor-connection";
 import hash from "object-hash";
+
+import { type ConnectionArguments } from "@kampus/gql-utils/connection";
 
 /**
  * Represents a key to load a graphql connection object.

@@ -1,11 +1,10 @@
 import DataLoader from "dataloader";
 import hash from "object-hash";
 
-import { ConnectionArguments, type Connection } from "@kampus/gql-utils/connection";
+import { type Connection, type ConnectionArguments } from "@kampus/gql-utils/connection";
 import { allTerms, type Term } from "@kampus/sozluk-content";
 
 import { applyPagination, generatePageInfo } from "~/features/relay/pagination";
-import { type SozlukQueryTermsArgs, type SozlukTermConnection } from "~/schema/types.generated";
 
 export const createSozlukLoaders = () => {
   return {
@@ -35,6 +34,12 @@ export const transformSozlukTermsConnection = (connection: Connection<Term>) => 
   ...connection,
   nodes: connection.nodes.map(transformSozlukTerm),
   edges: connection.edges.map((edge) => ({ ...edge, node: transformSozlukTerm(edge.node) })),
+  pageInfo: {
+    ...connection.pageInfo,
+    endCursor: connection.pageInfo.endCursor ?? null,
+    startCursor: connection.pageInfo.startCursor ?? null,
+  },
+  totalCount: connection.totalCount,
 });
 
 const loadTerm = (id: string) => {
