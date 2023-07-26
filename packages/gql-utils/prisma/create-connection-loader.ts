@@ -14,7 +14,7 @@ export function createPrismaConnectionLoader<TPrisma extends { id: string }>(
       const items = await Promise.all(
         keys.map(async (key) => {
           if (identifier && !key.parentID) {
-            return null;
+            return new Error(`"${identifier}" is required`);
           }
 
           const where =
