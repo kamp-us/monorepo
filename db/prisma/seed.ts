@@ -1,43 +1,62 @@
+import { faker } from "@faker-js/faker";
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcryptjs";
+import { UniqueEnforcer } from "enforce-unique";
 
-const users = [
-  { username: "admin", email: "admin@kamp.us", password: "123123" },
-  { username: "testuser", email: "user1a@kamp.us", password: "123123123" },
-];
+interface User {
+  username: string;
+  email: string;
+}
+
+interface Post {
+  title: string;
+  url?: string;
+  site?: string;
+  content?: string;
+  comments?: Comment[];
+}
+
+interface Comment {
+  content: string;
+}
+
+const unique = new UniqueEnforcer();
+
+const fake = {
+  user: (firstName = faker.person.firstName(), lastName = faker.person.lastName()): User => ({
+    username: unique.enforce(() => faker.internet.userName({ firstName, lastName })),
+    email: unique.enforce(() => faker.internet.email({ firstName, lastName })),
+  }),
+};
+
+const users = [fake.user("admin", "kampus"), fake.user("test", "user")];
 
 const posts = [
   {
     title: "Hacker News",
-    slug: "hacker-news",
     url: "https://news.ycombinator.com",
     site: "news.ycombinator.com",
     content: "Code",
   },
   {
     title: "Reddit",
-    slug: "reddit",
     url: "https://reddit.com",
     site: "reddit.com",
     content: "The front page of the internet",
   },
   {
     title: "Twitter",
-    slug: "twitter",
     url: "https://twitter.com",
     site: "twitter.com",
     content: "What's happening?",
   },
   {
     title: "Facebook",
-    slug: "facebook",
     url: "https://facebook.com",
     site: "facebook.com",
     content: "Connect with friends, family and other people you know.",
   },
   {
     title: "Kampus Twitch",
-    slug: "kampus-twitch",
     url: "https://twitch.tv/usirin",
     site: "twitch.tv/usirin",
     content: "Twitch",
@@ -45,7 +64,6 @@ const posts = [
   },
   {
     title: "discord.kamp.us",
-    slug: "discord-kamp-us",
     url: "discord.kamp.us",
     site: "discord.kamp.us",
     content:
@@ -60,7 +78,6 @@ const posts = [
   },
   {
     title: "Github",
-    slug: "github",
     url: "https://github.com/kamp-us/monorepo",
     site: "github.com/kamp-us/monorepo",
     content: "Dünyanın en iyi monoreposu",
@@ -93,109 +110,48 @@ const posts = [
   },
 ];
 
-type User = { username: string; email: string; password: string };
-
-type Post = {
-  title: string;
-  slug: string;
-  url?: string;
-  content?: string;
-  site?: string;
-  comments?: { content: string }[];
-};
-
 const prisma = new PrismaClient();
 
 async function seedAll(users: User[], posts: Post[]) {
-  let postOwnerIDs: string[] = [];
+  const postOwnerIDs: string[] = [];
   for (const user of users) {
     const email: string = user.email;
     const username: string = user.username;
 
-    const hashedPassword = await bcrypt.hash(user.password, 10);
-
     const prismaUser = await prisma.user.upsert({
-      where: {
-        username,
-      },
-      update: {
-        username,
-        email,
-        password: {
-          update: {
-            hash: hashedPassword,
-          },
-        },
-      },
-      create: {
-        username,
-        email,
-        password: {
-          create: {
-            hash: hashedPassword,
-          },
-        },
-      },
+      where: { username },
+      update: { username, email },
+      create: { username, email },
     });
+
     postOwnerIDs.push(prismaUser.id);
 
     await prisma.userPreference.upsert({
-      where: {
-        userID: prismaUser.id,
-      },
-      update: {
-        userID: prismaUser.id,
-      },
-      create: {
-        user: {
-          connect: {
-            id: prismaUser.id,
-          },
-        },
-      },
+      where: { userID: prismaUser.id },
+      update: { userID: prismaUser.id },
+      create: { user: { connect: { id: prismaUser.id } } },
     });
   }
 
   for (const post of posts) {
-    const title: string = post.title;
-    const slug: string = post.slug;
-    const url: string | null = post.url || null;
-    const site: string | null = post.site || null;
-    const content: string | null = post.content || null;
-    const comments: any[] = post.comments || [];
-    const findPrismaPost = await prisma.post.findFirst({
-      where: {
-        slug,
-      },
-      select: {
-        id: true,
-      },
+    const prismaPost = await prisma.post.findFirst({
+      where: { title: post.title },
+      select: { id: true },
     });
-    if (findPrismaPost) {
+
+    if (prismaPost) {
       return;
     }
 
     await prisma.post.create({
       data: {
-        title,
-        url,
-        site,
-        slug,
-        content,
-        owner: {
-          connect: {
-            id: postOwnerIDs[Math.floor(Math.random() * postOwnerIDs.length)],
-          },
-        },
+        ...post,
+        owner: { connect: { id: randomFrom(postOwnerIDs) } },
         comments: {
-          create: comments.map((comment) => {
+          create: (post.comments ?? []).map((comment) => {
             return {
               content: comment.content,
-              owner: {
-                connect: {
-                  id: postOwnerIDs[Math.floor(Math.random() * postOwnerIDs.length)],
-                },
-              },
+              owner: { connect: { id: randomFrom(postOwnerIDs) } },
             };
           }),
         },
@@ -204,11 +160,15 @@ async function seedAll(users: User[], posts: Post[]) {
   }
 }
 
+const randomFrom = <T>(items: T[]) => {
+  return items[Math.floor(Math.random() * items.length)];
+};
+
 seedAll(users, posts)
   .catch((e) => {
     console.error(e);
     process.exit(1);
   })
-  .finally(async () => {
-    await prisma.$disconnect();
+  .finally(() => {
+    void prisma.$disconnect();
   });

@@ -1,4 +1,4 @@
-import { type DataLoaders } from "~/loaders/types";
+import { type DataLoaders } from "~/loaders";
 
 export interface KampusGQLContext {
   loaders: DataLoaders;

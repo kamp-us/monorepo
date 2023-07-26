@@ -1,6 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { mockedClients } from "../clients/__mocks__/clients";
 import { createSozlukLoaders } from "./sozluk";
 
 // mock runs before everything so import needs to be handled here.
@@ -14,16 +13,16 @@ vi.mock("@kampus/sozluk-content", async () => {
 describe("Sozluk Loader", () => {
   describe("term loader", () => {
     it("should load terms", async () => {
-      const loader = createSozlukLoaders(mockedClients);
+      const loader = createSozlukLoaders();
 
       const result = await loader.term.load("1");
 
       expect(result).toMatchObject({
         body: {
-          code: "code",
-          html: "mdxHtml",
           raw: "raw",
+          code: "code",
         },
+        mdxHtml: "mdxHtml",
         id: "1",
         tags: ["tag1", "tag2"],
         title: "title",
@@ -31,7 +30,7 @@ describe("Sozluk Loader", () => {
     });
 
     it("should return null if term not found", () => {
-      const loader = createSozlukLoaders(mockedClients);
+      const loader = createSozlukLoaders();
 
       void expect(async () => {
         await loader.term.load("2");

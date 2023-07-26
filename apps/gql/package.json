@@ -16,9 +16,9 @@
     "extends": "../../package.json"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "3.3.1",
-    "@graphql-codegen/typescript": "3.0.4",
-    "@graphql-codegen/typescript-resolvers": "3.2.1",
+    "@graphql-codegen/cli": "4.0.1",
+    "@graphql-codegen/typescript": "4.0.1",
+    "@graphql-codegen/typescript-resolvers": "4.0.1",
     "@types/object-hash": "3.0.2",
     "@vitest/coverage-v8": "0.32.2",
     "@vitest/ui": "0.32.2",
@@ -28,8 +28,10 @@
   },
   "dependencies": {
     "@graphql-tools/schema": "9.0.19",
+    "@kampus/gql-utils": "*",
     "@kampus/prisma": "*",
     "@kampus/sozluk-content": "*",
+    "@kampus/std": "*",
     "dataloader": "2.2.2",
     "graphql": "16.6.0",
     "graphql-config": "4.5.0",
