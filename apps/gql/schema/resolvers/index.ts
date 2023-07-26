@@ -1,18 +1,51 @@
 import { DateResolver, DateTimeResolver } from "graphql-scalars";
 
-import { UserLoaderKey } from "~/loaders/user";
-import { type Resolvers } from "../types.generated";
+import { parse, stringify } from "@kampus/gql-utils/global-id";
+import { type User } from "@kampus/prisma";
+import { assertNever } from "@kampus/std";
+import { type Dictionary } from "@kampus/std/dictionary";
+
+import { transformSozlukTerm, transformSozlukTermsConnection } from "~/loaders/sozluk";
+import { transformUser } from "~/loaders/user";
+import { type Resolvers, type ResolversInterfaceTypes } from "../types.generated";
+
+type NodeTypename = ResolversInterfaceTypes<Dictionary>["Node"]["__typename"];
 
 export const resolvers = {
   Date: DateResolver,
   DateTime: DateTimeResolver,
+  Node: {},
+
   Query: {
-    user: (_, args, { loaders }) =>
-      args.id
-        ? loaders.user.load(new UserLoaderKey("id", args.id))
-        : args.username
-        ? loaders.user.load(new UserLoaderKey("username", args.username))
-        : null,
+    node: async (_, args, { loaders }) => {
+      const id = parse<NodeTypename>(args.id);
+
+      switch (id.type) {
+        case "User":
+          return transformUser(await loaders.user.byID.load(id.value));
+        case "SozlukTerm":
+          return transformSozlukTerm(await loaders.sozluk.term.load(id.value));
+        default:
+          return assertNever(id.type);
+      }
+    },
+
+    user: async (_, args, { loaders }) => {
+      let user: User | null = null;
+
+      if (args.id) {
+        user = await loaders.user.byID.load(parse(args.id).value);
+      } else if (args.username) {
+        user = await loaders.user.byUsername.load(args.username);
+      }
+
+      if (!user) {
+        return null;
+      }
+
+      return transformUser(user);
+    },
+
     sozluk: () => {
       return {
         term: null,
@@ -21,11 +54,13 @@ export const resolvers = {
     },
   },
   SozlukQuery: {
-    term: (_, args, { loaders }) => loaders.sozluk.term.load(args.id),
-    terms: (_, args, { loaders }) => loaders.sozluk.terms.load(args),
+    term: async (_, args, { loaders }) =>
+      transformSozlukTerm(await loaders.sozluk.term.load(args.id)),
+    terms: async (_, args, { loaders }) =>
+      transformSozlukTermsConnection(await loaders.sozluk.terms.load(args)),
   },
   SozlukTerm: {
-    id: (term) => term.id,
+    id: (term) => stringify("SozlukTerm", term.id),
     title: (term) => term.title,
     body: (term) => term.body,
     tags: (term) => term.tags,
@@ -51,7 +86,7 @@ export const resolvers = {
     endCursor: (pageInfo) => pageInfo.endCursor,
   },
   User: {
-    id: (u) => u.id,
+    id: (user) => stringify("User", user.id),
     username: (u) => u.username,
   },
 } satisfies Resolvers;

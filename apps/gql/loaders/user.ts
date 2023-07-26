@@ -1,4 +1,5 @@
 import { createPrismaLoader } from "@kampus/gql-utils";
+import { type User } from "@kampus/prisma";
 
 import { type Clients } from "~/clients";
 import { LoaderKey } from "./utils/loader-key";
@@ -25,3 +26,9 @@ export function createUserLoaders(clients: Clients) {
     byUsername,
   };
 }
+
+export const transformUser = (user: User) => ({
+  ...user,
+  __typename: "User" as const,
+  username: user.username ?? "",
+});

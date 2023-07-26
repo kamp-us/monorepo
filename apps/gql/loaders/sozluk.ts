@@ -1,28 +1,25 @@
 import DataLoader from "dataloader";
 import hash from "object-hash";
 
+import { ConnectionArguments, type Connection } from "@kampus/gql-utils/connection";
 import { allTerms, type Term } from "@kampus/sozluk-content";
 
 import { applyPagination, generatePageInfo } from "~/features/relay/pagination";
-import { type Clients } from "~/clients";
-import {
-  type SozlukQueryTermsArgs,
-  type SozlukTerm,
-  type SozlukTermConnection,
-} from "~/schema/types.generated";
+import { type SozlukQueryTermsArgs, type SozlukTermConnection } from "~/schema/types.generated";
 
-export const createSozlukLoaders = (clients: Clients) => {
+export const createSozlukLoaders = () => {
   return {
-    term: createTermLoader(clients),
-    terms: createTermsLoader(clients),
+    term: createTermLoader(),
+    terms: createTermsLoader(),
   };
 };
 
 export type SozlukTermLoader = ReturnType<typeof createTermLoader>;
 export type SozlukTermsLoader = ReturnType<typeof createTermsLoader>;
 
-const transformTerm = (term: Term) => {
+export const transformSozlukTerm = (term: Term) => {
   return {
+    __typename: "SozlukTerm" as const,
     id: term.id,
     title: term.title,
     tags: term.tags,
@@ -34,17 +31,22 @@ const transformTerm = (term: Term) => {
   };
 };
 
-// eslint-disable-next-line @typescript-eslint/require-await
-const loadTerm = async (id: string) => {
+export const transformSozlukTermsConnection = (connection: Connection<Term>) => ({
+  ...connection,
+  nodes: connection.nodes.map(transformSozlukTerm),
+  edges: connection.edges.map((edge) => ({ ...edge, node: transformSozlukTerm(edge.node) })),
+});
+
+const loadTerm = (id: string) => {
   const term = allTerms.find((term) => term.id === id);
   if (!term) {
     return null;
   }
-  return transformTerm(term);
+  return Promise.resolve(term);
 };
 
-const createTermLoader = (_: Clients) =>
-  new DataLoader<string, SozlukTerm>(async (keys) => {
+const createTermLoader = () =>
+  new DataLoader<string, Term>(async (keys) => {
     return await Promise.all(
       keys.map(async (key) => {
         const term = await loadTerm(key);
@@ -56,32 +58,29 @@ const createTermLoader = (_: Clients) =>
     );
   });
 
-const createTermsLoader = (_: Clients) =>
-  new DataLoader<Partial<SozlukQueryTermsArgs>, SozlukTermConnection, string>(termsLoaderBatchFn, {
-    cacheKeyFn: (key) => hash(key),
-  });
+const createTermsLoader = () =>
+  new DataLoader<ConnectionArguments, Connection<Term>, string>(
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async (keys) => {
+      const results: Connection<Term>[] = [];
 
-const termsLoaderBatchFn = async (keys: readonly Partial<SozlukQueryTermsArgs>[]) => {
-  const results: SozlukTermConnection[] = [];
+      for (const key of keys) {
+        const nodes = applyPagination<Term>({ data: allTerms, ...key });
+        const edges = nodes.map((term) => ({ cursor: term.id, node: term }));
 
-  for (const key of keys) {
-    const { before, after, first, last } = key;
+        const result = {
+          nodes,
+          edges,
+          pageInfo: generatePageInfo({ data: allTerms, ...key }),
+          totalCount: allTerms.length,
+        };
 
-    const terms = applyPagination<Term>({ data: allTerms, before, after, first, last });
+        results.push(result);
+      }
 
-    const edges = terms.map((term) => ({ cursor: term.id, node: transformTerm(term) }));
-
-    const totalCount = allTerms.length;
-
-    const result = {
-      edges,
-      // need to pass the same args to generatePageInfo
-      pageInfo: generatePageInfo({ data: allTerms, before, after, first, last }),
-      totalCount,
-    };
-
-    results.push(result);
-  }
-
-  return results;
-};
+      return results;
+    },
+    {
+      cacheKeyFn: (key) => hash(key),
+    }
+  );
