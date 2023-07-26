@@ -7,6 +7,6 @@ export type DataLoaders = ReturnType<typeof createLoaders>;
 export const createLoaders = (clients: Clients) => {
   return {
     user: createUserLoaders(clients),
-    sozluk: createSozlukLoaders(clients),
+    sozluk: createSozlukLoaders(),
   };
 };
