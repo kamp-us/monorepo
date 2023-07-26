@@ -1,10 +1,12 @@
 import { DateResolver, DateTimeResolver } from "graphql-scalars";
 
+import { ConnectionKey } from "@kampus/gql-utils";
 import { parse, stringify } from "@kampus/gql-utils/global-id";
 import { type User } from "@kampus/prisma";
 import { assertNever } from "@kampus/std";
 import { type Dictionary } from "@kampus/std/dictionary";
 
+import { transformPanoPost, transformPanoPostConnection } from "~/loaders/pano";
 import { transformSozlukTerm, transformSozlukTermsConnection } from "~/loaders/sozluk";
 import { transformUser } from "~/loaders/user";
 import { type Resolvers, type ResolversInterfaceTypes } from "../types.generated";
@@ -25,6 +27,8 @@ export const resolvers = {
           return transformUser(await loaders.user.byID.load(id.value));
         case "SozlukTerm":
           return transformSozlukTerm(await loaders.sozluk.term.load(id.value));
+        case "PanoPost":
+          return transformPanoPost(await loaders.pano.post.byID.load(id.value));
         default:
           return assertNever(id.type);
       }
@@ -52,6 +56,8 @@ export const resolvers = {
         terms: null,
       };
     },
+
+    pano: () => ({ post: null, posts: [], allPosts: null }),
   },
   SozlukQuery: {
     term: async (_, args, { loaders }) =>
@@ -76,6 +82,43 @@ export const resolvers = {
     totalCount: (connection) => connection.totalCount,
   },
   SozlukTermEdge: {
+    node: (edge) => edge.node,
+    cursor: (edge) => edge.cursor,
+  },
+  PanoQuery: {
+    post: async (_, args, { loaders }) =>
+      transformPanoPost(await loaders.pano.post.byID.load(args.id)),
+    posts: async (_, args, { loaders }) => {
+      const posts = await loaders.pano.post.byID.loadMany(args.ids);
+
+      return posts.map((post) => {
+        return post instanceof Error ? null : transformPanoPost(post);
+      });
+    },
+    allPosts: async (_, args, { loaders }) => {
+      const posts = await loaders.pano.post.all.load(new ConnectionKey(null, args));
+      return transformPanoPostConnection(posts);
+    },
+  },
+  PanoPost: {
+    id: (post) => stringify("PanoPost", post.id),
+    title: (post) => post.title,
+    url: (post) => post.url,
+    content: (post) => post.content,
+    owner: async (parent, _, { loaders }) => {
+      const post = await loaders.pano.post.byID.load(parent.id);
+      const user = await loaders.user.byID.load(post.userID);
+      return transformUser(user);
+    },
+    createdAt: (post) => post.createdAt,
+  },
+  PanoPostConnection: {
+    nodes: (connection) => connection.nodes,
+    edges: (connection) => connection.edges,
+    pageInfo: (connection) => connection.pageInfo,
+    totalCount: (connection) => connection.totalCount,
+  },
+  PanoPostEdge: {
     node: (edge) => edge.node,
     cursor: (edge) => edge.cursor,
   },

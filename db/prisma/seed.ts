@@ -90,7 +90,6 @@ const posts = [
   },
   {
     title: "Yüksek dozajlı şakalar",
-    slug: "yuksek-dozajli-sakalar",
     site: "kamp.us",
     content: "aynen öyle",
     comments: [
@@ -139,8 +138,11 @@ async function seedAll(users: User[], posts: Post[]) {
       select: { id: true },
     });
 
+    console.log(">> post", post);
+    console.log(">> prismaPost", prismaPost);
+
     if (prismaPost) {
-      return;
+      continue;
     }
 
     await prisma.post.create({
