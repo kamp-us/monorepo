@@ -9,13 +9,11 @@ export const env = parseEnv(
     DISCORD_SECRET: process.env.DISCORD_SECRET,
     TWITCH_ID: process.env.TWITCH_ID,
     TWITCH_SECRET: process.env.TWITCH_SECRET,
+    VERCEL_URL: process.env.VERCEL_URL,
   },
   {
-    // Provider Secrets
-    // EMAIL_SERVER: z.string().default(""),
-    // EMAIL_FROM: z.string(),
-
     AUTH_COOKIE_DOMAIN: z.string(),
+    VERCEL_URL: z.string().optional(),
 
     GITHUB_ID: z.string(),
     GITHUB_SECRET: z.string(),

@@ -1,38 +1,56 @@
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from "graphql";
 
-import { KampusGQLContext } from "./types";
+import type { KampusGQLContext } from "./types";
 
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = {
+  [_ in K]?: never;
+};
+export type Incremental<T> =
+  | T
+  | { [P in keyof T]?: P extends " $fragmentName" | "__typename" ? T[P] : never };
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  Date: { input: string; output: string };
+  DateTime: { input: string; output: string };
+};
+
+export type Node = {
+  id: Scalars["ID"]["output"];
 };
 
 export type PageInfo = {
   __typename?: "PageInfo";
-  endCursor: Maybe<Scalars["String"]>;
-  hasNextPage: Scalars["Boolean"];
-  hasPreviousPage: Scalars["Boolean"];
-  startCursor: Maybe<Scalars["String"]>;
+  endCursor: Maybe<Scalars["String"]["output"]>;
+  hasNextPage: Scalars["Boolean"]["output"];
+  hasPreviousPage: Scalars["Boolean"]["output"];
+  startCursor: Maybe<Scalars["String"]["output"]>;
 };
 
 export type Query = {
   __typename?: "Query";
+  node: Maybe<Node>;
   sozluk: SozlukQuery;
   user: Maybe<User>;
 };
 
+export type QueryNodeArgs = {
+  id: Scalars["ID"]["input"];
+};
+
 export type QueryUserArgs = {
-  input: UserInput;
+  id: InputMaybe<Scalars["ID"]["input"]>;
+  username: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type SozlukQuery = {
@@ -42,87 +60,81 @@ export type SozlukQuery = {
 };
 
 export type SozlukQueryTermArgs = {
-  input: SozlukTermInput;
+  id: Scalars["ID"]["input"];
 };
 
 export type SozlukQueryTermsArgs = {
-  after: InputMaybe<Scalars["String"]>;
-  before: InputMaybe<Scalars["String"]>;
-  first: InputMaybe<Scalars["Int"]>;
-  last: InputMaybe<Scalars["Int"]>;
+  after: InputMaybe<Scalars["String"]["input"]>;
+  before: InputMaybe<Scalars["String"]["input"]>;
+  first: InputMaybe<Scalars["Int"]["input"]>;
+  last: InputMaybe<Scalars["Int"]["input"]>;
 };
 
-export type SozlukTerm = {
+export type SozlukTerm = Node & {
   __typename?: "SozlukTerm";
   body: SozlukTermBody;
-  id: Scalars["ID"];
-  tags: Maybe<Array<Scalars["String"]>>;
-  title: Scalars["String"];
+  id: Scalars["ID"]["output"];
+  tags: Array<Scalars["String"]["output"]>;
+  title: Scalars["String"]["output"];
 };
 
 export type SozlukTermBody = {
   __typename?: "SozlukTermBody";
-  code: Scalars["String"];
-  html: Scalars["String"];
-  raw: Scalars["String"];
+  code: Scalars["String"]["output"];
+  html: Scalars["String"]["output"];
+  raw: Scalars["String"]["output"];
 };
 
 export type SozlukTermConnection = {
   __typename?: "SozlukTermConnection";
-  edges: Maybe<Array<Maybe<SozlukTermEdge>>>;
+  edges: Maybe<Array<SozlukTermEdge>>;
   pageInfo: PageInfo;
-  totalCount: Scalars["Int"];
+  totalCount: Scalars["Int"]["output"];
 };
 
 export type SozlukTermEdge = {
   __typename?: "SozlukTermEdge";
-  cursor: Scalars["String"];
+  cursor: Scalars["String"]["output"];
   node: Maybe<SozlukTerm>;
 };
 
-export type SozlukTermInput = {
-  id: Scalars["ID"];
-};
-
-export type User = {
+export type User = Node & {
   __typename?: "User";
-  id: Scalars["ID"];
-  username: Scalars["String"];
+  id: Scalars["ID"]["output"];
+  username: Scalars["String"]["output"];
 };
 
-export type UserInput = {
-  id: InputMaybe<Scalars["ID"]>;
-  username: InputMaybe<Scalars["String"]>;
-};
+export type WithIndex<TObject> = TObject & Record<string, any>;
+export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
-export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
-  resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
-};
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
-  | ResolverFn<TResult, TParent, TContext, TArgs>
-  | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
+export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = ResolverFn<
+  TResult,
+  TParent,
+  TContext,
+  TArgs
+>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info?: GraphQLResolveInfo
 ) => Promise<TResult> | TResult;
 
 export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info?: GraphQLResolveInfo
 ) => AsyncIterable<TResult> | Promise<AsyncIterable<TResult>>;
 
 export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info?: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
 export interface SubscriptionSubscriberObject<
@@ -158,13 +170,13 @@ export type SubscriptionResolver<
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   parent: TParent,
   context: TContext,
-  info: GraphQLResolveInfo
+  info?: GraphQLResolveInfo
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
 export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
   obj: T,
   context: TContext,
-  info: GraphQLResolveInfo
+  info?: GraphQLResolveInfo
 ) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
@@ -174,14 +186,22 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info?: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
+/** Mapping of interface types */
+export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = ResolversObject<{
+  Node: (SozlukTerm & { __typename: "SozlukTerm" }) | (User & { __typename: "User" });
+}>;
+
 /** Mapping between all available schema types and the resolvers types */
-export type ResolversTypes = {
-  Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
-  ID: ResolverTypeWrapper<Scalars["ID"]>;
-  Int: ResolverTypeWrapper<Scalars["Int"]>;
+export type ResolversTypes = ResolversObject<{
+  Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
+  Date: ResolverTypeWrapper<Scalars["Date"]["output"]>;
+  DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
+  ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
+  Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
+  Node: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>["Node"]>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
   Query: ResolverTypeWrapper<{}>;
   SozlukQuery: ResolverTypeWrapper<SozlukQuery>;
@@ -189,17 +209,18 @@ export type ResolversTypes = {
   SozlukTermBody: ResolverTypeWrapper<SozlukTermBody>;
   SozlukTermConnection: ResolverTypeWrapper<SozlukTermConnection>;
   SozlukTermEdge: ResolverTypeWrapper<SozlukTermEdge>;
-  SozlukTermInput: SozlukTermInput;
-  String: ResolverTypeWrapper<Scalars["String"]>;
+  String: ResolverTypeWrapper<Scalars["String"]["output"]>;
   User: ResolverTypeWrapper<User>;
-  UserInput: UserInput;
-};
+}>;
 
 /** Mapping between all available schema types and the resolvers parents */
-export type ResolversParentTypes = {
-  Boolean: Scalars["Boolean"];
-  ID: Scalars["ID"];
-  Int: Scalars["Int"];
+export type ResolversParentTypes = ResolversObject<{
+  Boolean: Scalars["Boolean"]["output"];
+  Date: Scalars["Date"]["output"];
+  DateTime: Scalars["DateTime"]["output"];
+  ID: Scalars["ID"]["output"];
+  Int: Scalars["Int"]["output"];
+  Node: ResolversInterfaceTypes<ResolversParentTypes>["Node"];
   PageInfo: PageInfo;
   Query: {};
   SozlukQuery: SozlukQuery;
@@ -207,45 +228,60 @@ export type ResolversParentTypes = {
   SozlukTermBody: SozlukTermBody;
   SozlukTermConnection: SozlukTermConnection;
   SozlukTermEdge: SozlukTermEdge;
-  SozlukTermInput: SozlukTermInput;
-  String: Scalars["String"];
+  String: Scalars["String"]["output"];
   User: User;
-  UserInput: UserInput;
-};
+}>;
+
+export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes["Date"], any> {
+  name: "Date";
+}
+
+export interface DateTimeScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
+  name: "DateTime";
+}
+
+export type NodeResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["Node"] = ResolversParentTypes["Node"]
+> = ResolversObject<{
+  __resolveType?: TypeResolveFn<"SozlukTerm" | "User", ParentType, ContextType>;
+}>;
 
 export type PageInfoResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["PageInfo"] = ResolversParentTypes["PageInfo"]
-> = {
+> = ResolversObject<{
   endCursor: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   hasNextPage: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
   hasPreviousPage: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
   startCursor: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
 export type QueryResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
-> = {
-  sozluk: Resolver<ResolversTypes["SozlukQuery"], ParentType, ContextType>;
-  user: Resolver<
-    Maybe<ResolversTypes["User"]>,
+> = ResolversObject<{
+  node: Resolver<
+    Maybe<ResolversTypes["Node"]>,
     ParentType,
     ContextType,
-    RequireFields<QueryUserArgs, "input">
+    RequireFields<QueryNodeArgs, "id">
   >;
-};
+  sozluk: Resolver<ResolversTypes["SozlukQuery"], ParentType, ContextType>;
+  user: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType, Partial<QueryUserArgs>>;
+}>;
 
 export type SozlukQueryResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["SozlukQuery"] = ResolversParentTypes["SozlukQuery"]
-> = {
+> = ResolversObject<{
   term: Resolver<
     Maybe<ResolversTypes["SozlukTerm"]>,
     ParentType,
     ContextType,
-    RequireFields<SozlukQueryTermArgs, "input">
+    RequireFields<SozlukQueryTermArgs, "id">
   >;
   terms: Resolver<
     Maybe<ResolversTypes["SozlukTermConnection"]>,
@@ -254,58 +290,61 @@ export type SozlukQueryResolvers<
     Partial<SozlukQueryTermsArgs>
   >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
 export type SozlukTermResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["SozlukTerm"] = ResolversParentTypes["SozlukTerm"]
-> = {
+> = ResolversObject<{
   body: Resolver<ResolversTypes["SozlukTermBody"], ParentType, ContextType>;
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  tags: Resolver<Maybe<Array<ResolversTypes["String"]>>, ParentType, ContextType>;
+  tags: Resolver<Array<ResolversTypes["String"]>, ParentType, ContextType>;
   title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
 export type SozlukTermBodyResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["SozlukTermBody"] = ResolversParentTypes["SozlukTermBody"]
-> = {
+> = ResolversObject<{
   code: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   html: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   raw: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
 export type SozlukTermConnectionResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["SozlukTermConnection"] = ResolversParentTypes["SozlukTermConnection"]
-> = {
-  edges: Resolver<Maybe<Array<Maybe<ResolversTypes["SozlukTermEdge"]>>>, ParentType, ContextType>;
+> = ResolversObject<{
+  edges: Resolver<Maybe<Array<ResolversTypes["SozlukTermEdge"]>>, ParentType, ContextType>;
   pageInfo: Resolver<ResolversTypes["PageInfo"], ParentType, ContextType>;
   totalCount: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
 export type SozlukTermEdgeResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["SozlukTermEdge"] = ResolversParentTypes["SozlukTermEdge"]
-> = {
+> = ResolversObject<{
   cursor: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   node: Resolver<Maybe<ResolversTypes["SozlukTerm"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
 export type UserResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
-> = {
+> = ResolversObject<{
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   username: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
-export type Resolvers<ContextType = KampusGQLContext> = {
+export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
+  Date: GraphQLScalarType;
+  DateTime: GraphQLScalarType;
+  Node: NodeResolvers<ContextType>;
   PageInfo: PageInfoResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
   SozlukQuery: SozlukQueryResolvers<ContextType>;
@@ -314,4 +353,4 @@ export type Resolvers<ContextType = KampusGQLContext> = {
   SozlukTermConnection: SozlukTermConnectionResolvers<ContextType>;
   SozlukTermEdge: SozlukTermEdgeResolvers<ContextType>;
   User: UserResolvers<ContextType>;
-};
+}>;

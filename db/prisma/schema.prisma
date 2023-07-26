@@ -77,7 +77,6 @@ model Post {
   title   String
   url     String?
   site    String?
-  slug    String
   content String?
 
   userID String
