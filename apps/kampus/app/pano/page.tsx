@@ -1,5 +1,8 @@
-import { Random } from "./random";
+import { redirect } from "next/navigation";
+
+import { DEFAULT_FILTER_PATH } from "~/app/pano/features/filter/utils";
 
 export default function PanoHome() {
-  return <Random />;
+  redirect(DEFAULT_FILTER_PATH);
+  return <div>Just redirecting</div>;
 }
