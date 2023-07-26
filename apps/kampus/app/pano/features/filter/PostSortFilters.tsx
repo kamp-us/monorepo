@@ -19,9 +19,9 @@ export const PostSortFilters = () => {
 
   return (
     <div className={"flex space-x-2"}>
-      {filters.map((f) => (
-        <PanoFilterLink key={f.query} query={f.query} activeQuery={filterQuery}>
-          {f.label}
+      {Object.entries(filters).map(([query, label]) => (
+        <PanoFilterLink key={query} query={query} activeQuery={filterQuery}>
+          {label}
         </PanoFilterLink>
       ))}
     </div>
