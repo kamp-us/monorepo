@@ -1,4 +1,4 @@
-import { PostSortFilters } from "~/app/pano/features/post/PostSortFilters";
+import { PostSortFilters } from "~/app/pano/features/filter/PostSortFilters";
 
 export default function PostsPage() {
   const posts = [
