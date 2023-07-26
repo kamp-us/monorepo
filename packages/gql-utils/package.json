@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@devoxa/prisma-relay-cursor-connection": "2.2.3",
+    "@kampus/std": "*",
     "dataloader": "2.2.2",
     "object-hash": "3.0.0"
   },
