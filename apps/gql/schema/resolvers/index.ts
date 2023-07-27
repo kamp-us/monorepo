@@ -78,12 +78,16 @@ export const resolvers = {
   },
   SozlukTermConnection: {
     edges: (connection) => connection.edges,
-    pageInfo: (connection) => connection.pageInfo,
+    pageInfo: (connection) => ({
+      ...connection.pageInfo,
+      startCursor: stringify("SozlukTerm", connection.pageInfo.startCursor ?? ""),
+      endCursor: stringify("SozlukTerm", connection.pageInfo.endCursor ?? ""),
+    }),
     totalCount: (connection) => connection.totalCount,
   },
   SozlukTermEdge: {
     node: (edge) => edge.node,
-    cursor: (edge) => edge.cursor,
+    cursor: (edge) => stringify("SozlukTerm", edge.cursor),
   },
   PanoQuery: {
     post: async (_, args, { loaders }) =>
@@ -115,12 +119,16 @@ export const resolvers = {
   PanoPostConnection: {
     nodes: (connection) => connection.nodes,
     edges: (connection) => connection.edges,
-    pageInfo: (connection) => connection.pageInfo,
+    pageInfo: (connection) => ({
+      ...connection.pageInfo,
+      startCursor: stringify("PanoPost", connection.pageInfo.startCursor ?? ""),
+      endCursor: stringify("PanoPost", connection.pageInfo.endCursor ?? ""),
+    }),
     totalCount: (connection) => connection.totalCount,
   },
   PanoPostEdge: {
     node: (edge) => edge.node,
-    cursor: (edge) => edge.cursor,
+    cursor: (edge) => stringify("PanoPost", edge.cursor),
   },
   PageInfo: {
     hasNextPage: (pageInfo) => pageInfo.hasNextPage,
