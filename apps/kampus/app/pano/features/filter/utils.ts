@@ -9,5 +9,5 @@ export const filters: Record<PanoPostFilterType, string> = {
 };
 
 export const DEFAULT_FILTER_PATH = "/pano/posts?filter=all";
-export const isPanoPostSortFilter = (x: any): x is PanoPostFilterType =>
+export const isPanoPostSortFilter = (x: unknown): x is PanoPostFilterType =>
   Object.keys(filters).some((filter) => filter === x);
