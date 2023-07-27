@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { type PanoPostFilterType } from "~/app/pano/features/filter/utils";
+import { type PanoPostFilterType } from "~/app/pano/features/PostFilter/utils";
 
 const createQueryString = (key: string, value: string) => {
   const searchParams = new URLSearchParams();

@@ -2,12 +2,12 @@
 
 import { redirect, useSearchParams } from "next/navigation";
 
-import { PanoFilterLink } from "~/app/pano/features/filter/PanoFilterLink";
+import { PanoFilterLink } from "~/app/pano/features/PostFilter/PanoFilterLink";
 import {
   DEFAULT_FILTER_PATH,
   filters,
   isPanoPostSortFilter,
-} from "~/app/pano/features/filter/utils";
+} from "~/app/pano/features/PostFilter/utils";
 
 export const PostSortFilters = () => {
   const searchParams = useSearchParams();
