@@ -8,6 +8,7 @@ type Query {
 
   user(id: ID, username: String): User
   sozluk: SozlukQuery!
+  pano: PanoQuery!
 }
 
 interface Node {
@@ -53,4 +54,46 @@ type SozlukTermConnection {
 type SozlukTermEdge {
   cursor: String!
   node: SozlukTerm
+}
+
+### PANO
+type PanoQuery {
+  post(id: ID!): PanoPost
+  posts(ids: [ID!]!): [PanoPost]!
+  allPosts(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    filter: PanoPostFilter
+  ): PanoPostConnection
+}
+
+enum PanoPostFilter {
+  ALL
+  HOT
+  LIKED
+  ACTIVE
+  SELF
+}
+
+type PanoPost implements Node {
+  id: ID!
+  title: String!
+  url: String
+  content: String
+  createdAt: DateTime!
+  owner: User
+}
+
+type PanoPostConnection {
+  nodes: [PanoPost]
+  edges: [PanoPostEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PanoPostEdge {
+  cursor: String!
+  node: PanoPost
 }

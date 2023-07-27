@@ -1,6 +1,7 @@
-import { findManyCursorConnection, type Connection } from "@devoxa/prisma-relay-cursor-connection";
+import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import DataLoader from "dataloader";
 
+import { type Connection } from "../connection";
 import { type ConnectionKey } from "./connection-key";
 import { type PrismaModel } from "./types";
 
@@ -14,7 +15,7 @@ export function createPrismaConnectionLoader<TPrisma extends { id: string }>(
       const items = await Promise.all(
         keys.map(async (key) => {
           if (identifier && !key.parentID) {
-            return null;
+            return new Error(`"${identifier}" is required`);
           }
 
           const where =

@@ -7,6 +7,7 @@
   "scripts": {
     "prisma:studio": "prisma studio --schema ./schema.prisma",
     "prisma:generate": "prisma generate --schema ./schema.prisma",
+    "prisma:seed": "prisma db seed --schema ./schema.prisma",
     "prisma:push": "prisma db push --skip-generate --schema ./schema.prisma",
     "prisma:migrate:dev": "prisma migrate dev --schema ./schema.prisma",
     "prisma:migrate:deploy": "prisma migrate deploy --schema ./schema.prisma"
