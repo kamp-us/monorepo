@@ -1,23 +1,46 @@
 import { PostSortFilters } from "../features/PostFilter/PostSortFilters";
 import { PostList } from "../features/PostList";
 
+type Post = {
+  __typename?: "PanoPost";
+  content: string;
+  createdAt: string;
+  id: string;
+  owner: string;
+  title: string;
+  url: string;
+};
+
 export default function PostsPage() {
-  const posts = [
-    { id: 1, title: "Post1" },
-    { id: 2, title: "Post2" },
-    { id: 3, title: "Post3" },
+  const posts: Post[] = [
+    {
+      __typename: "PanoPost",
+      content: "Muthis",
+      createdAt: "1 ay once",
+      id: "1",
+      owner: "Can",
+      title: "Can'in muthis postu",
+      url: "/wow.sh",
+    },
+    {
+      __typename: "PanoPost",
+      content: "Yuppi",
+      createdAt: "1 hafta once",
+      id: "2",
+      owner: "Vladik",
+      title: "Vladik'in muthis postu",
+      url: "/wow.sh",
+    },
   ];
 
   return (
-    <div>
-      <PostSortFilters />
-      {posts.map((post) => {
-        return (
-          <div key={post.id}>
-            <a href={`/pano/post/${post.id}`}>{post.title}</a>
-          </div>
-        );
-      })}
+    <div className="flex flex-col">
+      <div className="flex">
+        <PostSortFilters />
+      </div>
+      <div>
+        <PostList posts={posts} />
+      </div>
     </div>
   );
 }
