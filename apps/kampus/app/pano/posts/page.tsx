@@ -1,3 +1,4 @@
+import { ThemeToggle } from "~/../../packages/ui";
 import { PostSortFilters } from "../features/PostFilter/PostSortFilters";
 import { PostList } from "../features/PostList";
 
@@ -35,6 +36,7 @@ export default function PostsPage() {
 
   return (
     <div className="flex flex-col">
+      <ThemeToggle />
       <div className="flex">
         <PostSortFilters />
       </div>

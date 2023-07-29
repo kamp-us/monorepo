@@ -4,6 +4,8 @@ import { RelayEnvironmentProvider } from "~/features/relay/RelayEnvironmentProvi
 
 import "./globals.css";
 
+import { ThemeProvider } from "~/../../packages/ui";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -15,7 +17,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <RelayEnvironmentProvider>{children}</RelayEnvironmentProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <RelayEnvironmentProvider>{children}</RelayEnvironmentProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
