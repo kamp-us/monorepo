@@ -1,18 +1,20 @@
-### Introduction
+### Giriş
 
-This is the first of the two part course where we dig deeper into HTML and CSS.
+Bu bölüm, HTML ve CSS'i daha derinlemesine incelediğimiz iki bölümlük kursun ilkidir.
 
-Our foundations lessons, by design, only scratched the surface of what's possible. We wanted to give you all of the bare necessities for getting started so you could move on and be somewhat productive as quickly as possible, but now it's time to slow down and dig in!
+Temel bilgiler derslerimiz, tasarım gereği, sadece mümkün olana ilk adımı attı. Mümkün olduğunca çabuk ilerleyebilmeniz ve bir şekilde üretken olabilmeniz için başlangıçta ihtiyacınız olan tüm temel bilgileri vermek istedik, ancak şimdi yavaşlama ve ayrıntıya girme zamanı!
 
-You have probably realized by now that there are many more HTML elements than we mentioned in our foundations content. Throughout this course we'll be hitting the rest of the important elements such as forms and tables.
+Şimdiye kadar muhtemelen temel bilgiler bölümünde bahsettiğimizden çok daha fazla HTML öğesi olduğunu fark etmişsinizdir. Bu kurs boyunca formlar ve tablolar gibi diğer önemli öğelere de değineceğiz.
 
-There is also a _lot_ more that you can do with CSS that you'll learn throughout this course, such as variables, functions, shadows and of course grid layouts! So buckle up! By the time you finish this course you'll be able to recreate just about any web design you can find on the internet... which is an important skill to carry forward. Even if you are not shooting for a front-end specific job, being able to make your portfolio pieces look nice is important when it comes to making yourself stand out.
+Ayrıca bu kurs boyunca öğreneceğiniz değişkenler, fonksiyonlar, gölgeler ve tabii ki grid düzenleri gibi CSS ile yapabileceğiniz _çok daha fazla_ şey var! O yüzden kemerlerinizi bağlayın! Bu kursu bitirdiğinizde internette bulabileceğiniz hemen hemen her web tasarımını yeniden yaratabileceksiniz... ki bu ileriye taşımak için önemli bir beceridir. Önyüz özel bir iş istemiyor olsanız bile, portföyünüzün güzel görünmesini sağlamak, kendinizi öne çıkarmak konusunda oldukça önemlidir.
 
-You'll learn about animations, accessibility and responsive design in the second part of this course later in the curriculum.
+Müfredatın ilerleyen bölümlerinde bu dersin ikinci kısmında animasyonlar, erişilebilirlik ve duyarlı tasarım hakkında bilgi edineceksiniz.
 
-### Assignment
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
-1. Read through this [HTML elements reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) to get an overview of what other HTML elements are available to you. No need to commit this to memory because you'll be learning the important parts as we go, but having a glance now will help the content stick later.
-2. Take a glance at a somewhat overwhelming looking [CSS Cheat Sheet](https://htmlcheatsheet.com/css/).  Again, we don't need you to learn anything specific, or memorize anything from this list, just use it to get a feel for what you still have left to learn!
+
+1. Kullanabileceğiniz diğer HTML öğeleri hakkında genel bir bilgi edinmek için bu [HTML öğeleri referansı](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) sayfasını okuyun. Bunu ezberlemenize gerek yok çünkü önemli kısımları ilerledikçe öğreneceksiniz, ancak şimdilik bir göz atmanız içeriğin daha sonra kalıcı olmasına yardımcı olacaktır.
+2. Biraz bunaltıcı görünen [CSS Cheat Sheet](https://htmlcheatsheet.com/css/)'e bir göz atın.  Yine, bu listeden belirli bir şey öğrenmenize veya ezberlemenize gerek yok, sadece öğrenmeniz gerekenler hakkında bir fikir edinmek için kullanın!
+
 </div>
