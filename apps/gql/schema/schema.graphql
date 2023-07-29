@@ -25,6 +25,14 @@ type PageInfo {
 type User implements Node {
   id: ID!
   username: String!
+
+  panoPosts(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    filter: PanoPostFilter
+  ): PanoPostConnection
 }
 
 type SozlukQuery {

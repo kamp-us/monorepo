@@ -1,7 +1,7 @@
 import { DateResolver, DateTimeResolver } from "graphql-scalars";
 
 import { ConnectionKey } from "@kampus/gql-utils";
-import { type ConnectionArguments } from "@kampus/gql-utils/connection";
+import { type ConnectionArguments, type PageInfo } from "@kampus/gql-utils/connection";
 import { parse, stringify } from "@kampus/gql-utils/global-id";
 import { type User } from "@kampus/prisma";
 import { assertNever } from "@kampus/std";
@@ -14,10 +14,16 @@ import { type Resolvers, type ResolversInterfaceTypes } from "../types.generated
 
 type NodeTypename = ResolversInterfaceTypes<Dictionary>["Node"]["__typename"];
 
-const transformConnectionArgs = (type: NodeTypename, args: ConnectionArguments) => ({
+const transformPageInfo = (type: NodeTypename, pageInfo: PageInfo) => ({
+  ...pageInfo,
+  startCursor: stringify(type, pageInfo.startCursor ?? ""),
+  endCursor: stringify(type, pageInfo.endCursor ?? ""),
+});
+
+const parseConnectionArgs = (args: ConnectionArguments) => ({
   ...args,
-  after: args.after ? stringify(type, args.after) : null,
-  before: args.before ? stringify(type, args.before) : null,
+  after: args.after ? parse(args.after).value : null,
+  before: args.before ? parse(args.before).value : null,
 });
 
 export const resolvers = {
@@ -70,7 +76,9 @@ export const resolvers = {
     term: async (_, args, { loaders }) =>
       transformSozlukTerm(await loaders.sozluk.term.load(args.id)),
     terms: async (_, args, { loaders }) => {
-      return transformSozlukTermsConnection(await loaders.sozluk.terms.load(args));
+      return transformSozlukTermsConnection(
+        await loaders.sozluk.terms.load(parseConnectionArgs(args))
+      );
     },
   },
   SozlukTerm: {
@@ -86,11 +94,7 @@ export const resolvers = {
   },
   SozlukTermConnection: {
     edges: (connection) => connection.edges,
-    pageInfo: (connection) => ({
-      ...connection.pageInfo,
-      startCursor: stringify("SozlukTerm", connection.pageInfo.startCursor ?? ""),
-      endCursor: stringify("SozlukTerm", connection.pageInfo.endCursor ?? ""),
-    }),
+    pageInfo: (connection) => transformPageInfo("SozlukTerm", connection.pageInfo),
     totalCount: (connection) => connection.totalCount,
   },
   SozlukTermEdge: {
@@ -109,7 +113,7 @@ export const resolvers = {
     },
     allPosts: async (_, args, { loaders }) => {
       const posts = await loaders.pano.post.all.load(
-        new ConnectionKey(null, transformConnectionArgs("PanoPost", args))
+        new ConnectionKey(null, parseConnectionArgs(args))
       );
 
       return transformPanoPostConnection(posts);
@@ -130,11 +134,7 @@ export const resolvers = {
   PanoPostConnection: {
     nodes: (connection) => connection.nodes,
     edges: (connection) => connection.edges,
-    pageInfo: (connection) => ({
-      ...connection.pageInfo,
-      startCursor: stringify("PanoPost", connection.pageInfo.startCursor ?? ""),
-      endCursor: stringify("PanoPost", connection.pageInfo.endCursor ?? ""),
-    }),
+    pageInfo: (connection) => transformPageInfo("PanoPost", connection.pageInfo),
     totalCount: (connection) => connection.totalCount,
   },
   PanoPostEdge: {
@@ -150,5 +150,9 @@ export const resolvers = {
   User: {
     id: (user) => stringify("User", user.id),
     username: (u) => u.username,
+    panoPosts: async (user, args, { loaders }) =>
+      transformPanoPostConnection(
+        await loaders.pano.post.byUserID.load(new ConnectionKey(user.id, args))
+      ),
   },
 } satisfies Resolvers;
