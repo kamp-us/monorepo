@@ -21,13 +21,17 @@ export const PostItem = (props: PostItemProps) => {
       <div className="flex items-center">
         <UpvoteButton upvoteCount={10} isUpvoted={false} disabled={false} isVoting={false} />
       </div>
-      <div className="flex w-full flex-col gap-1">
-        <div className="flex gap-1 align-baseline">
+      <div className="flex w-full flex-col">
+        <div className="flex items-center gap-1 align-baseline">
           <PanoLink title={props.post.title} href={props.post.url} variant="external" />
-          <PanoLink title="/wow.sh" href={props.post.url} />
+          <div className="text-sm">
+            <PanoLink title="wow.sh" href={props.post.url} />
+          </div>
         </div>
-        <div className="flex">
-          @{props.post.owner} | 0 yorum | {props.post.createdAt}
+        <div className="flex gap-1 text-sm">
+          <div>@{props.post.owner} |</div>
+          <div>{<PanoLink title="0 yorum" href={`/pano/post/${props.post.id}/`} />} |</div>
+          <div>{props.post.createdAt}</div>
         </div>
       </div>
     </div>

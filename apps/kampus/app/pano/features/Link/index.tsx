@@ -10,16 +10,16 @@ interface PanoLinkProps {
 
 export const PanoLink = ({ href, title, variant = "internal" }: PanoLinkProps) => {
   // TODO: Differentiate between internal and external links with css
-  const css = "text-secondary-foreground hover:text-primary-foreground";
 
   if (variant === "external") {
     return (
-      <a className={css} href={href}>
+      <a className="text-primary" href={href}>
         {title}
       </a>
     );
   }
 
+  const css = "text-muted-foreground hover:underline";
   return (
     <Link className={css} href={href}>
       {title}

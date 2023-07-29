@@ -21,7 +21,7 @@ export default function PostsPage() {
       id: "1",
       owner: "Can",
       title: "Can'in muthis postu",
-      url: "/wow.sh",
+      url: "wow.sh",
     },
     {
       __typename: "PanoPost",
@@ -30,7 +30,7 @@ export default function PostsPage() {
       id: "2",
       owner: "Vladik",
       title: "Vladik'in muthis postu",
-      url: "/wow.sh",
+      url: "https://wow.sh",
     },
   ];
 

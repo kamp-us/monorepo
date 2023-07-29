@@ -18,7 +18,7 @@ export const PostList = (props: PostListProps) => {
   const { posts } = props;
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       {posts.map((post) => {
         return <PostItem key={post.id} post={post} />;
       })}
