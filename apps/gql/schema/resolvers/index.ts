@@ -1,6 +1,7 @@
 import { DateResolver, DateTimeResolver } from "graphql-scalars";
 
 import { ConnectionKey } from "@kampus/gql-utils";
+import { type ConnectionArguments } from "@kampus/gql-utils/connection";
 import { parse, stringify } from "@kampus/gql-utils/global-id";
 import { type User } from "@kampus/prisma";
 import { assertNever } from "@kampus/std";
@@ -12,6 +13,12 @@ import { transformUser } from "~/loaders/user";
 import { type Resolvers, type ResolversInterfaceTypes } from "../types.generated";
 
 type NodeTypename = ResolversInterfaceTypes<Dictionary>["Node"]["__typename"];
+
+const transformConnectionArgs = (type: NodeTypename, args: ConnectionArguments) => ({
+  ...args,
+  after: args.after ? stringify(type, args.after) : null,
+  before: args.before ? stringify(type, args.before) : null,
+});
 
 export const resolvers = {
   Date: DateResolver,
@@ -62,8 +69,9 @@ export const resolvers = {
   SozlukQuery: {
     term: async (_, args, { loaders }) =>
       transformSozlukTerm(await loaders.sozluk.term.load(args.id)),
-    terms: async (_, args, { loaders }) =>
-      transformSozlukTermsConnection(await loaders.sozluk.terms.load(args)),
+    terms: async (_, args, { loaders }) => {
+      return transformSozlukTermsConnection(await loaders.sozluk.terms.load(args));
+    },
   },
   SozlukTerm: {
     id: (term) => stringify("SozlukTerm", term.id),
@@ -100,7 +108,10 @@ export const resolvers = {
       });
     },
     allPosts: async (_, args, { loaders }) => {
-      const posts = await loaders.pano.post.all.load(new ConnectionKey(null, args));
+      const posts = await loaders.pano.post.all.load(
+        new ConnectionKey(null, transformConnectionArgs("PanoPost", args))
+      );
+
       return transformPanoPostConnection(posts);
     },
   },
