@@ -150,5 +150,9 @@ export const resolvers = {
   User: {
     id: (user) => stringify("User", user.id),
     username: (u) => u.username,
+    panoPosts: async (user, args, { loaders }) =>
+      transformPanoPostConnection(
+        await loaders.pano.post.byUserID.load(new ConnectionKey(user.id, args))
+      ),
   },
 } satisfies Resolvers;

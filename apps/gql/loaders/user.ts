@@ -31,4 +31,5 @@ export const transformUser = (user: User) => ({
   ...user,
   __typename: "User" as const,
   username: user.username ?? "",
+  panoPosts: null,
 });

@@ -151,7 +151,16 @@ export type SozlukTermEdge = {
 export type User = Node & {
   __typename?: "User";
   id: Scalars["ID"]["output"];
+  panoPosts: Maybe<PanoPostConnection>;
   username: Scalars["String"]["output"];
+};
+
+export type UserPanoPostsArgs = {
+  after: InputMaybe<Scalars["String"]["input"]>;
+  before: InputMaybe<Scalars["String"]["input"]>;
+  filter: InputMaybe<PanoPostFilter>;
+  first: InputMaybe<Scalars["Int"]["input"]>;
+  last: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -458,6 +467,12 @@ export type UserResolvers<
   ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
 > = ResolversObject<{
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  panoPosts: Resolver<
+    Maybe<ResolversTypes["PanoPostConnection"]>,
+    ParentType,
+    ContextType,
+    Partial<UserPanoPostsArgs>
+  >;
   username: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
