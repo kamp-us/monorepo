@@ -1,4 +1,3 @@
-import { ThemeToggle } from "~/../../packages/ui";
 import { PostSortFilters } from "../features/PostFilter/PostSortFilters";
 import { PostList } from "../features/PostList";
 
