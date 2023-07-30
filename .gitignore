@@ -43,3 +43,5 @@ yarn-error.log*
 .turbo
 
 !deploy/build
+
+.vercel
