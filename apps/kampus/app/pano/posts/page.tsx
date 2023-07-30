@@ -36,7 +36,6 @@ const posts: Post[] = [
 export default function PostsPage() {
   return (
     <div className="flex flex-col gap-4">
-      <ThemeToggle />
       <PostSortFilters />
       <PostList posts={posts} />
     </div>
