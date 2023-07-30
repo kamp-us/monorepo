@@ -43,4 +43,6 @@ yarn-error.log*
 .turbo
 
 !deploy/build
+
+.vercel
 !/.vscode/extensions.json
