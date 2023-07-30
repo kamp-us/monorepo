@@ -14,13 +14,13 @@
   },
   "devDependencies": {
     "@kampus/tailwind": "*",
-    "@types/react-relay": "14.1.4",
-    "relay-compiler": "15.0.0"
+    "@types/react-relay": "14.1.4"
   },
   "dependencies": {
     "@kampus/next-auth": "*",
     "@kampus/relay": "*",
     "react-relay": "15.0.0",
+    "relay-compiler": "15.0.0",
     "znv": "0.3.2",
     "zod": "3.21.4"
   }
