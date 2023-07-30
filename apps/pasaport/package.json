@@ -19,12 +19,14 @@
     "@vitest/ui": "0.32.2",
     "vite-tsconfig-paths": "4.2.0",
     "vitest": "0.32.2",
-    "vitest-mock-extended": "1.1.3"
+    "vitest-mock-extended": "1.1.3",
+    "@kampus/tailwind": "*"
   },
   "dependencies": {
     "znv": "0.3.2",
     "zod": "3.21.4",
     "@kampus/email": "*",
-    "@kampus/next-auth": "*"
+    "@kampus/next-auth": "*",
+    "@kampus/ui-next": "*"
   }
 }

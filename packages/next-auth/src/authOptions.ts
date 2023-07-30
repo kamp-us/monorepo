@@ -14,6 +14,8 @@ const prismaAdapter = PrismaAdapter(prisma) as Adapter;
 
 const useSecureCookies = !!env.VERCEL_URL;
 
+const existingProviders = ["GitHub", "Discord", "Twitch"];
+
 export const authOptions: AuthOptions = {
   adapter: prismaAdapter,
   secret: env.SECRET,
@@ -32,6 +34,28 @@ export const authOptions: AuthOptions = {
       clientSecret: env.TWITCH_SECRET,
     }),
   ],
+  callbacks: {
+    async session({ session, user }) {
+      const providers = await prisma.account.findMany({
+        where: {
+          userId: user.id,
+        },
+        select: {
+          provider: true,
+        },
+      });
+      return {
+        ...session,
+        user: {
+          ...user,
+          providers: existingProviders.map((p) => ({
+            name: p,
+            connected: providers.some((pr) => pr.provider.toLowerCase() === p.toLowerCase()),
+          })),
+        },
+      };
+    },
+  },
   cookies: {
     sessionToken: {
       name: `${useSecureCookies ? "__Secure-" : ""}next-auth.session-token`,
