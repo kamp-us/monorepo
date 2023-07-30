@@ -39,7 +39,7 @@ export const PostItem = (props: PostItemProps) => {
       <div className="ml-1 flex h-full">
         <UpvoteButton upvoteCount={5} isUpvoted={false} disabled={false} isVoting={false} />
       </div>
-      <div className="flex w-full flex-col">
+      <div className="flex w-full flex-col justify-center">
         <div className="flex items-center gap-1 align-baseline">
           <Link title={props.post.title} href={props.post.url} />
           <Link className="text-sm" title="wow.sh" href={props.post.url} />

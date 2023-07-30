@@ -1,5 +1,5 @@
 import { PostSortFilters } from "~/app/pano/features/post-filter/PostSortFilters";
-import { PostList } from "../features/post-list";
+import { PostList } from "../features/post-list/PostList";
 
 type Post = {
   __typename?: "PanoPost";
