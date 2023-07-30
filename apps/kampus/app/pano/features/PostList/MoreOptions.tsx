@@ -6,9 +6,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  FacebookShare,
-  RedditShare,
-  TwitterShare,
 } from "@kampus/ui-next";
 
 interface Props {
@@ -28,6 +25,7 @@ type Post = {
 
 export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
   // const user = useUserContext();
+  console.log(post, shareUrl);
 
   const ownerItems: JSX.Element[] = [];
   // if (canUserEdit(user, post)) {
