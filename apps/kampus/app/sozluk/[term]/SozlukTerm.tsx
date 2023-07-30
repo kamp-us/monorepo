@@ -20,7 +20,7 @@ export const SozlukTermContainer = (props: Props) => {
     graphql`
       query SozlukTermQuery($id: ID!) {
         sozluk {
-          term(input: { id: $id }) {
+          term(id: $id) {
             body {
               ...SozlukTermBody_body
             }

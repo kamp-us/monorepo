@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b4462c3458da3d3dad9453ce25becec7>>
+ * @generated SignedSource<<0607f440cba7ab2a27fe27945fda43c6>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -38,15 +38,9 @@ var v0 = [
 ],
 v1 = [
   {
-    "fields": [
-      {
-        "kind": "Variable",
-        "name": "id",
-        "variableName": "id"
-      }
-    ],
-    "kind": "ObjectValue",
-    "name": "input"
+    "kind": "Variable",
+    "name": "id",
+    "variableName": "id"
   }
 ];
 return {
@@ -166,16 +160,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "1b33e6b23bd1328f9e608ba6784029ca",
+    "cacheID": "5f5ae35be4d410b783292852cf6de435",
     "id": null,
     "metadata": {},
     "name": "SozlukTermQuery",
     "operationKind": "query",
-    "text": "query SozlukTermQuery(\n  $id: ID!\n) {\n  sozluk {\n    term(input: {id: $id}) {\n      body {\n        ...SozlukTermBody_body\n      }\n      ...SozlukTermTitle_title\n      id\n    }\n  }\n}\n\nfragment SozlukTermBody_body on SozlukTermBody {\n  html\n}\n\nfragment SozlukTermTitle_title on SozlukTerm {\n  title\n}\n"
+    "text": "query SozlukTermQuery(\n  $id: ID!\n) {\n  sozluk {\n    term(id: $id) {\n      body {\n        ...SozlukTermBody_body\n      }\n      ...SozlukTermTitle_title\n      id\n    }\n  }\n}\n\nfragment SozlukTermBody_body on SozlukTermBody {\n  html\n}\n\nfragment SozlukTermTitle_title on SozlukTerm {\n  title\n}\n"
   }
 };
 })();
 
-(node as any).hash = "0079e4dfdf38ca0bea6990f11661f126";
+(node as any).hash = "3fe0834cd15a55bc4548c13748506b45";
 
 export default node;
