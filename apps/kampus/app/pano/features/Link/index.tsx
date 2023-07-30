@@ -1,27 +1,28 @@
 import Link from "next/link";
 
+import { cn } from "~/../../packages/ui/utils";
+
 type PanoLinkTypes = "external" | "internal";
 
 interface PanoLinkProps {
   href: string;
   title: string;
   variant?: PanoLinkTypes;
+  className?: string;
 }
 
-export const PanoLink = ({ href, title, variant = "internal" }: PanoLinkProps) => {
+export const PanoLink = ({ href, title, variant = "internal", className }: PanoLinkProps) => {
   // TODO: Differentiate between internal and external links with css
-
   if (variant === "external") {
     return (
-      <a className="text-primary" href={href}>
+      <a className={cn("text-primary", className)} href={href}>
         {title}
       </a>
     );
   }
 
-  const css = "text-muted-foreground hover:underline";
   return (
-    <Link className={css} href={href}>
+    <Link className={cn("text-muted-foreground hover:underline", className)} href={href}>
       {title}
     </Link>
   );
