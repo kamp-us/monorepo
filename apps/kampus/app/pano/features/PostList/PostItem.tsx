@@ -1,4 +1,5 @@
 import { PanoLink } from "../Link";
+import { MoreOptionsDropdown } from "./MoreOptions";
 import { UpvoteButton } from "./PostUpvoteButton";
 
 type Post = {
@@ -18,20 +19,17 @@ type PostItemProps = {
 export const PostItem = (props: PostItemProps) => {
   return (
     <div className="flex gap-1">
-      <div className="flex items-center">
-        <UpvoteButton upvoteCount={10} isUpvoted={false} disabled={false} isVoting={false} />
-      </div>
+      <UpvoteButton upvoteCount={5} isUpvoted={false} disabled={false} isVoting={false} />
       <div className="flex w-full flex-col">
         <div className="flex items-center gap-1 align-baseline">
           <PanoLink title={props.post.title} href={props.post.url} variant="external" />
-          <div className="text-sm">
-            <PanoLink title="wow.sh" href={props.post.url} />
-          </div>
+          <PanoLink className="text-sm" title="wow.sh" href={props.post.url} />
         </div>
-        <div className="flex gap-1 text-sm">
+        <div className="flex items-center gap-1 align-baseline">
           <div>@{props.post.owner} |</div>
           <div>{<PanoLink title="0 yorum" href={`/pano/post/${props.post.id}/`} />} |</div>
-          <div>{props.post.createdAt}</div>
+          <div>{props.post.createdAt} |</div>
+          <MoreOptionsDropdown post={props.post} shareUrl={props.post.url} />
         </div>
       </div>
     </div>
