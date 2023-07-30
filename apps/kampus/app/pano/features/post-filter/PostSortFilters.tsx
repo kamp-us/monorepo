@@ -2,12 +2,14 @@
 
 import { redirect, useSearchParams } from "next/navigation";
 
-import { PanoFilterLink } from "~/app/pano/features/filter/PanoFilterLink";
+import { ThemeToggle } from "@kampus/ui-next";
+
+import { PanoFilterLink } from "~/app/pano/features/post-filter/PanoFilterLink";
 import {
   DEFAULT_FILTER_PATH,
   filters,
   isPanoPostSortFilter,
-} from "~/app/pano/features/filter/utils";
+} from "~/app/pano/features/post-filter/utils";
 
 export const PostSortFilters = () => {
   const searchParams = useSearchParams();
@@ -18,12 +20,13 @@ export const PostSortFilters = () => {
   }
 
   return (
-    <div className={"flex space-x-2"}>
+    <div className="flex items-center space-x-2">
       {Object.entries(filters).map(([query, label]) => (
         <PanoFilterLink key={query} query={query} activeQuery={filterQuery}>
           {label}
         </PanoFilterLink>
       ))}
+      <ThemeToggle />
     </div>
   );
 };
