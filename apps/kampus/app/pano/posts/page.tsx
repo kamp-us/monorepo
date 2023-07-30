@@ -12,37 +12,33 @@ type Post = {
   url: string;
 };
 
-export default function PostsPage() {
-  const posts: Post[] = [
-    {
-      __typename: "PanoPost",
-      content: "Muthis",
-      createdAt: "1 ay once",
-      id: "1",
-      owner: "Can",
-      title: "Can'in muthis postu",
-      url: "wow.sh",
-    },
-    {
-      __typename: "PanoPost",
-      content: "Yuppi",
-      createdAt: "1 hafta once",
-      id: "2",
-      owner: "Vladik",
-      title: "Vladik'in muthis postu",
-      url: "https://wow.sh",
-    },
-  ];
+const posts: Post[] = [
+  {
+    __typename: "PanoPost",
+    content: "Muthis",
+    createdAt: "1 ay once",
+    id: "1",
+    owner: "Can",
+    title: "Can'in muthis postu",
+    url: "wow.sh",
+  },
+  {
+    __typename: "PanoPost",
+    content: "Yuppi",
+    createdAt: "1 hafta once",
+    id: "2",
+    owner: "Vladik",
+    title: "Vladik'in muthis postu",
+    url: "https://wow.sh",
+  },
+];
 
+export default function PostsPage() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-4">
       <ThemeToggle />
-      <div className="flex">
-        <PostSortFilters />
-      </div>
-      <div>
-        <PostList posts={posts} />
-      </div>
+      <PostSortFilters />
+      <PostList posts={posts} />
     </div>
   );
 }

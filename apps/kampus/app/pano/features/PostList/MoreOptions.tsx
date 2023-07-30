@@ -51,7 +51,7 @@ export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button className="h-5 p-1" variant="ghost">
-          <MoreHorizontal aria-label="Daha fazla seçenek" />
+          <MoreHorizontal size="16" aria-label="Daha fazla seçenek" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
