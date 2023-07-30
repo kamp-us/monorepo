@@ -24,7 +24,7 @@ public/build
 
 #idea
 /.idea
-/.vscode
+/.vscode/*
 
 # debug
 npm-debug.log*
@@ -45,3 +45,4 @@ yarn-error.log*
 !deploy/build
 
 .vercel
+!/.vscode/extensions.json
