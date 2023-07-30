@@ -1,8 +1,7 @@
 import { Triangle } from "lucide-react";
 
 import { Button } from "@kampus/ui-next";
-
-import { cn } from "~/../../packages/ui/utils";
+import { cn } from "@kampus/ui-next/utils";
 
 interface UpvoteProps {
   isUpvoted: boolean;

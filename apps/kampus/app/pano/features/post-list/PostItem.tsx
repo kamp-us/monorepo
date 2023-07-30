@@ -1,4 +1,7 @@
-import { PanoLink } from "../Link";
+import NextLink from "next/link";
+
+import { cn } from "@kampus/ui-next/utils";
+
 import { MoreOptionsDropdown } from "./MoreOptions";
 import { UpvoteButton } from "./PostUpvoteButton";
 
@@ -16,6 +19,20 @@ type PostItemProps = {
   post: Post;
   showContent?: boolean;
 };
+
+interface LinkProps {
+  href: string;
+  title: string;
+  className?: string;
+}
+
+const Link = ({ href, title, className }: LinkProps) => {
+  return (
+    <NextLink className={cn("text-muted-foreground hover:underline", className)} href={href}>
+      {title}
+    </NextLink>
+  );
+};
 export const PostItem = (props: PostItemProps) => {
   return (
     <div className="mr-1 flex h-full gap-1 border-l-2">
@@ -24,12 +41,12 @@ export const PostItem = (props: PostItemProps) => {
       </div>
       <div className="flex w-full flex-col">
         <div className="flex items-center gap-1 align-baseline">
-          <PanoLink title={props.post.title} href={props.post.url} variant="external" />
-          <PanoLink className="text-sm" title="wow.sh" href={props.post.url} />
+          <Link title={props.post.title} href={props.post.url} />
+          <Link className="text-sm" title="wow.sh" href={props.post.url} />
         </div>
         <div className="flex items-center gap-1 text-sm">
           <div>@{props.post.owner} |</div>
-          <div>{<PanoLink title="0 yorum" href={`/pano/post/${props.post.id}/`} />} |</div>
+          <div>{<Link title="0 yorum" href={`/pano/post/${props.post.id}/`} />} |</div>
           <div>{props.post.createdAt} |</div>
           <MoreOptionsDropdown post={props.post} shareUrl={props.post.url} />
         </div>

@@ -4,12 +4,12 @@ import { redirect, useSearchParams } from "next/navigation";
 
 import { ThemeToggle } from "@kampus/ui-next";
 
-import { PanoFilterLink } from "~/app/pano/features/PostFilter/PanoFilterLink";
+import { PanoFilterLink } from "~/app/pano/features/post-filter/PanoFilterLink";
 import {
   DEFAULT_FILTER_PATH,
   filters,
   isPanoPostSortFilter,
-} from "~/app/pano/features/PostFilter/utils";
+} from "~/app/pano/features/post-filter/utils";
 
 export const PostSortFilters = () => {
   const searchParams = useSearchParams();
