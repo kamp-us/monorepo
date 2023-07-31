@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<1e903bb67341b5ce10d2846138dcfb01>>
+ * @generated SignedSource<<f43db615bdf79648dde1d7dd5092e93d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -19,6 +19,10 @@ export type AllPostsFragment$data = {
           readonly " $fragmentSpreads": FragmentRefs<"PostItem_post">;
         } | null;
       } | null> | null;
+      readonly pageInfo: {
+        readonly endCursor: string | null;
+        readonly startCursor: string | null;
+      };
     } | null;
   };
   readonly " $fragmentType": "AllPostsFragment";
@@ -41,18 +45,28 @@ return {
       "name": "after"
     },
     {
+      "defaultValue": null,
+      "kind": "LocalArgument",
+      "name": "before"
+    },
+    {
       "defaultValue": 2,
       "kind": "LocalArgument",
       "name": "first"
+    },
+    {
+      "defaultValue": null,
+      "kind": "LocalArgument",
+      "name": "last"
     }
   ],
   "kind": "Fragment",
   "metadata": {
     "connection": [
       {
-        "count": "first",
-        "cursor": "after",
-        "direction": "forward",
+        "count": null,
+        "cursor": null,
+        "direction": "bidirectional",
         "path": (v0/*: any*/)
       }
     ],
@@ -62,7 +76,10 @@ return {
           "count": "first",
           "cursor": "after"
         },
-        "backward": null,
+        "backward": {
+          "count": "last",
+          "cursor": "before"
+        },
         "path": (v0/*: any*/)
       },
       "fragmentPathInResult": [],
@@ -87,6 +104,45 @@ return {
           "name": "__AllPostFragment_pano_allPosts_connection",
           "plural": false,
           "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "PageInfo",
+              "kind": "LinkedField",
+              "name": "pageInfo",
+              "plural": false,
+              "selections": [
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "startCursor",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "endCursor",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "hasNextPage",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "hasPreviousPage",
+                  "storageKey": null
+                }
+              ],
+              "storageKey": null
+            },
             {
               "alias": null,
               "args": null,
@@ -127,31 +183,6 @@ return {
                 }
               ],
               "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "concreteType": "PageInfo",
-              "kind": "LinkedField",
-              "name": "pageInfo",
-              "plural": false,
-              "selections": [
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "endCursor",
-                  "storageKey": null
-                },
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "hasNextPage",
-                  "storageKey": null
-                }
-              ],
-              "storageKey": null
             }
           ],
           "storageKey": null
@@ -165,6 +196,6 @@ return {
 };
 })();
 
-(node as any).hash = "f7288dfc2eec6f4e2bcdb7f1c93348d8";
+(node as any).hash = "04baeacc8131b36fde7e1f200f703310";
 
 export default node;

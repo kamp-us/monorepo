@@ -9,10 +9,20 @@ import { type AllPostsPaginationQuery } from "./__generated__/AllPostsPagination
 
 const fragment = graphql`
   fragment AllPostsFragment on Query
-  @argumentDefinitions(after: { type: "String" }, first: { type: "Int", defaultValue: 2 })
+  @argumentDefinitions(
+    after: { type: "String" }
+    first: { type: "Int", defaultValue: 2 }
+    before: { type: "String" }
+    last: { type: "Int" }
+  )
   @refetchable(queryName: "AllPostsPaginationQuery") {
     pano {
-      allPosts(first: $first, after: $after) @connection(key: "AllPostFragment_pano_allPosts") {
+      allPosts(first: $first, after: $after, last: $last, before: $before)
+        @connection(key: "AllPostFragment_pano_allPosts") {
+        pageInfo {
+          startCursor
+          endCursor
+        }
         edges {
           cursor
           node {
@@ -29,20 +39,27 @@ interface Props {
 }
 
 export function AllPosts(props: Props) {
-  const { data, loadNext, isLoadingNext, refetch, hasNext } = usePaginationFragment<
+  const { data, refetch, hasNext, hasPrevious } = usePaginationFragment<
     AllPostsPaginationQuery,
     AllPostsFragment$key
   >(fragment, props.allPosts);
 
-  const loadMore = useCallback(() => {
-    console.log({ isLoadingNext, hasNext });
-    if (!isLoadingNext && hasNext) {
-      loadNext(2);
+  const allPosts = data.pano.allPosts;
+
+  const loadPrevPage = useCallback(() => {
+    if (allPosts?.pageInfo.startCursor && hasPrevious) {
+      refetch({ before: allPosts.pageInfo.startCursor, last: 2 });
     }
-  }, [hasNext, isLoadingNext, loadNext]);
+  }, [allPosts?.pageInfo.startCursor, hasPrevious, refetch]);
+
+  const loadNextPage = useCallback(() => {
+    if (allPosts?.pageInfo.endCursor && hasNext) {
+      refetch({ after: allPosts.pageInfo.endCursor, first: 2 });
+    }
+  }, [allPosts?.pageInfo.endCursor, hasNext, refetch]);
 
   return (
-    <section>
+    <section className="flex flex-col gap-4">
       {data?.pano.allPosts?.edges?.map((edge) => {
         if (!edge?.node) {
           return null;
@@ -55,19 +72,12 @@ export function AllPosts(props: Props) {
         return <PostItem key={edge.cursor} post={edge.node} />;
       })}
 
-      <div>
-        <Button onClick={loadMore} disabled={isLoadingNext}>
-          {isLoadingNext ? "Loading..." : "Load More"}
+      <div className="flex gap-2">
+        <Button variant="secondary" onClick={loadPrevPage} disabled={!hasPrevious}>
+          {"< Prev"}
         </Button>
-        <Button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            refetch({ first: 5 });
-          }}
-          disabled={isLoadingNext}
-        >
-          Refetch with 5 items
+        <Button variant="secondary" onClick={loadNextPage} disabled={!hasNext}>
+          {"Next >"}
         </Button>
       </div>
     </section>

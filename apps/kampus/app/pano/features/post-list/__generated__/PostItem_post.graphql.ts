@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<da816359801b1d5afae33c2bed58316d>>
+ * @generated SignedSource<<b51e67ab3c3dcff1f7cb23e429b21266>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -17,6 +17,7 @@ export type PostItem_post$data = {
   readonly owner: {
     readonly username: string;
   } | null;
+  readonly site: string | null;
   readonly title: string;
   readonly url: string | null;
   readonly " $fragmentType": "PostItem_post";
@@ -70,6 +71,13 @@ const node: ReaderFragment = {
     {
       "alias": null,
       "args": null,
+      "kind": "ScalarField",
+      "name": "site",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
       "concreteType": "User",
       "kind": "LinkedField",
       "name": "owner",
@@ -90,6 +98,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "b4ecee77e77ae2a105c7667ea465252c";
+(node as any).hash = "583dd2a40bc52f70a6850ef37061113c";
 
 export default node;

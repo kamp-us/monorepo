@@ -13,13 +13,13 @@ import { UpvoteButton } from "./PostUpvoteButton";
 
 interface LinkProps {
   href: string;
-  title: string;
+  children: string;
   className?: string;
 }
 
-const Link = ({ href, title, className }: LinkProps) => {
+const Link = ({ href, children: title, className }: LinkProps) => {
   return (
-    <NextLink className={cn("text-muted-foreground hover:underline", className)} href={href}>
+    <NextLink className={cn("hover:underline", className)} href={href}>
       {title}
     </NextLink>
   );
@@ -35,6 +35,7 @@ const usePanoPostFragment = (key: PostItem_post$key | null) =>
         url
         createdAt
         id
+        site
 
         owner {
           username
@@ -44,10 +45,10 @@ const usePanoPostFragment = (key: PostItem_post$key | null) =>
     key
   );
 
-type PostItemProps = {
+interface PostItemProps {
   post: PostItem_post$key;
   showContent?: boolean;
-};
+}
 
 export const PostItem = (props: PostItemProps) => {
   const post = usePanoPostFragment(props.post);
@@ -57,21 +58,26 @@ export const PostItem = (props: PostItemProps) => {
   }
 
   return (
-    <div className="mr-1 flex h-full gap-1 border-l-2">
-      <div className="ml-1 flex h-full">
-        <UpvoteButton upvoteCount={5} isUpvoted={false} disabled={false} isVoting={false} />
-      </div>
+    <section className="flex h-full items-center gap-2 rounded">
+      <UpvoteButton upvoteCount={5} isUpvoted={false} disabled={false} isVoting={false} />
+
       <div className="flex w-full flex-col justify-center">
         <div className="flex items-center gap-1 align-baseline">
-          <Link title={post.title} href={post.url ?? ""} />
-          <Link className="text-sm" title={post.site ?? ""} href={post.url ?? ""} />
+          <Link className="font-semibold" href={post.url ?? ""}>
+            {post.title}
+          </Link>
+          <Link className="text-sm" href={post.url ?? ""}>
+            {post.site ?? ""}
+          </Link>
         </div>
         <div className="flex items-center gap-1 text-sm">
           <div>@{post.owner?.username} |</div>
-          <div>{<Link title="0 yorum" href={`/pano/post/${post.id}/`} />} |</div>
+          <div>
+            <Link href={`/pano/post/${post.id}`}>0 yorum</Link> |
+          </div>
           <TimeAgo date={new Date(post.createdAt as string)} />
         </div>
       </div>
-    </div>
+    </section>
   );
 };

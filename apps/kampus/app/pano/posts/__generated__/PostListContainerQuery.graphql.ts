@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<fb97431676c2dc87644f4cd03330b7c7>>
+ * @generated SignedSource<<238e0bf255b1c17a1ebadd139adba17f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -75,6 +75,45 @@ return {
               {
                 "alias": null,
                 "args": null,
+                "concreteType": "PageInfo",
+                "kind": "LinkedField",
+                "name": "pageInfo",
+                "plural": false,
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "startCursor",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "endCursor",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "hasNextPage",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "hasPreviousPage",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
                 "concreteType": "PanoPostEdge",
                 "kind": "LinkedField",
                 "name": "edges",
@@ -127,6 +166,13 @@ return {
                       {
                         "alias": null,
                         "args": null,
+                        "kind": "ScalarField",
+                        "name": "site",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "User",
                         "kind": "LinkedField",
                         "name": "owner",
@@ -155,31 +201,6 @@ return {
                   }
                 ],
                 "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "PageInfo",
-                "kind": "LinkedField",
-                "name": "pageInfo",
-                "plural": false,
-                "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "endCursor",
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "hasNextPage",
-                    "storageKey": null
-                  }
-                ],
-                "storageKey": null
               }
             ],
             "storageKey": "allPosts(first:2)"
@@ -199,12 +220,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "d4730e686ab9ea151196ba3a1c3f9d3c",
+    "cacheID": "d65288fc8492e92caa7498887017ee4b",
     "id": null,
     "metadata": {},
     "name": "PostListContainerQuery",
     "operationKind": "query",
-    "text": "query PostListContainerQuery {\n  ...AllPostsFragment\n}\n\nfragment AllPostsFragment on Query {\n  pano {\n    allPosts(first: 2) {\n      edges {\n        cursor\n        node {\n          ...PostItem_post\n          id\n          __typename\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  owner {\n    username\n    id\n  }\n}\n"
+    "text": "query PostListContainerQuery {\n  ...AllPostsFragment\n}\n\nfragment AllPostsFragment on Query {\n  pano {\n    allPosts(first: 2) {\n      pageInfo {\n        startCursor\n        endCursor\n        hasNextPage\n        hasPreviousPage\n      }\n      edges {\n        cursor\n        node {\n          ...PostItem_post\n          id\n          __typename\n        }\n      }\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  owner {\n    username\n    id\n  }\n}\n"
   }
 };
 })();
