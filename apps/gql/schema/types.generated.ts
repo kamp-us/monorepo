@@ -37,14 +37,54 @@ export type PageInfo = {
   startCursor: Maybe<Scalars["String"]["output"]>;
 };
 
+export type PanoComment = Node & {
+  __typename?: "PanoComment";
+  comments: Maybe<PanoCommentConnection>;
+  content: Scalars["String"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
+  id: Scalars["ID"]["output"];
+  owner: Maybe<User>;
+  parent: Maybe<PanoComment>;
+  post: Maybe<PanoPost>;
+};
+
+export type PanoCommentCommentsArgs = {
+  after: InputMaybe<Scalars["String"]["input"]>;
+  before: InputMaybe<Scalars["String"]["input"]>;
+  first: InputMaybe<Scalars["Int"]["input"]>;
+  last: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+export type PanoCommentConnection = {
+  __typename?: "PanoCommentConnection";
+  edges: Maybe<Array<Maybe<PanoCommentEdge>>>;
+  nodes: Maybe<Array<Maybe<PanoComment>>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars["Int"]["output"];
+};
+
+export type PanoCommentEdge = {
+  __typename?: "PanoCommentEdge";
+  cursor: Scalars["String"]["output"];
+  node: Maybe<PanoComment>;
+};
+
 export type PanoPost = Node & {
   __typename?: "PanoPost";
+  comments: Maybe<PanoCommentConnection>;
   content: Maybe<Scalars["String"]["output"]>;
   createdAt: Scalars["DateTime"]["output"];
   id: Scalars["ID"]["output"];
   owner: Maybe<User>;
   title: Scalars["String"]["output"];
   url: Maybe<Scalars["String"]["output"]>;
+};
+
+export type PanoPostCommentsArgs = {
+  after: InputMaybe<Scalars["String"]["input"]>;
+  before: InputMaybe<Scalars["String"]["input"]>;
+  first: InputMaybe<Scalars["Int"]["input"]>;
+  last: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type PanoPostConnection = {
@@ -251,6 +291,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = ResolversObject<{
   Node:
+    | (PanoComment & { __typename: "PanoComment" })
     | (PanoPost & { __typename: "PanoPost" })
     | (SozlukTerm & { __typename: "SozlukTerm" })
     | (User & { __typename: "User" });
@@ -265,6 +306,9 @@ export type ResolversTypes = ResolversObject<{
   Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
   Node: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>["Node"]>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
+  PanoComment: ResolverTypeWrapper<PanoComment>;
+  PanoCommentConnection: ResolverTypeWrapper<PanoCommentConnection>;
+  PanoCommentEdge: ResolverTypeWrapper<PanoCommentEdge>;
   PanoPost: ResolverTypeWrapper<PanoPost>;
   PanoPostConnection: ResolverTypeWrapper<PanoPostConnection>;
   PanoPostEdge: ResolverTypeWrapper<PanoPostEdge>;
@@ -289,6 +333,9 @@ export type ResolversParentTypes = ResolversObject<{
   Int: Scalars["Int"]["output"];
   Node: ResolversInterfaceTypes<ResolversParentTypes>["Node"];
   PageInfo: PageInfo;
+  PanoComment: PanoComment;
+  PanoCommentConnection: PanoCommentConnection;
+  PanoCommentEdge: PanoCommentEdge;
   PanoPost: PanoPost;
   PanoPostConnection: PanoPostConnection;
   PanoPostEdge: PanoPostEdge;
@@ -316,7 +363,11 @@ export type NodeResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["Node"] = ResolversParentTypes["Node"]
 > = ResolversObject<{
-  __resolveType?: TypeResolveFn<"PanoPost" | "SozlukTerm" | "User", ParentType, ContextType>;
+  __resolveType?: TypeResolveFn<
+    "PanoComment" | "PanoPost" | "SozlukTerm" | "User",
+    ParentType,
+    ContextType
+  >;
 }>;
 
 export type PageInfoResolvers<
@@ -330,10 +381,55 @@ export type PageInfoResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type PanoCommentResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["PanoComment"] = ResolversParentTypes["PanoComment"]
+> = ResolversObject<{
+  comments: Resolver<
+    Maybe<ResolversTypes["PanoCommentConnection"]>,
+    ParentType,
+    ContextType,
+    Partial<PanoCommentCommentsArgs>
+  >;
+  content: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  owner: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
+  parent: Resolver<Maybe<ResolversTypes["PanoComment"]>, ParentType, ContextType>;
+  post: Resolver<Maybe<ResolversTypes["PanoPost"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type PanoCommentConnectionResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["PanoCommentConnection"] = ResolversParentTypes["PanoCommentConnection"]
+> = ResolversObject<{
+  edges: Resolver<Maybe<Array<Maybe<ResolversTypes["PanoCommentEdge"]>>>, ParentType, ContextType>;
+  nodes: Resolver<Maybe<Array<Maybe<ResolversTypes["PanoComment"]>>>, ParentType, ContextType>;
+  pageInfo: Resolver<ResolversTypes["PageInfo"], ParentType, ContextType>;
+  totalCount: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type PanoCommentEdgeResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["PanoCommentEdge"] = ResolversParentTypes["PanoCommentEdge"]
+> = ResolversObject<{
+  cursor: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  node: Resolver<Maybe<ResolversTypes["PanoComment"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type PanoPostResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["PanoPost"] = ResolversParentTypes["PanoPost"]
 > = ResolversObject<{
+  comments: Resolver<
+    Maybe<ResolversTypes["PanoCommentConnection"]>,
+    ParentType,
+    ContextType,
+    Partial<PanoPostCommentsArgs>
+  >;
   content: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   createdAt: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
@@ -482,6 +578,9 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   DateTime: GraphQLScalarType;
   Node: NodeResolvers<ContextType>;
   PageInfo: PageInfoResolvers<ContextType>;
+  PanoComment: PanoCommentResolvers<ContextType>;
+  PanoCommentConnection: PanoCommentConnectionResolvers<ContextType>;
+  PanoCommentEdge: PanoCommentEdgeResolvers<ContextType>;
   PanoPost: PanoPostResolvers<ContextType>;
   PanoPostConnection: PanoPostConnectionResolvers<ContextType>;
   PanoPostEdge: PanoPostEdgeResolvers<ContextType>;

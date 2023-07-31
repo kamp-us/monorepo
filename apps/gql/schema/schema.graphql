@@ -92,6 +92,12 @@ type PanoPost implements Node {
   content: String
   createdAt: DateTime!
   owner: User
+  comments(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PanoCommentConnection
 }
 
 type PanoPostConnection {
@@ -104,4 +110,31 @@ type PanoPostConnection {
 type PanoPostEdge {
   cursor: String!
   node: PanoPost
+}
+
+type PanoComment implements Node {
+  id: ID!
+  content: String!
+  owner: User
+  post: PanoPost
+  parent: PanoComment
+  comments(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PanoCommentConnection
+  createdAt: DateTime!
+}
+
+type PanoCommentConnection {
+  nodes: [PanoComment]
+  edges: [PanoCommentEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PanoCommentEdge {
+  cursor: String!
+  node: PanoComment
 }

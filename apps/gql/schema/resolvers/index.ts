@@ -7,7 +7,12 @@ import { type User } from "@kampus/prisma";
 import { assertNever } from "@kampus/std";
 import { type Dictionary } from "@kampus/std/dictionary";
 
-import { transformPanoPost, transformPanoPostConnection } from "~/loaders/pano";
+import {
+  transformPanoComment,
+  transformPanoCommentConnection,
+  transformPanoPost,
+  transformPanoPostConnection,
+} from "~/loaders/pano";
 import { transformSozlukTerm, transformSozlukTermsConnection } from "~/loaders/sozluk";
 import { transformUser } from "~/loaders/user";
 import { type Resolvers, type ResolversInterfaceTypes } from "../types.generated";
@@ -129,6 +134,11 @@ export const resolvers = {
       const user = await loaders.user.byID.load(post.userID);
       return transformUser(user);
     },
+    comments: async (post, args, { loaders }) => {
+      return transformPanoCommentConnection(
+        await loaders.pano.comment.byPostID.load(new ConnectionKey(post.id, args))
+      );
+    },
     createdAt: (post) => post.createdAt,
   },
   PanoPostConnection: {
@@ -154,5 +164,43 @@ export const resolvers = {
       transformPanoPostConnection(
         await loaders.pano.post.byUserID.load(new ConnectionKey(user.id, args))
       ),
+  },
+  PanoComment: {
+    id: (comment) => stringify("PanoComment", comment.id),
+    content: (comment) => comment.content,
+    owner: async (comment, _, { loaders }) => {
+      const model = await loaders.pano.comment.byID.load(comment.id);
+      const user = await loaders.user.byID.load(model.userID);
+      return transformUser(user);
+    },
+    post: async (comment, _, { loaders }) => {
+      const model = await loaders.pano.comment.byID.load(comment.id);
+      const post = await loaders.pano.post.byID.load(model.postID);
+      return transformPanoPost(post);
+    },
+    parent: async (comment, _, { loaders }) => {
+      const model = await loaders.pano.comment.byID.load(comment.id);
+      if (!model.parentID) {
+        return null;
+      }
+      const parent = await loaders.pano.comment.byID.load(model.parentID);
+      return transformPanoComment(parent);
+    },
+    comments: async (comment, args, { loaders }) => {
+      return transformPanoCommentConnection(
+        await loaders.pano.comment.byParentID.load(new ConnectionKey(comment.id, args))
+      );
+    },
+    createdAt: (post) => post.createdAt,
+  },
+  PanoCommentEdge: {
+    node: (edge) => edge.node,
+    cursor: (edge) => stringify("PanoComment", edge.cursor),
+  },
+  PanoCommentConnection: {
+    nodes: (connection) => connection.nodes,
+    edges: (connection) => connection.edges,
+    pageInfo: (connection) => transformPageInfo("PanoComment", connection.pageInfo),
+    totalCount: (connection) => connection.totalCount,
   },
 } satisfies Resolvers;
