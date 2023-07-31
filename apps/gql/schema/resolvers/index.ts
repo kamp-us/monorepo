@@ -47,6 +47,8 @@ export const resolvers = {
           return transformSozlukTerm(await loaders.sozluk.term.load(id.value));
         case "PanoPost":
           return transformPanoPost(await loaders.pano.post.byID.load(id.value));
+        case "PanoComment":
+          return transformPanoComment(await loaders.pano.comment.byID.load(id.value));
         default:
           return assertNever(id.type);
       }
