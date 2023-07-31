@@ -1,6 +1,6 @@
 import { createPrismaConnectionLoader, createPrismaLoader } from "@kampus/gql-utils";
 import { type Connection } from "@kampus/gql-utils/connection";
-import { type Post } from "@kampus/prisma";
+import { type Comment, type Post } from "@kampus/prisma";
 
 import { type Clients } from "~/clients";
 import {
@@ -9,7 +9,6 @@ import {
   type PanoPost,
   type PanoPostConnection,
 } from "~/schema/types.generated";
-import { type Comment } from ".prisma/client";
 
 export type PanoLoaders = ReturnType<typeof createPanoLoaders>;
 
