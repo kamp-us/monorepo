@@ -89,6 +89,7 @@ type PanoPost implements Node {
   id: ID!
   title: String!
   url: String
+  site: String
   content: String
   createdAt: DateTime!
   owner: User

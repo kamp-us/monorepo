@@ -1,42 +1,21 @@
+import loadSerializableQuery from "@kampus/relay/load-serializable-query";
+
 import { PostSortFilters } from "~/app/pano/features/post-filter/PostSortFilters";
-import { PostList } from "../features/post-list/PostList";
+import PostListContainerQueryNode, {
+  type PostListContainerQuery,
+} from "./__generated__/PostListContainerQuery.graphql";
+import { PostListContainer } from "./PostListContainer";
 
-type Post = {
-  __typename?: "PanoPost";
-  content: string;
-  createdAt: string;
-  id: string;
-  owner: string;
-  title: string;
-  url: string;
-};
+export default async function PostsPage() {
+  const preloadedQuery = await loadSerializableQuery<PostListContainerQuery>(
+    PostListContainerQueryNode,
+    {}
+  );
 
-const posts: Post[] = [
-  {
-    __typename: "PanoPost",
-    content: "Muthis",
-    createdAt: "1 ay once",
-    id: "1",
-    owner: "Can",
-    title: "Can'in muthis postu",
-    url: "wow.sh",
-  },
-  {
-    __typename: "PanoPost",
-    content: "Yuppi",
-    createdAt: "1 hafta once",
-    id: "2",
-    owner: "Vladik",
-    title: "Vladik'in muthis postu",
-    url: "https://wow.sh",
-  },
-];
-
-export default function PostsPage() {
   return (
     <div className="flex flex-col gap-4">
       <PostSortFilters />
-      <PostList posts={posts} />
+      <PostListContainer preloadedQuery={preloadedQuery} />
     </div>
   );
 }

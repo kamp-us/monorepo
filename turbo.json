@@ -43,7 +43,7 @@
       "cache": false
     },
     "@kampus/kampus#*": {
-      "env": ["NODE_ENV", "GQL_URL", "RESEND_API_KEY"]
+      "env": ["NODE_ENV", "NEXT_PUBLIC_GQL_URL", "RESEND_API_KEY", "NEXTAUTH_URL"]
     },
     "@kampus/next-auth#*": {
       "env": [
@@ -60,6 +60,9 @@
     },
     "@kampus-apps/gql#*": {
       "env": ["NODE_ENV", "DATABASE_URL"]
+    },
+    "@kampus/relay": {
+      "env": ["NEXT_PUBLIC_GQL_URL"]
     }
   }
 }
