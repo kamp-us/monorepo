@@ -1,10 +1,21 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import { MoreHorizontal } from "lucide-react";
 
 import {
   Button,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@kampus/ui-next";
 
@@ -22,40 +33,67 @@ type Post = {
   title: string;
   url: string;
 };
+type User = {
+  username: string;
+};
+
+function canUserEdit(user: User, post: Post) {
+  console.log(user, post);
+  return true;
+}
 
 export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
-  // const user = useUserContext();
+  const user = { username: "cancan" };
   console.log(post, shareUrl);
 
+  const router = useRouter();
   const ownerItems: JSX.Element[] = [];
-  // if (canUserEdit(user, post)) {
-  //   ownerItems.push(
-  //     <Item onSelect={() => navigate(`/posts/${post.id}/edit`)} key="edit">
-  //       Düzenle
-  //     </Item>
-  //   );
-  //   ownerItems.push(
-  //     <Item onSelect={handleOpen} key="delete">
-  //       Sil
-  //     </Item>
-  //   );
-  //   ownerItems.push(<DropdownMenuSeparator key="separator" />);
-  // }
+  if (canUserEdit(user, post)) {
+    ownerItems.push(
+      <DropdownMenuItem onSelect={() => router.push(`/posts/${post.id}/edit`)} key="edit">
+        Düzenle
+      </DropdownMenuItem>
+    );
+    ownerItems.push(
+      <DialogTrigger asChild>
+        <DropdownMenuItem>Sil</DropdownMenuItem>
+      </DialogTrigger>
+    );
+    ownerItems.push(<DropdownMenuSeparator key="separator" />);
+  }
 
   // // FIXME: below appears to be redundant, is it?
   // const menuItems = [...ownerItems];
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button className="h-5 p-1" variant="ghost">
-          <MoreHorizontal size="16" aria-label="Daha fazla seçenek" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        {ownerItems}
-        <DropdownMenuItem>Adresi kopyala</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Dialog>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button className="h-5 p-1" variant="ghost">
+            <MoreHorizontal size="16" aria-label="Daha fazla seçenek" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          {ownerItems}
+          <DropdownMenuItem>Adresi kopyala</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Silmek istediğine emin misin?</DialogTitle>
+          <DialogDescription>
+            Eğer bu gönderiyi silersen, bu işlemi geri alamazsın.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <Button variant="outline" type="submit">
+            Hayir
+          </Button>
+          <Button variant="destructive" type="submit">
+            Evet
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
