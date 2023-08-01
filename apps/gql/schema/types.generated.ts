@@ -77,6 +77,7 @@ export type PanoPost = Node & {
   createdAt: Scalars["DateTime"]["output"];
   id: Scalars["ID"]["output"];
   owner: Maybe<User>;
+  site: Maybe<Scalars["String"]["output"]>;
   title: Scalars["String"]["output"];
   upvoteCount: Maybe<Scalars["Int"]["output"]>;
   url: Maybe<Scalars["String"]["output"]>;
@@ -437,6 +438,7 @@ export type PanoPostResolvers<
   createdAt: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   owner: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
+  site: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   upvoteCount: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   url: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;

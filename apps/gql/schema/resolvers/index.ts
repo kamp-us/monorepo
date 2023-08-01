@@ -131,6 +131,7 @@ export const resolvers = {
     title: (post) => post.title,
     url: (post) => post.url,
     content: (post) => post.content,
+    site: (post) => post.site,
     owner: async (parent, _, { loaders }) => {
       const post = await loaders.pano.post.byID.load(parent.id);
       const user = await loaders.user.byID.load(post.userID);
