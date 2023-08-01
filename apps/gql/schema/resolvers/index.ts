@@ -141,6 +141,9 @@ export const resolvers = {
         await loaders.pano.comment.byPostID.load(new ConnectionKey(post.id, args))
       );
     },
+    upvoteCount: (post, _, { loaders }) => {
+      return loaders.pano.upvote.countByPostID.load(new ConnectionKey(post.id));
+    },
     createdAt: (post) => post.createdAt,
   },
   PanoPostConnection: {

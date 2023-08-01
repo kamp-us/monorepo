@@ -1,4 +1,8 @@
-import { createPrismaConnectionLoader, createPrismaLoader } from "@kampus/gql-utils";
+import {
+  createPrismaConnectionLoader,
+  createPrismaCountLoader,
+  createPrismaLoader,
+} from "@kampus/gql-utils";
 import { type Connection } from "@kampus/gql-utils/connection";
 import { type Comment, type Post } from "@kampus/prisma";
 
@@ -16,6 +20,7 @@ export const createPanoLoaders = (clients: Clients) => {
   return {
     post: createPanoPostLoaders(clients),
     comment: createPanoCommentLoaders(clients),
+    upvote: createPanoUpvoteLoaders(clients),
   };
 };
 
@@ -39,6 +44,12 @@ const createPanoPostLoaders = ({ prisma }: Clients) => {
     byUserID,
     all,
   };
+};
+
+const createPanoUpvoteLoaders = ({ prisma }: Clients) => {
+  const countByPostID = createPrismaCountLoader(prisma.upvote, "postID");
+
+  return { countByPostID };
 };
 
 const createPanoCommentLoaders = ({ prisma }: Clients) => {
@@ -75,6 +86,7 @@ export const transformPanoPost = (post: Post) => {
     __typename: "PanoPost",
     owner: null,
     comments: null,
+    upvoteCount: null,
     createdAt: post.createdAt.toISOString(),
   } satisfies PanoPost;
 };
