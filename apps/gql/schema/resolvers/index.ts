@@ -196,7 +196,10 @@ export const resolvers = {
         await loaders.pano.comment.byParentID.load(new ConnectionKey(comment.id, args))
       );
     },
-    createdAt: (post) => post.createdAt,
+    upvoteCount: (comment, _, { loaders }) => {
+      return loaders.pano.upvote.countByCommentID.load(new ConnectionKey(comment.id));
+    },
+    createdAt: (comment) => comment.createdAt,
   },
   PanoCommentEdge: {
     node: (edge) => edge.node,

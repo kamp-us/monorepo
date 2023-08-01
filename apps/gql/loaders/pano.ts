@@ -48,8 +48,9 @@ const createPanoPostLoaders = ({ prisma }: Clients) => {
 
 const createPanoUpvoteLoaders = ({ prisma }: Clients) => {
   const countByPostID = createPrismaCountLoader(prisma.upvote, "postID");
+  const countByCommentID = createPrismaCountLoader(prisma.commentUpvote, "commentID");
 
-  return { countByPostID };
+  return { countByPostID, countByCommentID };
 };
 
 const createPanoCommentLoaders = ({ prisma }: Clients) => {
@@ -115,6 +116,7 @@ export const transformPanoComment = (comment: Comment) => {
     parent: null,
     post: null,
     comments: null,
+    upvoteCount: null,
     createdAt: comment.createdAt.toISOString(),
   } satisfies PanoComment;
 };
