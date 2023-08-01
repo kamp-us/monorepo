@@ -116,6 +116,7 @@ type PanoComment implements Node {
   parent: PanoComment
   comments(after: String, before: String, first: Int, last: Int): PanoCommentConnection
   createdAt: DateTime!
+  upvoteCount: Int
 }
 
 type PanoCommentConnection {

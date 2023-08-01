@@ -46,6 +46,7 @@ export type PanoComment = Node & {
   owner: Maybe<User>;
   parent: Maybe<PanoComment>;
   post: Maybe<PanoPost>;
+  upvoteCount: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type PanoCommentCommentsArgs = {
@@ -398,6 +399,7 @@ export type PanoCommentResolvers<
   owner: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
   parent: Resolver<Maybe<ResolversTypes["PanoComment"]>, ParentType, ContextType>;
   post: Resolver<Maybe<ResolversTypes["PanoPost"]>, ParentType, ContextType>;
+  upvoteCount: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
