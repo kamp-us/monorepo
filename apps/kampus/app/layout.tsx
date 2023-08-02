@@ -6,7 +6,7 @@ import { RelayEnvironmentProvider } from "~/features/relay/RelayEnvironmentProvi
 
 import "./globals.css";
 
-import { ThemeProvider, Toast } from "@kampus/ui-next";
+import { ThemeProvider } from "@kampus/ui-next";
 
 const inter = Inter({ subsets: ["latin"] });
 
