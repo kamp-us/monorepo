@@ -5,6 +5,7 @@ import { createSchema, createYoga } from "graphql-yoga";
 
 import { getServerSession } from "@kampus/next-auth";
 
+import { createActions } from "~/actions";
 import { createClients } from "~/clients";
 import { createLoaders } from "~/loaders";
 import { resolvers } from "~/schema/resolvers";
@@ -21,10 +22,12 @@ const { handleRequest } = createYoga<ServerContext>({
   graphiql: true,
   context: async ({ req, res }) => {
     const loaders = createLoaders(clients);
+    const actions = createActions(clients);
     const session = await getServerSession(req, res);
 
     return {
       loaders,
+      actions,
       pasaport: {
         session,
       },
