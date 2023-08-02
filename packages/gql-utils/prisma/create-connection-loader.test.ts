@@ -26,13 +26,14 @@ describe(createPrismaConnectionLoader, () => {
     });
   });
 
-  it("returns null when there is an identifier but no parentID in key", async () => {
+  it("returns null when there is an identifier but no parentID in key", () => {
     // need to find a better example because "name" doesn't make sense with "parentID"
     // "name" needs to be replaced with an "id" column to represent real usecases.
     const allUsers = createPrismaConnectionLoader(mockedPrisma.user, "name");
 
-    const users = await allUsers.load(new ConnectionKey());
-    expect(users).toEqual(null);
+    void expect(async () => {
+      await allUsers.load(new ConnectionKey());
+    }).rejects.toThrowError(/name/);
   });
 
   it("works", async () => {
