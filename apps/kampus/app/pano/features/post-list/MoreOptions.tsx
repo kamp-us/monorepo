@@ -63,7 +63,7 @@ export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
             });
           }}
         >
-          Adresi kopyala
+          Linki kopyala
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
