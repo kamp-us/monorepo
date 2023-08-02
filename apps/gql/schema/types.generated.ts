@@ -25,6 +25,11 @@ export type Scalars = {
   DateTime: { input: string; output: string };
 };
 
+export type Actor = {
+  displayName: Maybe<Scalars["String"]["output"]>;
+  id: Scalars["ID"]["output"];
+};
+
 export type Node = {
   id: Scalars["ID"]["output"];
 };
@@ -135,6 +140,7 @@ export type Query = {
   pano: PanoQuery;
   sozluk: SozlukQuery;
   user: Maybe<User>;
+  viewer: Maybe<Viewer>;
 };
 
 export type QueryNodeArgs = {
@@ -191,12 +197,14 @@ export type SozlukTermEdge = {
   node: Maybe<SozlukTerm>;
 };
 
-export type User = Node & {
-  __typename?: "User";
-  id: Scalars["ID"]["output"];
-  panoPosts: Maybe<PanoPostConnection>;
-  username: Scalars["String"]["output"];
-};
+export type User = Actor &
+  Node & {
+    __typename?: "User";
+    displayName: Maybe<Scalars["String"]["output"]>;
+    id: Scalars["ID"]["output"];
+    panoPosts: Maybe<PanoPostConnection>;
+    username: Scalars["String"]["output"];
+  };
 
 export type UserPanoPostsArgs = {
   after: InputMaybe<Scalars["String"]["input"]>;
@@ -204,6 +212,11 @@ export type UserPanoPostsArgs = {
   filter: InputMaybe<PanoPostFilter>;
   first: InputMaybe<Scalars["Int"]["input"]>;
   last: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+export type Viewer = {
+  __typename?: "Viewer";
+  actor: Maybe<Actor>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -293,6 +306,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = ResolversObject<{
+  Actor: User & { __typename: "User" };
   Node:
     | (PanoComment & { __typename: "PanoComment" })
     | (PanoPost & { __typename: "PanoPost" })
@@ -302,6 +316,7 @@ export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = R
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
+  Actor: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>["Actor"]>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
   Date: ResolverTypeWrapper<Scalars["Date"]["output"]>;
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
@@ -325,10 +340,12 @@ export type ResolversTypes = ResolversObject<{
   SozlukTermEdge: ResolverTypeWrapper<SozlukTermEdge>;
   String: ResolverTypeWrapper<Scalars["String"]["output"]>;
   User: ResolverTypeWrapper<User>;
+  Viewer: ResolverTypeWrapper<Viewer>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
+  Actor: ResolversInterfaceTypes<ResolversParentTypes>["Actor"];
   Boolean: Scalars["Boolean"]["output"];
   Date: Scalars["Date"]["output"];
   DateTime: Scalars["DateTime"]["output"];
@@ -351,6 +368,14 @@ export type ResolversParentTypes = ResolversObject<{
   SozlukTermEdge: SozlukTermEdge;
   String: Scalars["String"]["output"];
   User: User;
+  Viewer: Viewer;
+}>;
+
+export type ActorResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["Actor"] = ResolversParentTypes["Actor"]
+> = ResolversObject<{
+  __resolveType?: TypeResolveFn<"User", ParentType, ContextType>;
 }>;
 
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes["Date"], any> {
@@ -503,6 +528,7 @@ export type QueryResolvers<
   pano: Resolver<ResolversTypes["PanoQuery"], ParentType, ContextType>;
   sozluk: Resolver<ResolversTypes["SozlukQuery"], ParentType, ContextType>;
   user: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType, Partial<QueryUserArgs>>;
+  viewer: Resolver<Maybe<ResolversTypes["Viewer"]>, ParentType, ContextType>;
 }>;
 
 export type SozlukQueryResolvers<
@@ -568,6 +594,7 @@ export type UserResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
 > = ResolversObject<{
+  displayName: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   panoPosts: Resolver<
     Maybe<ResolversTypes["PanoPostConnection"]>,
@@ -579,7 +606,16 @@ export type UserResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type ViewerResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["Viewer"] = ResolversParentTypes["Viewer"]
+> = ResolversObject<{
+  actor: Resolver<Maybe<ResolversTypes["Actor"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
+  Actor: ActorResolvers<ContextType>;
   Date: GraphQLScalarType;
   DateTime: GraphQLScalarType;
   Node: NodeResolvers<ContextType>;
@@ -598,4 +634,5 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   SozlukTermConnection: SozlukTermConnectionResolvers<ContextType>;
   SozlukTermEdge: SozlukTermEdgeResolvers<ContextType>;
   User: UserResolvers<ContextType>;
+  Viewer: ViewerResolvers<ContextType>;
 }>;

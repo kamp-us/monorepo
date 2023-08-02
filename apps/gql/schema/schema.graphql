@@ -1,18 +1,25 @@
 scalar Date
 scalar DateTime
 
+interface Node {
+  id: ID!
+}
+
+interface Actor {
+  id: ID!
+  displayName: String
+}
+
 type Query {
   # we need to have a way to encode the typename into id
   # so that `Query.node` can decode it and figure out what to resolve
   node(id: ID!): Node
 
+  viewer: Viewer
+
   user(id: ID, username: String): User
   sozluk: SozlukQuery!
   pano: PanoQuery!
-}
-
-interface Node {
-  id: ID!
 }
 
 type PageInfo {
@@ -22,9 +29,14 @@ type PageInfo {
   startCursor: String
 }
 
-type User implements Node {
+type Viewer {
+  actor: Actor
+}
+
+type User implements Node & Actor {
   id: ID!
   username: String!
+  displayName: String
 
   panoPosts(
     after: String

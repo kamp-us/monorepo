@@ -35,8 +35,11 @@ export const resolvers = {
   Date: DateResolver,
   DateTime: DateTimeResolver,
   Node: {},
+  Actor: {},
 
   Query: {
+    // we will properly handle this in Viewer field resolvers
+    viewer: () => ({ actor: null }),
     node: async (_, args, { loaders }) => {
       const id = parse<NodeTypename>(args.id);
 
@@ -53,7 +56,6 @@ export const resolvers = {
           return assertNever(id.type);
       }
     },
-
     user: async (_, args, { loaders }) => {
       let user: User | null = null;
 
@@ -79,6 +81,21 @@ export const resolvers = {
 
     pano: () => ({ post: null, posts: [], allPosts: null }),
   },
+  Viewer: {
+    actor: async (_viewer, _args, { loaders, pasaport: { session } }) => {
+      if (!session?.user?.email) {
+        return null;
+      }
+
+      const user = await loaders.user.byEmail.load(session.user.email);
+      if (!user) {
+        return null;
+      }
+
+      return transformUser(user);
+    },
+  },
+
   SozlukQuery: {
     term: async (_, args, { loaders }) =>
       transformSozlukTerm(await loaders.sozluk.term.load(args.id)),
@@ -166,6 +183,7 @@ export const resolvers = {
   User: {
     id: (user) => stringify("User", user.id),
     username: (u) => u.username,
+    displayName: (u) => u.displayName,
     panoPosts: async (user, args, { loaders }) =>
       transformPanoPostConnection(
         await loaders.pano.post.byUserID.load(new ConnectionKey(user.id, args))
