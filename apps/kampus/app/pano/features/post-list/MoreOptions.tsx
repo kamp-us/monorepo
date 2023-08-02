@@ -59,7 +59,7 @@ export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
         <DropdownMenuItem
           onSelect={() => {
             toast({
-              description: "link kopyalandı",
+              description: "Link kopyalandı",
             });
           }}
         >
