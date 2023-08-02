@@ -31,6 +31,10 @@ const parseConnectionArgs = (args: ConnectionArguments) => ({
   before: args.before ? parse(args.before).value : null,
 });
 
+const errorFieldsResolver = {
+  message: (error: { message: string }) => error.message,
+};
+
 export const resolvers = {
   Date: DateResolver,
   DateTime: DateTimeResolver,
@@ -230,4 +234,9 @@ export const resolvers = {
     pageInfo: (connection) => transformPageInfo("PanoComment", connection.pageInfo),
     totalCount: (connection) => connection.totalCount,
   },
+
+  UserError: {}, // interface
+
+  InvalidInput: errorFieldsResolver,
+  NotAuthorized: errorFieldsResolver,
 } satisfies Resolvers;

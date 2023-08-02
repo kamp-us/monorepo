@@ -10,6 +10,10 @@ interface Actor {
   displayName: String
 }
 
+interface UserError {
+  message: String!
+}
+
 type Query {
   # we need to have a way to encode the typename into id
   # so that `Query.node` can decode it and figure out what to resolve
@@ -27,6 +31,14 @@ type PageInfo {
   hasNextPage: Boolean!
   hasPreviousPage: Boolean!
   startCursor: String
+}
+
+type NotAuthorized implements UserError {
+  message: String!
+}
+
+type InvalidInput implements UserError {
+  message: String!
 }
 
 type Viewer {

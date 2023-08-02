@@ -30,8 +30,18 @@ export type Actor = {
   id: Scalars["ID"]["output"];
 };
 
+export type InvalidInput = UserError & {
+  __typename?: "InvalidInput";
+  message: Scalars["String"]["output"];
+};
+
 export type Node = {
   id: Scalars["ID"]["output"];
+};
+
+export type NotAuthorized = UserError & {
+  __typename?: "NotAuthorized";
+  message: Scalars["String"]["output"];
 };
 
 export type PageInfo = {
@@ -214,6 +224,10 @@ export type UserPanoPostsArgs = {
   last: InputMaybe<Scalars["Int"]["input"]>;
 };
 
+export type UserError = {
+  message: Scalars["String"]["output"];
+};
+
 export type Viewer = {
   __typename?: "Viewer";
   actor: Maybe<Actor>;
@@ -312,6 +326,9 @@ export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = R
     | (PanoPost & { __typename: "PanoPost" })
     | (SozlukTerm & { __typename: "SozlukTerm" })
     | (User & { __typename: "User" });
+  UserError:
+    | (InvalidInput & { __typename: "InvalidInput" })
+    | (NotAuthorized & { __typename: "NotAuthorized" });
 }>;
 
 /** Mapping between all available schema types and the resolvers types */
@@ -322,7 +339,9 @@ export type ResolversTypes = ResolversObject<{
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
   ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
+  InvalidInput: ResolverTypeWrapper<InvalidInput>;
   Node: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>["Node"]>;
+  NotAuthorized: ResolverTypeWrapper<NotAuthorized>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
   PanoComment: ResolverTypeWrapper<PanoComment>;
   PanoCommentConnection: ResolverTypeWrapper<PanoCommentConnection>;
@@ -340,6 +359,7 @@ export type ResolversTypes = ResolversObject<{
   SozlukTermEdge: ResolverTypeWrapper<SozlukTermEdge>;
   String: ResolverTypeWrapper<Scalars["String"]["output"]>;
   User: ResolverTypeWrapper<User>;
+  UserError: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>["UserError"]>;
   Viewer: ResolverTypeWrapper<Viewer>;
 }>;
 
@@ -351,7 +371,9 @@ export type ResolversParentTypes = ResolversObject<{
   DateTime: Scalars["DateTime"]["output"];
   ID: Scalars["ID"]["output"];
   Int: Scalars["Int"]["output"];
+  InvalidInput: InvalidInput;
   Node: ResolversInterfaceTypes<ResolversParentTypes>["Node"];
+  NotAuthorized: NotAuthorized;
   PageInfo: PageInfo;
   PanoComment: PanoComment;
   PanoCommentConnection: PanoCommentConnection;
@@ -368,6 +390,7 @@ export type ResolversParentTypes = ResolversObject<{
   SozlukTermEdge: SozlukTermEdge;
   String: Scalars["String"]["output"];
   User: User;
+  UserError: ResolversInterfaceTypes<ResolversParentTypes>["UserError"];
   Viewer: Viewer;
 }>;
 
@@ -387,6 +410,14 @@ export interface DateTimeScalarConfig
   name: "DateTime";
 }
 
+export type InvalidInputResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["InvalidInput"] = ResolversParentTypes["InvalidInput"]
+> = ResolversObject<{
+  message: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type NodeResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["Node"] = ResolversParentTypes["Node"]
@@ -396,6 +427,14 @@ export type NodeResolvers<
     ParentType,
     ContextType
   >;
+}>;
+
+export type NotAuthorizedResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["NotAuthorized"] = ResolversParentTypes["NotAuthorized"]
+> = ResolversObject<{
+  message: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type PageInfoResolvers<
@@ -606,6 +645,13 @@ export type UserResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type UserErrorResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["UserError"] = ResolversParentTypes["UserError"]
+> = ResolversObject<{
+  __resolveType?: TypeResolveFn<"InvalidInput" | "NotAuthorized", ParentType, ContextType>;
+}>;
+
 export type ViewerResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["Viewer"] = ResolversParentTypes["Viewer"]
@@ -618,7 +664,9 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   Actor: ActorResolvers<ContextType>;
   Date: GraphQLScalarType;
   DateTime: GraphQLScalarType;
+  InvalidInput: InvalidInputResolvers<ContextType>;
   Node: NodeResolvers<ContextType>;
+  NotAuthorized: NotAuthorizedResolvers<ContextType>;
   PageInfo: PageInfoResolvers<ContextType>;
   PanoComment: PanoCommentResolvers<ContextType>;
   PanoCommentConnection: PanoCommentConnectionResolvers<ContextType>;
@@ -634,5 +682,6 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   SozlukTermConnection: SozlukTermConnectionResolvers<ContextType>;
   SozlukTermEdge: SozlukTermEdgeResolvers<ContextType>;
   User: UserResolvers<ContextType>;
+  UserError: UserErrorResolvers<ContextType>;
   Viewer: ViewerResolvers<ContextType>;
 }>;
