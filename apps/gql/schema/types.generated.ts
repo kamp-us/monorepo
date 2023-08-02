@@ -30,9 +30,26 @@ export type Actor = {
   id: Scalars["ID"]["output"];
 };
 
+export type CreatePanoPostInput = {
+  content: InputMaybe<Scalars["String"]["input"]>;
+  title: Scalars["String"]["input"];
+  url: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type CreatePanoPostPayload = InvalidInput | NotAuthorized | PanoPost;
+
 export type InvalidInput = UserError & {
   __typename?: "InvalidInput";
   message: Scalars["String"]["output"];
+};
+
+export type Mutation = {
+  __typename?: "Mutation";
+  createPanoPost: Maybe<CreatePanoPostPayload>;
+};
+
+export type MutationCreatePanoPostArgs = {
+  input: CreatePanoPostInput;
 };
 
 export type Node = {
@@ -318,6 +335,14 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
   info?: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
+/** Mapping of union types */
+export type ResolversUnionTypes<RefType extends Record<string, unknown>> = ResolversObject<{
+  CreatePanoPostPayload:
+    | (InvalidInput & { __typename: "InvalidInput" })
+    | (NotAuthorized & { __typename: "NotAuthorized" })
+    | (PanoPost & { __typename: "PanoPost" });
+}>;
+
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = ResolversObject<{
   Actor: User & { __typename: "User" };
@@ -335,11 +360,16 @@ export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = R
 export type ResolversTypes = ResolversObject<{
   Actor: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>["Actor"]>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
+  CreatePanoPostInput: CreatePanoPostInput;
+  CreatePanoPostPayload: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["CreatePanoPostPayload"]
+  >;
   Date: ResolverTypeWrapper<Scalars["Date"]["output"]>;
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
   ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
   InvalidInput: ResolverTypeWrapper<InvalidInput>;
+  Mutation: ResolverTypeWrapper<{}>;
   Node: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>["Node"]>;
   NotAuthorized: ResolverTypeWrapper<NotAuthorized>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
@@ -367,11 +397,14 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   Actor: ResolversInterfaceTypes<ResolversParentTypes>["Actor"];
   Boolean: Scalars["Boolean"]["output"];
+  CreatePanoPostInput: CreatePanoPostInput;
+  CreatePanoPostPayload: ResolversUnionTypes<ResolversParentTypes>["CreatePanoPostPayload"];
   Date: Scalars["Date"]["output"];
   DateTime: Scalars["DateTime"]["output"];
   ID: Scalars["ID"]["output"];
   Int: Scalars["Int"]["output"];
   InvalidInput: InvalidInput;
+  Mutation: {};
   Node: ResolversInterfaceTypes<ResolversParentTypes>["Node"];
   NotAuthorized: NotAuthorized;
   PageInfo: PageInfo;
@@ -401,6 +434,17 @@ export type ActorResolvers<
   __resolveType?: TypeResolveFn<"User", ParentType, ContextType>;
 }>;
 
+export type CreatePanoPostPayloadResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["CreatePanoPostPayload"] = ResolversParentTypes["CreatePanoPostPayload"]
+> = ResolversObject<{
+  __resolveType?: TypeResolveFn<
+    "InvalidInput" | "NotAuthorized" | "PanoPost",
+    ParentType,
+    ContextType
+  >;
+}>;
+
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes["Date"], any> {
   name: "Date";
 }
@@ -416,6 +460,18 @@ export type InvalidInputResolvers<
 > = ResolversObject<{
   message: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type MutationResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"]
+> = ResolversObject<{
+  createPanoPost: Resolver<
+    Maybe<ResolversTypes["CreatePanoPostPayload"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreatePanoPostArgs, "input">
+  >;
 }>;
 
 export type NodeResolvers<
@@ -662,9 +718,11 @@ export type ViewerResolvers<
 
 export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   Actor: ActorResolvers<ContextType>;
+  CreatePanoPostPayload: CreatePanoPostPayloadResolvers<ContextType>;
   Date: GraphQLScalarType;
   DateTime: GraphQLScalarType;
   InvalidInput: InvalidInputResolvers<ContextType>;
+  Mutation: MutationResolvers<ContextType>;
   Node: NodeResolvers<ContextType>;
   NotAuthorized: NotAuthorizedResolvers<ContextType>;
   PageInfo: PageInfoResolvers<ContextType>;

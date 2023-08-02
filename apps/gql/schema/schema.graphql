@@ -155,3 +155,15 @@ type PanoCommentEdge {
   cursor: String!
   node: PanoComment
 }
+
+type Mutation {
+  createPanoPost(input: CreatePanoPostInput!): CreatePanoPostPayload
+}
+
+input CreatePanoPostInput {
+  title: String!
+  content: String
+  url: String
+}
+
+union CreatePanoPostPayload = PanoPost | NotAuthorized | InvalidInput

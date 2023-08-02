@@ -235,8 +235,38 @@ export const resolvers = {
     totalCount: (connection) => connection.totalCount,
   },
 
+  CreatePanoPostPayload: {}, // union
   UserError: {}, // interface
 
   InvalidInput: errorFieldsResolver,
   NotAuthorized: errorFieldsResolver,
+
+  Mutation: {
+    createPanoPost: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
+      if (!session?.user?.email) {
+        return {
+          __typename: "NotAuthorized",
+          message: "not authorized baby boi",
+        };
+      }
+
+      const authUser = await loaders.user.byEmail.load(session.user.email);
+      if (!authUser) {
+        return {
+          __typename: "NotAuthorized",
+          message: "not authorized baby boi",
+        };
+      }
+
+      if (!input.url && !input.content) {
+        return {
+          __typename: "InvalidInput",
+          message: "Either url or content is required",
+        };
+      }
+
+      const created = await actions.pano.post.create({ ...input, userID: authUser.id });
+      return transformPanoPost(await loaders.pano.post.byID.load(created.id));
+    },
+  },
 } satisfies Resolvers;
