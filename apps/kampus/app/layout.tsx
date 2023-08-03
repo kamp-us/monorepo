@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { Inter } from "next/font/google";
 
-import { RelayEnvironmentProvider } from "~/features/relay/RelayEnvironmentProvider";
+import { RelayEnvironmentProvider } from "@kampus/relay";
 
 import "./globals.css";
 

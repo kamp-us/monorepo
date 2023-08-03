@@ -17,5 +17,9 @@
   "devDependencies": {
     "@types/react-relay": "14.1.4",
     "@types/relay-runtime": "14.1.10"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   }
 }
