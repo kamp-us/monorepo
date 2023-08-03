@@ -244,39 +244,20 @@ export const resolvers = {
 
   Mutation: {
     createPanoPost: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
-      if (!session?.user?.email) {
-        return {
-          __typename: "NotAuthorized",
-          message: "not authorized baby boi",
-        };
-      }
-
-      const authUser = await loaders.user.byEmail.load(session.user.email);
-      if (!authUser) {
-        return {
-          __typename: "NotAuthorized",
-          message: "not authorized baby boi",
-        };
+      if (!session?.user?.id) {
+        return { __typename: "NotAuthorized", message: "not authorized baby boi" };
       }
 
       if (!input.url && !input.content) {
-        return {
-          __typename: "InvalidInput",
-          message: "Either url or content is required",
-        };
+        return { __typename: "InvalidInput", message: "Either url or content is required" };
       }
 
-      const created = await actions.pano.post.create({ ...input, userID: authUser.id });
+      const created = await actions.pano.post.create({ ...input, userID: session.user.id });
       return transformPanoPost(await loaders.pano.post.byID.load(created.id));
     },
 
     updatePanoPost: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
-      if (!session?.user?.email) {
-        return { __typename: "NotAuthorized", message: "not authorized baby boi" };
-      }
-
-      const authUser = await loaders.user.byEmail.load(session.user.email);
-      if (!authUser) {
+      if (!session?.user?.id) {
         return { __typename: "NotAuthorized", message: "not authorized baby boi" };
       }
 
@@ -286,7 +267,7 @@ export const resolvers = {
       }
 
       const post = await loaders.pano.post.byID.load(id.value);
-      if (post.userID !== authUser.id) {
+      if (post.userID !== session.user.id) {
         return { __typename: "NotAuthorized", message: "not authorized baby boi" };
       }
 
