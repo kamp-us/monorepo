@@ -7,6 +7,7 @@ import { type User } from "@kampus/prisma";
 import { assertNever } from "@kampus/std";
 import { type Dictionary } from "@kampus/std/dictionary";
 
+import { InvalidInput, NotAuthorized } from "~/features/errors";
 import {
   transformPanoComment,
   transformPanoCommentConnection,
@@ -245,11 +246,11 @@ export const resolvers = {
   Mutation: {
     createPanoPost: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
       if (!session?.user?.id) {
-        return { __typename: "NotAuthorized", message: "not authorized baby boi" };
+        return NotAuthorized();
       }
 
       if (!input.url && !input.content) {
-        return { __typename: "InvalidInput", message: "Either url or content is required" };
+        return InvalidInput("Either url or content is required");
       }
 
       const created = await actions.pano.post.create({ ...input, userID: session.user.id });
@@ -258,17 +259,17 @@ export const resolvers = {
 
     updatePanoPost: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
       if (!session?.user?.id) {
-        return { __typename: "NotAuthorized", message: "not authorized baby boi" };
+        return NotAuthorized();
       }
 
       const id = parse(input.id);
       if (id.type !== "PanoPost") {
-        return { __typename: "InvalidInput", message: "wrong id" };
+        return InvalidInput("wrong id");
       }
 
       const post = await loaders.pano.post.byID.load(id.value);
       if (post.userID !== session.user.id) {
-        return { __typename: "NotAuthorized", message: "not authorized baby boi" };
+        return NotAuthorized();
       }
 
       const updated = await actions.pano.post.update(id.value, input);
