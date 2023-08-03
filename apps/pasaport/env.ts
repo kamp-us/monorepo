@@ -4,6 +4,7 @@ import { z } from "zod";
 export const env = parseEnv(process.env, {
   NODE_ENV: z.enum(["development", "test", "production"]),
   NEXTAUTH_URL: z.string().url().default("http://sozluk.local.kamp.us:3000/auth"),
+  GQL_URL: z.string().url().default("http://localhost:3001/graphql"),
   DATABASE_URL: z
     .string()
     .url()

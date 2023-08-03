@@ -7,6 +7,7 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
+    "relay": "relay-compiler",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:cov": "vitest --coverage"
