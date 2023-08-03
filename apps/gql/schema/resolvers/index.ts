@@ -43,8 +43,13 @@ export const resolvers = {
   Actor: {},
 
   Query: {
-    // we will properly handle this in Viewer field resolvers
+    // @see Viewer field resolvers
     viewer: () => ({ actor: null }),
+    // @see SozlukQuery field resolvers
+    sozluk: () => ({ term: null, terms: null }),
+    // @see PanoQuery field resolvers
+    pano: () => ({ post: null, posts: [], allPosts: null }),
+
     node: async (_, args, { loaders }) => {
       const id = parse<NodeTypename>(args.id);
 
@@ -76,23 +81,14 @@ export const resolvers = {
 
       return transformUser(user);
     },
-
-    sozluk: () => {
-      return {
-        term: null,
-        terms: null,
-      };
-    },
-
-    pano: () => ({ post: null, posts: [], allPosts: null }),
   },
   Viewer: {
     actor: async (_viewer, _args, { loaders, pasaport: { session } }) => {
-      if (!session?.user?.email) {
+      if (!session?.user?.id) {
         return null;
       }
 
-      const user = await loaders.user.byEmail.load(session.user.email);
+      const user = await loaders.user.byID.load(session.user.id);
       if (!user) {
         return null;
       }
