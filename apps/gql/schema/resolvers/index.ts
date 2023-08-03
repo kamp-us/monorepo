@@ -236,6 +236,7 @@ export const resolvers = {
   },
 
   CreatePanoPostPayload: {}, // union
+  UpdatePanoPostPayload: {}, // union
   UserError: {}, // interface
 
   InvalidInput: errorFieldsResolver,
@@ -267,6 +268,30 @@ export const resolvers = {
 
       const created = await actions.pano.post.create({ ...input, userID: authUser.id });
       return transformPanoPost(await loaders.pano.post.byID.load(created.id));
+    },
+
+    updatePanoPost: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
+      if (!session?.user?.email) {
+        return { __typename: "NotAuthorized", message: "not authorized baby boi" };
+      }
+
+      const authUser = await loaders.user.byEmail.load(session.user.email);
+      if (!authUser) {
+        return { __typename: "NotAuthorized", message: "not authorized baby boi" };
+      }
+
+      const id = parse(input.id);
+      if (id.type !== "PanoPost") {
+        return { __typename: "InvalidInput", message: "wrong id" };
+      }
+
+      const post = await loaders.pano.post.byID.load(id.value);
+      if (post.userID !== authUser.id) {
+        return { __typename: "NotAuthorized", message: "not authorized baby boi" };
+      }
+
+      const updated = await actions.pano.post.update(id.value, input);
+      return transformPanoPost(await loaders.pano.post.byID.clear(updated.id).load(updated.id));
     },
   },
 } satisfies Resolvers;

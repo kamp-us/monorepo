@@ -46,10 +46,15 @@ export type InvalidInput = UserError & {
 export type Mutation = {
   __typename?: "Mutation";
   createPanoPost: Maybe<CreatePanoPostPayload>;
+  updatePanoPost: Maybe<UpdatePanoPostPayload>;
 };
 
 export type MutationCreatePanoPostArgs = {
   input: CreatePanoPostInput;
+};
+
+export type MutationUpdatePanoPostArgs = {
+  input: UpdatePanoPostInput;
 };
 
 export type Node = {
@@ -224,6 +229,15 @@ export type SozlukTermEdge = {
   node: Maybe<SozlukTerm>;
 };
 
+export type UpdatePanoPostInput = {
+  content: InputMaybe<Scalars["String"]["input"]>;
+  id: Scalars["ID"]["input"];
+  title: Scalars["String"]["input"];
+  url: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type UpdatePanoPostPayload = InvalidInput | NotAuthorized | PanoPost;
+
 export type User = Actor &
   Node & {
     __typename?: "User";
@@ -341,6 +355,10 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = Resol
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" })
     | (PanoPost & { __typename: "PanoPost" });
+  UpdatePanoPostPayload:
+    | (InvalidInput & { __typename: "InvalidInput" })
+    | (NotAuthorized & { __typename: "NotAuthorized" })
+    | (PanoPost & { __typename: "PanoPost" });
 }>;
 
 /** Mapping of interface types */
@@ -388,6 +406,10 @@ export type ResolversTypes = ResolversObject<{
   SozlukTermConnection: ResolverTypeWrapper<SozlukTermConnection>;
   SozlukTermEdge: ResolverTypeWrapper<SozlukTermEdge>;
   String: ResolverTypeWrapper<Scalars["String"]["output"]>;
+  UpdatePanoPostInput: UpdatePanoPostInput;
+  UpdatePanoPostPayload: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["UpdatePanoPostPayload"]
+  >;
   User: ResolverTypeWrapper<User>;
   UserError: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>["UserError"]>;
   Viewer: ResolverTypeWrapper<Viewer>;
@@ -422,6 +444,8 @@ export type ResolversParentTypes = ResolversObject<{
   SozlukTermConnection: SozlukTermConnection;
   SozlukTermEdge: SozlukTermEdge;
   String: Scalars["String"]["output"];
+  UpdatePanoPostInput: UpdatePanoPostInput;
+  UpdatePanoPostPayload: ResolversUnionTypes<ResolversParentTypes>["UpdatePanoPostPayload"];
   User: User;
   UserError: ResolversInterfaceTypes<ResolversParentTypes>["UserError"];
   Viewer: Viewer;
@@ -471,6 +495,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationCreatePanoPostArgs, "input">
+  >;
+  updatePanoPost: Resolver<
+    Maybe<ResolversTypes["UpdatePanoPostPayload"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdatePanoPostArgs, "input">
   >;
 }>;
 
@@ -685,6 +715,17 @@ export type SozlukTermEdgeResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type UpdatePanoPostPayloadResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["UpdatePanoPostPayload"] = ResolversParentTypes["UpdatePanoPostPayload"]
+> = ResolversObject<{
+  __resolveType?: TypeResolveFn<
+    "InvalidInput" | "NotAuthorized" | "PanoPost",
+    ParentType,
+    ContextType
+  >;
+}>;
+
 export type UserResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
@@ -739,6 +780,7 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   SozlukTermBody: SozlukTermBodyResolvers<ContextType>;
   SozlukTermConnection: SozlukTermConnectionResolvers<ContextType>;
   SozlukTermEdge: SozlukTermEdgeResolvers<ContextType>;
+  UpdatePanoPostPayload: UpdatePanoPostPayloadResolvers<ContextType>;
   User: UserResolvers<ContextType>;
   UserError: UserErrorResolvers<ContextType>;
   Viewer: ViewerResolvers<ContextType>;
