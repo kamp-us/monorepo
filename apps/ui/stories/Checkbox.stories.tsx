@@ -19,9 +19,9 @@ export const Default = {
       {labels.map((label) => {
         return (
           <div className="flex items-center space-x-2">
-            <Checkbox id="terms" />
+            <Checkbox id={label} />
             <Label
-              htmlFor="terms"
+              htmlFor={label}
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               {label}
