@@ -54,6 +54,12 @@
     "@kampus/pasaport#*": {
       "env": ["NODE_ENV", "NEXTAUTH_URL", "DATABASE_URL"]
     },
+    "@kampus-apps/pasaport#build": {
+      "dependsOn": ["@kampus/prisma#prisma:generate"]
+    },
+    "@kampus-apps/kampus#build": {
+      "dependsOn": ["@kampus/prisma#prisma:generate"]
+    },
     "@kampus/next-auth#*": {
       "env": [
         "AUTH_COOKIE_DOMAIN",
