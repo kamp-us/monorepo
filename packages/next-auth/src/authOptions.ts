@@ -12,7 +12,7 @@ import { PostaciProvider } from "./providers/postaci";
 
 const prismaAdapter = PrismaAdapter(prisma) as Adapter;
 
-const useSecureCookies = !!env.VERCEL_URL;
+const useSecureCookies = env.KAMPUS_ENV === "production";
 
 export const authOptions: AuthOptions = {
   adapter: prismaAdapter,

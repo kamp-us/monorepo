@@ -9,7 +9,7 @@ export const env = parseEnv(
     DISCORD_SECRET: process.env.DISCORD_SECRET,
     TWITCH_ID: process.env.TWITCH_ID,
     TWITCH_SECRET: process.env.TWITCH_SECRET,
-    VERCEL_URL: process.env.VERCEL_URL,
+    KAMPUS_ENV: process.env.KAMPUS_ENV,
   },
   {
     AUTH_COOKIE_DOMAIN: z.string(),
@@ -28,5 +28,6 @@ export const env = parseEnv(
       .string()
       .default("something")
       .describe("A secret for signing the tokens and everything on next auth"),
+    KAMPUS_ENV: z.enum(["development", "test", "production"]).default("development"),
   }
 );
