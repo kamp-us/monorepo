@@ -1,18 +1,29 @@
 scalar Date
 scalar DateTime
 
+interface Node {
+  id: ID!
+}
+
+interface Actor {
+  id: ID!
+  displayName: String
+}
+
+interface UserError {
+  message: String!
+}
+
 type Query {
   # we need to have a way to encode the typename into id
   # so that `Query.node` can decode it and figure out what to resolve
   node(id: ID!): Node
 
+  viewer: Viewer
+
   user(id: ID, username: String): User
   sozluk: SozlukQuery!
   pano: PanoQuery!
-}
-
-interface Node {
-  id: ID!
 }
 
 type PageInfo {
@@ -22,9 +33,22 @@ type PageInfo {
   startCursor: String
 }
 
-type User implements Node {
+type NotAuthorized implements UserError {
+  message: String!
+}
+
+type InvalidInput implements UserError {
+  message: String!
+}
+
+type Viewer {
+  actor: Actor
+}
+
+type User implements Node & Actor {
   id: ID!
   username: String!
+  displayName: String
 
   panoPosts(
     after: String
@@ -89,6 +113,7 @@ type PanoPost implements Node {
   id: ID!
   title: String!
   url: String
+  site: String
   content: String
   createdAt: DateTime!
   owner: User
@@ -130,3 +155,32 @@ type PanoCommentEdge {
   cursor: String!
   node: PanoComment
 }
+
+type Mutation {
+  createPanoPost(input: CreatePanoPostInput!): CreatePanoPostPayload
+  updatePanoPost(input: UpdatePanoPostInput!): UpdatePanoPostPayload
+  removePanoPost(input: RemovePanoPostInput!): RemovePanoPostPayload
+}
+
+input CreatePanoPostInput {
+  title: String!
+  content: String
+  url: String
+}
+
+union CreatePanoPostPayload = PanoPost | NotAuthorized | InvalidInput
+
+input UpdatePanoPostInput {
+  id: ID!
+  title: String!
+  content: String
+  url: String
+}
+
+union UpdatePanoPostPayload = PanoPost | NotAuthorized | InvalidInput
+
+input RemovePanoPostInput {
+  id: ID!
+}
+
+union RemovePanoPostPayload = PanoPost | NotAuthorized | InvalidInput
