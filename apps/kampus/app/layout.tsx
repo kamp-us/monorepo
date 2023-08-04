@@ -1,6 +1,7 @@
 import { type ReactNode } from "react";
 import { Inter } from "next/font/google";
-import { ToastProvider } from "@kampus/ui-next";
+
+import { Toaster } from "@kampus/ui-next";
 
 import { RelayEnvironmentProvider } from "~/features/relay/RelayEnvironmentProvider";
 
@@ -21,7 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <RelayEnvironmentProvider>{children}</RelayEnvironmentProvider>
-          <ToastProvider/>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

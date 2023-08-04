@@ -1,4 +1,5 @@
 "use client";
+
 import { MoreHorizontal } from "lucide-react";
 
 import {
@@ -27,7 +28,7 @@ type Post = {
 
 export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
   // const user = useUserContext();
-  console.log(post, shareUrl);
+  //console.log(post, shareUrl);
   const { toast } = useToast();
   const ownerItems: JSX.Element[] = [];
   // if (canUserEdit(user, post)) {
