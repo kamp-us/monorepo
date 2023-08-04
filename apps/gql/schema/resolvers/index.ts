@@ -234,6 +234,7 @@ export const resolvers = {
 
   CreatePanoPostPayload: {}, // union
   UpdatePanoPostPayload: {}, // union
+  RemovePanoPostPayload: {}, // union
   UserError: {}, // interface
 
   InvalidInput: errorFieldsResolver,
@@ -270,6 +271,23 @@ export const resolvers = {
 
       const updated = await actions.pano.post.update(id.value, input);
       return transformPanoPost(await loaders.pano.post.byID.clear(updated.id).load(updated.id));
+    },
+    removePanoPost: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      const id = parse(input.id);
+      if (id.type !== "PanoPost") {
+        return InvalidInput("wrong id");
+      }
+
+      const post = await loaders.pano.post.byID.load(id.value);
+      if (post.userID !== session.user.id) {
+        return NotAuthorized();
+      }
+
+      return transformPanoPost(await actions.pano.post.remove(id.value));
     },
   },
 } satisfies Resolvers;

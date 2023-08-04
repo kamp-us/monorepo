@@ -46,11 +46,16 @@ export type InvalidInput = UserError & {
 export type Mutation = {
   __typename?: "Mutation";
   createPanoPost: Maybe<CreatePanoPostPayload>;
+  removePanoPost: Maybe<RemovePanoPostPayload>;
   updatePanoPost: Maybe<UpdatePanoPostPayload>;
 };
 
 export type MutationCreatePanoPostArgs = {
   input: CreatePanoPostInput;
+};
+
+export type MutationRemovePanoPostArgs = {
+  input: RemovePanoPostInput;
 };
 
 export type MutationUpdatePanoPostArgs = {
@@ -183,6 +188,12 @@ export type QueryUserArgs = {
   id: InputMaybe<Scalars["ID"]["input"]>;
   username: InputMaybe<Scalars["String"]["input"]>;
 };
+
+export type RemovePanoPostInput = {
+  id: Scalars["ID"]["input"];
+};
+
+export type RemovePanoPostPayload = InvalidInput | NotAuthorized | PanoPost;
 
 export type SozlukQuery = {
   __typename?: "SozlukQuery";
@@ -355,6 +366,10 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = Resol
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" })
     | (PanoPost & { __typename: "PanoPost" });
+  RemovePanoPostPayload:
+    | (InvalidInput & { __typename: "InvalidInput" })
+    | (NotAuthorized & { __typename: "NotAuthorized" })
+    | (PanoPost & { __typename: "PanoPost" });
   UpdatePanoPostPayload:
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" })
@@ -400,6 +415,10 @@ export type ResolversTypes = ResolversObject<{
   PanoPostFilter: PanoPostFilter;
   PanoQuery: ResolverTypeWrapper<PanoQuery>;
   Query: ResolverTypeWrapper<{}>;
+  RemovePanoPostInput: RemovePanoPostInput;
+  RemovePanoPostPayload: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["RemovePanoPostPayload"]
+  >;
   SozlukQuery: ResolverTypeWrapper<SozlukQuery>;
   SozlukTerm: ResolverTypeWrapper<SozlukTerm>;
   SozlukTermBody: ResolverTypeWrapper<SozlukTermBody>;
@@ -438,6 +457,8 @@ export type ResolversParentTypes = ResolversObject<{
   PanoPostEdge: PanoPostEdge;
   PanoQuery: PanoQuery;
   Query: {};
+  RemovePanoPostInput: RemovePanoPostInput;
+  RemovePanoPostPayload: ResolversUnionTypes<ResolversParentTypes>["RemovePanoPostPayload"];
   SozlukQuery: SozlukQuery;
   SozlukTerm: SozlukTerm;
   SozlukTermBody: SozlukTermBody;
@@ -495,6 +516,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationCreatePanoPostArgs, "input">
+  >;
+  removePanoPost: Resolver<
+    Maybe<ResolversTypes["RemovePanoPostPayload"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationRemovePanoPostArgs, "input">
   >;
   updatePanoPost: Resolver<
     Maybe<ResolversTypes["UpdatePanoPostPayload"]>,
@@ -656,6 +683,17 @@ export type QueryResolvers<
   viewer: Resolver<Maybe<ResolversTypes["Viewer"]>, ParentType, ContextType>;
 }>;
 
+export type RemovePanoPostPayloadResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["RemovePanoPostPayload"] = ResolversParentTypes["RemovePanoPostPayload"]
+> = ResolversObject<{
+  __resolveType?: TypeResolveFn<
+    "InvalidInput" | "NotAuthorized" | "PanoPost",
+    ParentType,
+    ContextType
+  >;
+}>;
+
 export type SozlukQueryResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["SozlukQuery"] = ResolversParentTypes["SozlukQuery"]
@@ -775,6 +813,7 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   PanoPostEdge: PanoPostEdgeResolvers<ContextType>;
   PanoQuery: PanoQueryResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
+  RemovePanoPostPayload: RemovePanoPostPayloadResolvers<ContextType>;
   SozlukQuery: SozlukQueryResolvers<ContextType>;
   SozlukTerm: SozlukTermResolvers<ContextType>;
   SozlukTermBody: SozlukTermBodyResolvers<ContextType>;

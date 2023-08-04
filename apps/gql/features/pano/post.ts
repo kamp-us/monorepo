@@ -33,9 +33,9 @@ function createPanoPostActions({ prisma }: Clients) {
     });
   };
 
-  const update = (userID: string, args: UpdatePanoPostArgs) => {
+  const update = (id: string, args: UpdatePanoPostArgs) => {
     return prisma.post.update({
-      where: { id: userID },
+      where: { id },
       data: {
         title: args.title,
         url: args.url,
@@ -45,8 +45,13 @@ function createPanoPostActions({ prisma }: Clients) {
     });
   };
 
+  const remove = (id: string) => {
+    return prisma.post.delete({ where: { id } });
+  };
+
   return {
     create,
     update,
+    remove,
   };
 }
