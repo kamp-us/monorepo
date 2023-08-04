@@ -7,6 +7,7 @@ import { type User } from "@kampus/prisma";
 import { assertNever } from "@kampus/std";
 import { type Dictionary } from "@kampus/std/dictionary";
 
+import { InvalidInput, NotAuthorized } from "~/features/errors";
 import {
   transformPanoComment,
   transformPanoCommentConnection,
@@ -31,12 +32,24 @@ const parseConnectionArgs = (args: ConnectionArguments) => ({
   before: args.before ? parse(args.before).value : null,
 });
 
+const errorFieldsResolver = {
+  message: (error: { message: string }) => error.message,
+};
+
 export const resolvers = {
   Date: DateResolver,
   DateTime: DateTimeResolver,
   Node: {},
+  Actor: {},
 
   Query: {
+    // @see Viewer field resolvers
+    viewer: () => ({ actor: null }),
+    // @see SozlukQuery field resolvers
+    sozluk: () => ({ term: null, terms: null }),
+    // @see PanoQuery field resolvers
+    pano: () => ({ post: null, posts: [], allPosts: null }),
+
     node: async (_, args, { loaders }) => {
       const id = parse<NodeTypename>(args.id);
 
@@ -53,7 +66,6 @@ export const resolvers = {
           return assertNever(id.type);
       }
     },
-
     user: async (_, args, { loaders }) => {
       let user: User | null = null;
 
@@ -69,16 +81,22 @@ export const resolvers = {
 
       return transformUser(user);
     },
-
-    sozluk: () => {
-      return {
-        term: null,
-        terms: null,
-      };
-    },
-
-    pano: () => ({ post: null, posts: [], allPosts: null }),
   },
+  Viewer: {
+    actor: async (_viewer, _args, { loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return null;
+      }
+
+      const user = await loaders.user.byID.load(session.user.id);
+      if (!user) {
+        return null;
+      }
+
+      return transformUser(user);
+    },
+  },
+
   SozlukQuery: {
     term: async (_, args, { loaders }) =>
       transformSozlukTerm(await loaders.sozluk.term.load(args.id)),
@@ -131,6 +149,7 @@ export const resolvers = {
     title: (post) => post.title,
     url: (post) => post.url,
     content: (post) => post.content,
+    site: (post) => post.site,
     owner: async (parent, _, { loaders }) => {
       const post = await loaders.pano.post.byID.load(parent.id);
       const user = await loaders.user.byID.load(post.userID);
@@ -165,6 +184,7 @@ export const resolvers = {
   User: {
     id: (user) => stringify("User", user.id),
     username: (u) => u.username,
+    displayName: (u) => u.displayName,
     panoPosts: async (user, args, { loaders }) =>
       transformPanoPostConnection(
         await loaders.pano.post.byUserID.load(new ConnectionKey(user.id, args))
@@ -210,5 +230,64 @@ export const resolvers = {
     edges: (connection) => connection.edges,
     pageInfo: (connection) => transformPageInfo("PanoComment", connection.pageInfo),
     totalCount: (connection) => connection.totalCount,
+  },
+
+  CreatePanoPostPayload: {}, // union
+  UpdatePanoPostPayload: {}, // union
+  RemovePanoPostPayload: {}, // union
+  UserError: {}, // interface
+
+  InvalidInput: errorFieldsResolver,
+  NotAuthorized: errorFieldsResolver,
+
+  Mutation: {
+    createPanoPost: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      if (!input.url && !input.content) {
+        return InvalidInput("Either url or content is required");
+      }
+
+      const created = await actions.pano.post.create({ ...input, userID: session.user.id });
+      return transformPanoPost(await loaders.pano.post.byID.load(created.id));
+    },
+
+    updatePanoPost: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      const id = parse(input.id);
+      if (id.type !== "PanoPost") {
+        return InvalidInput("wrong id");
+      }
+
+      const post = await loaders.pano.post.byID.load(id.value);
+      if (post.userID !== session.user.id) {
+        return NotAuthorized();
+      }
+
+      const updated = await actions.pano.post.update(id.value, input);
+      return transformPanoPost(await loaders.pano.post.byID.clear(updated.id).load(updated.id));
+    },
+    removePanoPost: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      const id = parse(input.id);
+      if (id.type !== "PanoPost") {
+        return InvalidInput("wrong id");
+      }
+
+      const post = await loaders.pano.post.byID.load(id.value);
+      if (post.userID !== session.user.id) {
+        return NotAuthorized();
+      }
+
+      return transformPanoPost(await actions.pano.post.remove(id.value));
+    },
   },
 } satisfies Resolvers;

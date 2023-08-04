@@ -1,3 +1,5 @@
+const GQL_URL = process.env.NEXT_PUBLIC_GQL_URL ?? "";
+
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
@@ -15,6 +17,10 @@ const config = {
   async rewrites() {
     return {
       beforeFiles: [
+        {
+          source: "/gql",
+          destination: GQL_URL,
+        },
         // if the host is `pano.*`,
         // this rewrite will be applied
         {
