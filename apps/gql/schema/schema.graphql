@@ -43,6 +43,13 @@ type InvalidInput implements UserError {
 
 type Viewer {
   actor: Actor
+  panoFeed(
+    after: String
+    before: String
+    first: Int
+    last: Int
+    filter: PanoPostFilter
+  ): PanoPostConnection
 }
 
 type User implements Node & Actor {
@@ -92,13 +99,6 @@ type SozlukTermEdge {
 type PanoQuery {
   post(id: ID!): PanoPost
   posts(ids: [ID!]!): [PanoPost]!
-  allPosts(
-    after: String
-    before: String
-    first: Int
-    last: Int
-    filter: PanoPostFilter
-  ): PanoPostConnection
 }
 
 enum PanoPostFilter {
