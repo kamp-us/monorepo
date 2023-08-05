@@ -81,6 +81,7 @@ export type PageInfo = {
 
 export type PanoComment = Node & {
   __typename?: "PanoComment";
+  commentCount: Maybe<Scalars["Int"]["output"]>;
   comments: Maybe<PanoCommentConnection>;
   content: Scalars["String"]["output"];
   createdAt: Scalars["DateTime"]["output"];
@@ -114,6 +115,7 @@ export type PanoCommentEdge = {
 
 export type PanoPost = Node & {
   __typename?: "PanoPost";
+  commentCount: Maybe<Scalars["Int"]["output"]>;
   comments: Maybe<PanoCommentConnection>;
   content: Maybe<Scalars["String"]["output"]>;
   createdAt: Scalars["DateTime"]["output"];
@@ -565,6 +567,7 @@ export type PanoCommentResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["PanoComment"] = ResolversParentTypes["PanoComment"]
 > = ResolversObject<{
+  commentCount: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   comments: Resolver<
     Maybe<ResolversTypes["PanoCommentConnection"]>,
     ParentType,
@@ -605,6 +608,7 @@ export type PanoPostResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["PanoPost"] = ResolversParentTypes["PanoPost"]
 > = ResolversObject<{
+  commentCount: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   comments: Resolver<
     Maybe<ResolversTypes["PanoCommentConnection"]>,
     ParentType,

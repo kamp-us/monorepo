@@ -160,6 +160,9 @@ export const resolvers = {
         await loaders.pano.comment.byPostID.load(new ConnectionKey(post.id, args))
       );
     },
+    commentCount: (post, _, { loaders }) => {
+      return loaders.pano.comment.countByPostID.load(new ConnectionKey(post.id));
+    },
     upvoteCount: (post, _, { loaders }) => {
       return loaders.pano.upvote.countByPostID.load(new ConnectionKey(post.id));
     },
@@ -215,6 +218,9 @@ export const resolvers = {
       return transformPanoCommentConnection(
         await loaders.pano.comment.byParentID.load(new ConnectionKey(comment.id, args))
       );
+    },
+    commentCount: (comment, _, { loaders }) => {
+      return loaders.pano.comment.countByParentID.load(new ConnectionKey(comment.id));
     },
     upvoteCount: (comment, _, { loaders }) => {
       return loaders.pano.upvote.countByCommentID.load(new ConnectionKey(comment.id));
