@@ -150,17 +150,8 @@ export type PanoPostFilter = "ACTIVE" | "ALL" | "HOT" | "LIKED" | "SELF";
 
 export type PanoQuery = {
   __typename?: "PanoQuery";
-  allPosts: Maybe<PanoPostConnection>;
   post: Maybe<PanoPost>;
   posts: Array<Maybe<PanoPost>>;
-};
-
-export type PanoQueryAllPostsArgs = {
-  after: InputMaybe<Scalars["String"]["input"]>;
-  before: InputMaybe<Scalars["String"]["input"]>;
-  filter: InputMaybe<PanoPostFilter>;
-  first: InputMaybe<Scalars["Int"]["input"]>;
-  last: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type PanoQueryPostArgs = {
@@ -273,6 +264,15 @@ export type UserError = {
 export type Viewer = {
   __typename?: "Viewer";
   actor: Maybe<Actor>;
+  panoFeed: Maybe<PanoPostConnection>;
+};
+
+export type ViewerPanoFeedArgs = {
+  after: InputMaybe<Scalars["String"]["input"]>;
+  before: InputMaybe<Scalars["String"]["input"]>;
+  filter: InputMaybe<PanoPostFilter>;
+  first: InputMaybe<Scalars["Int"]["input"]>;
+  last: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -646,12 +646,6 @@ export type PanoQueryResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["PanoQuery"] = ResolversParentTypes["PanoQuery"]
 > = ResolversObject<{
-  allPosts: Resolver<
-    Maybe<ResolversTypes["PanoPostConnection"]>,
-    ParentType,
-    ContextType,
-    Partial<PanoQueryAllPostsArgs>
-  >;
   post: Resolver<
     Maybe<ResolversTypes["PanoPost"]>,
     ParentType,
@@ -792,6 +786,12 @@ export type ViewerResolvers<
   ParentType extends ResolversParentTypes["Viewer"] = ResolversParentTypes["Viewer"]
 > = ResolversObject<{
   actor: Resolver<Maybe<ResolversTypes["Actor"]>, ParentType, ContextType>;
+  panoFeed: Resolver<
+    Maybe<ResolversTypes["PanoPostConnection"]>,
+    ParentType,
+    ContextType,
+    Partial<ViewerPanoFeedArgs>
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

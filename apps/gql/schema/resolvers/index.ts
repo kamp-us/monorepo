@@ -44,7 +44,7 @@ export const resolvers = {
 
   Query: {
     // @see Viewer field resolvers
-    viewer: () => ({ actor: null }),
+    viewer: () => ({ actor: null, panoFeed: null }),
     // @see SozlukQuery field resolvers
     sozluk: () => ({ term: null, terms: null }),
     // @see PanoQuery field resolvers
@@ -95,6 +95,13 @@ export const resolvers = {
 
       return transformUser(user);
     },
+    panoFeed: async (_, args, { loaders }) => {
+      const posts = await loaders.pano.post.all.load(
+        new ConnectionKey(null, parseConnectionArgs(args))
+      );
+
+      return transformPanoPostConnection(posts);
+    },
   },
 
   SozlukQuery: {
@@ -135,13 +142,6 @@ export const resolvers = {
       return posts.map((post) => {
         return post instanceof Error ? null : transformPanoPost(post);
       });
-    },
-    allPosts: async (_, args, { loaders }) => {
-      const posts = await loaders.pano.post.all.load(
-        new ConnectionKey(null, parseConnectionArgs(args))
-      );
-
-      return transformPanoPostConnection(posts);
     },
   },
   PanoPost: {
