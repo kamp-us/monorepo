@@ -118,6 +118,7 @@ type PanoPost implements Node {
   createdAt: DateTime!
   owner: User
   comments(after: String, before: String, first: Int, last: Int): PanoCommentConnection
+  commentCount: Int
   upvoteCount: Int
 }
 
@@ -140,8 +141,9 @@ type PanoComment implements Node {
   post: PanoPost
   parent: PanoComment
   comments(after: String, before: String, first: Int, last: Int): PanoCommentConnection
-  createdAt: DateTime!
+  commentCount: Int
   upvoteCount: Int
+  createdAt: DateTime!
 }
 
 type PanoCommentConnection {
