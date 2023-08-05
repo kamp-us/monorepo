@@ -1,12 +1,6 @@
 import { type Clients } from "~/clients";
 import { getSitename } from "./utils/get-sitename";
 
-export function createPanoActions(clients: Clients) {
-  return {
-    post: createPanoPostActions(clients),
-  };
-}
-
 interface CreatePanoPostArgs {
   title: string;
   userID: string;
@@ -20,7 +14,7 @@ interface UpdatePanoPostArgs {
   content: string | null;
 }
 
-function createPanoPostActions({ prisma }: Clients) {
+export function createPanoPostActions({ prisma }: Clients) {
   const create = (args: CreatePanoPostArgs) => {
     return prisma.post.create({
       data: {

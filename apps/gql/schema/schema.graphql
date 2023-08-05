@@ -160,6 +160,9 @@ type Mutation {
   createPanoPost(input: CreatePanoPostInput!): CreatePanoPostPayload
   updatePanoPost(input: UpdatePanoPostInput!): UpdatePanoPostPayload
   removePanoPost(input: RemovePanoPostInput!): RemovePanoPostPayload
+
+  createPanoComment(input: CreatePanoCommentInput!): CreatePanoCommentPayload
+  updatePanoComment(input: UpdatePanoCommentInput!): UpdatePanoCommentPayload
 }
 
 input CreatePanoPostInput {
@@ -184,3 +187,18 @@ input RemovePanoPostInput {
 }
 
 union RemovePanoPostPayload = PanoPost | NotAuthorized | InvalidInput
+
+union CreatePanoCommentPayload = PanoComment | NotAuthorized | InvalidInput
+
+input CreatePanoCommentInput {
+  content: String!
+  postID: String!
+  parentID: String
+}
+
+union UpdatePanoCommentPayload = PanoComment | NotAuthorized | InvalidInput
+
+input UpdatePanoCommentInput {
+  id: ID!
+  content: String!
+}

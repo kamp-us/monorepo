@@ -30,6 +30,14 @@ export type Actor = {
   id: Scalars["ID"]["output"];
 };
 
+export type CreatePanoCommentInput = {
+  content: Scalars["String"]["input"];
+  parentID: InputMaybe<Scalars["String"]["input"]>;
+  postID: Scalars["String"]["input"];
+};
+
+export type CreatePanoCommentPayload = InvalidInput | NotAuthorized | PanoComment;
+
 export type CreatePanoPostInput = {
   content: InputMaybe<Scalars["String"]["input"]>;
   title: Scalars["String"]["input"];
@@ -45,9 +53,15 @@ export type InvalidInput = UserError & {
 
 export type Mutation = {
   __typename?: "Mutation";
+  createPanoComment: Maybe<CreatePanoCommentPayload>;
   createPanoPost: Maybe<CreatePanoPostPayload>;
   removePanoPost: Maybe<RemovePanoPostPayload>;
+  updatePanoComment: Maybe<UpdatePanoCommentPayload>;
   updatePanoPost: Maybe<UpdatePanoPostPayload>;
+};
+
+export type MutationCreatePanoCommentArgs = {
+  input: CreatePanoCommentInput;
 };
 
 export type MutationCreatePanoPostArgs = {
@@ -56,6 +70,10 @@ export type MutationCreatePanoPostArgs = {
 
 export type MutationRemovePanoPostArgs = {
   input: RemovePanoPostInput;
+};
+
+export type MutationUpdatePanoCommentArgs = {
+  input: UpdatePanoCommentInput;
 };
 
 export type MutationUpdatePanoPostArgs = {
@@ -231,6 +249,13 @@ export type SozlukTermEdge = {
   node: Maybe<SozlukTerm>;
 };
 
+export type UpdatePanoCommentInput = {
+  content: Scalars["String"]["input"];
+  id: Scalars["ID"]["input"];
+};
+
+export type UpdatePanoCommentPayload = InvalidInput | NotAuthorized | PanoComment;
+
 export type UpdatePanoPostInput = {
   content: InputMaybe<Scalars["String"]["input"]>;
   id: Scalars["ID"]["input"];
@@ -362,6 +387,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of union types */
 export type ResolversUnionTypes<RefType extends Record<string, unknown>> = ResolversObject<{
+  CreatePanoCommentPayload:
+    | (InvalidInput & { __typename: "InvalidInput" })
+    | (NotAuthorized & { __typename: "NotAuthorized" })
+    | (PanoComment & { __typename: "PanoComment" });
   CreatePanoPostPayload:
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" })
@@ -370,6 +399,10 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = Resol
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" })
     | (PanoPost & { __typename: "PanoPost" });
+  UpdatePanoCommentPayload:
+    | (InvalidInput & { __typename: "InvalidInput" })
+    | (NotAuthorized & { __typename: "NotAuthorized" })
+    | (PanoComment & { __typename: "PanoComment" });
   UpdatePanoPostPayload:
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" })
@@ -393,6 +426,10 @@ export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = R
 export type ResolversTypes = ResolversObject<{
   Actor: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>["Actor"]>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
+  CreatePanoCommentInput: CreatePanoCommentInput;
+  CreatePanoCommentPayload: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["CreatePanoCommentPayload"]
+  >;
   CreatePanoPostInput: CreatePanoPostInput;
   CreatePanoPostPayload: ResolverTypeWrapper<
     ResolversUnionTypes<ResolversTypes>["CreatePanoPostPayload"]
@@ -425,6 +462,10 @@ export type ResolversTypes = ResolversObject<{
   SozlukTermConnection: ResolverTypeWrapper<SozlukTermConnection>;
   SozlukTermEdge: ResolverTypeWrapper<SozlukTermEdge>;
   String: ResolverTypeWrapper<Scalars["String"]["output"]>;
+  UpdatePanoCommentInput: UpdatePanoCommentInput;
+  UpdatePanoCommentPayload: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["UpdatePanoCommentPayload"]
+  >;
   UpdatePanoPostInput: UpdatePanoPostInput;
   UpdatePanoPostPayload: ResolverTypeWrapper<
     ResolversUnionTypes<ResolversTypes>["UpdatePanoPostPayload"]
@@ -438,6 +479,8 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   Actor: ResolversInterfaceTypes<ResolversParentTypes>["Actor"];
   Boolean: Scalars["Boolean"]["output"];
+  CreatePanoCommentInput: CreatePanoCommentInput;
+  CreatePanoCommentPayload: ResolversUnionTypes<ResolversParentTypes>["CreatePanoCommentPayload"];
   CreatePanoPostInput: CreatePanoPostInput;
   CreatePanoPostPayload: ResolversUnionTypes<ResolversParentTypes>["CreatePanoPostPayload"];
   Date: Scalars["Date"]["output"];
@@ -465,6 +508,8 @@ export type ResolversParentTypes = ResolversObject<{
   SozlukTermConnection: SozlukTermConnection;
   SozlukTermEdge: SozlukTermEdge;
   String: Scalars["String"]["output"];
+  UpdatePanoCommentInput: UpdatePanoCommentInput;
+  UpdatePanoCommentPayload: ResolversUnionTypes<ResolversParentTypes>["UpdatePanoCommentPayload"];
   UpdatePanoPostInput: UpdatePanoPostInput;
   UpdatePanoPostPayload: ResolversUnionTypes<ResolversParentTypes>["UpdatePanoPostPayload"];
   User: User;
@@ -477,6 +522,17 @@ export type ActorResolvers<
   ParentType extends ResolversParentTypes["Actor"] = ResolversParentTypes["Actor"]
 > = ResolversObject<{
   __resolveType?: TypeResolveFn<"User", ParentType, ContextType>;
+}>;
+
+export type CreatePanoCommentPayloadResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["CreatePanoCommentPayload"] = ResolversParentTypes["CreatePanoCommentPayload"]
+> = ResolversObject<{
+  __resolveType?: TypeResolveFn<
+    "InvalidInput" | "NotAuthorized" | "PanoComment",
+    ParentType,
+    ContextType
+  >;
 }>;
 
 export type CreatePanoPostPayloadResolvers<
@@ -511,6 +567,12 @@ export type MutationResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"]
 > = ResolversObject<{
+  createPanoComment: Resolver<
+    Maybe<ResolversTypes["CreatePanoCommentPayload"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreatePanoCommentArgs, "input">
+  >;
   createPanoPost: Resolver<
     Maybe<ResolversTypes["CreatePanoPostPayload"]>,
     ParentType,
@@ -522,6 +584,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationRemovePanoPostArgs, "input">
+  >;
+  updatePanoComment: Resolver<
+    Maybe<ResolversTypes["UpdatePanoCommentPayload"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdatePanoCommentArgs, "input">
   >;
   updatePanoPost: Resolver<
     Maybe<ResolversTypes["UpdatePanoPostPayload"]>,
@@ -747,6 +815,17 @@ export type SozlukTermEdgeResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type UpdatePanoCommentPayloadResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["UpdatePanoCommentPayload"] = ResolversParentTypes["UpdatePanoCommentPayload"]
+> = ResolversObject<{
+  __resolveType?: TypeResolveFn<
+    "InvalidInput" | "NotAuthorized" | "PanoComment",
+    ParentType,
+    ContextType
+  >;
+}>;
+
 export type UpdatePanoPostPayloadResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["UpdatePanoPostPayload"] = ResolversParentTypes["UpdatePanoPostPayload"]
@@ -797,6 +876,7 @@ export type ViewerResolvers<
 
 export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   Actor: ActorResolvers<ContextType>;
+  CreatePanoCommentPayload: CreatePanoCommentPayloadResolvers<ContextType>;
   CreatePanoPostPayload: CreatePanoPostPayloadResolvers<ContextType>;
   Date: GraphQLScalarType;
   DateTime: GraphQLScalarType;
@@ -819,6 +899,7 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   SozlukTermBody: SozlukTermBodyResolvers<ContextType>;
   SozlukTermConnection: SozlukTermConnectionResolvers<ContextType>;
   SozlukTermEdge: SozlukTermEdgeResolvers<ContextType>;
+  UpdatePanoCommentPayload: UpdatePanoCommentPayloadResolvers<ContextType>;
   UpdatePanoPostPayload: UpdatePanoPostPayloadResolvers<ContextType>;
   User: UserResolvers<ContextType>;
   UserError: UserErrorResolvers<ContextType>;
