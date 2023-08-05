@@ -235,6 +235,9 @@ export const resolvers = {
   CreatePanoPostPayload: {}, // union
   UpdatePanoPostPayload: {}, // union
   RemovePanoPostPayload: {}, // union
+  CreatePanoCommentPayload: {}, // union
+  UpdatePanoCommentPayload: {}, // union
+  RemovePanoCommentPayload: {}, // union
   UserError: {}, // interface
 
   InvalidInput: errorFieldsResolver,

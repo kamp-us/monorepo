@@ -4,7 +4,7 @@ interface CreatePanoCommentArgs {
   userID: string;
   content: string;
   postID: string;
-  parentID: string | undefined;
+  parentID: string | null;
 }
 
 interface UpdatePanoCommentArgs {
