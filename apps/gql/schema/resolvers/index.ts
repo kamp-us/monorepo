@@ -321,5 +321,22 @@ export const resolvers = {
         await loaders.pano.comment.byID.clear(updated.id).load(updated.id)
       );
     },
+    removePanoComment: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      const id = parse(input.id);
+      if (id.type !== "PanoComment") {
+        return InvalidInput("wrong id");
+      }
+
+      const comment = await loaders.pano.comment.byID.load(id.value);
+      if (comment.userID !== session.user.id) {
+        return NotAuthorized();
+      }
+
+      return transformPanoComment(await actions.pano.comment.remove(id.value));
+    },
   },
 } satisfies Resolvers;

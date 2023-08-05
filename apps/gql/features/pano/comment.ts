@@ -38,8 +38,13 @@ export function createPanoCommentActions({ prisma }: Clients) {
     });
   };
 
+  const remove = (id: string) => {
+    return prisma.comment.delete({ where: { id } });
+  };
+
   return {
     create,
     update,
+    remove,
   };
 }

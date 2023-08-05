@@ -55,6 +55,7 @@ export type Mutation = {
   __typename?: "Mutation";
   createPanoComment: Maybe<CreatePanoCommentPayload>;
   createPanoPost: Maybe<CreatePanoPostPayload>;
+  removePanoComment: Maybe<RemovePanoCommentPayload>;
   removePanoPost: Maybe<RemovePanoPostPayload>;
   updatePanoComment: Maybe<UpdatePanoCommentPayload>;
   updatePanoPost: Maybe<UpdatePanoPostPayload>;
@@ -66,6 +67,10 @@ export type MutationCreatePanoCommentArgs = {
 
 export type MutationCreatePanoPostArgs = {
   input: CreatePanoPostInput;
+};
+
+export type MutationRemovePanoCommentArgs = {
+  input: RemovePanoCommentInput;
 };
 
 export type MutationRemovePanoPostArgs = {
@@ -197,6 +202,12 @@ export type QueryUserArgs = {
   id: InputMaybe<Scalars["ID"]["input"]>;
   username: InputMaybe<Scalars["String"]["input"]>;
 };
+
+export type RemovePanoCommentInput = {
+  id: Scalars["ID"]["input"];
+};
+
+export type RemovePanoCommentPayload = InvalidInput | NotAuthorized | PanoComment;
 
 export type RemovePanoPostInput = {
   id: Scalars["ID"]["input"];
@@ -395,6 +406,10 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = Resol
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" })
     | (PanoPost & { __typename: "PanoPost" });
+  RemovePanoCommentPayload:
+    | (InvalidInput & { __typename: "InvalidInput" })
+    | (NotAuthorized & { __typename: "NotAuthorized" })
+    | (PanoComment & { __typename: "PanoComment" });
   RemovePanoPostPayload:
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" })
@@ -452,6 +467,10 @@ export type ResolversTypes = ResolversObject<{
   PanoPostFilter: PanoPostFilter;
   PanoQuery: ResolverTypeWrapper<PanoQuery>;
   Query: ResolverTypeWrapper<{}>;
+  RemovePanoCommentInput: RemovePanoCommentInput;
+  RemovePanoCommentPayload: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["RemovePanoCommentPayload"]
+  >;
   RemovePanoPostInput: RemovePanoPostInput;
   RemovePanoPostPayload: ResolverTypeWrapper<
     ResolversUnionTypes<ResolversTypes>["RemovePanoPostPayload"]
@@ -500,6 +519,8 @@ export type ResolversParentTypes = ResolversObject<{
   PanoPostEdge: PanoPostEdge;
   PanoQuery: PanoQuery;
   Query: {};
+  RemovePanoCommentInput: RemovePanoCommentInput;
+  RemovePanoCommentPayload: ResolversUnionTypes<ResolversParentTypes>["RemovePanoCommentPayload"];
   RemovePanoPostInput: RemovePanoPostInput;
   RemovePanoPostPayload: ResolversUnionTypes<ResolversParentTypes>["RemovePanoPostPayload"];
   SozlukQuery: SozlukQuery;
@@ -578,6 +599,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationCreatePanoPostArgs, "input">
+  >;
+  removePanoComment: Resolver<
+    Maybe<ResolversTypes["RemovePanoCommentPayload"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationRemovePanoCommentArgs, "input">
   >;
   removePanoPost: Resolver<
     Maybe<ResolversTypes["RemovePanoPostPayload"]>,
@@ -745,6 +772,17 @@ export type QueryResolvers<
   viewer: Resolver<Maybe<ResolversTypes["Viewer"]>, ParentType, ContextType>;
 }>;
 
+export type RemovePanoCommentPayloadResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["RemovePanoCommentPayload"] = ResolversParentTypes["RemovePanoCommentPayload"]
+> = ResolversObject<{
+  __resolveType?: TypeResolveFn<
+    "InvalidInput" | "NotAuthorized" | "PanoComment",
+    ParentType,
+    ContextType
+  >;
+}>;
+
 export type RemovePanoPostPayloadResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["RemovePanoPostPayload"] = ResolversParentTypes["RemovePanoPostPayload"]
@@ -893,6 +931,7 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   PanoPostEdge: PanoPostEdgeResolvers<ContextType>;
   PanoQuery: PanoQueryResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
+  RemovePanoCommentPayload: RemovePanoCommentPayloadResolvers<ContextType>;
   RemovePanoPostPayload: RemovePanoPostPayloadResolvers<ContextType>;
   SozlukQuery: SozlukQueryResolvers<ContextType>;
   SozlukTerm: SozlukTermResolvers<ContextType>;
