@@ -301,5 +301,25 @@ export const resolvers = {
 
       return transformPanoComment(await loaders.pano.comment.byID.load(created.id));
     },
+    updatePanoComment: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      const id = parse(input.id);
+      if (id.type !== "PanoComment") {
+        return InvalidInput("wrong id");
+      }
+
+      const comment = await loaders.pano.comment.byID.load(id.value);
+      if (comment.userID !== session.user.id) {
+        return NotAuthorized();
+      }
+
+      const updated = await actions.pano.comment.update(id.value, input);
+      return transformPanoComment(
+        await loaders.pano.comment.byID.clear(updated.id).load(updated.id)
+      );
+    },
   },
 } satisfies Resolvers;

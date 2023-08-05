@@ -7,6 +7,10 @@ interface CreatePanoCommentArgs {
   parentID: string | undefined;
 }
 
+interface UpdatePanoCommentArgs {
+  content: string;
+}
+
 export function createPanoCommentActions({ prisma }: Clients) {
   const create = (args: CreatePanoCommentArgs) => {
     return prisma.comment.create({
@@ -25,7 +29,17 @@ export function createPanoCommentActions({ prisma }: Clients) {
     });
   };
 
+  const update = (id: string, args: UpdatePanoCommentArgs) => {
+    return prisma.comment.update({
+      where: { id },
+      data: {
+        content: args.content,
+      },
+    });
+  };
+
   return {
     create,
+    update,
   };
 }
