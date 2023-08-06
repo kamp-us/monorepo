@@ -12,7 +12,7 @@ import { PostaciProvider } from "./providers/postaci";
 
 const prismaAdapter = PrismaAdapter(prisma) as Adapter;
 
-const useSecureCookies = !!env.VERCEL_URL;
+const useSecureCookies = env.KAMPUS_ENV === "production";
 
 export const authOptions: AuthOptions = {
   adapter: prismaAdapter,
@@ -42,6 +42,20 @@ export const authOptions: AuthOptions = {
         domain: env.AUTH_COOKIE_DOMAIN,
         secure: useSecureCookies,
       },
+    },
+  },
+  callbacks: {
+    session({ session, user }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: user.id,
+        },
+      };
+    },
+    redirect() {
+      return env.KAMPUS_ENV === "production" ? "https://dev.kamp.us" : "http://localhost:3000";
     },
   },
 };

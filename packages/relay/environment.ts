@@ -10,9 +10,10 @@ import {
   type Variables,
 } from "relay-runtime";
 
-const HTTP_ENDPOINT = "https://gql.dev.kamp.us/graphql";
 const IS_SERVER = typeof window === typeof undefined;
 const CACHE_TTL = 5 * 1000; // 5 seconds, to resolve preloaded results
+
+const HTTP_ENDPOINT = IS_SERVER ? (process.env.NEXT_PUBLIC_GQL_URL as string) : "/gql";
 
 export async function networkFetch(
   request: RequestParameters,
@@ -29,7 +30,8 @@ export async function networkFetch(
       variables,
     }),
   });
-  const json = await resp.json();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const json = (await resp.json()) as { errors: any };
 
   // GraphQL returns exceptions (for example, a missing required variable) in the "errors"
   // property of the response. If any exceptions occurred when processing the request,

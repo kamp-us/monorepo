@@ -12,13 +12,6 @@
       ],
       "dependsOn": ["@kampus/prisma#prisma:generate", "^build"]
     },
-    "@kampus-apps/gql#dev": {
-      "dependsOn": ["@kampus/prisma#prisma:generate", "@kampus/sozluk-content#build"]
-    },
-    "@kampus-apps/gql#build": {
-      "cache": false,
-      "dependsOn": ["@kampus/prisma#prisma:generate", "@kampus/sozluk-content#build"]
-    },
     "dev": {
       "dependsOn": ["@kampus/prisma#prisma:generate"],
       "cache": false
@@ -42,8 +35,30 @@
     "docker:dev": {
       "cache": false
     },
+    "@kampus-apps/gql#*": {
+      "env": ["NODE_ENV", "DATABASE_URL", "NEXTAUTH_URL", "KAMPUS_ENV"]
+    },
+    "@kampus-apps/gql#dev": {
+      "dependsOn": ["@kampus/prisma#prisma:generate", "@kampus/sozluk-content#build"]
+    },
+    "@kampus-apps/gql#build": {
+      "cache": false,
+      "dependsOn": ["@kampus/prisma#prisma:generate", "@kampus/sozluk-content#build"]
+    },
     "@kampus/kampus#*": {
-      "env": ["NODE_ENV", "GQL_URL", "RESEND_API_KEY"]
+      "env": ["NODE_ENV", "NEXT_PUBLIC_GQL_URL", "RESEND_API_KEY", "NEXTAUTH_URL", "KAMPUS_ENV"]
+    },
+    "@kampus/kampus#dev": {
+      "dependsOn": ["@kampus-apps/gql", "@kampus/pasaport"]
+    },
+    "@kampus/pasaport#*": {
+      "env": ["NODE_ENV", "NEXTAUTH_URL", "DATABASE_URL", "KAMPUS_ENV"]
+    },
+    "@kampus-apps/pasaport#build": {
+      "dependsOn": ["@kampus/prisma#prisma:generate"]
+    },
+    "@kampus-apps/kampus#build": {
+      "dependsOn": ["@kampus/prisma#prisma:generate"]
     },
     "@kampus/next-auth#*": {
       "env": [
@@ -55,11 +70,11 @@
         "TWITCH_ID",
         "TWITCH_SECRET",
         "SECRET",
-        "VERCEL_URL"
+        "KAMPUS_ENV"
       ]
     },
-    "@kampus-apps/gql#*": {
-      "env": ["NODE_ENV", "DATABASE_URL"]
+    "@kampus/relay": {
+      "env": ["NEXT_PUBLIC_GQL_URL"]
     }
   }
 }

@@ -1,28 +1,29 @@
 "use client";
 
-import { redirect, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 import { ThemeToggle } from "@kampus/ui-next";
 
 import { PanoFilterLink } from "~/app/pano/features/post-filter/PanoFilterLink";
 import {
-  DEFAULT_FILTER_PATH,
   filters,
   isPanoPostSortFilter,
+  type PanoPostFilterType,
 } from "~/app/pano/features/post-filter/utils";
 
 export const PostSortFilters = () => {
   const searchParams = useSearchParams();
-  const filterQuery = searchParams.get("filter");
+  let filterQuery = searchParams.get("filter") ?? "all";
 
   if (!isPanoPostSortFilter(filterQuery)) {
-    redirect(DEFAULT_FILTER_PATH);
+    console.log(filterQuery);
+    filterQuery = "all";
   }
 
   return (
     <div className="flex items-center space-x-2">
       {Object.entries(filters).map(([query, label]) => (
-        <PanoFilterLink key={query} query={query} activeQuery={filterQuery}>
+        <PanoFilterLink key={query} query={query} activeQuery={filterQuery as PanoPostFilterType}>
           {label}
         </PanoFilterLink>
       ))}

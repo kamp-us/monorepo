@@ -17,6 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  useToast,
 } from "@kampus/ui-next";
 
 interface Props {
@@ -47,6 +48,8 @@ export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
   console.log(post, shareUrl);
 
   const router = useRouter();
+  const { toast } = useToast();
+
   const ownerItems: JSX.Element[] = [];
   if (canUserEdit(user, post)) {
     ownerItems.push(
@@ -75,7 +78,15 @@ export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           {ownerItems}
-          <DropdownMenuItem>Adresi kopyala</DropdownMenuItem>
+          <DropdownMenuItem
+          onSelect={() => {
+            toast({
+              description: "Link kopyalandı",
+            });
+          }}
+        >
+          Linki kopyala
+        </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       <DialogContent>

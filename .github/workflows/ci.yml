@@ -14,6 +14,7 @@ env:
   TWITCH_SECRET: "fake"
   DISCORD_ID: "fake"
   DISCORD_SECRET: "fake"
+  NEXT_PUBLIC_GQL_URL: "https://gql.dev.kamp.us/graphql"
 
 jobs:
   build:
