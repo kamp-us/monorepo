@@ -7,6 +7,7 @@ export const env = parseEnv(
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     KAMPUS_ENV: process.env.KAMPUS_ENV,
+    DATABASE_URL: process.env.DATABASE_URL,
   },
   {
     NODE_ENV: z.enum(["development", "test", "production"]),

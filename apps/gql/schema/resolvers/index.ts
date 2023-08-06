@@ -44,7 +44,7 @@ export const resolvers = {
 
   Query: {
     // @see Viewer field resolvers
-    viewer: () => ({ actor: null }),
+    viewer: () => ({ actor: null, panoFeed: null }),
     // @see SozlukQuery field resolvers
     sozluk: () => ({ term: null, terms: null }),
     // @see PanoQuery field resolvers
@@ -95,6 +95,13 @@ export const resolvers = {
 
       return transformUser(user);
     },
+    panoFeed: async (_, args, { loaders }) => {
+      const posts = await loaders.pano.post.all.load(
+        new ConnectionKey(null, parseConnectionArgs(args))
+      );
+
+      return transformPanoPostConnection(posts);
+    },
   },
 
   SozlukQuery: {
@@ -136,13 +143,6 @@ export const resolvers = {
         return post instanceof Error ? null : transformPanoPost(post);
       });
     },
-    allPosts: async (_, args, { loaders }) => {
-      const posts = await loaders.pano.post.all.load(
-        new ConnectionKey(null, parseConnectionArgs(args))
-      );
-
-      return transformPanoPostConnection(posts);
-    },
   },
   PanoPost: {
     id: (post) => stringify("PanoPost", post.id),
@@ -159,6 +159,9 @@ export const resolvers = {
       return transformPanoCommentConnection(
         await loaders.pano.comment.byPostID.load(new ConnectionKey(post.id, args))
       );
+    },
+    commentCount: (post, _, { loaders }) => {
+      return loaders.pano.comment.countByPostID.load(new ConnectionKey(post.id));
     },
     upvoteCount: (post, _, { loaders }) => {
       return loaders.pano.upvote.countByPostID.load(new ConnectionKey(post.id));
@@ -216,6 +219,9 @@ export const resolvers = {
         await loaders.pano.comment.byParentID.load(new ConnectionKey(comment.id, args))
       );
     },
+    commentCount: (comment, _, { loaders }) => {
+      return loaders.pano.comment.countByParentID.load(new ConnectionKey(comment.id));
+    },
     upvoteCount: (comment, _, { loaders }) => {
       return loaders.pano.upvote.countByCommentID.load(new ConnectionKey(comment.id));
     },
@@ -235,6 +241,9 @@ export const resolvers = {
   CreatePanoPostPayload: {}, // union
   UpdatePanoPostPayload: {}, // union
   RemovePanoPostPayload: {}, // union
+  CreatePanoCommentPayload: {}, // union
+  UpdatePanoCommentPayload: {}, // union
+  RemovePanoCommentPayload: {}, // union
   UserError: {}, // interface
 
   InvalidInput: errorFieldsResolver,
@@ -253,7 +262,6 @@ export const resolvers = {
       const created = await actions.pano.post.create({ ...input, userID: session.user.id });
       return transformPanoPost(await loaders.pano.post.byID.load(created.id));
     },
-
     updatePanoPost: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
       if (!session?.user?.id) {
         return NotAuthorized();
@@ -288,6 +296,56 @@ export const resolvers = {
       }
 
       return transformPanoPost(await actions.pano.post.remove(id.value));
+    },
+    createPanoComment: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      if (!input.postID && !input.content) {
+        return InvalidInput("Either post or content is required");
+      }
+
+      const created = await actions.pano.comment.create({ ...input, userID: session.user.id });
+
+      return transformPanoComment(await loaders.pano.comment.byID.load(created.id));
+    },
+    updatePanoComment: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      const id = parse(input.id);
+      if (id.type !== "PanoComment") {
+        return InvalidInput("wrong id");
+      }
+
+      const comment = await loaders.pano.comment.byID.load(id.value);
+      if (comment.userID !== session.user.id) {
+        return NotAuthorized();
+      }
+
+      const updated = await actions.pano.comment.update(id.value, input);
+      return transformPanoComment(
+        await loaders.pano.comment.byID.clear(updated.id).load(updated.id)
+      );
+    },
+    removePanoComment: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      const id = parse(input.id);
+      if (id.type !== "PanoComment") {
+        return InvalidInput("wrong id");
+      }
+
+      const comment = await loaders.pano.comment.byID.load(id.value);
+      if (comment.userID !== session.user.id) {
+        return NotAuthorized();
+      }
+
+      return transformPanoComment(await actions.pano.comment.remove(id.value));
     },
   },
 } satisfies Resolvers;
