@@ -1,5 +1,5 @@
+import { createPanoActions } from "~/features/pano";
 import { type Clients } from "./clients";
-import { createPanoActions } from "./features/pano/post";
 
 export type DataActions = ReturnType<typeof createActions>;
 

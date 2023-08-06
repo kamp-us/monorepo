@@ -71,12 +71,16 @@ const createPanoCommentLoaders = ({ prisma }: Clients) => {
     cacheCommentConnection
   );
   const byPostID = createPrismaConnectionLoader(prisma.comment, "postID", cacheCommentConnection);
+  const countByPostID = createPrismaCountLoader(prisma.comment, "postID");
+  const countByParentID = createPrismaCountLoader(prisma.comment, "parentID");
   const all = createPrismaConnectionLoader(prisma.comment, null);
 
   return {
     byID,
     byParentID,
     byPostID,
+    countByPostID,
+    countByParentID,
     all,
   };
 };
@@ -87,6 +91,7 @@ export const transformPanoPost = (post: Post) => {
     __typename: "PanoPost",
     owner: null,
     comments: null,
+    commentCount: null,
     upvoteCount: null,
     createdAt: post.createdAt.toISOString(),
   } satisfies PanoPost;
@@ -116,6 +121,7 @@ export const transformPanoComment = (comment: Comment) => {
     parent: null,
     post: null,
     comments: null,
+    commentCount: null,
     upvoteCount: null,
     createdAt: comment.createdAt.toISOString(),
   } satisfies PanoComment;

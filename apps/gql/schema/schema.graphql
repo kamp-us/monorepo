@@ -118,6 +118,7 @@ type PanoPost implements Node {
   createdAt: DateTime!
   owner: User
   comments(after: String, before: String, first: Int, last: Int): PanoCommentConnection
+  commentCount: Int
   upvoteCount: Int
 }
 
@@ -140,8 +141,9 @@ type PanoComment implements Node {
   post: PanoPost
   parent: PanoComment
   comments(after: String, before: String, first: Int, last: Int): PanoCommentConnection
-  createdAt: DateTime!
+  commentCount: Int
   upvoteCount: Int
+  createdAt: DateTime!
 }
 
 type PanoCommentConnection {
@@ -160,6 +162,10 @@ type Mutation {
   createPanoPost(input: CreatePanoPostInput!): CreatePanoPostPayload
   updatePanoPost(input: UpdatePanoPostInput!): UpdatePanoPostPayload
   removePanoPost(input: RemovePanoPostInput!): RemovePanoPostPayload
+
+  createPanoComment(input: CreatePanoCommentInput!): CreatePanoCommentPayload
+  updatePanoComment(input: UpdatePanoCommentInput!): UpdatePanoCommentPayload
+  removePanoComment(input: RemovePanoCommentInput!): RemovePanoCommentPayload
 }
 
 input CreatePanoPostInput {
@@ -184,3 +190,24 @@ input RemovePanoPostInput {
 }
 
 union RemovePanoPostPayload = PanoPost | NotAuthorized | InvalidInput
+
+union CreatePanoCommentPayload = PanoComment | NotAuthorized | InvalidInput
+
+input CreatePanoCommentInput {
+  content: String!
+  postID: String!
+  parentID: String
+}
+
+union UpdatePanoCommentPayload = PanoComment | NotAuthorized | InvalidInput
+
+input UpdatePanoCommentInput {
+  id: ID!
+  content: String!
+}
+
+union RemovePanoCommentPayload = PanoComment | NotAuthorized | InvalidInput
+
+input RemovePanoCommentInput {
+  id: ID!
+}
