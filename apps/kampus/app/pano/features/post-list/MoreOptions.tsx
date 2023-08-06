@@ -1,3 +1,5 @@
+"use client";
+
 import { MoreHorizontal } from "lucide-react";
 
 import {
@@ -6,6 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  useToast,
 } from "@kampus/ui-next";
 
 interface Props {
@@ -26,7 +29,7 @@ type Post = {
 export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
   // const user = useUserContext();
   console.log(post, shareUrl);
-
+  const { toast } = useToast();
   const ownerItems: JSX.Element[] = [];
   // if (canUserEdit(user, post)) {
   //   ownerItems.push(
@@ -54,7 +57,15 @@ export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {ownerItems}
-        <DropdownMenuItem>Adresi kopyala</DropdownMenuItem>
+        <DropdownMenuItem
+          onSelect={() => {
+            toast({
+              description: "Link kopyalandı",
+            });
+          }}
+        >
+          Linki kopyala
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
