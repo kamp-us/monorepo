@@ -28,6 +28,7 @@ type Post = {
 
 export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
   // const user = useUserContext();
+  console.log(post, shareUrl);
   const { toast } = useToast();
   const ownerItems: JSX.Element[] = [];
   // if (canUserEdit(user, post)) {
