@@ -3,6 +3,7 @@ import "../styles.css";
 
 import React from "react";
 import type { StoryContext, StoryFn } from "@storybook/react";
+import {Toaster} from "@kampus/ui-next" 
 
 import { ThemeProvider } from "@kampus/ui-next/components/theme-provider";
 
@@ -37,6 +38,7 @@ const withThemeProvider = (StoryFn: StoryFn) => {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <StoryFn />
+      <Toaster/>
     </ThemeProvider>
   );
 };
