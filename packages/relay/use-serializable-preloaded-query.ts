@@ -8,38 +8,38 @@ import { type OperationType } from "relay-runtime";
 import { responseCache } from "./environment";
 import { type SerializablePreloadedQuery } from "./load-serializable-query"; // This hook convert serializable preloaded query
 
-// This hook convert serializable preloaded query
-// into Relay's PreloadedQuery object.
-// It is also writes this serializable preloaded query
-// into QueryResponseCache, so we the network layer
-// can use these cache results when fetching data
-// in `usePreloadedQuery`.
+// This hook convert serializable preloaded query into Relay's PreloadedQuery
+// object. It is also writes this serializable preloaded query into
+// QueryResponseCache, so we the network layer can use these cache results when
+// fetching data in `usePreloadedQuery`.
 export default function useSerializablePreloadedQuery<TQuery extends OperationType>(
-  preloadQuery: SerializablePreloadedQuery<TQuery>,
+  preloadedQuery: SerializablePreloadedQuery<TQuery>,
   fetchPolicy: PreloadFetchPolicy = "store-or-network"
 ): PreloadedQuery<TQuery> {
-  useMemo(() => {
-    writePreloadedQueryToCache(preloadQuery);
-  }, [preloadQuery]);
   const environment = useRelayEnvironment();
+
+  useMemo(() => {
+    writePreloadedQueryToCache(preloadedQuery);
+  }, [preloadedQuery]);
 
   return {
     environment,
-    fetchKey: preloadQuery.params.id ?? preloadQuery.params.cacheID,
+    fetchKey: preloadedQuery.params.id ?? preloadedQuery.params.cacheID,
     fetchPolicy,
     isDisposed: false,
-    name: preloadQuery.params.name,
+    name: preloadedQuery.params.name,
     kind: "PreloadedQuery",
-    variables: preloadQuery.variables,
+    variables: preloadedQuery.variables,
     dispose: () => {
       return;
     },
   };
 }
 
-function writePreloadedQueryToCache<TQuery extends OperationType>(
-  preloadedQueryObject: SerializablePreloadedQuery<TQuery>
-) {
-  const cacheKey = preloadedQueryObject.params.id ?? preloadedQueryObject.params.cacheID;
-  responseCache?.set(cacheKey, preloadedQueryObject.variables, preloadedQueryObject.response);
+function writePreloadedQueryToCache<TQuery extends OperationType>({
+  params,
+  variables,
+  response,
+}: SerializablePreloadedQuery<TQuery>) {
+  responseCache?.set(params.id ?? params.cacheID, variables, response);
 }

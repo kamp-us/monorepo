@@ -16,11 +16,9 @@ export const UpvoteButton = (props: UpvoteProps) => {
   const combinedStyle = cn(upvoteStyle, opacity);
 
   return (
-    <Button className="flex h-full items-center pt-3" variant="ghost">
-      <div className="flex flex-col items-center justify-center">
-        <Triangle className={combinedStyle} size={12} />
-        {`${props.upvoteCount}`}
-      </div>
+    <Button className="flex h-full flex-col" variant="outline">
+      <Triangle className={combinedStyle} size={12} />
+      {props.upvoteCount}
     </Button>
   );
 };

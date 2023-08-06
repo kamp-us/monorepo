@@ -21,8 +21,15 @@ export function createUserLoaders(clients: Clients) {
     });
   });
 
+  const byEmail = createPrismaLoader(clients.prisma.user, "email", (users) => {
+    users.forEach((user) => {
+      byUsername.prime(user.id, user);
+    });
+  });
+
   return {
     byID,
+    byEmail,
     byUsername,
   };
 }
@@ -31,5 +38,6 @@ export const transformUser = (user: User) => ({
   ...user,
   __typename: "User" as const,
   username: user.username ?? "",
+  displayName: user.name ?? user.username ?? "",
   panoPosts: null,
 });

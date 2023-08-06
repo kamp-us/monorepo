@@ -8,6 +8,6 @@ export const filters: Record<PanoPostFilterType, string> = {
   "my-posts": "başlıklarım",
 };
 
-export const DEFAULT_FILTER_PATH = "/pano/posts?filter=all";
+export const DEFAULT_FILTER_PATH = "/posts?filter=all";
 export const isPanoPostSortFilter = (x: unknown): x is PanoPostFilterType =>
   Object.keys(filters).some((filter) => filter === x);
