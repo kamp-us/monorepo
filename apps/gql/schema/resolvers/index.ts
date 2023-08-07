@@ -356,10 +356,6 @@ export const resolvers = {
         return NotAuthorized();
       }
 
-      if (!input.postID) {
-        return InvalidInput("post is required");
-      }
-
       return transformPostUpvote(
         await actions.pano.postUpvote.create({
           postID: input.postID,
@@ -370,10 +366,6 @@ export const resolvers = {
     removePostUpvote: async (_, { input }, { actions, pasaport: { session } }) => {
       if (!session?.user?.id) {
         return NotAuthorized();
-      }
-
-      if (!input.postID) {
-        return InvalidInput("post is required");
       }
 
       return transformPostUpvote(
