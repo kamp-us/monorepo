@@ -4,7 +4,7 @@ import {
   createPrismaLoader,
 } from "@kampus/gql-utils";
 import { type Connection } from "@kampus/gql-utils/connection";
-import { type Comment, type Post } from "@kampus/prisma";
+import { type Comment, type Post, type Upvote } from "@kampus/prisma";
 
 import { type Clients } from "~/clients";
 import {
@@ -12,6 +12,7 @@ import {
   type PanoCommentConnection,
   type PanoPost,
   type PanoPostConnection,
+  type PostUpvote,
 } from "~/schema/types.generated";
 
 export type PanoLoaders = ReturnType<typeof createPanoLoaders>;
@@ -141,4 +142,11 @@ export const transformPanoCommentConnection = (connection: Connection<Comment>) 
     },
     totalCount: connection.totalCount,
   } satisfies PanoCommentConnection;
+};
+
+export const transformPostUpvote = (upvote: Upvote) => {
+  return {
+    ...upvote,
+    __typename: "PostUpvote",
+  } satisfies PostUpvote;
 };
