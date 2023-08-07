@@ -158,6 +158,12 @@ type PanoCommentEdge {
   node: PanoComment
 }
 
+type PostUpvote {
+  id: ID!
+  postID: String!
+  userID: String!
+}
+
 type Mutation {
   createPanoPost(input: CreatePanoPostInput!): CreatePanoPostPayload
   updatePanoPost(input: UpdatePanoPostInput!): UpdatePanoPostPayload
@@ -166,6 +172,9 @@ type Mutation {
   createPanoComment(input: CreatePanoCommentInput!): CreatePanoCommentPayload
   updatePanoComment(input: UpdatePanoCommentInput!): UpdatePanoCommentPayload
   removePanoComment(input: RemovePanoCommentInput!): RemovePanoCommentPayload
+
+  createPostUpvote(input: CreatePostUpvoteInput!): CreatePostUpvotePayload
+  removePostUpvote(input: RemovePostUpvoteInput!): RemovePostUpvotePayload
 }
 
 input CreatePanoPostInput {
@@ -211,3 +220,15 @@ union RemovePanoCommentPayload = PanoComment | NotAuthorized | InvalidInput
 input RemovePanoCommentInput {
   id: ID!
 }
+
+input CreatePostUpvoteInput {
+  postID: String!
+}
+
+union CreatePostUpvotePayload = PostUpvote | NotAuthorized | InvalidInput
+
+input RemovePostUpvoteInput {
+  postID: String!
+}
+
+union RemovePostUpvotePayload = PostUpvote | NotAuthorized | InvalidInput
