@@ -46,6 +46,12 @@ export type CreatePanoPostInput = {
 
 export type CreatePanoPostPayload = InvalidInput | NotAuthorized | PanoPost;
 
+export type CreatePostUpvoteInput = {
+  postID: Scalars["String"]["input"];
+};
+
+export type CreatePostUpvotePayload = InvalidInput | NotAuthorized | PostUpvote;
+
 export type InvalidInput = UserError & {
   __typename?: "InvalidInput";
   message: Scalars["String"]["output"];
@@ -55,8 +61,10 @@ export type Mutation = {
   __typename?: "Mutation";
   createPanoComment: Maybe<CreatePanoCommentPayload>;
   createPanoPost: Maybe<CreatePanoPostPayload>;
+  createPostUpvote: Maybe<CreatePostUpvotePayload>;
   removePanoComment: Maybe<RemovePanoCommentPayload>;
   removePanoPost: Maybe<RemovePanoPostPayload>;
+  removePostUpvote: Maybe<RemovePostUpvotePayload>;
   updatePanoComment: Maybe<UpdatePanoCommentPayload>;
   updatePanoPost: Maybe<UpdatePanoPostPayload>;
 };
@@ -69,12 +77,20 @@ export type MutationCreatePanoPostArgs = {
   input: CreatePanoPostInput;
 };
 
+export type MutationCreatePostUpvoteArgs = {
+  input: CreatePostUpvoteInput;
+};
+
 export type MutationRemovePanoCommentArgs = {
   input: RemovePanoCommentInput;
 };
 
 export type MutationRemovePanoPostArgs = {
   input: RemovePanoPostInput;
+};
+
+export type MutationRemovePostUpvoteArgs = {
+  input: RemovePostUpvoteInput;
 };
 
 export type MutationUpdatePanoCommentArgs = {
@@ -187,6 +203,13 @@ export type PanoQueryPostsArgs = {
   ids: Array<Scalars["ID"]["input"]>;
 };
 
+export type PostUpvote = {
+  __typename?: "PostUpvote";
+  id: Scalars["ID"]["output"];
+  owner: Maybe<User>;
+  post: Maybe<PanoPost>;
+};
+
 export type Query = {
   __typename?: "Query";
   node: Maybe<Node>;
@@ -216,6 +239,12 @@ export type RemovePanoPostInput = {
 };
 
 export type RemovePanoPostPayload = InvalidInput | NotAuthorized | PanoPost;
+
+export type RemovePostUpvoteInput = {
+  postID: Scalars["String"]["input"];
+};
+
+export type RemovePostUpvotePayload = InvalidInput | NotAuthorized | PostUpvote;
 
 export type SozlukQuery = {
   __typename?: "SozlukQuery";
@@ -408,6 +437,10 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = Resol
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" })
     | (PanoPost & { __typename: "PanoPost" });
+  CreatePostUpvotePayload:
+    | (InvalidInput & { __typename: "InvalidInput" })
+    | (NotAuthorized & { __typename: "NotAuthorized" })
+    | (PostUpvote & { __typename: "PostUpvote" });
   RemovePanoCommentPayload:
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" })
@@ -416,6 +449,10 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = Resol
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" })
     | (PanoPost & { __typename: "PanoPost" });
+  RemovePostUpvotePayload:
+    | (InvalidInput & { __typename: "InvalidInput" })
+    | (NotAuthorized & { __typename: "NotAuthorized" })
+    | (PostUpvote & { __typename: "PostUpvote" });
   UpdatePanoCommentPayload:
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" })
@@ -451,6 +488,10 @@ export type ResolversTypes = ResolversObject<{
   CreatePanoPostPayload: ResolverTypeWrapper<
     ResolversUnionTypes<ResolversTypes>["CreatePanoPostPayload"]
   >;
+  CreatePostUpvoteInput: CreatePostUpvoteInput;
+  CreatePostUpvotePayload: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["CreatePostUpvotePayload"]
+  >;
   Date: ResolverTypeWrapper<Scalars["Date"]["output"]>;
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
   ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
@@ -468,6 +509,7 @@ export type ResolversTypes = ResolversObject<{
   PanoPostEdge: ResolverTypeWrapper<PanoPostEdge>;
   PanoPostFilter: PanoPostFilter;
   PanoQuery: ResolverTypeWrapper<PanoQuery>;
+  PostUpvote: ResolverTypeWrapper<PostUpvote>;
   Query: ResolverTypeWrapper<{}>;
   RemovePanoCommentInput: RemovePanoCommentInput;
   RemovePanoCommentPayload: ResolverTypeWrapper<
@@ -476,6 +518,10 @@ export type ResolversTypes = ResolversObject<{
   RemovePanoPostInput: RemovePanoPostInput;
   RemovePanoPostPayload: ResolverTypeWrapper<
     ResolversUnionTypes<ResolversTypes>["RemovePanoPostPayload"]
+  >;
+  RemovePostUpvoteInput: RemovePostUpvoteInput;
+  RemovePostUpvotePayload: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["RemovePostUpvotePayload"]
   >;
   SozlukQuery: ResolverTypeWrapper<SozlukQuery>;
   SozlukTerm: ResolverTypeWrapper<SozlukTerm>;
@@ -504,6 +550,8 @@ export type ResolversParentTypes = ResolversObject<{
   CreatePanoCommentPayload: ResolversUnionTypes<ResolversParentTypes>["CreatePanoCommentPayload"];
   CreatePanoPostInput: CreatePanoPostInput;
   CreatePanoPostPayload: ResolversUnionTypes<ResolversParentTypes>["CreatePanoPostPayload"];
+  CreatePostUpvoteInput: CreatePostUpvoteInput;
+  CreatePostUpvotePayload: ResolversUnionTypes<ResolversParentTypes>["CreatePostUpvotePayload"];
   Date: Scalars["Date"]["output"];
   DateTime: Scalars["DateTime"]["output"];
   ID: Scalars["ID"]["output"];
@@ -520,11 +568,14 @@ export type ResolversParentTypes = ResolversObject<{
   PanoPostConnection: PanoPostConnection;
   PanoPostEdge: PanoPostEdge;
   PanoQuery: PanoQuery;
+  PostUpvote: PostUpvote;
   Query: {};
   RemovePanoCommentInput: RemovePanoCommentInput;
   RemovePanoCommentPayload: ResolversUnionTypes<ResolversParentTypes>["RemovePanoCommentPayload"];
   RemovePanoPostInput: RemovePanoPostInput;
   RemovePanoPostPayload: ResolversUnionTypes<ResolversParentTypes>["RemovePanoPostPayload"];
+  RemovePostUpvoteInput: RemovePostUpvoteInput;
+  RemovePostUpvotePayload: ResolversUnionTypes<ResolversParentTypes>["RemovePostUpvotePayload"];
   SozlukQuery: SozlukQuery;
   SozlukTerm: SozlukTerm;
   SozlukTermBody: SozlukTermBody;
@@ -569,6 +620,17 @@ export type CreatePanoPostPayloadResolvers<
   >;
 }>;
 
+export type CreatePostUpvotePayloadResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["CreatePostUpvotePayload"] = ResolversParentTypes["CreatePostUpvotePayload"]
+> = ResolversObject<{
+  __resolveType?: TypeResolveFn<
+    "InvalidInput" | "NotAuthorized" | "PostUpvote",
+    ParentType,
+    ContextType
+  >;
+}>;
+
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes["Date"], any> {
   name: "Date";
 }
@@ -602,6 +664,12 @@ export type MutationResolvers<
     ContextType,
     RequireFields<MutationCreatePanoPostArgs, "input">
   >;
+  createPostUpvote: Resolver<
+    Maybe<ResolversTypes["CreatePostUpvotePayload"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreatePostUpvoteArgs, "input">
+  >;
   removePanoComment: Resolver<
     Maybe<ResolversTypes["RemovePanoCommentPayload"]>,
     ParentType,
@@ -613,6 +681,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationRemovePanoPostArgs, "input">
+  >;
+  removePostUpvote: Resolver<
+    Maybe<ResolversTypes["RemovePostUpvotePayload"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationRemovePostUpvoteArgs, "input">
   >;
   updatePanoComment: Resolver<
     Maybe<ResolversTypes["UpdatePanoCommentPayload"]>,
@@ -760,6 +834,16 @@ export type PanoQueryResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type PostUpvoteResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["PostUpvote"] = ResolversParentTypes["PostUpvote"]
+> = ResolversObject<{
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  owner: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
+  post: Resolver<Maybe<ResolversTypes["PanoPost"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type QueryResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
@@ -793,6 +877,17 @@ export type RemovePanoPostPayloadResolvers<
 > = ResolversObject<{
   __resolveType?: TypeResolveFn<
     "InvalidInput" | "NotAuthorized" | "PanoPost",
+    ParentType,
+    ContextType
+  >;
+}>;
+
+export type RemovePostUpvotePayloadResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["RemovePostUpvotePayload"] = ResolversParentTypes["RemovePostUpvotePayload"]
+> = ResolversObject<{
+  __resolveType?: TypeResolveFn<
+    "InvalidInput" | "NotAuthorized" | "PostUpvote",
     ParentType,
     ContextType
   >;
@@ -920,6 +1015,7 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   Actor: ActorResolvers<ContextType>;
   CreatePanoCommentPayload: CreatePanoCommentPayloadResolvers<ContextType>;
   CreatePanoPostPayload: CreatePanoPostPayloadResolvers<ContextType>;
+  CreatePostUpvotePayload: CreatePostUpvotePayloadResolvers<ContextType>;
   Date: GraphQLScalarType;
   DateTime: GraphQLScalarType;
   InvalidInput: InvalidInputResolvers<ContextType>;
@@ -934,9 +1030,11 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   PanoPostConnection: PanoPostConnectionResolvers<ContextType>;
   PanoPostEdge: PanoPostEdgeResolvers<ContextType>;
   PanoQuery: PanoQueryResolvers<ContextType>;
+  PostUpvote: PostUpvoteResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
   RemovePanoCommentPayload: RemovePanoCommentPayloadResolvers<ContextType>;
   RemovePanoPostPayload: RemovePanoPostPayloadResolvers<ContextType>;
+  RemovePostUpvotePayload: RemovePostUpvotePayloadResolvers<ContextType>;
   SozlukQuery: SozlukQueryResolvers<ContextType>;
   SozlukTerm: SozlukTermResolvers<ContextType>;
   SozlukTermBody: SozlukTermBodyResolvers<ContextType>;

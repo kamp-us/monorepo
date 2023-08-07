@@ -25,6 +25,7 @@ model Upvote {
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
+  @@unique([postID, userID])
   @@index([postID])
   @@index([userID])
 }

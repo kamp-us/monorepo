@@ -13,6 +13,7 @@ import {
   transformPanoCommentConnection,
   transformPanoPost,
   transformPanoPostConnection,
+  transformPostUpvote,
 } from "~/loaders/pano";
 import { transformSozlukTerm, transformSozlukTermsConnection } from "~/loaders/sozluk";
 import { transformUser } from "~/loaders/user";
@@ -237,6 +238,19 @@ export const resolvers = {
     pageInfo: (connection) => transformPageInfo("PanoComment", connection.pageInfo),
     totalCount: (connection) => connection.totalCount,
   },
+  PostUpvote: {
+    id: (upvote) => stringify("PostUpvote", upvote.id),
+    post: async (upvote, _, { loaders }) => {
+      const model = await loaders.pano.upvote.byID.load(upvote.id);
+      const post = await loaders.pano.post.byID.load(model.postID);
+      return transformPanoPost(post);
+    },
+    owner: async (upvote, _, { loaders }) => {
+      const model = await loaders.pano.upvote.byID.load(upvote.id);
+      const user = await loaders.user.byID.load(model.userID);
+      return transformUser(user);
+    },
+  },
 
   CreatePanoPostPayload: {}, // union
   UpdatePanoPostPayload: {}, // union
@@ -244,6 +258,9 @@ export const resolvers = {
   CreatePanoCommentPayload: {}, // union
   UpdatePanoCommentPayload: {}, // union
   RemovePanoCommentPayload: {}, // union
+  CreatePostUpvotePayload: {}, // union
+  RemovePostUpvotePayload: {}, // union
+
   UserError: {}, // interface
 
   InvalidInput: errorFieldsResolver,
@@ -346,6 +363,30 @@ export const resolvers = {
       }
 
       return transformPanoComment(await actions.pano.comment.remove(id.value));
+    },
+    createPostUpvote: async (_, { input }, { actions, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      return transformPostUpvote(
+        await actions.pano.postUpvote.create({
+          postID: input.postID,
+          userID: session.user.id,
+        })
+      );
+    },
+    removePostUpvote: async (_, { input }, { actions, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      return transformPostUpvote(
+        await actions.pano.postUpvote.remove({
+          postID: input.postID,
+          userID: session.user.id,
+        })
+      );
     },
   },
 } satisfies Resolvers;
