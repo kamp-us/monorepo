@@ -2,7 +2,7 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Button, Toast, ToastAction, Toaster, useToast } from "@kampus/ui-next";
+import { Button, ToastAction, Toaster, useToast } from "@kampus/ui-next";
 
 const meta = {
   title: "Toast",
