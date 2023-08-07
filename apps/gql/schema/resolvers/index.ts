@@ -13,6 +13,7 @@ import {
   transformPanoCommentConnection,
   transformPanoPost,
   transformPanoPostConnection,
+  transformPostUpvote,
 } from "~/loaders/pano";
 import { transformSozlukTerm, transformSozlukTermsConnection } from "~/loaders/sozluk";
 import { transformUser } from "~/loaders/user";
@@ -244,6 +245,9 @@ export const resolvers = {
   CreatePanoCommentPayload: {}, // union
   UpdatePanoCommentPayload: {}, // union
   RemovePanoCommentPayload: {}, // union
+  CreatePostUpvotePayload: {}, // union
+  RemovePostUpvotePayload: {}, // union
+
   UserError: {}, // interface
 
   InvalidInput: errorFieldsResolver,
@@ -346,6 +350,30 @@ export const resolvers = {
       }
 
       return transformPanoComment(await actions.pano.comment.remove(id.value));
+    },
+    createPostUpvote: async (_, { input }, { actions, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      return transformPostUpvote(
+        await actions.pano.postUpvote.create({
+          postID: input.postID,
+          userID: session.user.id,
+        })
+      );
+    },
+    removePostUpvote: async (_, { input }, { actions, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return NotAuthorized();
+      }
+
+      return transformPostUpvote(
+        await actions.pano.postUpvote.remove({
+          postID: input.postID,
+          userID: session.user.id,
+        })
+      );
     },
   },
 } satisfies Resolvers;
