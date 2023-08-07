@@ -98,7 +98,7 @@ export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
         </DialogHeader>
         <DialogFooter>
           <Button variant="outline" type="submit">
-            Hayir
+            Hayır
           </Button>
           <Button variant="destructive" type="submit">
             Evet
