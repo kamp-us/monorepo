@@ -238,6 +238,19 @@ export const resolvers = {
     pageInfo: (connection) => transformPageInfo("PanoComment", connection.pageInfo),
     totalCount: (connection) => connection.totalCount,
   },
+  PostUpvote: {
+    id: (upvote) => stringify("PostUpvote", upvote.id),
+    post: async (upvote, _, { loaders }) => {
+      const model = await loaders.pano.upvote.byID.load(upvote.id);
+      const post = await loaders.pano.post.byID.load(model.postID);
+      return transformPanoPost(post);
+    },
+    owner: async (upvote, _, { loaders }) => {
+      const model = await loaders.pano.upvote.byID.load(upvote.id);
+      const user = await loaders.user.byID.load(model.userID);
+      return transformUser(user);
+    },
+  },
 
   CreatePanoPostPayload: {}, // union
   UpdatePanoPostPayload: {}, // union
