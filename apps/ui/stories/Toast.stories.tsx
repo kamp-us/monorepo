@@ -13,6 +13,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 export const Default = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { toast } = useToast();
 
     return (

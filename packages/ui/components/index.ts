@@ -18,3 +18,4 @@ export * from "./top-nav";
 export * from "./use-toast";
 export * from "./user-avatar";
 export * from "./toaster";
+export * from "./card";
