@@ -206,8 +206,8 @@ export type PanoQueryPostsArgs = {
 export type PostUpvote = {
   __typename?: "PostUpvote";
   id: Scalars["ID"]["output"];
-  postID: Scalars["String"]["output"];
-  userID: Scalars["String"]["output"];
+  owner: Maybe<User>;
+  post: Maybe<PanoPost>;
 };
 
 export type Query = {
@@ -839,8 +839,8 @@ export type PostUpvoteResolvers<
   ParentType extends ResolversParentTypes["PostUpvote"] = ResolversParentTypes["PostUpvote"]
 > = ResolversObject<{
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  postID: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  userID: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  owner: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
+  post: Resolver<Maybe<ResolversTypes["PanoPost"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
