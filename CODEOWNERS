@@ -1,3 +1,5 @@
 *               @kamp-us/kampus-devs
 
+/apps/gql/* @kamp-us/gql-leads
+
 /packages/sozluk-content/terms/ @kamp-us/sozluk-editors
