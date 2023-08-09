@@ -6,12 +6,14 @@ describe(ConnectionKey, () => {
   it("works with when no parent", () => {
     const key = new ConnectionKey();
 
-    expect(key.args).toEqual({
+    expect(key.arguments()).toEqual({
       before: null,
       after: null,
       first: null,
       last: null,
     });
+
+    expect(key.getOverrides()).toEqual({});
   });
 
   describe("hash", () => {
@@ -27,6 +29,13 @@ describe(ConnectionKey, () => {
       [new ConnectionKey(null, { after: null, first: null })],
     ])("key: %j", (key) => {
       expect(key.hash()).toEqual(new ConnectionKey().hash());
+    });
+  });
+
+  describe("getOverrides", () => {
+    it("returns overrides", () => {
+      const key = new ConnectionKey(null, null, { orderBy: { createdAt: "desc" } });
+      expect(key.getOverrides()).toEqual({ orderBy: { createdAt: "desc" } });
     });
   });
 });

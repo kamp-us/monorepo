@@ -23,9 +23,11 @@ export function createPrismaConnectionLoader<TPrisma extends { id: string }>(
               ? { [identifier]: key.parentID, deletedAt: null }
               : { deletedAt: null };
 
+          const queryArgs = { where, ...key.getOverrides() };
+
           return findManyCursorConnection(
-            (args) => table.findMany({ ...args, where }),
-            () => table.count({ where }),
+            (args) => table.findMany({ ...args, ...queryArgs }),
+            () => table.count({ where: queryArgs.where }),
             key.arguments()
           );
         })
