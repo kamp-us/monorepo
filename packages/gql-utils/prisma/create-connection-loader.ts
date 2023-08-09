@@ -23,7 +23,14 @@ export function createPrismaConnectionLoader<TPrisma extends { id: string }>(
               ? { [identifier]: key.parentID, deletedAt: null }
               : { deletedAt: null };
 
-          const queryArgs = { where, ...key.getOverrides() };
+          const overrides = key.getOverrides();
+
+          const queryArgs = {
+            ...overrides,
+            // we are making sure that [identifier]: parentID and deletedAt is
+            // not overriden
+            where: { ...overrides.where, ...where },
+          };
 
           return findManyCursorConnection(
             (args) => table.findMany({ ...args, ...queryArgs }),
@@ -33,7 +40,10 @@ export function createPrismaConnectionLoader<TPrisma extends { id: string }>(
         })
       );
 
-      onFetchComplete?.(items.filter(Boolean) as Connection<TPrisma>[]);
+      if (onFetchComplete) {
+        const filtered = items.filter(Boolean) as Connection<TPrisma>[];
+        onFetchComplete(filtered);
+      }
 
       return items;
     },
