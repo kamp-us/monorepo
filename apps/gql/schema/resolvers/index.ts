@@ -98,7 +98,7 @@ export const resolvers = {
     },
     panoFeed: async (_, args, { loaders }) => {
       const posts = await loaders.pano.post.all.load(
-        new ConnectionKey(null, parseConnectionArgs(args))
+        new ConnectionKey(null, parseConnectionArgs(args), { orderBy: { createdAt: "desc" } })
       );
 
       return transformPanoPostConnection(posts);

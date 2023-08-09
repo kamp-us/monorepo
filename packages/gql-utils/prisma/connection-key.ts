@@ -1,6 +1,9 @@
+import { PrismaFindManyArguments } from "@devoxa/prisma-relay-cursor-connection";
 import hash from "object-hash";
 
 import { type ConnectionArguments } from "@kampus/gql-utils/connection";
+
+import { FindManyArgs } from "./types";
 
 /**
  * Represents a key to load a graphql connection object.
@@ -37,11 +40,32 @@ export class ConnectionKey {
    * const userPosts = await postsByUserID.load(key)
    * ```
    */
-  public readonly args: Required<ConnectionArguments> | null;
+  public readonly connectionArgs: Required<ConnectionArguments> | null;
 
-  constructor(parentID?: string | null, args?: ConnectionArguments | null) {
+  /**
+   * Arguments to override the FindMany query params.
+   *
+   * @example
+   * ```typescript
+   * const postsByUserID = createPrismaConnectionLoader(prisma.post, "userID")
+   * const key = new ConnectionKey(
+   *   "test-user-id",
+   *   { first: 10, after: "other-user-id" },
+   *   { orderBy: { createdAt: "desc" } }
+   * )
+   * const userPosts = await postsByUserID.load(key)
+   * ```
+   */
+  public readonly overrides: FindManyArgs;
+
+  constructor(
+    parentID?: string | null,
+    args?: ConnectionArguments | null,
+    overrides: FindManyArgs = {}
+  ) {
     this.parentID = parentID ?? null;
-    this.args = {
+    this.overrides = overrides;
+    this.connectionArgs = {
       before: args?.before ?? null,
       after: args?.after ?? null,
       first: args?.first ?? null,
@@ -52,15 +76,22 @@ export class ConnectionKey {
   /**
    * @returns arguments to be used by prisma query.
    */
-  arguments() {
-    return this.args ?? undefined;
+  public arguments() {
+    return this.connectionArgs ?? undefined;
   }
 
   /**
    * @returns a deterministic hash that can be used as a cache key for
    * `DataLoader` instances.
    */
-  hash() {
-    return hash({ parentID: this.parentID, args: this.args });
+  public hash() {
+    return hash({ parentID: this.parentID, args: this.connectionArgs });
+  }
+
+  /**
+   * @returns FindManyArgs overrides for this key
+   */
+  public getOverrides() {
+    return this.overrides;
   }
 }
