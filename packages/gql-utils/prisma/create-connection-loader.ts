@@ -7,7 +7,7 @@ import { type PrismaModel } from "./types";
 
 export function createPrismaConnectionLoader<TPrisma extends { id: string }>(
   table: PrismaModel<TPrisma>,
-  identifier: string | null,
+  identifier: keyof TPrisma | null,
   onFetchComplete?: (connection: Connection<TPrisma>[]) => void
 ) {
   return new DataLoader(
@@ -15,7 +15,7 @@ export function createPrismaConnectionLoader<TPrisma extends { id: string }>(
       const items = await Promise.all(
         keys.map(async (key) => {
           if (identifier && !key.parentID) {
-            return new Error(`"${identifier}" is required`);
+            return new Error(`"${identifier as string}" is required`);
           }
 
           const where =
