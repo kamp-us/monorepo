@@ -67,9 +67,22 @@ const createPanoUpvoteLoaders = ({ prisma }: Clients) => {
     }
   );
 
+  const byUserAndCommentID = createDataLoader(
+    async (keys: readonly { commentID: string; userID: string }[]) => {
+      const promises = keys.map(({ commentID, userID }) =>
+        prisma.commentUpvote.findUnique({ where: { commentID_userID: { commentID, userID } } })
+      );
+
+      return Promise.allSettled(promises).then((results) =>
+        results.map((result) => (result.status === "fulfilled" ? result.value : null))
+      );
+    }
+  );
+
   return {
     byID,
     byUserAndPostID,
+    byUserAndCommentID,
     countByPostID,
     countByCommentID,
   };
@@ -146,6 +159,7 @@ export const transformPanoComment = (comment: Comment) => {
     comments: null,
     commentCount: null,
     upvoteCount: null,
+    isUpvotedByViewer: false,
     createdAt: comment.createdAt.toISOString(),
   } satisfies PanoComment;
 };

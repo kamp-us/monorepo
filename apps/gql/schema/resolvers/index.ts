@@ -246,6 +246,18 @@ export const resolvers = {
     upvoteCount: (comment, _, { loaders }) => {
       return loaders.pano.upvote.countByCommentID.load(new ConnectionKey(comment.id));
     },
+    isUpvotedByViewer: async (comment, _, { loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return false;
+      }
+
+      const upvote = await loaders.pano.upvote.byUserAndCommentID.load({
+        userID: session?.user.id,
+        commentID: comment.id,
+      });
+
+      return !!upvote;
+    },
     createdAt: (comment) => comment.createdAt,
   },
   PanoCommentEdge: {
@@ -377,7 +389,7 @@ export const resolvers = {
       }
 
       const node = await actions.pano.comment
-        .create({ ...input, userID: session.user.id })
+        .create({ ...input, postID: parse(input.postID).value, userID: session.user.id })
         .then((created) => loaders.pano.comment.byID.load(created.id))
         .then(transformPanoComment);
 

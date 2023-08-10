@@ -138,6 +138,7 @@ export type PanoComment = Node & {
   content: Scalars["String"]["output"];
   createdAt: Scalars["DateTime"]["output"];
   id: Scalars["ID"]["output"];
+  isUpvotedByViewer: Scalars["Boolean"]["output"];
   owner: Maybe<User>;
   parent: Maybe<PanoComment>;
   post: Maybe<PanoPost>;
@@ -786,6 +787,7 @@ export type PanoCommentResolvers<
   content: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   createdAt: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  isUpvotedByViewer: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
   owner: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
   parent: Resolver<Maybe<ResolversTypes["PanoComment"]>, ParentType, ContextType>;
   post: Resolver<Maybe<ResolversTypes["PanoPost"]>, ParentType, ContextType>;
