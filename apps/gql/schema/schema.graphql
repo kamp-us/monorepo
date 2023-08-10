@@ -99,9 +99,6 @@ type SozlukTermEdge {
 type PanoQuery {
   post(id: ID!): PanoPost
   posts(ids: [ID!]!): [PanoPost]!
-}
-
-extend type PanoQuery {
   postsBySite(site: String!, after: String, first: Int): PanoPostConnection
 }
 
