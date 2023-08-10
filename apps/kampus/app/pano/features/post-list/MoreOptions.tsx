@@ -44,7 +44,7 @@ function canUserEdit(user: User, post: Post) {
 }
 
 export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
-  const user = { username: "cancan" };
+  const user = { username: "John Doe" };
   console.log(post, shareUrl);
 
   const router = useRouter();
@@ -98,7 +98,7 @@ export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
         </DialogHeader>
         <DialogFooter>
           <Button variant="outline" type="submit">
-            Hayir
+            Hayır
           </Button>
           <Button variant="destructive" type="submit">
             Evet
