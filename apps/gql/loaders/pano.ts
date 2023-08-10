@@ -1,4 +1,5 @@
 import {
+  createDataLoader,
   createPrismaConnectionLoader,
   createPrismaCountLoader,
   createPrismaLoader,
@@ -54,7 +55,24 @@ const createPanoUpvoteLoaders = ({ prisma }: Clients) => {
   const countByPostID = createPrismaCountLoader(prisma.upvote, "postID");
   const countByCommentID = createPrismaCountLoader(prisma.commentUpvote, "commentID");
 
-  return { byID, countByPostID, countByCommentID };
+  const byUserAndPostID = createDataLoader(
+    async (keys: readonly { postID: string; userID: string }[]) => {
+      const promises = keys.map(({ postID, userID }) =>
+        prisma.upvote.findUnique({ where: { postID_userID: { postID, userID } } })
+      );
+
+      return Promise.allSettled(promises).then((results) =>
+        results.map((result) => (result.status === "fulfilled" ? result.value : null))
+      );
+    }
+  );
+
+  return {
+    byID,
+    byUserAndPostID,
+    countByPostID,
+    countByCommentID,
+  };
 };
 
 const createPanoCommentLoaders = ({ prisma }: Clients) => {
@@ -97,6 +115,7 @@ export const transformPanoPost = (post: Post) => {
     comments: null,
     commentCount: null,
     upvoteCount: null,
+    isUpvotedByViewer: false,
     createdAt: post.createdAt.toISOString(),
   } satisfies PanoPost;
 };

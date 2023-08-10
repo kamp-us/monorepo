@@ -121,6 +121,7 @@ type PanoPost implements Node {
   comments(after: String, before: String, first: Int, last: Int): PanoCommentConnection
   commentCount: Int
   upvoteCount: Int
+  isUpvotedByViewer: Boolean!
 }
 
 type PanoPostConnection {

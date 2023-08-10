@@ -136,10 +136,9 @@ export const resolvers = {
   },
   PanoQuery: {
     post: async (_, args, { loaders }) =>
-      transformPanoPost(await loaders.pano.post.byID.load(args.id)),
+      transformPanoPost(await loaders.pano.post.byID.load(parse(args.id).value)),
     posts: async (_, args, { loaders }) => {
-      const posts = await loaders.pano.post.byID.loadMany(args.ids);
-
+      const posts = await loaders.pano.post.byID.loadMany(args.ids.map((id) => parse(id).value));
       return posts.map((post) => {
         return post instanceof Error ? null : transformPanoPost(post);
       });
@@ -174,6 +173,20 @@ export const resolvers = {
     upvoteCount: (post, _, { loaders }) => {
       return loaders.pano.upvote.countByPostID.load(new ConnectionKey(post.id));
     },
+
+    isUpvotedByViewer: async (post, _, { loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return false;
+      }
+
+      const upvote = await loaders.pano.upvote.byUserAndPostID.load({
+        userID: session?.user.id,
+        postID: post.id,
+      });
+
+      return !!upvote;
+    },
+
     createdAt: (post) => post.createdAt,
   },
   PanoPostConnection: {
@@ -418,7 +431,7 @@ export const resolvers = {
 
       const node = transformPostUpvote(
         await actions.pano.postUpvote.create({
-          postID: input.postID,
+          postID: parse(input.postID).value,
           userID: session.user.id,
         })
       );
@@ -432,7 +445,7 @@ export const resolvers = {
 
       const node = transformPostUpvote(
         await actions.pano.postUpvote.remove({
-          postID: input.postID,
+          postID: parse(input.postID).value,
           userID: session.user.id,
         })
       );
