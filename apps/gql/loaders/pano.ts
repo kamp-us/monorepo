@@ -38,11 +38,13 @@ const createPanoPostLoaders = ({ prisma }: Clients) => {
 
   const byID = createPrismaLoader(prisma.post, "id");
   const byUserID = createPrismaConnectionLoader(prisma.post, "userID", cachePostConnection);
+  const bySite = createPrismaConnectionLoader(prisma.post, "site", cachePostConnection);
   const all = createPrismaConnectionLoader(prisma.post, null);
 
   return {
     byID,
     byUserID,
+    bySite,
     all,
   };
 };

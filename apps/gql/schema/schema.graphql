@@ -101,6 +101,10 @@ type PanoQuery {
   posts(ids: [ID!]!): [PanoPost]!
 }
 
+extend type PanoQuery {
+  postsBySite(site: String!, after: String, first: Int): PanoPostConnection
+}
+
 enum PanoPostFilter {
   ALL
   HOT
