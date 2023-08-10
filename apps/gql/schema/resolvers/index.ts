@@ -146,7 +146,7 @@ export const resolvers = {
     },
     postsBySite: async (_, args, { loaders }) => {
       const posts = await loaders.pano.post.bySite.load(
-        new ConnectionKey(null, parseConnectionArgs(args), { orderBy: { createdAt: "desc" } })
+        new ConnectionKey(args.site, parseConnectionArgs(args), { orderBy: { createdAt: "desc" } })
       );
 
       return transformPanoPostConnection(posts);
