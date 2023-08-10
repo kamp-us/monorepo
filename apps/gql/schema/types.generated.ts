@@ -210,6 +210,7 @@ export type PanoQuery = {
   __typename?: "PanoQuery";
   post: Maybe<PanoPost>;
   posts: Array<Maybe<PanoPost>>;
+  postsBySite: Maybe<PanoPostConnection>;
 };
 
 export type PanoQueryPostArgs = {
@@ -218,6 +219,12 @@ export type PanoQueryPostArgs = {
 
 export type PanoQueryPostsArgs = {
   ids: Array<Scalars["ID"]["input"]>;
+};
+
+export type PanoQueryPostsBySiteArgs = {
+  after: InputMaybe<Scalars["String"]["input"]>;
+  first: InputMaybe<Scalars["Int"]["input"]>;
+  site: Scalars["String"]["input"];
 };
 
 export type PostUpvote = {
@@ -876,6 +883,12 @@ export type PanoQueryResolvers<
     ParentType,
     ContextType,
     RequireFields<PanoQueryPostsArgs, "ids">
+  >;
+  postsBySite: Resolver<
+    Maybe<ResolversTypes["PanoPostConnection"]>,
+    ParentType,
+    ContextType,
+    RequireFields<PanoQueryPostsBySiteArgs, "site">
   >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
