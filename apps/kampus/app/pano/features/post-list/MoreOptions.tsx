@@ -44,7 +44,7 @@ function canUserEdit(user: User, post: Post) {
 }
 
 export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
-  const user = { username: "cancan" };
+  const user = { username: "John Doe" };
   console.log(post, shareUrl);
 
   const router = useRouter();
