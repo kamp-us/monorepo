@@ -49,7 +49,7 @@ export const resolvers = {
     // @see SozlukQuery field resolvers
     sozluk: () => ({ term: null, terms: null }),
     // @see PanoQuery field resolvers
-    pano: () => ({ post: null, posts: [], allPosts: null }),
+    pano: () => ({ post: null, posts: [], postsBySite: null, allPosts: null }),
 
     node: async (_, args, { loaders }) => {
       const id = parse<NodeTypename>(args.id);
@@ -98,7 +98,7 @@ export const resolvers = {
     },
     panoFeed: async (_, args, { loaders }) => {
       const posts = await loaders.pano.post.all.load(
-        new ConnectionKey(null, parseConnectionArgs(args))
+        new ConnectionKey(null, parseConnectionArgs(args), { orderBy: { createdAt: "desc" } })
       );
 
       return transformPanoPostConnection(posts);
@@ -143,6 +143,13 @@ export const resolvers = {
       return posts.map((post) => {
         return post instanceof Error ? null : transformPanoPost(post);
       });
+    },
+    postsBySite: async (_, args, { loaders }) => {
+      const posts = await loaders.pano.post.bySite.load(
+        new ConnectionKey(null, parseConnectionArgs(args), { orderBy: { createdAt: "desc" } })
+      );
+
+      return transformPanoPostConnection(posts);
     },
   },
   PanoPost: {

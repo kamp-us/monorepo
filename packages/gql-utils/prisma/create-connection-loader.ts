@@ -7,7 +7,7 @@ import { type PrismaModel } from "./types";
 
 export function createPrismaConnectionLoader<TPrisma extends { id: string }>(
   table: PrismaModel<TPrisma>,
-  identifier: string | null,
+  identifier: keyof TPrisma | null,
   onFetchComplete?: (connection: Connection<TPrisma>[]) => void
 ) {
   return new DataLoader(
@@ -15,7 +15,7 @@ export function createPrismaConnectionLoader<TPrisma extends { id: string }>(
       const items = await Promise.all(
         keys.map(async (key) => {
           if (identifier && !key.parentID) {
-            return new Error(`"${identifier}" is required`);
+            return new Error(`"${identifier as string}" is required`);
           }
 
           const where =
@@ -23,15 +23,27 @@ export function createPrismaConnectionLoader<TPrisma extends { id: string }>(
               ? { [identifier]: key.parentID, deletedAt: null }
               : { deletedAt: null };
 
+          const overrides = key.getOverrides();
+
+          const queryArgs = {
+            ...overrides,
+            // we are making sure that [identifier]: parentID and deletedAt is
+            // not overriden
+            where: { ...overrides.where, ...where },
+          };
+
           return findManyCursorConnection(
-            (args) => table.findMany({ ...args, where }),
-            () => table.count({ where }),
+            (args) => table.findMany({ ...args, ...queryArgs }),
+            () => table.count({ where: queryArgs.where }),
             key.arguments()
           );
         })
       );
 
-      onFetchComplete?.(items.filter(Boolean) as Connection<TPrisma>[]);
+      if (onFetchComplete) {
+        const filtered = items.filter(Boolean) as Connection<TPrisma>[];
+        onFetchComplete(filtered);
+      }
 
       return items;
     },
