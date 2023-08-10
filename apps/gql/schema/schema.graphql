@@ -101,6 +101,10 @@ type PanoQuery {
   posts(ids: [ID!]!): [PanoPost]!
 }
 
+extend type PanoQuery {
+  postsBySite(site: String!, after: String, first: Int): PanoPostConnection
+}
+
 enum PanoPostFilter {
   ALL
   HOT
@@ -158,6 +162,12 @@ type PanoCommentEdge {
   node: PanoComment
 }
 
+type PostUpvote {
+  id: ID!
+  post: PanoPost
+  owner: User
+}
+
 type Mutation {
   createPanoPost(input: CreatePanoPostInput!): CreatePanoPostPayload
   updatePanoPost(input: UpdatePanoPostInput!): UpdatePanoPostPayload
@@ -166,7 +176,14 @@ type Mutation {
   createPanoComment(input: CreatePanoCommentInput!): CreatePanoCommentPayload
   updatePanoComment(input: UpdatePanoCommentInput!): UpdatePanoCommentPayload
   removePanoComment(input: RemovePanoCommentInput!): RemovePanoCommentPayload
+
+  createPostUpvote(input: CreatePostUpvoteInput!): CreatePostUpvotePayload
+  removePostUpvote(input: RemovePostUpvoteInput!): RemovePostUpvotePayload
 }
+
+# Pano post mutations
+
+union PanoPostError = NotAuthorized | InvalidInput
 
 input CreatePanoPostInput {
   title: String!
@@ -174,7 +191,10 @@ input CreatePanoPostInput {
   url: String
 }
 
-union CreatePanoPostPayload = PanoPost | NotAuthorized | InvalidInput
+type CreatePanoPostPayload {
+  edge: PanoPostEdge
+  error: PanoPostError
+}
 
 input UpdatePanoPostInput {
   id: ID!
@@ -183,15 +203,23 @@ input UpdatePanoPostInput {
   url: String
 }
 
-union UpdatePanoPostPayload = PanoPost | NotAuthorized | InvalidInput
+type UpdatePanoPostPayload {
+  edge: PanoPostEdge
+  error: PanoPostError
+}
 
 input RemovePanoPostInput {
   id: ID!
 }
 
-union RemovePanoPostPayload = PanoPost | NotAuthorized | InvalidInput
+type RemovePanoPostPayload {
+  edge: PanoPostEdge
+  error: PanoPostError
+}
 
-union CreatePanoCommentPayload = PanoComment | NotAuthorized | InvalidInput
+# Pano comment mutations
+
+union PanoCommentError = NotAuthorized | InvalidInput
 
 input CreatePanoCommentInput {
   content: String!
@@ -199,15 +227,48 @@ input CreatePanoCommentInput {
   parentID: String
 }
 
-union UpdatePanoCommentPayload = PanoComment | NotAuthorized | InvalidInput
+type CreatePanoCommentPayload {
+  edge: PanoCommentEdge
+  error: PanoCommentError
+}
 
 input UpdatePanoCommentInput {
   id: ID!
   content: String!
 }
 
-union RemovePanoCommentPayload = PanoComment | NotAuthorized | InvalidInput
+type UpdatePanoCommentPayload {
+  edge: PanoCommentEdge
+  error: PanoCommentError
+}
 
 input RemovePanoCommentInput {
   id: ID!
+}
+
+type RemovePanoCommentPayload {
+  edge: PanoCommentEdge
+  error: PanoCommentError
+}
+
+# Pano post upvote mutations
+
+union PostUpvoteError = NotAuthorized | InvalidInput
+
+input CreatePostUpvoteInput {
+  postID: String!
+}
+
+type CreatePostUpvotePayload {
+  node: PostUpvote
+  error: PostUpvoteError
+}
+
+input RemovePostUpvoteInput {
+  postID: String!
+}
+
+type RemovePostUpvotePayload {
+  node: PostUpvote
+  error: PostUpvoteError
 }
