@@ -438,7 +438,7 @@ export const resolvers = {
 
       return { edge: { node, cursor: node.id }, error: null };
     },
-    createPanoUpvote: async (_, { input }, { actions, pasaport: { session } }) => {
+    createPanoUpvote: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
       if (!session?.user?.id) {
         return { node: null, error: NotAuthorized() };
       }
@@ -447,11 +447,18 @@ export const resolvers = {
 
       switch (type) {
         case "PanoPost": {
-          const upvote = await actions.pano.postUpvote
-            .create({ postID: value, userID: session.user.id })
-            .then(transformPanoUpvote);
+          let upvote = await loaders.pano.upvote.byUserAndPostID.load({
+            postID: value,
+            userID: session.user.id,
+          });
 
-          return { node: upvote, error: null };
+          if (upvote) {
+            return { node: null, error: InvalidInput() };
+          }
+
+          upvote = await actions.pano.postUpvote.create({ postID: value, userID: session.user.id });
+
+          return { node: transformPanoUpvote(upvote), error: null };
         }
       }
     },
