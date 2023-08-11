@@ -1,3 +1,4 @@
+import { type ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import {
   Environment,
   Network,
@@ -10,6 +11,8 @@ import {
   type Variables,
 } from "relay-runtime";
 
+import { type Dictionary } from "@kampus/std";
+
 const IS_SERVER = typeof window === typeof undefined;
 const CACHE_TTL = 5 * 1000; // 5 seconds, to resolve preloaded results
 
@@ -19,12 +22,24 @@ export async function networkFetch(
   request: RequestParameters,
   variables: Variables
 ): Promise<GraphQLResponse> {
+  const headers: Dictionary<string> = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  };
+
+  // pasaport wraps next-auth and uses its cookie auth mechanism to validate sessions.
+  // on browsers, fetch request automatically attaches the existing cookies
+  // but on next.js servers, `fetch` is pollyfilled, and does not pick up cookies
+  // we use `next/header`'s cookies() helper here
+  if (IS_SERVER) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const nextHeaders = require("next/headers") as { cookies: () => ReadonlyRequestCookies };
+    headers.Cookie = nextHeaders.cookies().toString();
+  }
+
   const resp = await fetch(HTTP_ENDPOINT, {
     method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
+    headers,
     body: JSON.stringify({
       query: request.text,
       variables,
