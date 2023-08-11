@@ -7,8 +7,6 @@ export function createDataLoader<TKey, TValue>(
   return new DataLoader(async (keys: readonly TKey[]) => {
     const result = (await batchFn(keys)) ?? [];
 
-    console.log({ result });
-
     onComplete?.(result as unknown as TValue[]);
 
     return result;
