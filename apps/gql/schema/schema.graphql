@@ -14,6 +14,10 @@ interface UserError {
   message: String!
 }
 
+interface Upvotable {
+  isUpvotedByViewer: Boolean!
+}
+
 type Query {
   # we need to have a way to encode the typename into id
   # so that `Query.node` can decode it and figure out what to resolve
@@ -110,7 +114,7 @@ enum PanoPostFilter {
   SELF
 }
 
-type PanoPost implements Node {
+type PanoPost implements Node & Upvotable {
   id: ID!
   title: String!
   url: String
@@ -121,6 +125,7 @@ type PanoPost implements Node {
   comments(after: String, before: String, first: Int, last: Int): PanoCommentConnection
   commentCount: Int
   upvoteCount: Int
+  isUpvotedByViewer: Boolean!
 }
 
 type PanoPostConnection {
@@ -144,6 +149,7 @@ type PanoComment implements Node {
   comments(after: String, before: String, first: Int, last: Int): PanoCommentConnection
   commentCount: Int
   upvoteCount: Int
+  isUpvotedByViewer: Boolean!
   createdAt: DateTime!
 }
 
@@ -159,12 +165,6 @@ type PanoCommentEdge {
   node: PanoComment
 }
 
-type PostUpvote {
-  id: ID!
-  post: PanoPost
-  owner: User
-}
-
 type Mutation {
   createPanoPost(input: CreatePanoPostInput!): CreatePanoPostPayload
   updatePanoPost(input: UpdatePanoPostInput!): UpdatePanoPostPayload
@@ -174,8 +174,8 @@ type Mutation {
   updatePanoComment(input: UpdatePanoCommentInput!): UpdatePanoCommentPayload
   removePanoComment(input: RemovePanoCommentInput!): RemovePanoCommentPayload
 
-  createPostUpvote(input: CreatePostUpvoteInput!): CreatePostUpvotePayload
-  removePostUpvote(input: RemovePostUpvoteInput!): RemovePostUpvotePayload
+  createPanoUpvote(input: CreatePanoUpvoteInput!): CreatePanoUpvotePayload
+  removePanoUpvote(input: RemovePanoUpvoteInput!): RemovePanoUpvotePayload
 }
 
 # Pano post mutations
@@ -250,22 +250,28 @@ type RemovePanoCommentPayload {
 
 # Pano post upvote mutations
 
-union PostUpvoteError = NotAuthorized | InvalidInput
+union PanoUpvoteError = NotAuthorized | InvalidInput
 
-input CreatePostUpvoteInput {
-  postID: String!
+type PanoUpvote {
+  id: ID!
+  node: Upvotable
+  owner: User
 }
 
-type CreatePostUpvotePayload {
-  node: PostUpvote
-  error: PostUpvoteError
+input CreatePanoUpvoteInput {
+  id: ID!
 }
 
-input RemovePostUpvoteInput {
-  postID: String!
+type CreatePanoUpvotePayload {
+  node: PanoUpvote
+  error: PanoUpvoteError
 }
 
-type RemovePostUpvotePayload {
-  node: PostUpvote
-  error: PostUpvoteError
+input RemovePanoUpvoteInput {
+  id: ID!
+}
+
+type RemovePanoUpvotePayload {
+  node: PanoUpvote
+  error: PanoUpvoteError
 }

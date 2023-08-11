@@ -43,6 +43,7 @@ model CommentUpvote {
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
+  @@unique([commentID, userID])
   @@index([commentID])
   @@index([userID])
 }

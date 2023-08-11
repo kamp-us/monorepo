@@ -1,4 +1,5 @@
 import {
+  createDataLoader,
   createPrismaConnectionLoader,
   createPrismaCountLoader,
   createPrismaLoader,
@@ -12,7 +13,7 @@ import {
   type PanoCommentConnection,
   type PanoPost,
   type PanoPostConnection,
-  type PostUpvote,
+  type PanoUpvote,
 } from "~/schema/types.generated";
 
 export type PanoLoaders = ReturnType<typeof createPanoLoaders>;
@@ -50,11 +51,61 @@ const createPanoPostLoaders = ({ prisma }: Clients) => {
 };
 
 const createPanoUpvoteLoaders = ({ prisma }: Clients) => {
-  const byID = createPrismaLoader(prisma.upvote, "id");
+  const byPostID = createPrismaLoader(prisma.upvote, "id");
+  const byCommentID = createPrismaLoader(prisma.commentUpvote, "id");
+
   const countByPostID = createPrismaCountLoader(prisma.upvote, "postID");
   const countByCommentID = createPrismaCountLoader(prisma.commentUpvote, "commentID");
 
-  return { byID, countByPostID, countByCommentID };
+  const byUserAndPostID = createDataLoader(
+    async (keys: readonly { postID: string; userID: string }[]) => {
+      const promises = keys.map(({ postID, userID }) =>
+        prisma.upvote.findUnique({ where: { postID_userID: { postID, userID } } })
+      );
+
+      const results = await Promise.allSettled(promises).then((results) =>
+        results.map((result) => (result.status === "fulfilled" ? result.value : null))
+      );
+
+      return results;
+    },
+    (results) => {
+      results?.forEach((upvote) => {
+        if (upvote) {
+          byPostID.prime(upvote.id, upvote);
+        }
+      });
+    }
+  );
+
+  const byUserAndCommentID = createDataLoader(
+    async (keys: readonly { commentID: string; userID: string }[]) => {
+      const promises = keys.map(({ commentID, userID }) =>
+        prisma.commentUpvote.findUnique({ where: { commentID_userID: { commentID, userID } } })
+      );
+
+      const results = await Promise.allSettled(promises).then((results) =>
+        results.map((result) => (result.status === "fulfilled" ? result.value : null))
+      );
+
+      return results;
+    },
+    (results) => {
+      results?.forEach((upvote) => {
+        if (upvote) {
+          byCommentID.prime(upvote.id, upvote);
+        }
+      });
+    }
+  );
+
+  return {
+    byPostID,
+    byUserAndPostID,
+    byUserAndCommentID,
+    countByPostID,
+    countByCommentID,
+  };
 };
 
 const createPanoCommentLoaders = ({ prisma }: Clients) => {
@@ -97,6 +148,7 @@ export const transformPanoPost = (post: Post) => {
     comments: null,
     commentCount: null,
     upvoteCount: null,
+    isUpvotedByViewer: false,
     createdAt: post.createdAt.toISOString(),
   } satisfies PanoPost;
 };
@@ -127,6 +179,7 @@ export const transformPanoComment = (comment: Comment) => {
     comments: null,
     commentCount: null,
     upvoteCount: null,
+    isUpvotedByViewer: false,
     createdAt: comment.createdAt.toISOString(),
   } satisfies PanoComment;
 };
@@ -147,11 +200,11 @@ export const transformPanoCommentConnection = (connection: Connection<Comment>) 
   } satisfies PanoCommentConnection;
 };
 
-export const transformPostUpvote = (upvote: Upvote) => {
+export const transformPanoUpvote = (upvote: Upvote) => {
   return {
     ...upvote,
-    __typename: "PostUpvote",
-    post: null,
+    __typename: "PanoUpvote",
+    node: null,
     owner: null,
-  } satisfies PostUpvote;
+  } satisfies PanoUpvote;
 };

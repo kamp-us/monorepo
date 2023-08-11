@@ -13,13 +13,14 @@ import {
   transformPanoCommentConnection,
   transformPanoPost,
   transformPanoPostConnection,
-  transformPostUpvote,
+  transformPanoUpvote,
 } from "~/loaders/pano";
 import { transformSozlukTerm, transformSozlukTermsConnection } from "~/loaders/sozluk";
 import { transformUser } from "~/loaders/user";
 import { type Resolvers, type ResolversInterfaceTypes } from "../types.generated";
 
 type NodeTypename = ResolversInterfaceTypes<Dictionary>["Node"]["__typename"];
+type UpvotableTypename = ResolversInterfaceTypes<Dictionary>["Upvotable"]["__typename"];
 
 const transformPageInfo = (type: NodeTypename, pageInfo: PageInfo) => ({
   ...pageInfo,
@@ -136,10 +137,9 @@ export const resolvers = {
   },
   PanoQuery: {
     post: async (_, args, { loaders }) =>
-      transformPanoPost(await loaders.pano.post.byID.load(args.id)),
+      transformPanoPost(await loaders.pano.post.byID.load(parse(args.id).value)),
     posts: async (_, args, { loaders }) => {
-      const posts = await loaders.pano.post.byID.loadMany(args.ids);
-
+      const posts = await loaders.pano.post.byID.loadMany(args.ids.map((id) => parse(id).value));
       return posts.map((post) => {
         return post instanceof Error ? null : transformPanoPost(post);
       });
@@ -174,6 +174,20 @@ export const resolvers = {
     upvoteCount: (post, _, { loaders }) => {
       return loaders.pano.upvote.countByPostID.load(new ConnectionKey(post.id));
     },
+
+    isUpvotedByViewer: async (post, _, { loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return false;
+      }
+
+      const upvote = await loaders.pano.upvote.byUserAndPostID.load({
+        userID: session?.user.id,
+        postID: post.id,
+      });
+
+      return !!upvote;
+    },
+
     createdAt: (post) => post.createdAt,
   },
   PanoPostConnection: {
@@ -233,6 +247,18 @@ export const resolvers = {
     upvoteCount: (comment, _, { loaders }) => {
       return loaders.pano.upvote.countByCommentID.load(new ConnectionKey(comment.id));
     },
+    isUpvotedByViewer: async (comment, _, { loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return false;
+      }
+
+      const upvote = await loaders.pano.upvote.byUserAndCommentID.load({
+        userID: session?.user.id,
+        commentID: comment.id,
+      });
+
+      return !!upvote;
+    },
     createdAt: (comment) => comment.createdAt,
   },
   PanoCommentEdge: {
@@ -245,15 +271,15 @@ export const resolvers = {
     pageInfo: (connection) => transformPageInfo("PanoComment", connection.pageInfo),
     totalCount: (connection) => connection.totalCount,
   },
-  PostUpvote: {
-    id: (upvote) => stringify("PostUpvote", upvote.id),
-    post: async (upvote, _, { loaders }) => {
-      const model = await loaders.pano.upvote.byID.load(upvote.id);
+  PanoUpvote: {
+    id: (upvote) => stringify("PanoUpvote", upvote.id),
+    node: async (upvote, _, { loaders }) => {
+      const model = await loaders.pano.upvote.byPostID.load(upvote.id);
       const post = await loaders.pano.post.byID.load(model.postID);
       return transformPanoPost(post);
     },
     owner: async (upvote, _, { loaders }) => {
-      const model = await loaders.pano.upvote.byID.load(upvote.id);
+      const model = await loaders.pano.upvote.byPostID.load(upvote.id);
       const user = await loaders.user.byID.load(model.userID);
       return transformUser(user);
     },
@@ -285,17 +311,18 @@ export const resolvers = {
     edge: (payload) => payload.edge,
     error: (payload) => payload.error,
   },
-  PostUpvoteError: {}, // union
-  CreatePostUpvotePayload: {
+  PanoUpvoteError: {}, // union
+  CreatePanoUpvotePayload: {
     node: (payload) => payload.node,
     error: (payload) => payload.error,
   },
-  RemovePostUpvotePayload: {
+  RemovePanoUpvotePayload: {
     node: (payload) => payload.node,
     error: (payload) => payload.error,
   },
 
   UserError: {}, // interface
+  Upvotable: {}, // interface
 
   InvalidInput: errorFieldsResolver,
   NotAuthorized: errorFieldsResolver,
@@ -364,7 +391,7 @@ export const resolvers = {
       }
 
       const node = await actions.pano.comment
-        .create({ ...input, userID: session.user.id })
+        .create({ ...input, postID: parse(input.postID).value, userID: session.user.id })
         .then((created) => loaders.pano.comment.byID.load(created.id))
         .then(transformPanoComment);
 
@@ -411,33 +438,56 @@ export const resolvers = {
 
       return { edge: { node, cursor: node.id }, error: null };
     },
-    createPostUpvote: async (_, { input }, { actions, pasaport: { session } }) => {
+    createPanoUpvote: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
       if (!session?.user?.id) {
         return { node: null, error: NotAuthorized() };
       }
 
-      const node = transformPostUpvote(
-        await actions.pano.postUpvote.create({
-          postID: input.postID,
-          userID: session.user.id,
-        })
-      );
+      const { type, value } = parse<UpvotableTypename>(input.id);
 
-      return { node, error: null };
+      switch (type) {
+        case "PanoPost": {
+          let upvote = await loaders.pano.upvote.byUserAndPostID.load({
+            postID: value,
+            userID: session.user.id,
+          });
+
+          if (upvote) {
+            return { node: null, error: InvalidInput() };
+          }
+
+          upvote = await actions.pano.postUpvote.create({ postID: value, userID: session.user.id });
+
+          return { node: transformPanoUpvote(upvote), error: null };
+        }
+      }
     },
-    removePostUpvote: async (_, { input }, { actions, pasaport: { session } }) => {
+    removePanoUpvote: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
       if (!session?.user?.id) {
         return { node: null, error: NotAuthorized() };
       }
 
-      const node = transformPostUpvote(
-        await actions.pano.postUpvote.remove({
-          postID: input.postID,
-          userID: session.user.id,
-        })
-      );
+      const { type, value } = parse<UpvotableTypename>(input.id);
 
-      return { node, error: null };
+      switch (type) {
+        case "PanoPost": {
+          const upvote = await loaders.pano.upvote.byUserAndPostID.load({
+            postID: value,
+            userID: session.user.id,
+          });
+
+          if (!upvote) {
+            return { node: null, error: InvalidInput() };
+          }
+
+          await actions.pano.postUpvote.remove(upvote);
+
+          return { node: transformPanoUpvote(upvote), error: null };
+        }
+        default: {
+          return assertNever(type);
+        }
+      }
     },
   },
 } satisfies Resolvers;
