@@ -86,7 +86,6 @@ export const resolvers = {
   },
   Viewer: {
     actor: async (_viewer, _args, { loaders, pasaport: { session } }) => {
-      console.log(1, { session });
       if (!session?.user?.id) {
         return null;
       }
