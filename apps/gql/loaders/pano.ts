@@ -13,7 +13,7 @@ import {
   type PanoCommentConnection,
   type PanoPost,
   type PanoPostConnection,
-  type PostUpvote,
+  type PanoUpvote,
 } from "~/schema/types.generated";
 
 export type PanoLoaders = ReturnType<typeof createPanoLoaders>;
@@ -51,7 +51,9 @@ const createPanoPostLoaders = ({ prisma }: Clients) => {
 };
 
 const createPanoUpvoteLoaders = ({ prisma }: Clients) => {
-  const byID = createPrismaLoader(prisma.upvote, "id");
+  const byPostID = createPrismaLoader(prisma.upvote, "id");
+  const byCommentID = createPrismaLoader(prisma.commentUpvote, "id");
+
   const countByPostID = createPrismaCountLoader(prisma.upvote, "postID");
   const countByCommentID = createPrismaCountLoader(prisma.commentUpvote, "commentID");
 
@@ -61,9 +63,17 @@ const createPanoUpvoteLoaders = ({ prisma }: Clients) => {
         prisma.upvote.findUnique({ where: { postID_userID: { postID, userID } } })
       );
 
-      return Promise.allSettled(promises).then((results) =>
+      const results = await Promise.allSettled(promises).then((results) =>
         results.map((result) => (result.status === "fulfilled" ? result.value : null))
       );
+
+      results.forEach((upvote) => {
+        if (upvote) {
+          byPostID.prime(upvote.id, upvote);
+        }
+      });
+
+      return results;
     }
   );
 
@@ -73,14 +83,22 @@ const createPanoUpvoteLoaders = ({ prisma }: Clients) => {
         prisma.commentUpvote.findUnique({ where: { commentID_userID: { commentID, userID } } })
       );
 
-      return Promise.allSettled(promises).then((results) =>
+      const results = await Promise.allSettled(promises).then((results) =>
         results.map((result) => (result.status === "fulfilled" ? result.value : null))
       );
+
+      results.forEach((upvote) => {
+        if (upvote) {
+          byCommentID.prime(upvote.id, upvote);
+        }
+      });
+
+      return results;
     }
   );
 
   return {
-    byID,
+    byPostID,
     byUserAndPostID,
     byUserAndCommentID,
     countByPostID,
@@ -180,11 +198,11 @@ export const transformPanoCommentConnection = (connection: Connection<Comment>) 
   } satisfies PanoCommentConnection;
 };
 
-export const transformPostUpvote = (upvote: Upvote) => {
+export const transformPanoUpvote = (upvote: Upvote) => {
   return {
     ...upvote,
-    __typename: "PostUpvote",
-    post: null,
+    __typename: "PanoUpvote",
+    node: null,
     owner: null,
-  } satisfies PostUpvote;
+  } satisfies PanoUpvote;
 };
