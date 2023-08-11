@@ -67,13 +67,14 @@ const createPanoUpvoteLoaders = ({ prisma }: Clients) => {
         results.map((result) => (result.status === "fulfilled" ? result.value : null))
       );
 
-      results.forEach((upvote) => {
+      return results;
+    },
+    (results) => {
+      results?.forEach((upvote) => {
         if (upvote) {
           byPostID.prime(upvote.id, upvote);
         }
       });
-
-      return results;
     }
   );
 
@@ -87,13 +88,14 @@ const createPanoUpvoteLoaders = ({ prisma }: Clients) => {
         results.map((result) => (result.status === "fulfilled" ? result.value : null))
       );
 
-      results.forEach((upvote) => {
+      return results;
+    },
+    (results) => {
+      results?.forEach((upvote) => {
         if (upvote) {
           byCommentID.prime(upvote.id, upvote);
         }
       });
-
-      return results;
     }
   );
 

@@ -1,5 +1,16 @@
 import DataLoader, { type BatchLoadFn } from "dataloader";
 
-export function createDataLoader<T, U>(batchFn: BatchLoadFn<T, U>) {
-  return new DataLoader(batchFn);
+export function createDataLoader<TKey, TValue>(
+  batchFn: BatchLoadFn<TKey, TValue>,
+  onComplete?: (values: TValue[]) => void
+) {
+  return new DataLoader(async (keys: readonly TKey[]) => {
+    const result = (await batchFn(keys)) ?? [];
+
+    console.log({ result });
+
+    onComplete?.(result as unknown as TValue[]);
+
+    return result;
+  });
 }
