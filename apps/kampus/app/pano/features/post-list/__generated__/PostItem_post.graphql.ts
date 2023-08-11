@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<a3a8bf896c849c44812c64d62f8867ad>>
+ * @generated SignedSource<<f1e4f6f5072c925f50590ec6402945d6>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -20,7 +20,7 @@ export type PostItem_post$data = {
   readonly site: string | null;
   readonly title: string;
   readonly url: string | null;
-  readonly " $fragmentSpreads": FragmentRefs<"PostUpvoteButton_post">;
+  readonly " $fragmentSpreads": FragmentRefs<"MoreOptions_post" | "PostUpvoteButton_post">;
   readonly " $fragmentType": "PostItem_post";
 } | null;
 export type PostItem_post$key = {
@@ -108,12 +108,17 @@ const node: ReaderFragment = {
       },
       "action": "LOG",
       "path": "owner"
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
+      "name": "MoreOptions_post"
     }
   ],
   "type": "PanoPost",
   "abstractKey": null
 };
 
-(node as any).hash = "2722b74002976e15c158a0be92853b78";
+(node as any).hash = "40952525253258c86b4d4320cf4279a0";
 
 export default node;

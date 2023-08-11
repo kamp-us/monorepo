@@ -7,9 +7,8 @@ import { cn } from "@kampus/ui-next/utils";
 
 import { TimeAgo } from "~/../../packages/ui";
 import { type PostItem_post$key } from "./__generated__/PostItem_post.graphql";
+import { MoreOptionsDropdown } from "./MoreOptions";
 import { UpvoteButton } from "./PostUpvoteButton";
-
-// import { MoreOptionsDropdown } from "./MoreOptions";
 
 interface LinkProps {
   href: string;
@@ -34,7 +33,6 @@ const usePanoPostFragment = (key: PostItem_post$key | null) =>
         content
         url
         createdAt
-        id
         site
 
         ...PostUpvoteButton_post
@@ -42,6 +40,7 @@ const usePanoPostFragment = (key: PostItem_post$key | null) =>
         owner @required(action: LOG) {
           displayName @required(action: LOG)
         }
+        ...MoreOptions_post
       }
     `,
     key
@@ -78,6 +77,7 @@ export const PostItem = (props: PostItemProps) => {
             <Link href={`/pano/post/${post.id}`}>0 yorum</Link> |
           </div>
           <TimeAgo date={new Date(post.createdAt as string)} />
+          <MoreOptionsDropdown key={post.id} post={post} />
         </div>
       </div>
     </section>

@@ -1,7 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { MoreHorizontal } from "lucide-react";
+import { graphql, useFragment } from "react-relay";
 
 import {
   Button,
@@ -20,53 +21,55 @@ import {
   useToast,
 } from "@kampus/ui-next";
 
+import { MoreOptions_post$key } from "./__generated__/MoreOptions_post.graphql";
+
 interface Props {
-  post: Post;
-  shareUrl: string;
+  post: MoreOptions_post$key;
 }
 
-type Post = {
-  __typename?: "PanoPost";
-  content: string;
-  createdAt: string;
-  id: string;
-  owner: string;
-  title: string;
-  url: string;
-};
-type User = {
-  username: string;
-};
+const moreOptionsPostFragment = graphql`
+  fragment MoreOptions_post on PanoPost {
+    id
+    owner {
+      username
+    }
+  }
+`;
 
-function canUserEdit(user: User, post: Post) {
-  console.log(user, post);
-  return true;
+// const moreOptionsViewerFragment = graphql`
+//   fragment MoreOptions_viewer on Actor {
+//     displayName
+//     id
+//   }
+// `;
+
+function canUserEdit(session?: any, owner?: any) {
+  if (!owner) return false;
+  if (!session) return false;
+
+  const username = session.user?.name;
+  return username === owner;
 }
 
-export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
-  const user = { username: "John Doe" };
-  console.log(post, shareUrl);
-
-  const router = useRouter();
+export const MoreOptionsDropdown = (props: Props) => {
+  const post = useFragment(moreOptionsPostFragment, props.post);
+  // const viewer = useFragment(moreOptionsViewerFragment, props.viewer);
   const { toast } = useToast();
 
   const ownerItems: JSX.Element[] = [];
-  if (canUserEdit(user, post)) {
-    ownerItems.push(
-      <DropdownMenuItem onSelect={() => router.push(`/posts/${post.id}/edit`)} key="edit">
-        Düzenle
-      </DropdownMenuItem>
-    );
-    ownerItems.push(
-      <DialogTrigger asChild>
-        <DropdownMenuItem>Sil</DropdownMenuItem>
-      </DialogTrigger>
-    );
-    ownerItems.push(<DropdownMenuSeparator key="separator" />);
-  }
-
-  // // FIXME: below appears to be redundant, is it?
-  // const menuItems = [...ownerItems];
+  // if (canUserEdit(session, post.owner?.username)) {
+  ownerItems.push(
+    <DropdownMenuItem key="edit">
+      <Link href={`/post/${post.id}/edit`}>Düzenle</Link>
+    </DropdownMenuItem>
+  );
+  ownerItems.push(
+    <DialogTrigger asChild>
+      <DropdownMenuItem>Sil</DropdownMenuItem>
+    </DialogTrigger>
+  );
+  ownerItems.push(<DropdownMenuSeparator key="separator" />);
+  // }
 
   return (
     <Dialog>
@@ -77,16 +80,26 @@ export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          {ownerItems}
+          {canUserEdit({ user: { name: "can" } }, "can") && (
+            <>
+              <DropdownMenuItem key="edit">
+                <Link href={`/post/${post.id}/edit`}>Düzenle</Link>
+              </DropdownMenuItem>
+              <DialogTrigger asChild>
+                <DropdownMenuItem>Sil</DropdownMenuItem>
+              </DialogTrigger>
+              <DropdownMenuSeparator key="separator" />
+            </>
+          )}
           <DropdownMenuItem
-          onSelect={() => {
-            toast({
-              description: "Link kopyalandı",
-            });
-          }}
-        >
-          Linki kopyala
-        </DropdownMenuItem>
+            onSelect={() => {
+              toast({
+                description: "Link kopyalandı",
+              });
+            }}
+          >
+            Linki kopyala
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       <DialogContent>

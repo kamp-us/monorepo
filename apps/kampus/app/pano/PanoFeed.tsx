@@ -1,9 +1,10 @@
 import { Suspense, useCallback } from "react";
-import { graphql, usePaginationFragment } from "react-relay";
+import { graphql, useFragment, usePaginationFragment } from "react-relay";
 
 import { Button } from "@kampus/ui-next";
 
 import { PostItem } from "~/app/pano/features/post-list/PostItem";
+import { PanoFeed_viewer$key } from "./__generated__/PanoFeed_viewer.graphql";
 import { type PanoFeedFragment$key } from "./__generated__/PanoFeedFragment.graphql";
 
 const fragment = graphql`
@@ -28,8 +29,15 @@ const fragment = graphql`
   }
 `;
 
+const viewerFragment = graphql`
+  fragment PanoFeed_viewer on Actor {
+    displayName
+  }
+`;
+
 interface Props {
   panoFeed: PanoFeedFragment$key;
+  panoViewer: PanoFeed_viewer$key | null;
 }
 
 export function PanoFeed(props: Props) {
@@ -37,6 +45,8 @@ export function PanoFeed(props: Props) {
     fragment,
     props.panoFeed
   );
+  const viewer = useFragment(viewerFragment, props.panoViewer);
+  console.log(viewer, "-------------------viewer");
 
   const feed = data.panoFeed;
 
