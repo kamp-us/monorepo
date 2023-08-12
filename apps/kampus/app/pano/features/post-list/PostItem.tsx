@@ -7,6 +7,7 @@ import { cn } from "@kampus/ui-next/utils";
 
 import { TimeAgo } from "~/../../packages/ui";
 import { type PostItem_post$key } from "./__generated__/PostItem_post.graphql";
+import { type PostItem_viewer$key } from "./__generated__/PostItem_viewer.graphql";
 import { MoreOptionsDropdown } from "./MoreOptions";
 import { UpvoteButton } from "./PostUpvoteButton";
 
@@ -46,13 +47,25 @@ const usePanoPostFragment = (key: PostItem_post$key | null) =>
     key
   );
 
+const usePanoViewerFragment = (key: PostItem_viewer$key | null) =>
+  useFragment(
+    graphql`
+      fragment PostItem_viewer on Viewer {
+        ...MoreOptions_viewer
+      }
+    `,
+    key
+  );
+
 interface PostItemProps {
   post: PostItem_post$key;
+  viewerRef: PostItem_viewer$key;
   showContent?: boolean;
 }
 
 export const PostItem = (props: PostItemProps) => {
   const post = usePanoPostFragment(props.post);
+  const viewer = usePanoViewerFragment(props.viewerRef);
 
   if (!post) {
     return null;
@@ -77,7 +90,7 @@ export const PostItem = (props: PostItemProps) => {
             <Link href={`/pano/post/${post.id}`}>0 yorum</Link> |
           </div>
           <TimeAgo date={new Date(post.createdAt as string)} />
-          <MoreOptionsDropdown key={post.id} post={post} />
+          <MoreOptionsDropdown key={post.id} post={post} viewerRef={viewer} />
         </div>
       </div>
     </section>

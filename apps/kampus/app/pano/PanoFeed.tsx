@@ -30,14 +30,14 @@ const fragment = graphql`
 `;
 
 const viewerFragment = graphql`
-  fragment PanoFeed_viewer on Actor {
-    displayName
+  fragment PanoFeed_viewer on Viewer {
+    ...PostItem_viewer
   }
 `;
 
 interface Props {
   panoFeed: PanoFeedFragment$key;
-  panoViewer: PanoFeed_viewer$key | null;
+  panoViewer: PanoFeed_viewer$key;
 }
 
 export function PanoFeed(props: Props) {
@@ -46,7 +46,6 @@ export function PanoFeed(props: Props) {
     props.panoFeed
   );
   const viewer = useFragment(viewerFragment, props.panoViewer);
-  console.log(viewer, "-------------------viewer");
 
   const feed = data.panoFeed;
 
@@ -70,7 +69,7 @@ export function PanoFeed(props: Props) {
             return null;
           }
 
-          return <PostItem key={edge.node.id} post={edge.node} />;
+          return <PostItem key={edge.node.id} post={edge.node} viewerRef={viewer} />;
         })}
 
         <div className="flex gap-2">

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c5104d8dde70a0539774eedec536b385>>
+ * @generated SignedSource<<f23b977dfdce2a51d7443bf6a4bfee06>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,10 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type PostListContainerQuery$variables = {};
 export type PostListContainerQuery$data = {
   readonly viewer: {
-    readonly actor: {
-      readonly " $fragmentSpreads": FragmentRefs<"PanoFeed_viewer">;
-    } | null;
-    readonly " $fragmentSpreads": FragmentRefs<"PanoFeedFragment">;
+    readonly " $fragmentSpreads": FragmentRefs<"PanoFeedFragment" | "PanoFeed_viewer">;
   } | null;
 };
 export type PostListContainerQuery = {
@@ -74,20 +71,9 @@ return {
             "name": "PanoFeedFragment"
           },
           {
-            "alias": null,
             "args": null,
-            "concreteType": null,
-            "kind": "LinkedField",
-            "name": "actor",
-            "plural": false,
-            "selections": [
-              {
-                "args": null,
-                "kind": "FragmentSpread",
-                "name": "PanoFeed_viewer"
-              }
-            ],
-            "storageKey": null
+            "kind": "FragmentSpread",
+            "name": "PanoFeed_viewer"
           }
         ],
         "storageKey": null
@@ -278,10 +264,6 @@ return {
             "plural": false,
             "selections": [
               (v3/*: any*/),
-              {
-                "kind": "TypeDiscriminator",
-                "abstractKey": "__isActor"
-              },
               (v2/*: any*/),
               (v1/*: any*/)
             ],
@@ -293,16 +275,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "03884b4e86f1ba9d6723df79bf407499",
+    "cacheID": "f17705aca1c90be09fad072eb42c4786",
     "id": null,
     "metadata": {},
     "name": "PostListContainerQuery",
     "operationKind": "query",
-    "text": "query PostListContainerQuery {\n  viewer {\n    ...PanoFeedFragment\n    actor {\n      __typename\n      ...PanoFeed_viewer\n      id\n    }\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    username\n    id\n  }\n}\n\nfragment PanoFeedFragment on Viewer {\n  panoFeed(first: 10) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PanoFeed_viewer on Actor {\n  __isActor: __typename\n  displayName\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "query PostListContainerQuery {\n  viewer {\n    ...PanoFeedFragment\n    ...PanoFeed_viewer\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    username\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedFragment on Viewer {\n  panoFeed(first: 10) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PanoFeed_viewer on Viewer {\n  ...PostItem_viewer\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();
 
-(node as any).hash = "1a56ce0599346554f35cba75e9ef0e29";
+(node as any).hash = "246fd8479a18172b183f288ff6f3e842";
 
 export default node;

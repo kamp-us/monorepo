@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<6909702fcff66160abb20fbbfeab1e64>>
+ * @generated SignedSource<<285a7607218f1bcd3ce4cf4f6613f8d0>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,7 +11,7 @@
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type PanoFeed_viewer$data = {
-  readonly displayName: string | null;
+  readonly " $fragmentSpreads": FragmentRefs<"PostItem_viewer">;
   readonly " $fragmentType": "PanoFeed_viewer";
 };
 export type PanoFeed_viewer$key = {
@@ -26,17 +26,15 @@ const node: ReaderFragment = {
   "name": "PanoFeed_viewer",
   "selections": [
     {
-      "alias": null,
       "args": null,
-      "kind": "ScalarField",
-      "name": "displayName",
-      "storageKey": null
+      "kind": "FragmentSpread",
+      "name": "PostItem_viewer"
     }
   ],
-  "type": "Actor",
-  "abstractKey": "__isActor"
+  "type": "Viewer",
+  "abstractKey": null
 };
 
-(node as any).hash = "d899f3d2a551aba8616408feb294eb54";
+(node as any).hash = "aa9717b7dd3561c13af770ff24544e2d";
 
 export default node;

@@ -22,26 +22,37 @@ import {
 } from "@kampus/ui-next";
 
 import { MoreOptions_post$key } from "./__generated__/MoreOptions_post.graphql";
+import { MoreOptions_viewer$key } from "./__generated__/MoreOptions_viewer.graphql";
 
 interface Props {
   post: MoreOptions_post$key;
+  viewerRef: MoreOptions_viewer$key | null;
 }
 
-const moreOptionsPostFragment = graphql`
-  fragment MoreOptions_post on PanoPost {
-    id
-    owner {
-      username
-    }
-  }
-`;
+const useMoreOptionsPostFragment = (key: MoreOptions_post$key | null) =>
+  useFragment(
+    graphql`
+      fragment MoreOptions_post on PanoPost {
+        id
+        owner {
+          username
+        }
+      }
+    `,
+    key
+  );
 
-// const moreOptionsViewerFragment = graphql`
-//   fragment MoreOptions_viewer on Actor {
-//     displayName
-//     id
-//   }
-// `;
+const useMoreOptionsViewerFragment = (key: MoreOptions_viewer$key | null) =>
+  useFragment(
+    graphql`
+      fragment MoreOptions_viewer on Viewer {
+        actor {
+          displayName
+        }
+      }
+    `,
+    key
+  );
 
 function canUserEdit(session?: any, owner?: any) {
   if (!owner) return false;
@@ -52,15 +63,15 @@ function canUserEdit(session?: any, owner?: any) {
 }
 
 export const MoreOptionsDropdown = (props: Props) => {
-  const post = useFragment(moreOptionsPostFragment, props.post);
-  // const viewer = useFragment(moreOptionsViewerFragment, props.viewer);
+  const post = useMoreOptionsPostFragment(props.post);
+  const viewer = useMoreOptionsViewerFragment(props.viewerRef);
   const { toast } = useToast();
 
   const ownerItems: JSX.Element[] = [];
   // if (canUserEdit(session, post.owner?.username)) {
   ownerItems.push(
     <DropdownMenuItem key="edit">
-      <Link href={`/post/${post.id}/edit`}>Düzenle</Link>
+      <Link href={`/post/${post?.id}/edit`}>Düzenle</Link>
     </DropdownMenuItem>
   );
   ownerItems.push(
@@ -83,7 +94,7 @@ export const MoreOptionsDropdown = (props: Props) => {
           {canUserEdit({ user: { name: "can" } }, "can") && (
             <>
               <DropdownMenuItem key="edit">
-                <Link href={`/post/${post.id}/edit`}>Düzenle</Link>
+                <Link href={`/post/${post?.id}/edit`}>Düzenle</Link>
               </DropdownMenuItem>
               <DialogTrigger asChild>
                 <DropdownMenuItem>Sil</DropdownMenuItem>

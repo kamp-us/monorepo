@@ -16,9 +16,7 @@ const query = graphql`
   query PostListContainerQuery {
     viewer {
       ...PanoFeedFragment
-      actor {
-        ...PanoFeed_viewer
-      }
+      ...PanoFeed_viewer
     }
   }
 `;
@@ -26,11 +24,10 @@ const query = graphql`
 export const PostListContainer = (props: Props) => {
   const queryRef = useSerializablePreloadedQuery(props.preloadedQuery);
   const data = usePreloadedQuery(query, queryRef);
-  console.log(data);
 
   if (!data.viewer) {
     return null;
   }
 
-  return <PanoFeed panoFeed={data.viewer} panoViewer={data.viewer.actor} />;
+  return <PanoFeed panoFeed={data.viewer} panoViewer={data.viewer} />;
 };
