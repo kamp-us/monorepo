@@ -4,7 +4,7 @@ import { graphql, useFragment, usePaginationFragment } from "react-relay";
 import { Button } from "@kampus/ui-next";
 
 import { PostItem } from "~/app/pano/features/post-list/PostItem";
-import { PanoFeed_viewer$key } from "./__generated__/PanoFeed_viewer.graphql";
+import { type PanoFeed_viewer$key } from "./__generated__/PanoFeed_viewer.graphql";
 import { type PanoFeedFragment$key } from "./__generated__/PanoFeedFragment.graphql";
 
 const fragment = graphql`

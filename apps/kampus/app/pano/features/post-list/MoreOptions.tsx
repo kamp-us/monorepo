@@ -21,8 +21,8 @@ import {
   useToast,
 } from "@kampus/ui-next";
 
-import { MoreOptions_post$key } from "./__generated__/MoreOptions_post.graphql";
-import { MoreOptions_viewer$key } from "./__generated__/MoreOptions_viewer.graphql";
+import { type MoreOptions_post$key } from "./__generated__/MoreOptions_post.graphql";
+import { type MoreOptions_viewer$key } from "./__generated__/MoreOptions_viewer.graphql";
 
 interface Props {
   post: MoreOptions_post$key;
