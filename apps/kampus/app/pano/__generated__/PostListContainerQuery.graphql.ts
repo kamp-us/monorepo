@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<08ab109a670795d013ca7bfb2e0b6a24>>
+ * @generated SignedSource<<b4402c6c6f941c6d13e4022a5017f7d8>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -147,6 +147,20 @@ return {
                       {
                         "alias": null,
                         "args": null,
+                        "kind": "ScalarField",
+                        "name": "isUpvotedByViewer",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "upvoteCount",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "User",
                         "kind": "LinkedField",
                         "name": "owner",
@@ -156,7 +170,7 @@ return {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "username",
+                            "name": "displayName",
                             "storageKey": null
                           },
                           (v1/*: any*/)
@@ -233,12 +247,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "13cff242cbdc1e5e77bd53fff19a0553",
+    "cacheID": "18eb8eaf3693895b2efd987ddc3b9362",
     "id": null,
     "metadata": {},
     "name": "PostListContainerQuery",
     "operationKind": "query",
-    "text": "query PostListContainerQuery {\n  viewer {\n    ...PanoFeedFragment\n  }\n}\n\nfragment PanoFeedFragment on Viewer {\n  panoFeed(first: 10) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  owner {\n    username\n    id\n  }\n}\n"
+    "text": "query PostListContainerQuery {\n  viewer {\n    ...PanoFeedFragment\n  }\n}\n\nfragment PanoFeedFragment on Viewer {\n  panoFeed(first: 10) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();

@@ -357,7 +357,9 @@ export type UpdatePanoPostPayload = {
 };
 
 export type Upvotable = {
+  id: Scalars["ID"]["output"];
   isUpvotedByViewer: Scalars["Boolean"]["output"];
+  upvoteCount: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type User = Actor &

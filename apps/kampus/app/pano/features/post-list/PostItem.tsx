@@ -37,8 +37,10 @@ const usePanoPostFragment = (key: PostItem_post$key | null) =>
         id
         site
 
-        owner {
-          username
+        ...PostUpvoteButton_post
+
+        owner @required(action: LOG) {
+          displayName @required(action: LOG)
         }
       }
     `,
@@ -59,7 +61,7 @@ export const PostItem = (props: PostItemProps) => {
 
   return (
     <section className="flex h-full items-center gap-2 rounded">
-      <UpvoteButton upvoteCount={5} isUpvoted={false} disabled={false} isVoting={false} />
+      <UpvoteButton postRef={post} />
 
       <div className="flex w-full flex-col justify-center">
         <div className="flex items-center gap-1 align-baseline">
@@ -71,7 +73,7 @@ export const PostItem = (props: PostItemProps) => {
           </Link>
         </div>
         <div className="flex items-center gap-1 text-sm">
-          <div>@{post.owner?.username} |</div>
+          <div>@{post.owner.displayName} |</div>
           <div>
             <Link href={`/pano/post/${post.id}`}>0 yorum</Link> |
           </div>
