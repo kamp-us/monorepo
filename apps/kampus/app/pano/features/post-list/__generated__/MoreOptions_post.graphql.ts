@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<789c3dcce5dd3bfead2297a6ac6667d5>>
+ * @generated SignedSource<<abbe62bfe41d092fb53e2d58cd794272>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,7 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type MoreOptions_post$data = {
   readonly id: string;
   readonly owner: {
-    readonly username: string;
+    readonly displayName: string | null;
   } | null;
   readonly " $fragmentType": "MoreOptions_post";
 };
@@ -47,7 +47,7 @@ const node: ReaderFragment = {
           "alias": null,
           "args": null,
           "kind": "ScalarField",
-          "name": "username",
+          "name": "displayName",
           "storageKey": null
         }
       ],
@@ -58,6 +58,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "9d3d7c45939c77a59da8a5829f1aa5c2";
+(node as any).hash = "01fe2324527daa720ea5ca88add6406c";
 
 export default node;

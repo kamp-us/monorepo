@@ -35,7 +35,7 @@ const useMoreOptionsPostFragment = (key: MoreOptions_post$key | null) =>
       fragment MoreOptions_post on PanoPost {
         id
         owner {
-          username
+          displayName
         }
       }
     `,
@@ -54,11 +54,10 @@ const useMoreOptionsViewerFragment = (key: MoreOptions_viewer$key | null) =>
     key
   );
 
-function canUserEdit(session?: any, owner?: any) {
+function canUserEdit(username?: string | null, owner?: string | null) {
   if (!owner) return false;
-  if (!session) return false;
+  if (!username) return false;
 
-  const username = session.user?.name;
   return username === owner;
 }
 
@@ -66,21 +65,6 @@ export const MoreOptionsDropdown = (props: Props) => {
   const post = useMoreOptionsPostFragment(props.post);
   const viewer = useMoreOptionsViewerFragment(props.viewerRef);
   const { toast } = useToast();
-
-  const ownerItems: JSX.Element[] = [];
-  // if (canUserEdit(session, post.owner?.username)) {
-  ownerItems.push(
-    <DropdownMenuItem key="edit">
-      <Link href={`/post/${post?.id}/edit`}>Düzenle</Link>
-    </DropdownMenuItem>
-  );
-  ownerItems.push(
-    <DialogTrigger asChild>
-      <DropdownMenuItem>Sil</DropdownMenuItem>
-    </DialogTrigger>
-  );
-  ownerItems.push(<DropdownMenuSeparator key="separator" />);
-  // }
 
   return (
     <Dialog>
@@ -91,9 +75,9 @@ export const MoreOptionsDropdown = (props: Props) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          {canUserEdit({ user: { name: "can" } }, "can") && (
+          {canUserEdit(viewer?.actor?.displayName, post?.owner?.displayName) && (
             <>
-              <DropdownMenuItem key="edit">
+              <DropdownMenuItem asChild key="edit">
                 <Link href={`/post/${post?.id}/edit`}>Düzenle</Link>
               </DropdownMenuItem>
               <DialogTrigger asChild>
