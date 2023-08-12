@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b51e67ab3c3dcff1f7cb23e429b21266>>
+ * @generated SignedSource<<a3a8bf896c849c44812c64d62f8867ad>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,13 +15,14 @@ export type PostItem_post$data = {
   readonly createdAt: any;
   readonly id: string;
   readonly owner: {
-    readonly username: string;
-  } | null;
+    readonly displayName: string;
+  };
   readonly site: string | null;
   readonly title: string;
   readonly url: string | null;
+  readonly " $fragmentSpreads": FragmentRefs<"PostUpvoteButton_post">;
   readonly " $fragmentType": "PostItem_post";
-};
+} | null;
 export type PostItem_post$key = {
   readonly " $data"?: PostItem_post$data;
   readonly " $fragmentSpreads": FragmentRefs<"PostItem_post">;
@@ -76,28 +77,43 @@ const node: ReaderFragment = {
       "storageKey": null
     },
     {
-      "alias": null,
       "args": null,
-      "concreteType": "User",
-      "kind": "LinkedField",
-      "name": "owner",
-      "plural": false,
-      "selections": [
-        {
-          "alias": null,
-          "args": null,
-          "kind": "ScalarField",
-          "name": "username",
-          "storageKey": null
-        }
-      ],
-      "storageKey": null
+      "kind": "FragmentSpread",
+      "name": "PostUpvoteButton_post"
+    },
+    {
+      "kind": "RequiredField",
+      "field": {
+        "alias": null,
+        "args": null,
+        "concreteType": "User",
+        "kind": "LinkedField",
+        "name": "owner",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "RequiredField",
+            "field": {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "displayName",
+              "storageKey": null
+            },
+            "action": "LOG",
+            "path": "owner.displayName"
+          }
+        ],
+        "storageKey": null
+      },
+      "action": "LOG",
+      "path": "owner"
     }
   ],
   "type": "PanoPost",
   "abstractKey": null
 };
 
-(node as any).hash = "583dd2a40bc52f70a6850ef37061113c";
+(node as any).hash = "2722b74002976e15c158a0be92853b78";
 
 export default node;

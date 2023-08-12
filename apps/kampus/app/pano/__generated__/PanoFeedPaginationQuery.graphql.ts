@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<adfd5c63fb3e991e50595ccf9a6106aa>>
+ * @generated SignedSource<<09ed6683c9184c2f89dbaad228142867>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -189,6 +189,20 @@ return {
                       {
                         "alias": null,
                         "args": null,
+                        "kind": "ScalarField",
+                        "name": "isUpvotedByViewer",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "upvoteCount",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "User",
                         "kind": "LinkedField",
                         "name": "owner",
@@ -198,7 +212,7 @@ return {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "username",
+                            "name": "displayName",
                             "storageKey": null
                           },
                           (v2/*: any*/)
@@ -275,12 +289,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "a37f00ca4bf634ab98a5654d46324f98",
+    "cacheID": "4ca0994c46e6a44f1dc573f87eb2c3b6",
     "id": null,
     "metadata": {},
     "name": "PanoFeedPaginationQuery",
     "operationKind": "query",
-    "text": "query PanoFeedPaginationQuery(\n  $after: String\n  $before: String\n  $first: Int = 10\n  $last: Int\n) {\n  viewer {\n    ...PanoFeedFragment_pbnwq\n  }\n}\n\nfragment PanoFeedFragment_pbnwq on Viewer {\n  panoFeed(first: $first, after: $after, last: $last, before: $before) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  owner {\n    username\n    id\n  }\n}\n"
+    "text": "query PanoFeedPaginationQuery(\n  $after: String\n  $before: String\n  $first: Int = 10\n  $last: Int\n) {\n  viewer {\n    ...PanoFeedFragment_pbnwq\n  }\n}\n\nfragment PanoFeedFragment_pbnwq on Viewer {\n  panoFeed(first: $first, after: $after, last: $last, before: $before) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();
