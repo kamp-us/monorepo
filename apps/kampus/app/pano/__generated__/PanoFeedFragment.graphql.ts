@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3c9f3f7de053b4688b2404c72e9daa59>>
+ * @generated SignedSource<<845cce7dd6f615c692812a518c6c92de>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,6 +12,7 @@ import { ReaderFragment, RefetchableFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type PanoFeedFragment$data = {
   readonly panoFeed: {
+    readonly __id: string;
     readonly edges: ReadonlyArray<{
       readonly cursor: string;
       readonly node: {
@@ -178,6 +179,18 @@ return {
             }
           ],
           "storageKey": null
+        },
+        {
+          "kind": "ClientExtension",
+          "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "__id",
+              "storageKey": null
+            }
+          ]
         }
       ],
       "storageKey": null
@@ -188,6 +201,6 @@ return {
 };
 })();
 
-(node as any).hash = "c0d59088c3d65e88fdd5d8da836c2d76";
+(node as any).hash = "169d642e0dd7ef004b6ba9327f096aca";
 
 export default node;
