@@ -10,7 +10,7 @@ export const env = parseEnv(
   },
   {
     NODE_ENV: z.enum(["development", "test", "production"]),
-    NEXTAUTH_URL: z.string().url().default("http://sozluk.local.kamp.us:3000/auth"),
+    NEXTAUTH_URL: z.string().url(),
     DATABASE_URL: z
       .string()
       .url()

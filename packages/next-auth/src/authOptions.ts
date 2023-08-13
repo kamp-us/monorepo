@@ -55,7 +55,7 @@ export const authOptions: AuthOptions = {
       };
     },
     redirect() {
-      return env.KAMPUS_ENV === "production" ? "https://dev.kamp.us" : "http://localhost:3000";
+      return env.KAMPUS_ENV === "production" ? "https://dev.kamp.us" : "http://localhost:3001";
     },
   },
 };

@@ -72,12 +72,6 @@
         "KAMPUS_ENV"
       ]
     },
-    "@kampus/kampus#dev": {
-      "dependsOn": [
-        "@kampus/gql#dev",
-        "@kampus/pasaport#dev"
-      ]
-    },
     "@kampus/pasaport#*": {
       "env": [
         "NODE_ENV",

@@ -14,7 +14,7 @@ export const env = parseEnv(
       .string()
       .url()
       .default("mysql://kampus:kampus@localhost:3306/kampus?schema=public&connect_timeout=300"),
-    NEXTAUTH_URL: z.string().url().default("http://localhost:3002/auth"),
+    NEXTAUTH_URL: z.string().url().default("http://localhost:3001/auth"),
     KAMPUS_ENV: z.enum(["development", "test", "production"]).default("development"),
   }
 );
