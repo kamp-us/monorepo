@@ -75,8 +75,6 @@ export const PostItem = (props: PostItemProps) => {
     return null;
   }
 
-  console.log(viewer, "viewer");
-
   return (
     <section className="flex h-full items-center gap-2 rounded">
       <UpvoteButton postRef={post} />
