@@ -18,9 +18,11 @@ const fragment = graphql`
   @refetchable(queryName: "PanoFeedPaginationQuery") {
     panoFeed(first: $first, after: $after, last: $last, before: $before)
       @connection(key: "PanoFeedFragment__panoFeed") {
+      __id
       edges {
         cursor
         node {
+          __id
           id
           ...PostItem_post
         }
@@ -69,7 +71,14 @@ export function PanoFeed(props: Props) {
             return null;
           }
 
-          return <PostItem key={edge.node.id} post={edge.node} viewerRef={viewer} />;
+          return (
+            <PostItem
+              key={edge.node.id}
+              post={edge.node}
+              viewerRef={viewer}
+              postConnectionId={data.panoFeed?.__id}
+            />
+          );
         })}
 
         <div className="flex gap-2">

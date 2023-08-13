@@ -52,6 +52,9 @@ const usePanoViewerFragment = (key: PostItem_viewer$key | null) =>
     graphql`
       fragment PostItem_viewer on Viewer {
         ...MoreOptions_viewer
+        actor {
+          displayName
+        }
       }
     `,
     key
@@ -61,6 +64,7 @@ interface PostItemProps {
   post: PostItem_post$key;
   viewerRef: PostItem_viewer$key;
   showContent?: boolean;
+  postConnectionId?: string;
 }
 
 export const PostItem = (props: PostItemProps) => {
@@ -70,6 +74,8 @@ export const PostItem = (props: PostItemProps) => {
   if (!post) {
     return null;
   }
+
+  console.log(viewer, "viewer");
 
   return (
     <section className="flex h-full items-center gap-2 rounded">
@@ -90,7 +96,12 @@ export const PostItem = (props: PostItemProps) => {
             <Link href={`/pano/post/${post.id}`}>0 yorum</Link> |
           </div>
           <TimeAgo date={new Date(post.createdAt as string)} />
-          <MoreOptionsDropdown key={post.id} post={post} viewerRef={viewer} />
+          <MoreOptionsDropdown
+            key={post.id}
+            post={post}
+            viewerRef={viewer}
+            postConnectionId={props.postConnectionId}
+          />
         </div>
       </div>
     </section>
