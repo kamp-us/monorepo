@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<a5b5ccbd105ab3e2022aa41f17b9c696>>
+ * @generated SignedSource<<4b69c454a3a58b7052f9e79ba03b1bec>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,6 +11,9 @@
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type PostItem_viewer$data = {
+  readonly actor: {
+    readonly displayName: string | null;
+  } | null;
   readonly " $fragmentSpreads": FragmentRefs<"MoreOptions_viewer">;
   readonly " $fragmentType": "PostItem_viewer";
 };
@@ -29,12 +32,30 @@ const node: ReaderFragment = {
       "args": null,
       "kind": "FragmentSpread",
       "name": "MoreOptions_viewer"
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": null,
+      "kind": "LinkedField",
+      "name": "actor",
+      "plural": false,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "displayName",
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
     }
   ],
   "type": "Viewer",
   "abstractKey": null
 };
 
-(node as any).hash = "691b7ff06781176ab6c92034830657db";
+(node as any).hash = "08a45a50da6ade7e46c243f7477d30ac";
 
 export default node;

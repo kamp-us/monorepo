@@ -2,17 +2,19 @@
 
 import Link from "next/link";
 import { MoreHorizontal } from "lucide-react";
-import { graphql, useFragment } from "react-relay";
+import { graphql, useFragment, useMutation } from "react-relay";
 
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
   Button,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -27,6 +29,7 @@ import { type MoreOptions_viewer$key } from "./__generated__/MoreOptions_viewer.
 interface Props {
   post: MoreOptions_post$key;
   viewerRef: MoreOptions_viewer$key | null;
+  postConnectionId?: string;
 }
 
 const useMoreOptionsPostFragment = (key: MoreOptions_post$key | null) =>
@@ -54,6 +57,19 @@ const useMoreOptionsViewerFragment = (key: MoreOptions_viewer$key | null) =>
     key
   );
 
+const remotePostMutation = graphql`
+  mutation MoreOptionsRemotePostMutation($connections: [ID!]!, $postID: ID!) {
+    removePanoPost(input: { id: $postID }) {
+      edge {
+        node {
+          id @deleteEdge(connections: $connections)
+          title
+        }
+      }
+    }
+  }
+`;
+
 function canUserEdit(username?: string | null, owner?: string | null) {
   if (!owner) return false;
   if (!username) return false;
@@ -65,9 +81,21 @@ export const MoreOptionsDropdown = (props: Props) => {
   const post = useMoreOptionsPostFragment(props.post);
   const viewer = useMoreOptionsViewerFragment(props.viewerRef);
   const { toast } = useToast();
+  const [removePost, isRemoving] = useMutation(remotePostMutation);
 
+  const onClick = () => {
+    if (!post) {
+      return;
+    }
+
+    if (isRemoving) {
+      return;
+    }
+
+    removePost({ variables: { postID: post.id, connections: [props.postConnectionId] } });
+  };
   return (
-    <Dialog>
+    <AlertDialog>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button className="h-5 p-1" variant="ghost">
@@ -80,9 +108,9 @@ export const MoreOptionsDropdown = (props: Props) => {
               <DropdownMenuItem asChild key="edit">
                 <Link href={`/post/${post?.id}/edit`}>Düzenle</Link>
               </DropdownMenuItem>
-              <DialogTrigger asChild>
+              <AlertDialogTrigger asChild>
                 <DropdownMenuItem>Sil</DropdownMenuItem>
-              </DialogTrigger>
+              </AlertDialogTrigger>
               <DropdownMenuSeparator key="separator" />
             </>
           )}
@@ -97,22 +125,18 @@ export const MoreOptionsDropdown = (props: Props) => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Silmek istediğine emin misin?</DialogTitle>
-          <DialogDescription>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Silmek istediğine emin misin?</AlertDialogTitle>
+          <AlertDialogDescription>
             Eğer bu gönderiyi silersen, bu işlemi geri alamazsın.
-          </DialogDescription>
-        </DialogHeader>
-        <DialogFooter>
-          <Button variant="outline" type="submit">
-            Hayır
-          </Button>
-          <Button variant="destructive" type="submit">
-            Evet
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Hayır</AlertDialogCancel>
+          <AlertDialogAction onClick={onClick}>Evet</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };

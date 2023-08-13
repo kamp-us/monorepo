@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c87f789d018dc26ccbd73f12e306675e>>
+ * @generated SignedSource<<98e2a5455bce95d44527b69e9a38256a>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -77,6 +77,18 @@ v2 = {
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
+},
+v3 = {
+  "kind": "ClientExtension",
+  "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "__id",
+      "storageKey": null
+    }
+  ]
 };
 return {
   "fragment": {
@@ -219,6 +231,7 @@ return {
                         ],
                         "storageKey": null
                       },
+                      (v3/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -270,7 +283,8 @@ return {
                   }
                 ],
                 "storageKey": null
-              }
+              },
+              (v3/*: any*/)
             ],
             "storageKey": null
           },
@@ -299,6 +313,6 @@ return {
 };
 })();
 
-(node as any).hash = "c0d59088c3d65e88fdd5d8da836c2d76";
+(node as any).hash = "8221de534510fed35dd0d645b9b44259";
 
 export default node;

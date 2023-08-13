@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3c9f3f7de053b4688b2404c72e9daa59>>
+ * @generated SignedSource<<b8d40a9fa312d20cda6e648d240133ab>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,9 +12,11 @@ import { ReaderFragment, RefetchableFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type PanoFeedFragment$data = {
   readonly panoFeed: {
+    readonly __id: string;
     readonly edges: ReadonlyArray<{
       readonly cursor: string;
       readonly node: {
+        readonly __id: string;
         readonly id: string;
         readonly " $fragmentSpreads": FragmentRefs<"PostItem_post">;
       } | null;
@@ -30,7 +32,19 @@ export type PanoFeedFragment$key = {
 const node: ReaderFragment = (function(){
 var v0 = [
   "panoFeed"
-];
+],
+v1 = {
+  "kind": "ClientExtension",
+  "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "__id",
+      "storageKey": null
+    }
+  ]
+};
 return {
   "argumentDefinitions": [
     {
@@ -127,6 +141,7 @@ return {
                   "kind": "FragmentSpread",
                   "name": "PostItem_post"
                 },
+                (v1/*: any*/),
                 {
                   "alias": null,
                   "args": null,
@@ -178,7 +193,8 @@ return {
             }
           ],
           "storageKey": null
-        }
+        },
+        (v1/*: any*/)
       ],
       "storageKey": null
     }
@@ -188,6 +204,6 @@ return {
 };
 })();
 
-(node as any).hash = "c0d59088c3d65e88fdd5d8da836c2d76";
+(node as any).hash = "8221de534510fed35dd0d645b9b44259";
 
 export default node;
