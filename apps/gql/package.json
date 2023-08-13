@@ -1,5 +1,5 @@
 {
-  "name": "@kampus-apps/gql",
+  "name": "@kampus/gql",
   "private": true,
   "version": "0.0.0",
   "scripts": {
