@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b8d40a9fa312d20cda6e648d240133ab>>
+ * @generated SignedSource<<845cce7dd6f615c692812a518c6c92de>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -16,7 +16,6 @@ export type PanoFeedFragment$data = {
     readonly edges: ReadonlyArray<{
       readonly cursor: string;
       readonly node: {
-        readonly __id: string;
         readonly id: string;
         readonly " $fragmentSpreads": FragmentRefs<"PostItem_post">;
       } | null;
@@ -32,19 +31,7 @@ export type PanoFeedFragment$key = {
 const node: ReaderFragment = (function(){
 var v0 = [
   "panoFeed"
-],
-v1 = {
-  "kind": "ClientExtension",
-  "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "__id",
-      "storageKey": null
-    }
-  ]
-};
+];
 return {
   "argumentDefinitions": [
     {
@@ -141,7 +128,6 @@ return {
                   "kind": "FragmentSpread",
                   "name": "PostItem_post"
                 },
-                (v1/*: any*/),
                 {
                   "alias": null,
                   "args": null,
@@ -194,7 +180,18 @@ return {
           ],
           "storageKey": null
         },
-        (v1/*: any*/)
+        {
+          "kind": "ClientExtension",
+          "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "__id",
+              "storageKey": null
+            }
+          ]
+        }
       ],
       "storageKey": null
     }
@@ -204,6 +201,6 @@ return {
 };
 })();
 
-(node as any).hash = "8221de534510fed35dd0d645b9b44259";
+(node as any).hash = "169d642e0dd7ef004b6ba9327f096aca";
 
 export default node;

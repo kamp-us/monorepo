@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<4310a943f342f4775027fa0ff214c999>>
+ * @generated SignedSource<<bcbe3b0785aff9486d54527b084baf33>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,11 +9,11 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
-export type MoreOptionsRemotePostMutation$variables = {
+export type MoreOptionsRemovePostMutation$variables = {
   connections: ReadonlyArray<string>;
   postID: string;
 };
-export type MoreOptionsRemotePostMutation$data = {
+export type MoreOptionsRemovePostMutation$data = {
   readonly removePanoPost: {
     readonly edge: {
       readonly node: {
@@ -23,9 +23,9 @@ export type MoreOptionsRemotePostMutation$data = {
     } | null;
   } | null;
 };
-export type MoreOptionsRemotePostMutation = {
-  response: MoreOptionsRemotePostMutation$data;
-  variables: MoreOptionsRemotePostMutation$variables;
+export type MoreOptionsRemovePostMutation = {
+  response: MoreOptionsRemovePostMutation$data;
+  variables: MoreOptionsRemovePostMutation$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -73,7 +73,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "MoreOptionsRemotePostMutation",
+    "name": "MoreOptionsRemovePostMutation",
     "selections": [
       {
         "alias": null,
@@ -118,7 +118,7 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "MoreOptionsRemotePostMutation",
+    "name": "MoreOptionsRemovePostMutation",
     "selections": [
       {
         "alias": null,
@@ -174,16 +174,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "97a33e0cf008ffdcd790abdec86cc134",
+    "cacheID": "6c9942183f760e86a8cbfcf94dbc7ebe",
     "id": null,
     "metadata": {},
-    "name": "MoreOptionsRemotePostMutation",
+    "name": "MoreOptionsRemovePostMutation",
     "operationKind": "mutation",
-    "text": "mutation MoreOptionsRemotePostMutation(\n  $postID: ID!\n) {\n  removePanoPost(input: {id: $postID}) {\n    edge {\n      node {\n        id\n        title\n      }\n    }\n  }\n}\n"
+    "text": "mutation MoreOptionsRemovePostMutation(\n  $postID: ID!\n) {\n  removePanoPost(input: {id: $postID}) {\n    edge {\n      node {\n        id\n        title\n      }\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "38f8dec25a77178637e1b25506d773e1";
+(node as any).hash = "0bc137edfc163648cc5c8a5969e5697a";
 
 export default node;

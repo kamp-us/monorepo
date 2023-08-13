@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<1e355bbc68aacef6b1d9586fde987101>>
+ * @generated SignedSource<<e309efdc8d21815a694683ff388308a1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -44,18 +44,6 @@ v2 = {
   "storageKey": null
 },
 v3 = {
-  "kind": "ClientExtension",
-  "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "__id",
-      "storageKey": null
-    }
-  ]
-},
-v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -202,8 +190,7 @@ return {
                         ],
                         "storageKey": null
                       },
-                      (v3/*: any*/),
-                      (v4/*: any*/)
+                      (v3/*: any*/)
                     ],
                     "storageKey": null
                   }
@@ -249,7 +236,18 @@ return {
                 ],
                 "storageKey": null
               },
-              (v3/*: any*/)
+              {
+                "kind": "ClientExtension",
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "__id",
+                    "storageKey": null
+                  }
+                ]
+              }
             ],
             "storageKey": "panoFeed(first:10)"
           },
@@ -270,7 +268,7 @@ return {
             "name": "actor",
             "plural": false,
             "selections": [
-              (v4/*: any*/),
+              (v3/*: any*/),
               (v2/*: any*/),
               (v1/*: any*/)
             ],

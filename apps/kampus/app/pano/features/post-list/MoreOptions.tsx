@@ -57,8 +57,8 @@ const useMoreOptionsViewerFragment = (key: MoreOptions_viewer$key | null) =>
     key
   );
 
-const remotePostMutation = graphql`
-  mutation MoreOptionsRemotePostMutation($connections: [ID!]!, $postID: ID!) {
+const removePostMutation = graphql`
+  mutation MoreOptionsRemovePostMutation($connections: [ID!]!, $postID: ID!) {
     removePanoPost(input: { id: $postID }) {
       edge {
         node {
@@ -70,6 +70,7 @@ const remotePostMutation = graphql`
   }
 `;
 
+// TODO: move this to server side
 function canUserEdit(username?: string | null, owner?: string | null) {
   if (!owner) return false;
   if (!username) return false;
@@ -81,7 +82,7 @@ export const MoreOptionsDropdown = (props: Props) => {
   const post = useMoreOptionsPostFragment(props.post);
   const viewer = useMoreOptionsViewerFragment(props.viewerRef);
   const { toast } = useToast();
-  const [removePost, isRemoving] = useMutation(remotePostMutation);
+  const [removePost, isRemoving] = useMutation(removePostMutation);
 
   const onClick = () => {
     if (!post) {
@@ -94,6 +95,7 @@ export const MoreOptionsDropdown = (props: Props) => {
 
     removePost({ variables: { postID: post.id, connections: [props.postConnectionId] } });
   };
+
   return (
     <AlertDialog>
       <DropdownMenu>
