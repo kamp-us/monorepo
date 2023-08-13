@@ -22,7 +22,6 @@ const fragment = graphql`
       edges {
         cursor
         node {
-          __id
           id
           ...PostItem_post
         }
