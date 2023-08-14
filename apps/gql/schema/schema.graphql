@@ -142,7 +142,7 @@ type PanoPostEdge {
   node: PanoPost
 }
 
-type PanoComment implements Node {
+type PanoComment implements Node & Upvotable {
   id: ID!
   content: String!
   owner: User

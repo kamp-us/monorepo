@@ -16,6 +16,7 @@ const query = graphql`
   query PostListContainerQuery {
     viewer {
       ...PanoFeedFragment
+      ...PanoFeed_viewer
     }
   }
 `;
@@ -28,5 +29,5 @@ export const PostListContainer = (props: Props) => {
     return null;
   }
 
-  return <PanoFeed panoFeed={data.viewer} />;
+  return <PanoFeed panoFeed={data.viewer} panoViewer={data.viewer} />;
 };

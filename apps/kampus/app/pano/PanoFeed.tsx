@@ -1,9 +1,10 @@
 import { Suspense, useCallback } from "react";
-import { graphql, usePaginationFragment } from "react-relay";
+import { graphql, useFragment, usePaginationFragment } from "react-relay";
 
 import { Button } from "@kampus/ui";
 
 import { PostItem } from "~/app/pano/features/post-list/PostItem";
+import { type PanoFeed_viewer$key } from "./__generated__/PanoFeed_viewer.graphql";
 import { type PanoFeedFragment$key } from "./__generated__/PanoFeedFragment.graphql";
 
 const fragment = graphql`
@@ -17,6 +18,7 @@ const fragment = graphql`
   @refetchable(queryName: "PanoFeedPaginationQuery") {
     panoFeed(first: $first, after: $after, last: $last, before: $before)
       @connection(key: "PanoFeedFragment__panoFeed") {
+      __id
       edges {
         cursor
         node {
@@ -28,8 +30,15 @@ const fragment = graphql`
   }
 `;
 
+const viewerFragment = graphql`
+  fragment PanoFeed_viewer on Viewer {
+    ...PostItem_viewer
+  }
+`;
+
 interface Props {
   panoFeed: PanoFeedFragment$key;
+  panoViewer: PanoFeed_viewer$key;
 }
 
 export function PanoFeed(props: Props) {
@@ -37,6 +46,7 @@ export function PanoFeed(props: Props) {
     fragment,
     props.panoFeed
   );
+  const viewer = useFragment(viewerFragment, props.panoViewer);
 
   const feed = data.panoFeed;
 
@@ -60,7 +70,14 @@ export function PanoFeed(props: Props) {
             return null;
           }
 
-          return <PostItem key={edge.node.id} post={edge.node} />;
+          return (
+            <PostItem
+              key={edge.node.id}
+              post={edge.node}
+              viewerRef={viewer}
+              postConnectionId={data.panoFeed?.__id}
+            />
+          );
         })}
 
         <div className="flex gap-2">

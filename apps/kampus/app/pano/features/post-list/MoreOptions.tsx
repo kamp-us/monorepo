@@ -1,17 +1,20 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { MoreHorizontal } from "lucide-react";
+import { graphql, useFragment, useMutation } from "react-relay";
 
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
   Button,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -20,56 +23,81 @@ import {
   useToast,
 } from "@kampus/ui";
 
+import { type MoreOptions_post$key } from "./__generated__/MoreOptions_post.graphql";
+import { type MoreOptions_viewer$key } from "./__generated__/MoreOptions_viewer.graphql";
+
 interface Props {
-  post: Post;
-  shareUrl: string;
+  post: MoreOptions_post$key;
+  viewerRef: MoreOptions_viewer$key | null;
+  postConnectionId?: string;
 }
 
-type Post = {
-  __typename?: "PanoPost";
-  content: string;
-  createdAt: string;
-  id: string;
-  owner: string;
-  title: string;
-  url: string;
-};
-type User = {
-  username: string;
-};
+const useMoreOptionsPostFragment = (key: MoreOptions_post$key | null) =>
+  useFragment(
+    graphql`
+      fragment MoreOptions_post on PanoPost {
+        id
+        owner {
+          displayName
+        }
+      }
+    `,
+    key
+  );
 
-function canUserEdit(user: User, post: Post) {
-  console.log(user, post);
-  return true;
-}
+const useMoreOptionsViewerFragment = (key: MoreOptions_viewer$key | null) =>
+  useFragment(
+    graphql`
+      fragment MoreOptions_viewer on Viewer {
+        actor {
+          displayName
+        }
+      }
+    `,
+    key
+  );
 
-export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
-  const user = { username: "John Doe" };
-  console.log(post, shareUrl);
-
-  const router = useRouter();
-  const { toast } = useToast();
-
-  const ownerItems: JSX.Element[] = [];
-  if (canUserEdit(user, post)) {
-    ownerItems.push(
-      <DropdownMenuItem onSelect={() => router.push(`/posts/${post.id}/edit`)} key="edit">
-        Düzenle
-      </DropdownMenuItem>
-    );
-    ownerItems.push(
-      <DialogTrigger asChild>
-        <DropdownMenuItem>Sil</DropdownMenuItem>
-      </DialogTrigger>
-    );
-    ownerItems.push(<DropdownMenuSeparator key="separator" />);
+const removePostMutation = graphql`
+  mutation MoreOptionsRemovePostMutation($connections: [ID!]!, $postID: ID!) {
+    removePanoPost(input: { id: $postID }) {
+      edge {
+        node {
+          id @deleteEdge(connections: $connections)
+          title
+        }
+      }
+    }
   }
+`;
 
-  // // FIXME: below appears to be redundant, is it?
-  // const menuItems = [...ownerItems];
+// TODO: move this to server side
+function canUserEdit(username?: string | null, owner?: string | null) {
+  if (!owner) return false;
+  if (!username) return false;
+
+  return username === owner;
+}
+
+export const MoreOptionsDropdown = (props: Props) => {
+  const post = useMoreOptionsPostFragment(props.post);
+  const viewer = useMoreOptionsViewerFragment(props.viewerRef);
+  const { toast } = useToast();
+  const [removePost, isRemoving] = useMutation(removePostMutation);
+
+  const onClick = () => {
+    if (!post) {
+      return;
+    }
+
+    if (isRemoving) {
+      return;
+    }
+
+    removePost({ variables: { postID: post.id, connections: [props.postConnectionId] } });
+  };
 
   return (
-    <Dialog>
+    <AlertDialog>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button className="h-5 p-1" variant="ghost">
@@ -77,7 +105,17 @@ export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          {ownerItems}
+          {canUserEdit(viewer?.actor?.displayName, post?.owner?.displayName) && (
+            <>
+              <DropdownMenuItem asChild key="edit">
+                <Link href={`/post/${post?.id}/edit`}>Düzenle</Link>
+              </DropdownMenuItem>
+              <AlertDialogTrigger asChild>
+                <DropdownMenuItem>Sil</DropdownMenuItem>
+              </AlertDialogTrigger>
+              <DropdownMenuSeparator key="separator" />
+            </>
+          )}
           <DropdownMenuItem
             onSelect={() => {
               toast({
@@ -89,22 +127,18 @@ export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Silmek istediğine emin misin?</DialogTitle>
-          <DialogDescription>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Silmek istediğine emin misin?</AlertDialogTitle>
+          <AlertDialogDescription>
             Eğer bu gönderiyi silersen, bu işlemi geri alamazsın.
-          </DialogDescription>
-        </DialogHeader>
-        <DialogFooter>
-          <Button variant="outline" type="submit">
-            Hayır
-          </Button>
-          <Button variant="destructive" type="submit">
-            Evet
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Hayır</AlertDialogCancel>
+          <AlertDialogAction onClick={onClick}>Evet</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
