@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b51e67ab3c3dcff1f7cb23e429b21266>>
+ * @generated SignedSource<<f1e4f6f5072c925f50590ec6402945d6>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,13 +15,14 @@ export type PostItem_post$data = {
   readonly createdAt: any;
   readonly id: string;
   readonly owner: {
-    readonly username: string;
-  } | null;
+    readonly displayName: string;
+  };
   readonly site: string | null;
   readonly title: string;
   readonly url: string | null;
+  readonly " $fragmentSpreads": FragmentRefs<"MoreOptions_post" | "PostUpvoteButton_post">;
   readonly " $fragmentType": "PostItem_post";
-};
+} | null;
 export type PostItem_post$key = {
   readonly " $data"?: PostItem_post$data;
   readonly " $fragmentSpreads": FragmentRefs<"PostItem_post">;
@@ -76,28 +77,48 @@ const node: ReaderFragment = {
       "storageKey": null
     },
     {
-      "alias": null,
       "args": null,
-      "concreteType": "User",
-      "kind": "LinkedField",
-      "name": "owner",
-      "plural": false,
-      "selections": [
-        {
-          "alias": null,
-          "args": null,
-          "kind": "ScalarField",
-          "name": "username",
-          "storageKey": null
-        }
-      ],
-      "storageKey": null
+      "kind": "FragmentSpread",
+      "name": "PostUpvoteButton_post"
+    },
+    {
+      "kind": "RequiredField",
+      "field": {
+        "alias": null,
+        "args": null,
+        "concreteType": "User",
+        "kind": "LinkedField",
+        "name": "owner",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "RequiredField",
+            "field": {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "displayName",
+              "storageKey": null
+            },
+            "action": "LOG",
+            "path": "owner.displayName"
+          }
+        ],
+        "storageKey": null
+      },
+      "action": "LOG",
+      "path": "owner"
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
+      "name": "MoreOptions_post"
     }
   ],
   "type": "PanoPost",
   "abstractKey": null
 };
 
-(node as any).hash = "583dd2a40bc52f70a6850ef37061113c";
+(node as any).hash = "40952525253258c86b4d4320cf4279a0";
 
 export default node;

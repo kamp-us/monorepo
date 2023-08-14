@@ -5,7 +5,7 @@ import { type PrismaModel } from "./types";
 
 export function createPrismaCountLoader<TPrisma extends { id: string }>(
   table: PrismaModel<TPrisma>,
-  identifier: string
+  identifier: keyof TPrisma
 ) {
   return new DataLoader(async (keys: readonly ConnectionKey[]) => {
     const counts = await Promise.all(

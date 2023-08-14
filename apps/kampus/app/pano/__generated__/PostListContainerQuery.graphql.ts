@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<08ab109a670795d013ca7bfb2e0b6a24>>
+ * @generated SignedSource<<e309efdc8d21815a694683ff388308a1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,7 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type PostListContainerQuery$variables = {};
 export type PostListContainerQuery$data = {
   readonly viewer: {
-    readonly " $fragmentSpreads": FragmentRefs<"PanoFeedFragment">;
+    readonly " $fragmentSpreads": FragmentRefs<"PanoFeedFragment" | "PanoFeed_viewer">;
   } | null;
 };
 export type PostListContainerQuery = {
@@ -35,6 +35,20 @@ v1 = {
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
+},
+v2 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "displayName",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "__typename",
+  "storageKey": null
 };
 return {
   "fragment": {
@@ -55,6 +69,11 @@ return {
             "args": null,
             "kind": "FragmentSpread",
             "name": "PanoFeedFragment"
+          },
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "PanoFeed_viewer"
           }
         ],
         "storageKey": null
@@ -147,29 +166,31 @@ return {
                       {
                         "alias": null,
                         "args": null,
-                        "concreteType": "User",
-                        "kind": "LinkedField",
-                        "name": "owner",
-                        "plural": false,
-                        "selections": [
-                          {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "username",
-                            "storageKey": null
-                          },
-                          (v1/*: any*/)
-                        ],
+                        "kind": "ScalarField",
+                        "name": "isUpvotedByViewer",
                         "storageKey": null
                       },
                       {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "__typename",
+                        "name": "upvoteCount",
                         "storageKey": null
-                      }
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "User",
+                        "kind": "LinkedField",
+                        "name": "owner",
+                        "plural": false,
+                        "selections": [
+                          (v2/*: any*/),
+                          (v1/*: any*/)
+                        ],
+                        "storageKey": null
+                      },
+                      (v3/*: any*/)
                     ],
                     "storageKey": null
                   }
@@ -214,6 +235,18 @@ return {
                   }
                 ],
                 "storageKey": null
+              },
+              {
+                "kind": "ClientExtension",
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "__id",
+                    "storageKey": null
+                  }
+                ]
               }
             ],
             "storageKey": "panoFeed(first:10)"
@@ -226,6 +259,20 @@ return {
             "key": "PanoFeedFragment__panoFeed",
             "kind": "LinkedHandle",
             "name": "panoFeed"
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": null,
+            "kind": "LinkedField",
+            "name": "actor",
+            "plural": false,
+            "selections": [
+              (v3/*: any*/),
+              (v2/*: any*/),
+              (v1/*: any*/)
+            ],
+            "storageKey": null
           }
         ],
         "storageKey": null
@@ -233,16 +280,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "13cff242cbdc1e5e77bd53fff19a0553",
+    "cacheID": "8d8a203cd59b6775cfbc8daaad9001ef",
     "id": null,
     "metadata": {},
     "name": "PostListContainerQuery",
     "operationKind": "query",
-    "text": "query PostListContainerQuery {\n  viewer {\n    ...PanoFeedFragment\n  }\n}\n\nfragment PanoFeedFragment on Viewer {\n  panoFeed(first: 10) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  owner {\n    username\n    id\n  }\n}\n"
+    "text": "query PostListContainerQuery {\n  viewer {\n    ...PanoFeedFragment\n    ...PanoFeed_viewer\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedFragment on Viewer {\n  panoFeed(first: 10) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PanoFeed_viewer on Viewer {\n  ...PostItem_viewer\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();
 
-(node as any).hash = "38254b185df77d46946b76194dd61219";
+(node as any).hash = "246fd8479a18172b183f288ff6f3e842";
 
 export default node;

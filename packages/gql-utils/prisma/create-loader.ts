@@ -37,7 +37,7 @@ import { type PrismaModel } from "./types";
  */
 export function createPrismaLoader<TModel extends Record<string, unknown>>(
   model: PrismaModel<TModel>,
-  identifier: string,
+  identifier: keyof TModel,
   onFetchComplete?: (items: TModel[]) => void
 ) {
   return new DataLoader<string, TModel>(async (keys: readonly string[]) => {
@@ -53,7 +53,7 @@ export function createPrismaLoader<TModel extends Record<string, unknown>>(
     return keys.map((key) => {
       return (
         items.find((item) => item[identifier] === key) ??
-        new Error(`not found: ${identifier}: ${key}`)
+        new Error(`not found: ${identifier as string}: ${key}`)
       );
     });
   });

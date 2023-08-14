@@ -7,9 +7,9 @@ import { cn } from "@kampus/ui-next/utils";
 
 import { TimeAgo } from "~/../../packages/ui";
 import { type PostItem_post$key } from "./__generated__/PostItem_post.graphql";
+import { type PostItem_viewer$key } from "./__generated__/PostItem_viewer.graphql";
+import { MoreOptionsDropdown } from "./MoreOptions";
 import { UpvoteButton } from "./PostUpvoteButton";
-
-// import { MoreOptionsDropdown } from "./MoreOptions";
 
 interface LinkProps {
   href: string;
@@ -34,11 +34,26 @@ const usePanoPostFragment = (key: PostItem_post$key | null) =>
         content
         url
         createdAt
-        id
         site
 
-        owner {
-          username
+        ...PostUpvoteButton_post
+
+        owner @required(action: LOG) {
+          displayName @required(action: LOG)
+        }
+        ...MoreOptions_post
+      }
+    `,
+    key
+  );
+
+const usePanoViewerFragment = (key: PostItem_viewer$key | null) =>
+  useFragment(
+    graphql`
+      fragment PostItem_viewer on Viewer {
+        ...MoreOptions_viewer
+        actor {
+          displayName
         }
       }
     `,
@@ -47,11 +62,14 @@ const usePanoPostFragment = (key: PostItem_post$key | null) =>
 
 interface PostItemProps {
   post: PostItem_post$key;
+  viewerRef: PostItem_viewer$key;
   showContent?: boolean;
+  postConnectionId?: string;
 }
 
 export const PostItem = (props: PostItemProps) => {
   const post = usePanoPostFragment(props.post);
+  const viewer = usePanoViewerFragment(props.viewerRef);
 
   if (!post) {
     return null;
@@ -59,7 +77,7 @@ export const PostItem = (props: PostItemProps) => {
 
   return (
     <section className="flex h-full items-center gap-2 rounded">
-      <UpvoteButton upvoteCount={5} isUpvoted={false} disabled={false} isVoting={false} />
+      <UpvoteButton postRef={post} />
 
       <div className="flex w-full flex-col justify-center">
         <div className="flex items-center gap-1 align-baseline">
@@ -71,11 +89,17 @@ export const PostItem = (props: PostItemProps) => {
           </Link>
         </div>
         <div className="flex items-center gap-1 text-sm">
-          <div>@{post.owner?.username} |</div>
+          <div>@{post.owner.displayName} |</div>
           <div>
             <Link href={`/pano/post/${post.id}`}>0 yorum</Link> |
           </div>
           <TimeAgo date={new Date(post.createdAt as string)} />
+          <MoreOptionsDropdown
+            key={post.id}
+            post={post}
+            viewerRef={viewer}
+            postConnectionId={props.postConnectionId}
+          />
         </div>
       </div>
     </section>

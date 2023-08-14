@@ -13,13 +13,14 @@ import {
   transformPanoCommentConnection,
   transformPanoPost,
   transformPanoPostConnection,
-  transformPostUpvote,
+  transformPanoUpvote,
 } from "~/loaders/pano";
 import { transformSozlukTerm, transformSozlukTermsConnection } from "~/loaders/sozluk";
 import { transformUser } from "~/loaders/user";
 import { type Resolvers, type ResolversInterfaceTypes } from "../types.generated";
 
 type NodeTypename = ResolversInterfaceTypes<Dictionary>["Node"]["__typename"];
+type UpvotableTypename = ResolversInterfaceTypes<Dictionary>["Upvotable"]["__typename"];
 
 const transformPageInfo = (type: NodeTypename, pageInfo: PageInfo) => ({
   ...pageInfo,
@@ -49,7 +50,7 @@ export const resolvers = {
     // @see SozlukQuery field resolvers
     sozluk: () => ({ term: null, terms: null }),
     // @see PanoQuery field resolvers
-    pano: () => ({ post: null, posts: [], allPosts: null }),
+    pano: () => ({ post: null, posts: [], postsBySite: null, allPosts: null }),
 
     node: async (_, args, { loaders }) => {
       const id = parse<NodeTypename>(args.id);
@@ -98,7 +99,7 @@ export const resolvers = {
     },
     panoFeed: async (_, args, { loaders }) => {
       const posts = await loaders.pano.post.all.load(
-        new ConnectionKey(null, parseConnectionArgs(args))
+        new ConnectionKey(null, parseConnectionArgs(args), { orderBy: { createdAt: "desc" } })
       );
 
       return transformPanoPostConnection(posts);
@@ -136,13 +137,19 @@ export const resolvers = {
   },
   PanoQuery: {
     post: async (_, args, { loaders }) =>
-      transformPanoPost(await loaders.pano.post.byID.load(args.id)),
+      transformPanoPost(await loaders.pano.post.byID.load(parse(args.id).value)),
     posts: async (_, args, { loaders }) => {
-      const posts = await loaders.pano.post.byID.loadMany(args.ids);
-
+      const posts = await loaders.pano.post.byID.loadMany(args.ids.map((id) => parse(id).value));
       return posts.map((post) => {
         return post instanceof Error ? null : transformPanoPost(post);
       });
+    },
+    postsBySite: async (_, args, { loaders }) => {
+      const posts = await loaders.pano.post.bySite.load(
+        new ConnectionKey(args.site, parseConnectionArgs(args), { orderBy: { createdAt: "desc" } })
+      );
+
+      return transformPanoPostConnection(posts);
     },
   },
   PanoPost: {
@@ -167,6 +174,20 @@ export const resolvers = {
     upvoteCount: (post, _, { loaders }) => {
       return loaders.pano.upvote.countByPostID.load(new ConnectionKey(post.id));
     },
+
+    isUpvotedByViewer: async (post, _, { loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return false;
+      }
+
+      const upvote = await loaders.pano.upvote.byUserAndPostID.load({
+        userID: session?.user.id,
+        postID: post.id,
+      });
+
+      return !!upvote;
+    },
+
     createdAt: (post) => post.createdAt,
   },
   PanoPostConnection: {
@@ -226,6 +247,18 @@ export const resolvers = {
     upvoteCount: (comment, _, { loaders }) => {
       return loaders.pano.upvote.countByCommentID.load(new ConnectionKey(comment.id));
     },
+    isUpvotedByViewer: async (comment, _, { loaders, pasaport: { session } }) => {
+      if (!session?.user?.id) {
+        return false;
+      }
+
+      const upvote = await loaders.pano.upvote.byUserAndCommentID.load({
+        userID: session?.user.id,
+        commentID: comment.id,
+      });
+
+      return !!upvote;
+    },
     createdAt: (comment) => comment.createdAt,
   },
   PanoCommentEdge: {
@@ -238,17 +271,58 @@ export const resolvers = {
     pageInfo: (connection) => transformPageInfo("PanoComment", connection.pageInfo),
     totalCount: (connection) => connection.totalCount,
   },
+  PanoUpvote: {
+    id: (upvote) => stringify("PanoUpvote", upvote.id),
+    node: async (upvote, _, { loaders }) => {
+      const model = await loaders.pano.upvote.byPostID.load(upvote.id);
+      const post = await loaders.pano.post.byID.load(model.postID);
+      return transformPanoPost(post);
+    },
+    owner: async (upvote, _, { loaders }) => {
+      const model = await loaders.pano.upvote.byPostID.load(upvote.id);
+      const user = await loaders.user.byID.load(model.userID);
+      return transformUser(user);
+    },
+  },
 
-  CreatePanoPostPayload: {}, // union
-  UpdatePanoPostPayload: {}, // union
-  RemovePanoPostPayload: {}, // union
-  CreatePanoCommentPayload: {}, // union
-  UpdatePanoCommentPayload: {}, // union
-  RemovePanoCommentPayload: {}, // union
-  CreatePostUpvotePayload: {}, // union
-  RemovePostUpvotePayload: {}, // union
+  PanoPostError: {}, // union
+  CreatePanoPostPayload: {
+    edge: (payload) => payload.edge,
+    error: (payload) => payload.error,
+  },
+  UpdatePanoPostPayload: {
+    edge: (payload) => payload.edge,
+    error: (payload) => payload.error,
+  },
+  RemovePanoPostPayload: {
+    edge: (payload) => payload.edge,
+    error: (payload) => payload.error,
+  },
+  PanoCommentError: {}, // union
+  CreatePanoCommentPayload: {
+    edge: (payload) => payload.edge,
+    error: (payload) => payload.error,
+  },
+  UpdatePanoCommentPayload: {
+    edge: (payload) => payload.edge,
+    error: (payload) => payload.error,
+  },
+  RemovePanoCommentPayload: {
+    edge: (payload) => payload.edge,
+    error: (payload) => payload.error,
+  },
+  PanoUpvoteError: {}, // union
+  CreatePanoUpvotePayload: {
+    node: (payload) => payload.node,
+    error: (payload) => payload.error,
+  },
+  RemovePanoUpvotePayload: {
+    node: (payload) => payload.node,
+    error: (payload) => payload.error,
+  },
 
   UserError: {}, // interface
+  Upvotable: {}, // interface
 
   InvalidInput: errorFieldsResolver,
   NotAuthorized: errorFieldsResolver,
@@ -256,124 +330,164 @@ export const resolvers = {
   Mutation: {
     createPanoPost: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
       if (!session?.user?.id) {
-        return NotAuthorized();
+        return { edge: null, error: NotAuthorized() };
       }
 
       if (!input.url && !input.content) {
-        return InvalidInput("Either url or content is required");
+        return { edge: null, error: InvalidInput("Either url or content is required") };
       }
 
-      const created = await actions.pano.post.create({ ...input, userID: session.user.id });
-      return transformPanoPost(await loaders.pano.post.byID.load(created.id));
+      const node = await actions.pano.post
+        .create({ ...input, userID: session.user.id })
+        .then((created) => loaders.pano.post.byID.load(created.id))
+        .then(transformPanoPost);
+
+      return { edge: { cursor: node.id, node }, error: null };
     },
     updatePanoPost: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
       if (!session?.user?.id) {
-        return NotAuthorized();
+        return { edge: null, error: NotAuthorized() };
       }
 
       const id = parse(input.id);
       if (id.type !== "PanoPost") {
-        return InvalidInput("wrong id");
+        return { edge: null, error: InvalidInput("wrong id") };
       }
 
       const post = await loaders.pano.post.byID.load(id.value);
       if (post.userID !== session.user.id) {
-        return NotAuthorized();
+        return { edge: null, error: NotAuthorized() };
       }
 
-      const updated = await actions.pano.post.update(id.value, input);
-      return transformPanoPost(await loaders.pano.post.byID.clear(updated.id).load(updated.id));
+      const node = await actions.pano.post
+        .update(id.value, input)
+        .then((updated) => loaders.pano.post.byID.clear(updated.id).load(updated.id))
+        .then(transformPanoPost);
+
+      return { edge: { node, cursor: node.id }, error: null };
     },
     removePanoPost: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
       if (!session?.user?.id) {
-        return NotAuthorized();
+        return { edge: null, error: NotAuthorized() };
       }
 
       const id = parse(input.id);
       if (id.type !== "PanoPost") {
-        return InvalidInput("wrong id");
+        return { edge: null, error: InvalidInput("wrong id") };
       }
 
       const post = await loaders.pano.post.byID.load(id.value);
       if (post.userID !== session.user.id) {
-        return NotAuthorized();
+        return { edge: null, error: NotAuthorized() };
       }
 
-      return transformPanoPost(await actions.pano.post.remove(id.value));
+      const node = transformPanoPost(await actions.pano.post.remove(id.value));
+
+      return { edge: { node, cursor: node.id }, error: null };
     },
     createPanoComment: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
       if (!session?.user?.id) {
-        return NotAuthorized();
+        return { edge: null, error: NotAuthorized() };
       }
 
-      if (!input.postID && !input.content) {
-        return InvalidInput("Either post or content is required");
-      }
+      const node = await actions.pano.comment
+        .create({ ...input, postID: parse(input.postID).value, userID: session.user.id })
+        .then((created) => loaders.pano.comment.byID.load(created.id))
+        .then(transformPanoComment);
 
-      const created = await actions.pano.comment.create({ ...input, userID: session.user.id });
-
-      return transformPanoComment(await loaders.pano.comment.byID.load(created.id));
+      return { edge: { node, cursor: node.id }, error: null };
     },
     updatePanoComment: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
       if (!session?.user?.id) {
-        return NotAuthorized();
+        return { edge: null, error: NotAuthorized() };
       }
 
       const id = parse(input.id);
       if (id.type !== "PanoComment") {
-        return InvalidInput("wrong id");
+        return { edge: null, error: InvalidInput("wrong id") };
       }
 
       const comment = await loaders.pano.comment.byID.load(id.value);
       if (comment.userID !== session.user.id) {
-        return NotAuthorized();
+        return { edge: null, error: NotAuthorized() };
       }
 
-      const updated = await actions.pano.comment.update(id.value, input);
-      return transformPanoComment(
-        await loaders.pano.comment.byID.clear(updated.id).load(updated.id)
-      );
+      const node = await actions.pano.comment
+        .update(id.value, input)
+        .then((updated) => loaders.pano.comment.byID.clear(updated.id).load(updated.id))
+        .then(transformPanoComment);
+
+      return { edge: { node, cursor: node.id }, error: null };
     },
     removePanoComment: async (_, { input }, { actions, loaders, pasaport: { session } }) => {
       if (!session?.user?.id) {
-        return NotAuthorized();
+        return { edge: null, error: NotAuthorized() };
       }
 
       const id = parse(input.id);
       if (id.type !== "PanoComment") {
-        return InvalidInput("wrong id");
+        return { edge: null, error: InvalidInput("wrong id") };
       }
 
       const comment = await loaders.pano.comment.byID.load(id.value);
       if (comment.userID !== session.user.id) {
-        return NotAuthorized();
+        return { edge: null, error: NotAuthorized() };
       }
 
-      return transformPanoComment(await actions.pano.comment.remove(id.value));
+      const node = transformPanoComment(await actions.pano.comment.remove(id.value));
+
+      return { edge: { node, cursor: node.id }, error: null };
     },
-    createPostUpvote: async (_, { input }, { actions, pasaport: { session } }) => {
+    createPanoUpvote: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
       if (!session?.user?.id) {
-        return NotAuthorized();
+        return { node: null, error: NotAuthorized() };
       }
 
-      return transformPostUpvote(
-        await actions.pano.postUpvote.create({
-          postID: input.postID,
-          userID: session.user.id,
-        })
-      );
+      const { type, value } = parse<UpvotableTypename>(input.id);
+
+      switch (type) {
+        case "PanoPost": {
+          let upvote = await loaders.pano.upvote.byUserAndPostID.load({
+            postID: value,
+            userID: session.user.id,
+          });
+
+          if (upvote) {
+            return { node: null, error: InvalidInput() };
+          }
+
+          upvote = await actions.pano.postUpvote.create({ postID: value, userID: session.user.id });
+
+          return { node: transformPanoUpvote(upvote), error: null };
+        }
+      }
     },
-    removePostUpvote: async (_, { input }, { actions, pasaport: { session } }) => {
+    removePanoUpvote: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
       if (!session?.user?.id) {
-        return NotAuthorized();
+        return { node: null, error: NotAuthorized() };
       }
 
-      return transformPostUpvote(
-        await actions.pano.postUpvote.remove({
-          postID: input.postID,
-          userID: session.user.id,
-        })
-      );
+      const { type, value } = parse<UpvotableTypename>(input.id);
+
+      switch (type) {
+        case "PanoPost": {
+          const upvote = await loaders.pano.upvote.byUserAndPostID.load({
+            postID: value,
+            userID: session.user.id,
+          });
+
+          if (!upvote) {
+            return { node: null, error: InvalidInput() };
+          }
+
+          await actions.pano.postUpvote.remove(upvote);
+
+          return { node: transformPanoUpvote(upvote), error: null };
+        }
+        default: {
+          return assertNever(type);
+        }
+      }
     },
   },
 } satisfies Resolvers;

@@ -1,6 +1,5 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { type NextApiRequest, type NextApiResponse } from "next";
 import { createSchema, createYoga } from "graphql-yoga";
 
 import { getServerSession } from "@kampus/next-auth";
@@ -14,16 +13,14 @@ import { type KampusGQLContext } from "~/schema/types";
 const typeDefs = readFileSync(join(process.cwd(), "schema/schema.graphql"), "utf8").toString();
 const clients = createClients();
 
-type ServerContext = { req: NextApiRequest; res: NextApiResponse } & KampusGQLContext;
-
-const { handleRequest } = createYoga<ServerContext>({
-  schema: createSchema<ServerContext>({ typeDefs, resolvers }),
+const { handleRequest } = createYoga<KampusGQLContext>({
+  schema: createSchema<KampusGQLContext>({ typeDefs, resolvers }),
   logging: "debug",
   graphiql: true,
-  context: async ({ req, res }) => {
+  context: async () => {
     const loaders = createLoaders(clients);
     const actions = createActions(clients);
-    const session = await getServerSession(req, res);
+    const session = await getServerSession();
 
     return {
       loaders,
