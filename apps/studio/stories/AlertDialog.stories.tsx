@@ -11,7 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
   Button,
-} from "@kampus/ui-next";
+} from "@kampus/ui";
 
 const meta = {
   title: "Alert Dialog",

@@ -11,9 +11,9 @@ export const env = parseEnv(
   },
   {
     NODE_ENV: z.enum(["development", "test", "production"]),
-    GQL_URL: z.string().url().default("http://localhost:3001/graphql"),
+    GQL_URL: z.string().url().default("http://localhost:4000/graphql"),
     RESEND_API_KEY: z.string().default("default-resend-key"),
-    NEXTAUTH_URL: z.string().url().default("http://localhost:3000/pasaport"),
+    NEXTAUTH_URL: z.string().url().default("http://localhost:3001/auth"),
     KAMPUS_ENV: z.enum(["development", "test", "production"]).default("development"),
   }
 );

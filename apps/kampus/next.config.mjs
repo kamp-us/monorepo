@@ -4,7 +4,7 @@ const GQL_URL = process.env.NEXT_PUBLIC_GQL_URL ?? "";
 const config = {
   reactStrictMode: true,
   swcMinify: true,
-  transpilePackages: ["@kampus/tailwind", "@kampus/ui-next", "@kampus/next-auth", "@kampus/email"],
+  transpilePackages: ["@kampus/tailwind", "@kampus/ui", "@kampus/next-auth", "@kampus/email"],
 
   compiler: {
     relay: {

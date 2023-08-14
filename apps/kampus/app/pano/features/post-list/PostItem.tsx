@@ -3,7 +3,7 @@
 import NextLink from "next/link";
 import { graphql, useFragment } from "react-relay";
 
-import { cn } from "@kampus/ui-next/utils";
+import { cn } from "@kampus/ui/utils";
 
 import { TimeAgo } from "~/../../packages/ui";
 import { type PostItem_post$key } from "./__generated__/PostItem_post.graphql";

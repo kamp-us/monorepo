@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Separator } from "@kampus/ui-next";
+import { Separator } from "@kampus/ui";
 
 const meta = {
   title: "Seperator",

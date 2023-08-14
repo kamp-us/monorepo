@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from "@storybook/react";
 
-import { TopNav, TopNavBrand, TopNavItem } from "@kampus/ui-next";
+import { TopNav, TopNavBrand, TopNavItem } from "@kampus/ui";
 
 const meta = {
   title: "TopNav Menu",

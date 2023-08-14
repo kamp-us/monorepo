@@ -1,10 +1,10 @@
 {
-  "name": "@kampus/pasaport",
+  "name": "@kampus-apps/pasaport",
   "private": true,
   "version": "0.0.0",
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",

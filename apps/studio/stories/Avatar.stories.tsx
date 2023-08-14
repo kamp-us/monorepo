@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { UserAvatar } from "@kampus/ui-next";
+import { UserAvatar } from "@kampus/ui";
 
 const meta = {
   component: UserAvatar,

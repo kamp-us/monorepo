@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ThemeToggle } from "@kampus/ui-next/components/theme-toggle";
+import { ThemeToggle } from "@kampus/ui/components/theme-toggle";
 
 const meta = {
   component: ThemeToggle,

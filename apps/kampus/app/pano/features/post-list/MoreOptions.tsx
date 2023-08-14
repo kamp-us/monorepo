@@ -21,7 +21,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   useToast,
-} from "@kampus/ui-next";
+} from "@kampus/ui";
 
 import { type MoreOptions_post$key } from "./__generated__/MoreOptions_post.graphql";
 import { type MoreOptions_viewer$key } from "./__generated__/MoreOptions_viewer.graphql";

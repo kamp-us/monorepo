@@ -1,11 +1,11 @@
-import "@kampus/kampus/app/globals.css";
+import "@kampus-apps/kampus/app/globals.css";
 import "../styles.css";
 
 import React from "react";
 import type { StoryContext, StoryFn } from "@storybook/react";
 
-import { Toaster } from "@kampus/ui-next";
-import { ThemeProvider } from "@kampus/ui-next/components/theme-provider";
+import { Toaster } from "@kampus/ui";
+import { ThemeProvider } from "@kampus/ui/components/theme-provider";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

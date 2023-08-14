@@ -46,14 +46,3 @@ If you haven't already install [Volta](https://volta.sh), you can install instal
 ```sh
 curl https://get.volta.sh | bash
 ```
-
-### Setup projects
-
-Install dependencies and build all projects.
-
-```sh
-# Install all the dependencies use -w or --workspace for workspace specific installs
-npm install
-# Builds all the applications in the monorepo
-npx turbo build
-```

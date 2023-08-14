@@ -1,13 +1,13 @@
 import { type ReactNode } from "react";
 import { Inter } from "next/font/google";
 
-import { Toaster } from "@kampus/ui-next";
+import { Toaster } from "@kampus/ui";
 
 import { RelayEnvironmentProvider } from "~/features/relay/RelayEnvironmentProvider";
 
 import "./globals.css";
 
-import { ThemeProvider } from "@kampus/ui-next";
+import { ThemeProvider } from "@kampus/ui";
 
 const inter = Inter({ subsets: ["latin"] });
 

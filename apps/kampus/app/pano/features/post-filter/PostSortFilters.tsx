@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 
-import { ThemeToggle } from "@kampus/ui-next";
+import { ThemeToggle } from "@kampus/ui";
 
 import { PanoFilterLink } from "~/app/pano/features/post-filter/PanoFilterLink";
 import {

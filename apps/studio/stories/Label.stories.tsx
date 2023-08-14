@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Checkbox, Label } from "@kampus/ui-next";
+import { Checkbox, Label } from "@kampus/ui";
 
 const meta = {
   title: "Label",

@@ -1,6 +1,6 @@
 {
-  "name": "@kampus-apps/ui",
-  "version": "1.0.0",
+  "name": "@kampus-apps/studio",
+  "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
