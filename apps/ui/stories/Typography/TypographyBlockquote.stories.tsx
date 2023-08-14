@@ -17,5 +17,5 @@ export const Default = {
   args: {
     children: "Kamp.us",
   },
-  render: (args) => <TypographyBlockquote >{args.children}</TypographyBlockquote>,
+  render: (args) => <TypographyBlockquote>{args.children}</TypographyBlockquote>,
 } satisfies Story;

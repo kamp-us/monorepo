@@ -14,8 +14,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-    args: {
-        children: "Kamp.us",
-      },
-      render: (args) => <TypographyLarge>{args.children}</TypographyLarge>,
+  args: {
+    children: "Kamp.us",
+  },
+  render: (args) => <TypographyLarge>{args.children}</TypographyLarge>,
 } satisfies Story;
