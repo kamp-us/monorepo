@@ -19,6 +19,7 @@
   "dependencies": {
     "@kampus/next-auth": "*",
     "@kampus/relay": "*",
+    "@kampus/ui": "*",
     "react-relay": "15.0.0",
     "relay-compiler": "15.0.0",
     "znv": "0.3.2",
