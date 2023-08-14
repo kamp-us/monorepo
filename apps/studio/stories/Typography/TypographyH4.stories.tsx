@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { TypographyH4 } from "@kampus/ui-next";
+import { TypographyH4 } from "@kampus/ui";
 
 const meta = {
   component: TypographyH4,

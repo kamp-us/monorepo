@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { TypographyBlockquote } from "@kampus/ui-next";
+import { TypographyBlockquote } from "@kampus/ui";
 
 const meta = {
   component: TypographyBlockquote,
