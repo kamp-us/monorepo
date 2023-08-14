@@ -21,3 +21,4 @@ export * from "./checkbox";
 export * from "./toaster";
 export * from "./card";
 export * from "./form";
+export * from "./typography";
