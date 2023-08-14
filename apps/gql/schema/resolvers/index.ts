@@ -274,25 +274,39 @@ export const resolvers = {
   PanoUpvote: {
     id: (upvote) => upvote.id,
     node: async (upvote, _, { loaders }) => {
-      const { type } = parse<UpvotableTypename>(upvote.id);
+      const { type, value } = parse<UpvotableTypename>(upvote.id);
 
       switch (type) {
         case "PanoComment": {
-          const model = await loaders.pano.upvote.byCommentID.load(upvote.id);
+          const model = await loaders.pano.upvote.byCommentID.load(value);
           const comment = await loaders.pano.comment.byID.load(model.commentID);
           return transformPanoComment(comment);
         }
         case "PanoPost": {
-          const model = await loaders.pano.upvote.byPostID.load(upvote.id);
+          const model = await loaders.pano.upvote.byPostID.load(value);
           const post = await loaders.pano.post.byID.load(model.postID);
           return transformPanoPost(post);
         }
       }
     },
     owner: async (upvote, _, { loaders }) => {
-      const model = await loaders.pano.upvote.byPostID.load(upvote.id);
-      const user = await loaders.user.byID.load(model.userID);
-      return transformUser(user);
+      const id = parse<UpvotableTypename>(upvote.id);
+
+      switch (id.type) {
+        case "PanoComment": {
+          const model = await loaders.pano.upvote.byCommentID.load(id.value);
+          const user = await loaders.user.byID.load(model.userID);
+          return transformUser(user);
+        }
+        case "PanoPost": {
+          const model = await loaders.pano.upvote.byPostID.load(id.value);
+          const user = await loaders.user.byID.load(model.userID);
+          return transformUser(user);
+        }
+        default: {
+          return assertNever(id.type);
+        }
+      }
     },
   },
 
