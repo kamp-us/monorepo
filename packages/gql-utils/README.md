@@ -23,7 +23,7 @@ Then make sure it is registered to the related workspace package's package.json:
 
 ## What?
 
-Group of tools that we write to help working with our [`@kampus/gql`]
+Group of tools that we write to help working with our [`@kampus-apps/gql`]
 application living at https://gql.dev.kamp.us/graphql (click to link to
 discover our graphql schema)
 
@@ -236,4 +236,4 @@ const userByUsername = userByUsername.load("testuser");
 [prisma model]: ../../db/prisma/schema.prisma
 [Relay Connection]: https://relay.dev/graphql/connections.htm
 [@devoxa/prisma-relay-cursor-connection]: https://www.npmjs.com/package/@devoxa/prisma-relay-cursor-connection
-[`@kampus/gql`]: ../../apps/gql
+[`@kampus-apps/gql`]: ../../apps/gql

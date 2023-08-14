@@ -45,10 +45,10 @@
       "cache": false,
       "dependsOn": ["@kampus/prisma#prisma:generate", "@kampus/sozluk-content#build"]
     },
-    "@kampus/kampus#*": {
+    "@kampus-apps/kampus#*": {
       "env": ["NODE_ENV", "NEXT_PUBLIC_GQL_URL", "RESEND_API_KEY", "NEXTAUTH_URL", "KAMPUS_ENV"]
     },
-    "@kampus/pasaport#*": {
+    "@kampus-apps/pasaport#*": {
       "env": ["NODE_ENV", "NEXTAUTH_URL", "DATABASE_URL", "KAMPUS_ENV"]
     },
     "@kampus-apps/pasaport#build": {

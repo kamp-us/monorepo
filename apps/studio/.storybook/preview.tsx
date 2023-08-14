@@ -1,4 +1,4 @@
-import "@kampus/kampus/app/globals.css";
+import "@kampus-apps/kampus/app/globals.css";
 import "../styles.css";
 
 import React from "react";
