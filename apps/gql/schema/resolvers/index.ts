@@ -272,11 +272,22 @@ export const resolvers = {
     totalCount: (connection) => connection.totalCount,
   },
   PanoUpvote: {
-    id: (upvote) => stringify("PanoUpvote", upvote.id),
+    id: (upvote) => upvote.id,
     node: async (upvote, _, { loaders }) => {
-      const model = await loaders.pano.upvote.byPostID.load(upvote.id);
-      const post = await loaders.pano.post.byID.load(model.postID);
-      return transformPanoPost(post);
+      const { type } = parse<UpvotableTypename>(upvote.id);
+
+      switch (type) {
+        case "PanoComment": {
+          const model = await loaders.pano.upvote.byCommentID.load(upvote.id);
+          const comment = await loaders.pano.comment.byID.load(model.commentID);
+          return transformPanoComment(comment);
+        }
+        case "PanoPost": {
+          const model = await loaders.pano.upvote.byPostID.load(upvote.id);
+          const post = await loaders.pano.post.byID.load(model.postID);
+          return transformPanoPost(post);
+        }
+      }
     },
     owner: async (upvote, _, { loaders }) => {
       const model = await loaders.pano.upvote.byPostID.load(upvote.id);
