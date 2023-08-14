@@ -5,7 +5,8 @@ import {
   createPrismaLoader,
 } from "@kampus/gql-utils";
 import { type Connection } from "@kampus/gql-utils/connection";
-import { type Comment, type Post, type Upvote } from "@kampus/prisma";
+import { stringify } from "@kampus/gql-utils/global-id";
+import { type Comment, type CommentUpvote, type Post, type Upvote } from "@kampus/prisma";
 
 import { type Clients } from "~/clients";
 import {
@@ -101,6 +102,7 @@ const createPanoUpvoteLoaders = ({ prisma }: Clients) => {
 
   return {
     byPostID,
+    byCommentID,
     byUserAndPostID,
     byUserAndCommentID,
     countByPostID,
@@ -200,9 +202,21 @@ export const transformPanoCommentConnection = (connection: Connection<Comment>) 
   } satisfies PanoCommentConnection;
 };
 
-export const transformPanoUpvote = (upvote: Upvote) => {
+export function isPostUpvote(upvote: Upvote | CommentUpvote): upvote is Upvote {
+  return !!(upvote as Upvote).postID;
+}
+
+export function isCommentUpvote(upvote: Upvote | CommentUpvote): upvote is Upvote {
+  return !!(upvote as CommentUpvote).commentID;
+}
+
+export const transformPanoUpvote = (upvote: Upvote | CommentUpvote) => {
+  const type = isPostUpvote(upvote) ? "PanoPost" : "PanoComment";
+  const id = stringify(type, upvote.id);
+
   return {
     ...upvote,
+    id,
     __typename: "PanoUpvote",
     node: null,
     owner: null,
