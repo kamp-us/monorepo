@@ -5,7 +5,7 @@ import {
   createPrismaLoader,
 } from "@kampus/gql-utils";
 import { type Connection } from "@kampus/gql-utils/connection";
-import { type Comment, type Post, type Upvote } from "@kampus/prisma";
+import { type Comment, type CommentUpvote, type Post, type Upvote } from "@kampus/prisma";
 
 import { type Clients } from "~/clients";
 import {
@@ -200,7 +200,7 @@ export const transformPanoCommentConnection = (connection: Connection<Comment>) 
   } satisfies PanoCommentConnection;
 };
 
-export const transformPanoUpvote = (upvote: Upvote) => {
+export const transformPanoUpvote = (upvote: Upvote | CommentUpvote) => {
   return {
     ...upvote,
     __typename: "PanoUpvote",

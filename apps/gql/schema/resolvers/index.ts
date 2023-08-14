@@ -460,6 +460,23 @@ export const resolvers = {
 
           return { node: transformPanoUpvote(upvote), error: null };
         }
+        case "PanoComment": {
+          let upvote = await loaders.pano.upvote.byUserAndCommentID.load({
+            commentID: value,
+            userID: session.user.id,
+          });
+
+          if (upvote) {
+            return { node: null, error: InvalidInput() };
+          }
+
+          upvote = await actions.pano.commentUpvote.create({
+            commentID: value,
+            userID: session.user.id,
+          });
+
+          return { node: transformPanoUpvote(upvote), error: null };
+        }
       }
     },
     removePanoUpvote: async (_, { input }, { loaders, actions, pasaport: { session } }) => {
@@ -481,6 +498,20 @@ export const resolvers = {
           }
 
           await actions.pano.postUpvote.remove(upvote);
+
+          return { node: transformPanoUpvote(upvote), error: null };
+        }
+        case "PanoComment": {
+          const upvote = await loaders.pano.upvote.byUserAndCommentID.load({
+            commentID: value,
+            userID: session.user.id,
+          });
+
+          if (!upvote) {
+            return { node: null, error: InvalidInput() };
+          }
+
+          await actions.pano.commentUpvote.remove(upvote);
 
           return { node: transformPanoUpvote(upvote), error: null };
         }

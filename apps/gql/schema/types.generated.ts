@@ -131,19 +131,20 @@ export type PageInfo = {
   startCursor: Maybe<Scalars["String"]["output"]>;
 };
 
-export type PanoComment = Node & {
-  __typename?: "PanoComment";
-  commentCount: Maybe<Scalars["Int"]["output"]>;
-  comments: Maybe<PanoCommentConnection>;
-  content: Scalars["String"]["output"];
-  createdAt: Scalars["DateTime"]["output"];
-  id: Scalars["ID"]["output"];
-  isUpvotedByViewer: Scalars["Boolean"]["output"];
-  owner: Maybe<User>;
-  parent: Maybe<PanoComment>;
-  post: Maybe<PanoPost>;
-  upvoteCount: Maybe<Scalars["Int"]["output"]>;
-};
+export type PanoComment = Node &
+  Upvotable & {
+    __typename?: "PanoComment";
+    commentCount: Maybe<Scalars["Int"]["output"]>;
+    comments: Maybe<PanoCommentConnection>;
+    content: Scalars["String"]["output"];
+    createdAt: Scalars["DateTime"]["output"];
+    id: Scalars["ID"]["output"];
+    isUpvotedByViewer: Scalars["Boolean"]["output"];
+    owner: Maybe<User>;
+    parent: Maybe<PanoComment>;
+    post: Maybe<PanoPost>;
+    upvoteCount: Maybe<Scalars["Int"]["output"]>;
+  };
 
 export type PanoCommentCommentsArgs = {
   after: InputMaybe<Scalars["String"]["input"]>;
@@ -503,7 +504,9 @@ export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = R
     | (PanoPost & { __typename: "PanoPost" })
     | (SozlukTerm & { __typename: "SozlukTerm" })
     | (User & { __typename: "User" });
-  Upvotable: PanoPost & { __typename: "PanoPost" };
+  Upvotable:
+    | (PanoComment & { __typename: "PanoComment" })
+    | (PanoPost & { __typename: "PanoPost" });
   UserError:
     | (InvalidInput & { __typename: "InvalidInput" })
     | (NotAuthorized & { __typename: "NotAuthorized" });
@@ -1048,7 +1051,7 @@ export type UpvotableResolvers<
   ContextType = KampusGQLContext,
   ParentType extends ResolversParentTypes["Upvotable"] = ResolversParentTypes["Upvotable"]
 > = ResolversObject<{
-  __resolveType?: TypeResolveFn<"PanoPost", ParentType, ContextType>;
+  __resolveType?: TypeResolveFn<"PanoComment" | "PanoPost", ParentType, ContextType>;
 }>;
 
 export type UserResolvers<
