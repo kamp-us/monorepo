@@ -1,8 +1,8 @@
 import { Triangle } from "lucide-react";
 import { graphql, useFragment, useMutation } from "react-relay";
 
-import { Button } from "@kampus/ui-next";
-import { cn } from "@kampus/ui-next/utils";
+import { Button } from "@kampus/ui";
+import { cn } from "@kampus/ui/utils";
 
 import { type PostUpvoteButton_post$key } from "./__generated__/PostUpvoteButton_post.graphql";
 

@@ -1,4 +1,4 @@
-import { Loading as LoadingSkeleton } from "@kampus/ui-next";
+import { Loading as LoadingSkeleton } from "@kampus/ui";
 
 export default function Loading() {
   return (

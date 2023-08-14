@@ -8,7 +8,7 @@ import {
   ToastTitle,
   ToastViewport,
   useToast,
-} from "@kampus/ui-next";
+} from "@kampus/ui";
 
 export function Toaster() {
   const { toasts } = useToast();

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { TimeAgo } from "@kampus/ui-next/components/time-ago";
+import { TimeAgo } from "@kampus/ui/components/time-ago";
 
 const meta = {
   component: TimeAgo,

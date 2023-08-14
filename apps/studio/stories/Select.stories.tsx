@@ -8,7 +8,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@kampus/ui-next";
+} from "@kampus/ui";
 
 const meta = {
   title: "Select",

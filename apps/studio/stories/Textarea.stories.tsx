@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Textarea } from "@kampus/ui-next";
+import { Textarea } from "@kampus/ui";
 
 const meta = {
   title: "TextArea",

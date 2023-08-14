@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Loading } from "@kampus/ui-next";
+import { Loading } from "@kampus/ui";
 
 const meta = {
   component: Loading,

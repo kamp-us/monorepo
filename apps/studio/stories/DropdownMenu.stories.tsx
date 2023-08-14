@@ -26,7 +26,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@kampus/ui-next";
+} from "@kampus/ui";
 
 const meta = {
   title: "Dropdown Menu",

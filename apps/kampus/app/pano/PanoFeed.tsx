@@ -1,7 +1,7 @@
 import { Suspense, useCallback } from "react";
 import { graphql, usePaginationFragment } from "react-relay";
 
-import { Button } from "@kampus/ui-next";
+import { Button } from "@kampus/ui";
 
 import { PostItem } from "~/app/pano/features/post-list/PostItem";
 import { type PanoFeedFragment$key } from "./__generated__/PanoFeedFragment.graphql";

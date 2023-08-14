@@ -21,7 +21,7 @@ import {
   Textarea,
   useForm,
   z,
-} from "@kampus/ui-next";
+} from "@kampus/ui";
 
 // 1. create a form schema
 

@@ -18,7 +18,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   useToast,
-} from "@kampus/ui-next";
+} from "@kampus/ui";
 
 interface Props {
   post: Post;
@@ -79,14 +79,14 @@ export const MoreOptionsDropdown = ({ post, shareUrl }: Props) => {
         <DropdownMenuContent>
           {ownerItems}
           <DropdownMenuItem
-          onSelect={() => {
-            toast({
-              description: "Link kopyalandı",
-            });
-          }}
-        >
-          Linki kopyala
-        </DropdownMenuItem>
+            onSelect={() => {
+              toast({
+                description: "Link kopyalandı",
+              });
+            }}
+          >
+            Linki kopyala
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       <DialogContent>
