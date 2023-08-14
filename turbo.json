@@ -10,15 +10,10 @@
         "storybook-static/**",
         ".contentlayer/**"
       ],
-      "dependsOn": [
-        "@kampus/prisma#prisma:generate",
-        "^build"
-      ]
+      "dependsOn": ["@kampus/prisma#prisma:generate", "^build"]
     },
     "dev": {
-      "dependsOn": [
-        "@kampus/prisma#prisma:generate"
-      ],
+      "dependsOn": ["@kampus/prisma#prisma:generate"],
       "cache": false
     },
     "prisma:generate": {
@@ -28,9 +23,7 @@
       "cache": false
     },
     "test": {
-      "outputs": [
-        "coverage/**"
-      ],
+      "outputs": ["coverage/**"],
       "dependsOn": []
     },
     "lint": {
@@ -42,53 +35,27 @@
     "docker:dev": {
       "cache": false
     },
-    "@kampus/gql#*": {
-      "env": [
-        "NODE_ENV",
-        "DATABASE_URL",
-        "NEXTAUTH_URL",
-        "KAMPUS_ENV"
-      ]
+    "@kampus-apps/gql#*": {
+      "env": ["NODE_ENV", "DATABASE_URL", "NEXTAUTH_URL", "KAMPUS_ENV"]
     },
-    "@kampus/gql#dev": {
-      "dependsOn": [
-        "@kampus/prisma#prisma:generate",
-        "@kampus/sozluk-content#build"
-      ]
+    "@kampus-apps/gql#dev": {
+      "dependsOn": ["@kampus/prisma#prisma:generate", "@kampus/sozluk-content#build"]
     },
-    "@kampus/gql#build": {
+    "@kampus-apps/gql#build": {
       "cache": false,
-      "dependsOn": [
-        "@kampus/prisma#prisma:generate",
-        "@kampus/sozluk-content#build"
-      ]
+      "dependsOn": ["@kampus/prisma#prisma:generate", "@kampus/sozluk-content#build"]
     },
     "@kampus/kampus#*": {
-      "env": [
-        "NODE_ENV",
-        "NEXT_PUBLIC_GQL_URL",
-        "RESEND_API_KEY",
-        "NEXTAUTH_URL",
-        "KAMPUS_ENV"
-      ]
+      "env": ["NODE_ENV", "NEXT_PUBLIC_GQL_URL", "RESEND_API_KEY", "NEXTAUTH_URL", "KAMPUS_ENV"]
     },
     "@kampus/pasaport#*": {
-      "env": [
-        "NODE_ENV",
-        "NEXTAUTH_URL",
-        "DATABASE_URL",
-        "KAMPUS_ENV"
-      ]
+      "env": ["NODE_ENV", "NEXTAUTH_URL", "DATABASE_URL", "KAMPUS_ENV"]
     },
     "@kampus-apps/pasaport#build": {
-      "dependsOn": [
-        "@kampus/prisma#prisma:generate"
-      ]
+      "dependsOn": ["@kampus/prisma#prisma:generate"]
     },
     "@kampus-apps/kampus#build": {
-      "dependsOn": [
-        "@kampus/prisma#prisma:generate"
-      ]
+      "dependsOn": ["@kampus/prisma#prisma:generate"]
     },
     "@kampus/next-auth#*": {
       "env": [
@@ -104,9 +71,7 @@
       ]
     },
     "@kampus/relay": {
-      "env": [
-        "NEXT_PUBLIC_GQL_URL"
-      ]
+      "env": ["NEXT_PUBLIC_GQL_URL"]
     }
   }
 }
