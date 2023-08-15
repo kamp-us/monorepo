@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { TypographyList } from "@kampus/ui-next";
+import { TypographyList } from "@kampus/ui";
 
 const meta = {
   component: TypographyList,

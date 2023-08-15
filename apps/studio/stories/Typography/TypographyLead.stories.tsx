@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { TypographyLead } from "@kampus/ui-next";
+import { TypographyLead } from "@kampus/ui";
 
 const meta = {
   component: TypographyLead,
