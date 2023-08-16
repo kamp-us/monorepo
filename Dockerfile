@@ -17,8 +17,6 @@ FROM base AS gql-builder
 # Prune the workspace
 RUN turbo prune --scope=@kampus-apps/gql --docker
 # First install the dependencies (as they change less often)
-COPY .gitignore .gitignore
-COPY turbo.json turbo.json
 RUN npm install
 # Build the project
 RUN npx turbo build --filter=gql...
@@ -28,8 +26,6 @@ FROM base AS pasaport-builder
 # Prune the workspace
 RUN turbo prune --scope=@kampus-apps/pasaport --docker
 # First install the dependencies (as they change less often)
-COPY .gitignore .gitignore
-COPY turbo.json turbo.json
 RUN npm install
 # Build the project
 RUN npx turbo build --filter=pasaport...

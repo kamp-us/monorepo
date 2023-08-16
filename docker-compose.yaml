@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   mysql:
-    container_name: kampus-mysql
+    container_name: mysql
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     ports:
