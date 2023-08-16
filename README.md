@@ -5,7 +5,8 @@ kamp.us web projects & packages
 - sozluk: turkce terimler sozlugu - https://sozluk.dev.kamp.us
 - pano: link & bilgi & soru cevap paylasim platformu - https://pano.dev.kamp.us
 - gql: https://gql.dev.kamp.us/graphql
-- pasaport: kampus icin kullanici bilgileri & [centralized auth](https://sozluk.dev.kamp.us/centralized-auth) servisi - https://pasaport.dev.kamp.us
+- pasaport: kampus icin kullanici bilgileri & [centralized auth](https://sozluk.dev.kamp.us/centralized-auth)
+  servisi - https://pasaport.dev.kamp.us
 - storybook: @kampus/ui paketi icin hosted storybook - https://ui.dev.kamp.us
 
 ## IMPORTANT NOTE
@@ -18,7 +19,7 @@ and say hi to us at #kampus-projects channel.
 ## Getting started
 
 - Fork `kamp-us/monorepo` under your personal account.
-  - eg: `usirin/monorepo`
+    - eg: `usirin/monorepo`
 - Clone the project to your local computer:
 
 ```sh
@@ -45,4 +46,45 @@ If you haven't already install [Volta](https://volta.sh), you can install instal
 
 ```sh
 curl https://get.volta.sh | bash
+```
+
+## Docker Setup
+
+### Dockerfile
+
+- We use a multi-stage build process to separate the building of applications from the final production image. This
+  ensures smaller and more optimized production images.
+- We build three services: `kampus`, `gql`, and `pasaport`. Each service has its dedicated builder stage followed by its
+  execution stage.
+- The `node:18-bullseye-slim` image is used to keep the final production images lean.
+
+### Docker Compose
+
+- We have four primary services: `mysql`, `kampus`, `gql`, and `pasaport`.
+- `mysql` is the database service. We ensure that its authentication is set correctly and ports are mapped to allow for
+  local development access.
+- The other three services are built using the project's Dockerfile. These services are exposed on ports 3000, 3001, and
+  3002 respectively.
+- Health checks are set up for each service to ensure they are running correctly.
+
+## Running a Fully Clean Build with Docker Compose
+
+- To build the images and run the containers, run the following command:
+
+```sh
+docker-compose up --build -d
+```
+
+- To stop the containers, run the following command:
+
+```sh
+docker-compose down
+```
+
+## Running a Fully Clean Build with Docker
+
+- Build and start the services, ensuring Docker Compose builds the images from scratch without using any cache.
+
+```sh
+docker-compose up --build --force-recreate
 ```
