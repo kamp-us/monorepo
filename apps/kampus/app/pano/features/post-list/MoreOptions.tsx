@@ -104,7 +104,7 @@ export const MoreOptionsDropdown = (props: Props) => {
             <MoreHorizontal size="16" aria-label="Daha fazla seçenek" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent align="end">
           {canUserEdit(viewer?.actor?.displayName, post?.owner?.displayName) && (
             <>
               <DropdownMenuItem asChild key="edit">

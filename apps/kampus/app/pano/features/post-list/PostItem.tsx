@@ -1,11 +1,12 @@
 "use client";
 
 import NextLink from "next/link";
+import { ExternalLinkIcon, MessageCircleIcon } from "lucide-react";
 import { graphql, useFragment } from "react-relay";
 
+import { Card, CardContent, CardFooter, CardTitle, TimeAgo } from "@kampus/ui";
 import { cn } from "@kampus/ui/utils";
 
-import { TimeAgo } from "~/../../packages/ui";
 import { type PostItem_post$key } from "./__generated__/PostItem_post.graphql";
 import { type PostItem_viewer$key } from "./__generated__/PostItem_viewer.graphql";
 import { MoreOptionsDropdown } from "./MoreOptions";
@@ -35,6 +36,7 @@ const usePanoPostFragment = (key: PostItem_post$key | null) =>
         url
         createdAt
         site
+        commentCount @required(action: LOG)
 
         ...PostUpvoteButton_post
 
@@ -76,24 +78,38 @@ export const PostItem = (props: PostItemProps) => {
   }
 
   return (
-    <section className="flex h-full items-center gap-2 rounded">
-      <UpvoteButton postRef={post} />
+    <Card className="flex flex-row items-center gap-6 p-6">
+      <div className="flex flex-col gap-3 p-0">
+        <UpvoteButton postRef={post} />
+      </div>
 
-      <div className="flex w-full flex-col justify-center">
-        <div className="flex items-center gap-1 align-baseline">
+      <CardContent className="flex flex-1 flex-col gap-2 p-0">
+        <CardTitle className="flex gap-3">
           <Link className="font-semibold" href={post.url ?? ""}>
             {post.title}
           </Link>
-          <Link className="text-sm" href={post.url ?? ""}>
-            {post.site ?? ""}
-          </Link>
-        </div>
-        <div className="flex items-center gap-1 text-sm">
-          <div>@{post.owner.displayName} |</div>
-          <div>
-            <Link href={`/pano/post/${post.id}`}>0 yorum</Link> |
+
+          <div className="text-muted-foreground flex items-center gap-1 text-sm">
+            <Link className="text-sm" href={post.url ?? ""}>
+              {post.site ?? ""}
+            </Link>
+            <ExternalLinkIcon size={12} />
           </div>
+        </CardTitle>
+        <div className="text-muted-foreground flex text-sm">
+          <div>@{post.owner.displayName}</div>&nbsp;·&nbsp;
           <TimeAgo date={new Date(post.createdAt as string)} />
+        </div>
+
+        <div className="flex items-center gap-4 text-sm">
+          <div className="flex items-center gap-1 font-semibold">
+            <MessageCircleIcon size="12" />
+            <Link href={`/pano/post/${post.id}`}>{`${post.commentCount} yorum`}</Link>
+          </div>
+        </div>
+      </CardContent>
+      <CardFooter className="flex h-full flex-col justify-between p-0">
+        <div className="flex flex-1 flex-col">
           <MoreOptionsDropdown
             key={post.id}
             post={post}
@@ -101,7 +117,7 @@ export const PostItem = (props: PostItemProps) => {
             postConnectionId={props.postConnectionId}
           />
         </div>
-      </div>
-    </section>
+      </CardFooter>
+    </Card>
   );
 };
