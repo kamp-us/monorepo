@@ -1,4 +1,4 @@
-import { Triangle } from "lucide-react";
+import { ArrowBigUp, Triangle, TriangleIcon } from "lucide-react";
 import { graphql, useFragment, useMutation } from "react-relay";
 
 import { Button } from "@kampus/ui";
@@ -53,8 +53,7 @@ export const UpvoteButton = (props: UpvoteProps) => {
 
   const disabled = isCreating || isRemoving;
 
-  const upvoteStyle = post?.isUpvotedByViewer ? "fill-primary" : "fill-none";
-  const combinedStyle = cn(upvoteStyle);
+  const upvoteStyle = cn();
 
   const onClick = () => {
     if (!post) {
@@ -73,14 +72,15 @@ export const UpvoteButton = (props: UpvoteProps) => {
   };
 
   return (
-    <Button
-      onClick={onClick}
-      disabled={disabled}
-      className="flex h-full flex-col"
-      variant="outline"
-    >
-      <Triangle className={combinedStyle} size={12} />
-      {post?.upvoteCount ?? 0}
-    </Button>
+    <>
+      <Button onClick={onClick} disabled={disabled} variant="ghost" size="icon">
+        <ArrowBigUp
+          fill={post.isUpvotedByViewer ? "currentColor" : "none"}
+          className={upvoteStyle}
+          size="24"
+        />
+      </Button>
+      <div className="text-center font-semibold">{post?.upvoteCount ?? 0}</div>
+    </>
   );
 };
