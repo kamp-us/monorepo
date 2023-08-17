@@ -1,4 +1,4 @@
-import { ArrowBigUp, Triangle, TriangleIcon } from "lucide-react";
+import { ArrowBigUp } from "lucide-react";
 import { graphql, useFragment, useMutation } from "react-relay";
 
 import { Button } from "@kampus/ui";
