@@ -36,7 +36,19 @@ cd monorepo
 npm install
 ```
 
-### 2) Setting up `.env` files and modifying `hosts` file
+### 2) Modifying `hosts` file
+
+- Add the following text block to [your `/etc/hosts` file](https://www.howtogeek.com/27350/beginner-geek-how-to-edit-your-hosts-file/).
+
+```text
+127.0.0.1 localhost.kamp.us
+127.0.0.1 pasaport.localhost.kamp.us
+127.0.0.1 pano.localhost.kamp.us
+127.0.0.1 sozluk.localhost.kamp.us
+127.0.0.1 gql.localhost.kamp.us
+```
+
+### 3) Setting up `.env` files
 
 - Duplicate `.env.example` files and rename them as `.env` in the following folders: `db/prisma`, `apps/gql`, `apps/kampus`, `apps/pasaport`.
 
@@ -57,17 +69,7 @@ NEXT_PUBLIC_GQL_URL=http://gql.localhost.kamp.us:3002/graphql
 AUTH_COOKIE_DOMAIN='.localhost.kamp.us'
 ```
 
-- Add the following text block to your `/etc/hosts` file.
-
-```text
-127.0.0.1 localhost.kamp.us
-127.0.0.1 pasaport.localhost.kamp.us
-127.0.0.1 pano.localhost.kamp.us
-127.0.0.1 sozluk.localhost.kamp.us
-127.0.0.1 gql.localhost.kamp.us
-```
-
-### 3) Prisma Setup and Database Configuration
+### 4) Prisma Setup and Database Configuration
 
 - Build required packages(`sozluk` and `prisma client`). (It may fail, but it's fine, continue with the next step.)
 
@@ -105,7 +107,7 @@ npm run prisma:generate
 npm run prisma:push
 ```
 
-### 4) Running dev servers
+### 5) Running dev servers
 
 - Open up 3 terminals, and run the commands below on each.
 
@@ -123,7 +125,7 @@ npm run dev -w @kampus-apps/pasaport
 
 - Now you can go to [localhost.kamp.us:3000](localhost.kamp.us:3000) to see it live. 🚀
 
-### 5) Logging in with GitHub on development server(optional)
+### 6) Logging in with GitHub on development server(optional)
 
 - Go to [OAuth Apps page](https://github.com/settings/developers) on GitHub.
 - Click on `New OAuth App`.
