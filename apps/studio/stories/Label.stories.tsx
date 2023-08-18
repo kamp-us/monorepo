@@ -14,11 +14,14 @@ type Story = NewType;
 
 // export const Default = {} satisfies Story;
 export const Default = {
-  render: () => (
+  args: {
+    title: "Accept terms and conditions",
+  },
+  render: (args: any) => (
     <div>
       <div className="flex items-center space-x-2">
         <Checkbox id="terms" />
-        <Label htmlFor="terms">Accept terms and conditions</Label>
+        <Label htmlFor="terms">{args.title}</Label>
       </div>
     </div>
   ),

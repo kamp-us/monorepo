@@ -19,19 +19,30 @@ export default meta;
 type NewType = StoryObj<typeof meta>;
 
 export const Default = {
-  render: () => (
+  args: {
+    title: "Select a fruit",
+    children: {
+      item1: "Apple",
+      item2: "Banana",
+      item3: "Blueberry",
+      item4: "Grapes",
+      item5: "Pineapple",
+    },
+    label: "Fruits",
+  },
+  render: (args: any) => (
     <Select>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a fruit" />
+        <SelectValue placeholder={args.title} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
+          <SelectLabel>{args.label}</SelectLabel>
+          <SelectItem value="apple">{args.children.item1}</SelectItem>
+          <SelectItem value="banana">{args.children.item2}</SelectItem>
+          <SelectItem value="blueberry">{args.children.item3}</SelectItem>
+          <SelectItem value="grapes">{args.children.item4}</SelectItem>
+          <SelectItem value="pineapple">{args.children.item5}</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
