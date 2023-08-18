@@ -388,6 +388,7 @@ export type Viewer = {
   __typename?: "Viewer";
   actor: Maybe<Actor>;
   panoFeed: Maybe<PanoPostConnection>;
+  panoFeedBySite: Maybe<PanoPostConnection>;
 };
 
 export type ViewerPanoFeedArgs = {
@@ -396,6 +397,12 @@ export type ViewerPanoFeedArgs = {
   filter: InputMaybe<PanoPostFilter>;
   first: InputMaybe<Scalars["Int"]["input"]>;
   last: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+export type ViewerPanoFeedBySiteArgs = {
+  after: InputMaybe<Scalars["String"]["input"]>;
+  first: InputMaybe<Scalars["Int"]["input"]>;
+  site: Scalars["String"]["input"];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -1087,6 +1094,12 @@ export type ViewerResolvers<
     ParentType,
     ContextType,
     Partial<ViewerPanoFeedArgs>
+  >;
+  panoFeedBySite: Resolver<
+    Maybe<ResolversTypes["PanoPostConnection"]>,
+    ParentType,
+    ContextType,
+    RequireFields<ViewerPanoFeedBySiteArgs, "site">
   >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
