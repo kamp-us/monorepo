@@ -56,7 +56,13 @@ type Viewer {
     last: Int
     filter: PanoPostFilter
   ): PanoPostConnection
-  panoFeedBySite(site: String!, after: String, first: Int): PanoPostConnection
+  panoFeedBySite(
+    site: String!
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PanoPostConnection
 }
 
 type User implements Node & Actor {

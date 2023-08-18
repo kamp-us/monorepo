@@ -12,10 +12,12 @@ const fragment = graphql`
   @argumentDefinitions(
     site: { type: "String!" }
     after: { type: "String" }
+    before: { type: "String" }
     first: { type: "Int", defaultValue: 10 }
+    last: { type: "Int" }
   )
   @refetchable(queryName: "PanoFeedBySitePaginationQuery") {
-    panoFeedBySite(site: $site, after: $after, first: $first)
+    panoFeedBySite(after: $after, before: $before, first: $first, last: $last, site: $site)
       @connection(key: "PanoFeedBySiteFragment__panoFeedBySite") {
       __id
       edges {

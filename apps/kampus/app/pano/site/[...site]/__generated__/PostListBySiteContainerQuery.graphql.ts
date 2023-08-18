@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<aa2da2fdb487240168f4a30dbfa91f81>>
+ * @generated SignedSource<<b38d7679471b083bca5ee808cbb47d0d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,8 +11,6 @@
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type PostListBySiteContainerQuery$variables = {
-  after?: string | null;
-  first?: number | null;
   site: string;
 };
 export type PostListBySiteContainerQuery$data = {
@@ -26,53 +24,41 @@ export type PostListBySiteContainerQuery = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "after"
-},
-v1 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "first"
-},
-v2 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "site"
-},
-v3 = [
+var v0 = [
   {
-    "kind": "Variable",
-    "name": "after",
-    "variableName": "after"
-  },
-  {
-    "kind": "Variable",
-    "name": "first",
-    "variableName": "first"
-  },
-  {
-    "kind": "Variable",
-    "name": "site",
-    "variableName": "site"
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "site"
   }
 ],
-v4 = {
+v1 = {
+  "kind": "Variable",
+  "name": "site",
+  "variableName": "site"
+},
+v2 = [
+  {
+    "kind": "Literal",
+    "name": "first",
+    "value": 10
+  },
+  (v1/*: any*/)
+],
+v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v5 = {
+v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "displayName",
   "storageKey": null
 },
-v6 = {
+v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -81,11 +67,7 @@ v6 = {
 };
 return {
   "fragment": {
-    "argumentDefinitions": [
-      (v0/*: any*/),
-      (v1/*: any*/),
-      (v2/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "PostListBySiteContainerQuery",
@@ -99,7 +81,9 @@ return {
         "plural": false,
         "selections": [
           {
-            "args": (v3/*: any*/),
+            "args": [
+              (v1/*: any*/)
+            ],
             "kind": "FragmentSpread",
             "name": "PanoFeedBySiteFragment"
           },
@@ -117,11 +101,7 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [
-      (v2/*: any*/),
-      (v0/*: any*/),
-      (v1/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "PostListBySiteContainerQuery",
     "selections": [
@@ -135,7 +115,7 @@ return {
         "selections": [
           {
             "alias": null,
-            "args": (v3/*: any*/),
+            "args": (v2/*: any*/),
             "concreteType": "PanoPostConnection",
             "kind": "LinkedField",
             "name": "panoFeedBySite",
@@ -164,7 +144,7 @@ return {
                     "name": "node",
                     "plural": false,
                     "selections": [
-                      (v4/*: any*/),
+                      (v3/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -229,12 +209,12 @@ return {
                         "name": "owner",
                         "plural": false,
                         "selections": [
-                          (v5/*: any*/),
-                          (v4/*: any*/)
+                          (v4/*: any*/),
+                          (v3/*: any*/)
                         ],
                         "storageKey": null
                       },
-                      (v6/*: any*/)
+                      (v5/*: any*/)
                     ],
                     "storageKey": null
                   }
@@ -262,6 +242,20 @@ return {
                     "kind": "ScalarField",
                     "name": "hasNextPage",
                     "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "hasPreviousPage",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "startCursor",
+                    "storageKey": null
                   }
                 ],
                 "storageKey": null
@@ -283,7 +277,7 @@ return {
           },
           {
             "alias": null,
-            "args": (v3/*: any*/),
+            "args": (v2/*: any*/),
             "filters": [
               "site"
             ],
@@ -300,9 +294,9 @@ return {
             "name": "actor",
             "plural": false,
             "selections": [
-              (v6/*: any*/),
               (v5/*: any*/),
-              (v4/*: any*/)
+              (v4/*: any*/),
+              (v3/*: any*/)
             ],
             "storageKey": null
           }
@@ -312,16 +306,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "849c30d2b56b14ff5119389d9205f3bc",
+    "cacheID": "a08f6f1c1401c3d4cbc214a86fead5ac",
     "id": null,
     "metadata": {},
     "name": "PostListBySiteContainerQuery",
     "operationKind": "query",
-    "text": "query PostListBySiteContainerQuery(\n  $site: String!\n  $after: String\n  $first: Int\n) {\n  viewer {\n    ...PanoFeedBySiteFragment_25cAeP\n    ...PanoFeedBySite_viewer\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedBySiteFragment_25cAeP on Viewer {\n  panoFeedBySite(site: $site, after: $after, first: $first) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment PanoFeedBySite_viewer on Viewer {\n  ...PostItem_viewer\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "query PostListBySiteContainerQuery(\n  $site: String!\n) {\n  viewer {\n    ...PanoFeedBySiteFragment_QaI6y\n    ...PanoFeedBySite_viewer\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedBySiteFragment_QaI6y on Viewer {\n  panoFeedBySite(first: 10, site: $site) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PanoFeedBySite_viewer on Viewer {\n  ...PostItem_viewer\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();
 
-(node as any).hash = "7d0849f24dd6d8b057459846a19261a5";
+(node as any).hash = "90544bd6f6e1e746981397e9609fffa5";
 
 export default node;
