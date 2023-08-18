@@ -52,23 +52,6 @@ npm install
 
 - Duplicate `.env.example` files and rename them as `.env` in the following folders: `db/prisma`, `apps/gql`, `apps/kampus`, `apps/pasaport`.
 
-- Make the following changes to the corresponding files.
-
-```sh
-# apps/gql, apps/kampus, apps/pasaport
-NEXTAUTH_URL=http://pasaport.localhost.kamp.us:3001/auth
-```
-
-```sh
-# apps/kampus
-NEXT_PUBLIC_GQL_URL=http://gql.localhost.kamp.us:3002/graphql
-```
-
-```sh
-# apps/kampus, apps/pasaport
-AUTH_COOKIE_DOMAIN='.localhost.kamp.us'
-```
-
 ### 4) Prisma Setup and Database Configuration
 
 - Build required packages(`sozluk` and `prisma client`). (It may fail, but it's fine, continue with the next step.)
