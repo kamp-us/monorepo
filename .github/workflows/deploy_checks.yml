@@ -21,7 +21,7 @@ jobs:
         run: docker-compose up -d
       - name: List running services
         run: docker-compose ps
-#      - name: Ensure services remain healthy
-#        run:
+#      - name: List running containers and check if they are running
+#        run: docker ps -a --filter "status=running" --format "{{.Names}}" | grep -q "kampus"
       - name: Shutdown Docker Compose services
         run: docker-compose down
