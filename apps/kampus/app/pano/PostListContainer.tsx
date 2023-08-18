@@ -13,9 +13,9 @@ interface Props {
 }
 
 const query = graphql`
-  query PostListContainerQuery {
+  query PostListContainerQuery($filter: PanoPostFilter) {
     viewer {
-      ...PanoFeedFragment
+      ...PanoFeedFragment @arguments(filter: $filter)
       ...PanoFeed_viewer
     }
   }

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<845cce7dd6f615c692812a518c6c92de>>
+ * @generated SignedSource<<ebb4eee4ecf6b67839a38d96daf93392>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -45,7 +45,12 @@ return {
       "name": "before"
     },
     {
-      "defaultValue": 10,
+      "defaultValue": null,
+      "kind": "LocalArgument",
+      "name": "filter"
+    },
+    {
+      "defaultValue": 20,
       "kind": "LocalArgument",
       "name": "first"
     },
@@ -87,7 +92,13 @@ return {
   "selections": [
     {
       "alias": "panoFeed",
-      "args": null,
+      "args": [
+        {
+          "kind": "Variable",
+          "name": "filter",
+          "variableName": "filter"
+        }
+      ],
       "concreteType": "PanoPostConnection",
       "kind": "LinkedField",
       "name": "__PanoFeedFragment__panoFeed_connection",
@@ -201,6 +212,6 @@ return {
 };
 })();
 
-(node as any).hash = "169d642e0dd7ef004b6ba9327f096aca";
+(node as any).hash = "e8ff3d9e17828afbcf005f38a17a3264";
 
 export default node;
