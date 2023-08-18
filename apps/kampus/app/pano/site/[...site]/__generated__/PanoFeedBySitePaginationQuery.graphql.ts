@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<80ed40a9e630ccd88d71bd6e3e6d7229>>
+ * @generated SignedSource<<50ea6d62df94c24d31b8e52e9867a153>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,9 +12,7 @@ import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type PanoFeedBySitePaginationQuery$variables = {
   after?: string | null;
-  before?: string | null;
   first?: number | null;
-  last?: number | null;
   site: string;
 };
 export type PanoFeedBySitePaginationQuery$data = {
@@ -35,19 +33,9 @@ var v0 = [
     "name": "after"
   },
   {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "before"
-  },
-  {
-    "defaultValue": 10,
+    "defaultValue": 1,
     "kind": "LocalArgument",
     "name": "first"
-  },
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "last"
   },
   {
     "defaultValue": null,
@@ -63,18 +51,8 @@ v1 = [
   },
   {
     "kind": "Variable",
-    "name": "before",
-    "variableName": "before"
-  },
-  {
-    "kind": "Variable",
     "name": "first",
     "variableName": "first"
-  },
-  {
-    "kind": "Variable",
-    "name": "last",
-    "variableName": "last"
   },
   {
     "kind": "Variable",
@@ -271,20 +249,6 @@ return {
                     "kind": "ScalarField",
                     "name": "hasNextPage",
                     "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "hasPreviousPage",
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "startCursor",
-                    "storageKey": null
                   }
                 ],
                 "storageKey": null
@@ -321,16 +285,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "89900d2dfc84ce6cabfd0ac97f7825fe",
+    "cacheID": "d8f02f851f0c060e850bc3422bac5b51",
     "id": null,
     "metadata": {},
     "name": "PanoFeedBySitePaginationQuery",
     "operationKind": "query",
-    "text": "query PanoFeedBySitePaginationQuery(\n  $after: String\n  $before: String\n  $first: Int = 10\n  $last: Int\n  $site: String!\n) {\n  viewer {\n    ...PanoFeedBySiteFragment_D4Dv5\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedBySiteFragment_D4Dv5 on Viewer {\n  panoFeedBySite(after: $after, before: $before, first: $first, last: $last, site: $site) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "query PanoFeedBySitePaginationQuery(\n  $after: String\n  $first: Int = 1\n  $site: String!\n) {\n  viewer {\n    ...PanoFeedBySiteFragment_25cAeP\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedBySiteFragment_25cAeP on Viewer {\n  panoFeedBySite(after: $after, first: $first, site: $site) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();
 
-(node as any).hash = "cd1adb02aa45500c89838f05d231740f";
+(node as any).hash = "eb40e830c4cd4e75d726e738cbd4de16";
 
 export default node;

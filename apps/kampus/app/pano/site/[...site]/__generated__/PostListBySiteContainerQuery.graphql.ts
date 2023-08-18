@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b38d7679471b083bca5ee808cbb47d0d>>
+ * @generated SignedSource<<86d43887c64c196d1b814cc837f732b2>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -40,7 +40,7 @@ v2 = [
   {
     "kind": "Literal",
     "name": "first",
-    "value": 10
+    "value": 1
   },
   (v1/*: any*/)
 ],
@@ -242,20 +242,6 @@ return {
                     "kind": "ScalarField",
                     "name": "hasNextPage",
                     "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "hasPreviousPage",
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "startCursor",
-                    "storageKey": null
                   }
                 ],
                 "storageKey": null
@@ -306,12 +292,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "a08f6f1c1401c3d4cbc214a86fead5ac",
+    "cacheID": "42c2ec98b48096fa0a0b2e98d31b026e",
     "id": null,
     "metadata": {},
     "name": "PostListBySiteContainerQuery",
     "operationKind": "query",
-    "text": "query PostListBySiteContainerQuery(\n  $site: String!\n) {\n  viewer {\n    ...PanoFeedBySiteFragment_QaI6y\n    ...PanoFeedBySite_viewer\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedBySiteFragment_QaI6y on Viewer {\n  panoFeedBySite(first: 10, site: $site) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PanoFeedBySite_viewer on Viewer {\n  ...PostItem_viewer\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "query PostListBySiteContainerQuery(\n  $site: String!\n) {\n  viewer {\n    ...PanoFeedBySiteFragment_QaI6y\n    ...PanoFeedBySite_viewer\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedBySiteFragment_QaI6y on Viewer {\n  panoFeedBySite(first: 1, site: $site) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment PanoFeedBySite_viewer on Viewer {\n  ...PostItem_viewer\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();

@@ -401,9 +401,7 @@ export type ViewerPanoFeedArgs = {
 
 export type ViewerPanoFeedBySiteArgs = {
   after: InputMaybe<Scalars["String"]["input"]>;
-  before: InputMaybe<Scalars["String"]["input"]>;
   first: InputMaybe<Scalars["Int"]["input"]>;
-  last: InputMaybe<Scalars["Int"]["input"]>;
   site: Scalars["String"]["input"];
 };
 
