@@ -12,7 +12,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Default = {
-  render: () => {
+  args: {
+    title: "Show Toast",
+    children: {
+      variant: "destructive",
+      title: "Uh oh! Something went wrong.",
+      description: "There was a problem with your request.",
+      action: "Try again",
+    },
+  },
+  render: (args: any) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { toast } = useToast();
 
@@ -21,14 +30,14 @@ export const Default = {
         variant="outline"
         onClick={() => {
           toast({
-            variant: "destructive",
-            title: "Uh oh! Something went wrong.",
-            description: "There was a problem with your request.",
-            action: <ToastAction altText="Try again">Try again</ToastAction>,
+            variant: args.children.variant,
+            title: args.children.title,
+            description: args.children.description,
+            action: <ToastAction altText="Try again">{args.children.action}</ToastAction>,
           });
         }}
       >
-        Show Toast
+        {args.title}
       </Button>
     );
   },

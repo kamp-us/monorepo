@@ -22,22 +22,30 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  render: () => (
+  args: {
+    title: "Show Toast",
+    children: {
+      label: "destructive", //hata var ama çalışıyor
+      description: "Uh oh! Something went wrong.",
+      cancel: "There was a problem with your request.",
+      action: "Try again",
+    },
+  },
+  render: (args: any) => (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline">Show Dialog</Button>
+        <Button variant="outline">{args.title}</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>{args.children.label}</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your account and remove your
-            data from our servers.
+          {args.children.description}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogCancel>{args.children.cancel}</AlertDialogCancel>
+          <AlertDialogAction>{args.children.action}</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
