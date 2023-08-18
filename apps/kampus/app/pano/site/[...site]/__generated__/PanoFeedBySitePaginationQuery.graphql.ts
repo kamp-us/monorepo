@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<50ea6d62df94c24d31b8e52e9867a153>>
+ * @generated SignedSource<<c813a3e10dd9d128d7471677de56e9e5>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -33,7 +33,7 @@ var v0 = [
     "name": "after"
   },
   {
-    "defaultValue": 1,
+    "defaultValue": 10,
     "kind": "LocalArgument",
     "name": "first"
   },
@@ -285,16 +285,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "d8f02f851f0c060e850bc3422bac5b51",
+    "cacheID": "720475be983f481d4bf824d7be1cdfea",
     "id": null,
     "metadata": {},
     "name": "PanoFeedBySitePaginationQuery",
     "operationKind": "query",
-    "text": "query PanoFeedBySitePaginationQuery(\n  $after: String\n  $first: Int = 1\n  $site: String!\n) {\n  viewer {\n    ...PanoFeedBySiteFragment_25cAeP\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedBySiteFragment_25cAeP on Viewer {\n  panoFeedBySite(after: $after, first: $first, site: $site) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "query PanoFeedBySitePaginationQuery(\n  $after: String\n  $first: Int = 10\n  $site: String!\n) {\n  viewer {\n    ...PanoFeedBySiteFragment_25cAeP\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedBySiteFragment_25cAeP on Viewer {\n  panoFeedBySite(after: $after, first: $first, site: $site) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();
 
-(node as any).hash = "eb40e830c4cd4e75d726e738cbd4de16";
+(node as any).hash = "a1858424257de428f52a047f9c4c99fb";
 
 export default node;
