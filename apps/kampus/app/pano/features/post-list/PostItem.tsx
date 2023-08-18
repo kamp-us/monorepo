@@ -90,7 +90,7 @@ export const PostItem = (props: PostItemProps) => {
           </Link>
 
           <div className="text-muted-foreground flex items-center gap-1 text-sm">
-            <Link className="text-sm" href={post.url ?? ""}>
+            <Link className="text-sm" href={post.site ? "pano/site/" + post.site : ""}>
               {post.site ?? ""}
             </Link>
             <ExternalLinkIcon size={12} />
