@@ -1,7 +1,8 @@
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
+import Link from "next/link";
 import { graphql, useFragment, usePaginationFragment } from "react-relay";
 
-import { Button } from "@kampus/ui-next";
+import { Button } from "@kampus/ui";
 
 import { PostItem } from "~/app/pano/features/post-list/PostItem";
 import { type PanoFeed_viewer$key } from "./__generated__/PanoFeed_viewer.graphql";
@@ -50,45 +51,46 @@ export function PanoFeed(props: Props) {
 
   const feed = data.panoFeed;
 
-  const loadPrevPage = useCallback(() => {
-    if (hasPrevious) {
-      loadPrevious(10);
-    }
-  }, [hasPrevious, loadPrevious]);
-
-  const loadNextPage = useCallback(() => {
-    if (hasNext) {
-      loadNext(10);
-    }
-  }, [hasNext, loadNext]);
-
   return (
-    <Suspense fallback="loading">
-      <section className="flex flex-col gap-4">
-        {feed?.edges?.map((edge) => {
-          if (!edge?.node) {
-            return null;
-          }
+    <>
+      <Button variant="outline" asChild>
+        <Link
+          href={{
+            pathname: `/post/create`,
+            search: `foo=bar`,
+          }}
+          as="post/create"
+        >
+          New post
+        </Link>
+      </Button>
+      <Suspense fallback="loading">
+        <section className="flex flex-col gap-4">
+          {feed?.edges?.map((edge) => {
+            if (!edge?.node) {
+              return null;
+            }
 
-          return (
-            <PostItem
-              key={edge.node.id}
-              post={edge.node}
-              viewerRef={viewer}
-              postConnectionId={data.panoFeed?.__id}
-            />
-          );
-        })}
+            return (
+              <PostItem
+                key={edge.node.id}
+                post={edge.node}
+                viewerRef={viewer}
+                postConnectionId={data.panoFeed?.__id}
+              />
+            );
+          })}
 
-        <div className="flex gap-2">
-          <Button variant="secondary" onClick={loadPrevPage} disabled={!hasPrevious}>
-            {"< Prev"}
-          </Button>
-          <Button variant="secondary" onClick={loadNextPage} disabled={!hasNext}>
-            {"Next >"}
-          </Button>
-        </div>
-      </section>
-    </Suspense>
+          <div className="flex gap-2">
+            <Button variant="secondary" onClick={() => loadPrevious(10)} disabled={!hasPrevious}>
+              {"< Prev"}
+            </Button>
+            <Button variant="secondary" onClick={() => loadNext(10)} disabled={!hasNext}>
+              {"Next >"}
+            </Button>
+          </div>
+        </section>
+      </Suspense>
+    </>
   );
 }

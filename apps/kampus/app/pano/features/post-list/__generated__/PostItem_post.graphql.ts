@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<f1e4f6f5072c925f50590ec6402945d6>>
+ * @generated SignedSource<<5f75e5667edef9e6857b85ad1a46e63d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,6 +11,7 @@
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type PostItem_post$data = {
+  readonly commentCount: number;
   readonly content: string | null;
   readonly createdAt: any;
   readonly id: string;
@@ -77,6 +78,18 @@ const node: ReaderFragment = {
       "storageKey": null
     },
     {
+      "kind": "RequiredField",
+      "field": {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "commentCount",
+        "storageKey": null
+      },
+      "action": "LOG",
+      "path": "commentCount"
+    },
+    {
       "args": null,
       "kind": "FragmentSpread",
       "name": "PostUpvoteButton_post"
@@ -119,6 +132,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "40952525253258c86b4d4320cf4279a0";
+(node as any).hash = "03c1325a353b031abe75c421b022ef9f";
 
 export default node;

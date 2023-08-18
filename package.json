@@ -8,6 +8,9 @@
     "packages/*"
   ],
   "scripts": {
+    "gql": "turbo dev --filter=@kampus-apps/gql",
+    "web": "turbo dev --filter=@kampus-apps/*",
+    "dev": "turbo dev",
     "build": "turbo run build",
     "prettier": "prettier --write .",
     "lint": "turbo run lint"

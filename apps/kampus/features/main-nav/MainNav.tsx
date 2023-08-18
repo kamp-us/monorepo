@@ -3,8 +3,8 @@
 import { type PropsWithChildren, type ReactNode } from "react";
 import Link from "next/link";
 
-import { TopNav, TopNavBrand, TopNavItem } from "@kampus/ui-next";
-import { cn } from "@kampus/ui-next/utils";
+import { TopNav, TopNavBrand, TopNavItem } from "@kampus/ui";
+import { cn } from "@kampus/ui/utils";
 
 interface Props {
   brand: ReactNode;

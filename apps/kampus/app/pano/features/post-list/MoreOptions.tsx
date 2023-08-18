@@ -21,7 +21,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   useToast,
-} from "@kampus/ui-next";
+} from "@kampus/ui";
 
 import { type MoreOptions_post$key } from "./__generated__/MoreOptions_post.graphql";
 import { type MoreOptions_viewer$key } from "./__generated__/MoreOptions_viewer.graphql";
@@ -104,7 +104,7 @@ export const MoreOptionsDropdown = (props: Props) => {
             <MoreHorizontal size="16" aria-label="Daha fazla seçenek" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent align="end">
           {canUserEdit(viewer?.actor?.displayName, post?.owner?.displayName) && (
             <>
               <DropdownMenuItem asChild key="edit">
