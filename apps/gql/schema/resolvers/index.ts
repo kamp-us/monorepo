@@ -97,12 +97,56 @@ export const resolvers = {
 
       return transformUser(user);
     },
-    panoFeed: async (_, args, { loaders }) => {
-      const posts = await loaders.pano.post.all.load(
-        new ConnectionKey(null, parseConnectionArgs(args), { orderBy: { createdAt: "desc" } })
-      );
+    panoFeed: async (_, args, { loaders, pasaport: { session } }) => {
+      switch (args.filter) {
+        case "MOST_COMMENTED": {
+          const posts = await loaders.pano.post.all.load(
+            new ConnectionKey(null, parseConnectionArgs(args), {
+              orderBy: { comments: { _count: "desc" } },
+            })
+          );
 
-      return transformPanoPostConnection(posts);
+          return transformPanoPostConnection(posts);
+        }
+        case "ACTIVE": {
+          const posts = await loaders.pano.post.all.load(
+            new ConnectionKey(null, parseConnectionArgs(args), {
+              include: { comments: { orderBy: { createdAt: "desc" } } },
+              orderBy: { createdAt: "desc" },
+            })
+          );
+
+          return transformPanoPostConnection(posts);
+        }
+        case "MOST_UPVOTED": {
+          const posts = await loaders.pano.post.all.load(
+            new ConnectionKey(null, parseConnectionArgs(args), {
+              orderBy: { upvotes: { _count: "desc" } },
+            })
+          );
+
+          return transformPanoPostConnection(posts);
+        }
+        case "OWNED": {
+          if (!session?.user?.id) {
+            return null;
+          }
+
+          return transformPanoPostConnection(
+            await loaders.pano.post.byUserID.load(
+              new ConnectionKey(session.user.id, parseConnectionArgs(args), {
+                orderBy: { createdAt: "desc" },
+              })
+            )
+          );
+        }
+        default: {
+          const posts = await loaders.pano.post.all.load(
+            new ConnectionKey(null, parseConnectionArgs(args), { orderBy: { createdAt: "desc" } })
+          );
+          return transformPanoPostConnection(posts);
+        }
+      }
     },
     panoFeedBySite: async (_, args, { loaders }) => {
       const posts = await loaders.pano.post.bySite.load(

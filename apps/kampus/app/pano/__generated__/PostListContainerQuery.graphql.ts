@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<a3ac7bf0bd3649387387eb357aef5c04>>
+ * @generated SignedSource<<c9aef33edeb598849fa024874e85b2e1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,7 +10,10 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type PostListContainerQuery$variables = {};
+export type PanoPostFilter = "ACTIVE" | "MOST_COMMENTED" | "MOST_UPVOTED" | "OWNED" | "%future added value";
+export type PostListContainerQuery$variables = {
+  filter?: PanoPostFilter | null;
+};
 export type PostListContainerQuery$data = {
   readonly viewer: {
     readonly " $fragmentSpreads": FragmentRefs<"PanoFeedFragment" | "PanoFeed_viewer">;
@@ -24,26 +27,39 @@ export type PostListContainerQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
-    "kind": "Literal",
-    "name": "first",
-    "value": 10
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "filter"
   }
 ],
 v1 = {
+  "kind": "Variable",
+  "name": "filter",
+  "variableName": "filter"
+},
+v2 = [
+  (v1/*: any*/),
+  {
+    "kind": "Literal",
+    "name": "first",
+    "value": 20
+  }
+],
+v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v2 = {
+v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "displayName",
   "storageKey": null
 },
-v3 = {
+v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -52,7 +68,7 @@ v3 = {
 };
 return {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "PostListContainerQuery",
@@ -66,7 +82,9 @@ return {
         "plural": false,
         "selections": [
           {
-            "args": null,
+            "args": [
+              (v1/*: any*/)
+            ],
             "kind": "FragmentSpread",
             "name": "PanoFeedFragment"
           },
@@ -84,7 +102,7 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "PostListContainerQuery",
     "selections": [
@@ -98,7 +116,7 @@ return {
         "selections": [
           {
             "alias": null,
-            "args": (v0/*: any*/),
+            "args": (v2/*: any*/),
             "concreteType": "PanoPostConnection",
             "kind": "LinkedField",
             "name": "panoFeed",
@@ -127,7 +145,7 @@ return {
                     "name": "node",
                     "plural": false,
                     "selections": [
-                      (v1/*: any*/),
+                      (v3/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -192,12 +210,12 @@ return {
                         "name": "owner",
                         "plural": false,
                         "selections": [
-                          (v2/*: any*/),
-                          (v1/*: any*/)
+                          (v4/*: any*/),
+                          (v3/*: any*/)
                         ],
                         "storageKey": null
                       },
-                      (v3/*: any*/)
+                      (v5/*: any*/)
                     ],
                     "storageKey": null
                   }
@@ -256,12 +274,14 @@ return {
                 ]
               }
             ],
-            "storageKey": "panoFeed(first:10)"
+            "storageKey": null
           },
           {
             "alias": null,
-            "args": (v0/*: any*/),
-            "filters": null,
+            "args": (v2/*: any*/),
+            "filters": [
+              "filter"
+            ],
             "handle": "connection",
             "key": "PanoFeedFragment__panoFeed",
             "kind": "LinkedHandle",
@@ -275,9 +295,9 @@ return {
             "name": "actor",
             "plural": false,
             "selections": [
-              (v3/*: any*/),
-              (v2/*: any*/),
-              (v1/*: any*/)
+              (v5/*: any*/),
+              (v4/*: any*/),
+              (v3/*: any*/)
             ],
             "storageKey": null
           }
@@ -287,16 +307,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "046307bf078e70e6dddbc19cdbf24f9f",
+    "cacheID": "4382e79fc6bd8612b3dc7f6453323f65",
     "id": null,
     "metadata": {},
     "name": "PostListContainerQuery",
     "operationKind": "query",
-    "text": "query PostListContainerQuery {\n  viewer {\n    ...PanoFeedFragment\n    ...PanoFeed_viewer\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedFragment on Viewer {\n  panoFeed(first: 10) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PanoFeed_viewer on Viewer {\n  ...PostItem_viewer\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "query PostListContainerQuery(\n  $filter: PanoPostFilter\n) {\n  viewer {\n    ...PanoFeedFragment_Vt7Yj\n    ...PanoFeed_viewer\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedFragment_Vt7Yj on Viewer {\n  panoFeed(first: 20, filter: $filter) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PanoFeed_viewer on Viewer {\n  ...PostItem_viewer\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();
 
-(node as any).hash = "246fd8479a18172b183f288ff6f3e842";
+(node as any).hash = "9c74048afe10dcf77c1f05b47a2da9ae";
 
 export default node;

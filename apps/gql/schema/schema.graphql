@@ -110,11 +110,17 @@ type PanoQuery {
 }
 
 enum PanoPostFilter {
-  ALL
-  HOT
-  LIKED
+  # Return list of posts that's ordered by their most recent comment.
   ACTIVE
-  SELF
+
+  # Return a list of posts that's ordered by their comment count.
+  MOST_COMMENTED
+
+  # Return a list of posts that's ordered by their upvote count.
+  MOST_UPVOTED
+
+  # Return viewer's posts
+  OWNED
 }
 
 type PanoPost implements Node & Upvotable {

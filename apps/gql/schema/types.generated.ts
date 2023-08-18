@@ -208,7 +208,7 @@ export type PanoPostEdge = {
 
 export type PanoPostError = InvalidInput | NotAuthorized;
 
-export type PanoPostFilter = "ACTIVE" | "ALL" | "HOT" | "LIKED" | "SELF";
+export type PanoPostFilter = "ACTIVE" | "MOST_COMMENTED" | "MOST_UPVOTED" | "OWNED";
 
 export type PanoQuery = {
   __typename?: "PanoQuery";

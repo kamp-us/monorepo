@@ -9,20 +9,16 @@ const createQueryString = (key: string, value: string) => {
   return searchParams.toString();
 };
 
-export function PanoFilterLink({
-  query,
-  children,
-  activeQuery,
-}: {
-  query: string;
-  activeQuery: PanoPostFilterType;
+interface Props {
+  isActive: boolean;
+  filter: PanoPostFilterType;
   children: React.ReactNode;
-}) {
-  const isActive = query === activeQuery;
+}
 
+export function PanoFilterLink({ isActive, children, filter }: Props) {
   return (
     <Link
-      href={"/pano/posts?" + createQueryString("filter", query)}
+      href={"/?" + createQueryString("filter", filter)}
       style={{ fontWeight: isActive ? "bold" : "normal" }}
     >
       {children}
