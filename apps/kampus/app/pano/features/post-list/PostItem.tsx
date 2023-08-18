@@ -93,7 +93,7 @@ export const PostItem = (props: PostItemProps) => {
           </div>
 
           <div className="text-muted-foreground flex items-center gap-1 text-sm">
-            <Link className="text-sm" href={post.site ? "pano/site/" + post.site : ""}>
+            <Link className="text-sm" href={post.site ? "site/" + post.site : ""}>
               {post.site ?? ""}
             </Link>
           </div>
