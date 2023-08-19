@@ -56,7 +56,7 @@ RUN npx turbo build
 FROM gcr.io/distroless/nodejs18-debian11 as kampus
 ARG NODE_ENV=development
 COPY --from=kampus-builder /app .
-#EXPOSE 3000
+EXPOSE 3000
 CMD ["node_modules/next/dist/bin/next", "dev", "-p", "3000"]
 #CMD ["npm", "run", "dev", "-w", "@kampus-apps/kampus"]
 
