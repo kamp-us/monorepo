@@ -65,7 +65,12 @@ curl https://get.volta.sh | bash
   local development access.
 - The other three services are built using the project's Dockerfile. These services are exposed on ports 3000, 3001, and
   3002 respectively.
-- Health checks are set up for each service to ensure they are running correctly.
+- If you want to run the services with Docker Compose, copy the docker-compose.dev.yml file to docker-compose.yml. This
+  file is ignored by Git to prevent accidental commits of sensitive information such as secrets and passwords.
+
+```sh
+cp docker-compose.dev.yml docker-compose.yml
+```
 
 ## Running a Fully Clean Build with Docker Compose
 
