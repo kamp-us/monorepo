@@ -1,9 +1,8 @@
-import { PrismaFindManyArguments } from "@devoxa/prisma-relay-cursor-connection";
 import hash from "object-hash";
 
 import { type ConnectionArguments } from "@kampus/gql-utils/connection";
 
-import { FindManyArgs } from "./types";
+import { type FindManyArgs } from "./types";
 
 /**
  * Represents a key to load a graphql connection object.

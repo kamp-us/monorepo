@@ -1,3 +1,10 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
+import { CreatePanoPostForm } from "../../CreatePanoPostForm";
+
 export default function CreatePost() {
-  return <div>CreatePost</div>
+  const router = useRouter();
+  return <CreatePanoPostForm onCompleted={() => router.push("/")} />;
 }
