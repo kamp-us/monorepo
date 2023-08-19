@@ -1,4 +1,4 @@
-# syntax = docker/dockerfile:1.2  
+# syntax = docker/dockerfile:1
 FROM node:18-bullseye-slim AS base
 WORKDIR /app
 RUN npm install --global turbo
