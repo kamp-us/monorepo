@@ -21,8 +21,8 @@ jobs:
         run: docker-compose build
       - name: Start Docker Compose services
         run: docker-compose up -d
-      - name: Check Docker Compose services health
-        run: | # chech if all services are up and running. Don't check health
+      - name: Check Docker Compose services are running
+        run: |
           for service in $(docker-compose ps --services); do
               if [ "$(docker inspect -f '{{.State.Status}}' $service)" != "running" ]; then
               echo "Service $service is not running"
