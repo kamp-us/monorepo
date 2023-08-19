@@ -1,13 +1,12 @@
-export type PanoPostFilterType = "all" | "active" | "hot" | "liked" | "my-posts";
+export const filters = {
+  ALL: "hepsi",
+  ACTIVE: "en son yorumlananlar",
+  MOST_COMMENTED: "en cok yorumlananlar",
+  MOST_UPVOTED: "en cok oylananlar",
+  OWNED: "başlıklarım",
+} as const;
 
-export const filters: Record<PanoPostFilterType, string> = {
-  all: "hepsi",
-  active: "en son yorumlananlar",
-  hot: "en fazla yorum almışlar",
-  liked: "beğendiklerim",
-  "my-posts": "başlıklarım",
-};
+export type PanoPostFilterType = keyof typeof filters;
 
-export const DEFAULT_FILTER_PATH = "/posts?filter=all";
 export const isPanoPostSortFilter = (x: unknown): x is PanoPostFilterType =>
   Object.keys(filters).some((filter) => filter === x);

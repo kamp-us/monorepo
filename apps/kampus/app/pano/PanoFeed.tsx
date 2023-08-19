@@ -1,4 +1,5 @@
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
+import Link from "next/link";
 import { graphql, useFragment, usePaginationFragment } from "react-relay";
 
 import { Button } from "@kampus/ui";
@@ -11,12 +12,13 @@ const fragment = graphql`
   fragment PanoFeedFragment on Viewer
   @argumentDefinitions(
     after: { type: "String" }
-    first: { type: "Int", defaultValue: 10 }
+    first: { type: "Int", defaultValue: 20 }
     before: { type: "String" }
     last: { type: "Int" }
+    filter: { type: "PanoPostFilter" }
   )
   @refetchable(queryName: "PanoFeedPaginationQuery") {
-    panoFeed(first: $first, after: $after, last: $last, before: $before)
+    panoFeed(first: $first, after: $after, last: $last, before: $before, filter: $filter)
       @connection(key: "PanoFeedFragment__panoFeed") {
       __id
       edges {
@@ -50,45 +52,46 @@ export function PanoFeed(props: Props) {
 
   const feed = data.panoFeed;
 
-  const loadPrevPage = useCallback(() => {
-    if (hasPrevious) {
-      loadPrevious(10);
-    }
-  }, [hasPrevious, loadPrevious]);
-
-  const loadNextPage = useCallback(() => {
-    if (hasNext) {
-      loadNext(10);
-    }
-  }, [hasNext, loadNext]);
-
   return (
-    <Suspense fallback="loading">
-      <section className="flex flex-col gap-4">
-        {feed?.edges?.map((edge) => {
-          if (!edge?.node) {
-            return null;
-          }
+    <>
+      <Button variant="outline" asChild>
+        <Link
+          href={{
+            pathname: `/post/create`,
+            search: `foo=bar`,
+          }}
+          as="post/create"
+        >
+          New post
+        </Link>
+      </Button>
+      <Suspense fallback="loading">
+        <section className="flex flex-col gap-4">
+          {feed?.edges?.map((edge) => {
+            if (!edge?.node) {
+              return null;
+            }
 
-          return (
-            <PostItem
-              key={edge.node.id}
-              post={edge.node}
-              viewerRef={viewer}
-              postConnectionId={data.panoFeed?.__id}
-            />
-          );
-        })}
+            return (
+              <PostItem
+                key={edge.node.id}
+                post={edge.node}
+                viewerRef={viewer}
+                postConnectionId={data.panoFeed?.__id}
+              />
+            );
+          })}
 
-        <div className="flex gap-2">
-          <Button variant="secondary" onClick={loadPrevPage} disabled={!hasPrevious}>
-            {"< Prev"}
-          </Button>
-          <Button variant="secondary" onClick={loadNextPage} disabled={!hasNext}>
-            {"Next >"}
-          </Button>
-        </div>
-      </section>
-    </Suspense>
+          <div className="flex gap-2">
+            <Button variant="secondary" onClick={() => loadPrevious(20)} disabled={!hasPrevious}>
+              {"< Prev"}
+            </Button>
+            <Button variant="secondary" onClick={() => loadNext(20)} disabled={!hasNext}>
+              {"Next >"}
+            </Button>
+          </div>
+        </section>
+      </Suspense>
+    </>
   );
 }

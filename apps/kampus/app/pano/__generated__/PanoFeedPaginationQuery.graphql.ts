@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b305e874248dc95e59805f20aac1f419>>
+ * @generated SignedSource<<a304893b2c7c2f053802820932ad4f5c>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,9 +10,11 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
+export type PanoPostFilter = "ACTIVE" | "MOST_COMMENTED" | "MOST_UPVOTED" | "OWNED" | "%future added value";
 export type PanoFeedPaginationQuery$variables = {
   after?: string | null;
   before?: string | null;
+  filter?: PanoPostFilter | null;
   first?: number | null;
   last?: number | null;
 };
@@ -39,7 +41,12 @@ var v0 = [
     "name": "before"
   },
   {
-    "defaultValue": 10,
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "filter"
+  },
+  {
+    "defaultValue": 20,
     "kind": "LocalArgument",
     "name": "first"
   },
@@ -59,6 +66,11 @@ v1 = [
     "kind": "Variable",
     "name": "before",
     "variableName": "before"
+  },
+  {
+    "kind": "Variable",
+    "name": "filter",
+    "variableName": "filter"
   },
   {
     "kind": "Variable",
@@ -190,6 +202,13 @@ return {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
+                        "name": "commentCount",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
                         "name": "isUpvotedByViewer",
                         "storageKey": null
                       },
@@ -289,7 +308,9 @@ return {
           {
             "alias": null,
             "args": (v1/*: any*/),
-            "filters": null,
+            "filters": [
+              "filter"
+            ],
             "handle": "connection",
             "key": "PanoFeedFragment__panoFeed",
             "kind": "LinkedHandle",
@@ -301,16 +322,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "2fa3d4b245b0acc80462563f1be852b7",
+    "cacheID": "bfd0b49ea530948253e68370ab0cacbe",
     "id": null,
     "metadata": {},
     "name": "PanoFeedPaginationQuery",
     "operationKind": "query",
-    "text": "query PanoFeedPaginationQuery(\n  $after: String\n  $before: String\n  $first: Int = 10\n  $last: Int\n) {\n  viewer {\n    ...PanoFeedFragment_pbnwq\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedFragment_pbnwq on Viewer {\n  panoFeed(first: $first, after: $after, last: $last, before: $before) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "query PanoFeedPaginationQuery(\n  $after: String\n  $before: String\n  $filter: PanoPostFilter\n  $first: Int = 20\n  $last: Int\n) {\n  viewer {\n    ...PanoFeedFragment_4zM71\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedFragment_4zM71 on Viewer {\n  panoFeed(first: $first, after: $after, last: $last, before: $before, filter: $filter) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();
 
-(node as any).hash = "169d642e0dd7ef004b6ba9327f096aca";
+(node as any).hash = "e8ff3d9e17828afbcf005f38a17a3264";
 
 export default node;

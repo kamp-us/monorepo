@@ -1,29 +1,23 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-
 import { ThemeToggle } from "@kampus/ui";
 
 import { PanoFilterLink } from "~/app/pano/features/post-filter/PanoFilterLink";
-import {
-  filters,
-  isPanoPostSortFilter,
-  type PanoPostFilterType,
-} from "~/app/pano/features/post-filter/utils";
+import { filters, type PanoPostFilterType } from "~/app/pano/features/post-filter/utils";
 
-export const PostSortFilters = () => {
-  const searchParams = useSearchParams();
-  let filterQuery = searchParams.get("filter") ?? "all";
+interface Props {
+  selected: PanoPostFilterType;
+}
 
-  if (!isPanoPostSortFilter(filterQuery)) {
-    console.log(filterQuery);
-    filterQuery = "all";
-  }
-
+export const PostSortFilters = (props: Props) => {
   return (
     <div className="flex items-center space-x-2">
-      {Object.entries(filters).map(([query, label]) => (
-        <PanoFilterLink key={query} query={query} activeQuery={filterQuery as PanoPostFilterType}>
+      {Object.entries(filters).map(([filter, label]) => (
+        <PanoFilterLink
+          key={filter}
+          filter={filter as PanoPostFilterType}
+          isActive={filter === props.selected}
+        >
           {label}
         </PanoFilterLink>
       ))}
