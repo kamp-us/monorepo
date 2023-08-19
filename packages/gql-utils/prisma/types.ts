@@ -1,8 +1,14 @@
+interface OrderByArgs {
+  [key: string]: "asc" | "desc" | OrderByArgs;
+}
+
 export interface FindManyArgs {
   where?: { [key: string]: string | { in: string[] } | null };
-  orderBy?: { createdAt: "asc" | "desc" };
+  orderBy?: OrderByArgs;
   cursor?: { id: string };
   take?: number;
+
+  include?: { [key: string]: FindManyArgs };
 }
 
 export interface CountArgs {
