@@ -17,7 +17,7 @@ and say hi to us at #kampus-projects channel.
 
 ## Getting started
 
-### 1) Cloning the project
+### 1. Cloning the project
 
 - Fork `kamp-us/monorepo` under your personal account.
   - eg: `usirin/monorepo`
@@ -36,7 +36,7 @@ cd monorepo
 npm install
 ```
 
-### 2) Modifying `hosts` file
+### 2. Modifying `hosts` file
 
 - Add the following text block to [your `/etc/hosts` file](https://www.howtogeek.com/27350/beginner-geek-how-to-edit-your-hosts-file/).
 
@@ -48,17 +48,11 @@ npm install
 127.0.0.1 gql.localhost.kamp.us
 ```
 
-### 3) Setting up `.env` files
+### 3. Setting up `.env` files
 
 - Duplicate `.env.example` files and rename them as `.env` in the following folders: `db/prisma`, `apps/gql`, `apps/kampus`, `apps/pasaport`.
 
-### 4) Prisma Setup and Database Configuration
-
-- Build required packages(`sozluk` and `prisma client`). (It may fail, but it's fine, continue with the next step.)
-
-```sh
-npx turbo build
-```
+### 4. Prisma Setup and Database Configuration
 
 - Move to `db/prisma` folder.
 
@@ -69,13 +63,7 @@ cd db/prisma
 - Build/start the container. (You should have docker installed.)
 
 ```sh
-docker-compose up --build
-```
-
-- Open up another terminal. Move to `db/prisma` folder. (docker-compose will keep running on previous terminal.)
-
-```sh
-cd db/prisma
+docker-compose up -d
 ```
 
 - Generate artifacts. (e.g. Prisma Client)
@@ -90,25 +78,30 @@ npm run prisma:generate
 npm run prisma:push
 ```
 
-### 5) Running dev servers
+### 5. Running dev servers
 
-- Open up 3 terminals, and run the commands below on each.
-
-```sh
-npm run dev -w @kampus-apps/kampus
-```
+- Run the command below at the root folder.
 
 ```sh
-npm run dev -w @kampus-apps/gql
-```
-
-```sh
-npm run dev -w @kampus-apps/pasaport
+# Runs "gql", "kampus" and "pasaport" apps so the platform can be alive with 1 command.
+npm run web
 ```
 
 - Now you can go to [localhost.kamp.us:3000](localhost.kamp.us:3000) to see it live. 🚀
 
-### 6) Logging in with GitHub on development server(optional)
+```sh
+# Runs all "dev" commands on each package inside the workspace
+npm run dev
+```
+
+```sh
+# Runs only "gql" server so backend work can be done separetly.
+npm run gql
+```
+
+### 6. Logging in on development server(optional)
+
+#### 6.1 GitHub
 
 - Go to [OAuth Apps page](https://github.com/settings/developers) on GitHub.
 - Click on `New OAuth App`.
@@ -121,11 +114,52 @@ npm run dev -w @kampus-apps/pasaport
 
 ```sh
 # apps/kampus, apps/pasaport
-GITHUB_ID=<Your Client ID>
-GITHUB_SECRET=<Client secret you generated>
+GITHUB_ID=<Your_Client_ID>
+GITHUB_SECRET=<Your_Client_Secret>
 ```
 
 - Now you can use `Sign in with GitHub` on development server.
+
+#### 6.2 Discord
+
+- Go to [Applications page](https://discord.com/developers/applications) on Discord.
+- Click on `New Application`.
+  - Name: "you can choose any name"
+  - Click on `Create`.
+- Go to `OAuth2` on the left sidebar.
+- Click on `Reset Secret` to generate secret key.
+- Click on `Add Redirect` and enter `http://pasaport.localhost.kamp.us:3001/auth/callback/discord`
+- Save changes.
+- Make the following changes to the corresponding files.
+
+```sh
+# apps/kampus, apps/pasaport
+DISCORD_ID=<Your_Client_ID>
+DISCORD_SECRET=<Your_Client_Secret>
+```
+
+- Now you can use `Sign in with Discord` on development server.
+
+#### 6.3 Twitch
+
+- Go to [Developer Applications page](https://dev.twitch.tv/console/apps) on Twitch.
+- Click on `Register Your Application`.
+  - Name: "you can choose any name"
+  - OAuth Redirect URLs: https://pasaport.localhost.kamp.us:3001/auth/callback/twitch
+  - Category: Website Integration
+- Click on `Create`.
+- Click on `Manage` for your application.
+- Click on `New Secret`.
+
+- Make the following changes to the corresponding files.
+
+```sh
+# apps/kampus, apps/pasaport
+TWITCH_ID=<Your_Client_ID>
+TWITCH_SECRET=<Your_Client_Secret>
+```
+
+- Now you can use `Sign in with Twitch` on development server.
 
 ## Structure
 
