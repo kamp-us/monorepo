@@ -78,6 +78,12 @@ npm run prisma:generate
 npm run prisma:push
 ```
 
+- Run seed command to fill database with demo data.
+
+```sh
+npm run prisma:seed
+```
+
 ### 5. Running dev servers
 
 - Run the command below at the root folder.
