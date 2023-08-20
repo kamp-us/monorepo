@@ -60,7 +60,7 @@ npm install
 cd db/prisma
 ```
 
-- Build/start the container. (You should have docker installed.)
+- Start the image. (You should have docker installed.)
 
 ```sh
 docker-compose up -d
@@ -120,6 +120,8 @@ GITHUB_SECRET=<Your_Client_Secret>
 
 - Now you can use `Sign in with GitHub` on development server.
 
+<!---
+
 #### 6.2 Discord
 
 - Go to [Applications page](https://discord.com/developers/applications) on Discord.
@@ -160,6 +162,8 @@ TWITCH_SECRET=<Your_Client_Secret>
 ```
 
 - Now you can use `Sign in with Twitch` on development server.
+
+-->
 
 ## Structure
 
