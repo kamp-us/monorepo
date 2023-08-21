@@ -1,3 +1,4 @@
+import { getServerSession } from "@kampus/next-auth";
 import loadSerializableQuery from "@kampus/relay/load-serializable-query";
 
 import { PostSortFilters } from "~/app/pano/features/post-filter/PostSortFilters";
@@ -19,6 +20,7 @@ const normalizeFilter = (query?: string): PanoPostFilterType | null => {
 };
 
 export default async function PostsPage({ searchParams }: { searchParams: { filter?: string } }) {
+  const session = await getServerSession();
   const normalized = normalizeFilter(searchParams.filter);
 
   const preloadedQuery = await loadSerializableQuery<PostListContainerQuery>(query, {
@@ -28,7 +30,7 @@ export default async function PostsPage({ searchParams }: { searchParams: { filt
   return (
     <div className="flex flex-col gap-4">
       <PostSortFilters selected={normalized ?? "ALL"} />
-      <PostListContainer preloadedQuery={preloadedQuery} />
+      <PostListContainer session={session} preloadedQuery={preloadedQuery} />
     </div>
   );
 }

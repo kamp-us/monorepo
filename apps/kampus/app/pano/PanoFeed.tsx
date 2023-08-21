@@ -3,6 +3,7 @@ import Link from "next/link";
 import { graphql, useFragment, usePaginationFragment } from "react-relay";
 
 import { Button } from "@kampus/ui";
+import { Session } from "@kampus/next-auth";
 
 import { PostItem } from "~/app/pano/features/post-list/PostItem";
 import { type PanoFeed_viewer$key } from "./__generated__/PanoFeed_viewer.graphql";
@@ -39,6 +40,7 @@ const viewerFragment = graphql`
 `;
 
 interface Props {
+  session: Session | null;
   panoFeed: PanoFeedFragment$key;
   panoViewer: PanoFeed_viewer$key;
 }
@@ -54,17 +56,19 @@ export function PanoFeed(props: Props) {
 
   return (
     <>
-      <Button variant="outline" asChild>
-        <Link
-          href={{
-            pathname: `/post/create`,
-            search: `foo=bar`,
-          }}
-          as="post/create"
-        >
-          New post
-        </Link>
-      </Button>
+      {props.session && (
+        <Button variant="outline" asChild>
+          <Link
+            href={{
+              pathname: `/post/create`,
+              search: `foo=bar`,
+            }}
+            as="post/create"
+          >
+            New post
+          </Link>
+        </Button>
+      )}
       <Suspense fallback="loading">
         <section className="flex flex-col gap-4">
           {feed?.edges?.map((edge) => {
