@@ -2,7 +2,6 @@
 
 import { graphql, usePreloadedQuery } from "react-relay";
 
-import { Session } from "@kampus/next-auth";
 import { type SerializablePreloadedQuery } from "@kampus/relay";
 import useSerializablePreloadedQuery from "@kampus/relay/use-serializable-preloaded-query";
 
@@ -10,7 +9,6 @@ import { type PostListContainerQuery } from "./__generated__/PostListContainerQu
 import { PanoFeed } from "./PanoFeed";
 
 interface Props {
-  session: Session | null;
   preloadedQuery: SerializablePreloadedQuery<PostListContainerQuery>;
 }
 
@@ -31,5 +29,5 @@ export const PostListContainer = (props: Props) => {
     return null;
   }
 
-  return <PanoFeed session={props.session} panoFeed={data.viewer} panoViewer={data.viewer} />;
+  return <PanoFeed panoFeed={data.viewer} panoViewer={data.viewer} />;
 };
