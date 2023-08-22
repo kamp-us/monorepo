@@ -35,6 +35,9 @@ const fragment = graphql`
 const viewerFragment = graphql`
   fragment PanoFeed_viewer on Viewer {
     ...PostItem_viewer
+    actor {
+      displayName
+    }
   }
 `;
 
@@ -49,6 +52,8 @@ export function PanoFeed(props: Props) {
     props.panoFeed
   );
   const viewer = useFragment(viewerFragment, props.panoViewer);
+  // I get undefined here.
+  console.log(viewer?.actor);
 
   const feed = data.panoFeed;
 

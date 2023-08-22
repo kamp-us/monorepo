@@ -11,6 +11,9 @@
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type PanoFeed_viewer$data = {
+  readonly actor: {
+    readonly displayName: string | null;
+  } | null;
   readonly " $fragmentSpreads": FragmentRefs<"PostItem_viewer">;
   readonly " $fragmentType": "PanoFeed_viewer";
 };
