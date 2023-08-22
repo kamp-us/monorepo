@@ -33,7 +33,7 @@ cd monorepo
 - Install dependencies.
 
 ```sh
-npm install
+npm ci
 ```
 
 ### 2. Modifying `hosts` file
