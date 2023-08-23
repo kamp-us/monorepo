@@ -47,7 +47,6 @@ COPY --from=gql-prune /app/out/package-lock.json ./package-lock.json
 COPY /tsconfig.json tsconfig.json
 RUN npm install
 COPY --from=gql-prune /app/out/full/ .
-COPY --from=gql-prune /app/out/full/apps/gql/.env.example ./apps/gql/.env
 COPY .env ./apps/pasaport/.env
 COPY turbo.json turbo.json
 RUN npx turbo build
