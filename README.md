@@ -39,7 +39,8 @@ npm ci
 
 ### 2. Modifying `hosts` file
 
-- Add the following text block to [your `/etc/hosts` file](https://www.howtogeek.com/27350/beginner-geek-how-to-edit-your-hosts-file/).
+- Add the following text block
+  to [your `/etc/hosts` file](https://www.howtogeek.com/27350/beginner-geek-how-to-edit-your-hosts-file/).
 
 ```text
 127.0.0.1 localhost.kamp.us
@@ -51,7 +52,8 @@ npm ci
 
 ### 3. Setting up `.env` files
 
-- Duplicate `.env.example` files and rename them as `.env` in the following folders: `db/prisma`, `apps/gql`, `apps/kampus`, `apps/pasaport`.
+- Duplicate `.env.example` files and rename them as `.env` in the following
+  folders: `db/prisma`, `apps/gql`, `apps/kampus`, `apps/pasaport`.
 
 ### 4. Prisma Setup and Database Configuration
 
@@ -112,9 +114,9 @@ npm run gql
 
 - Go to [OAuth Apps page](https://github.com/settings/developers) on GitHub.
 - Click on `New OAuth App`.
-  - Application name: "you can choose any name"
-  - Homepage URL: http://pasaport.localhost.kamp.us:3001/
-  - Authorization callback URL: http://pasaport.localhost.kamp.us:3001/auth/callback/github
+    - Application name: "you can choose any name"
+    - Homepage URL: http://pasaport.localhost.kamp.us:3001/
+    - Authorization callback URL: http://pasaport.localhost.kamp.us:3001/auth/callback/github
 - Click on `Register Application`.
 - On the application page, click on `Generate a new client secret`.
 - Make the following changes to the corresponding files.
@@ -207,10 +209,12 @@ curl https://get.volta.sh | bash
 - The other three services are built using the project's Dockerfile. These services are exposed on ports 3000, 3001, and
   3002 respectively.
 - If you want to run the services with Docker Compose, copy the docker-compose.dev.yml file to docker-compose.yml. This
-  file is ignored by Git to prevent accidental commits of sensitive information such as secrets and passwords.
+  file is ignored by Git to prevent accidental commits of sensitive information such as secrets and passwords. You will
+  need to update the environment variables in this file to match your local environment.
 
 ```sh
 cp docker-compose.dev.yml docker-compose.yml
+cp .env.example .env
 ```
 
 ## Running a Fully Clean Build with Docker Compose
