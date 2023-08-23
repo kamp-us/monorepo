@@ -48,4 +48,4 @@ yarn-error.log*
 !/.vscode/extensions.json
 
 # docker compose
-docker-compose.yml
+docker-compose.yaml

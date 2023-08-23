@@ -5,6 +5,7 @@ const config = {
   reactStrictMode: true,
   swcMinify: true,
   transpilePackages: ["@kampus/tailwind", "@kampus/ui", "@kampus/next-auth", "@kampus/email"],
+  output: process.env.BUILD_STANDALONE === "true" ? "standalone" : undefined,
 
   compiler: {
     relay: {
