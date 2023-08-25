@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import { Button, Checkbox, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, Label, toast, useForm, z } from "@kampus/ui";
-import { Link } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod"
 
 const meta = {
@@ -123,7 +122,7 @@ export const InsideForm = {
                     Use different settings for my mobile devices
                   </FormLabel>
                   <FormDescription>
-                    You can manage your mobile notifications in the <Link href="/examples/forms">mobile settings</Link> page.
+                    You can manage your mobile notifications in the mobile settings page.
                   </FormDescription>
                 </div>
               </FormItem>
