@@ -11,7 +11,7 @@ import { type FindManyArgs } from "./types";
  */
 export class ConnectionKey {
   /**
-   * This is useful for cases where we want to fetch "list of X belogs to Y"
+   * This is useful for cases where we want to fetch "list of X belongs to Y"
    * It's going to be used as value for connection loader's "identifier" when
    * fetching the connection. Set it to null if you are using this key to
    * fetch top level connections (e.g: PanoQuery.posts)
