@@ -2,6 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { Button, Checkbox, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, Label, toast, useForm, z } from "@kampus/ui";
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useState } from "react";
 
 const meta = {
   title: "Checkbox",
@@ -13,7 +14,7 @@ const meta = {
     },
     checked: {
       control: "boolean",
-    }
+    },
   },
 
 } satisfies Meta<typeof Checkbox>;
@@ -27,26 +28,32 @@ export const DefaultChecked = {
   },
 } satisfies Story;
 
-export const OnFocus = {
-  args: {
-    onFocus: () => {
-      const label = document.querySelector("#label");
-      label!.innerHTML = "Focused";
-    },
-  },
-  render: ({ ...props }) => (
+const OnFocusTemplate = ({ ...props }) => {
+  const [isFocused, setIsFocused] = useState(false)
+  return (
     <div className="flex flex-col space-y-2 ">
       <div className="flex items-center space-x-2">
-        <Checkbox id="checkbox" {...props} />
+        <Checkbox id="checkbox"
+          onFocus={() => {
+            setIsFocused(true)
+          }}
+          {...props} />
         <Label
           htmlFor="checkbox"
           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          <span id="label">focus to trigger 'onFocus'</span>
+          <span id="label">
+            {isFocused ? "Focused" : "Default"}
+          </span>
         </Label>
       </div>
     </div>
-  ),
+  )
+}
+
+export const OnFocus = {
+ 
+  render: ({ ...props }) => <OnFocusTemplate {...props} />,
 } satisfies Story;
 
 export const WithText = {
@@ -75,64 +82,66 @@ export const WithText = {
   ),
 } satisfies Story;
 
-export const InsideForm = {
-  render: ({ ...props }) => {
-    const FormSchema = z.object({
-      mobile: z.boolean().default(false).optional(),
+const FormComponent = ({ ...props }) => {
+  const FormSchema = z.object({
+    mobile: z.boolean().default(false).optional(),
+  })
+
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    toast({
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
     })
-
-    function onSubmit(data: z.infer<typeof FormSchema>) {
-      toast({
-        title: "You submitted the following values:",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-          </pre>
-        ),
-      })
-    }
-
-    const form = useForm<z.infer<typeof FormSchema>>(
-      FormSchema,
-      {
-        resolver: zodResolver(FormSchema),
-        values: {
-          mobile: props?.checked,
-        }
-      },
-    )
-
-    return (
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
-            control={form.control}
-            name="mobile"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    {...props}
-                  />
-                </FormControl>
-                <div className="space-y-1 leading-none">
-                  <FormLabel>
-                    Use different settings for my mobile devices
-                  </FormLabel>
-                  <FormDescription>
-                    You can manage your mobile notifications in the mobile settings page.
-                  </FormDescription>
-                </div>
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Submit</Button>
-        </form>
-      </Form>
-    )
   }
+
+  const form = useForm<z.infer<typeof FormSchema>>(
+    FormSchema,
+    {
+      resolver: zodResolver(FormSchema),
+      values: {
+        mobile: props?.checked,
+      }
+    },
+  )
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="mobile"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  {...props}
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel>
+                  Use different settings for my mobile devices
+                </FormLabel>
+                <FormDescription>
+                  You can manage your mobile notifications in the mobile settings page.
+                </FormDescription>
+              </div>
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
+  )
+}
+
+export const InsideForm = {
+  render: ({ ...props }) => <FormComponent {...props} />
 } satisfies Story;
 
 
