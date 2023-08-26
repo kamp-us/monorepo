@@ -15,11 +15,11 @@ const meta = {
     checked: {
       control: "boolean",
     },
-  },
-
+  }
 } satisfies Meta<typeof Checkbox>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const DefaultChecked = {
@@ -52,8 +52,56 @@ const OnFocusTemplate = ({ ...props }) => {
 }
 
 export const OnFocus = {
- 
   render: ({ ...props }) => <OnFocusTemplate {...props} />,
+} satisfies Story;
+
+const DescriptionTemplate = ({ ...props }) => {
+  return (
+
+    <div className="items-center flex space-x-2">
+      <Checkbox id="terms1" {...props} />
+      <div className="grid gap-1.5 leading-none">
+        <Label
+          htmlFor="terms1"
+          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        >
+          {props?.children
+            ? props?.children
+            : "Default"
+          }
+        </Label>
+        {props?.description && (
+          <p className="text-sm text-muted-foreground">
+
+            <p className="text-sm text-muted-foreground">
+              {props?.description}
+            </p>
+          </p>
+        )}
+        {props?.error && (
+          <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-red-500">
+              {props?.error}
+            </p>
+          </p>
+        )}
+      </div>
+    </div >
+  )
+}
+
+export const WithError = {
+  argTypes: {
+    disabled: {
+      control: "boolean",
+    },
+    checked: {
+      control: "boolean",
+    }
+  },
+  render: ({ ...props }) => (
+    <DescriptionTemplate {...props} error="This is an error" />
+  ),
 } satisfies Story;
 
 export const WithText = {
@@ -66,19 +114,7 @@ export const WithText = {
     }
   },
   render: ({ ...props }) => (
-    <div className="items-center flex space-x-2">
-      <Checkbox id="terms1" {...props} />
-      <div className="grid gap-1.5 leading-none">
-        <Label
-          htmlFor="terms1"
-        >
-          Accept terms and conditions
-        </Label>
-        <p className="text-sm text-muted-foreground">
-          You agree to our Terms of Service and Privacy Policy.
-        </p>
-      </div>
-    </div>
+    <DescriptionTemplate {...props} description="This is a description" />
   ),
 } satisfies Story;
 
@@ -150,18 +186,8 @@ export const Default = {
     children: "Default"
   },
   render: (
-    { children, ...props }
+    { ...props }
   ) => (
-    <div className="flex flex-col space-y-2 ">
-      <div className="flex items-center space-x-2">
-        <Checkbox id="checkbox" {...props} />
-        <Label
-          htmlFor="checkbox"
-          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-        >
-          {children}
-        </Label>
-      </div>
-    </div>
-  ),
+    <DescriptionTemplate {...props} />
+  )
 } satisfies Story;
