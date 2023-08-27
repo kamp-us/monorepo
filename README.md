@@ -101,7 +101,7 @@ npm run dev
 ```
 
 ```sh
-# Runs only "gql" server so backend work can be done separetly.
+# Runs only "gql" server so backend work can be done separately.
 npm run gql
 ```
 
