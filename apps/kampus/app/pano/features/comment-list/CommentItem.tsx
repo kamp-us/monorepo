@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { graphql, useFragment, usePaginationFragment } from "react-relay";
+import { graphql, useFragment } from "react-relay";
 
 import { cn } from "@kampus/ui/utils";
 
@@ -20,14 +20,7 @@ interface Props {
 }
 
 const commentsFragment = graphql`
-  fragment CommentItem_comment on PanoComment
-  @argumentDefinitions(
-    after: { type: "String" }
-    first: { type: "Int", defaultValue: 10 }
-    before: { type: "String" }
-    last: { type: "Int" }
-  )
-  @refetchable(queryName: "CommentItemPaginationQuery") {
+  fragment CommentItem_comment on PanoComment {
     __id
     id
     content
@@ -64,7 +57,7 @@ export const CommentItem = (props: Props) => {
 
   const hashStyles = "rounded-lg bg-amber-400 p-1";
 
-  const { data: comment } = usePaginationFragment(commentsFragment, props.comment);
+  const comment = useFragment(commentsFragment, props.comment);
   const viewer = useFragment(viewerFragment, props.viewerRef);
 
   return (
@@ -91,7 +84,7 @@ export const CommentItem = (props: Props) => {
                   comment={comment}
                   viewerRef={viewer}
                   setEditOpen={setEditing}
-                  commentConnectionID={comment.__id}
+                  commentConnectionID={props.connectionID}
                 />
               </div>
             </div>

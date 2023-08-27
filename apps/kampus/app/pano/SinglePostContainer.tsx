@@ -20,7 +20,6 @@ const query = graphql`
     pano {
       post(id: $id) {
         ...SinglePostFeed_post
-        ...SinglePostFeed_comments
       }
     }
   }
@@ -38,11 +37,9 @@ export const SinglePostContainer = (props: Props) => {
     return null;
   }
 
-  console.log(data);
-
   return (
     <div>
-      <SinglePostFeed post={data.pano.post} viewer={data.viewer} comments={data.pano.post} />
+      <SinglePostFeed viewer={data.viewer} post={data.pano.post} />
     </div>
   );
 };

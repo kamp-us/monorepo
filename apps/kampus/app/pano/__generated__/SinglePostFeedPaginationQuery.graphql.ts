@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<fa2b17258ed48e71fd87a698b99b67dd>>
+ * @generated SignedSource<<ce52e4446df9ef4183ddae82084e4dbe>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -19,7 +19,7 @@ export type SinglePostFeedPaginationQuery$variables = {
 };
 export type SinglePostFeedPaginationQuery$data = {
   readonly node: {
-    readonly " $fragmentSpreads": FragmentRefs<"SinglePostFeed_comments">;
+    readonly " $fragmentSpreads": FragmentRefs<"SinglePostFeed_post">;
   } | null;
 };
 export type SinglePostFeedPaginationQuery = {
@@ -114,60 +114,28 @@ v11 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "displayName",
+  "name": "commentCount",
   "storageKey": null
 },
-v12 = [
-  {
-    "kind": "Literal",
-    "name": "first",
-    "value": 10
-  }
-],
+v12 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "isUpvotedByViewer",
+  "storageKey": null
+},
 v13 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "cursor",
+  "name": "upvoteCount",
   "storageKey": null
 },
 v14 = {
   "alias": null,
   "args": null,
-  "concreteType": "PageInfo",
-  "kind": "LinkedField",
-  "name": "pageInfo",
-  "plural": false,
-  "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "endCursor",
-      "storageKey": null
-    },
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "hasNextPage",
-      "storageKey": null
-    },
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "hasPreviousPage",
-      "storageKey": null
-    },
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "startCursor",
-      "storageKey": null
-    }
-  ],
+  "kind": "ScalarField",
+  "name": "displayName",
   "storageKey": null
 },
 v15 = {
@@ -206,7 +174,7 @@ return {
           {
             "args": (v6/*: any*/),
             "kind": "FragmentSpread",
-            "name": "SinglePostFeed_comments"
+            "name": "SinglePostFeed_post"
           }
         ],
         "storageKey": null
@@ -242,6 +210,45 @@ return {
             "selections": [
               {
                 "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "title",
+                "storageKey": null
+              },
+              (v9/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "url",
+                "storageKey": null
+              },
+              (v10/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "site",
+                "storageKey": null
+              },
+              (v11/*: any*/),
+              (v12/*: any*/),
+              (v13/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "User",
+                "kind": "LinkedField",
+                "name": "owner",
+                "plural": false,
+                "selections": [
+                  (v14/*: any*/),
+                  (v8/*: any*/)
+                ],
+                "storageKey": null
+              },
+              {
+                "alias": null,
                 "args": (v6/*: any*/),
                 "concreteType": "PanoCommentConnection",
                 "kind": "LinkedField",
@@ -275,7 +282,7 @@ return {
                             "name": "owner",
                             "plural": false,
                             "selections": [
-                              (v11/*: any*/),
+                              (v14/*: any*/),
                               (v8/*: any*/),
                               {
                                 "alias": null,
@@ -287,99 +294,63 @@ return {
                             ],
                             "storageKey": null
                           },
-                          {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "commentCount",
-                            "storageKey": null
-                          },
-                          {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "isUpvotedByViewer",
-                            "storageKey": null
-                          },
-                          {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "upvoteCount",
-                            "storageKey": null
-                          },
-                          {
-                            "alias": null,
-                            "args": (v12/*: any*/),
-                            "concreteType": "PanoCommentConnection",
-                            "kind": "LinkedField",
-                            "name": "comments",
-                            "plural": false,
-                            "selections": [
-                              {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "PanoCommentEdge",
-                                "kind": "LinkedField",
-                                "name": "edges",
-                                "plural": true,
-                                "selections": [
-                                  {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "PanoComment",
-                                    "kind": "LinkedField",
-                                    "name": "node",
-                                    "plural": false,
-                                    "selections": [
-                                      (v8/*: any*/),
-                                      (v9/*: any*/),
-                                      (v10/*: any*/),
-                                      {
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "User",
-                                        "kind": "LinkedField",
-                                        "name": "owner",
-                                        "plural": false,
-                                        "selections": [
-                                          (v11/*: any*/),
-                                          (v8/*: any*/)
-                                        ],
-                                        "storageKey": null
-                                      },
-                                      (v7/*: any*/)
-                                    ],
-                                    "storageKey": null
-                                  },
-                                  (v13/*: any*/)
-                                ],
-                                "storageKey": null
-                              },
-                              (v14/*: any*/),
-                              (v15/*: any*/)
-                            ],
-                            "storageKey": "comments(first:10)"
-                          },
-                          {
-                            "alias": null,
-                            "args": (v12/*: any*/),
-                            "filters": null,
-                            "handle": "connection",
-                            "key": "SinglePostFeedFragment__comments",
-                            "kind": "LinkedHandle",
-                            "name": "comments"
-                          },
+                          (v11/*: any*/),
+                          (v12/*: any*/),
+                          (v13/*: any*/),
                           (v15/*: any*/),
                           (v7/*: any*/)
                         ],
                         "storageKey": null
                       },
-                      (v13/*: any*/)
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "cursor",
+                        "storageKey": null
+                      }
                     ],
                     "storageKey": null
                   },
-                  (v14/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "PageInfo",
+                    "kind": "LinkedField",
+                    "name": "pageInfo",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "endCursor",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "hasNextPage",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "hasPreviousPage",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "startCursor",
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  },
                   (v15/*: any*/)
                 ],
                 "storageKey": null
@@ -403,16 +374,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "ab85c13bf0adbf6aa1a44d1ee92f7c1a",
+    "cacheID": "e4ccbcec59e430ace0075c245d018eea",
     "id": null,
     "metadata": {},
     "name": "SinglePostFeedPaginationQuery",
     "operationKind": "query",
-    "text": "query SinglePostFeedPaginationQuery(\n  $after: String\n  $before: String\n  $first: Int = 10\n  $last: Int\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...SinglePostFeed_comments_pbnwq\n    id\n  }\n}\n\nfragment CommentItem_comment on PanoComment {\n  id\n  content\n  createdAt\n  owner {\n    username\n    id\n  }\n  commentCount\n  ...CommentUpvoteButton_comment\n  ...CommentMoreOptions_comment\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment CommentMoreOptions_comment on PanoComment {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment CommentUpvoteButton_comment on PanoComment {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment SinglePostFeed_comments_pbnwq on PanoPost {\n  comments(first: $first, after: $after, last: $last, before: $before) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n        ...CommentItem_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n"
+    "text": "query SinglePostFeedPaginationQuery(\n  $after: String\n  $before: String\n  $first: Int = 10\n  $last: Int\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...SinglePostFeed_post_pbnwq\n    id\n  }\n}\n\nfragment CommentItem_comment on PanoComment {\n  id\n  content\n  createdAt\n  owner {\n    username\n    id\n  }\n  commentCount\n  ...CommentUpvoteButton_comment\n  ...CommentMoreOptions_comment\n}\n\nfragment CommentMoreOptions_comment on PanoComment {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment CommentUpvoteButton_comment on PanoComment {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment SinglePostFeed_post_pbnwq on PanoPost {\n  ...PostItem_post\n  commentCount\n  comments(first: $first, after: $after, last: $last, before: $before) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n        ...CommentItem_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "57d153a783c423667bcb2e8060357ff5";
+(node as any).hash = "9a823242557fcbb88aa261d3d40a0fef";
 
 export default node;

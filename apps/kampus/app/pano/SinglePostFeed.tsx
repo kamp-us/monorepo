@@ -2,7 +2,6 @@ import { graphql, useFragment, usePaginationFragment } from "react-relay";
 
 import { Separator } from "@kampus/ui";
 
-import { SinglePostFeed_comments$key } from "./__generated__/SinglePostFeed_comments.graphql";
 import { SinglePostFeed_post$key } from "./__generated__/SinglePostFeed_post.graphql";
 import { SinglePostFeed_viewer$key } from "./__generated__/SinglePostFeed_viewer.graphql";
 import { CreatePanoCommentForm } from "./CreatePostCommentForm";
@@ -10,13 +9,12 @@ import { CommentItem } from "./features/comment-list/CommentItem";
 import { PostItem } from "./features/post-list/PostItem";
 
 interface SinglePostFeedProps {
-  post: SinglePostFeed_post$key;
   viewer: SinglePostFeed_viewer$key;
-  comments: SinglePostFeed_comments$key;
+  post: SinglePostFeed_post$key;
 }
 
 const fragment = graphql`
-  fragment SinglePostFeed_comments on PanoPost
+  fragment SinglePostFeed_post on PanoPost
   @argumentDefinitions(
     after: { type: "String" }
     first: { type: "Int", defaultValue: 10 }
@@ -24,6 +22,8 @@ const fragment = graphql`
     last: { type: "Int" }
   )
   @refetchable(queryName: "SinglePostFeedPaginationQuery") {
+    ...PostItem_post
+    commentCount
     comments(first: $first, after: $after, last: $last, before: $before)
       @connection(key: "SinglePostFeedFragment__comments") {
       __id
@@ -42,12 +42,6 @@ const fragment = graphql`
   }
 `;
 
-const postFragment = graphql`
-  fragment SinglePostFeed_post on PanoPost {
-    ...PostItem_post
-  }
-`;
-
 const viewerFragment = graphql`
   fragment SinglePostFeed_viewer on Viewer {
     ...PostItem_viewer
@@ -57,17 +51,24 @@ const viewerFragment = graphql`
 `;
 
 export const SinglePostFeed = (props: SinglePostFeedProps) => {
-  const post = useFragment(postFragment, props.post);
   const viewer = useFragment(viewerFragment, props.viewer);
-  const { data } = usePaginationFragment(fragment, props.comments);
+  const { data, refetch } = usePaginationFragment(fragment, props.post);
 
+  // TODO: fetch comments in asc order for their createdAt
   const comments = data.comments;
 
   return (
     <div className="flex flex-col gap-4">
-      <PostItem post={post} showContent viewerRef={viewer} />
+      <PostItem post={data} showContent viewerRef={viewer} />
       <Separator />
-      <CreatePanoCommentForm viewer={viewer} connectionID={comments?.__id} />
+      {/* I'm sure this is pretty bad but it gets the job done
+          It's showing a loading indicator for a small time
+      */}
+      <CreatePanoCommentForm
+        onCompleted={() => refetch({})}
+        viewer={viewer}
+        connectionID={comments?.__id}
+      />
       <h2>Yorumlar</h2>
       {comments?.edges?.map((edge) => {
         if (!edge?.node) return null;

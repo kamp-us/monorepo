@@ -88,6 +88,7 @@ export function CreatePanoCommentForm(props: Props) {
       },
       onCompleted: () => {
         props.onCompleted?.();
+        form.resetField("content");
       },
     });
   };

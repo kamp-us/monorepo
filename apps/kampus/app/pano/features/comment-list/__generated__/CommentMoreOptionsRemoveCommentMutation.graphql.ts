@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<40c4678a86dee1cd7afe283fcf61f8c2>>
+ * @generated SignedSource<<c8d29f78c17a20141e7dd7047ef0bd90>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -17,8 +17,13 @@ export type CommentMoreOptionsRemoveCommentMutation$data = {
   readonly removePanoComment: {
     readonly edge: {
       readonly node: {
+        readonly commentCount: number | null;
         readonly content: string;
+        readonly createdAt: any;
         readonly id: string;
+        readonly owner: {
+          readonly username: string;
+        } | null;
       } | null;
     } | null;
   } | null;
@@ -65,6 +70,27 @@ v4 = {
   "kind": "ScalarField",
   "name": "content",
   "storageKey": null
+},
+v5 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "createdAt",
+  "storageKey": null
+},
+v6 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "username",
+  "storageKey": null
+},
+v7 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "commentCount",
+  "storageKey": null
 };
 return {
   "fragment": {
@@ -101,7 +127,21 @@ return {
                 "plural": false,
                 "selections": [
                   (v3/*: any*/),
-                  (v4/*: any*/)
+                  (v4/*: any*/),
+                  (v5/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "User",
+                    "kind": "LinkedField",
+                    "name": "owner",
+                    "plural": false,
+                    "selections": [
+                      (v6/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  (v7/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -165,7 +205,22 @@ return {
                       }
                     ]
                   },
-                  (v4/*: any*/)
+                  (v4/*: any*/),
+                  (v5/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "User",
+                    "kind": "LinkedField",
+                    "name": "owner",
+                    "plural": false,
+                    "selections": [
+                      (v6/*: any*/),
+                      (v3/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  (v7/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -178,16 +233,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "824f2fed1e22cdbeb95e7ec6adb07ddb",
+    "cacheID": "78e4d9921483f86a6076b452530f1aa3",
     "id": null,
     "metadata": {},
     "name": "CommentMoreOptionsRemoveCommentMutation",
     "operationKind": "mutation",
-    "text": "mutation CommentMoreOptionsRemoveCommentMutation(\n  $commentID: ID!\n) {\n  removePanoComment(input: {id: $commentID}) {\n    edge {\n      node {\n        id\n        content\n      }\n    }\n  }\n}\n"
+    "text": "mutation CommentMoreOptionsRemoveCommentMutation(\n  $commentID: ID!\n) {\n  removePanoComment(input: {id: $commentID}) {\n    edge {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          username\n          id\n        }\n        commentCount\n      }\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "0f0b2f95d3b023f6f113dc2f598788bd";
+(node as any).hash = "465d3b9b88d7e9f384da3b700d378142";
 
 export default node;

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c7412e25e0aa3de110fd8aa04837d3d6>>
+ * @generated SignedSource<<a4e47c67ef1690cd17e6b67e1121af58>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -86,38 +86,31 @@ v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "__typename",
+  "name": "id",
   "storageKey": null
 },
 v8 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "id",
+  "name": "content",
   "storageKey": null
 },
 v9 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "content",
+  "name": "createdAt",
   "storageKey": null
 },
 v10 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "createdAt",
+  "name": "username",
   "storageKey": null
 },
 v11 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "displayName",
-  "storageKey": null
-},
-v12 = {
   "kind": "ClientExtension",
   "selections": [
     {
@@ -182,13 +175,19 @@ return {
         "name": "node",
         "plural": false,
         "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "__typename",
+            "storageKey": null
+          },
           (v7/*: any*/),
-          (v8/*: any*/),
           {
             "kind": "InlineFragment",
             "selections": [
+              (v8/*: any*/),
               (v9/*: any*/),
-              (v10/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -197,15 +196,15 @@ return {
                 "name": "owner",
                 "plural": false,
                 "selections": [
+                  (v10/*: any*/),
+                  (v7/*: any*/),
                   {
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
-                    "name": "username",
+                    "name": "displayName",
                     "storageKey": null
-                  },
-                  (v8/*: any*/),
-                  (v11/*: any*/)
+                  }
                 ],
                 "storageKey": null
               },
@@ -254,9 +253,9 @@ return {
                         "name": "node",
                         "plural": false,
                         "selections": [
+                          (v7/*: any*/),
                           (v8/*: any*/),
                           (v9/*: any*/),
-                          (v10/*: any*/),
                           {
                             "alias": null,
                             "args": null,
@@ -265,78 +264,22 @@ return {
                             "name": "owner",
                             "plural": false,
                             "selections": [
-                              (v11/*: any*/),
-                              (v8/*: any*/)
+                              (v10/*: any*/),
+                              (v7/*: any*/)
                             ],
                             "storageKey": null
-                          },
-                          (v7/*: any*/)
+                          }
                         ],
                         "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "cursor",
-                        "storageKey": null
                       }
                     ],
                     "storageKey": null
                   },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "PageInfo",
-                    "kind": "LinkedField",
-                    "name": "pageInfo",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "endCursor",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "hasNextPage",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "hasPreviousPage",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "startCursor",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
-                  (v12/*: any*/)
+                  (v11/*: any*/)
                 ],
                 "storageKey": null
               },
-              {
-                "alias": null,
-                "args": (v6/*: any*/),
-                "filters": null,
-                "handle": "connection",
-                "key": "SinglePostFeedFragment__comments",
-                "kind": "LinkedHandle",
-                "name": "comments"
-              },
-              (v12/*: any*/)
+              (v11/*: any*/)
             ],
             "type": "PanoComment",
             "abstractKey": null
@@ -347,16 +290,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "8013659cc3f110eb5694c30ae380dc79",
+    "cacheID": "11791422d3533b2da6a517d5dfc58756",
     "id": null,
     "metadata": {},
     "name": "CommentItemPaginationQuery",
     "operationKind": "query",
-    "text": "query CommentItemPaginationQuery(\n  $after: String\n  $before: String\n  $first: Int = 10\n  $last: Int\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...CommentItem_comment_pbnwq\n    id\n  }\n}\n\nfragment CommentItem_comment_pbnwq on PanoComment {\n  id\n  content\n  createdAt\n  owner {\n    username\n    id\n  }\n  commentCount\n  ...CommentUpvoteButton_comment\n  ...CommentMoreOptions_comment\n  comments(first: $first, after: $after, last: $last, before: $before) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment CommentMoreOptions_comment on PanoComment {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment CommentUpvoteButton_comment on PanoComment {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "query CommentItemPaginationQuery(\n  $after: String\n  $before: String\n  $first: Int = 10\n  $last: Int\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...CommentItem_comment_pbnwq\n    id\n  }\n}\n\nfragment CommentItem_comment_pbnwq on PanoComment {\n  id\n  content\n  createdAt\n  owner {\n    username\n    id\n  }\n  commentCount\n  ...CommentUpvoteButton_comment\n  ...CommentMoreOptions_comment\n  comments(first: $first, after: $after, last: $last, before: $before) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          username\n          id\n        }\n      }\n    }\n  }\n}\n\nfragment CommentMoreOptions_comment on PanoComment {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment CommentUpvoteButton_comment on PanoComment {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();
 
-(node as any).hash = "a83d4c2aacd3443ebbe2ed46adf1cf25";
+(node as any).hash = "d35e55dd3f4a4c0ffc07c9133170c4c6";
 
 export default node;
