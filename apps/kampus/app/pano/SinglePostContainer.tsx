@@ -5,7 +5,7 @@ import { graphql, usePreloadedQuery } from "react-relay";
 import { type SerializablePreloadedQuery } from "@kampus/relay";
 import useSerializablePreloadedQuery from "@kampus/relay/use-serializable-preloaded-query";
 
-import { SinglePostContainerQuery } from "./__generated__/SinglePostContainerQuery.graphql";
+import { type SinglePostContainerQuery } from "./__generated__/SinglePostContainerQuery.graphql";
 import { SinglePostFeed } from "./SinglePostFeed";
 
 interface Props {

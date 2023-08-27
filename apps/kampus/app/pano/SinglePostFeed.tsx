@@ -2,8 +2,8 @@ import { graphql, useFragment, usePaginationFragment } from "react-relay";
 
 import { Separator } from "@kampus/ui";
 
-import { SinglePostFeed_post$key } from "./__generated__/SinglePostFeed_post.graphql";
-import { SinglePostFeed_viewer$key } from "./__generated__/SinglePostFeed_viewer.graphql";
+import { type SinglePostFeed_post$key } from "./__generated__/SinglePostFeed_post.graphql";
+import { type SinglePostFeed_viewer$key } from "./__generated__/SinglePostFeed_viewer.graphql";
 import { CreatePanoCommentForm } from "./CreatePostCommentForm";
 import { CommentItem } from "./features/comment-list/CommentItem";
 import { PostItem } from "./features/post-list/PostItem";

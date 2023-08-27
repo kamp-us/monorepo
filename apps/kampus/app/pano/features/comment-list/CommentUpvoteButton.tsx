@@ -3,7 +3,7 @@ import { graphql, useFragment } from "react-relay";
 
 import { Button } from "@kampus/ui";
 
-import { CommentUpvoteButton_comment$key } from "./__generated__/CommentUpvoteButton_comment.graphql";
+import { type CommentUpvoteButton_comment$key } from "./__generated__/CommentUpvoteButton_comment.graphql";
 
 interface Props {
   commentRef: CommentUpvoteButton_comment$key;
@@ -46,7 +46,9 @@ export const CommentUpvoteButton = (props: Props) => {
   const upvoteStyle = comment?.isUpvotedByViewer ? "fill-primary" : "fill-none";
 
   const disabled = false;
-  const onClick = () => {};
+  const onClick = () => {
+    console.log("DO UPVOTE MUTATION");
+  };
 
   return (
     <>

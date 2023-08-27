@@ -22,8 +22,8 @@ import {
   useToast,
 } from "@kampus/ui";
 
-import { CommentMoreOptions_comment$key } from "./__generated__/CommentMoreOptions_comment.graphql";
-import { CommentMoreOptions_viewer$key } from "./__generated__/CommentMoreOptions_viewer.graphql";
+import { type CommentMoreOptions_comment$key } from "./__generated__/CommentMoreOptions_comment.graphql";
+import { type CommentMoreOptions_viewer$key } from "./__generated__/CommentMoreOptions_viewer.graphql";
 
 interface Props {
   comment: CommentMoreOptions_comment$key | null;

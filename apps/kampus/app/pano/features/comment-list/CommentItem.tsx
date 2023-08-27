@@ -8,8 +8,8 @@ import { cn } from "@kampus/ui/utils";
 
 import { Card, CardContent, TimeAgo } from "~/../../packages/ui";
 import { UpdateCommentForm } from "../../UpdateCommentForm";
-import { CommentItem_comment$key } from "./__generated__/CommentItem_comment.graphql";
-import { CommentItem_viewer$key } from "./__generated__/CommentItem_viewer.graphql";
+import { type CommentItem_comment$key } from "./__generated__/CommentItem_comment.graphql";
+import { type CommentItem_viewer$key } from "./__generated__/CommentItem_viewer.graphql";
 import { CommentMoreOptions } from "./CommentMoreOptions";
 import { CommentUpvoteButton } from "./CommentUpvoteButton";
 

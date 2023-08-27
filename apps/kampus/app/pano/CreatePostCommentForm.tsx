@@ -16,7 +16,7 @@ import {
   useForm,
 } from "@kampus/ui";
 
-import { CreatePostCommentForm_viewer$key } from "./__generated__/CreatePostCommentForm_viewer.graphql";
+import { type CreatePostCommentForm_viewer$key } from "./__generated__/CreatePostCommentForm_viewer.graphql";
 
 const mutation = graphql`
   mutation CreatePostCommentFormMutation(
@@ -80,7 +80,7 @@ export function CreatePanoCommentForm(props: Props) {
     commit({
       variables: {
         content: values.content,
-        postID: decodeURIComponent(postID!),
+        postID: decodeURIComponent(postID ?? ""),
         connections: [props.connectionID].filter(Boolean),
       },
       onError: (error) => {

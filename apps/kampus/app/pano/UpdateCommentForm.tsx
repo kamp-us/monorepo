@@ -16,7 +16,7 @@ import {
   useForm,
 } from "@kampus/ui";
 
-import { UpdateCommentForm_viewer$key } from "./__generated__/UpdateCommentForm_viewer.graphql";
+import { type UpdateCommentForm_viewer$key } from "./__generated__/UpdateCommentForm_viewer.graphql";
 
 const mutation = graphql`
   mutation UpdateCommentFormMutation($content: String!, $id: ID!) {
