@@ -85,15 +85,17 @@ export const PostItem = (props: PostItemProps) => {
 
       <CardContent className="flex flex-1 flex-col gap-2 p-0">
         <CardTitle className="flex gap-3">
-          <Link className="font-semibold" href={post.url ?? ""}>
-            {post.title}
-          </Link>
-
-          <div className="text-muted-foreground flex items-center gap-1 text-sm">
-            <Link className="text-sm" href={post.url ?? ""}>
-              {post.site ?? ""}
+          <div className="flex items-center gap-1.5">
+            <Link className="font-semibold" href={post.url ?? ""}>
+              {post.title}
             </Link>
             <ExternalLinkIcon size={12} />
+          </div>
+
+          <div className="text-muted-foreground flex items-center gap-1 text-sm">
+            <Link className="text-sm" href={post.site ? "/site/" + post.site : ""}>
+              {post.site ?? ""}
+            </Link>
           </div>
         </CardTitle>
         <div className="text-muted-foreground flex text-sm">

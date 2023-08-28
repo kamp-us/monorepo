@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-// export zod for convinience
+// export zod for convenience
 export { z };
 
 export * from "./components";

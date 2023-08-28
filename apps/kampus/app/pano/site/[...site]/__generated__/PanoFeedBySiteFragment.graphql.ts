@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<ebb4eee4ecf6b67839a38d96daf93392>>
+ * @generated SignedSource<<8b97acf2030f40e9fd4eb8160fe8f870>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,8 +10,8 @@
 
 import { ReaderFragment, RefetchableFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type PanoFeedFragment$data = {
-  readonly panoFeed: {
+export type PanoFeedBySiteFragment$data = {
+  readonly panoFeedBySite: {
     readonly __id: string;
     readonly edges: ReadonlyArray<{
       readonly cursor: string;
@@ -21,16 +21,16 @@ export type PanoFeedFragment$data = {
       } | null;
     } | null> | null;
   } | null;
-  readonly " $fragmentType": "PanoFeedFragment";
+  readonly " $fragmentType": "PanoFeedBySiteFragment";
 };
-export type PanoFeedFragment$key = {
-  readonly " $data"?: PanoFeedFragment$data;
-  readonly " $fragmentSpreads": FragmentRefs<"PanoFeedFragment">;
+export type PanoFeedBySiteFragment$key = {
+  readonly " $data"?: PanoFeedBySiteFragment$data;
+  readonly " $fragmentSpreads": FragmentRefs<"PanoFeedBySiteFragment">;
 };
 
 const node: ReaderFragment = (function(){
 var v0 = [
-  "panoFeed"
+  "panoFeedBySite"
 ];
 return {
   "argumentDefinitions": [
@@ -40,33 +40,23 @@ return {
       "name": "after"
     },
     {
-      "defaultValue": null,
-      "kind": "LocalArgument",
-      "name": "before"
-    },
-    {
-      "defaultValue": null,
-      "kind": "LocalArgument",
-      "name": "filter"
-    },
-    {
-      "defaultValue": 20,
+      "defaultValue": 10,
       "kind": "LocalArgument",
       "name": "first"
     },
     {
       "defaultValue": null,
       "kind": "LocalArgument",
-      "name": "last"
+      "name": "site"
     }
   ],
   "kind": "Fragment",
   "metadata": {
     "connection": [
       {
-        "count": null,
-        "cursor": null,
-        "direction": "bidirectional",
+        "count": "first",
+        "cursor": "after",
+        "direction": "forward",
         "path": (v0/*: any*/)
       }
     ],
@@ -76,32 +66,29 @@ return {
           "count": "first",
           "cursor": "after"
         },
-        "backward": {
-          "count": "last",
-          "cursor": "before"
-        },
+        "backward": null,
         "path": (v0/*: any*/)
       },
       "fragmentPathInResult": [
         "viewer"
       ],
-      "operation": require('./PanoFeedPaginationQuery.graphql')
+      "operation": require('./PanoFeedBySitePaginationQuery.graphql')
     }
   },
-  "name": "PanoFeedFragment",
+  "name": "PanoFeedBySiteFragment",
   "selections": [
     {
-      "alias": "panoFeed",
+      "alias": "panoFeedBySite",
       "args": [
         {
           "kind": "Variable",
-          "name": "filter",
-          "variableName": "filter"
+          "name": "site",
+          "variableName": "site"
         }
       ],
       "concreteType": "PanoPostConnection",
       "kind": "LinkedField",
-      "name": "__PanoFeedFragment__panoFeed_connection",
+      "name": "__PanoFeedBySiteFragment__panoFeedBySite_connection",
       "plural": false,
       "selections": [
         {
@@ -173,20 +160,6 @@ return {
               "kind": "ScalarField",
               "name": "hasNextPage",
               "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "hasPreviousPage",
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "startCursor",
-              "storageKey": null
             }
           ],
           "storageKey": null
@@ -212,6 +185,6 @@ return {
 };
 })();
 
-(node as any).hash = "e8ff3d9e17828afbcf005f38a17a3264";
+(node as any).hash = "a1858424257de428f52a047f9c4c99fb";
 
 export default node;
