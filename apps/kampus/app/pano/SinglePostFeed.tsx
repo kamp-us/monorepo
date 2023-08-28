@@ -61,14 +61,7 @@ export const SinglePostFeed = (props: SinglePostFeedProps) => {
     <div className="flex flex-col gap-4">
       <PostItem post={data} showContent viewerRef={viewer} />
       <Separator />
-      {/* I'm sure this is pretty bad but it gets the job done
-          It's showing a loading indicator for a small time
-      */}
-      <CreatePanoCommentForm
-        onCompleted={() => refetch({})}
-        viewer={viewer}
-        connectionID={comments?.__id}
-      />
+      <CreatePanoCommentForm viewer={viewer} connectionID={comments?.__id} />
       <h2>Yorumlar</h2>
       {comments?.edges?.map((edge) => {
         if (!edge?.node) return null;
