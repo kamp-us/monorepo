@@ -37,7 +37,6 @@ const useMoreOptionsPostFragment = (key: MoreOptions_post$key | null) =>
     graphql`
       fragment MoreOptions_post on PanoPost {
         id
-        url
         owner {
           displayName
         }
@@ -119,7 +118,6 @@ export const MoreOptionsDropdown = (props: Props) => {
           )}
           <DropdownMenuItem
             onSelect={() => {
-              navigator.clipboard.writeText(`${post?.url}`);
               toast({
                 description: "Link kopyalandı",
               });

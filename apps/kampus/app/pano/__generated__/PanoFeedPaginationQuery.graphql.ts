@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<be422874c71ab9045367563c7eae7f4d>>
+ * @generated SignedSource<<a304893b2c7c2f053802820932ad4f5c>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -322,12 +322,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "42f9bc63ad8476fb1528c93a5bb98d71",
+    "cacheID": "bfd0b49ea530948253e68370ab0cacbe",
     "id": null,
     "metadata": {},
     "name": "PanoFeedPaginationQuery",
     "operationKind": "query",
-    "text": "query PanoFeedPaginationQuery(\n  $after: String\n  $before: String\n  $filter: PanoPostFilter\n  $first: Int = 20\n  $last: Int\n) {\n  viewer {\n    ...PanoFeedFragment_4zM71\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  url\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedFragment_4zM71 on Viewer {\n  panoFeed(first: $first, after: $after, last: $last, before: $before, filter: $filter) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "query PanoFeedPaginationQuery(\n  $after: String\n  $before: String\n  $filter: PanoPostFilter\n  $first: Int = 20\n  $last: Int\n) {\n  viewer {\n    ...PanoFeedFragment_4zM71\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedFragment_4zM71 on Viewer {\n  panoFeed(first: $first, after: $after, last: $last, before: $before, filter: $filter) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();
