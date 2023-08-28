@@ -52,7 +52,7 @@ const viewerFragment = graphql`
 
 export const SinglePostFeed = (props: SinglePostFeedProps) => {
   const viewer = useFragment(viewerFragment, props.viewer);
-  const { data, refetch } = usePaginationFragment(fragment, props.post);
+  const { data } = usePaginationFragment(fragment, props.post);
 
   // TODO: fetch comments in asc order for their createdAt
   const comments = data.comments;
