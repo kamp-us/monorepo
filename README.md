@@ -5,7 +5,8 @@ kamp.us web projects & packages
 - sozluk: turkce terimler sozlugu - https://sozluk.dev.kamp.us
 - pano: link & bilgi & soru cevap paylasim platformu - https://pano.dev.kamp.us
 - gql: https://gql.dev.kamp.us/graphql
-- pasaport: kampus icin kullanici bilgileri & [centralized auth](https://sozluk.dev.kamp.us/centralized-auth) servisi - https://pasaport.dev.kamp.us
+- pasaport: kampus icin kullanici bilgileri & [centralized auth](https://sozluk.dev.kamp.us/centralized-auth)
+  servisi - https://pasaport.dev.kamp.us
 - storybook: @kampus/ui paketi icin hosted storybook - https://ui.dev.kamp.us
 
 ## IMPORTANT NOTE
@@ -20,7 +21,7 @@ and say hi to us at #kampus-projects channel.
 ### 1. Cloning the project
 
 - Fork `kamp-us/monorepo` under your personal account.
-  - eg: `usirin/monorepo`
+    - eg: `usirin/monorepo`
 - Clone the project to your local computer:
 
 ```sh
@@ -38,7 +39,8 @@ npm ci
 
 ### 2. Modifying `hosts` file
 
-- Add the following text block to [your `/etc/hosts` file](https://www.howtogeek.com/27350/beginner-geek-how-to-edit-your-hosts-file/).
+- Add the following text block
+  to [your `/etc/hosts` file](https://www.howtogeek.com/27350/beginner-geek-how-to-edit-your-hosts-file/).
 
 ```text
 127.0.0.1 localhost.kamp.us
@@ -50,7 +52,8 @@ npm ci
 
 ### 3. Setting up `.env` files
 
-- Duplicate `.env.example` files and rename them as `.env` in the following folders: `db/prisma`, `apps/gql`, `apps/kampus`, `apps/pasaport`.
+- Duplicate `.env.example` files and rename them as `.env` in the following
+  folders: `db/prisma`, `apps/gql`, `apps/kampus`, `apps/pasaport`.
 
 ### 4. Prisma Setup and Database Configuration
 
@@ -111,9 +114,9 @@ npm run gql
 
 - Go to [OAuth Apps page](https://github.com/settings/developers) on GitHub.
 - Click on `New OAuth App`.
-  - Application name: "you can choose any name"
-  - Homepage URL: http://pasaport.localhost.kamp.us:3001/
-  - Authorization callback URL: http://pasaport.localhost.kamp.us:3001/auth/callback/github
+    - Application name: "you can choose any name"
+    - Homepage URL: http://pasaport.localhost.kamp.us:3001/
+    - Authorization callback URL: http://pasaport.localhost.kamp.us:3001/auth/callback/github
 - Click on `Register Application`.
 - On the application page, click on `Generate a new client secret`.
 - Make the following changes to the corresponding files.
@@ -186,4 +189,52 @@ If you haven't already install [Volta](https://volta.sh), you can install instal
 
 ```sh
 curl https://get.volta.sh | bash
+```
+
+## Docker Setup
+
+### Dockerfile
+
+- We use a multi-stage build process to separate the building of applications from the final production image. This
+  ensures smaller and more optimized production images.
+- We build three services: `kampus`, `gql`, and `pasaport`. Each service has its dedicated builder stage followed by its
+  execution stage.
+- The `node:18-bullseye-slim` image is used to keep the final production images lean.
+
+### Docker Compose
+
+- We have four primary services: `mysql`, `kampus`, `gql`, and `pasaport`.
+- `mysql` is the database service. We ensure that its authentication is set correctly and ports are mapped to allow for
+  local development access.
+- The other three services are built using the project's Dockerfile. These services are exposed on ports 3000, 3001, and
+  3002 respectively.
+- If you want to run the services with Docker Compose, copy the docker-compose.dev.yml file to docker-compose.yml. This
+  file is ignored by Git to prevent accidental commits of sensitive information such as secrets and passwords. You will
+  need to update the environment variables in this file to match your local environment.
+
+```sh
+cp docker-compose.dev.yml docker-compose.yml
+cp .env.example .env
+```
+
+## Running a Fully Clean Build with Docker Compose
+
+- To build the images and run the containers, run the following command:
+
+```sh
+docker-compose up --build -d
+```
+
+- To stop the containers, run the following command:
+
+```sh
+docker-compose down
+```
+
+## Running a Fully Clean Build with Docker
+
+- Build and start the services, ensuring Docker Compose builds the images from scratch without using any cache.
+
+```sh
+docker-compose up --build --force-recreate
 ```

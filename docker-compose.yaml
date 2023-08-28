@@ -1,0 +1,142 @@
+version: "3.9"
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: kampus
+      MYSQL_DATABASE: kampus
+      MYSQL_USER: kampus
+      MYSQL_PASSWORD: kampus
+    volumes:
+      - mysqldata:/var/lib/mysql
+    networks:
+      - kampus-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-p$MYSQL_ROOT_PASSWORD" ]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+
+  kampus:
+    container_name: kampus
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: kampus
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    networks:
+      - kampus-network
+    volumes:
+      - kampusdata:/app
+    env_file:
+      - .env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+  #    healthcheck: # TODO: Add healthcheck for kampus
+  #      test: [ "CMD", "curl", "-f", "http://localhost:3000" ]
+  #      interval: 30s
+  #      timeout: 10s
+  #      retries: 3
+
+  gql:
+    container_name: gql
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: gql
+    ports:
+      - "4000:3000"
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    networks:
+      - kampus-network
+    volumes:
+      - gqldata:/app
+    env_file:
+      - .env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+  #    healthcheck: # TODO: Add healthcheck for gql
+  #      test: [ "CMD", "curl", "-f", "http://localhost:3002" ]
+  #      interval: 30s
+  #      timeout: 10s
+  #      retries: 3
+
+  pasaport:
+    container_name: pasaport
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: pasaport
+    ports:
+      - "3001:3000"
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    networks:
+      - kampus-network
+    volumes:
+      - pasaportdata:/app
+    env_file:
+      - .env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+  #    healthcheck: # TODO: Add healthcheck for pasaport
+  #      test: [ "CMD", "curl", "-f", "http://localhost:3001" ]
+  #      interval: 30s
+  #      timeout: 10s
+  #      retries: 3
+  proxy:
+    container_name: proxy
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: proxy
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+      - "5002:5002"
+    restart: unless-stopped
+    depends_on:
+      - kampus
+      - gql
+      - pasaport
+    networks:
+      - kampus-network
+    volumes:
+      - proxydata:/app
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+
+volumes:
+  mysqldata:
+  kampusdata:
+  gqldata:
+  pasaportdata:
+  proxydata:
+
+networks:
+  kampus-network:
+    driver: bridge

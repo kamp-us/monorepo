@@ -46,3 +46,6 @@ yarn-error.log*
 
 .vercel
 !/.vscode/extensions.json
+
+# docker compose
+docker-compose.yaml
