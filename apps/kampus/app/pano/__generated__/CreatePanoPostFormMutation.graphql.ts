@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<4ff94a56f36cabd941f8e6415b4cab9c>>
+ * @generated SignedSource<<fd1794a0cc76b45d70bb2ad8b1380933>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -332,12 +332,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "2a9f2bd39fa4c75bdbd1d46d297a31cb",
+    "cacheID": "e2ce8d07310792825c52581a2fde5b31",
     "id": null,
     "metadata": {},
     "name": "CreatePanoPostFormMutation",
     "operationKind": "mutation",
-    "text": "mutation CreatePanoPostFormMutation(\n  $title: String!\n  $content: String\n  $url: String\n) {\n  createPanoPost(input: {url: $url, title: $title, content: $content}) {\n    edge {\n      cursor\n      node {\n        ...PostItem_post\n        id\n      }\n    }\n    error {\n      __typename\n      ... on UserError {\n        __isUserError: __typename\n        message\n      }\n    }\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "mutation CreatePanoPostFormMutation(\n  $title: String!\n  $content: String\n  $url: String\n) {\n  createPanoPost(input: {url: $url, title: $title, content: $content}) {\n    edge {\n      cursor\n      node {\n        ...PostItem_post\n        id\n      }\n    }\n    error {\n      __typename\n      ... on UserError {\n        __isUserError: __typename\n        message\n      }\n    }\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  url\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
   }
 };
 })();

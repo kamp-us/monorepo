@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<abbe62bfe41d092fb53e2d58cd794272>>
+ * @generated SignedSource<<4128ebf17cc3008cd5a95bcf6aeaa2d1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,6 +15,7 @@ export type MoreOptions_post$data = {
   readonly owner: {
     readonly displayName: string | null;
   } | null;
+  readonly url: string | null;
   readonly " $fragmentType": "MoreOptions_post";
 };
 export type MoreOptions_post$key = {
@@ -33,6 +34,13 @@ const node: ReaderFragment = {
       "args": null,
       "kind": "ScalarField",
       "name": "id",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "url",
       "storageKey": null
     },
     {
@@ -58,6 +66,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "01fe2324527daa720ea5ca88add6406c";
+(node as any).hash = "da66b10353f75748a4c9f0b709916d9a";
 
 export default node;
