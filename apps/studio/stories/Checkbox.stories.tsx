@@ -55,7 +55,7 @@ export const OnFocus = {
   render: ({ ...props }) => <OnFocusTemplate {...props} />,
 } satisfies Story;
 
-const DescriptionTemplate = ({ ...props }) => {
+const DefaultTemplate = ({ ...props }) => {
   return (
 
     <div className="items-center flex space-x-2">
@@ -95,7 +95,7 @@ export const WithError = {
     }
   },
   render: ({ ...props }) => (
-    <DescriptionTemplate {...props} error="This is an error" />
+    <DefaultTemplate {...props} error="This is an error" />
   ),
 } satisfies Story;
 
@@ -109,7 +109,7 @@ export const WithText = {
     }
   },
   render: ({ ...props }) => (
-    <DescriptionTemplate {...props} description="This is a description" />
+    <DefaultTemplate {...props} description="This is a description" />
   ),
 } satisfies Story;
 
@@ -183,6 +183,6 @@ export const Default = {
   render: (
     { ...props }
   ) => (
-    <DescriptionTemplate {...props} />
+    <DefaultTemplate {...props} />
   )
 } satisfies Story;
