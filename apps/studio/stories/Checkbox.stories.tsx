@@ -40,7 +40,7 @@ const OnFocusTemplate = ({ ...props }) => {
           {...props} />
         <Label
           htmlFor="checkbox"
-          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          className="text-primary font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
           <span id="label">
             {isFocused ? "Focused" : "Default"}
@@ -63,7 +63,7 @@ const DescriptionTemplate = ({ ...props }) => {
       <div className="grid gap-1.5 leading-none">
         <Label
           htmlFor="terms1"
-          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          className="text-primary font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
           {props?.children
             ? props?.children
@@ -72,17 +72,12 @@ const DescriptionTemplate = ({ ...props }) => {
         </Label>
         {props?.description && (
           <p className="text-sm text-muted-foreground">
-
-            <p className="text-sm text-muted-foreground">
-              {props?.description}
-            </p>
+            {props?.description}
           </p>
         )}
         {props?.error && (
-          <p className="text-sm text-muted-foreground">
-            <p className="text-sm text-red-500">
-              {props?.error}
-            </p>
+          <p className="text-sm text-muted-foreground text-red-500">
+            {props?.error}
           </p>
         )}
       </div>
@@ -160,10 +155,10 @@ const FormComponent = ({ ...props }) => {
                 />
               </FormControl>
               <div className="space-y-1 leading-none">
-                <FormLabel>
+                <FormLabel className="text-primary">
                   Use different settings for my mobile devices
                 </FormLabel>
-                <FormDescription>
+                <FormDescription className="text-muted-foreground text-sm">
                   You can manage your mobile notifications in the mobile settings page.
                 </FormDescription>
               </div>
