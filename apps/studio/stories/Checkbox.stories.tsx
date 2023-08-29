@@ -37,6 +37,9 @@ const OnFocusTemplate = ({ ...props }) => {
           onFocus={() => {
             setIsFocused(true)
           }}
+          onBlur={() => {
+            setIsFocused(false)
+          }}
           {...props} />
         <Label
           htmlFor="checkbox"
