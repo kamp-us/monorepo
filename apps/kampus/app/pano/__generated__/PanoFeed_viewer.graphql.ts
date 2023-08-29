@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<285a7607218f1bcd3ce4cf4f6613f8d0>>
+ * @generated SignedSource<<58c1831b671bd4d04b0ad09cfdbb1f81>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,6 +11,9 @@
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type PanoFeed_viewer$data = {
+  readonly actor: {
+    readonly displayName: string | null;
+  } | null;
   readonly " $fragmentSpreads": FragmentRefs<"PostItem_viewer">;
   readonly " $fragmentType": "PanoFeed_viewer";
 };
@@ -29,12 +32,30 @@ const node: ReaderFragment = {
       "args": null,
       "kind": "FragmentSpread",
       "name": "PostItem_viewer"
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": null,
+      "kind": "LinkedField",
+      "name": "actor",
+      "plural": false,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "displayName",
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
     }
   ],
   "type": "Viewer",
   "abstractKey": null
 };
 
-(node as any).hash = "aa9717b7dd3561c13af770ff24544e2d";
+(node as any).hash = "a1563ae245b11b75b895ddb8725c0000";
 
 export default node;
