@@ -118,10 +118,16 @@ export const MoreOptionsDropdown = (props: Props) => {
           )}
           <DropdownMenuItem
             onSelect={() => {
-              navigator.clipboard.writeText(`pano/post/${post?.id}`);
-              toast({
-                description: "Link kopyalandı",
-              });
+              navigator.clipboard
+                .writeText(`post/${post?.id}`)
+                .then(() => {
+                  toast({
+                    description: "Link kopyalandı",
+                  });
+                })
+                .catch((error) => {
+                  console.error("Link kopyalanamadı:", error);
+                });
             }}
           >
             Linki kopyala
