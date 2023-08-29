@@ -28,7 +28,7 @@ export function createPrismaConnectionLoader<TPrisma extends { id: string }>(
           const queryArgs = {
             ...overrides,
             // we are making sure that [identifier]: parentID and deletedAt is
-            // not overriden
+            // not overridden
             where: { ...overrides.where, ...where },
           };
 
