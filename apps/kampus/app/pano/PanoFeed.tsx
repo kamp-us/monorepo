@@ -52,8 +52,6 @@ export function PanoFeed(props: Props) {
     props.panoFeed
   );
   const viewer = useFragment(viewerFragment, props.panoViewer);
-  // I get undefined here.
-  console.log(viewer?.actor);
 
   const feed = data.panoFeed;
 
