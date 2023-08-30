@@ -35,9 +35,6 @@ const fragment = graphql`
 const viewerFragment = graphql`
   fragment PanoFeed_viewer on Viewer {
     ...PostItem_viewer
-    actor {
-      displayName
-    }
   }
 `;
 
@@ -57,19 +54,17 @@ export function PanoFeed(props: Props) {
 
   return (
     <>
-      {viewer.actor && (
-        <Button variant="outline" asChild>
-          <Link
-            href={{
-              pathname: `/post/create`,
-              search: `foo=bar`,
-            }}
-            as="post/create"
-          >
-            New post
-          </Link>
-        </Button>
-      )}
+      <Button variant="outline" asChild>
+        <Link
+          href={{
+            pathname: `/post/create`,
+            search: `foo=bar`,
+          }}
+          as="post/create"
+        >
+          New post
+        </Link>
+      </Button>
       <Suspense fallback="loading">
         <section className="flex flex-col gap-4">
           {feed?.edges?.map((edge) => {
