@@ -1,11 +1,11 @@
 import { graphql, useFragment } from "react-relay";
-import { useViewer_actor$key } from "./__generated__/useViewer_actor.graphql";
+import { useViewer_viewer$key } from "./__generated__/useViewer_viewer.graphql";
 
 
-export const useViewerFragment = (key: useViewer_actor$key | null) =>
+export const useViewerFragment = (key: useViewer_viewer$key | null) =>
   useFragment(
     graphql`
-      fragment useViewer_actor on Viewer {
+      fragment useViewer_viewer on Viewer {
         actor {
           displayName
         }

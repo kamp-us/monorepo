@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<44e6184a5cb6c906d2aaacab0797bdd7>>
+ * @generated SignedSource<<23d164cc710ea691595637c3f46df425>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,22 +10,22 @@
 
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type useViewer_actor$data = {
+export type useViewer_viewer$data = {
   readonly actor: {
     readonly displayName: string | null;
   } | null;
-  readonly " $fragmentType": "useViewer_actor";
+  readonly " $fragmentType": "useViewer_viewer";
 };
-export type useViewer_actor$key = {
-  readonly " $data"?: useViewer_actor$data;
-  readonly " $fragmentSpreads": FragmentRefs<"useViewer_actor">;
+export type useViewer_viewer$key = {
+  readonly " $data"?: useViewer_viewer$data;
+  readonly " $fragmentSpreads": FragmentRefs<"useViewer_viewer">;
 };
 
 const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "useViewer_actor",
+  "name": "useViewer_viewer",
   "selections": [
     {
       "alias": null,
@@ -50,6 +50,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "8e2aad45a3226d0f519e4247fee17c40";
+(node as any).hash = "ac7d77e85dcba09b4920cc8e41e986d9";
 
 export default node;
