@@ -17,7 +17,6 @@
     "@types/react-relay": "14.1.4"
   },
   "dependencies": {
-    "@kampus/next-auth": "*",
     "@kampus/relay": "*",
     "@kampus/ui": "*",
     "react-relay": "15.0.0",
