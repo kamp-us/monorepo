@@ -31,6 +31,9 @@ const mutation = graphql`
           id
           content
           createdAt
+          post {
+            commentCount
+          }
           owner {
             displayName
           }

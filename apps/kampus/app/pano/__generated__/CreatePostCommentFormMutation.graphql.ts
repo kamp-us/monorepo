@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<256a5796de3fc44d1116cbac9e665a94>>
+ * @generated SignedSource<<47e651a3d62e682276eb6c267b5b4fea>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -24,6 +24,9 @@ export type CreatePostCommentFormMutation$data = {
         readonly id: string;
         readonly owner: {
           readonly displayName: string | null;
+        } | null;
+        readonly post: {
+          readonly commentCount: number | null;
         } | null;
       } | null;
     } | null;
@@ -103,10 +106,17 @@ v8 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "displayName",
+  "name": "commentCount",
   "storageKey": null
 },
 v9 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "displayName",
+  "storageKey": null
+},
+v10 = {
   "kind": "InlineFragment",
   "selections": [
     {
@@ -162,12 +172,24 @@ return {
                   {
                     "alias": null,
                     "args": null,
+                    "concreteType": "PanoPost",
+                    "kind": "LinkedField",
+                    "name": "post",
+                    "plural": false,
+                    "selections": [
+                      (v8/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
                     "concreteType": "User",
                     "kind": "LinkedField",
                     "name": "owner",
                     "plural": false,
                     "selections": [
-                      (v8/*: any*/)
+                      (v9/*: any*/)
                     ],
                     "storageKey": null
                   }
@@ -185,7 +207,7 @@ return {
             "name": "error",
             "plural": false,
             "selections": [
-              (v9/*: any*/)
+              (v10/*: any*/)
             ],
             "storageKey": null
           }
@@ -237,12 +259,25 @@ return {
                   {
                     "alias": null,
                     "args": null,
+                    "concreteType": "PanoPost",
+                    "kind": "LinkedField",
+                    "name": "post",
+                    "plural": false,
+                    "selections": [
+                      (v8/*: any*/),
+                      (v5/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
                     "concreteType": "User",
                     "kind": "LinkedField",
                     "name": "owner",
                     "plural": false,
                     "selections": [
-                      (v8/*: any*/),
+                      (v9/*: any*/),
                       (v5/*: any*/)
                     ],
                     "storageKey": null
@@ -284,7 +319,7 @@ return {
                 "name": "__typename",
                 "storageKey": null
               },
-              (v9/*: any*/)
+              (v10/*: any*/)
             ],
             "storageKey": null
           }
@@ -294,16 +329,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "5be3bb4d7f6955a56592a776070d432b",
+    "cacheID": "1add03433b05e9b355b9e390ab61fe67",
     "id": null,
     "metadata": {},
     "name": "CreatePostCommentFormMutation",
     "operationKind": "mutation",
-    "text": "mutation CreatePostCommentFormMutation(\n  $content: String!\n  $postID: String!\n) {\n  createPanoComment(input: {content: $content, postID: $postID}) {\n    edge {\n      cursor\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n      }\n    }\n    error {\n      __typename\n      ... on UserError {\n        __isUserError: __typename\n        message\n      }\n    }\n  }\n}\n"
+    "text": "mutation CreatePostCommentFormMutation(\n  $content: String!\n  $postID: String!\n) {\n  createPanoComment(input: {content: $content, postID: $postID}) {\n    edge {\n      cursor\n      node {\n        id\n        content\n        createdAt\n        post {\n          commentCount\n          id\n        }\n        owner {\n          displayName\n          id\n        }\n      }\n    }\n    error {\n      __typename\n      ... on UserError {\n        __isUserError: __typename\n        message\n      }\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "b7e8bcd1d12d5581b57f2f1ba39e7039";
+(node as any).hash = "a9e17bd8d70bcec089e80729a7de092d";
 
 export default node;
