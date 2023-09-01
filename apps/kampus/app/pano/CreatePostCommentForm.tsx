@@ -65,7 +65,7 @@ interface Props {
   onCompleted?: () => void;
 }
 
-export function CreatePanoCommentForm(props: Props) {
+export function CreatePostCommentForm(props: Props) {
   const [commit, isInFlight] = useMutation(mutation);
   const { id: postID } = useParams();
   const { actor } = useFragment(viewerFragment, props.viewer);

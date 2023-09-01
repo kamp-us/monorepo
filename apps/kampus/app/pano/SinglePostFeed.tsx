@@ -4,7 +4,7 @@ import { Separator } from "@kampus/ui";
 
 import { type SinglePostFeed_post$key } from "./__generated__/SinglePostFeed_post.graphql";
 import { type SinglePostFeed_viewer$key } from "./__generated__/SinglePostFeed_viewer.graphql";
-import { CreatePanoCommentForm } from "./CreatePostCommentForm";
+import { CreatePostCommentForm } from "./CreatePostCommentForm";
 import { CommentItem } from "./features/comment-list/CommentItem";
 import { PostItem } from "./features/post-list/PostItem";
 
@@ -61,7 +61,7 @@ export const SinglePostFeed = (props: SinglePostFeedProps) => {
     <div className="flex flex-col gap-4">
       <PostItem post={data} showContent viewerRef={viewer} />
       <Separator />
-      <CreatePanoCommentForm viewer={viewer} connectionID={comments?.__id} />
+      <CreatePostCommentForm viewer={viewer} connectionID={comments?.__id} />
       <h2>Yorumlar</h2>
       {comments?.edges?.map((edge) => {
         if (!edge?.node) return null;
