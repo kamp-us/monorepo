@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9749ea50e76b7b5878cf7849fde1fb82>>
+ * @generated SignedSource<<0f9ba95719e84d33862f64b6eb640447>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -17,7 +17,7 @@ export type CommentItem_comment$data = {
   readonly createdAt: any;
   readonly id: string;
   readonly owner: {
-    readonly username: string;
+    readonly displayName: string | null;
   } | null;
   readonly " $fragmentSpreads": FragmentRefs<"CommentMoreOptions_comment" | "CommentUpvoteButton_comment">;
   readonly " $fragmentType": "CommentItem_comment";
@@ -66,7 +66,7 @@ const node: ReaderFragment = {
           "alias": null,
           "args": null,
           "kind": "ScalarField",
-          "name": "username",
+          "name": "displayName",
           "storageKey": null
         }
       ],
@@ -106,6 +106,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "4d757325a2b08549d39b06c53785b8f4";
+(node as any).hash = "e8df019c2d1528e52c9469d656244c74";
 
 export default node;
