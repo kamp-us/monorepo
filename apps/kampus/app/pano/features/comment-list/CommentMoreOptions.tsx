@@ -22,21 +22,25 @@ import {
   useToast,
 } from "@kampus/ui";
 
+import { generateBaseURL, getCommentURL } from "~/features/url/generate-url";
 import { type CommentMoreOptions_comment$key } from "./__generated__/CommentMoreOptions_comment.graphql";
 import { type CommentMoreOptions_viewer$key } from "./__generated__/CommentMoreOptions_viewer.graphql";
 
 interface Props {
-  comment: CommentMoreOptions_comment$key | null;
-  viewerRef: CommentMoreOptions_viewer$key | null;
+  comment: CommentMoreOptions_comment$key;
+  viewerRef: CommentMoreOptions_viewer$key;
   commentConnectionID?: string;
   setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const useMoreOptionsCommentFragment = (key: CommentMoreOptions_comment$key | null) =>
+const useMoreOptionsCommentFragment = (key: CommentMoreOptions_comment$key) =>
   useFragment(
     graphql`
       fragment CommentMoreOptions_comment on PanoComment {
         id
+        post {
+          id
+        }
         owner {
           displayName
         }
@@ -45,7 +49,7 @@ const useMoreOptionsCommentFragment = (key: CommentMoreOptions_comment$key | nul
     key
   );
 
-const useMoreOptionsViewerFragment = (key: CommentMoreOptions_viewer$key | null) =>
+const useMoreOptionsViewerFragment = (key: CommentMoreOptions_viewer$key) =>
   useFragment(
     graphql`
       fragment CommentMoreOptions_viewer on Viewer {
@@ -88,6 +92,11 @@ export const CommentMoreOptions = (props: Props) => {
   const viewer = useMoreOptionsViewerFragment(props.viewerRef);
   const { toast } = useToast();
   const [removeComment, isRemoving] = useMutation(removeCommentMutation);
+  const shareUrl = getCommentURL({
+    baseUrl: generateBaseURL("pano"),
+    commentID: comment.id,
+    postID: comment.post?.id ?? "",
+  });
 
   const onClick = () => {
     if (!comment) {
@@ -124,7 +133,8 @@ export const CommentMoreOptions = (props: Props) => {
             </>
           )}
           <DropdownMenuItem
-            onSelect={() => {
+            onSelect={async () => {
+              await navigator.clipboard?.writeText(shareUrl);
               toast({
                 description: "Link kopyalandı",
               });
