@@ -26,7 +26,7 @@ const commentsFragment = graphql`
     content
     createdAt
     owner {
-      username
+      displayName
     }
     commentCount
     ...CommentUpvoteButton_comment
@@ -77,7 +77,7 @@ export const CommentItem = (props: Props) => {
             <div className="text-muted-foreground flex flex-col p-0 text-sm">
               <div className="flex items-start gap-2 text-sm">
                 <div className="text-muted-foreground flex text-sm">
-                  <div>@{comment.owner?.username}&nbsp;·&nbsp;</div>
+                  <div>@{comment.owner?.displayName}&nbsp;·&nbsp;</div>
                   <TimeAgo date={new Date(comment.createdAt as string)} />
                 </div>
                 <CommentMoreOptions
