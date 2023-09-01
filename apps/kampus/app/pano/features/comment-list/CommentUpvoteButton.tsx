@@ -1,5 +1,5 @@
 import { ArrowBigUp } from "lucide-react";
-import { graphql, useFragment } from "react-relay";
+import { graphql, useFragment, useMutation } from "react-relay";
 
 import { Button } from "@kampus/ui";
 
@@ -17,47 +17,54 @@ const fragment = graphql`
   }
 `;
 
-// const createUpvoteMutation = graphql`
-//   mutation CommentUpvoteButtonCreateMutation($commentID: ID!) {
-//     createPanoCommentUpvote(input: { id: $commentID }) {
-//       node {
-//         node {
-//           ...CommentUpvoteButton_comment
-//         }
-//       }
-//     }
-//   }
-// `;
+const createUpvoteMutation = graphql`
+  mutation CommentUpvoteButtonCreateMutation($commentID: ID!) {
+    createPanoUpvote(input: { id: $commentID }) {
+      node {
+        node {
+          ...CommentUpvoteButton_comment
+        }
+      }
+    }
+  }
+`;
 
-// const removeUpvoteMutation = graphql`
-//   mutation CommentUpvoteButtonRemoveMutation($commentID: ID!) {
-//     removePanoCommentUpvote(input: { id: $commentID }) {
-//       node {
-//         node {
-//           ...CommentUpvoteButton_comment
-//         }
-//       }
-//     }
-//   }
-// `;
+const removeUpvoteMutation = graphql`
+  mutation CommentUpvoteButtonRemoveMutation($commentID: ID!) {
+    removePanoUpvote(input: { id: $commentID }) {
+      node {
+        node {
+          ...CommentUpvoteButton_comment
+        }
+      }
+    }
+  }
+`;
 
 export const CommentUpvoteButton = (props: Props) => {
   const comment = useFragment(fragment, props.commentRef);
-  const upvoteStyle = comment?.isUpvotedByViewer ? "fill-primary" : "fill-none";
 
-  const disabled = false;
+  const [createUpvote, isCreating] = useMutation(createUpvoteMutation);
+  const [removeUpvote, isRemoving] = useMutation(removeUpvoteMutation);
+
+  const disabled = isCreating || isRemoving;
+
   const onClick = () => {
-    console.log("DO UPVOTE MUTATION");
+    if (isCreating || isRemoving) {
+      return;
+    }
+
+    if (comment.isUpvotedByViewer) {
+      removeUpvote({ variables: { commentID: comment.id } });
+    } else {
+      createUpvote({ variables: { commentID: comment.id } });
+    }
   };
 
   return (
     <>
       <Button onClick={onClick} disabled={disabled} variant="ghost" size="icon">
-        <ArrowBigUp
-          fill={comment.isUpvotedByViewer ? "currentColor" : "none"}
-          className={upvoteStyle}
-          size="24"
-        />
+        <ArrowBigUp fill={comment.isUpvotedByViewer ? "currentColor" : "none"} size="24" />
       </Button>
       <div className="text-center font-semibold">{comment?.upvoteCount ?? 0}</div>
     </>
