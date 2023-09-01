@@ -1,6 +1,6 @@
 import { graphql, useFragment, usePaginationFragment } from "react-relay";
 
-import { Separator } from "@kampus/ui";
+import { Separator, TypographyH4 } from "@kampus/ui";
 
 import { type SinglePostFeed_post$key } from "./__generated__/SinglePostFeed_post.graphql";
 import { type SinglePostFeed_viewer$key } from "./__generated__/SinglePostFeed_viewer.graphql";
@@ -54,7 +54,6 @@ export const SinglePostFeed = (props: SinglePostFeedProps) => {
   const viewer = useFragment(viewerFragment, props.viewer);
   const { data } = usePaginationFragment(fragment, props.post);
 
-  // TODO: fetch comments in asc order for their createdAt
   const comments = data.comments;
 
   return (
@@ -62,7 +61,8 @@ export const SinglePostFeed = (props: SinglePostFeedProps) => {
       <PostItem post={data} showContent viewerRef={viewer} />
       <Separator />
       <CreatePostCommentForm viewer={viewer} connectionID={comments?.__id} />
-      <h2>Yorumlar</h2>
+      <TypographyH4>Yorumlar</TypographyH4>
+      {comments?.edges?.length === 0 && <p>Henüz yorum yapılmamış.</p>}
       {comments?.edges?.map((edge) => {
         if (!edge?.node) return null;
         return (
