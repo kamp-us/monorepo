@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { MoreHorizontal } from "lucide-react";
 import { graphql, useFragment, useMutation } from "react-relay";
 
@@ -23,19 +22,20 @@ import {
   useToast,
 } from "@kampus/ui";
 
-import { type MoreOptions_post$key } from "./__generated__/MoreOptions_post.graphql";
-import { type MoreOptions_viewer$key } from "./__generated__/MoreOptions_viewer.graphql";
+import { type CommentMoreOptions_comment$key } from "./__generated__/CommentMoreOptions_comment.graphql";
+import { type CommentMoreOptions_viewer$key } from "./__generated__/CommentMoreOptions_viewer.graphql";
 
 interface Props {
-  post: MoreOptions_post$key;
-  viewerRef: MoreOptions_viewer$key | null;
-  postConnectionID?: string;
+  comment: CommentMoreOptions_comment$key | null;
+  viewerRef: CommentMoreOptions_viewer$key | null;
+  commentConnectionID?: string;
+  setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const useMoreOptionsPostFragment = (key: MoreOptions_post$key | null) =>
+const useMoreOptionsCommentFragment = (key: CommentMoreOptions_comment$key | null) =>
   useFragment(
     graphql`
-      fragment MoreOptions_post on PanoPost {
+      fragment CommentMoreOptions_comment on PanoComment {
         id
         owner {
           displayName
@@ -45,10 +45,10 @@ const useMoreOptionsPostFragment = (key: MoreOptions_post$key | null) =>
     key
   );
 
-const useMoreOptionsViewerFragment = (key: MoreOptions_viewer$key | null) =>
+const useMoreOptionsViewerFragment = (key: CommentMoreOptions_viewer$key | null) =>
   useFragment(
     graphql`
-      fragment MoreOptions_viewer on Viewer {
+      fragment CommentMoreOptions_viewer on Viewer {
         actor {
           displayName
         }
@@ -57,20 +57,25 @@ const useMoreOptionsViewerFragment = (key: MoreOptions_viewer$key | null) =>
     key
   );
 
-const removePostMutation = graphql`
-  mutation MoreOptionsRemovePostMutation($connections: [ID!]!, $postID: ID!) {
-    removePanoPost(input: { id: $postID }) {
+const removeCommentMutation = graphql`
+  mutation CommentMoreOptionsRemoveCommentMutation($connections: [ID!]!, $commentID: ID!) {
+    removePanoComment(input: { id: $commentID }) {
       edge {
         node {
           id @deleteEdge(connections: $connections)
-          title
+          content
+          createdAt
+          owner {
+            username
+          }
+          commentCount
         }
       }
     }
   }
 `;
 
-// TODO: move this to server side
+// TODO: move this to server side and don't use displayName
 function canUserEdit(username?: string | null, owner?: string | null) {
   if (!owner) return false;
   if (!username) return false;
@@ -78,14 +83,14 @@ function canUserEdit(username?: string | null, owner?: string | null) {
   return username === owner;
 }
 
-export const MoreOptionsDropdown = (props: Props) => {
-  const post = useMoreOptionsPostFragment(props.post);
+export const CommentMoreOptions = (props: Props) => {
+  const comment = useMoreOptionsCommentFragment(props.comment);
   const viewer = useMoreOptionsViewerFragment(props.viewerRef);
   const { toast } = useToast();
-  const [removePost, isRemoving] = useMutation(removePostMutation);
+  const [removeComment, isRemoving] = useMutation(removeCommentMutation);
 
   const onClick = () => {
-    if (!post) {
+    if (!comment) {
       return;
     }
 
@@ -93,7 +98,9 @@ export const MoreOptionsDropdown = (props: Props) => {
       return;
     }
 
-    removePost({ variables: { postID: post.id, connections: [props.postConnectionID] } });
+    removeComment({
+      variables: { commentID: comment.id, connections: [props.commentConnectionID] },
+    });
   };
 
   return (
@@ -104,11 +111,11 @@ export const MoreOptionsDropdown = (props: Props) => {
             <MoreHorizontal size="16" aria-label="Daha fazla seçenek" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          {canUserEdit(viewer?.actor?.displayName, post?.owner?.displayName) && (
+        <DropdownMenuContent>
+          {canUserEdit(viewer?.actor?.displayName, comment?.owner?.displayName) && (
             <>
-              <DropdownMenuItem asChild key="edit">
-                <Link href={`/post/${post?.id}/edit`}>Düzenle</Link>
+              <DropdownMenuItem key="edit" onSelect={() => props.setEditOpen(true)}>
+                Düzenle
               </DropdownMenuItem>
               <AlertDialogTrigger asChild>
                 <DropdownMenuItem>Sil</DropdownMenuItem>

@@ -72,7 +72,6 @@ interface PostItemProps {
 export const PostItem = (props: PostItemProps) => {
   const post = usePanoPostFragment(props.post);
   const viewer = usePanoViewerFragment(props.viewerRef);
-
   if (!post) {
     return null;
   }
@@ -106,7 +105,7 @@ export const PostItem = (props: PostItemProps) => {
         <div className="flex items-center gap-4 text-sm">
           <div className="flex items-center gap-1 font-semibold">
             <MessageCircleIcon size="12" />
-            <Link href={`/pano/post/${post.id}`}>{`${post.commentCount} yorum`}</Link>
+            <Link href={`/post/${post.id}`}>{`${post.commentCount} yorum`}</Link>
           </div>
         </div>
       </CardContent>
@@ -116,7 +115,7 @@ export const PostItem = (props: PostItemProps) => {
             key={post.id}
             post={post}
             viewerRef={viewer}
-            postConnectionId={props.postConnectionId}
+            postConnectionID={props.postConnectionId}
           />
         </div>
       </CardFooter>
