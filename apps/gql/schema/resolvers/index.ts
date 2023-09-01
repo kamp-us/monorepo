@@ -216,7 +216,9 @@ export const resolvers = {
     },
     comments: async (post, args, { loaders }) => {
       return transformPanoCommentConnection(
-        await loaders.pano.comment.byPostID.load(new ConnectionKey(post.id, args))
+        await loaders.pano.comment.byPostID.load(
+          new ConnectionKey(post.id, args, { orderBy: { createdAt: "desc" } })
+        )
       );
     },
     commentCount: (post, _, { loaders }) => {
