@@ -38,8 +38,6 @@ export const generateBaseURL = (product: KampusProduct) => {
       return `http://${product}.localhost.kamp.us:3000`;
     case "development":
       return `https://${product}.dev.kamp.us`;
-    case "test":
-      return `https://${product}.dev.kamp.us`;
     case "production":
       return `https://${product}.kamp.us`;
     default:
