@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d41ba67f52d7c234d67922679ebd796f>>
+ * @generated SignedSource<<3c81d39b138324a82b5e40ad209ba5f5>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -17,9 +17,9 @@ export type CommentMoreOptions_comment$data = {
   } | null;
   readonly post: {
     readonly id: string;
-  } | null;
+  };
   readonly " $fragmentType": "CommentMoreOptions_comment";
-};
+} | null;
 export type CommentMoreOptions_comment$key = {
   readonly " $data"?: CommentMoreOptions_comment$data;
   readonly " $fragmentSpreads": FragmentRefs<"CommentMoreOptions_comment">;
@@ -41,16 +41,21 @@ return {
   "selections": [
     (v0/*: any*/),
     {
-      "alias": null,
-      "args": null,
-      "concreteType": "PanoPost",
-      "kind": "LinkedField",
-      "name": "post",
-      "plural": false,
-      "selections": [
-        (v0/*: any*/)
-      ],
-      "storageKey": null
+      "kind": "RequiredField",
+      "field": {
+        "alias": null,
+        "args": null,
+        "concreteType": "PanoPost",
+        "kind": "LinkedField",
+        "name": "post",
+        "plural": false,
+        "selections": [
+          (v0/*: any*/)
+        ],
+        "storageKey": null
+      },
+      "action": "LOG",
+      "path": "post"
     },
     {
       "alias": null,
@@ -76,6 +81,6 @@ return {
 };
 })();
 
-(node as any).hash = "820a093df22cfcaaa1dd4d5f61000020";
+(node as any).hash = "c4121b9e6ee30e11971e068a0e562e44";
 
 export default node;

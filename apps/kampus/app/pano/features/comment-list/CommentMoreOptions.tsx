@@ -22,7 +22,7 @@ import {
   useToast,
 } from "@kampus/ui";
 
-import { generateBaseURL, getCommentURL } from "~/features/url/generate-url";
+import { getCommentURL } from "~/features/kampus-url/pano";
 import { type CommentMoreOptions_comment$key } from "./__generated__/CommentMoreOptions_comment.graphql";
 import { type CommentMoreOptions_viewer$key } from "./__generated__/CommentMoreOptions_viewer.graphql";
 
@@ -38,7 +38,7 @@ const useMoreOptionsCommentFragment = (key: CommentMoreOptions_comment$key) =>
     graphql`
       fragment CommentMoreOptions_comment on PanoComment {
         id
-        post {
+        post @required(action: LOG) {
           id
         }
         owner {
@@ -92,11 +92,9 @@ export const CommentMoreOptions = (props: Props) => {
   const viewer = useMoreOptionsViewerFragment(props.viewerRef);
   const { toast } = useToast();
   const [removeComment, isRemoving] = useMutation(removeCommentMutation);
-  const shareUrl = getCommentURL({
-    baseUrl: generateBaseURL("pano"),
-    commentID: comment.id,
-    postID: comment.post?.id ?? "",
-  });
+
+  if (!comment) return null;
+  const shareUrl = getCommentURL({ postID: comment.post.id, commentID: comment.id });
 
   const onClick = () => {
     if (!comment) {
