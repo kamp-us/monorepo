@@ -31,6 +31,7 @@ type Query {
   sozluk: SozlukQuery!
   pano: PanoQuery!
   odin: OdinQuery!
+  rafine: RafineQuery!
 }
 
 type PageInfo {
@@ -334,4 +335,16 @@ type OdinLessonConnection {
 type OdinLessonEdge {
   cursor: String!
   node: OdinLesson
+}
+
+### Rafine
+
+type RafineQuery {
+  metadata(input: String!): RafineMetadataResult
+}
+
+type RafineMetadataResult {
+  title: String!
+  description: String!
+  url: String!
 }

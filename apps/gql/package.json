@@ -40,6 +40,7 @@
     "graphql-config": "4.5.0",
     "graphql-scalars": "1.21.3",
     "graphql-yoga": "3.9.1",
+    "html-metadata-parser": "2.0.4",
     "object-hash": "3.0.0",
     "svix": "1.15.0",
     "znv": "0.3.2",
