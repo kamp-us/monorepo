@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<aac369c825de70431c43ca0c96f67ddf>>
+ * @generated SignedSource<<3c81d39b138324a82b5e40ad209ba5f5>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,25 +15,47 @@ export type CommentMoreOptions_comment$data = {
   readonly owner: {
     readonly displayName: string | null;
   } | null;
+  readonly post: {
+    readonly id: string;
+  };
   readonly " $fragmentType": "CommentMoreOptions_comment";
-};
+} | null;
 export type CommentMoreOptions_comment$key = {
   readonly " $data"?: CommentMoreOptions_comment$data;
   readonly " $fragmentSpreads": FragmentRefs<"CommentMoreOptions_comment">;
 };
 
-const node: ReaderFragment = {
+const node: ReaderFragment = (function(){
+var v0 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+};
+return {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
   "name": "CommentMoreOptions_comment",
   "selections": [
+    (v0/*: any*/),
     {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "id",
-      "storageKey": null
+      "kind": "RequiredField",
+      "field": {
+        "alias": null,
+        "args": null,
+        "concreteType": "PanoPost",
+        "kind": "LinkedField",
+        "name": "post",
+        "plural": false,
+        "selections": [
+          (v0/*: any*/)
+        ],
+        "storageKey": null
+      },
+      "action": "LOG",
+      "path": "post"
     },
     {
       "alias": null,
@@ -57,7 +79,8 @@ const node: ReaderFragment = {
   "type": "PanoComment",
   "abstractKey": null
 };
+})();
 
-(node as any).hash = "8d099d051875d0adf45fc3e7191f22e8";
+(node as any).hash = "c4121b9e6ee30e11971e068a0e562e44";
 
 export default node;

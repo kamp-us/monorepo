@@ -22,21 +22,25 @@ import {
   useToast,
 } from "@kampus/ui";
 
+import { getCommentURL } from "~/features/kampus-url/pano";
 import { type CommentMoreOptions_comment$key } from "./__generated__/CommentMoreOptions_comment.graphql";
 import { type CommentMoreOptions_viewer$key } from "./__generated__/CommentMoreOptions_viewer.graphql";
 
 interface Props {
-  comment: CommentMoreOptions_comment$key | null;
-  viewerRef: CommentMoreOptions_viewer$key | null;
+  comment: CommentMoreOptions_comment$key;
+  viewerRef: CommentMoreOptions_viewer$key;
   commentConnectionID?: string;
   setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const useMoreOptionsCommentFragment = (key: CommentMoreOptions_comment$key | null) =>
+const useMoreOptionsCommentFragment = (key: CommentMoreOptions_comment$key) =>
   useFragment(
     graphql`
       fragment CommentMoreOptions_comment on PanoComment {
         id
+        post @required(action: LOG) {
+          id
+        }
         owner {
           displayName
         }
@@ -45,7 +49,7 @@ const useMoreOptionsCommentFragment = (key: CommentMoreOptions_comment$key | nul
     key
   );
 
-const useMoreOptionsViewerFragment = (key: CommentMoreOptions_viewer$key | null) =>
+const useMoreOptionsViewerFragment = (key: CommentMoreOptions_viewer$key) =>
   useFragment(
     graphql`
       fragment CommentMoreOptions_viewer on Viewer {
@@ -89,6 +93,9 @@ export const CommentMoreOptions = (props: Props) => {
   const { toast } = useToast();
   const [removeComment, isRemoving] = useMutation(removeCommentMutation);
 
+  if (!comment) return null;
+  const shareUrl = getCommentURL({ postID: comment.post.id, commentID: comment.id });
+
   const onClick = () => {
     if (!comment) {
       return;
@@ -125,8 +132,10 @@ export const CommentMoreOptions = (props: Props) => {
           )}
           <DropdownMenuItem
             onSelect={() => {
-              toast({
-                description: "Link kopyalandı",
+              void navigator.clipboard?.writeText(shareUrl).then(() => {
+                toast({
+                  description: "Link kopyalandı",
+                });
               });
             }}
           >
