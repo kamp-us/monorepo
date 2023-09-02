@@ -13,6 +13,6 @@ export const env = parseEnv(
     GQL_URL: z.string().url().default("http://localhost:4000/graphql"),
     RESEND_API_KEY: z.string().default("default-resend-key"),
     NEXTAUTH_URL: z.string().url().default("http://localhost:3001/auth"),
-    KAMPUS_ENV: z.enum(["localhost", "development", "test", "production"]).default("localhost"),
+    KAMPUS_ENV: z.enum(["localhost", "preview", "development", "production"]).default("localhost"),
   }
 );
