@@ -131,10 +131,11 @@ export const CommentMoreOptions = (props: Props) => {
             </>
           )}
           <DropdownMenuItem
-            onSelect={async () => {
-              await navigator.clipboard?.writeText(shareUrl);
-              toast({
-                description: "Link kopyalandı",
+            onSelect={() => {
+              void navigator.clipboard?.writeText(shareUrl).then(() => {
+                toast({
+                  description: "Link kopyalandı",
+                });
               });
             }}
           >
