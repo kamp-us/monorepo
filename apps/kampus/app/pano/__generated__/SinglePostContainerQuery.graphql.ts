@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c2fe2be1bad9a9dbac28d2bf7d3589bd>>
+ * @generated SignedSource<<aa7cfa93f6c43757579043f5934322d8>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -88,20 +88,6 @@ v7 = {
 v8 = {
   "alias": null,
   "args": null,
-  "kind": "ScalarField",
-  "name": "isUpvotedByViewer",
-  "storageKey": null
-},
-v9 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "upvoteCount",
-  "storageKey": null
-},
-v10 = {
-  "alias": null,
-  "args": null,
   "concreteType": "User",
   "kind": "LinkedField",
   "name": "owner",
@@ -110,6 +96,20 @@ v10 = {
     (v3/*: any*/),
     (v4/*: any*/)
   ],
+  "storageKey": null
+},
+v9 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "isUpvotedByViewer",
+  "storageKey": null
+},
+v10 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "upvoteCount",
   "storageKey": null
 },
 v11 = [
@@ -261,6 +261,48 @@ return {
               (v9/*: any*/),
               (v10/*: any*/),
               {
+                "alias": "recentComments",
+                "args": [
+                  {
+                    "kind": "Literal",
+                    "name": "last",
+                    "value": 3
+                  }
+                ],
+                "concreteType": "PanoCommentConnection",
+                "kind": "LinkedField",
+                "name": "comments",
+                "plural": false,
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "PanoComment",
+                    "kind": "LinkedField",
+                    "name": "nodes",
+                    "plural": true,
+                    "selections": [
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "User",
+                        "kind": "LinkedField",
+                        "name": "owner",
+                        "plural": false,
+                        "selections": [
+                          (v4/*: any*/),
+                          (v3/*: any*/)
+                        ],
+                        "storageKey": null
+                      },
+                      (v4/*: any*/)
+                    ],
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": "comments(last:3)"
+              },
+              {
                 "alias": null,
                 "args": (v11/*: any*/),
                 "concreteType": "PanoCommentConnection",
@@ -287,10 +329,10 @@ return {
                           (v4/*: any*/),
                           (v5/*: any*/),
                           (v6/*: any*/),
-                          (v10/*: any*/),
-                          (v7/*: any*/),
                           (v8/*: any*/),
+                          (v7/*: any*/),
                           (v9/*: any*/),
+                          (v10/*: any*/),
                           {
                             "alias": null,
                             "args": null,
@@ -379,12 +421,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "bce44ac06b004a5aa2ba6ae686442e66",
+    "cacheID": "6e4d06f26eeb9b2aa15c61407d4861fb",
     "id": null,
     "metadata": {},
     "name": "SinglePostContainerQuery",
     "operationKind": "query",
-    "text": "query SinglePostContainerQuery(\n  $id: ID!\n) {\n  viewer {\n    ...SinglePostFeed_viewer\n  }\n  pano {\n    post(id: $id) {\n      ...SinglePostFeed_post\n      id\n    }\n  }\n}\n\nfragment CommentItem_comment on PanoComment {\n  id\n  content\n  createdAt\n  owner {\n    displayName\n    id\n  }\n  commentCount\n  ...CommentUpvoteButton_comment\n  ...CommentMoreOptions_comment\n}\n\nfragment CommentItem_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n  ...CommentMoreOptions_viewer\n  ...UpdateCommentForm_viewer\n}\n\nfragment CommentMoreOptions_comment on PanoComment {\n  id\n  post {\n    id\n  }\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment CommentMoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment CommentUpvoteButton_comment on PanoComment {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment CreatePostCommentForm_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment SinglePostFeed_post on PanoPost {\n  ...PostItem_post\n  commentCount\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n        ...CommentItem_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n\nfragment SinglePostFeed_viewer on Viewer {\n  ...PostItem_viewer\n  ...CommentItem_viewer\n  ...CreatePostCommentForm_viewer\n}\n\nfragment UpdateCommentForm_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n"
+    "text": "query SinglePostContainerQuery(\n  $id: ID!\n) {\n  viewer {\n    ...SinglePostFeed_viewer\n  }\n  pano {\n    post(id: $id) {\n      ...SinglePostFeed_post\n      id\n    }\n  }\n}\n\nfragment CommentItem_comment on PanoComment {\n  id\n  content\n  createdAt\n  owner {\n    displayName\n    id\n  }\n  commentCount\n  ...CommentUpvoteButton_comment\n  ...CommentMoreOptions_comment\n}\n\nfragment CommentItem_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n  ...CommentMoreOptions_viewer\n  ...UpdateCommentForm_viewer\n}\n\nfragment CommentMoreOptions_comment on PanoComment {\n  id\n  post {\n    id\n  }\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment CommentMoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment CommentUpvoteButton_comment on PanoComment {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment CreatePostCommentForm_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  owner {\n    displayName\n    ...UserAvatar_user\n    id\n  }\n  ...PostUpvoteButton_post\n  ...MoreOptions_post\n  recentComments: comments(last: 3) {\n    nodes {\n      owner {\n        id\n        ...UserAvatar_user\n      }\n      id\n    }\n  }\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment SinglePostFeed_post on PanoPost {\n  ...PostItem_post\n  commentCount\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n        ...CommentItem_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n\nfragment SinglePostFeed_viewer on Viewer {\n  ...PostItem_viewer\n  ...CommentItem_viewer\n  ...CreatePostCommentForm_viewer\n}\n\nfragment UpdateCommentForm_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment UserAvatar_user on User {\n  displayName\n}\n"
   }
 };
 })();

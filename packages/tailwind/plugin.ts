@@ -6,7 +6,7 @@ export const kampusPlugin = plugin(
   ({ addBase }) => {
     addBase({
       ":root": {
-        "--background": "0 0% 100%",
+        "--background": "0 0% 98%",
         "--foreground": "224 71.4% 4.1%",
         "--card": "0 0% 100%",
         "--card-foreground": "224 71.4% 4.1%",
@@ -28,7 +28,7 @@ export const kampusPlugin = plugin(
         "--radius": "0.5rem",
       },
       ".dark": {
-        "--background": "224 71.4% 4.1%",
+        "--background": "224 71.4% 2.1%",
         "--foreground": "210 20% 98%",
         "--card": "224 71.4% 4.1%",
         "--card-foreground": "210 20% 98%",

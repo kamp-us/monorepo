@@ -1,4 +1,4 @@
-import { ArrowBigUp } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { graphql, useFragment, useMutation } from "react-relay";
 
 import { Button } from "@kampus/ui";
@@ -53,8 +53,6 @@ export const UpvoteButton = (props: UpvoteProps) => {
 
   const disabled = isCreating || isRemoving;
 
-  const upvoteStyle = cn();
-
   const onClick = () => {
     if (!post) {
       return;
@@ -71,16 +69,12 @@ export const UpvoteButton = (props: UpvoteProps) => {
     }
   };
 
+  const styles = cn("flex gap-1.5 border-2", post.isUpvotedByViewer ? "border-primary" : null);
+
   return (
-    <>
-      <Button onClick={onClick} disabled={disabled} variant="ghost" size="icon">
-        <ArrowBigUp
-          fill={post.isUpvotedByViewer ? "currentColor" : "none"}
-          className={upvoteStyle}
-          size="24"
-        />
-      </Button>
+    <Button size="sm" onClick={onClick} disabled={disabled} variant="secondary" className={styles}>
+      <ArrowUp size="16" />
       <div className="text-center font-semibold">{post?.upvoteCount ?? 0}</div>
-    </>
+    </Button>
   );
 };

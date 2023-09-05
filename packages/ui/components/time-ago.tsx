@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type PropsWithChildren } from "react";
+import { Slot } from "@radix-ui/react-slot";
 
 const formatter = new Intl.RelativeTimeFormat("tr", {
   // numeric: "auto",
@@ -29,16 +30,20 @@ export function formatTimeAgo(date: Date) {
   }
 }
 
-interface TimeagoProps {
-  date: Date;
+interface TimeagoProps extends PropsWithChildren {
+  date: Date | string;
+  asChild?: boolean;
 }
 
 export const TimeAgo = (props: TimeagoProps) => {
-  const [timeAgo, setTimeAgo] = useState(formatTimeAgo(props.date));
+  const Comp = props.asChild ? Slot : "div";
+  const [timeAgo, setTimeAgo] = useState(
+    formatTimeAgo(typeof props.date === "string" ? new Date(props.date) : props.date)
+  );
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeAgo(formatTimeAgo(props.date));
+      setTimeAgo(formatTimeAgo(typeof props.date === "string" ? new Date(props.date) : props.date));
     }, 10000);
 
     return () => clearInterval(timer);
@@ -46,5 +51,5 @@ export const TimeAgo = (props: TimeagoProps) => {
 
   // If we don't suppress the hydration warning, we get this error: https://nextjs.org/docs/messages/react-hydration-error
   // https://nextjs.org/docs/messages/react-hydration-error#solution-3-using-suppresshydrationwarning
-  return <div suppressHydrationWarning>{timeAgo}</div>;
+  return <Comp suppressHydrationWarning>{timeAgo}</Comp>;
 };

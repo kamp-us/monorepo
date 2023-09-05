@@ -1,12 +1,22 @@
 "use client";
 
+import { type ReactNode } from "react";
 import NextLink from "next/link";
-import { ExternalLinkIcon, MessageCircleIcon } from "lucide-react";
+import { ExternalLinkIcon, MessageCircle } from "lucide-react";
 import { graphql, useFragment } from "react-relay";
 
-import { Card, CardContent, CardFooter, CardTitle, TimeAgo } from "@kampus/ui";
+import {
+  Button,
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  TimeAgo,
+} from "@kampus/ui";
 import { cn } from "@kampus/ui/utils";
 
+import { UserAvatar } from "~/features/user-avatar/UserAvatar";
 import { type PostItem_post$key } from "./__generated__/PostItem_post.graphql";
 import { type PostItem_viewer$key } from "./__generated__/PostItem_viewer.graphql";
 import { MoreOptionsDropdown } from "./MoreOptions";
@@ -14,7 +24,7 @@ import { UpvoteButton } from "./PostUpvoteButton";
 
 interface LinkProps {
   href: string;
-  children: string;
+  children: ReactNode;
   className?: string;
 }
 
@@ -38,12 +48,21 @@ const usePanoPostFragment = (key: PostItem_post$key | null) =>
         site
         commentCount @required(action: LOG)
 
-        ...PostUpvoteButton_post
-
         owner @required(action: LOG) {
           displayName @required(action: LOG)
+          ...UserAvatar_user
         }
+        ...PostUpvoteButton_post
         ...MoreOptions_post
+
+        recentComments: comments(last: 3) {
+          nodes {
+            owner {
+              id
+              ...UserAvatar_user
+            }
+          }
+        }
       }
     `,
     key
@@ -77,48 +96,50 @@ export const PostItem = (props: PostItemProps) => {
   }
 
   return (
-    <Card className="flex flex-row items-center gap-6 p-6">
-      <div className="flex flex-col gap-3 p-0">
-        <UpvoteButton postRef={post} />
-      </div>
-
-      <CardContent className="flex flex-1 flex-col gap-2 p-0">
-        <CardTitle className="flex gap-3">
-          <div className="flex items-center gap-1.5">
-            <Link className="font-semibold" href={post.url ?? ""}>
-              {post.title}
-            </Link>
-            <ExternalLinkIcon size={12} />
+    <Card className="flex overflow-clip">
+      <div>
+        <CardHeader>
+          <div className="flex items-center gap-3 pb-4">
+            <UserAvatar user={post.owner} />
+            <div>
+              <p className="text-sm font-medium leading-none">{post.owner.displayName}</p>
+              <CardDescription>
+                <TimeAgo date={post.createdAt as string} />
+              </CardDescription>
+            </div>
           </div>
-
-          <div className="text-muted-foreground flex items-center gap-1 text-sm">
+          <CardTitle className="flex">
+            <div className="flex items-center gap-1.5">
+              <Link className="font-semibold" href={post.url ?? ""}>
+                {post.title}
+              </Link>
+              <ExternalLinkIcon size={12} />
+            </div>
+          </CardTitle>
+          <CardDescription>
             <Link className="text-sm" href={post.site ? "/site/" + post.site : ""}>
               {post.site ?? ""}
             </Link>
-          </div>
-        </CardTitle>
-        <div className="text-muted-foreground flex text-sm">
-          <div>@{post.owner.displayName}</div>&nbsp;·&nbsp;
-          <TimeAgo date={new Date(post.createdAt as string)} />
-        </div>
-
-        <div className="flex items-center gap-4 text-sm">
+          </CardDescription>
+        </CardHeader>
+        <CardFooter className="gap-1.5">
+          <UpvoteButton postRef={post} />
           <div className="flex items-center gap-1 font-semibold">
-            <MessageCircleIcon size="12" />
-            <Link href={`/post/${post.id}`}>{`${post.commentCount} yorum`}</Link>
+            <Button asChild variant="secondary" className="flex gap-1.5" size="sm">
+              <Link href={`/post/${post.id}`}>
+                <MessageCircle size="16" />
+                <div className="text-center font-semibold">{post.commentCount ?? 0}</div>
+              </Link>
+            </Button>
           </div>
-        </div>
-      </CardContent>
-      <CardFooter className="flex h-full flex-col justify-between p-0">
-        <div className="flex flex-1 flex-col">
           <MoreOptionsDropdown
             key={post.id}
             post={post}
             viewerRef={viewer}
             postConnectionID={props.postConnectionId}
           />
-        </div>
-      </CardFooter>
+        </CardFooter>
+      </div>
     </Card>
   );
 };

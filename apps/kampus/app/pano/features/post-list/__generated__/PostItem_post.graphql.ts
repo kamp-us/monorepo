@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<5f75e5667edef9e6857b85ad1a46e63d>>
+ * @generated SignedSource<<f6d8678233748b9ad21bd3126337d8f7>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -17,7 +17,16 @@ export type PostItem_post$data = {
   readonly id: string;
   readonly owner: {
     readonly displayName: string;
+    readonly " $fragmentSpreads": FragmentRefs<"UserAvatar_user">;
   };
+  readonly recentComments: {
+    readonly nodes: ReadonlyArray<{
+      readonly owner: {
+        readonly id: string;
+        readonly " $fragmentSpreads": FragmentRefs<"UserAvatar_user">;
+      } | null;
+    } | null> | null;
+  } | null;
   readonly site: string | null;
   readonly title: string;
   readonly url: string | null;
@@ -29,19 +38,26 @@ export type PostItem_post$key = {
   readonly " $fragmentSpreads": FragmentRefs<"PostItem_post">;
 };
 
-const node: ReaderFragment = {
+const node: ReaderFragment = (function(){
+var v0 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+},
+v1 = {
+  "args": null,
+  "kind": "FragmentSpread",
+  "name": "UserAvatar_user"
+};
+return {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
   "name": "PostItem_post",
   "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "id",
-      "storageKey": null
-    },
+    (v0/*: any*/),
     {
       "alias": null,
       "args": null,
@@ -90,11 +106,6 @@ const node: ReaderFragment = {
       "path": "commentCount"
     },
     {
-      "args": null,
-      "kind": "FragmentSpread",
-      "name": "PostUpvoteButton_post"
-    },
-    {
       "kind": "RequiredField",
       "field": {
         "alias": null,
@@ -115,7 +126,8 @@ const node: ReaderFragment = {
             },
             "action": "LOG",
             "path": "owner.displayName"
-          }
+          },
+          (v1/*: any*/)
         ],
         "storageKey": null
       },
@@ -125,13 +137,60 @@ const node: ReaderFragment = {
     {
       "args": null,
       "kind": "FragmentSpread",
+      "name": "PostUpvoteButton_post"
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
       "name": "MoreOptions_post"
+    },
+    {
+      "alias": "recentComments",
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "last",
+          "value": 3
+        }
+      ],
+      "concreteType": "PanoCommentConnection",
+      "kind": "LinkedField",
+      "name": "comments",
+      "plural": false,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "PanoComment",
+          "kind": "LinkedField",
+          "name": "nodes",
+          "plural": true,
+          "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "User",
+              "kind": "LinkedField",
+              "name": "owner",
+              "plural": false,
+              "selections": [
+                (v0/*: any*/),
+                (v1/*: any*/)
+              ],
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
+        }
+      ],
+      "storageKey": "comments(last:3)"
     }
   ],
   "type": "PanoPost",
   "abstractKey": null
 };
+})();
 
-(node as any).hash = "03c1325a353b031abe75c421b022ef9f";
+(node as any).hash = "bf18b1aca0dc672939d3fdf61addc33f";
 
 export default node;

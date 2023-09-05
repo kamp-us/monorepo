@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<6b510cb6581f4f6f0b387ac509439a3e>>
+ * @generated SignedSource<<02e4993c3e917c40f9a734df33e66c2e>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -121,17 +121,10 @@ v12 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "isUpvotedByViewer",
+  "name": "displayName",
   "storageKey": null
 },
 v13 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "upvoteCount",
-  "storageKey": null
-},
-v14 = {
   "alias": null,
   "args": null,
   "concreteType": "User",
@@ -139,18 +132,26 @@ v14 = {
   "name": "owner",
   "plural": false,
   "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "displayName",
-      "storageKey": null
-    },
+    (v12/*: any*/),
     (v8/*: any*/)
   ],
   "storageKey": null
 },
+v14 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "isUpvotedByViewer",
+  "storageKey": null
+},
 v15 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "upvoteCount",
+  "storageKey": null
+},
+v16 = {
   "kind": "ClientExtension",
   "selections": [
     {
@@ -244,9 +245,51 @@ return {
                 "storageKey": null
               },
               (v11/*: any*/),
-              (v12/*: any*/),
               (v13/*: any*/),
               (v14/*: any*/),
+              (v15/*: any*/),
+              {
+                "alias": "recentComments",
+                "args": [
+                  {
+                    "kind": "Literal",
+                    "name": "last",
+                    "value": 3
+                  }
+                ],
+                "concreteType": "PanoCommentConnection",
+                "kind": "LinkedField",
+                "name": "comments",
+                "plural": false,
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "PanoComment",
+                    "kind": "LinkedField",
+                    "name": "nodes",
+                    "plural": true,
+                    "selections": [
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "User",
+                        "kind": "LinkedField",
+                        "name": "owner",
+                        "plural": false,
+                        "selections": [
+                          (v8/*: any*/),
+                          (v12/*: any*/)
+                        ],
+                        "storageKey": null
+                      },
+                      (v8/*: any*/)
+                    ],
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": "comments(last:3)"
+              },
               {
                 "alias": null,
                 "args": (v6/*: any*/),
@@ -274,10 +317,10 @@ return {
                           (v8/*: any*/),
                           (v9/*: any*/),
                           (v10/*: any*/),
-                          (v14/*: any*/),
-                          (v11/*: any*/),
-                          (v12/*: any*/),
                           (v13/*: any*/),
+                          (v11/*: any*/),
+                          (v14/*: any*/),
+                          (v15/*: any*/),
                           {
                             "alias": null,
                             "args": null,
@@ -290,7 +333,7 @@ return {
                             ],
                             "storageKey": null
                           },
-                          (v15/*: any*/),
+                          (v16/*: any*/),
                           (v7/*: any*/)
                         ],
                         "storageKey": null
@@ -344,7 +387,7 @@ return {
                     ],
                     "storageKey": null
                   },
-                  (v15/*: any*/)
+                  (v16/*: any*/)
                 ],
                 "storageKey": null
               },
@@ -367,12 +410,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "8296a6f08ec06ed693c0d25236076dca",
+    "cacheID": "f62c30252dd6489e89061c3e1a7d48a3",
     "id": null,
     "metadata": {},
     "name": "SinglePostFeedPaginationQuery",
     "operationKind": "query",
-    "text": "query SinglePostFeedPaginationQuery(\n  $after: String\n  $before: String\n  $first: Int = 10\n  $last: Int\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...SinglePostFeed_post_pbnwq\n    id\n  }\n}\n\nfragment CommentItem_comment on PanoComment {\n  id\n  content\n  createdAt\n  owner {\n    displayName\n    id\n  }\n  commentCount\n  ...CommentUpvoteButton_comment\n  ...CommentMoreOptions_comment\n}\n\nfragment CommentMoreOptions_comment on PanoComment {\n  id\n  post {\n    id\n  }\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment CommentUpvoteButton_comment on PanoComment {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment SinglePostFeed_post_pbnwq on PanoPost {\n  ...PostItem_post\n  commentCount\n  comments(first: $first, after: $after, last: $last, before: $before) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n        ...CommentItem_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n"
+    "text": "query SinglePostFeedPaginationQuery(\n  $after: String\n  $before: String\n  $first: Int = 10\n  $last: Int\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...SinglePostFeed_post_pbnwq\n    id\n  }\n}\n\nfragment CommentItem_comment on PanoComment {\n  id\n  content\n  createdAt\n  owner {\n    displayName\n    id\n  }\n  commentCount\n  ...CommentUpvoteButton_comment\n  ...CommentMoreOptions_comment\n}\n\nfragment CommentMoreOptions_comment on PanoComment {\n  id\n  post {\n    id\n  }\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment CommentUpvoteButton_comment on PanoComment {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  owner {\n    displayName\n    ...UserAvatar_user\n    id\n  }\n  ...PostUpvoteButton_post\n  ...MoreOptions_post\n  recentComments: comments(last: 3) {\n    nodes {\n      owner {\n        id\n        ...UserAvatar_user\n      }\n      id\n    }\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment SinglePostFeed_post_pbnwq on PanoPost {\n  ...PostItem_post\n  commentCount\n  comments(first: $first, after: $after, last: $last, before: $before) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n        ...CommentItem_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n\nfragment UserAvatar_user on User {\n  displayName\n}\n"
   }
 };
 })();

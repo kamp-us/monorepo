@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<99e9d9c483e3ec59ed137fbab70e8ba6>>
+ * @generated SignedSource<<943e51a7ef00e44881e44a508eb2f553>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -190,6 +190,19 @@ return {
                       {
                         "alias": null,
                         "args": null,
+                        "concreteType": "User",
+                        "kind": "LinkedField",
+                        "name": "owner",
+                        "plural": false,
+                        "selections": [
+                          (v4/*: any*/),
+                          (v3/*: any*/)
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
                         "kind": "ScalarField",
                         "name": "isUpvotedByViewer",
                         "storageKey": null
@@ -202,17 +215,46 @@ return {
                         "storageKey": null
                       },
                       {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "User",
+                        "alias": "recentComments",
+                        "args": [
+                          {
+                            "kind": "Literal",
+                            "name": "last",
+                            "value": 3
+                          }
+                        ],
+                        "concreteType": "PanoCommentConnection",
                         "kind": "LinkedField",
-                        "name": "owner",
+                        "name": "comments",
                         "plural": false,
                         "selections": [
-                          (v4/*: any*/),
-                          (v3/*: any*/)
+                          {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "PanoComment",
+                            "kind": "LinkedField",
+                            "name": "nodes",
+                            "plural": true,
+                            "selections": [
+                              {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "User",
+                                "kind": "LinkedField",
+                                "name": "owner",
+                                "plural": false,
+                                "selections": [
+                                  (v3/*: any*/),
+                                  (v4/*: any*/)
+                                ],
+                                "storageKey": null
+                              },
+                              (v3/*: any*/)
+                            ],
+                            "storageKey": null
+                          }
                         ],
-                        "storageKey": null
+                        "storageKey": "comments(last:3)"
                       },
                       (v5/*: any*/)
                     ],
@@ -292,12 +334,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "a9652ab6b0fb7122397f1a086a24b7d2",
+    "cacheID": "3175a4b2a3ff6da369aa1e6b0de76a80",
     "id": null,
     "metadata": {},
     "name": "PostListBySiteContainerQuery",
     "operationKind": "query",
-    "text": "query PostListBySiteContainerQuery(\n  $site: String!\n) {\n  viewer {\n    ...PanoFeedBySiteFragment_QaI6y\n    ...PanoFeedBySite_viewer\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedBySiteFragment_QaI6y on Viewer {\n  panoFeedBySite(first: 10, site: $site) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment PanoFeedBySite_viewer on Viewer {\n  ...PostItem_viewer\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "query PostListBySiteContainerQuery(\n  $site: String!\n) {\n  viewer {\n    ...PanoFeedBySiteFragment_QaI6y\n    ...PanoFeedBySite_viewer\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedBySiteFragment_QaI6y on Viewer {\n  panoFeedBySite(first: 10, site: $site) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment PanoFeedBySite_viewer on Viewer {\n  ...PostItem_viewer\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  owner {\n    displayName\n    ...UserAvatar_user\n    id\n  }\n  ...PostUpvoteButton_post\n  ...MoreOptions_post\n  recentComments: comments(last: 3) {\n    nodes {\n      owner {\n        id\n        ...UserAvatar_user\n      }\n      id\n    }\n  }\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment UserAvatar_user on User {\n  displayName\n}\n"
   }
 };
 })();

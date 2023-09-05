@@ -1,7 +1,5 @@
 "use client";
 
-import { ThemeToggle } from "@kampus/ui";
-
 import { PanoFilterLink } from "~/app/pano/features/post-filter/PanoFilterLink";
 import { filters, type PanoPostFilterType } from "~/app/pano/features/post-filter/utils";
 
@@ -11,7 +9,7 @@ interface Props {
 
 export const PostSortFilters = (props: Props) => {
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center gap-2">
       {Object.entries(filters).map(([filter, label]) => (
         <PanoFilterLink
           key={filter}
@@ -21,7 +19,6 @@ export const PostSortFilters = (props: Props) => {
           {label}
         </PanoFilterLink>
       ))}
-      <ThemeToggle />
     </div>
   );
 };

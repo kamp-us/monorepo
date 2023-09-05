@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { Button } from "~/../../packages/ui";
 import { type PanoPostFilterType } from "~/app/pano/features/post-filter/utils";
 
 const createQueryString = (key: string, value: string) => {
@@ -17,11 +18,13 @@ interface Props {
 
 export function PanoFilterLink({ isActive, children, filter }: Props) {
   return (
-    <Link
-      href={"/?" + createQueryString("filter", filter)}
-      style={{ fontWeight: isActive ? "bold" : "normal" }}
-    >
-      {children}
-    </Link>
+    <Button variant="ghost" asChild>
+      <Link
+        href={"/?" + createQueryString("filter", filter)}
+        style={{ fontWeight: isActive ? "bold" : "normal" }}
+      >
+        {children}
+      </Link>
+    </Button>
   );
 }

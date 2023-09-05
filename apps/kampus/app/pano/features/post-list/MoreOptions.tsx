@@ -100,7 +100,7 @@ export const MoreOptionsDropdown = (props: Props) => {
     <AlertDialog>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className="h-5 p-1" variant="ghost">
+          <Button variant="ghost" size="sm">
             <MoreHorizontal size="16" aria-label="Daha fazla seçenek" />
           </Button>
         </DropdownMenuTrigger>

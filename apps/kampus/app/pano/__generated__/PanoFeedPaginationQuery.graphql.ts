@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<a304893b2c7c2f053802820932ad4f5c>>
+ * @generated SignedSource<<365d620a13c14cbcf0c13e67ad30e039>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -88,6 +88,13 @@ v2 = {
   "args": null,
   "kind": "ScalarField",
   "name": "id",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "displayName",
   "storageKey": null
 };
 return {
@@ -208,6 +215,19 @@ return {
                       {
                         "alias": null,
                         "args": null,
+                        "concreteType": "User",
+                        "kind": "LinkedField",
+                        "name": "owner",
+                        "plural": false,
+                        "selections": [
+                          (v3/*: any*/),
+                          (v2/*: any*/)
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
                         "kind": "ScalarField",
                         "name": "isUpvotedByViewer",
                         "storageKey": null
@@ -220,23 +240,46 @@ return {
                         "storageKey": null
                       },
                       {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "User",
+                        "alias": "recentComments",
+                        "args": [
+                          {
+                            "kind": "Literal",
+                            "name": "last",
+                            "value": 3
+                          }
+                        ],
+                        "concreteType": "PanoCommentConnection",
                         "kind": "LinkedField",
-                        "name": "owner",
+                        "name": "comments",
                         "plural": false,
                         "selections": [
                           {
                             "alias": null,
                             "args": null,
-                            "kind": "ScalarField",
-                            "name": "displayName",
+                            "concreteType": "PanoComment",
+                            "kind": "LinkedField",
+                            "name": "nodes",
+                            "plural": true,
+                            "selections": [
+                              {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "User",
+                                "kind": "LinkedField",
+                                "name": "owner",
+                                "plural": false,
+                                "selections": [
+                                  (v2/*: any*/),
+                                  (v3/*: any*/)
+                                ],
+                                "storageKey": null
+                              },
+                              (v2/*: any*/)
+                            ],
                             "storageKey": null
-                          },
-                          (v2/*: any*/)
+                          }
                         ],
-                        "storageKey": null
+                        "storageKey": "comments(last:3)"
                       },
                       {
                         "alias": null,
@@ -322,12 +365,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "bfd0b49ea530948253e68370ab0cacbe",
+    "cacheID": "b3d4685fe15fa71d330547e2168dbad6",
     "id": null,
     "metadata": {},
     "name": "PanoFeedPaginationQuery",
     "operationKind": "query",
-    "text": "query PanoFeedPaginationQuery(\n  $after: String\n  $before: String\n  $filter: PanoPostFilter\n  $first: Int = 20\n  $last: Int\n) {\n  viewer {\n    ...PanoFeedFragment_4zM71\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedFragment_4zM71 on Viewer {\n  panoFeed(first: $first, after: $after, last: $last, before: $before, filter: $filter) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "query PanoFeedPaginationQuery(\n  $after: String\n  $before: String\n  $filter: PanoPostFilter\n  $first: Int = 20\n  $last: Int\n) {\n  viewer {\n    ...PanoFeedFragment_4zM71\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PanoFeedFragment_4zM71 on Viewer {\n  panoFeed(first: $first, after: $after, last: $last, before: $before, filter: $filter) {\n    edges {\n      cursor\n      node {\n        id\n        ...PostItem_post\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  owner {\n    displayName\n    ...UserAvatar_user\n    id\n  }\n  ...PostUpvoteButton_post\n  ...MoreOptions_post\n  recentComments: comments(last: 3) {\n    nodes {\n      owner {\n        id\n        ...UserAvatar_user\n      }\n      id\n    }\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment UserAvatar_user on User {\n  displayName\n}\n"
   }
 };
 })();

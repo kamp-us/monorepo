@@ -4,7 +4,7 @@ import { env } from "~/env";
 
 type KampusProduct = "sozluk" | "pano" | "pasaport";
 
-export const getKampusURL = (product: KampusProduct, path: string = "") => {
+export const getKampusURL = (product: KampusProduct, path = "") => {
   switch (env.KAMPUS_ENV) {
     case "localhost":
       return `http://${product}.localhost.kamp.us:3000${path}`;

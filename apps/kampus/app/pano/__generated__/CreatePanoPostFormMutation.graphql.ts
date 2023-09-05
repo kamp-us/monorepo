@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<4ff94a56f36cabd941f8e6415b4cab9c>>
+ * @generated SignedSource<<df5273726cf023c990eeedc4b74c9fc5>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -104,6 +104,13 @@ v7 = {
   "args": null,
   "kind": "ScalarField",
   "name": "id",
+  "storageKey": null
+},
+v8 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "displayName",
   "storageKey": null
 };
 return {
@@ -255,6 +262,19 @@ return {
                   {
                     "alias": null,
                     "args": null,
+                    "concreteType": "User",
+                    "kind": "LinkedField",
+                    "name": "owner",
+                    "plural": false,
+                    "selections": [
+                      (v8/*: any*/),
+                      (v7/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
                     "kind": "ScalarField",
                     "name": "isUpvotedByViewer",
                     "storageKey": null
@@ -267,23 +287,46 @@ return {
                     "storageKey": null
                   },
                   {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "User",
+                    "alias": "recentComments",
+                    "args": [
+                      {
+                        "kind": "Literal",
+                        "name": "last",
+                        "value": 3
+                      }
+                    ],
+                    "concreteType": "PanoCommentConnection",
                     "kind": "LinkedField",
-                    "name": "owner",
+                    "name": "comments",
                     "plural": false,
                     "selections": [
                       {
                         "alias": null,
                         "args": null,
-                        "kind": "ScalarField",
-                        "name": "displayName",
+                        "concreteType": "PanoComment",
+                        "kind": "LinkedField",
+                        "name": "nodes",
+                        "plural": true,
+                        "selections": [
+                          {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "User",
+                            "kind": "LinkedField",
+                            "name": "owner",
+                            "plural": false,
+                            "selections": [
+                              (v7/*: any*/),
+                              (v8/*: any*/)
+                            ],
+                            "storageKey": null
+                          },
+                          (v7/*: any*/)
+                        ],
                         "storageKey": null
-                      },
-                      (v7/*: any*/)
+                      }
                     ],
-                    "storageKey": null
+                    "storageKey": "comments(last:3)"
                   }
                 ],
                 "storageKey": null
@@ -332,12 +375,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "2a9f2bd39fa4c75bdbd1d46d297a31cb",
+    "cacheID": "b5682abc1ff0eb69b803453e44f72239",
     "id": null,
     "metadata": {},
     "name": "CreatePanoPostFormMutation",
     "operationKind": "mutation",
-    "text": "mutation CreatePanoPostFormMutation(\n  $title: String!\n  $content: String\n  $url: String\n) {\n  createPanoPost(input: {url: $url, title: $title, content: $content}) {\n    edge {\n      cursor\n      node {\n        ...PostItem_post\n        id\n      }\n    }\n    error {\n      __typename\n      ... on UserError {\n        __isUserError: __typename\n        message\n      }\n    }\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n"
+    "text": "mutation CreatePanoPostFormMutation(\n  $title: String!\n  $content: String\n  $url: String\n) {\n  createPanoPost(input: {url: $url, title: $title, content: $content}) {\n    edge {\n      cursor\n      node {\n        ...PostItem_post\n        id\n      }\n    }\n    error {\n      __typename\n      ... on UserError {\n        __isUserError: __typename\n        message\n      }\n    }\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  owner {\n    displayName\n    ...UserAvatar_user\n    id\n  }\n  ...PostUpvoteButton_post\n  ...MoreOptions_post\n  recentComments: comments(last: 3) {\n    nodes {\n      owner {\n        id\n        ...UserAvatar_user\n      }\n      id\n    }\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment UserAvatar_user on User {\n  displayName\n}\n"
   }
 };
 })();

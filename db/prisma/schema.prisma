@@ -50,7 +50,7 @@ model CommentUpvote {
 
 model Comment {
   id      String @id @default(cuid())
-  content String
+  content String @db.Text
 
   userID String
   owner  User   @relation(fields: [userID], references: [id])
@@ -79,7 +79,7 @@ model Post {
   title   String
   url     String?
   site    String?
-  content String?
+  content String? @db.Text
 
   userID String
   owner  User   @relation(fields: [userID], references: [id])

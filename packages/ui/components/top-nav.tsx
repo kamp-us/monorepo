@@ -5,29 +5,31 @@ import { cn } from "../utils";
 
 export const TopNav = ({ children, sticky }: PropsWithChildren<{ sticky?: boolean }>) => {
   return (
-    <header className={cn(!!sticky && "sticky", "top-0 z-40 w-full border-b bg-background")}>
-      <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-        <div className="flex gap-6 md:gap-10">{children}</div>
-      </div>
+    <header className={cn(!!sticky && "sticky", "bg-background top-0 z-40 h-16 w-full border-b")}>
+      <div className="flex h-full w-full">{children}</div>
     </header>
   );
 };
 
-export const TopNavBrand = ({ children, asChild }: PropsWithChildren<{ asChild?: boolean }>) => {
+export const TopNavBrand = ({
+  className,
+  children,
+  asChild,
+}: PropsWithChildren<{ asChild?: boolean; className?: string }>) => {
   const Comp = asChild ? Slot : "a";
 
-  return (
-    <Comp className="flex items-center space-x-2">
-      <span className="inline-block font-bold">{children}</span>
-    </Comp>
-  );
+  return <Comp className={cn(className, "flex items-center font-bold")}>{children}</Comp>;
 };
 
 export const TopNavItem = ({ children, asChild }: PropsWithChildren<{ asChild?: boolean }>) => {
   const Comp = asChild ? Slot : "div";
 
   return (
-    <Comp className={"flex items-center text-sm font-medium text-muted-foreground"}>
+    <Comp
+      className={
+        "text-muted-foreground hover:text-foreground flex items-center px-4 text-sm font-medium"
+      }
+    >
       {children}
     </Comp>
   );

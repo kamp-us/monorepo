@@ -54,17 +54,6 @@ export function PanoFeed(props: Props) {
 
   return (
     <>
-      <Button variant="outline" asChild>
-        <Link
-          href={{
-            pathname: `/post/create`,
-            search: `foo=bar`,
-          }}
-          as="post/create"
-        >
-          New post
-        </Link>
-      </Button>
       <Suspense fallback="loading">
         <section className="flex flex-col gap-4">
           {feed?.edges?.map((edge) => {
