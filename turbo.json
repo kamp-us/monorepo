@@ -46,7 +46,14 @@
       "dependsOn": ["@kampus/prisma#prisma:generate", "@kampus/sozluk-content#build"]
     },
     "@kampus-apps/kampus#*": {
-      "env": ["NODE_ENV", "NEXT_PUBLIC_GQL_URL", "RESEND_API_KEY", "NEXTAUTH_URL", "KAMPUS_ENV"]
+      "env": [
+        "NODE_ENV",
+        "NEXT_PUBLIC_GQL_URL",
+        "RESEND_API_KEY",
+        "NEXTAUTH_URL",
+        "NEXT_PUBLIC_KAMPUS_ENV",
+        "VERCEL_URL"
+      ]
     },
     "@kampus-apps/pasaport#*": {
       "env": ["NODE_ENV", "NEXTAUTH_URL", "DATABASE_URL", "KAMPUS_ENV"]
