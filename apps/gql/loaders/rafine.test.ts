@@ -8,7 +8,6 @@ describe("Rafine Loader", () => {
       const loader = createRafineLoaders();
 
       const result = await loader.metadata.parse.load("https://www.google.com");
-      console.log(result);
 
       expect(result).toMatchObject({
         images: [
