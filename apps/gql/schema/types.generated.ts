@@ -304,8 +304,8 @@ export type QueryUserArgs = {
   username: InputMaybe<Scalars["String"]["input"]>;
 };
 
-export type RafineMetadataResult = {
-  __typename?: "RafineMetadataResult";
+export type RafineMetadata = {
+  __typename?: "RafineMetadata";
   description: Scalars["String"]["output"];
   title: Scalars["String"]["output"];
   url: Scalars["String"]["output"];
@@ -313,7 +313,7 @@ export type RafineMetadataResult = {
 
 export type RafineQuery = {
   __typename?: "RafineQuery";
-  metadata: Maybe<RafineMetadataResult>;
+  metadata: Maybe<RafineMetadata>;
 };
 
 export type RafineQueryMetadataArgs = {
@@ -625,7 +625,7 @@ export type ResolversTypes = ResolversObject<{
   PanoUpvote: ResolverTypeWrapper<PanoUpvote>;
   PanoUpvoteError: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>["PanoUpvoteError"]>;
   Query: ResolverTypeWrapper<{}>;
-  RafineMetadataResult: ResolverTypeWrapper<RafineMetadataResult>;
+  RafineMetadata: ResolverTypeWrapper<RafineMetadata>;
   RafineQuery: ResolverTypeWrapper<RafineQuery>;
   RemovePanoCommentInput: RemovePanoCommentInput;
   RemovePanoCommentPayload: ResolverTypeWrapper<
@@ -701,7 +701,7 @@ export type ResolversParentTypes = ResolversObject<{
   PanoUpvote: PanoUpvote;
   PanoUpvoteError: ResolversUnionTypes<ResolversParentTypes>["PanoUpvoteError"];
   Query: {};
-  RafineMetadataResult: RafineMetadataResult;
+  RafineMetadata: RafineMetadata;
   RafineQuery: RafineQuery;
   RemovePanoCommentInput: RemovePanoCommentInput;
   RemovePanoCommentPayload: Omit<RemovePanoCommentPayload, "error"> & {
@@ -1087,9 +1087,9 @@ export type QueryResolvers<
   viewer: Resolver<Maybe<ResolversTypes["Viewer"]>, ParentType, ContextType>;
 }>;
 
-export type RafineMetadataResultResolvers<
+export type RafineMetadataResolvers<
   ContextType = KampusGQLContext,
-  ParentType extends ResolversParentTypes["RafineMetadataResult"] = ResolversParentTypes["RafineMetadataResult"]
+  ParentType extends ResolversParentTypes["RafineMetadata"] = ResolversParentTypes["RafineMetadata"]
 > = ResolversObject<{
   description: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
@@ -1102,7 +1102,7 @@ export type RafineQueryResolvers<
   ParentType extends ResolversParentTypes["RafineQuery"] = ResolversParentTypes["RafineQuery"]
 > = ResolversObject<{
   metadata: Resolver<
-    Maybe<ResolversTypes["RafineMetadataResult"]>,
+    Maybe<ResolversTypes["RafineMetadata"]>,
     ParentType,
     ContextType,
     RequireFields<RafineQueryMetadataArgs, "input">
@@ -1293,7 +1293,7 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   PanoUpvote: PanoUpvoteResolvers<ContextType>;
   PanoUpvoteError: PanoUpvoteErrorResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
-  RafineMetadataResult: RafineMetadataResultResolvers<ContextType>;
+  RafineMetadata: RafineMetadataResolvers<ContextType>;
   RafineQuery: RafineQueryResolvers<ContextType>;
   RemovePanoCommentPayload: RemovePanoCommentPayloadResolvers<ContextType>;
   RemovePanoPostPayload: RemovePanoPostPayloadResolvers<ContextType>;

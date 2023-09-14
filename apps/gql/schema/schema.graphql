@@ -340,10 +340,10 @@ type OdinLessonEdge {
 ### Rafine
 
 type RafineQuery {
-  metadata(input: String!): RafineMetadataResult
+  metadata(input: String!): RafineMetadata
 }
 
-type RafineMetadataResult {
+type RafineMetadata {
   title: String!
   description: String!
   url: String!
