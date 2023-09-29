@@ -1,41 +1,41 @@
-### Introduction
+### Giriş
 
-Browsers, by default, inject a little bit of style into your web projects. You may not have thought about this specifically, but you  have definitely encountered it.
+Tarayıcılar, varsayılan olarak web projelerinize biraz stil enjekte ederler. Belki bunu özellikle düşünmemiş olabilirsiniz ancak kesinlikle karşılaşmışsınızdır.
 
-### Learning outcomes
+### Öğrenme Çıktıları
 
--   You'll learn about default browser styles
--   You'll learn how to use a CSS reset to remove, or change those default styles
+-   Varsayılan tarayıcı stilleri hakkında bilgi edineceksiniz.
+-   CSS sıfırlama kullanarak bu varsayılan stilleri kaldırmayı veya değiştirmeyi öğreneceksiniz.
 
-### Default styles
+### Varsayılan Stiller
 
-When you did the first [HTML Recipes project](https://www.theodinproject.com/lessons/foundations-recipes), you would have noticed that some elements already have a little bit of style applied to them. An `h1`, for instance, is bigger and bolder than regular text. Links (`a`) are blue and underlined. Lists (`ul` and `ol`) both have a bunch of padding surrounding them. Browsers accomplish this by inserting a little bit of CSS into every webpage. ([Here is Chrome's default HTML stylesheet](https://chromium.googlesource.com/chromium/blink/+/refs/heads/main/Source/core/css/html.css))
+İlk olarak [HTML Tarifler Projesini](https://www.theodinproject.com/lessons/foundations-recipes) yaptığınızda, bazı elementlerin zaten üzerlerine biraz stil uygulandığını fark etmiş olmalısınız. Bir `h1` başlığı, örneğin, normal metinden daha büyük ve kalındır. Bağlantılar (`a`), mavi renkte ve altı çizgilidir. Listeler (`ul` ve `ol`), etraflarında bir sürü dolgu bulunan bir yapıya sahiptir. Tarayıcılar, her web sayfasına biraz CSS ekleyerek bunu yaparlar. [İşte Chrome'un varsayılan HTML stil-sayfası](https://chromium.googlesource.com/chromium/blink/+/refs/heads/main/Source/core/css/html.css)
 
-The problem with this is that there is no guarantee that different browsers will style everything the same. In general, inconsistencies are going to be pretty minor, but they DO exist. Also, in many cases as a developer you're going to end up undoing or redoing all of this default styling to make your site look exactly how you envision it.
+Bununla ilgili sorun, farklı tarayıcıların her şeyi aynı şekilde biçimlendireceğinin garantisi olmamasıdır. Genel olarak, tutarsızlıklar oldukça küçük olacak ancak yine de VAR OLACAKLAR. Ayrıca, birçok durumda bir geliştirici olarak, sitenizin tam olarak hayal ettiğiniz gibi görünmesini sağlamak için tüm bu varsayılan stili geri alacak veya yeniden yapacaksınız.
 
-To counter this, many developers start their projects with a "CSS Reset"; a file that undoes browser defaults, so that every element behaves the same in every browser.
+Buna karşı birçok geliştirici, projelerine "CSS Sıfırlama" ile başlar; tarayıcı varsayılanlarını geri alarak her elementin her tarayıcıda aynı şekilde davranmasını sağlayan bir dosya. 
 
-You don't _have_ to use a CSS reset. In many cases you're going to end up undoing, or redoing a lot of the styles that a reset will provide for you. You can decide whether or not you want to use one on a regular basis, but it's worth taking the time to dig through a couple now. Understanding exactly how they're doing what they're doing is a useful exercise!
+CSS sıfırlama kullanmak zorunda değilsiniz. Birçok durumda, size sunulan sıfırlama tarafından sağlanan stillerin çoğunu geri almanız veya yeniden yapmanız gerekecektir. Bir sıfırlama kullanıp kullanmamaya karar verebilirsiniz, ancak birkaç tanesini incelemek için zaman ayırmak faydalı bir alıştırmadır!
 
-### Assignment
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
 
-1.  [The Meyer Reset](https://meyerweb.com/eric/tools/css/reset/) is almost certainly the most popular. It's very simple and basically removes every default style.
-2.  [Normalize.css](http://nicolasgallagher.com/about-normalize-css/) is another popular one. It's a little different in that it doesn't remove all the default styles, but tweaks them slightly to ensure that browsers are consistent.
-3.  [Reboot, Resets and Reasoning](https://css-tricks.com/reboot-resets-reasoning/) is a CSS tricks article that goes a little more in depth, and mentions a few other popular resets.
-4.  Maybe more trivial than useful, this [Browser Default Styles](https://browserdefaultstyles.com/) site is fun to play with.
+1.  [Meyer Sıfırlaması](https://meyerweb.com/eric/tools/css/reset/) muhtemelen en popüler olanıdır. Çok basittir ve temelde tüm varsayılan stilleri kaldırır.
+2.  [Normalize.css](http://nicolasgallagher.com/about-normalize-css/) başka popüler bir seçenektir. Tüm varsayılan stilleri kaldırmaz, ancak tarayıcıların tutarlı olmasını sağlamak için onları hafifçe düzenler.
+3.  [Reboot, Resets and Reasoning](https://css-tricks.com/reboot-resets-reasoning/) CSS hileleri makalesi, biraz daha derine iner ve birkaç diğer popüler sıfırlamayı anlatır.
+4.  İşe yararlığından ziyade eğlence için bu [Tarayıcı Varsayılan Stiller](https://browserdefaultstyles.com/) sitesiyle oynayabilirsiniz.
 
 </div>
 
-### Knowledge check
+### Bilgi Ölçme Bakış
 
-This section contains questions for you to check your understanding of this lesson on your own. If you’re having trouble answering a question, click it and review the material it links to.
+Bu bölüm, bu dersin anlayışınızı kendi başınıza kontrol etmeniz için sorular içerir. Bir soruya cevap vermede zorluk yaşıyorsanız, üzerine tıklıyarak bağlantı verilen materyali gözden geçirebilirsiniz.
 
--   [Why would you want to use a CSS reset?](#default-styles)
+-   [Neden CSS sıfırlama kullanmak istersiniz?](#default-styles)
 
-### Additional resources
+### Ek Kaynaklar
 
-This section contains helpful links to related content. It isn’t required, so consider it supplemental.
+Bu bölüm, ilgili içeriklere yönlendiren yararlı bağlantılar içerir. Zorunlu değildir, bu yüzden bunlar ek bilgi kaynakları olarak düşünülebilir.
 
--   [A Look at CSS Resets in 2018](https://bitsofco.de/a-look-at-css-resets-in-2018/) is another article that talks about the various resets out there.
+-   [2018'de CSS Sıfırlamalarına Bir Bakış](https://bitsofco.de/a-look-at-css-resets-in-2018/) diğer sıfırlama seçeneklerini ele alan başka bir makaledir.
