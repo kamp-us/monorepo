@@ -64,6 +64,9 @@
     "@kampus-apps/kampus#build": {
       "dependsOn": ["@kampus/prisma#prisma:generate"]
     },
+    "@kampus-apps/kontrol-bot": {
+      "env": ["DISCORD_TOKEN", "DISCORD_CLIENT_ID", "DISCORD_GUILD_ID"]
+    },
     "@kampus/next-auth#*": {
       "env": [
         "AUTH_COOKIE_DOMAIN",
