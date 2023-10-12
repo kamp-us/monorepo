@@ -4,14 +4,13 @@
   "description": "Yo",
   "main": "index.ts",
   "scripts": {
-    "dev": "nodemon index.ts"
+    "dev": "tsx index.ts"
   },
   "author": "Umut Sirin <umutsirin1@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "discord.js": "14.13.0",
     "dotenv": "16.3.1",
-    "ts-node": "^10.9.1",
     "znv": "0.3.2",
     "zod": "3.21.4"
   },
