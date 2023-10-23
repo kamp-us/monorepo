@@ -8,8 +8,5 @@
   "license": "MIT",
   "volta": {
     "extends": "../../package.json"
-  },
-  "devDependencies": {
-    "vite-tsconfig-paths": "4.2.0"
   }
 }

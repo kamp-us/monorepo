@@ -11,9 +11,6 @@
   "volta": {
     "extends": "../../package.json"
   },
-  "devDependencies": {
-    "vite-tsconfig-paths": "4.2.0"
-  },
   "dependencies": {
     "znv": "0.3.2",
     "zod": "3.21.4",
