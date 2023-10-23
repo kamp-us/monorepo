@@ -1,9 +1,17 @@
+import { readdirSync } from "fs";
+import { join } from "path";
 import { Client, Events, GatewayIntentBits } from "discord.js";
 
 import { commands } from "./commands";
 import { env } from "./env";
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
 
 client.once(Events.ClientReady, (event) => {
   console.log("ready", event);
@@ -44,6 +52,13 @@ client.on(Events.InteractionCreate, async (interaction) => {
       });
     }
   }
+});
+
+const handlersPath = join(__dirname, "handlers");
+const handlerFiles = readdirSync(handlersPath).filter((file) => file.endsWith("Handler.ts"));
+handlerFiles.forEach((handlerFile: string) => {
+  const filePath = join(handlersPath, handlerFile);
+  import(filePath).then((handler) => handler.default(client));
 });
 
 const start = async () => {
