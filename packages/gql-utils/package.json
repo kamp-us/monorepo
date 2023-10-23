@@ -7,7 +7,8 @@
   "scripts": {
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:cov": "vitest --coverage"
+    "test:cov": "vitest --coverage",
+    "test:nowatch": "vitest run"
   },
   "author": "",
   "license": "MIT",
