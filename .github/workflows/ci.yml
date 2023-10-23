@@ -36,13 +36,14 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
+          cache: npm
           node-version-file: "package.json"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Test
+        run: npm run test:nowatch --workspaces --if-present
 
       - name: Build
         run: npm run build
-
-      # - name: Test
-      #   run: npm run test
