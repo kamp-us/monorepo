@@ -1,23 +1,23 @@
-### Introduction
+### Giriş
 
-Over the next few lessons we will cover CSS Grid and make page layouts much easier. First we’ll take a quick look back at Flexbox (remember Flexbox!?) and then learn about Grid.
+Önümüzdeki birkaç ders boyunca CSS Grid'i ele alacağız ve sayfa düzenlerini çok daha kolaylaştıracağız. Öncelikle Flexbox'a (Flexbox'ı hatırladınız mı!?) tekrardan hızlıca bir göz atacağız ve sonrasında Grid'i öğreneceğiz.
 
-The following lessons will show you how to create a grid, position grid items and use some advanced properties. Then we will take a deeper look between Flexbox and Grid. Ultimately we are working towards building a dashboard project using Grid.
+Önümüzdeki dersler size grid'in nasıl oluşturulduğunu, grid öğelerini konumlandırmayı ve bazı gelişmiş özelliklerin nasıl kullanıldığını gösterecek. Sonrasında Flexbox ve Grid arasında daha derin bir inceleme yapacağız. Nihayetinde Grid kullanarak bir gösterge paneli projesi geliştirmeye yönelik çalışıyoruz.
 
-### Learning outcomes
+### Öğrenim Çıktıları
 
-By the end of this lesson, you should be able to:
+Bu dersin sonunda şunları yapabiliyor olmalısınız:
 
-* Compare the basics between Flexbox and Grid
-* Describe a situation for using Grid over Flexbox
+- Flexbox ve Grid arasındaki temelleri karşılaştırabilme.
+- Flexbox yerine Grid kullanabileceğimiz bir durumu açıklayabilme.
 
-### A look back at flex
+### Flex'e geri bakış
 
-In the Foundations course you learned a lot about Flexbox. If you’ve been using Flex here and there along the way, this section will be a quick refresher before we get into Grid. If you’re completely lost on Flex, then it might be helpful to go back through the [Flex lessons](https://www.theodinproject.com/lessons/foundations-introduction-to-flexbox) again to get up to speed.
+Temel Bilgiler kursunda Flexbox hakkında çok şey öğrendiniz. Eğer Flex'i yol boyunca orada burada kullandıysanız, bu bölüm sizin için Grid'e giriş yapmadan önce hızlı bir hatırlatıcı olacak. Eğer Flex konusunda tamamen kaybolduysanız [Flex](https://www.theodinproject.com/lessons/foundations-introduction-to-flexbox) derslerini tekrar etmek hızlanmak için yardımcı olabilir.
 
-The Flex lessons covered positioning items along the two [axes](https://www.theodinproject.com/lessons/foundations-axes) (main and cross) and how to set their [alignment.](https://www.theodinproject.com/lessons/foundations-alignment) You also learned how to make your flex items [grow, shrink or change their size.](https://www.theodinproject.com/lessons/foundations-growing-and-shrinking) This is the real beauty of Flexbox as items can, well, “flex” to stretch out or shrink down.
+Flex dersleri, öğelerin iki [eksen](https://www.theodinproject.com/lessons/foundations-axes) üzerinde konumlandırmasını ve [hizalandırmasını](https://www.theodinproject.com/lessons/foundations-alignment) ele aldı. Ayrıca flex öğelerinizde [grow, shrink veya boyut değiştirme](https://www.theodinproject.com/lessons/foundations-growing-and-shrinking) özelliklerinin nasıl kullanıldığını öğrendiniz. Öğeler flex ile büyüyebilir veya küçülebilir, işte Flexbox'ın güzelliği bu.
 
-You’ll remember you can line up a nice row of flex items like this:
+Hatırlarsınız ki, güzel bir satır flex öğesini, bu şekilde hizalayabilirsiniz:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="XWeJbRy" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
   <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/XWeJbRy">
@@ -26,7 +26,7 @@ You’ll remember you can line up a nice row of flex items like this:
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-Or a column like this:
+Veya bir sütunu bu şekilde:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="MWEYwoX" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
   <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/MWEYwoX">
@@ -35,17 +35,17 @@ Or a column like this:
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-For one-dimensional layouts, Flex offers a convenient tool without having to rely on floats or CSS hacks to align your items properly.
+Flex tek boyutlu düzenler için, float'lara veya CSS kurnazlıklarına gerek kalmadan, bize öğelerimizi hizalamamız için kullanışlı bir araç sunar.
 
-For two-dimensional layouts, you learned a little bit about `flex-wrap`, which allows you to take your flex items and wrap them to the next line. This can be done with either a row that wraps to another row, or a column that wraps to another column.
+İki boyutlu düzenler için, flex öğelerinizi bir sonraki satıra kaydırmanızı sağlayan `flex-wrap` hakkında biraz bilgi edinmiştiniz. Bu, başka bir satıra sarılan bir satır ile veya başka bir sütuna sarılan bir sütun ile yapılabilir.
 
-Remember how much fun you had solving the card layout in this exercise?
+Kart Düzeni egzersizini çözerken ne kadar eğlenmiştiniz, hatırlıyor musunuz?
 
 [![flex-exercise-desired-outcome.png](https://i.postimg.cc/vZ81HMkB/flex-exercise-desired-outcome.png)](https://github.com/TheOdinProject/css-exercises/tree/main/flex/07-flex-layout-2)
 
-We know that was a frustrating one, but it's part of the point. While Flexbox allows you to build a layout of rows and columns together, it isn’t always easy.
+Sinir bozucuydu biliyoruz, ama bu konunun bir parçası. Flexbox, satır ve sütunlardan oluşan bir düzen oluşturmanıza olanak tanısa da bu her zaman kolay değil.
 
-But setting up a two-dimensional layout of cards would be much simpler using CSS Grid:
+Ama iki boyutlu bir kart düzeni oluşturmak CSS Grid kullanarak çok daha basit olacaktır:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="KKXwpZR" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
   <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/KKXwpZR">
@@ -54,30 +54,30 @@ But setting up a two-dimensional layout of cards would be much simpler using CSS
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-### What is grid?
+### Grid nedir?
 
-Although Grid is a newer module to CSS, this layout tool has long been in development. Fun fact, CSS co-creator Dr. Bert Bos (no relation to Wes Bos) started working on this layout model in 1996. The idea was inspired by the use of grid-like layouts in other forms of media like newspapers and magazines. After years of thorough demonstrations and development, CSS Grid was finally introduced to all major browsers in 2017.
+Grid, CSS için daha yeni bir modül olmasına rağmen, bu düzen aracı uzun süredir geliştirilme aşamasında. Eğlenceli bir bilgi, CSS'nin yaratıcısı olan Dr. Bert Bos (Wes Bos ile hiçbir ilişkisi olmayan) bu düzen modeli üzerinde 1996 yılında çalışmaya başladı. Bu fikir, gazeteler ve dergiler gibi diğer medya biçimlerinde kullanılan grid benzeri düzenlerden ilham alınarak ortaya çıktı. Yıllar süren detaylı gösterimler ve geliştirmelerin ardından, CSS Grid nihayet 2017 yılında tüm büyük tarayıcılara tanıtıldı.
 
-As shown above, Grid is often praised for easy placement of items in a two-dimensional layout. But Grid can be used for one-dimensional layouts too. One advantage for developers is if they start off with only one row of items, they can simply add additional rows later.
+Yukarıda gösterildiği gibi, Grid genellikle öğelerin iki boyutlu düzen içinde kolayca yerleştirilmesi için övülür. Ancak Grid, tek boyutlu düzenler için de kullanılabilir. Geliştiriciler için bir avantajı, yalnızca bir sıra öğe ile başladıklarında, sonrasında basitçe ek sıralar ekleyebilmeleridir.
 
-You will notice a lot of similarities between Flex and Grid. Both use parent containers with child items. They have similar property names for alignment and positioning. But you will also come across a lot of differences between the two and opinions on how each module should be used. For example, if you’ve been struggling to get your Flex items to all match evenly in size, Grid can make this type of layout much easier.
+Flex ve Grid arasında birçok benzerlik fark edeceksiniz. İkisi de çocuk öğeleri olan ana konteynerler kullanır. Hizalama ve konumlandırma için benzer özellik adlarına sahiptirler. Ancak her iki modül arasında nasıl kullanılması gerektiği konusunda farklılıklar ve görüşlerle karşılaşacaksınız. Örneğin, Flex öğelerinizi boyut olarak eşit hale getirmekte zorlanıyorsanız, Grid bu tür düzenlemeleri çok daha kolay hale getirebilir.
 
-When reviewing older resources, keep in mind that differences between Flex and Grid can also change as these modules get updated. One of the big highlights for CSS Grid was the use of the `gap` property, which we will cover in the next lesson. This used to only be available to Grid, but is now supported with Flex too.
+Eski kaynakları gözden geçirirken, Flex ve Grid arasındaki farklılıkların bu modüller güncellendikçe değişebileceğini unutmayın. CSS Grid için önemli özelliklerden biri, bir sonraki dersimizde ele alacağımız gap özelliğinin kullanımıydı. Bu özellik başlangıçta yalnızca Grid için mevcuttu, ancak şimdi Flex'te de destekleniyor.
 
-While some people thought CSS Grid was here to replace Flexbox, you will learn by the end of these lessons that Grid is just another tool for the bag. In fact, not only do each of these modules have their own use cases, but you will also find it helpful to pair Flex and Grid together. But we’ll be covering all of that in the concluding lesson. First you will learn how to actually make a grid!
+CSS Grid'in Flexbox'un yerini almak için geldiğini düşünen bazı insanlar olsa da, bu derslerin sonunda Grid'in sadece başka bir araç olduğunu öğreneceksiniz. Aslında, bu modüllerin her birinin kendi kullanım durumları olmasıyla kalmayıp ve Flex ve Grid'i bir araya getirmenizin faydalı olabileceğini göreceksiniz. Ancak, bunların hepsini son dersimizde ele alacağız. İlk olarak gerçekten nasıl bir grid oluşturacağınızı öğreneceksiniz!
 
-### Knowledge check
+### Bilgi Ölçme
 
-This section contains questions for you to check your understanding of this lesson. If you’re having trouble answering the questions below on your own, review the material above to find the answer.
+Bu bölüm, sizin bu dersi ne kadar anladığınızı kontrol etmek için sorular içerir. Aşağıdaki soruları kendi başınıza cevaplamakta zorlanıyorsanız, cevapları bulmak için yukarıdaki materyali gözden geçirin.
 
-- [How can you use Flex to make a two-dimensional layout?](#a-look-back-at-flex)
-- [Why was CSS Grid introduced?](#what-is-grid)
-- [Which CSS layout module would you use to easily make equal sized items in a container?](#what-is-grid)
+- [Flex'i iki boyutlu düzende nasıl kullanabilirsin?](#flexe-bir-geri-bakış)
+- [CSS Grid neden tanıtıldı?](#grid-nedir)
+- [Konteynerde eşit boyutlu öğeleri kolayca oluşturmak için hangi CSS düzen modülünü kullanırsınız?](#grid-nedir)
 
-### Additional resources
+### Ek Kaynaklar
 
-This section contains helpful links to other content. It isn’t required, so consider it supplemental.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-- Watch [Flexbox vs. CSS Grid — Which is Better?](https://www.youtube.com/watch?v=hs3piaN4b5I) for a visual representation of the use cases for Flexbox vs CSS Grid
-- Read CSS Tricks [quick take](https://css-tricks.com/quick-whats-the-difference-between-flexbox-and-grid/) on the differences between Flex and Grid
-- Check out [The Story of CSS Grid](https://alistapart.com/article/the-story-of-css-grid-from-its-creators/)
+- Flexbox vs CSS Grid kullanım durumlarının görsel sunumu için [Flexbox vs. CSS Grid — Which is Better?](https://www.youtube.com/watch?v=hs3piaN4b5I) izleyin.
+- CSS Tricks'ın Flex ve Grid arasındaki farklar hakkında [hızlı özetini](https://css-tricks.com/quick-whats-the-difference-between-flexbox-and-grid/) okuyun.
+- [CSS Grid'in hikayesine](https://alistapart.com/article/the-story-of-css-grid-from-its-creators/) göz atın.
