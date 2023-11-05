@@ -43,6 +43,7 @@ Müfredatın birebir orijinali takip edilmekte ve çevrilmekte olup her iki proj
 - [@bsrakts](https://www.github.com/bsrakts)
 - [@halil-yesilyurt](https://www.github.com/halil-yesilyurt)
 - [@neslihanatasever](https://www.github.com/neslihanatasever)
+- [@selimbiber](https://github.com/selimbiber)
 
 ---
 Lisans için license.md dosyasına bakınız.
