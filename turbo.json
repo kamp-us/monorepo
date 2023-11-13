@@ -39,11 +39,19 @@
       "env": ["NODE_ENV", "DATABASE_URL", "NEXTAUTH_URL", "KAMPUS_ENV"]
     },
     "@kampus-apps/gql#dev": {
-      "dependsOn": ["@kampus/prisma#prisma:generate", "@kampus/sozluk-content#build"]
+      "dependsOn": [
+        "@kampus/prisma#prisma:generate",
+        "@kampus/sozluk-content#build",
+        "@kampus/tr-odin-project-content#build"
+      ]
     },
     "@kampus-apps/gql#build": {
       "cache": false,
-      "dependsOn": ["@kampus/prisma#prisma:generate", "@kampus/sozluk-content#build"]
+      "dependsOn": [
+        "@kampus/prisma#prisma:generate",
+        "@kampus/sozluk-content#build",
+        "@kampus/tr-odin-project-content#build"
+      ]
     },
     "@kampus-apps/kampus#*": {
       "env": [

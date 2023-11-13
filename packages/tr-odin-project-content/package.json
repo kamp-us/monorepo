@@ -1,0 +1,24 @@
+{
+  "name": "@kampus/tr-odin-project-content",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "build": "contentlayer build",
+    "dev": "contentlayer dev"
+  },
+  "author": "",
+  "license": "MIT",
+  "volta": {
+    "extends": "../../package.json"
+  },
+  "dependencies": {
+    "contentlayer": "0.3.3",
+    "mdx-bundler": "9.2.1",
+    "remark-wiki-link-plus": "1.1.1"
+  },
+  "devDependencies": {
+    "@turbo/gen": "1.10.7"
+  }
+}
