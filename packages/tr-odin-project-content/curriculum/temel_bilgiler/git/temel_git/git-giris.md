@@ -1,5 +1,5 @@
 ---
-title: 'Git'e Giriş'
+title: "Git'e Giriş"
 ---
 
 ### Giriş

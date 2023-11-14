@@ -1,3 +1,7 @@
+---
+title: 'Form Temelleri'
+---
+
 ### Giriş
 
 Formlar sitenizin en kritik kısımlarından biridir. Kullanıcılarınızla arkayüzünüz arasında geçit görevi görürler - Kullanıcı forma veri girer ve siz o bilgiyle bir şeyler yaparsınız.

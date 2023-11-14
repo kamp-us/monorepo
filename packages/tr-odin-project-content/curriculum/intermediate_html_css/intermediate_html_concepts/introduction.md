@@ -1,3 +1,7 @@
+---
+title: 'Giriş'
+---
+
 ### Giriş
 
 Bu bölüm, HTML ve CSS'i daha derinlemesine incelediğimiz iki bölümlük kursun ilkidir.
