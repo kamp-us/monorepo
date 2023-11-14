@@ -8,6 +8,7 @@ import { assertNever } from "@kampus/std";
 import { type Dictionary } from "@kampus/std/dictionary";
 
 import { InvalidInput, NotAuthorized } from "~/features/errors";
+import { transformOdinLesson, transformOdinLessonsConnection } from "~/loaders/odin";
 import {
   transformPanoComment,
   transformPanoCommentConnection,
@@ -51,6 +52,7 @@ export const resolvers = {
     sozluk: () => ({ term: null, terms: null }),
     // @see PanoQuery field resolvers
     pano: () => ({ post: null, posts: [], postsBySite: null, allPosts: null }),
+    odin: () => ({ lesson: null, lessons: null }),
 
     node: async (_, args, { loaders }) => {
       const id = parse<NodeTypename>(args.id);
@@ -64,6 +66,8 @@ export const resolvers = {
           return transformPanoPost(await loaders.pano.post.byID.load(id.value));
         case "PanoComment":
           return transformPanoComment(await loaders.pano.comment.byID.load(id.value));
+        case "OdinLesson":
+          return transformOdinLesson(await loaders.odin.lesson.load(id.value));
         default:
           return assertNever(id.type);
       }
@@ -186,6 +190,35 @@ export const resolvers = {
     node: (edge) => edge.node,
     cursor: (edge) => stringify("SozlukTerm", edge.cursor),
   },
+
+  OdinQuery: {
+    lesson: async (_, args, { loaders }) =>
+      transformOdinLesson(await loaders.odin.lesson.load(args.id)),
+    lessons: async (_, args, { loaders }) => {
+      return transformOdinLessonsConnection(
+        await loaders.odin.lessons.load(parseConnectionArgs(args))
+      );
+    },
+  },
+  OdinLesson: {
+    id: (lesson) => stringify("OdinLesson", lesson.id),
+    title: (lesson) => lesson.title,
+    body: (lesson) => lesson.body,
+  },
+  OdinLessonBody: {
+    raw: (body) => body.raw,
+    html: (body) => body.html,
+  },
+  OdinLessonConnection: {
+    edges: (connection) => connection.edges,
+    pageInfo: (connection) => transformPageInfo("OdinLesson", connection.pageInfo),
+    totalCount: (connection) => connection.totalCount,
+  },
+  OdinLessonEdge: {
+    node: (edge) => edge.node,
+    cursor: (edge) => stringify("OdinLesson", edge.cursor),
+  },
+
   PanoQuery: {
     post: async (_, args, { loaders }) =>
       transformPanoPost(await loaders.pano.post.byID.load(parse(args.id).value)),

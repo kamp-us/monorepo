@@ -30,6 +30,7 @@ type Query {
   user(id: ID, username: String): User
   sozluk: SozlukQuery!
   pano: PanoQuery!
+  odin: OdinQuery!
 }
 
 type PageInfo {
@@ -75,7 +76,12 @@ type User implements Node & Actor {
 
 type SozlukQuery {
   term(id: ID!): SozlukTerm
-  terms(after: String, before: String, first: Int, last: Int): SozlukTermConnection
+  terms(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): SozlukTermConnection
 }
 
 type SozlukTerm implements Node {
@@ -131,7 +137,12 @@ type PanoPost implements Node & Upvotable {
   content: String
   createdAt: DateTime!
   owner: User
-  comments(after: String, before: String, first: Int, last: Int): PanoCommentConnection
+  comments(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PanoCommentConnection
   commentCount: Int
   upvoteCount: Int
   isUpvotedByViewer: Boolean!
@@ -155,7 +166,12 @@ type PanoComment implements Node & Upvotable {
   owner: User
   post: PanoPost
   parent: PanoComment
-  comments(after: String, before: String, first: Int, last: Int): PanoCommentConnection
+  comments(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PanoCommentConnection
   commentCount: Int
   upvoteCount: Int
   isUpvotedByViewer: Boolean!
@@ -283,4 +299,38 @@ input RemovePanoUpvoteInput {
 type RemovePanoUpvotePayload {
   node: PanoUpvote
   error: PanoUpvoteError
+}
+
+### TR-ODIN-PROJECT
+
+type OdinQuery {
+  lesson(id: ID!): OdinLesson
+  lessons(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): OdinLessonConnection
+}
+
+type OdinLesson implements Node {
+  id: ID!
+  title: String!
+  body: OdinLessonBody!
+}
+
+type OdinLessonBody {
+  raw: String!
+  html: String!
+}
+
+type OdinLessonConnection {
+  edges: [OdinLessonEdge!]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type OdinLessonEdge {
+  cursor: String!
+  node: OdinLesson
 }

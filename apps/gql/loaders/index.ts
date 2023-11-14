@@ -1,4 +1,5 @@
 import { type Clients } from "~/clients";
+import { createOdinLoaders } from "~/loaders/odin";
 import { createPanoLoaders } from "./pano";
 import { createSozlukLoaders } from "./sozluk";
 import { createUserLoaders } from "./user";
@@ -10,5 +11,6 @@ export const createLoaders = (clients: Clients) => {
     user: createUserLoaders(clients),
     sozluk: createSozlukLoaders(),
     pano: createPanoLoaders(clients),
+    odin: createOdinLoaders(),
   };
 };

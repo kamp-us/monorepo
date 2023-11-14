@@ -1,28 +1,28 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import { defineDocumentType, makeSource } from 'contentlayer/source-files'
 
 const Lesson = defineDocumentType(() => ({
-  name: "Lesson",
-  filePathPattern: "**/*.md",
+  name: 'Lesson',
+  filePathPattern: '**/*.md',
   fields: {
     title: {
-      type: "string",
-      description: "The title of the Lesson",
+      type: 'string',
+      description: 'The title of the Lesson',
       required: true,
     },
   },
   computedFields: {
     id: {
-      type: "string",
+      type: 'string',
       resolve: (doc) => doc._raw.flattenedPath,
     },
     html: {
-      type: "string",
-      resolve: (doc) => doc.body.raw,
+      type: 'string',
+      resolve: ({ body }) => body.raw,
     },
   },
-}));
+}))
 
 export default makeSource({
-  contentDirPath: "curriculum",
+  contentDirPath: 'curriculum',
   documentTypes: [Lesson],
-});
+})
