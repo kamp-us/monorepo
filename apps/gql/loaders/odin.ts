@@ -41,7 +41,9 @@ export const transformOdinLessonsConnection = (connection: Connection<Lesson>) =
 });
 
 const loadLesson = (id: string) => {
-  const lesson = allLessons.find((lesson) => lesson.id === id);
+  const lesson = allLessons.find((lesson) => {
+    return lesson.id === id;
+  });
   if (!lesson) {
     return null;
   }
