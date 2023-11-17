@@ -37,4 +37,4 @@ Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir,
 
 - [FreeCodeCamp Makalesi](https://www.freecodecamp.org/news/html-css-and-javascript-explained-for-beginners/) belirlenenden biraz daha derine iner. Ancak daha sonraki derslerde açık bir şekilde öğreteceğimiz şeyleri kapsıyor. Bu nedenle ayrıntıları ezberleme konusunda endişelenmeyin.
 
-- [DevDocs.io](https://devdocs.io) yer imlerinize ekleyiniz. "Hoş Geldiniz" mesajını okuyunuz. Massive API belgeleri koleksiyonu, çevrimdışı da kullanılabiliyor. Kapsanan her şey ve daha fazlası için temel bir başvuru materyali koleksiyonu. (Yöneten: [FreeCodeCamp](https://freecodecamp.org))
+- Yer imlerine [DevDocs.io](https://devdocs.io) ekleyiniz. "Hoş Geldiniz" mesajını okuyunuz. Massive API belgeleri koleksiyonu, çevrimdışı da kullanılabiliyor. Kapsanan her şey ve daha fazlası için temel bir başvuru materyali koleksiyonu. (Yöneten: [FreeCodeCamp](https://freecodecamp.org))
