@@ -1,40 +1,40 @@
-### Giriş
+### Introduction
 
-İşte Burada: Artık _bir şeyler yapmaya_ başlamanın zamanı geldi. Bu bölüm, internetteki neredeyse her şeyin temel yapı taşları olan HTML ve CSS'nin temellerini öğretecektir.
+So here it is: it's time to actually start _making things_. This section will teach you the basics of HTML and CSS, the two foundational building blocks of pretty much everything on the web.
 
-### Derse Genel Bakış
+### Lesson overview
 
-Bu bölüm, bu derste öğreneceğiniz konulara ilişkin genel bir bakış içerir.
+This section contains a general overview of topics that you will learn in this lesson.
 
-- HTML, CSS ve iki teknolojinin birlikte nasıl çalıştığına ilişkin temel bir genel bakış edineceksiniz.
+- Get a basic overview of HTML, CSS and how they work together.
 
-### HTML ve CSS
+### HTML and CSS
 
-HTML ve CSS, internette bir şeye baktığınızda gördüğünüz her şeyi oluşturmak için birlikte çalışan iki dildir. HTML, bir internet sayfasının temel verilerini oluşturur. Tüm metinler, bağlantılar, kartlar, listeler ve düğmeler HTML'de oluşturulur. CSS ise bu sade öğelere _stil_ ekler. HTML, bilgiyi internet sitenize yerleştirir ve CSS bu bilgiyi konumlandırır, ona renk verir, yazı tipini değiştirir ve harika görünmesini sağlar!
+HTML and CSS are two languages that work together to create everything that you see when you look at something on the internet. HTML is the raw data that a webpage is built out of. All the text, links, cards, lists, and buttons are created in HTML. CSS is what adds _style_ to those plain elements. HTML puts information on a webpage, and CSS positions that information, gives it color, changes the font, and makes it look great!
 
-Birçok harika kaynak, HTML ve CSS'yi _programlama dilleri_ olarak sürekli bahseder, ancak teknik açıdan yaklaşmak istiyorsanız onları bu şekilde etiketlemek pek doğru değildir. Çünkü yalnızca bilgi sunma ile ilgilidirler. Herhangi bir mantığı programlamak için kullanılmazlar. Bir sonraki bölümde öğreneceğiniz JavaScript, bir programlama dilidir çünkü internet sitelerinin bir şeyler yapmasını sağlamak için kullanılır. Ancak sadece HTML ve CSS ile yapabileceğiniz pek çok şey var ve kesinlikle ikisine de ihtiyacınız olacak. Takip ettiğiniz dersler, müfredatımızda ilerledikçe JavaScript içeriğinde başarılı olmanızı sağlayacak araçları size sunmaktadır.
+Many great resources out there keep referring to HTML and CSS as _programming languages_, but if you want to get technical, labeling them as such is not quite accurate, because they are only concerned with presenting information. They are not used to program any logic. JavaScript, which you will be learning in the next section, is a programming language because it's used to make webpages do things. Yet, there is quite a lot you can do with just HTML and CSS, and you will definitely need them both. The following lessons focus on giving you the tools you need to be successful once you get to the JavaScript content as you continue through our curriculum!
 
-### Ödev
+### Assignment
 
 <div class="lesson-content__panel" markdown="1">
 
-1. Lütfen Okuyunuz [HTML ile CSS ile de Javascript Arasındaki Farklar](https://brytdesigns.com/html-css-javascript-whats-the-difference/). HTML, CSS ve JavaScript arasındaki ilişkinin kısa bir genel bakışıdır.
+1. Read [HTML vs CSS vs JavaScript](https://brytdesigns.com/html-css-javascript-whats-the-difference/). It's a quick overview of the relationship between HTML, CSS, and JavaScript.
 
 </div>
 
-### Bilgi Ölçme Bakış
+### Knowledge check
 
-Bu bölümde, bu dersi anladığınıza dair, kendinizi kontrol etmeniz için sorular bulunmaktadır. Bir soruyu yanıtlamakta sorun yaşıyorsanız, soruya tıklayın ve bağlantı verdiği materyali inceleyin.
+This section contains questions for you to check your understanding of this lesson on your own. If you’re having trouble answering a question, click it and review the material it links to.
 
-- [HTML ve CSS ne anlamına geliyor?](https://brytdesigns.com/html-css-javascript-whats-the-difference/#What_is_HTML)
-- [HTML ve CSS arasında, bir web sayfasında metin paragrafları eklemek için hangisini kullanırsınız?](#html-and-css)
-- [HTML ve CSS arasında, bir düğmenin yazı tipini ve arka plan rengini değiştirmek için hangisini kullanırsınız?](#html-and-css)
-- [HTML, CSS ve JavaScript arasındaki farklar nelerdir?](https://brytdesigns.com/html-css-javascript-whats-the-difference/)
+- [What do HTML and CSS stand for?](https://brytdesigns.com/html-css-javascript-whats-the-difference/#What_is_HTML)
+- [Between HTML and CSS, which would you use for putting paragraphs of text on a webpage?](#html-and-css)
+- [Between HTML and CSS, which would you use for changing the font and background color of a button?](#html-and-css)
+- [What is the difference between HTML, CSS and JavaScript?](https://brytdesigns.com/html-css-javascript-whats-the-difference/)
 
-### Ek Kaynaklar
+### Additional resources
 
-Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
+This section contains helpful links to related content. It isn’t required, so consider it supplemental.
 
-- [FreeCodeCamp Makalesi](https://www.freecodecamp.org/news/html-css-and-javascript-explained-for-beginners/) belirlenenden biraz daha derine iner. Ancak daha sonraki derslerde açık bir şekilde öğreteceğimiz şeyleri kapsıyor. Bu nedenle ayrıntıları ezberleme konusunda endişelenmeyin.
+- [This FreeCodeCamp article](https://www.freecodecamp.org/news/html-css-and-javascript-explained-for-beginners/) goes into a little more depth than the assigned one. It covers things we'll be teaching explicitly in later lessons though, so don't worry about memorizing any of the details.
 
-- [DevDocs.io](https://devdocs.io) yer imlerinize ekleyiniz. "Hoş Geldiniz" mesajını okuyunuz. Massive API belgeleri koleksiyonu, çevrimdışı da kullanılabiliyor. Kapsanan her şey ve daha fazlası için temel bir başvuru materyali koleksiyonu. (Yöneten: [FreeCodeCamp](https://freecodecamp.org))
+- Bookmark [DevDocs.io](https://devdocs.io). Read the “Welcome” message. Massive API documentation collection that even works offline. An essential collection of reference material for everything covered and more. (Maintained by [FreeCodeCamp](https://freecodecamp.org))
