@@ -19,6 +19,7 @@
   "dependencies": {
     "@kampus/relay": "*",
     "@kampus/ui": "*",
+    "react-markdown": "^9.0.1",
     "react-relay": "15.0.0",
     "relay-compiler": "15.0.0",
     "znv": "0.3.2",

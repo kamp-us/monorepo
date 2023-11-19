@@ -1,5 +1,6 @@
 "use client";
 
+import Markdown from "react-markdown";
 import { graphql, usePreloadedQuery } from "react-relay";
 
 import { type SerializablePreloadedQuery } from "@kampus/relay";
@@ -35,9 +36,8 @@ export const OdinLessonContainer = (props: Props) => {
 
   return (
     <>
-      {/*<SozlukTermTitle term={data.sozluk.term} />*/}
-      {/*<SozlukTermBody body={term?.body ?? null} />*/}
       {lesson?.title}
+      <Markdown>{lesson?.body.html}</Markdown>
     </>
   );
 };
