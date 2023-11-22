@@ -18,7 +18,7 @@ Birçok harika kaynak, HTML ve CSS'yi _programlama dilleri_ olarak sürekli bahs
 
 <div class="lesson-content__panel" markdown="1">
 
-1. Lütfen Okuyunuz [HTML ile CSS ile de Javascript Arasındaki Farklar](https://brytdesigns.com/html-css-javascript-whats-the-difference/). HTML, CSS ve JavaScript arasındaki ilişkinin kısa bir genel bakışıdır.
+1. [HTML vs CSS vs JavaScript](https://brytdesigns.com/html-css-javascript-whats-the-difference/) adlı ingilizce makaleyi okuyun. Bu, HTML, CSS ve JavaScript arasındaki ilişkinin kısa bir genel bakışıdır.
 
 </div>
 
