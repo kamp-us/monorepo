@@ -35,6 +35,6 @@ Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeni
 
 Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-- [FreeCodeCamp Makalesi](https://www.freecodecamp.org/news/html-css-and-javascript-explained-for-beginners/) belirlenenden biraz daha derine iner. Ancak daha sonraki derslerde açık bir şekilde öğreteceğimiz şeyleri kapsıyor. Bu nedenle ayrıntıları ezberleme konusunda endişelenmeyin.
+- Bu ingilizce [FreeCodeCamp Makalesi](https://www.freecodecamp.org/news/html-css-and-javascript-explained-for-beginners/) ödev olarak verilen makaleden biraz daha derine iniyor. Daha sonraki derslerde açık bir şekilde öğreteceğimiz şeyleri kapsıyor, bu nedenle herhangi bir ayrıntıyı ezberleme konusunda endişelenmeyin.
 
 - Yer imlerine [DevDocs.io](https://devdocs.io)'u ekleyiniz. "Hoş Geldiniz" mesajını okuyunuz. Massive API belgeleri koleksiyonu, çevrimdışı da kullanılabiliyor. Kapsanan her şey ve daha fazlası için temel bir başvuru materyali koleksiyonu. (Yöneten: [FreeCodeCamp](https://freecodecamp.org))
