@@ -26,7 +26,7 @@ Birçok harika kaynak, HTML ve CSS'yi _programlama dilleri_ olarak sürekli bahs
 
 Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve bağlantılı olduğu materyali gözden geçirin.
 
-- [HTML ve CSS ne anlamına geliyor?](https://brytdesigns.com/html-css-javascript-whats-the-difference/#What_is_HTML)
+- [HTML ve CSS ne anlamına geliyor? adlı ingilizce makale](https://brytdesigns.com/html-css-javascript-whats-the-difference/#What_is_HTML)
 - [HTML ve CSS arasında, bir web sayfasında metin paragrafları eklemek için hangisini kullanırsınız?](#html-and-css)
 - [HTML ve CSS arasında, bir düğmenin yazı tipini ve arka plan rengini değiştirmek için hangisini kullanırsınız?](#html-and-css)
 - [HTML, CSS ve JavaScript arasındaki farklar nelerdir?](https://brytdesigns.com/html-css-javascript-whats-the-difference/)
