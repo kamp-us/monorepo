@@ -25,14 +25,14 @@ Müfredatın birebir orijinali takip edilmekte ve çevrilmekte olup her iki proj
 
 ### Geliştirenler / Maintainers
 
-- [ ] [Umut Berkay Soydan](https://github.com/ubsoydan) <br/>
-- [ ] [Can Şirin](https://github.com/cansirin)
+- [Umut Berkay Soydan](https://github.com/ubsoydan) <br/>
+- [Can Şirin](https://github.com/cansirin)
+- [Hüseyin Güleç](https://github.com/huseyingulec)
 
 ---
 
 ## Katkı Sağlayanlar / Contributors
 - [@batuhanbaybas](https://www.github.com/batuhanbaybas)
-- [@huseyingulec](https://www.github.com/huseyingulec)
 - [@alicangunduz](https://www.github.com/alicangunduz)
 - [@emredevsalot](https://www.github.com/emredevsalot)
 - [@mertkaanguzel](https://www.github.com/mertkaanguzel)
