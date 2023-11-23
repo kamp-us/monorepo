@@ -27,23 +27,11 @@ Müfredatın birebir orijinali takip edilmekte ve çevrilmekte olup her iki proj
 
 - [Umut Berkay Soydan](https://github.com/ubsoydan) <br/>
 - [Can Şirin](https://github.com/cansirin)
-- [Hüseyin Güleç](https://github.com/huseyingulec)
+- [Huseyin Gulec](https://github.com/huseyingulec)
 
 ---
 
-## Katkı Sağlayanlar / Contributors
-- [@batuhanbaybas](https://www.github.com/batuhanbaybas)
-- [@alicangunduz](https://www.github.com/alicangunduz)
-- [@emredevsalot](https://www.github.com/emredevsalot)
-- [@mertkaanguzel](https://www.github.com/mertkaanguzel)
-- [@sevilayerkan](https://www.github.com/sevilayerkan)
-- [@kutaui](https://www.github.com/kutaui)
-- [@durmusrasit](https://www.github.com/durmusrasit)
-- [@gorkemdolcek](https://www.github.com/gorkemdolcek)
-- [@bsrakts](https://www.github.com/bsrakts)
-- [@halil-yesilyurt](https://www.github.com/halil-yesilyurt)
-- [@neslihanatasever](https://www.github.com/neslihanatasever)
-- [@selimbiber](https://github.com/selimbiber)
+## [Katkı Sağlayanlar / Contributors](https://github.com/kamp-us/turkce-odin-project/graphs/contributors)
 
 ---
-Lisans için license.md dosyasına bakınız.
+Lisans için [license.md](https://github.com/kamp-us/turkce-odin-project/blob/main/license.md) dosyasına bakınız.
