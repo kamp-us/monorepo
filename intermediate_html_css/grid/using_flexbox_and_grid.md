@@ -1,70 +1,66 @@
-### Introduction
+### Giriş
 
-Some may tell you there is a debate on the use of Grid vs. Flexbox and whether or not one is superior to the other. The reality is much simpler - these are complementary tools that can work together, and each has its own place in the world of CSS.
+Bazıları size Grid ve Flexbox kullanımıyla ve birisinin diğerine üstün olup olmadığıyla ilgili bir tartışma olduğunu söyleyebilir. Gerçek çok daha basittir; bunlar birlikte çalışabilen birbirini tamamlayan araçlardır ve her birinin CSS dünyasında kendine has bir yeri vardır.
 
-### Learning outcomes
+### Öğrenim çıktıları
 
-By the end of this lesson, you should be able to:
+Bu dersin sonunda şunları yapabiliyor olmalısınız:
 
-* Know when you might want to use Flexbox over Grid
-* Know when you might want to use Grid over Flexbox
-* Know when you might want to use the two together
+* Grid yerine Flexbox'ı ne zaman kullanmak isteyebileceğinizi bilmek,
+* Flexbox yerine Grid'i ne zaman kullanmak isteyebileceğinizi bilmek,
+* İkisini beraber ne zaman kullanmak isteyebileceğinizi bilmek.
 
-### Content first vs layout first design
+### İçerik öncelikli tasarım vs düzen öncelikli tasarım
 
-A way to decide between Grid and Flexbox is to consider if your design starts from the content, or from the layout.
+Grid ve Flexbox arasında seçim yapabilmenin yolu tasarımınızın içerikten mi yoksa düzenden mi başladığını dikkate almaktır.
 
-In Content First Design, you begin with clarity of how the content should be, and the layout follows. This is a great opportunity to use Flexbox. Its flexible nature gives you control of the *behavior* of items through logical rules. How they grow, shrink, their ideal size and position in relation to each other, all make the layout dynamic. While Flexbox gives you control over its content, the final layout is only a consequence. Depending on the dimensions of the flex container, the general layout can change a lot.
+İçerik Öncelikli Tasarımda, içeriğin nasıl olması gerektiğinin netliğiyle başlarsınız ve düzen buna göre oluşturulur. Bu Flexbox'ı kullanmak için harika bir fırsattır. Onun esnek yapısı size, mantıksal kurallar yoluyla nesnelerin *davranışlarını* kontrol etmenizi sağlar. Onların nasıl büyüdükleri, küçüldükleri, onların ideal boyutları ve birbirlerine olan konumları; bunların hepsi düzeni dinamik yapar. Flexbox size onun içerikleri üzerinde kontrol verirken, ortaya çıkan son düzen bu kontrolün bir sonucudur. Flex konteynerinin boyutlarına bağlı olarak genel düzen çok değişebilir.
 
-In Layout First Design, you decide how you want the pieces arranged, then fill in the content. That is when Grid shines. Defining grid row and column tracks gives you full control of layout. Content in a grid can only fill the spaces of explicit or implicit tracks. So, when you have an idea of how the big picture of a container should look like, Grid is the clear choice.
+Düzen Öncelikli Tasarımda, parçaların nasıl düzenleneceğine karar verirsiniz ve sonrasında içeriği doldurursunuz. Bu Grid'in öne çıktığı durumdur. Grid satır ve sütun parçalarının tanımlanması size düzenle ilgili tam bir kontrol sağlar. Grid içerisinde içerik sadece belirli veya belirsiz parçaların boşluklarını doldurabilir. Bu yüzden konteynerın genel yapısının nasıl olması gerektiği hakkında bir fikriniz varsa Grid doğru bir seçim olacaktır.
 
-Content or Layout First Design do not force us to use either Flexbox or Grid! Let's try laying out a one dimensional set of items – a task many reserve for Flexbox – using Grid.
+İçerik ya da Düzen Öncelikli Tasarım bizi sadece Flexbox veya Grid kullanmaya zorlamaz! Grid kullanarak - çoğu kişinin Flexbox ile oluşturduğu - tek boyutlu bir nesne kümesini oluşturmayı deneyelim.
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="mdByJRV" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/mdByJRV">
-  1-Dimensional Grid | CSS Grid</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+<span>TheOdinProject(<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından ( <a href="https://codepen.io">CodePen'de</a> ) hazırlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/mdByJRV"> 1-Dimensional Grid | CSS Grid</a> adlı ingilizce örneğe bakın </span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-It works and looks absolutely *beautiful*! But imagine we would like to move these boxes around in the future. Or, for instance, we wanted the third box to stretch in a second row so that the boxes didn't shrink too much to fit in only one. Both of these things would be *possible* in Grid. But if controlling the layout isn't our priority, Flexbox is more intuitive and fit for the task.
+Çalışıyor ve kesinlikle *güzel* gözüküyor! Ama ileride bu kutuları taşımak istediğimizi düşünelim ya da örnek olarak, üçüncü kutunun ikinci bir satırda genişlemesini isteyelim ki kutular bir satıra sığmak için çok küçülmesinler. Bunların ikisi de Grid ile *mümkün*. Ama düzenin kontrolü bizim için öncelikli değilse Flexbox daha sezgisel ve bu işe uygun olacaktır.
 
-### Combining flexbox and grid
-If you have one-dimensional content, Flexbox can make it easier to control how that content is positioned in a Flex container. If, on the other hand, you want to accurately place content on a complex layout in two-dimensions, Grid can be simpler to use.
+### Flexbox ve Grid'i beraber kullanmak
+Eğer tek boyutlu bir içeriğiniz varsa Flexbox bu içeriklerin Flex konteyneri içerisinde nasıl pozisyonlandırılacağı hakkında daha kolay bir kontrol sağlar. Eğer içeriği çift boyutlu bir düzen içerisinde daha kesin olarak yerleştirmek istiyorsanız Grid kullanmak daha kolay olacaktır.
 
-Say you want your overall layout to be a grid, but you want the grid items to act as flex parents. This way, the grid items can be moved around using the precise two-dimensional placement Grid allows for, while also allowing the content inside the grid items to be capable of freely moving around using Flex. Check out this example from CSS-Tricks.
+Diyelim ki genel düzeninizin Grid olmasını ama nesneleriniz flex nesnesi gibi davranmasını istiyorsunuz. Bu sayede, grid nesneleri Grid'in sağladığı yerleştirme ile iki boyutlu düzende daha kesin olarak hareket edecek; aynı zamanda da grid nesnelerinin içerisindeki içeriğin ise Flex ile daha özgür bir şekilde hareket edecektir. CSS-Tricks'deki bu örneği göz at:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="vYeEOxN" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/vYeEOxN">
-  Combine Grid and Flexbox</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+<span>TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından (<a href="https://codepen.io">CodePen'de</a>) hazırlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/vYeEOxN">Combine Grid and Flexbox</a> adlı ingilizce örneğe bakın</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-### Closing opinion
-This lesson includes recommendations, not the "right" or "wrong" way of using Flexbox or Grid. Ultimately, it comes down to personal preference and what a developer feels is easier for whatever the given task might be. At this point you have both of these tools in your toolbox and got a sneak peek at how they can be used together or one in place of the other. The best way to learn Flexbox and Grid is to build many projects with both of them and develop your own opinion about which to use in different circumstances.
+### Kapanış görüşü
+Bu ders Flexbox ve Grid kullanımıyla ilgili "doğru" ya da "yanlış" bilgiler değil, tavsiyeler bulunduruyor. Sonuçta, geliştiricinin kişisel tercihlerine ve verilen işle ilgili hangisinin daha kolay hissettirdiğine bağlıdır. Bu noktada bu iki araç hakkında ve beraber ya da birisinin yerine diğerinin nasıl kullanabileceği hakkında bilginiz var. Flexbox ve Grid'i öğrenmenin en iyi yolu ikisiyle de bolca proje geliştirme ve farklı şartlar altında hangisini kullanabileceğiniz hakkında kendi düşüncelerinizi oluşturmaktır. 
 
-### Assignments
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
 
-1. If you haven't already, read through the previously mentioned [article by CSS-Tricks](https://css-tricks.com/css-grid-replace-flexbox/)
+1. Eğer hala okumadıysanız, daha önce bahsedilen [CSS-Tricks'in ingilizce makalesini](https://css-tricks.com/css-grid-replace-flexbox/) okuyun.
 
-2. To look at many different use cases for Grid, have a look at [this video by Wes Bos](https://www.youtube.com/watch?v=HYji_V2aYa0)
+2. Grid'in farklı kullanım gerekliliklerine bakmak için [Wes Bos'un ingilizce videosunu](https://www.youtube.com/watch?v=HYji_V2aYa0) izleyin.
 
-3. To gain some more insight on when to use Grid or Flexbox and why, read through this [article](https://webdesign.tutsplus.com/articles/flexbox-vs-css-grid-which-should-you-use--cms-30184)
+3. Grid ve Flexbox'un nerede ve nasıl kullanılmasını daha derin incelemek için [bu](https://webdesign.tutsplus.com/articles/flexbox-vs-css-grid-which-should-you-use--cms-30184) ingilizce makaleyi okuyun.
 </div>
 
-### Knowledge check
+### Bilgi ölçme
 
-This section contains questions for you to check your understanding of this lesson. If you’re having trouble answering the questions below on your own, review the material above to find the answer.
+Bu bölüm, bu dersi anladığınızı kontrol etmeniz için sorular içermektedir. Aşağıdaki soruları kendi kendinize yanıtlamakta zorlanıyorsanız, yanıtı bulmak için yukarıdaki materyali gözden geçirin.
 
-- [When might you use Flexbox over Grid?](#content-first-vs-layout-first-design)
-- [When might you use Grid over Flexbox?](#content-first-vs-layout-first-design)
-- [When might you use the two of these tools together?](#combining-flexbox-and-grid)
+- [Grid yerine Flexbox'ı ne zaman kullanabilirsiniz?](#content-first-vs-layout-first-design)
+- [Flexbox yerine Grid'i ne zaman kullanabilirsiniz?](#content-first-vs-layout-first-design)
+- [Bu iki aracı ne zaman birlikte kullanabilirsiniz?](#combining-flexbox-and-grid)
 
-### Additional resources
+### Ek kaynaklar
 
-This section contains helpful links to other content. It isn’t required, so consider it supplemental.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-- MDN wrote an in-depth article on the relationship between Grid and other layout methods [here](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Relationship_of_Grid_Layout)
+- MDN, Grid'in diğer düzen metotlarıyla olan ilişkisi hakkında derinlemesine bir ingilizce makale yazdı, [buradan okuyabilirsiniz](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Relationship_of_Grid_Layout).
