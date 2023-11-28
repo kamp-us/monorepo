@@ -68,3 +68,4 @@ Bu bölüm, bu dersi anladığınızı kontrol etmeniz için sorular içermekted
 Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
 - MDN, Grid'in diğer düzen metotlarıyla olan ilişkisi hakkında derinlemesine bir ingilizce makale yazdı, [buradan okuyabilirsiniz](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Relationship_of_Grid_Layout).
+- Görererek daha kolay öğrenen biriyseniz, [Flexbox30](https://www.samanthaming.com/flexbox30/) hızlı görsel referans için harika bir ingilizce kaynaktır.
