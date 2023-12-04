@@ -1,4 +1,4 @@
-### Introduction
+### Giriş
 
 Odin Projesi, sizi sıfırdan full stack bir geliştiriciye taşıyacak en iyi bilgi kaynaklarını sağlamaya adanmış açık kaynaklı bir topluluktur. Daha fazla bilgiyi Odin Projesi'nin [hakkında sayfası](https://www.theodinproject.com/about)nda bulabilirsiniz.
 
