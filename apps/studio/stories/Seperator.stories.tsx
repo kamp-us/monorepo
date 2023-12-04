@@ -22,8 +22,6 @@ export const Default = {
         <div>Pano</div>
         <Separator orientation="vertical" />
         <div>Sözlük</div>
-        <Separator orientation="vertical" />
-        <div>Pasaport</div>
       </div>
     </div>
   ),

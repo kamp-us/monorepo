@@ -2,7 +2,6 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { createSchema, createYoga } from "graphql-yoga";
 
-import { getSession } from "~/features/auth";
 import { createActions } from "~/actions";
 import { createClients } from "~/clients";
 import { createLoaders } from "~/loaders";
@@ -16,16 +15,15 @@ const { handleRequest } = createYoga<KampusGQLContext>({
   schema: createSchema<KampusGQLContext>({ typeDefs, resolvers }),
   logging: "debug",
   graphiql: true,
-  context: async ({ request }) => {
+  context: () => {
     const loaders = createLoaders(clients);
     const actions = createActions(clients);
-    const session = await getSession(request);
 
     return {
       loaders,
       actions,
       pasaport: {
-        session,
+        session: null,
       },
     } satisfies KampusGQLContext;
   },

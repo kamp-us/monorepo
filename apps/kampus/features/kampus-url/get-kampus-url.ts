@@ -2,9 +2,9 @@ import { assertNever } from "@kampus/std";
 
 import { env } from "~/env";
 
-type KampusProduct = "sozluk" | "pano" | "pasaport";
+type KampusProduct = "sozluk" | "pano";
 
-export const getKampusURL = (product: KampusProduct, path: string = "") => {
+export const getKampusURL = (product: KampusProduct, path = "") => {
   switch (env.KAMPUS_ENV) {
     case "localhost":
       return `http://${product}.localhost.kamp.us:3000${path}`;
