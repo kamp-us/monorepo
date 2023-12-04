@@ -2,7 +2,7 @@ import DataLoader from "dataloader";
 import hash from "object-hash";
 
 import { type Connection, type ConnectionArguments } from "@kampus/gql-utils/connection";
-import { allLessons, type Lesson } from "@kampus/tr-odin-project-content";
+import { allLessons, type Lesson } from "@kampus/odin-content";
 
 import { applyPagination, generatePageInfo } from "~/features/relay/pagination";
 
