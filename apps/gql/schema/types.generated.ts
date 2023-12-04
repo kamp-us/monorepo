@@ -123,6 +123,49 @@ export type NotAuthorized = UserError & {
   message: Scalars["String"]["output"];
 };
 
+export type OdinLesson = Node & {
+  __typename?: "OdinLesson";
+  body: OdinLessonBody;
+  id: Scalars["ID"]["output"];
+  title: Scalars["String"]["output"];
+};
+
+export type OdinLessonBody = {
+  __typename?: "OdinLessonBody";
+  html: Scalars["String"]["output"];
+  raw: Scalars["String"]["output"];
+};
+
+export type OdinLessonConnection = {
+  __typename?: "OdinLessonConnection";
+  edges: Maybe<Array<OdinLessonEdge>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars["Int"]["output"];
+};
+
+export type OdinLessonEdge = {
+  __typename?: "OdinLessonEdge";
+  cursor: Scalars["String"]["output"];
+  node: Maybe<OdinLesson>;
+};
+
+export type OdinQuery = {
+  __typename?: "OdinQuery";
+  lesson: Maybe<OdinLesson>;
+  lessons: Maybe<OdinLessonConnection>;
+};
+
+export type OdinQueryLessonArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type OdinQueryLessonsArgs = {
+  after: InputMaybe<Scalars["String"]["input"]>;
+  before: InputMaybe<Scalars["String"]["input"]>;
+  first: InputMaybe<Scalars["Int"]["input"]>;
+  last: InputMaybe<Scalars["Int"]["input"]>;
+};
+
 export type PageInfo = {
   __typename?: "PageInfo";
   endCursor: Maybe<Scalars["String"]["output"]>;
@@ -243,6 +286,7 @@ export type PanoUpvoteError = InvalidInput | NotAuthorized;
 export type Query = {
   __typename?: "Query";
   node: Maybe<Node>;
+  odin: OdinQuery;
   pano: PanoQuery;
   sozluk: SozlukQuery;
   user: Maybe<User>;
@@ -507,6 +551,7 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = Resol
 export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = ResolversObject<{
   Actor: User & { __typename: "User" };
   Node:
+    | (OdinLesson & { __typename: "OdinLesson" })
     | (PanoComment & { __typename: "PanoComment" })
     | (PanoPost & { __typename: "PanoPost" })
     | (SozlukTerm & { __typename: "SozlukTerm" })
@@ -543,6 +588,11 @@ export type ResolversTypes = ResolversObject<{
   Mutation: ResolverTypeWrapper<{}>;
   Node: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>["Node"]>;
   NotAuthorized: ResolverTypeWrapper<NotAuthorized>;
+  OdinLesson: ResolverTypeWrapper<OdinLesson>;
+  OdinLessonBody: ResolverTypeWrapper<OdinLessonBody>;
+  OdinLessonConnection: ResolverTypeWrapper<OdinLessonConnection>;
+  OdinLessonEdge: ResolverTypeWrapper<OdinLessonEdge>;
+  OdinQuery: ResolverTypeWrapper<OdinQuery>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
   PanoComment: ResolverTypeWrapper<PanoComment>;
   PanoCommentConnection: ResolverTypeWrapper<PanoCommentConnection>;
@@ -613,6 +663,11 @@ export type ResolversParentTypes = ResolversObject<{
   Mutation: {};
   Node: ResolversInterfaceTypes<ResolversParentTypes>["Node"];
   NotAuthorized: NotAuthorized;
+  OdinLesson: OdinLesson;
+  OdinLessonBody: OdinLessonBody;
+  OdinLessonConnection: OdinLessonConnection;
+  OdinLessonEdge: OdinLessonEdge;
+  OdinQuery: OdinQuery;
   PageInfo: PageInfo;
   PanoComment: PanoComment;
   PanoCommentConnection: PanoCommentConnection;
@@ -768,7 +823,7 @@ export type NodeResolvers<
   ParentType extends ResolversParentTypes["Node"] = ResolversParentTypes["Node"]
 > = ResolversObject<{
   __resolveType?: TypeResolveFn<
-    "PanoComment" | "PanoPost" | "SozlukTerm" | "User",
+    "OdinLesson" | "PanoComment" | "PanoPost" | "SozlukTerm" | "User",
     ParentType,
     ContextType
   >;
@@ -779,6 +834,63 @@ export type NotAuthorizedResolvers<
   ParentType extends ResolversParentTypes["NotAuthorized"] = ResolversParentTypes["NotAuthorized"]
 > = ResolversObject<{
   message: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type OdinLessonResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["OdinLesson"] = ResolversParentTypes["OdinLesson"]
+> = ResolversObject<{
+  body: Resolver<ResolversTypes["OdinLessonBody"], ParentType, ContextType>;
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type OdinLessonBodyResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["OdinLessonBody"] = ResolversParentTypes["OdinLessonBody"]
+> = ResolversObject<{
+  html: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  raw: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type OdinLessonConnectionResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["OdinLessonConnection"] = ResolversParentTypes["OdinLessonConnection"]
+> = ResolversObject<{
+  edges: Resolver<Maybe<Array<ResolversTypes["OdinLessonEdge"]>>, ParentType, ContextType>;
+  pageInfo: Resolver<ResolversTypes["PageInfo"], ParentType, ContextType>;
+  totalCount: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type OdinLessonEdgeResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["OdinLessonEdge"] = ResolversParentTypes["OdinLessonEdge"]
+> = ResolversObject<{
+  cursor: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  node: Resolver<Maybe<ResolversTypes["OdinLesson"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type OdinQueryResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["OdinQuery"] = ResolversParentTypes["OdinQuery"]
+> = ResolversObject<{
+  lesson: Resolver<
+    Maybe<ResolversTypes["OdinLesson"]>,
+    ParentType,
+    ContextType,
+    RequireFields<OdinQueryLessonArgs, "id">
+  >;
+  lessons: Resolver<
+    Maybe<ResolversTypes["OdinLessonConnection"]>,
+    ParentType,
+    ContextType,
+    Partial<OdinQueryLessonsArgs>
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -944,6 +1056,7 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryNodeArgs, "id">
   >;
+  odin: Resolver<ResolversTypes["OdinQuery"], ParentType, ContextType>;
   pano: Resolver<ResolversTypes["PanoQuery"], ParentType, ContextType>;
   sozluk: Resolver<ResolversTypes["SozlukQuery"], ParentType, ContextType>;
   user: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType, Partial<QueryUserArgs>>;
@@ -1115,6 +1228,11 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   Mutation: MutationResolvers<ContextType>;
   Node: NodeResolvers<ContextType>;
   NotAuthorized: NotAuthorizedResolvers<ContextType>;
+  OdinLesson: OdinLessonResolvers<ContextType>;
+  OdinLessonBody: OdinLessonBodyResolvers<ContextType>;
+  OdinLessonConnection: OdinLessonConnectionResolvers<ContextType>;
+  OdinLessonEdge: OdinLessonEdgeResolvers<ContextType>;
+  OdinQuery: OdinQueryResolvers<ContextType>;
   PageInfo: PageInfoResolvers<ContextType>;
   PanoComment: PanoCommentResolvers<ContextType>;
   PanoCommentConnection: PanoCommentConnectionResolvers<ContextType>;
