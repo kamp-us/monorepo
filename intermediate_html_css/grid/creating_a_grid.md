@@ -177,7 +177,7 @@ Now that you’ve made a grid you can start to see how easy it is to control the
 This section contains questions for you to check your understanding of this lesson. If you’re having trouble answering the questions below on your own, review the material above to find the answer.
 
 - [How does an HTML element become a grid item?](#setting-up-a-grid)
-- [What is the space between lines on the grid?](#setting-up-a-grid)
+- [What is the space between lines on the grid?](#setting-up-a-rows)
 - [How do you set gutters (also known as alleys) in the grid?](#gap)
 - [Describe what happens when you have more content than defined tracks.](#explicit-vs-implicit-grid)
 - [How could you change the size for those undefined tracks?](#explicit-vs-implicit-grid)
@@ -187,3 +187,4 @@ This section contains questions for you to check your understanding of this less
 This section contains helpful links to other content. It isn’t required, so consider it supplemental.
 
 - The [MDN Basic Concepts of grid layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout) reviews many of the basics and introduces some additional concepts.
+- Watch this [short video](https://www.youtube.com/watch?v=0m5qgfX2TVQ&ab_channel=PeterSommerhoff) on grid terminology from PeterSommerhoff.
