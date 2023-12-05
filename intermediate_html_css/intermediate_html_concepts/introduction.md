@@ -13,8 +13,6 @@ Müfredatın ilerleyen bölümlerinde bu dersin ikinci kısmında animasyonlar, 
 ### Ödev
 
 <div class="lesson-content__panel" markdown="1">
-
-1. Kullanabileceğiniz diğer HTML öğeleri hakkında genel bir bilgi edinmek için bu [HTML öğeleri referansı](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) sayfasını okuyun. Bunu ezberlemenize gerek yok çünkü önemli kısımları ilerledikçe öğreneceksiniz, ancak şimdilik bir göz atmanız içeriğin daha sonra kalıcı olmasına yardımcı olacaktır.
-2. Biraz bunaltıcı görünen [CSS Cheat Sheet](https://htmlcheatsheet.com/css/)'e bir göz atın.  Yine, bu listeden belirli bir şey öğrenmenize veya ezberlemenize gerek yok, sadece öğrenmeniz gerekenler hakkında bir fikir edinmek için kullanın!
-
+1. Kullanabileceğiniz diğer HTML öğeleri hakkında genel bir bilgi edinmek için bu ingilizce [HTML öğeleri referansı](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) sayfasını okuyun. Bunu ezberlemenize gerek yok çünkü önemli kısımları ilerledikçe öğreneceksiniz, ancak şimdilik bir göz atmanız içeriğin daha sonra kalıcı olmasına yardımcı olacaktır.
+2. Biraz bunaltıcı görünen bu ingilizce [CSS Cheat Sheet](https://htmlcheatsheet.com/css/)'e bir göz atın.  Yine, bu listeden belirli bir şey öğrenmenize veya ezberlemenize gerek yok, sadece öğrenmeniz gerekenler hakkında bir fikir edinmek için kullanın!
 </div>
