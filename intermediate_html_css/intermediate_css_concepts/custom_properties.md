@@ -13,7 +13,7 @@ We can even redefine custom properties under different contexts, which is incred
 
 The syntax for declaring and accessing a custom property is really simple and not too different from how we write normal rule declarations:
 
-~~~css
+```css
 .error-modal {
   --color-error-text: red;
   --modal-border: 1px solid black;
@@ -23,7 +23,7 @@ The syntax for declaring and accessing a custom property is really simple and no
   border: var(--modal-border);
   font-size: var(--modal-font-size);
 }
-~~~
+```
 
 That's it! First, we declare our custom property with a double hyphen followed by a case-sensitive, hyphen-separated property name (`color-error-text` wouldn't be the same as `Color-Error-Text`). The use of Kebab case (single hyphens to separate words) is very important here because spaces are not valid (`--color error text` would not work). Then we can store any valid CSS value in our newly declared custom property, whether it be a simple color value, shorthand values, or even a more complex function, just to give you a few examples.
 
@@ -33,14 +33,14 @@ When we want to access a custom property, we use the `var()` function as the val
 
 The `var()` function actually accepts two parameters. The first parameter we've already gone over, which is the custom property we want to assign. The second parameter is an optional fallback value. When a fallback value is provided in addition to a custom property, the fallback value will be used if the custom property is invalid or hasn't been declared yet. We can even pass in *another* custom property as a fallback, which can have *its own* fallback value as well!
 
-~~~css
+```css
 .fallback {
   --color-text: white;
 
   background-color: var(--undeclared-property, black);
   color: var(--undeclared-again, var(--color-text, yellow));
 }
-~~~
+```
 
 In the above example, our `background-color` property would have a value of `black` and our `color` property would have a value of `white`. If the `--color-text` custom property was invalid or didn't exist, the fallback to our fallback would take over and the `color` property would have a value of `yellow`.
 
@@ -50,14 +50,14 @@ In the first example above, you may have noticed that we declared and then acces
 
 In the example below, only the element with the `cool-paragraph` class would get styled with a red background since it's a descendant of the element where our custom property is declared.
 
-~~~html
+```html
 <div class='cool-div'>
   <p class='cool-paragraph'>Check out my cool, red background!</p>
 </div>
 
 <p class='boring-paragraph'>I'm not in scope so I'm not cool.</p>
-~~~
-~~~css
+```
+```css
 .cool-div {
   --main-bg: red;
 }
@@ -69,7 +69,7 @@ In the example below, only the element with the `cool-paragraph` class would get
 .boring-paragraph {
   background-color: var(--main-bg);
 }
-~~~
+```
 
 #### The :root selector
 
@@ -77,12 +77,12 @@ While there may be times where you will want to limit the scope of a custom prop
 
 A better solution is declaring those custom properties on the `:root` selector, which is essentially the same thing as the `html` selector except it has a higher specificity.
 
-~~~html
+```html
 <p class='cool-paragraph'>Lorem ipsum dolor sit amet.</p>
 
 <p class='exciting-paragraph'>Lorem ipsum dolor sit amet.</p>
-~~~
-~~~css
+```
+```css
 :root {
   --main-color: red;
 }
@@ -94,7 +94,7 @@ A better solution is declaring those custom properties on the `:root` selector, 
 .exciting-paragraph {
   background-color: var(--main-color);
 }
-~~~
+```
 
 By declaring our custom property on the `:root` selector in the example above, we can access it on *any* other valid selector within our CSS file, since any other selector would be considered a descendant of the `:root` selector.
 
@@ -109,7 +109,7 @@ Beyond allowing us to access custom properties more globally, the `:root` select
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-First we added a `class` attribute on our `html` element so that our page has a default theme. Next in our CSS we created two scopes for our custom properties on the `:root` selector, one for when our `html` (or root) element has a class of `dark` and another for when it has a class of `light`. Our other selectors then use the values of any custom properties depending on which class is currently present on our root element.
+First we used JavaScript to add a `class` attribute on our `html` element (We don't have direct access to the `html` element in the HTML tab on codepen, but you should be able to see the class being applied in the browser's inspector) so that our page has a default theme. Next in our CSS we created two scopes for our custom properties on the `:root` selector, one for when our `html` (or root) element has a class of `dark` and another for when it has a class of `light`. Our other selectors then use the values of any custom properties depending on which class is currently present on our root element.
 
 #### Media queries
 
@@ -152,5 +152,3 @@ This section contains questions for you to check your understanding of this less
 This section contains helpful links to other content. It isn't required, so consider it supplemental for if you need to dive deeper into something.
 
 - It looks like this lesson doesn’t have any additional resources yet. Help us expand this section by contributing to our curriculum.
-
-
