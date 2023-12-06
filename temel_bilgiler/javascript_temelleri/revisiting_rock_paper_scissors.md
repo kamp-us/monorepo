@@ -70,7 +70,7 @@ Dalların kullanımı için bir başka durum da, ana dalınıza (veya özellik d
     1. Şimdi `rps-ui` dalımızı `git merge rps-ui` ile mevcut dalımız olan `main` ile birleştirelim.
     1. Her şey yolunda gittiyse, `rps-ui` dalımız artık main ile başarıyla birleştirildi! `git log` komutunu kullanarak ana dalda yaptığınız değişiklikler dışında özellik (feature)  dalında yaptığınız tüm değişiklikleri görebileceksiniz. Şimdi son adımımız için!
     1. Şimdi `git push origin main` komutunu çalıştırarak `main` dalımızı uzak depomuzla birleştirelim. GitHub reponuza gidin ve `main` dalının `rps-ui` dalında yaptığı tüm değişiklikleri ve commitleri içerdiğini göreceksiniz. Tebrikler! İlk özelliğinizi üretim dalınıza başarıyla gönderdiniz!
-    1. Şimdi tüm kodumuz ana dalda olduğuna göre, artık `rps-ui` dalına gerçekten ihtiyacımız yok. Hem yerel hem de uzak depoda biraz temizlik yapalım. Dalı yerel depomuzdan `git branch -d rps-ui` ile silin ve ayrıca GitHub'daki uzak depodan `git push --delete origin rps-ui` ile silin. Tebrikler, temizliği tamamladık!
+    1. Şimdi tüm kodumuz ana dalda olduğuna göre, artık `rps-ui` dalına gerçekten ihtiyacımız yok. Hem yerel hem de uzak depoda biraz temizlik yapalım. Dalı yerel depomuzdan `git branch -d rps-ui` ile silin ve ayrıca GitHub'daki uzak depodan `git push origin --delete rps-ui` ile silin. Tebrikler, temizliği tamamladık!
 1. Projeyi GitHub Pages'da yayınladığınızdan ve [proje dersi](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/rock-paper-scissors) bölümüne canlı önizleme bağlantısı eklediğinizden emin olun.
 
 </div>
