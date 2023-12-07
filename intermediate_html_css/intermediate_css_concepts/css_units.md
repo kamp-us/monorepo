@@ -1,50 +1,50 @@
-### Introduction
-There are many different units that you can use to define sizes in CSS. This lesson will introduce the most important to you, and show you where to learn about the rest of them.
+### Giriş
+CSS'de boyutları tanımlamak için kullanabileceğiniz birçok farklı birim vardır. Bu ders sizin için en önemli olanları tanıtacak ve geri kalanları nereden öğrenebileceğinizi gösterecektir.
 
-### Learning outcomes
+### Öğrenme çıktıları
 
-* You'll learn the difference between relative and absolute units
-* You'll learn when it's appropriate to use the different units.
+* Göreli ve mutlak birimler arasındaki farkı öğreneceksiniz.
+* Farklı birimleri kullanmanın ne zaman uygun olduğunu öğreneceksiniz.
 
-### Absolute units
+### Mutlak birimler
 
-Absolute units are those that are always the same in any context. `px` is an absolute unit because the size of a pixel doesn't change relative to anything else on the page. In fact, `px` is the only absolute unit you should be using for web projects. The rest of them make more sense in a print setting because they are related to physical units such as `in` (inch) and `cm` (centimeter).
+Mutlak birimler, herhangi bir bağlamda her zaman aynı olan birimlerdir. `px` mutlak bir birimdir çünkü bir pikselin boyutu sayfadaki başka bir şeye göre değişmez. Aslında `px` web projeleri için kullanmanız gereken tek mutlak birimdir. Diğerleri `in` (inç) ve `cm` (santimetre) gibi fiziksel birimlerle ilişkili oldukları için baskı ortamında daha anlamlıdır.
 
-### Relative units
+### Göreli birimler
 
-Relative units are units that can change based on their context. There are several of them that you are likely to encounter and want to use.
+Göreli birimler, bağlamlarına göre değişebilen birimlerdir. Karşılaşmanız ve kullanmak istemeniz muhtemel olan birkaç tane vardır.
 
-#### em and rem
+#### em ve rem
 
-`em` and `rem` both refer to a font size, though they are often used to define other sizes in CSS. You'll see both of them often so we're going to explain both, but as a rule-of-thumb, prefer `rem`.
+`em` ve `rem` genellikle CSS'de diğer boyutları tanımlamak için kullanılsalar da, her ikisi de bir yazı tipi boyutunu ifade eder. Her ikisini de sık sık göreceksiniz, bu yüzden her ikisini de açıklayacağız, ancak genel bir kural olarak `rem`'i tercih edin.
 
-`1em` is the `font-size` of an element (or the element's parent if you're using it to set `font-size`). So, for example, if an element's `font-size` is `16px`, then setting its width to `4em` would make its width `64px` (`16 * 4 == 64`). 
+`1em` bir öğenin (veya `font-size` ayarlamak için kullanıyorsanız öğenin ebeveyninin) `font-size` değeridir. Örneğin, bir öğenin `font-size` değeri `16px` ise, öğenin genişliğini `4em` olarak ayarlamak genişliğini `64px` yapacaktır (`16 * 4 == 64`).
 
-`1rem` is the `font-size` of the root element (either `:root` or `html`). The math works the same with `rem` as it did with `em`, but without the added complexity of keeping track of the parent's font size. Relying on `em` could mean that a particular size could change if the context changes, which is very likely not the behavior you want.
+`1rem` kök öğenin (ya `:root` ya da `html`) `font-size` değeridir. Matematiksel olarak, 'rem' ile 'em' aynı şekilde çalışır, ancak ebeveynin yazı tipi boyutunu takip etme karmaşıklığı olmadan çalışır. `em`'e güvenmek, bağlam değişirse belirli bir boyutun değişebileceği anlamına gelebilir, bu da büyük olasılıkla istediğiniz davranış değildir.
 
-Using a relative size like `rem` to define font sizes across your website _is_ recommended. Many browsers allow users to change the base font-size to increase readability. If at all possible, it is advisable to respect a user's wishes regarding font size. You'll learn more about this from the reading assignments.
+Web siteniz genelinde yazı tipi boyutlarını tanımlamak için `rem` gibi göreli bir boyut kullanılması _önerilir_. Birçok tarayıcı, okunabilirliği artırmak için kullanıcıların temel yazı tipi boyutunu değiştirmesine izin verir. Mümkünse, kullanıcının yazı tipi boyutuyla ilgili isteklerine saygı gösterilmesi tavsiye edilir. Okuma ödevlerinden bu konuda daha fazla bilgi edineceksiniz.
 
-#### Viewport units
+#### Görüntü alanı birimleri
 
-The units `vh` and `vw` relate to the size of the viewport. Specifically, `1vh` is equal to `1%` of the viewport height and `1vw` is equal to `1%` of the viewport width. These can be useful any time you want something to be sized relative to the viewport, examples including full-height heroes, full-screen app-like interfaces.
+`vh` ve `vw` birimleri görüntü alanının boyutuyla ilgilidir. Özellikle, `1vh` görüntü alanı yüksekliğinin `%1`ine ve `1vw` görüntü alanı genişliğinin `%1`ine eşittir. Bunlar, bir şeyin görüntü alanına göre boyutlandırılmasını yani tam boy kahramanlar, tam ekran uygulama benzeri arayüzler gibi örnekler dahil olmak üzere istediğiniz zaman yararlı olabilir.
 
-### Assignment
+### Ödev
 <div class="lesson-content__panel" markdown="1">
-1. [CSS values and units](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units) covers all the available units.
-2. The article [CSS units](https://codyloyd.com/2021/css-units/) goes in depth on how and when you might want to use `em`, `rem`, or `px`.
-3. [Fun with Viewport Units](https://css-tricks.com/fun-viewport-units/) demonstrates some interesting things you can do with `vh` and `vw`.
+1. [CSS values and units](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units) adlı ingilizce makale mevcut tüm birimleri kapsar.
+2. [CSS units](https://codyloyd.com/2021/css-units/) adlı ingilizce makale nasıl ve ne zaman `em`, `rem` veya `px` kullanabileceğinizi derinlemesine açıklar.
+3. [Fun with Viewport Units](https://css-tricks.com/fun-viewport-units/) adlı ingilizce makale `vh` ve `vw` ile yapabileceğiniz bazı ilginç şeyleri gösterir.
 </div>
 
-### Knowledge check
+### Bilgi kontrolü
 
-This section contains questions for you to check your understanding of this lesson. If you’re having trouble answering the questions below on your own, review the material above to find the answer.
+Bu bölüm, bu dersi anladığınızı kontrol etmeniz için sorular içermektedir. Aşağıdaki soruları kendi kendinize yanıtlamakta zorlanıyorsanız, yanıtı bulmak için yukarıdaki materyali gözden geçirin.
 
-- [Why would you want to use `em` or `rem` for font-size instead of `px`?](#em-and-rem)
-- [What are some instances where you might want to use `vh` and `vw`?](#viewport-units)
-- [What are some instances where you might want to use `px` instead of a relative unit?](https://codyloyd.com/2021/css-units/)
+- [Yazı tipi boyutu için neden `px` yerine `em` veya `rem` kullanmak istiyorsunuz?](#em-ve-rem)
+- [`vh` ve `vw` kullanmak isteyebileceğiniz bazı durumlar nelerdir?](#görüntü-alanı-birimleri)
+- [Göreli bir birim yerine `px` kullanmak isteyebileceğiniz bazı durumlar nelerdir? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://codyloyd.com/2021/css-units/)
 
-### Additional resources
+### Ek kaynaklar
 
-This section contains helpful links to other content. It isn't required, so consider it supplemental for if you need to dive deeper into something.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, bu nedenle bir şeyi daha derinlemesine incelemeniz gerektiğinde bunu tamamlayıcı olarak düşünün.
 
-* Watch [are you using the right CSS unit?](https://www.youtube.com/watch?v=N5wpD9Ov_To) if you'd like to learn Kevin Powells general rules of thumb when it comes to choosing the correct CSS units for different situations.
+* Farklı durumlar için doğru CSS birimlerini seçme konusunda Kevin Powells'ın genel kurallarını öğrenmek istiyorsanız [are you using the right CSS unit?](https://www.youtube.com/watch?v=N5wpD9Ov_To) adlı ingilizce videosunu izleyin. 
