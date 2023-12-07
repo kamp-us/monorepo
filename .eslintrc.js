@@ -19,6 +19,6 @@ const config = {
       rootDir: ["apps/kampus", "apps/gql"],
     },
   },
-}
+};
 
 module.exports = config;
