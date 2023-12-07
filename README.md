@@ -5,7 +5,6 @@ kamp.us web projects & packages
 - sozluk: turkce terimler sozlugu - https://sozluk.dev.kamp.us
 - pano: link & bilgi & soru cevap paylasim platformu - https://pano.dev.kamp.us
 - gql: https://gql.dev.kamp.us/graphql
-- pasaport: kampus icin kullanici bilgileri & [centralized auth](https://sozluk.dev.kamp.us/centralized-auth) servisi - https://pasaport.dev.kamp.us
 - storybook: @kampus/ui paketi icin hosted storybook - https://ui.dev.kamp.us
 
 ## IMPORTANT NOTE
@@ -42,7 +41,6 @@ npm ci
 
 ```text
 127.0.0.1 localhost.kamp.us
-127.0.0.1 pasaport.localhost.kamp.us
 127.0.0.1 pano.localhost.kamp.us
 127.0.0.1 sozluk.localhost.kamp.us
 127.0.0.1 gql.localhost.kamp.us
@@ -50,7 +48,7 @@ npm ci
 
 ### 3. Setting up `.env` files
 
-- Duplicate `.env.example` files and rename them as `.env` in the following folders: `db/prisma`, `apps/gql`, `apps/kampus`, `apps/pasaport`.
+- Duplicate `.env.example` files and rename them as `.env` in the following folders: `db/prisma`, `apps/gql`, `apps/kampus`.
 
 ### 4. Prisma Setup and Database Configuration
 
@@ -89,7 +87,7 @@ npm run prisma:seed
 - Run the command below at the root folder.
 
 ```sh
-# Runs "gql", "kampus" and "pasaport" apps so the platform can be alive with 1 command.
+# Runs "gql" and "kampus" apps so the platform can be alive with 1 command.
 npm run web
 ```
 
@@ -104,72 +102,6 @@ npm run dev
 # Runs only "gql" server so backend work can be done separately.
 npm run gql
 ```
-
-### 6. Logging in on development server(optional)
-
-#### 6.1 GitHub
-
-- Go to [OAuth Apps page](https://github.com/settings/developers) on GitHub.
-- Click on `New OAuth App`.
-  - Application name: "you can choose any name"
-  - Homepage URL: http://pasaport.localhost.kamp.us:3001/
-  - Authorization callback URL: http://pasaport.localhost.kamp.us:3001/auth/callback/github
-- Click on `Register Application`.
-- On the application page, click on `Generate a new client secret`.
-- Make the following changes to the corresponding files.
-
-```sh
-# apps/kampus, apps/pasaport
-GITHUB_ID=<Your_Client_ID>
-GITHUB_SECRET=<Your_Client_Secret>
-```
-
-- Now you can use `Sign in with GitHub` on development server.
-
-<!---
-
-#### 6.2 Discord
-
-- Go to [Applications page](https://discord.com/developers/applications) on Discord.
-- Click on `New Application`.
-  - Name: "you can choose any name"
-  - Click on `Create`.
-- Go to `OAuth2` on the left sidebar.
-- Click on `Reset Secret` to generate secret key.
-- Click on `Add Redirect` and enter `http://pasaport.localhost.kamp.us:3001/auth/callback/discord`
-- Save changes.
-- Make the following changes to the corresponding files.
-
-```sh
-# apps/kampus, apps/pasaport
-DISCORD_ID=<Your_Client_ID>
-DISCORD_SECRET=<Your_Client_Secret>
-```
-
-- Now you can use `Sign in with Discord` on development server.
-
-#### 6.3 Twitch
-
-- Go to [Developer Applications page](https://dev.twitch.tv/console/apps) on Twitch.
-- Click on `Register Your Application`.
-  - Name: "you can choose any name"
-  - OAuth Redirect URLs: https://pasaport.localhost.kamp.us:3001/auth/callback/twitch
-  - Category: Website Integration
-- Click on `Create`.
-- Click on `Manage` for your application.
-- Click on `New Secret`.
-
-- Make the following changes to the corresponding files.
-
-```sh
-# apps/kampus, apps/pasaport
-TWITCH_ID=<Your_Client_ID>
-TWITCH_SECRET=<Your_Client_Secret>
-```
-
-- Now you can use `Sign in with Twitch` on development server.
-
--->
 
 ## Structure
 

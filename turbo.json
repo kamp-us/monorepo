@@ -36,7 +36,7 @@
       "cache": false
     },
     "@kampus-apps/gql#*": {
-      "env": ["NODE_ENV", "DATABASE_URL", "NEXTAUTH_URL", "KAMPUS_ENV"]
+      "env": ["NODE_ENV", "DATABASE_URL", "KAMPUS_ENV"]
     },
     "@kampus-apps/gql#dev": {
       "dependsOn": [
@@ -58,32 +58,12 @@
         "NODE_ENV",
         "NEXT_PUBLIC_GQL_URL",
         "RESEND_API_KEY",
-        "NEXTAUTH_URL",
         "NEXT_PUBLIC_KAMPUS_ENV",
         "VERCEL_URL"
       ]
     },
-    "@kampus-apps/pasaport#*": {
-      "env": ["NODE_ENV", "NEXTAUTH_URL", "DATABASE_URL", "KAMPUS_ENV"]
-    },
-    "@kampus-apps/pasaport#build": {
-      "dependsOn": ["@kampus/prisma#prisma:generate"]
-    },
     "@kampus-apps/kampus#build": {
       "dependsOn": ["@kampus/prisma#prisma:generate"]
-    },
-    "@kampus/next-auth#*": {
-      "env": [
-        "AUTH_COOKIE_DOMAIN",
-        "GITHUB_ID",
-        "GITHUB_SECRET",
-        "DISCORD_ID",
-        "DISCORD_SECRET",
-        "TWITCH_ID",
-        "TWITCH_SECRET",
-        "SECRET",
-        "KAMPUS_ENV"
-      ]
     },
     "@kampus/relay": {
       "env": ["NEXT_PUBLIC_GQL_URL"]

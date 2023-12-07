@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   render: () => (
     <TypographyList>
-      <li>Kamp.us/Pano</li> <li>Kamp.us/Sozluk</li> <li>Kamp.us/Pasaport</li>
+      <li>Kamp.us/Pano</li> <li>Kamp.us/Sozluk</li>
     </TypographyList>
   ),
 } satisfies Story;
