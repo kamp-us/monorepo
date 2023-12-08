@@ -42,7 +42,7 @@
       "dependsOn": [
         "@kampus/prisma#prisma:generate",
         "@kampus/sozluk-content#build",
-        "@kampus/tr-odin-project-content#build"
+        "@kampus/odin-content#build"
       ]
     },
     "@kampus-apps/gql#build": {
@@ -50,7 +50,7 @@
       "dependsOn": [
         "@kampus/prisma#prisma:generate",
         "@kampus/sozluk-content#build",
-        "@kampus/tr-odin-project-content#build"
+        "@kampus/odin-content#build"
       ]
     },
     "@kampus-apps/kampus#*": {
