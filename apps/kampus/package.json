@@ -17,6 +17,9 @@
     "@types/react-relay": "14.1.4"
   },
   "dependencies": {
+    "@clerk/localizations": "1.26.11",
+    "@clerk/nextjs": "4.27.2",
+    "@clerk/themes": "1.7.9",
     "@kampus/relay": "*",
     "@kampus/ui": "*",
     "react-markdown": "^9.0.1",

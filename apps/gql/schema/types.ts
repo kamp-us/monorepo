@@ -5,6 +5,6 @@ export interface KampusGQLContext {
   loaders: DataLoaders;
   actions: DataActions;
   pasaport: {
-    session: null | { id: string; user: { id: string } };
+    session: null | { user: { id: string } };
   };
 }

@@ -28,6 +28,7 @@
     "vitest-mock-extended": "1.1.3"
   },
   "dependencies": {
+    "@clerk/nextjs": "4.27.5",
     "@graphql-tools/schema": "9.0.19",
     "@kampus/gql-utils": "*",
     "@kampus/prisma": "*",
@@ -40,6 +41,7 @@
     "graphql-scalars": "1.21.3",
     "graphql-yoga": "3.9.1",
     "object-hash": "3.0.0",
+    "svix": "1.15.0",
     "znv": "0.3.2",
     "zod": "3.21.4"
   }

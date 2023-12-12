@@ -4,9 +4,10 @@ import NextLink from "next/link";
 import { ExternalLinkIcon, MessageCircleIcon } from "lucide-react";
 import { graphql, useFragment } from "react-relay";
 
-import { Card, CardContent, CardFooter, CardTitle, TimeAgo } from "@kampus/ui";
+import { Card, CardContent, CardFooter, CardTitle, TimeAgo, UserAvatar } from "@kampus/ui";
 import { cn } from "@kampus/ui/utils";
 
+import { getPostURL, getSitePostsURL } from "~/features/kampus-url/pano";
 import { type PostItem_post$key } from "./__generated__/PostItem_post.graphql";
 import { type PostItem_viewer$key } from "./__generated__/PostItem_viewer.graphql";
 import { MoreOptionsDropdown } from "./MoreOptions";
@@ -92,9 +93,11 @@ export const PostItem = (props: PostItemProps) => {
           </div>
 
           <div className="text-muted-foreground flex items-center gap-1 text-sm">
-            <Link className="text-sm" href={post.site ? "/site/" + post.site : ""}>
-              {post.site ?? ""}
-            </Link>
+            {post.site && (
+              <Link className="text-sm" href={getSitePostsURL({ site: post.site })}>
+                {post.site}
+              </Link>
+            )}
           </div>
         </CardTitle>
         <div className="text-muted-foreground flex text-sm">
@@ -105,7 +108,7 @@ export const PostItem = (props: PostItemProps) => {
         <div className="flex items-center gap-4 text-sm">
           <div className="flex items-center gap-1 font-semibold">
             <MessageCircleIcon size="12" />
-            <Link href={`/post/${post.id}`}>{`${post.commentCount} yorum`}</Link>
+            <Link href={getPostURL(post)}>{`${post.commentCount} yorum`}</Link>
           </div>
         </div>
       </CardContent>
