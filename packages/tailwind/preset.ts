@@ -1,3 +1,4 @@
+import typographyPlugin from "@tailwindcss/typography";
 import { type Config } from "tailwindcss";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -8,5 +9,5 @@ import { kampusPlugin } from "./plugin";
 export const kampusPreset = {
   darkMode: ["class"],
   content: [],
-  plugins: [animatePlugin, kampusPlugin],
+  plugins: [animatePlugin, typographyPlugin, kampusPlugin],
 } satisfies Config;
