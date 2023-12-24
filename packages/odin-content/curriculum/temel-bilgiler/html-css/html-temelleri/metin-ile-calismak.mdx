@@ -34,7 +34,7 @@ Bir HTML sayfasında aşağıdaki metnin çıktısının ne olmasını beklersin
 Görünüşe göre iki paragraf metin gibi duruyor, bu nedenle onun bu şekilde görüntülenmesini bekleyebilirsiniz. Ancak durum böyle değil, aşağıdaki çıktıda görebileceğiniz gibi:
 
 <p
-  class="codepen"
+  className="codepen"
   data-height="300"
   data-theme-id="dark"
   data-default-tab="html,result"
@@ -63,7 +63,7 @@ HTML'de paragraflar oluşturmak istiyorsak, <span id='create-paragraph-element'>
 Örneğin paragraf öğelerini kullanacak şekilde değiştirmek sorunu çözer:
 
 <p
-  class="codepen"
+  className="codepen"
   data-height="300"
   data-theme-id="dark"
   data-default-tab="html,result"
@@ -89,14 +89,13 @@ HTML'de paragraflar oluşturmak istiyorsak, <span id='create-paragraph-element'>
 
 Başlıklar diğer HTML kodlarından farklıdır: başlık olduklarını belirtmek için diğer metinlerden daha büyük ve kalın bir şekilde görüntülenirler.
 
-<span id='different-heading-levels'>`<h1>` den başlayarak `<h6>` ya kadar 6 farklı başlık seviyesi vardır. Bir başlık etiketi içindeki sayı, o başlığın seviyesini temsil eder. En büyük ve en önemli başlık h1 iken, h6 en alt seviyedeki en küçük başlıktır.</span>
+<span id='different-heading-levels'>`<h1 />` den başlayarak `<h6 />` ya kadar 6 farklı başlık seviyesi vardır. Bir başlık etiketi içindeki sayı, o başlığın seviyesini temsil eder. En büyük ve en önemli başlık h1 iken, h6 en alt seviyedeki en küçük başlıktır.</span>
 
 Başlıklar da paragraflar gibi tanımlanır. Örneğin, bir h1 başlığı oluşturmak için başlık metnimizi bir `<h1>` etiketi içine sararız.
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="LYLPLbg" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
+<p className="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="LYLPLbg" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
 <a href="https://codepen.io">CodePen</a>'de
 TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/LYLPLbg">html-başlık-örneği</a>'ni inceleyebilirsiniz.
-  </span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
@@ -108,8 +107,7 @@ Doğru başlık seviyesini kullanmak, içeriğe bir hiyerarşi sağladığından
 
 Tek başına `strong` öğesini kullanabilirsiniz:
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="qBjWXrB" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>
+<p className="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="qBjWXrB" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
 <a href="https://codepen.io">CodePen</a>'de
 TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/qBjWXrB">html-single-strong-örneği</a>'ni inceleyebilirsiniz.
 </p>
@@ -118,7 +116,7 @@ TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProj
 Ancak muhtemelen kendinizi güçlü öğeyi diğer metin öğeleriyle birlikte daha çok kullanırken göreceksiniz, bunun gibi:
 
 <p
-  class="codepen"
+  className="codepen"
   data-height="300"
   data-theme-id="dark"
   data-default-tab="html,result"
@@ -149,7 +147,7 @@ Bazen metni `<strong>` etiketi kullanmadan kalın yapmak isteyebilirsiniz. Bunu 
 Tek başına `<em>` kullanmak için:
 
 <p
-  class="codepen"
+  className="codepen"
   data-height="300"
   data-theme-id="dark"
   data-default-tab="html,result"
@@ -174,7 +172,7 @@ Tek başına `<em>` kullanmak için:
 Yine strong öğesinde olduğu gibi, `<em>` öğesini de çoğunlukla diğer metin öğeleriyle birlikte kullanacaksınız:
 
 <p
-  class="codepen"
+  className="codepen"
   data-height="300"
   data-theme-id="dark"
   data-default-tab="html,result"
@@ -209,7 +207,7 @@ Bu dersteki tüm örneklerde, diğer öğelerin içinde yer alan öğeleri girin
 Aşağıdaki örnekte body öğesi üst öğe (ebeveyn), paragraf ise alt öğedir(çocuk):
 
 <p
-  class="codepen"
+  className="codepen"
   data-height="300"
   data-theme-id="dark"
   data-default-tab="html,result"
@@ -236,7 +234,7 @@ Tıpkı insan ilişkilerinde olduğu gibi, HTML ana öğelerinin birçok çocuğ
 Örneğin, aşağıdaki kodda yer alan iki paragraf kardeştir, çünkü her ikisi de body etiketinin alt öğeleridir ve birbirleriyle aynı iç içe geçme düzeyindedirler:
 
 <p
-  class="codepen"
+  className="codepen"
   data-height="300"
   data-theme-id="dark"
   data-default-tab="html,result"
@@ -269,7 +267,7 @@ HTML yorumları tarayıcı tarafından görülemez; kodumuz üzerinde _yorum_ ya
 Bir HTML yorumu yazmak basittir: Yorumu sadece `<!--` ve `-->` etiketleri ile çevreliyoruz. Örneğin:
 
 <p
-  class="codepen"
+  className="codepen"
   data-height="300"
   data-theme-id="dark"
   data-default-tab="html,result"
@@ -293,7 +291,7 @@ Bir HTML yorumu yazmak basittir: Yorumu sadece `<!--` ve `-->` etiketleri ile ç
 
 ### Ödev
 
-<div class="lesson-content__panel" markdown="1">
+<div className="lesson-content__panel" markdown="1">
 
 1.  Kevin Powell'ın [HTML Paragraf ve Başlıklar Videosunu İzleyin](https://www.youtube.com/watch?v=yqcd-XkxZNM&list=PL4-IK0AVhVjM0xE0K2uZRvsM7LkIhsPT-&index=3)
 2.  Kevin Powell'ın [HTML Kalın ve İtalik Metin Videosunu İzleyin](https://www.youtube.com/watch?v=gW6cBZLUk6M&list=PL4-IK0AVhVjM0xE0K2uZRvsM7LkIhsPT-&index=4)
