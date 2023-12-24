@@ -1,5 +1,4 @@
 const fs = require("fs");
-const path = require("path");
 const glob = require("glob");
 
 const modifyImgTag = (match) => {
@@ -10,15 +9,13 @@ const modifyImgTag = (match) => {
 };
 
 function fixImgTag(mdxContent) {
-  const modifiedMDX = mdxContent.replace(/<img[^>]*>/g, (match) => {
+  return mdxContent.replace(/<img[^>]*>/g, (match) => {
     modifyImgTag(match);
   });
-
-  return modifiedMDX;
 }
 
 // Find all .md files in the current directory and its subdirectories
-glob("**/*.mdx", function (err, files) {
+glob("**/*.md", function (err, files) {
   if (err) {
     console.error("Error while finding .md files:", err);
     return;
@@ -50,10 +47,9 @@ glob("**/*.mdx", function (err, files) {
       });
 
       // fix img tag
-      const fixedMDX = fixImgTag(newData);
 
       // Write the new data back to the file
-      fs.writeFile(file, fixedMDX, "utf8", function (err) {
+      fs.writeFile(file, newData, "utf8", function (err) {
         if (err) {
           console.error("Error while writing file:", file, err);
         }

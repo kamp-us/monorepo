@@ -31,7 +31,7 @@ const mdxToHtml = async (mdxSource: string) => {
 
 const Lesson = defineDocumentType(() => ({
   name: "Lesson",
-  filePathPattern: "**/*.md",
+  filePathPattern: "**/*.mdx",
   fields: {
     title: {
       type: "string",

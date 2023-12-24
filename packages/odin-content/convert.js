@@ -6,8 +6,8 @@ const processDirectory = (directory) => {
     const fullPath = path.join(directory, dirent.name);
     if (dirent.isDirectory()) {
       processDirectory(fullPath); // Recursive call for subdirectories
-    } else if (path.extname(fullPath) === ".mdx") {
-      const mdFilePath = fullPath.replace(".mdx", ".md");
+    } else if (path.extname(fullPath) === ".md") {
+      const mdFilePath = fullPath.replace(".md", ".mdx");
       fs.renameSync(fullPath, mdFilePath);
       console.log(`Renamed ${fullPath} to ${mdFilePath}`);
     }
