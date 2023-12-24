@@ -1,5 +1,3 @@
-"use client";
-
 import { graphql, usePreloadedQuery } from "react-relay";
 
 import { type SerializablePreloadedQuery } from "@kampus/relay";
@@ -19,10 +17,8 @@ export const OdinLessonContainer = (props: Props) => {
       query OdinLessonQuery($id: ID!) {
         odin {
           lesson(id: $id) {
-            title
             body {
               html
-              raw
             }
           }
         }

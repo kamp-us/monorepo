@@ -46,7 +46,7 @@ const Lesson = defineDocumentType(() => ({
     },
     html: {
       type: "string",
-      resolve: ({ body }) => mdxToHtml(body.raw),
+      resolve: async ({ body }) => mdxToHtml(body.raw),
     },
   },
 }));
