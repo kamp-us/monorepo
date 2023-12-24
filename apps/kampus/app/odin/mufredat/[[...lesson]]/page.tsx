@@ -5,6 +5,8 @@ import OdinLessonQueryNode, {
 } from "~/app/odin/mufredat/[[...lesson]]/__generated__/OdinLessonQuery.graphql";
 import { OdinLessonContainer } from "~/app/odin/mufredat/[[...lesson]]/OdinLesson";
 
+export const dynamic = "force-dynamic";
+
 export default async function OdinLessonPage({ params }: { params: { lesson: string[] } }) {
   const id = params.lesson ? params.lesson.join("/") : "mufredat";
 
