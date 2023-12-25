@@ -18,15 +18,15 @@ body:
       options:
         - label: Böyle bir sorun mevcut değil (lütfen [açık sorunlar listemize](https://github.com/kamp-us/turkce-odin-project/issues) bakmayı unutmayın)
           required: true
-        - label: [Projeye Katkıda Bulunma Kılavuzu](https://github.com/kamp-us/turkce-odin-project/issues/28)'nu dikkatlice okudum ve anlıyorum
+        - label: Öneri için [Projeye Katkıda Bulunma Kılavuzu](https://github.com/kamp-us/turkce-odin-project/issues/28)'nu dikkatlice inceledim ve anladım
           required: true
-        - label: Bu sorun üzerinde çalışmak ister misiniz?
+        - label: Bu sorun üzerinde çalışmak ister misin?
           required: false
   - type: textarea
     id: suggested-changes
     attributes:
       label: Açıklama
-      description: İlgili ekran görüntüleri veya ek bilgi sağlayabilirsiniz.
+      description: İlgili ekran görüntüleri veya ek bilgi sağlayabilirsin.
       placeholder: Önerilen kaynak bölümünde bir yazım hatası var - bunun "wombat", değil "combat" olması gerekiyor
     validations:
       required: true
@@ -34,7 +34,7 @@ body:
     id: path
     attributes:
       label: Hangi yolu etkileyecek?
-      description: Önerinizin hangi yolu etkilediğini seçin.
+      description: Önerinin hangi yolu etkilediğini seçin.
       multiple: true
       options:
         - Temeller
@@ -45,7 +45,7 @@ body:
     id: lesson-link
     attributes:
       label: Ders Linki
-      description: İlgili dersin veya düzeltilmesi gereken içeriğin bir bağlantısı. Uygulanabilir değilse, önerinizi nerede bulabileceğimizi açıklayın.
+      description: İlgili dersin veya düzeltilmesi gereken içeriğin bir bağlantısı. Uygulanabilir değilse, öneriyi nerede bulabileceğimizi açıklayın.
       placeholder: Örn. https://www.kamp.us/odin/mufredat/temel-bilgiler/git/commit-mesajlari
     validations:
       required: true
