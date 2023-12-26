@@ -32,7 +32,7 @@ Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
 3. `Repository name` kısmından, repo adınıza "git_test" ismini verin."Add a README file" kutucuğunu işaretleyin. Ve ardından sayfanın altındaki "repo oluştur" düğmesine tıklayarak repoyu oluşturun .
 
-   ![Create new repo using GitHub](https://cdn.statically.io/gh/TheOdinProject/curriculum/b54d14c5dcee1c6fac61aee02fca7e9ef7ba1510/foundations/git_basics/project_practicing_git_basics/imgs/01.png)
+   ![Create new repo using GitHub](https://cdn.statically.io/gh/TheOdinProject/curriculum/d0579120dd641d26aaef6a601008e998f8a7c648/git/foundations_git/git_basics/imgs/01.png)
 
 4. Bu sizi GitHub'daki yeni reponuza yönlendirecektir. Bu repoyu yerel makinenize kopyalamak (klonlamak) için, yeşil "Code" düğmesine tıklayın. Ardından SSH seçeneğini seçin ve altındaki satırı kopyalayın. **NOT: Doğru URL'yi almak için SSH seçeneğine tıklamalısınız.**
 
