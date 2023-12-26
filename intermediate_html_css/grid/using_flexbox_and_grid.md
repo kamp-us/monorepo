@@ -20,7 +20,7 @@ Düzen Öncelikli Tasarımda, parçaların nasıl düzenleneceğine karar verirs
 
 İçerik ya da Düzen Öncelikli Tasarım bizi sadece Flexbox veya Grid kullanmaya zorlamaz! Grid kullanarak - çoğu kişinin Flexbox ile oluşturduğu - tek boyutlu bir nesne kümesini oluşturmayı deneyelim.
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="mdByJRV" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="mdByJRV" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
   <span>TheOdinProject(<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) 
     tarafından (<a href="https://codepen.io">CodePen'de</a>) hazırlanan 
     <a href="https://codepen.io/TheOdinProjectExamples/pen/mdByJRV"> 1-Dimensional Grid | CSS Grid</a> adlı ingilizce örneğe bakın.</span>
@@ -34,7 +34,7 @@ Eğer tek boyutlu bir içeriğiniz varsa Flexbox bu içeriklerin Flex konteyneri
 
 Diyelim ki genel düzeninizin Grid olmasını ama nesneleriniz flex nesnesi gibi davranmasını istiyorsunuz. Bu sayede, grid nesneleri Grid'in sağladığı yerleştirme ile iki boyutlu düzende daha kesin olarak hareket edecek; aynı zamanda da grid nesnelerinin içerisindeki içeriğin ise Flex ile daha özgür bir şekilde hareket edecektir. CSS-Tricks'deki bu örneği göz at:
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="vYeEOxN" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="vYeEOxN" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
   <span>TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) 
     tarafından (<a href="https://codepen.io">CodePen'de</a>) hazırlanan 
     <a href="https://codepen.io/TheOdinProjectExamples/pen/vYeEOxN">Combine Grid and Flexbox</a> adlı ingilizce örneğe bakın.</span>

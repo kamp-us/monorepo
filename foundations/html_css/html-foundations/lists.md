@@ -25,7 +25,7 @@ Sırasız listeler `<ul>` öğesi kullanılarak oluşturulur,  <span id="li"></s
 
 Sırasız bir listedeki her liste öğesi bir madde işaretiyle başlar:
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="powjajd" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="powjajd" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
   <span>
   <a href="https://codepen.io">CodePen</a>'de
   TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/powjajd">html-sırasız-listesi</a>'ni inceleyebilirsiniz.
@@ -41,7 +41,7 @@ Bunun dışında, bir yemek tarifi için adım adım talimatlar veya en sevdiği
 
 Sıralı listeler `<ol>` öğesi kullanılarak oluşturulur. İçlerindeki her bir öğe yine `<li>` öğesi kullanılarak oluşturulur. Ancak, sıralı bir listedeki her liste öğesi bunun yerine bir sayıyla başlar:
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="yLXYvYp" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="yLXYvYp" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
   <span>
     <a href="https://codepen.io">CodePen</a>'de
  TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/yLXYvYp">html-sıralı-listesi</a>'ni inceleyebilirsiniz.

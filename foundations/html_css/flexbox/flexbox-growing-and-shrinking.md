@@ -43,7 +43,7 @@ Yukarıdaki ekran görüntüsünde, `flex: 1` şu anlama gelir: `flex-grow: 1`, 
 
 Aşağıdaki örnekte `flex` kısaltması için `flex-shrink` ve `flex-basis` değerleri varsayılan değerleriyle belirtilmiştir.
 
-<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="YzQqvgK" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="YzQqvgK" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
   <span><a href="https://codepen.io">CodePen</a>'de TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/YzQqvgK">flex-grow örneğine</a> göz atın.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
@@ -57,7 +57,7 @@ Aşağıdaki örnekte `flex` kısaltması için `flex-shrink` ve `flex-basis` de
 Varsayılan küçültme faktörü `flex-shrink: 1`dir, bu da tüm öğelerin eşit şekilde küçüleceği anlamına gelir. Eğer bir öğenin küçülmesini istemiyorsanız `flex-shrink: 0;` belirtebilirsiniz. Belirli öğelerin normalden daha yüksek oranda küçülmesini sağlamak için daha yüksek sayılar da belirtebilirsiniz.
 
 İşte bir örnek. Birazdan açıklayacağımız nedenlerden dolayı `flex-basis` değerini de değiştirdiğimizi unutmayın. Tarayıcı pencerenizi küçültürseniz, `flex-grow` kuralı aksi takdirde her öğenin eşit boyutta olması gerektiğini belirtmesine rağmen `.two` öğesinin verilen 250 piksel genişliğinden daha küçük olmadığını fark edeceksiniz.
-<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="JjJXZVz" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="JjJXZVz" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
   <span><a href="https://codepen.io">CodePen</a>'de TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/JjJXZVz">flex-shrink örneğine</a> göz atın.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>

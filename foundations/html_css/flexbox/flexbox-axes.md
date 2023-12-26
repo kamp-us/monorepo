@@ -30,7 +30,7 @@ Bir flex konteyneri için varsayılan yön yatay veya `row` (satır)dır, <span 
 
 Yani ilk örneğimizdeki gibi, bir div'e `display: flex` ekleyince çocukları yatay olarak sıralanır. Bu, varsayılan ayar olan "`flex-direction: row`a bir örnektir. Aşağıda benzer bir örnek var. `flex-direction: column` yazan satırın yorumunu kaldırırsanız, bu div'ler dikey olarak sıralanırlar.
 
-<p class="codepen" data-height="400" data-default-tab="html,result" data-slug-hash="BaZKPdw" data-editable="true" data-user="TheOdinProjectExamples" style="height: 400px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="400" data-default-tab="html,result" data-slug-hash="BaZKPdw" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"400px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
   <span>[CodePen](https://codepen.io)'de TheOdinProject'in ([@TheOdinProjectExamples](https://codepen.io/TheOdinProjectExamples)) yazdığı [flex-direction örneğine](https://codepen.io/TheOdinProjectExamples/pen/BaZKPdw) bakın.
   </span> 
 </p>

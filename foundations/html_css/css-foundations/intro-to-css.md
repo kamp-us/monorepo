@@ -354,7 +354,7 @@ Satır içi CSS, stilleri doğrudan HTML öğelerine eklemeyi sağlar. Ancak bu 
 
 ```html
 <body>
-  <div style="color: white; background-color: black;">...</div>
+  <div style={{"color":"white","backgroundColor":"black"}}>...</div>
 </body>
 ```
 

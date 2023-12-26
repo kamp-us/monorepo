@@ -167,7 +167,7 @@ Açılış ve kapanış etiketiyle içeriği sarmak yerine src özelliğini kull
 
 Örneğin The Odin Project sitesinde bulunan bir görüntüyü mutlak yol kullanarak görüntüleyebiliriz:
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="gORbExZ" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="gORbExZ" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
 <span><a href="https://codepen.io">CodePen</a>'de TheOdinProject 
 (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan 
 <a href="https://codepen.io/TheOdinProjectExamples/pen/gORbExZ">absolute-path-image örneğine</a> göz atın.</span>
@@ -258,7 +258,7 @@ Alt niteliği bir görüntüyü açıklamak için kullanılır. Eğer görüntü
 
 İşte daha önce kullandığımız The Odin Project logosu örneği alt niteliği eklenmiş hali:
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="ExXjoEp" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="ExXjoEp" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
   <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/ExXjoEp">
   image-alt-attribute</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
@@ -276,7 +276,7 @@ Görüntü doğru boyutta olsa veya değiştirmek için CSS kullanıyor olsanız
 
 İşte yükseklik ve genişlik etiketleri içeren Odin Project logo örneğimiz:
 
-<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="PoXJKvy" data-user="FabulousPBB" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="PoXJKvy" data-user="FabulousPBB" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
   <span><a href="https://codepen.io">CodePen</a>'de Brian Lister 
   (<a href="https://codepen.io/FabulousPBB">@FabulousPBB</a>) tarafından yazılan 
   <a href="https://codepen.io/FabulousPBB/pen/PoXJKvy">Görüntü Yükseklik ve Genişlik Özelliklerine </a> bakın.</span>

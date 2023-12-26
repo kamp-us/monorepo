@@ -16,7 +16,7 @@ Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
 Bir örneğe bakalım.
 
-<p class="codepen" data-height="400" data-default-tab="html,result" data-slug-hash="MWoyBzR" data-editable="true" data-user="TheOdinProjectExamples" style="height: 400px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="400" data-default-tab="html,result" data-slug-hash="MWoyBzR" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"400px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
   <span><a href="https://codepen.io">CodePen</a>'deki TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından sağlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/MWoyBzR"> 
   flex-alignment örneğine</a> 
   bakın.</span>
@@ -43,7 +43,7 @@ Bir örneğe bakalım.
 
 Flex'in çok kullanışlı bir özelliği de `gap` özelliğidir. Flex konteynerde `gap` ayarlamak, flex öğeler arasına, öğelerin kendilerine bir margin(dış kenar boşluğu) eklemeye çok benzer şekilde, yalnızca belirli bir açıklık ekler. `gap` _yeni_ bir özelliktir, bu nedenle henüz pek çok kaynakta bulunmaz, ancak tüm modern tarayıcılarda güvenilir bir şekilde çalışır, bu nedenle kullanımı güvenli ve çok kullanışlıdır! Yukarıdaki ortalanmış örneğe `gap: 8px` eklemek, aşağıdaki sonucu verir.
 
-<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="qBjZyea" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="qBjZyea" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
   <span><a href="https://codepen.io">CodePen</a>'deki TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından sağlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/qBjZyea"> 
   flex-alignment örneğine</a> 
   bakın.</span>
