@@ -1,3 +1,7 @@
+---
+title: 'Flexbox Eksenleri'
+---
+
 ### Giriş
 
 Bir flex konteynerindeki öğelerin yönünün `flex-direction` özelliği kullanılarak nasıl kontrol edilebileceğini görelim.

@@ -1,3 +1,7 @@
+---
+title: 'Hesap Makinesi Projesi'
+---
+
 ### Giriş
 
 Başardınız! Bu noktada JavaScript'in temellerini _gerçekten_ sağlam bir şekilde kavramış olmalısınız. Tabii ki öğrenilecek daha çok şey var ancak şu an oldukça fazla şey oluşturabiliyor olmalısınız. Son projemiz, şimdiye kadar öğrendiklerinizi bir araya getirecek: JavaScript, HTML ve CSS kullanarak bir ekran üzerinde hesap makinesi yapacaksınız.

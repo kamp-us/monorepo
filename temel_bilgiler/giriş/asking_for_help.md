@@ -1,3 +1,7 @@
+---
+title: 'Yardım İstemek'
+---
+
 ### Giriş
 
 Programlama yolculuğunuz boyunca, Odin topluluğu gibi bir çevrimiçi kodlama topluluğunda veya iş arkadaşlarınızla yaptığınız konuşmalarda kaçınılmaz olarak soru sormanız gerekecek. Soru sormak basit gibi görünebilir ancak olabildiğince iyi şekilde yardım alabilmek için probleminizi net şekilde açıklayan, iyi biçimlendirilmiş sorular sormak çok önemlidir. Yani "başkalarının size yardım etmesine yardım etmektir!" Bu ders; işyerinde ve Discord, Stack Overflow gibi ortamlarda etkili sorular sormanız için size araçlar sunacaktır.

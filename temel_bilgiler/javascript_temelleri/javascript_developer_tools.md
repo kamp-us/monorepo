@@ -1,3 +1,7 @@
+---
+title: 'Javascript Geliştirici Araçları'
+---
+
 ### Giriş
 
 Tarayıcı içerisindeki 'Geliştirici Araçları'nı kullanmak her web geliştiricisi için önemli bir beceridir. 'Geliştirici Araçları'; JavaScript kodlarını çalıştırma, HTML ve CSS stillerini sayfayı yenilemeden düzenleme ve performans verilerini görüntülemeyi sağlar. Ayrıca oldukça zaman kazandırır. Web geliştirmeye başlamak hiç bu kadar kolay olmamıştı. HTML ve CSS üzerinde çalışmak ve hata ayıklamak konularına çoktan aşina olduğunuza göre, bunların bize JavaScript yazarken nasıl katkı sağlayacağını birlikte görelim.

@@ -1,3 +1,7 @@
+---
+title: 'Komut Satırı Temelleri'
+---
+
 ### Giriş
 
 Komut satırından korkuyor musunuz? Yalnız değilsiniz. Aklımızda, şirketin ana bilgisayarını hacklemek için çılgınca anlaşılmaz komutlar girerken, beyaz veya yeşil metinlerin yanıp söndüğü siyah bir ekrana dikkatle bakan geliştiricilerin imajı canlanıyor.

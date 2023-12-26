@@ -1,3 +1,7 @@
+---
+title: "Temiz Kod"
+---
+
 ### Giriş
 
 

@@ -1,3 +1,7 @@
+---
+title: 'Flexbox ile Hizalama'
+---
+
 ### Giriş
 
 Şimdiye kadar flexbox ile değindiğimiz her şey, tüm flex öğelerde `flex: 1` kuralını kullandı; bu, öğelerin mevcut tüm alanı doldurmak için eşit şekilde büyümesini veya küçülmesini sağlar, ancak çoğu zaman bu istenen etki değildir. Flex, belirli bir boyuta sahip öğeleri düzenlemek için de çok kullanışlıdır.

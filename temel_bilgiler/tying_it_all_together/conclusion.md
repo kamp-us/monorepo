@@ -1,3 +1,7 @@
+---
+title: 'Her Şeyi Bir Araya Getirme - Sonuç'
+---
+
 ### Giriş
 
 Bu uzun bir yolculuktu. Bir saniyenizi ayırın ve hali hazırda en üç farklı dilin temellerini öğrendiğinizi ve gerekirse, kendi başınıza bir web sayfasını oluşturabileceğinizi düşünün.

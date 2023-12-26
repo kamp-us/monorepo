@@ -1,3 +1,7 @@
+---
+title: 'Çizim Tahtası'
+---
+
 ### Giriş
 
 Bu projede, portfolyonuza koyabileceğiniz ve DOM manipülasyonu becerilerinizi geliştirecek oldukça iyi bir oyuncak oluşturacaksınız. Bir eskiz defteri ve manyetik çizim tahtasının tarayıcı versiyonunu inşa edeceksiniz.

@@ -1,3 +1,7 @@
+---
+title: 'Listeler'
+---
+
 ### Giriş
 
 İster IMDB'nin en iyi 250 filmi ister FBI'ın en çok arananları olsun, listeler web'de her yerdedir ve web sayfalarınızda eninde sonunda bir listeye ihtiyacı olacaktır.

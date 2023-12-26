@@ -1,3 +1,7 @@
+---
+title: 'Kurulumlar'
+---
+
 ### Giriş
 
 İşletim sistemi olarak zaten **MacOS**, **Ubuntu** veya [Ubuntu'nun resmi bir dağıtımını](https://wiki.ubuntu.com/UbuntuFlavors) kullanıyorsanız ve tarayıcı olarak **Google Chrome** yüklüyse, bu dersi atlayabilirsiniz. Aksi takdirde, bu bölümü görüntülemek için aşağıda kullanmak istediğiniz yöntemin solundaki küçük oka tıklayın ve ardından kurulum talimatlarını izleyin.

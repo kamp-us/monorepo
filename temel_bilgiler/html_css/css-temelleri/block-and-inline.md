@@ -1,3 +1,7 @@
+---
+title: 'Blok ve Satır İçi Öğeler'
+---
+
 ### Giriş
 
 Önceki derste bağlantısı verilen MDN kutu modeli makalesinde, farklı görüntüleme tiplerinin, aralarında küçük farklar bulunan kutu modellerine sahip olduklarından bahsedilmektedir. Ayrıca, `display` özelliği değiştiğinde, bir kutunun nasıl hesaplandığının değiştiğinden de bahseder. Bu derste, kullanabileceğiniz farklı görüntüleme değerlerini daha ayrıntılı olarak inceleyeceğiz.

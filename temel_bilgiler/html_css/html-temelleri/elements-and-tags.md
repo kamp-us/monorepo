@@ -1,3 +1,7 @@
+---
+title: 'Elementler ve Etiketler'
+---
+
 ### Giriş
 
 HTML (HyperText Markup Language) internet sitelerinin yapılarını ve içeriklerini tanımlar. HTML elementlerini tipik bir siteyi oluşturan paragraflar, başlıklar, listeler, görseller ve bağlantılar yaratmak için kullanırız. Bu derste HTML elementlerinin nasıl çalıştığını öğreneceğiz.

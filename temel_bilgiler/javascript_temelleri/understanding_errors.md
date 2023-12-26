@@ -1,3 +1,7 @@
+---
+title: 'Hata Mesajlarını Anlama'
+---
+
 ### Giriş
 
 Bir geliştirici olarak hata mesajlarını okumak ve anlamak bir gerekliliktir. İlk bakışta yeni başlayan pek çok kişi, aşina olunmayan terimler içerdiği için "korkutucu" ve anlaşılması zor gibi görünen hata mesajlarından uzak durur. Ancak, hata mesajları geliştiricilere bir bilgi hazinesi sunar ve bu mesajları nasıl çözeceğiniz konusunda bilmeniz gereken her şeyi size söyler! Hata mesajlarını ve uyarıları korkmadan ayrıştırabilmek, uygulamalarınızda etkili bir şekilde hata ayıklamanızı, başkalarından anlamlı yardım almanızı ve bir hatayla karşılaştığınızda ilerlemek için kendinizi güçlendirmenizi sağlayacaktır.

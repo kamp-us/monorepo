@@ -1,3 +1,7 @@
+---
+title: 'DOM Manipülasyonu ve Eventler'
+---
+
 ### Giriş
 
 JavaScript'in en eşsiz ve kullanışlı yeteneklerinden biri DOM'u manipüle edebilmesidir. Peki DOM nedir ve onu nasıl değiştirebiliriz? Hadi hemen konuya geçelim...
@@ -249,9 +253,9 @@ SADECE JavaScript ve yukarıda gösterilen DOM yöntemlerini kullanarak aşağı
     2.  "BEN DE!" diyen bir `<p>`
     3.  Bunun için ipucu: createElement ile `<div>` oluşturduktan sonra, konteynere eklemeden önce `<h1>` ve `<p>` ekleyin.
 
-### Olaylar
+### Eventler
 
-Artık DOM'u JavaScript ile manipüle etmeyi öğrendiğimize göre, bir sonraki adım bunun dinamik olarak veya talep üzerine nasıl gerçekleştirileceğini öğrenmektir!  Olaylar, sayfalarınızda bu sihri nasıl gerçekleştireceğinizi gösterir.  Olaylar, web sayfanızda meydana gelen fare tıklamaları veya tuşlara basma gibi eylemlerdir ve JavaScript kullanarak web sayfamızın bu olayları dinlemesini ve bunlara tepki vermesini sağlayabiliriz.
+Artık DOM'u JavaScript ile manipüle etmeyi öğrendiğimize göre, bir sonraki adım bunun dinamik olarak veya talep üzerine nasıl gerçekleştirileceğini öğrenmektir!  Eventler, sayfalarınızda bu sihri nasıl gerçekleştireceğinizi gösterir.  Eventler, web sayfanızda meydana gelen fare tıklamaları veya tuşlara basma gibi eylemlerdir ve JavaScript kullanarak web sayfamızın bu eventleri dinlemesini ve bunlara tepki vermesini sağlayabiliriz.
 
 Bunu yapmanın üç temel yolu vardır: Doğrudan HTML öğelerinizde fonksiyon özellikleri belirleyebilir, JavaScript'inizdeki DOM düğümlerinde `on[eventType]` formunun özelliklerini (`onclick`, `onmousedown`, gibi) ayarlayabilir ya da JavaScript'inizdeki DOM düğümlerine olay dinleyicileri(eventListener) ekleyebilirsiniz.  Olay dinleyicileri kesinlikle tercih edilen yöntemdir, ancak diğerlerinin de kullanıldığını düzenli olarak göreceksiniz, bu nedenle üçünü de ele alacağız.
 
@@ -400,7 +404,7 @@ buttons.forEach((button) => {
 
 Bu, DOM manipülasyonu ve olay işleme söz konusu olduğunda buzdağının sadece görünen kısmıdır, ancak bazı alıştırmalarla başlamanız için yeterlidir.  Şimdiye kadarki örneklerimizde yalnızca 'tıklama' olayını kullandık, ancak kullanabileceğiniz *çok* daha fazlası var.
 
-Bazı kullanışlı olaylar şunlardır:
+Bazı kullanışlı eventler şunlardır:
 
 - click
 - dblclick
@@ -416,7 +420,7 @@ Her bir olayın açıklamalarını içeren daha kapsamlı bir listeyi [bu ingili
 Web sayfalarını manipüle etmek JavaScript dilinin birincil faydasıdır! Bu teknikler, bir ön yüz geliştiricisi olarak *her gün* uğraşmanız muhtemel olan şeylerdir, bu yüzden hadi pratik yapalım!
 
 1. [Bu ingilizce MDN makalesinde](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents#active_learning_a_dynamic_shopping_list) yer alan görevleri tamamlayın ve becerilerinizi test edin!
-2. Bu [ingilizce JavaScript DOM Dersindeki](https://www.javascripttutorial.net/javascript-dom/) ilk 2 bölüm üzerinde çalışın. `getElementById` gibi bazı yöntemlerin daha eski olduğunu ve günümüzde daha az kullanıldığını unutmayın. Daha sonra, olaylar, kabarcıklanma ve yayılma konusunda gerçekten uzmanlaşmak için bölüm 7 üzerinde çalışın.
+2. Bu [ingilizce JavaScript DOM Dersindeki](https://www.javascripttutorial.net/javascript-dom/) ilk 2 bölüm üzerinde çalışın. `getElementById` gibi bazı yöntemlerin daha eski olduğunu ve günümüzde daha az kullanıldığını unutmayın. Daha sonra, eventler, kabarcıklanma ve yayılma konusunda gerçekten uzmanlaşmak için bölüm 7 üzerinde çalışın.
 
 </div>
 
@@ -432,9 +436,9 @@ Bu bölüm, bu dersi anlayıp anlamadığınızı kendi başınıza kontrol etme
 - [DOM'daki bir öğeyi nasıl değiştirebilirsiniz?](#altering-elements)
 - [Bir DOM öğesine metin eklerken textContent mi yoksa innerHTML mi kullanmalısınız? Neden? bunu öğrenmek için bu ingilizce videoya göz atın.](https://www.youtube.com/watch?v=ns1LX6mEvyM)
 - [DOM düğümleriyle çalışırken JavaScript etiketinizi HTML dosyanızın neresine eklemelisiniz?](#important-note)
-- ["Olaylar" ve "dinleyiciler" nasıl çalışır?](#events)
-- [Kodunuzda olayları kullanmanın üç yolu nedir?](#events)
-- [Olay dinleyicileri neden olayları ele almak için tercih edilen yoldur?](#attaching-listeners-to-groups-of-nodes)
+- ["Eventler" ve "dinleyiciler" nasıl çalışır?](#events)
+- [Kodunuzda eventleri kullanmanın üç yolu nedir?](#events)
+- [Olay dinleyicileri neden eventleri ele almak için tercih edilen yoldur?](#attaching-listeners-to-groups-of-nodes)
 - [Dinleyicilerinizde adlandırılmış fonksiyonları kullanmanın faydaları nelerdir?](#method-3)
 - [Dinleyicileri düğüm gruplarına nasıl bağlarsınız?](#attaching-listeners-to-groups-of-nodes)
 - [querySelector` ve `querySelectorAll` dönüş değerleri arasındaki fark nedir?](#query-selectors)
@@ -451,6 +455,6 @@ Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir,
 - Bu [W3Schools](https://www.w3schools.com/js/js_htmldom.asp) ingilizce makalesi DOM hakkında basit ve anlaşılması kolay dersler sunmaktadır.
 - [JS DOM Crash Course](https://www.youtube.com/watch?v=0ik6X4DJKCc&list=PLillGF-RfqbYE6Ik_EuXA2iZFcE082B3s) Traversy Media tarafından DOM üzerine kapsamlı ve iyi açıklanmış 4 bölümlük ingilizce video serisidir.
 - [Understanding The Dom](https://www.digitalocean.com/community/tutorial_series/understanding-the-dom-document-object-model), DigitalOcean tarafından uygun bir şekilde adlandırılmış makale tabanlı ingilizce bir eğitim serisidir.
-- MDN tarafından hazırlanan bu ingilizce makale, [Introduction to events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events), olaylar hakkında bu derste öğrendiğiniz konuları kapsar.
+- MDN tarafından hazırlanan bu ingilizce makale, [Introduction to events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events), eventler hakkında bu derste öğrendiğiniz konuları kapsar.
 - [Wes Bos'un Drumkit](https://www.youtube.com/watch?v=VuN8qwZoego) JavaScript30 programı ödevde işlenen içeriği desteklemektedir. İngilizce videoda kullanımdan kaldırılmış [keycode(ingilizce MDN makalesi)](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode) klavye olayının kullanıldığını fark edeceksiniz, bunu önerilen [code(ingilizce MDN makalesi)](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code) klavye olayı ile değiştirin ve `data-key` etiketlerini uygun şekilde değiştirin.
 - Wes Bos'un JavaScript30 programından [Event Capture, Propagation and Bubbling adlı ingilizce videosu](https://www.youtube.com/watch?v=F1anRyL37lE).

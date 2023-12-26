@@ -1,3 +1,6 @@
+---
+title: 'Javascript Temelleri - 4'
+---
 ### Giriş
 
 Programlamanın zorluklarından biri de büyük miktarda veri ile uğraşmaktır. Örneğin, sınıfınızdaki tüm öğrencilerin isimlerini depolamak istiyorsanız, bunu nasıl yaparsınız? Her isim için bir değişken oluşturabilirsiniz, ancak bu sıkıcı ve verimsiz olacaktır. Ayrıca yönetilmesi ve güncellenmesi de zor olacaktır. Ya isimleri daha sonra değiştirmek ya da erişmek isterseniz?

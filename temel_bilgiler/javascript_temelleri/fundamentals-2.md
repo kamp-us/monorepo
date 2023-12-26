@@ -1,3 +1,7 @@
+---
+title: 'Javascript Temelleri - 2'
+---
+
 ### Giriş
 
 JavaScript'te karşılacağınız son derece yaygın birkaç veri tipi vardır ve temel bilgiler derslerinde, bunların temelini iyi atacağız. Daha derine inmeden önce, [bu İngilice makaleyi](http://javascript.info/types), okuyarak en yaygın olanlara bir bakabilirsiniz.

@@ -1,3 +1,7 @@
+---
+title: 'Kutu Modeli'
+---
+
 ### Giriş
 
 HTML ve CSS'in temel sözdizimini anladığınıza göre, artık ciddileşeceğiz. CSS'te ustalaşmanızı sağlayan en önemli beceriler _konumlandırma_ ve _düzendir._ Yazı tiplerini ve renkleri değiştirmek çok önemli bir beceridir. Ancak bir öğeyi, internet sayfasında tam olarak istediğiniz yere koyabilmek daha da önemlidir. Sonuçta, istisnasız tüm öğelerin üst üste yığıldığı kaç tane internet sayfası bulabilirsiniz ki?

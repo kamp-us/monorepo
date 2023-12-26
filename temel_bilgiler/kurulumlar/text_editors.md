@@ -1,3 +1,7 @@
+---
+title: 'Metin Düzenleyiciler'
+---
+
 ### Giriş
 
 Bir metin düzenleyici, ne tür bir geliştirici olduğunuzdan bağımsız olarak en çok kullanılan geliştirici aracıdır. İyi bir metin düzenleyicisi; gerçek zamanlı kod denetimi, söz dizimi vurgulama ve otomatik biçimlendirme ile daha iyi kod yazmanıza yardımcı olabilir.

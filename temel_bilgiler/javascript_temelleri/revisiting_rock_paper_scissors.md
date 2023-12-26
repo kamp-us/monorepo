@@ -1,3 +1,7 @@
+---
+title: 'Taş Kağıt Makas Projesine Geri Dönüş'
+---
+
 ### Giriş
 
 Şimdi DOM'u manipüle edebildiğimize göre, [Taş Kağıt Makas](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/rock-paper-scissors) oyununu tekrar gözden geçirme ve basit bir kullanıcı arayüzü ekleme zamanı geldi.

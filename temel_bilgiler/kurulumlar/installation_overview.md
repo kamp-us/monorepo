@@ -1,3 +1,7 @@
+---
+title: 'Kuruluma Genel Bakış'
+---
+
 ### Giriş
 
 Herhangi bir web sitesi oluşturmanın ilk adımı doğru araçlara sahip olmaktır. Bizim için bu, iyi kod yazmak için bir geliştirme ortamı kurmak anlamına geliyor.

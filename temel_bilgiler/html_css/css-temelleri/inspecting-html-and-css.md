@@ -1,3 +1,7 @@
+---
+title: 'HTML ve CSS İnceleme'
+---
+
 ### Giriş
 
 HTML ve CSS'inizi inceleyebilmek ve hata ayıklayabilmek, önyüz geliştirme için çok önemlidir. Bu derste, öğeleriniz ve CSS kurallarınız hakkında ayrıntılı bilgileri görmenizi sağlayan ve kodunuzdaki sorunları bulup düzeltmenize yardımcı olan Chrome Geliştirme Araçlarını inceleyeceğiz.

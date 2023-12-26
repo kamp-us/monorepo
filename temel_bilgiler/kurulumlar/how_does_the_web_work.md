@@ -1,3 +1,7 @@
+---
+title: 'Web Nasıl Çalışır?'
+---
+
 ### Giriş
 
 Web'i nasıl programlayacağınızı anlamadan önce, web'in kendisini muhtemelen şimdi sahip olduğunuzdan daha titiz bir şekilde anlamanız gerekir. Bu kavramlar, içinde çalışacağınız ekosistem hakkında daha bütünsel bir anlayış sağlar ve diğer geliştiricilerle işiniz hakkında akıllıca konuşmanıza olanak tanır.

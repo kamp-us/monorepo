@@ -1,3 +1,7 @@
+---
+title: 'Motivasyon ve Düşünce Yapısı'
+---
+
 ### Giriş
 
 Kod yazmayı öğrenmek inanılmaz derecede faydalı ancak aynı zamanda zor ve sinir bozucu olabilir. Bilmeye değer her beceri gibi, edinilmesi zaman alır ve bir hafta sonu ya da bir ayda öğrenilemez. Bununla birlikte, zaman ve çaba harcamaya istekli oldukları sürece herkesin programlamayı öğrenebileceğine inanıyoruz.

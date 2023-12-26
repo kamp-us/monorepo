@@ -1,3 +1,7 @@
+---
+title: 'Problem Çözme'
+---
+
 ### Giriş
 
 JavaScript'i incelemeye başlamadan önce, bir geliştiricinin ihtiyaç duyduğu en önemli beceri olan *problem çözme* hakkında konuşmaya başlamamız gerekiyor.

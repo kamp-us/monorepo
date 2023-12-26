@@ -1,3 +1,7 @@
+---
+title: 'Linkler ve Resimler'
+---
+
 ### Giriş
 
 Linkler HTML'nin temel özelliklerinden biridir. Bize web üzerindeki diğer HTML sayfalarıyla bağlantı kurma imkanı sağlar. Aslında bu yüzden web olarak adlandırılır.

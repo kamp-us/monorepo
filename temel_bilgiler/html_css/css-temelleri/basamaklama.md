@@ -1,3 +1,7 @@
+---
+title: "Basamaklama"
+---
+
 ### Giriş
 
 Bir önceki derste temel CSS sözdizimini ve seçicileri ele almıştık. Şimdi seçiciler hakkındaki bilgilerimizi CSS'in *C*'si olan cascade(basamaklama) ile birleştirmenin zamanı geldi.

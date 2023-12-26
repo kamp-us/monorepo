@@ -1,3 +1,7 @@
+---
+title: 'Taş Kağıt Makas Projesi'
+---
+
 ### Giriş
 
 İlkokul klasiklerinden olan "taş kağıt makas" oyununun basit bir uygulamasını yapacağız. Bu oyunu bilmiyorsanız, [Wikipedia makalesine](https://en.wikipedia.org/wiki/Rock%E2%80%93paper%E2%80%93scissors) veya [bu](https://www.wikihow.com/Play-Rock,-Paper,-Scissors) adım adım talimata bakabilirsiniz. Şimdilik sadece tarayıcı konsolunda oyunu oynayacağız, ancak __daha sonra bu projeye tekrar dönecek ve butonlar ve metinlerle bir Grafiksel Kullanıcı Arayüzü ekleyeceğiz,__ bu nedenle kodu GitHub'ta saklamayı unutmayın! Öğrenci çözümlerinde GUI(GKA)'ye sahip 'Canlı Önizleme' bağlantılarını fark edebilirsiniz - bu daha sonraki bir derste geliyor. Oraya ulaştığınızda geri gelip bağlantınızı eklemeyi unutmayın!

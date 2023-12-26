@@ -1,3 +1,7 @@
+---
+title: 'Metinlerle Çalışma'
+---
+
 ### Giriş
 
 Web'deki çoğu içerik metin tabanlıdır, bu nedenle kendinizi HTML kodlarıyla oldukça fazla çalışıyor halde bulacaksınız.

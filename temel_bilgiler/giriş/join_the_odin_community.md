@@ -1,3 +1,7 @@
+---
+title: 'Odin Topluluğuna Katıl'
+---
+
 ### Giriş
 
 Diğer insanlarla çalışmak ve işbirliği yapmak, bir web geliştiricisi olarak çalışmanın önemli bir parçasıdır. Bu nedenle, The Odin Project olarak sizi aşağıda daha ayrıntılı olarak bahsedeceğimiz çevrimiçi sohbet topluluğumuza katılmaya teşvik ediyoruz. Topluluğa katılarak, diğer Odin öğrencileriyle birlikte gelişebilir ve birbirinizin web geliştirmeyi öğrenmesine yardımcı olabilirsiniz. Hazır başlamışken, [Facebook](https://www.facebook.com/theodinproject/), [X](https://x.com/TheOdinProject) ve [Instagram](https://www.instagram.com/theodinproject/) sayfalarımıza göz atabilirsiniz. Odin Projesi ilerlemenizi, güncellemeleri, düşüncelerinizi paylaşmak ve diğer Odin öğrencilerinin neler yaptığını görmek için #TheOdinProject'i kullanın!

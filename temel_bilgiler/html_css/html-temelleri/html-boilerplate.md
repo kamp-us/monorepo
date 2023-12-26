@@ -1,3 +1,7 @@
+---
+title: 'HTML Şablonu'
+---
+
 ### Giriş
 
 Tüm HTML belgelerinin kullanılmadan önce yerine konması gereken temel bir yapı veya şablonu vardır. Bu derste bu şablonun farklı bölümlerini keşfedecek ve nasıl bir araya geldiğini göreceğiz.

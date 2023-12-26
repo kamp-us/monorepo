@@ -1,3 +1,7 @@
+---
+title: 'Javascript Temelleri - 1'
+---
+
 ### Giriş
 JavaScript'e dalalım!
 

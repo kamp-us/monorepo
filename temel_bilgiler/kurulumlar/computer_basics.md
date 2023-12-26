@@ -1,3 +1,7 @@
+---
+title: 'Bilgisayar Temelleri'
+---
+
 ### Giriş
 
 Söylemeye gerek yok, kodlamayı öğrenirken zamanınızın çoğunu bilgisayar başında geçireceksiniz. Bu nedenle, bilgisayarınızla nasıl çalışacağınızı anlamak çok önemlidir. Bu derste, bilgisayar temelleri konusunda sizi hızlıca bilgilendirecek bir kaynağa değineceğiz.

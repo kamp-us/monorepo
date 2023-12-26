@@ -1,4 +1,8 @@
-### Tanıtım
+---
+title: 'Flexbox Grow ve Shrink'
+---
+
+### Giriş
 
 Son derste bu flex öğelere `flex: 1` koyduğunuzda gerçekte ne olduğuna biraz daha yakından bakalım.
 

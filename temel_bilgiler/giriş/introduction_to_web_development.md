@@ -1,3 +1,7 @@
+---
+title: 'Web Geliştirmeye Giriş'
+---
+
 ### Giriş
 
 Web geliştiricileri ne yapar? Kısaca, websitesi oluşturur ve bakımını yaparlar.
