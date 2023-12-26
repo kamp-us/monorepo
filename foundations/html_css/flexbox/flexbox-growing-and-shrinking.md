@@ -6,7 +6,7 @@ title: 'Flexbox Grow ve Shrink'
 
 Son derste bu flex öğelere `flex: 1` koyduğunuzda gerçekte ne olduğuna biraz daha yakından bakalım.
 
-<br>
+<br />
 
 ### Derse Genel Bakış
 
@@ -14,7 +14,7 @@ Bu bölüm, bu derste öğreneceğiniz konulara genel bir bakış içermektedir.
 
 -   `flex` kısaltması olarak tanımlanan 3 özelliği ve bunları ayrı ayrı nasıl kullanacağınızı öğreneceksiniz.
 
-<br>
+<br />
 
 ### Flex Kısaltması
 
@@ -33,11 +33,11 @@ Yukarıdaki ekran görüntüsünde, `flex: 1` şu anlama gelir: `flex-grow: 1`, 
 Çoğu zaman flex kısaltmasının yalnızca _bir_ değeriyle tanımlandığını görürsünüz. Bu durumda, bu değer `flex-grow` değerine uygulanır. Yani div'lerimize `flex: 1` koyduğumuzda, aslında `flex: 1 1 0` şeklinde bir kısaltma belirtmiş oluruz.
 
 
-<br>
+<br />
 
 #### Flex-Grow
 
-<br>
+<br />
 
 `flex-grow` değeri olarak tek bir sayı bekler ve bu sayı flex-item'in "büyüme faktörü" olarak kullanılır. Kapsayıcımızın içindeki her div'e `flex: 1` uyguladığımızda, her div'e aynı miktarda büyümesini söylemiş oluruz. Bunun sonucu olarak her div tam olarak aynı boyutta olur. Bunun yerine div'lerden yalnızca birine `flex: 2` eklersek, bu div diğerlerinin 2 katı kadar büyür.
 
@@ -48,7 +48,7 @@ Aşağıdaki örnekte `flex` kısaltması için `flex-shrink` ve `flex-basis` de
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-<br>
+<br />
 
 #### Flex-Shrink
 
@@ -64,25 +64,25 @@ Varsayılan küçültme faktörü `flex-shrink: 1`dir, bu da tüm öğelerin eş
 
 Burada dikkat edilmesi gereken önemli bir husus, `flex-grow` veya `flex-shrink` belirttiğinizde, flex öğelerinin `width` için verdiğiniz değerlere uymak zorunda olmadığıdır. Yukarıdaki örnekte, 3 div'e de 250 piksellik bir genişlik verilmiştir, ancak üst öğeleri yeterince büyük olduğunda, onu doldurmak için büyürler. Aynı şekilde, üst öğe çok küçük olduğunda, varsayılan davranış sığacak şekilde küçülmeleridir. Bu bir hata değildir, ancak bunu beklemiyorsanız kafa karıştırıcı bir davranış olabilir.
 
-<br>
+<br />
 
 #### Flex-Basis
 
 `flex-basis` basitçe bir flex öğesinin başlangıç boyutunu ayarlar, böylece her türlü `flex-grow` veya `flex-shrink` işlemi bu başlangıç boyutundan başlar. Kısaltma değeri varsayılan olarak `flex-basis: 0%`. `Flex-shrink` örneğinde bunu `auto` olarak değiştirmek zorunda kalmamızın nedeni, temel `0` olarak ayarlandığında, bu öğelerin öğenin genişliğini(width) yok sayması ve her şeyin eşit şekilde küçülmesidir. Bir flex-base olarak `auto` kullanmak öğeye bir genişlik bildirimi (`width: 250px`) olup olmadığını kontrol etmesini söyler.
 
-<br>
+<br />
 
 > #### Flex-Basis Hakkında Önemli Not:
 >
 > `flex-basis`in varsayılan değeri ile `flex-basis` belirtilmediğinde `flex` kısaltmasının bunu tanımlama şekli arasında bir fark vardır. `flex-basis` için gerçek varsayılan değer `auto`dur, ancak bir öğe üzerinde `flex: 1` belirttiğinizde, bunu `flex: 1 1 0` olarak yorumlar. Eğer bir öğenin `flex-grow` değerini _sadece_ ayarlamak istiyorsanız, bunu kısaltma kullanmadan doğrudan yapabilirsiniz. Ya da daha ayrıntılı olabilir ve `flex: auto` kullanımına eşdeğer olan tam 3 değer kısaltması `flex: 1 1 auto` kullanabilirsiniz.
 
-<br>
+<br />
 
 > #### Flex: auto Nedir?
 >
 > Fark ettiyseniz, bir önceki notta yeni bir flex kısaltması olan `flex: auto`dan bahsetmiştik. Ancak bunu tam olarak tanıtmamıştık. `flex: auto` flex'in kısaltmalarından biridir. `auto` bir flex anahtar sözcüğü olarak tanımlandığında, `flex-grow: 1`, `flex-shrink: 1` ve `flex-basis: auto` değerlerine veya flex kısaltması kullanılarak `flex: 1 1 auto` değerine eşdeğerdir. Adı "auto" olmasına rağmen flex kısaltması kullanılırken `flex: auto` değerinin varsayılan değer olmadığına dikkat edin, bu ilk başta biraz kafa karıştırıcı olabilir. Ödev bölümünü okurken `flex: auto` ve potansiyel kullanım durumlarıyla karşılaşacak ve daha fazlasını öğreneceksiniz.
 
-<br>
+<br />
 
 #### Pratikte...
 
@@ -90,7 +90,7 @@ Pratikte muhtemelen `flex-grow`, `flex-shrink` veya `flex-basis` için karmaşı
 
 Gösterişli olmak ve bazı sütunların birbirleriyle belirli bir oranda ilişkili olduğu düzenler kurmak mümkündür, bu nedenle başka değerler kullanabileceğinizi bilmek yararlıdır, ancak bunlar nadiren rastlanan değerlerdir.
 
-<br>
+<br />
 
 ### Görev
 
@@ -103,7 +103,7 @@ Gösterişli olmak ve bazı sütunların birbirleriyle belirli bir oranda ilişk
 
 </div>
 
-<br>
+<br />
 
 ### Bilgi Kontrolü
 
@@ -113,7 +113,7 @@ Bu bölüm, bu dersi kendi başınıza anlayıp anlamadığınızı kontrol etme
 -   [flex kısaltması `flex:auto` için tanımlanan 3 değer nedir?](#flex-auto-nedir)
 
 
-<br>
+<br />
 
 ### Ek Kaynaklar
 
