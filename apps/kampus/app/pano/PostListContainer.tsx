@@ -2,9 +2,8 @@
 
 import { graphql, usePreloadedQuery } from "react-relay";
 
-import { type SerializablePreloadedQuery } from "@kampus/relay";
-import useSerializablePreloadedQuery from "@kampus/relay/use-serializable-preloaded-query";
-
+import { type SerializablePreloadedQuery } from "~/features/relay";
+import useSerializablePreloadedQuery from "~/features/relay/use-serializable-preloaded-query";
 import { type PostListContainerQuery } from "./__generated__/PostListContainerQuery.graphql";
 import { PanoFeed } from "./PanoFeed";
 

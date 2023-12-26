@@ -2,9 +2,8 @@
 
 import { graphql, usePreloadedQuery } from "react-relay";
 
-import { type SerializablePreloadedQuery } from "@kampus/relay";
-import useSerializablePreloadedQuery from "@kampus/relay/use-serializable-preloaded-query";
-
+import { type SerializablePreloadedQuery } from "~/features/relay";
+import useSerializablePreloadedQuery from "~/features/relay/use-serializable-preloaded-query";
 import { type OdinLessonQuery } from "~/app/odin/mufredat/[[...lesson]]/__generated__/OdinLessonQuery.graphql";
 import { OdinLessonBody } from "./OdinLessonBody";
 import { OdinLessonTitle } from "./OdinLessonTitle";

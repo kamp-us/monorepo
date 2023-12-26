@@ -1,5 +1,4 @@
-import loadSerializableQuery from "@kampus/relay/load-serializable-query";
-
+import loadSerializableQuery from "~/features/relay/load-serializable-query";
 import { PostSortFilters } from "~/app/pano/features/post-filter/PostSortFilters";
 import query, {
   type PanoPostFilter,

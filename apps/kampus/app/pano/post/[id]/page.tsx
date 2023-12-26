@@ -1,5 +1,4 @@
-import loadSerializableQuery from "@kampus/relay/load-serializable-query";
-
+import loadSerializableQuery from "~/features/relay/load-serializable-query";
 import query, {
   type SinglePostContainerQuery,
 } from "../../__generated__/SinglePostContainerQuery.graphql";

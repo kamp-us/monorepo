@@ -1,5 +1,4 @@
-import loadSerializableQuery from "@kampus/relay/load-serializable-query";
-
+import loadSerializableQuery from "~/features/relay/load-serializable-query";
 import OdinLessonQueryNode, {
   type OdinLessonQuery,
 } from "~/app/odin/mufredat/[[...lesson]]/__generated__/OdinLessonQuery.graphql";
