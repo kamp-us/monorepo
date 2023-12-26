@@ -30,7 +30,7 @@ Bir sanal makine kurmak basit bir işlemdir. Bu kılavuz, sanal makineyi oluştu
 
 #### ÖNEMLİ
 
-Bu talimatları tamamladıktan sonra, **tamamen VM'de çalışmanız beklenmektedir.** Pencereyi büyütün, varsa daha fazla sanal monitör ekleyin, masaüstünün sol üst köşesindeki **Whisker Menu** <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}}> içindeki internet tarayıcısını çalıştırın. Odin Project üzerinde çalışırken sanal makine dışında hiçbir şey kullanmamalısınız. VM'yi bir süre kullandıktan sonra alıştığınızı düşünüyorsanız veya deneyiminizi geliştirmek istiyorsanız, aşağıda talimatları bulunan Ubuntu'yu dual boot yapmanızı öneririz.
+Bu talimatları tamamladıktan sonra, **tamamen VM'de çalışmanız beklenmektedir.** Pencereyi büyütün, varsa daha fazla sanal monitör ekleyin, masaüstünün sol üst köşesindeki **Whisker Menu** <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}} /> içindeki internet tarayıcısını çalıştırın. Odin Project üzerinde çalışırken sanal makine dışında hiçbir şey kullanmamalısınız. VM'yi bir süre kullandıktan sonra alıştığınızı düşünüyorsanız veya deneyiminizi geliştirmek istiyorsanız, aşağıda talimatları bulunan Ubuntu'yu dual boot yapmanızı öneririz.
 
 #### Adım 1.1: VirtualBox'u indirme
 
@@ -122,7 +122,7 @@ Katılımsız kurulumun VirtualBox tarafından yapılandırılma şekli nedeniyl
 
 #### Adım 3.1: Users and Group'a gidiş
 
-İlk olarak, pencerenizin sol üst köşesindeki <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}}> simgesine tıklayın, ardından `Users` yazın ve `Users and Groups'u` göreceksiniz. Üzerine tıklayın.
+İlk olarak, pencerenizin sol üst köşesindeki <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}} /> simgesine tıklayın, ardından `Users` yazın ve `Users and Groups'u` göreceksiniz. Üzerine tıklayın.
 
    ![It should be the top option you see. It is possible that due to localization it'll be called differently - try using the term in your language then.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/11_users_and_groups.png)
 
@@ -142,7 +142,7 @@ Ve ardından **OK**'a tıklayın. Bir parola, giriş yaparken kullandığınız 
 
 #### Adım 3.3: Sanal makinenizi yeniden başlatma
 
-Tüm bunlar tamamlandığına göre, bu pencereleri kapatabilir ve sanal makinenizi yeniden başlatabilirsiniz. Klavyede <kbd>CTRL + ALT + T</kbd> yaparak `Terminal` penceresi açabilirsiniz ve terminalde `reboot` yazın ardından komutu çalıştırmak için <kbd>Enter'a</kbd> basın. Alternatif olarak, <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}}> ikonuna tıklayabilirsiniz, ardından sağ alttaki güç simgesine tıklayın ve **Restart** seçeneğini seçin.
+Tüm bunlar tamamlandığına göre, bu pencereleri kapatabilir ve sanal makinenizi yeniden başlatabilirsiniz. Klavyede <kbd>CTRL + ALT + T</kbd> yaparak `Terminal` penceresi açabilirsiniz ve terminalde `reboot` yazın ardından komutu çalıştırmak için <kbd>Enter'a</kbd> basın. Alternatif olarak, <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}} /> ikonuna tıklayabilirsiniz, ardından sağ alttaki güç simgesine tıklayın ve **Restart** seçeneğini seçin.
 
    ![You might want to take note of other options that you see in this menu.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/14_logout.png)
 
@@ -185,9 +185,9 @@ Bir süre `sudo apt upgrade` çalıştıktan sonra terminalde bir şeyler yükle
     -   Sanal makineyi çalıştırırken Windows'taki etkinliğinizi en aza indirin. Dizüstü bilgisayara sahipseniz muhtemelen şarja takılı kullanınız.
     -   Processors ayarının yalnızca 2 olarak ayarlandığından ve sanal makinenize verdiğiniz belleğin toplam RAM'inizin en fazla yarısı ve en az 2GB olduğundan emin olun. Eğer 2GB ayıramıyorsanız, dual boot kullanın.
     -   Videolar sanal makinede takılıyorsa, Video Memory ayarını mümkün olan en üst düzeye çıkardığınızdan emin olun veya alternatif olarak makineniz kaldırabiliyorsa Windows'unuzda oynatın. Etkinleştirdiyseniz 3D Acceleration ayarını devre dışı bırakın.
-    -   Sanal makine pencerenizin sağ alt köşesindeki <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/17_turtle.png" alt="Icon with a green turtle and a V" style={{"display":"inline","margin":"auto"}}> simgesine dikkat edin, eğer varsa, burada [VirtualBox forumunda ondan nasıl kurtulacağınıza dair bir başlık var](https://forums.virtualbox.org/viewtopic.php?f=25&t=99390). Bunun yerine <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/18_vboxV.png" alt="Icon of a chip with a V" style={{"display":"inline","margin":"auto"}}> simgesi de bulunabilir. Eğer sağ altta <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/17_turtle.png" alt="Icon with a green turtle and a V" style={{"display":"inline","margin":"auto"}}> veya <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/18_vboxV.png" alt="Icon of a chip with a V" style={{"display":"inline","margin":"auto"}}> görmüyorsanız, bunları görmek için tam ekran modundan çıkmanız gerekir.
+    -   Sanal makine pencerenizin sağ alt köşesindeki <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/17_turtle.png" alt="Icon with a green turtle and a V" style={{"display":"inline","margin":"auto"}} /> simgesine dikkat edin, eğer varsa, burada [VirtualBox forumunda ondan nasıl kurtulacağınıza dair bir başlık var](https://forums.virtualbox.org/viewtopic.php?f=25&t=99390). Bunun yerine <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/18_vboxV.png" alt="Icon of a chip with a V" style={{"display":"inline","margin":"auto"}} /> simgesi de bulunabilir. Eğer sağ altta <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/17_turtle.png" alt="Icon with a green turtle and a V" style={{"display":"inline","margin":"auto"}} /> veya <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/18_vboxV.png" alt="Icon of a chip with a V" style={{"display":"inline","margin":"auto"}} /> görmüyorsanız, bunları görmek için tam ekran modundan çıkmanız gerekir.
   -   Performansınız hala yetersizse, dual boot yapın çünkü bu, tüm bilgisayar kaynaklarını yalnızca bir işletim sistemi için kullandığınızı garanti edecek ve böylece deneyiminizi önemli ölçüde arttıracaktır.
--   Farenizin kaydırma tekerleği Google Chrome'da garip davranıyorsa ve sanal makinenizin istendiği gibi çalıştığından emin olmak için sanal makine performans ipuçlarını gözden geçirdiyseniz, `imwheel'e` bakın: [daha fazla bilgi için bu AskUbuntu talimatlarına bakın](https://askubuntu.com/a/621140). VSCode'u yüklediyseniz, `gedit` yerine bu talimatları kullanın, aksi takdirde `sudo apt install gedit` komutuyla gedit'i yükleyin. Eğer gedit'i `snap` ile yüklerseniz, dosyayı kaydetmenize izin vermez. Her açılışta `imwheel`in çalıştığından emin olmak için whisker menüsüne tıklamalısınız <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}}> , ardından `Session` yazın ve `Session and Startup'a` tıklayın. `Application Autostart'ı` göreceksiniz ve ona gidin, sonra da `Add'e` tıklayın. `Name` değeri için `imwheel` ve `Command` değeri için `imwheel -b "4 5` girin. `OK'e` tıklayın ve her şey hazır olmalı.
+-   Farenizin kaydırma tekerleği Google Chrome'da garip davranıyorsa ve sanal makinenizin istendiği gibi çalıştığından emin olmak için sanal makine performans ipuçlarını gözden geçirdiyseniz, `imwheel'e` bakın: [daha fazla bilgi için bu AskUbuntu talimatlarına bakın](https://askubuntu.com/a/621140). VSCode'u yüklediyseniz, `gedit` yerine bu talimatları kullanın, aksi takdirde `sudo apt install gedit` komutuyla gedit'i yükleyin. Eğer gedit'i `snap` ile yüklerseniz, dosyayı kaydetmenize izin vermez. Her açılışta `imwheel`in çalıştığından emin olmak için whisker menüsüne tıklamalısınız <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}} /> , ardından `Session` yazın ve `Session and Startup'a` tıklayın. `Application Autostart'ı` göreceksiniz ve ona gidin, sonra da `Add'e` tıklayın. `Name` değeri için `imwheel` ve `Command` değeri için `imwheel -b "4 5` girin. `OK'e` tıklayın ve her şey hazır olmalı.
 
 ### Adım 5: Güvenli bir şekilde sanal makinenizi kapatma
 
@@ -195,7 +195,7 @@ Günlük kullandığınız bilgisayarın fişini çekmezsiniz, değil mi? Neden 
 
 #### 1. Seçenek - Kullanıcı arayüzüyle sanal makine içinden kapatma
 
-**Whisker Menu** <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}}> üzerine tıkladığınızda ve güç simgesine tıkladığınızda, oturumunuzu nasıl değiştireceğiniz konusunda **Shut Down** seçeneği de dahil olmak üzere çeşitli seçenekler sunulur. Evet, daha önce **Restart** için kullandığınız yerle aynı yer!
+**Whisker Menu** <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}} /> üzerine tıkladığınızda ve güç simgesine tıkladığınızda, oturumunuzu nasıl değiştireceğiniz konusunda **Shut Down** seçeneği de dahil olmak üzere çeşitli seçenekler sunulur. Evet, daha önce **Restart** için kullandığınız yerle aynı yer!
 
 #### 2. Seçenek - Terminal ile sanal makine içinden kapatma
 
@@ -214,8 +214,7 @@ Güvende olmak için **Send the shutdown signal'ı** seçin ve OK'a tıklayın. 
 </details>
 
 <details markdown="block">
-<summary class="dropDown-header">Ubuntu/Windows Dual-Boot
-</summary>
+<summary class="dropDown-header">Ubuntu/Windows Dual-Boot </summary>
 
 ### Başlamadan önce bu bölümün tamamını okuyun
 
@@ -258,8 +257,7 @@ Ubuntu'yu yüklemeye çalışırken **Intel RST'yi** devre dışı bırakmanız�
 </details>
 
 <details markdown="block">
-<summary class="dropDown-header">ChromeOS/ChromeOS Flex
-</summary>
+<summary class="dropDown-header">ChromeOS/ChromeOS Flex </summary>
 
 Yakın zamanda eklenen Linux terminali çalıştırabilme özelliği ile ChromeOS platformu, yerel Linux uygulamalarının yüklenebilmesine açılmıştır. Odin Project'i tamamlamak için Chromebook'unuzu kullanmak istiyorsanız, birkaç gereksinimi karşıladığınızdan emin olmanız gerekir:
 

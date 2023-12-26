@@ -64,11 +64,8 @@ Başlıklar diğer HTML kodlarından farklıdır: başlık olduklarını belirtm
 
 Başlıklar da paragraflar gibi tanımlanır. Örneğin, bir h1 başlığı oluşturmak için başlık metnimizi bir `<h1>` etiketi içine sararız.
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="LYLPLbg" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","padding":"1em"}}>
 <a href="https://codepen.io">CodePen</a>'de
 TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/LYLPLbg">html-başlık-örneği</a>'ni inceleyebilirsiniz.
-  </span>
-</p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 Doğru başlık seviyesini kullanmak, içeriğe bir hiyerarşi sağladığından önemlidir. Genel sayfanın başlığı için her zaman h1 başlığı kullanılmalı ve daha düşük seviye başlıklar, sayfanın daha küçük bölümlerindeki içeriklerin başlıkları olarak kullanılmalıdır.
@@ -83,8 +80,9 @@ Tek başına `strong` öğesini kullanabilirsiniz:
   <span>
 <a href="https://codepen.io">CodePen</a>'de
 TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/qBjWXrB">html-single-strong-örneği</a>'ni inceleyebilirsiniz.
-</p>
+  </span>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+</p>
 
 Ancak muhtemelen kendinizi güçlü öğeyi diğer metin öğeleriyle birlikte daha çok kullanırken göreceksiniz, bunun gibi:
 

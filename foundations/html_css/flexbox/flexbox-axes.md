@@ -15,8 +15,7 @@ Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
 Flexbox ile ilgili en kafa karıştırıcı şey, yatay veya dikey olarak çalışabilmesi ve hangi yönde çalıştığınıza bağlı olarak bazı kuralların biraz değişmesidir.
 
-Bir flex konteyneri için varsayılan yön yatay veya `row` (satır)dır, <span id='flex-vertical'>ancak yönü dikey veya `column` (sütun) olarak değiştirebilirsiniz. Yön, CSS'de şu şekilde belirtilebilir:
-</span>
+Bir flex konteyneri için varsayılan yön yatay veya `row` (satır)dır, <span id='flex-vertical'>ancak yönü dikey veya `column` (sütun) olarak değiştirebilirsiniz. Yön, CSS'de şu şekilde belirtilebilir: </span>
 
 ~~~css
 .flex-container {
@@ -30,8 +29,7 @@ Bir flex konteyneri için varsayılan yön yatay veya `row` (satır)dır, <span 
 
 Yani ilk örneğimizdeki gibi, bir div'e `display: flex` ekleyince çocukları yatay olarak sıralanır. Bu, varsayılan ayar olan "`flex-direction: row`a bir örnektir. Aşağıda benzer bir örnek var. `flex-direction: column` yazan satırın yorumunu kaldırırsanız, bu div'ler dikey olarak sıralanırlar.
 
-<span>[CodePen](https://codepen.io)'de TheOdinProject'in ([@TheOdinProjectExamples](https://codepen.io/TheOdinProjectExamples)) yazdığı [flex-direction örneğine](https://codepen.io/TheOdinProjectExamples/pen/BaZKPdw) bakın.
-</span>
+<span>[CodePen](https://codepen.io)'de TheOdinProject'in ([@TheOdinProjectExamples](https://codepen.io/TheOdinProjectExamples)) yazdığı [flex-direction örneğine](https://codepen.io/TheOdinProjectExamples/pen/BaZKPdw) bakın. </span>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 Unutulmaması gereken bir nokta, bu örnekte, `flex: 1` kısaltmasını kullanırsak `flex-direction: column` beklendiği gibi çalışmaz. Şimdi deneyin (yani, `flex: 1 1 auto;` satırındaki flex değerini değiştirin). `flex: 1` kullanılırsa neden çalışmadığını anlayabilir misiniz? Orada _açıkça_ tanımlanmış bir `height` (yükseklik) bulunmasına rağmen div'ler kapanıyor.
