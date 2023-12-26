@@ -177,7 +177,7 @@ div.innerHTML = '<span>Merhaba Dünya!</span>';
 // div içindeki HTML'yi oluşturur
 ```
 
-<div class="lesson-note--tip" markdown="1">
+<div class="lesson-note lesson-note--tip" markdown="1">
 
 Metin eklemek için textContent'in tercih edildiğini ve innerHTML'nin yanlış kullanıldığında güvenlik riskleri oluşturabileceğinden dikkatli kullanılması gerektiğini unutmayın. Nasıl kullanıldığına dair bir örnek görmek istiyorsanız [bu ingilizce videoya] (https://youtube.com/watch?v=ns1LX6mEvyM) göz atın.
 
