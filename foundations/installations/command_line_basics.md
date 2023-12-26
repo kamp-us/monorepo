@@ -47,7 +47,7 @@ Bu bölüm, derste öğreneceğiniz konulara genel bir bakış içermektedir.
 **WSL kullanıcıları için not**: WSL kurulumunuzda zip dosyasına sahip olmak için `dosyaları indir` bölümünde verilen bağlantı ile birlikte `wget` komutunu kullanmanız gerekecektir (`wget https://swcarpentry.github.io/shell-novice/data/shell-lesson-data.zip`). Ayrıca `sudo apt install unzip` komutunu kullanarak unzip`i yüklemeniz ve ardından dosyayı açmak için `unzip shell-lesson-data.zip` komutunu kullanmanız gerekecektir. Aşağıdaki ilk adımda bağlantısı verilen kurs boyunca terminal çıktınızın derslerde gösterilenden biraz farklı görünebileceğini unutmayın. Kurs sizden Masaüstüne gitmenizi istediğinde, bunun yerine cd komutunu (`cd ~`) kullanarak yapabileceğiniz ev dizinine gideceksiniz.
 </div>
 
-<div class="lesson-note lesson-note--warning" markdown=1>
+<div class="lesson-note lesson-note--warning" markdown="1">
 Bu kaynakların birçoğu Mac veya Linux ortamı kullandığınızı varsaymaktadır. Önceki kurulum dersimizi yaptıysanız, Linux'u çift önyükleme veya sanal bir makinede zaten kurmuş olmalısınız. Ya da MacOS kullanıyor olabilirsiniz. MacOS veya herhangi bir Linux sürümü yüklü değilse, lütfen [işletim sistemi kurulum kılavuzu](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/prerequisites) bölümüne geri dönün.
 </div>
 

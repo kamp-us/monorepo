@@ -20,8 +20,7 @@ Bu müfredat yalnızca bir dizüstü bilgisayar, masaüstü bilgisayar veya dest
 Kurulum yönteminizi aşağıdan seçiniz:
 
 <details markdown="block">
-<summary class="dropDown-header">Sanal Makine (Önerilen)
-</summary>
+<summary class="dropDown-header">Sanal Makine (Önerilen) </summary>
 
 Bir Sanal Makine (VM) kurmak, web geliştirme için bir ortam oluşturmaya başlamanın en kolay ve en güvenilir yoludur. Sanal Makine, mevcut İşletim Sisteminizin (OS), Windows gibi, içinde çalışan komple bir bilgisayar emülasyonudur. Sanal makinenin en büyük dezavantajı, aynı anda iki bilgisayar çalıştırdığınız için yavaş olabilmesidir. Performansını artırmak için birkaç şey yapacağız.
 

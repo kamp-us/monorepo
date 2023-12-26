@@ -113,7 +113,7 @@ let answer = parseInt(prompt("Please enter the number you would like to FizzBuzz
 
 Yukarıdaki kod, kullanıcıdan bir sayı isteyen küçük bir açılır kutu oluşturmalıdır. Geri aldığımız girdi `answer` değişkenimizde saklanacaktır.
 
-<div class="lesson-note lesson-note--tip" markdown=1>
+<div class="lesson-note lesson-note--tip" markdown="1">
 Prompt yöntemini bir `parseInt` fonksiyonuna sardık, böylece kullanıcının girdisinden bir sayı döndürüldü.
 </div>
 
@@ -129,7 +129,7 @@ for (let i = 1; i <= answer; i++) {
 
 Bunu daha önce görmediyseniz ve garip görünüyorsa, aslında basittir. Bir `i` değişkeni tanımlıyoruz ve ona döngümüzdeki `i` değişkeninin başlangıç değeri olarak 1 atıyoruz. İkinci ifade, `i <= answer` bizim koşulumuzdur. `i` değeri `answer` değerinden büyük olana kadar döngü yapmak istiyoruz. Üçüncü ifade, `i++`, döngümüze her tekrarda `i` değerini 1 artırmasını söyler. Sonuç olarak, kullanıcı 10 girerse, bu döngü konsola 1 - 10 sayılarını yazdıracaktır.
 
-<div class="lesson-note lesson-note--tip" markdown=1>
+<div class="lesson-note lesson-note--tip" markdown="1">
 Çoğu zaman, programcılar kendilerini 0'dan başlayarak döngü yaparken bulurlar. Programımızın ihtiyaçları nedeniyle, biz 1'den başlıyoruz
 </div>
 

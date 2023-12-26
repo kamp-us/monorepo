@@ -108,7 +108,7 @@ code
 
 - **Dosya Gezgini'ni** açın.
 - **Downloads** klasörüne gidin.
-- **VSCodeUserSetup-{version}.exe** dosyasını çöp kutusuna sürükleyin.
+- **VSCodeUserSetup-version.exe** dosyasını çöp kutusuna sürükleyin.
 
 #### 3. Adım: WSL eklentisini indirme
 

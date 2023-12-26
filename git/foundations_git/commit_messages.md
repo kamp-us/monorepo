@@ -39,7 +39,7 @@ Projede yaptığınız değişikliğin kısa bir özeti.
 Kod tabanında yaptığım değişiklik.
 ```
 
-<div class="lesson-note lesson-note--tip" markdown=1>
+<div class="lesson-note lesson-note--tip" markdown="1">
 GitHub, commit başlıkları için 72 karakter sınırına sahiptir, bu nedenle commit başlığınızı bu sınırlar içinde tutmanızı öneririz.
 </div>
 

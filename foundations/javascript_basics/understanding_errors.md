@@ -18,7 +18,7 @@ Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
 Hata, JS dilinde yerleşik olarak bulunan, bir ad/tür ve bir mesajdan oluşan bir nesne türüdür. Hatalar, hatadan sorumlu kodu bulmanıza, bu hatayı neden aldığınızı belirlemenize ve hatayı çözmenize yardımcı olabilecek önemli bilgiler içerir. 
 
-<div class="lesson-note lesson-note--tip" markdown=1>
+<div class="lesson-note lesson-note--tip" markdown="1">
   Bu dersteki tüm örnekler için kodu tarayıcının konsolunda çalıştırmalısınız.
 </div>
 
