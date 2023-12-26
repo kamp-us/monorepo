@@ -350,7 +350,7 @@ btn.addEventListener('click', function (e) {
 });
 ```
 
-<div class="lesson-note--tip" markdown="1">
+<div class="lesson-note lesson-note--tip" markdown="1">
 
 Fonksiyon (e)`nin addEventListener'dan bir geri çağırması olduğuna dikkat edin. Geri aramalarla ilgili daha fazla ingilizce açıklama [BURADA](https://dev.to/i3uckwheat/understanding-callbacks-2o9e) bulunabilir.
 
