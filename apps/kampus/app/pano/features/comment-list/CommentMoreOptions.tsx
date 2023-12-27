@@ -1,26 +1,10 @@
 "use client";
 
-import { MoreHorizontal } from "lucide-react";
+import { DotsHorizontalIcon, DotsVerticalIcon } from "@radix-ui/react-icons";
+import { AlertDialog, Button, DropdownMenu, Flex, IconButton } from "@radix-ui/themes";
 import { graphql, useFragment, useMutation } from "react-relay";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-  Button,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  useToast,
-} from "@kampus/ui";
+import { useToast } from "@kampus/ui";
 
 import { getCommentURL } from "~/features/kampus-url/pano";
 import { type CommentMoreOptions_comment$key } from "./__generated__/CommentMoreOptions_comment.graphql";
@@ -111,26 +95,26 @@ export const CommentMoreOptions = (props: Props) => {
   };
 
   return (
-    <AlertDialog>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button className="h-5 p-1" variant="ghost">
-            <MoreHorizontal size="16" aria-label="Daha fazla seçenek" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
+    <AlertDialog.Root>
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <IconButton variant="ghost" color="gray">
+            <DotsVerticalIcon width="16" height="16" aria-label="Daha fazla seçenek" />
+          </IconButton>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
           {canUserEdit(viewer?.actor?.displayName, comment?.owner?.displayName) && (
             <>
-              <DropdownMenuItem key="edit" onSelect={() => props.setEditOpen(true)}>
+              <DropdownMenu.Item key="edit" onSelect={() => props.setEditOpen(true)}>
                 Düzenle
-              </DropdownMenuItem>
-              <AlertDialogTrigger asChild>
-                <DropdownMenuItem>Sil</DropdownMenuItem>
-              </AlertDialogTrigger>
-              <DropdownMenuSeparator key="separator" />
+              </DropdownMenu.Item>
+              <AlertDialog.Trigger>
+                <DropdownMenu.Item>Sil</DropdownMenu.Item>
+              </AlertDialog.Trigger>
+              <DropdownMenu.Separator key="separator" />
             </>
           )}
-          <DropdownMenuItem
+          <DropdownMenu.Item
             onSelect={() => {
               void navigator.clipboard?.writeText(shareUrl).then(() => {
                 toast({
@@ -140,21 +124,27 @@ export const CommentMoreOptions = (props: Props) => {
             }}
           >
             Linki kopyala
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Silmek istediğine emin misin?</AlertDialogTitle>
-          <AlertDialogDescription>
-            Eğer bu gönderiyi silersen, bu işlemi geri alamazsın.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Hayır</AlertDialogCancel>
-          <AlertDialogAction onClick={onClick}>Evet</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+      <AlertDialog.Content>
+        <AlertDialog.Title>Silmek istediğine emin misin?</AlertDialog.Title>
+        <AlertDialog.Description>
+          Eğer bu gönderiyi silersen, bu işlemi geri alamazsın.
+        </AlertDialog.Description>
+        <Flex gap="3" mt="4" justify="end">
+          <AlertDialog.Cancel>
+            <Button variant="soft" color="gray">
+              Hayır
+            </Button>
+          </AlertDialog.Cancel>
+          <AlertDialog.Action onClick={onClick}>
+            <Button variant="solid" color="red">
+              Evet
+            </Button>
+          </AlertDialog.Action>
+        </Flex>
+      </AlertDialog.Content>
+    </AlertDialog.Root>
   );
 };

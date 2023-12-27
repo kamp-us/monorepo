@@ -1,11 +1,11 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { Button, Flex, Text, TextArea } from "@radix-ui/themes";
 import { graphql, useFragment, useMutation } from "react-relay";
 import { z } from "zod";
 
 import {
-  Button,
   Form,
   FormControl,
   FormField,
@@ -105,14 +105,14 @@ export function CreatePostCommentForm(props: Props) {
           name="content"
           render={(props) => (
             <FormItem>
-              <FormLabel>Senin yorumun</FormLabel>
               <FormControl>
-                <Textarea
+                <TextArea
                   placeholder={
                     actor ? "Yorumunu buraya ekle..." : "Yorum yapmak için giriş yapmalısın."
                   }
                   className="max-h-64 resize-y"
                   disabled={!actor}
+                  aria-label="Yorum"
                   {...props.field}
                 />
               </FormControl>
@@ -120,11 +120,11 @@ export function CreatePostCommentForm(props: Props) {
             </FormItem>
           )}
         />
-        <div className="flex">
+        <Flex justify="end">
           <Button type="submit" disabled={isInFlight || !actor}>
             Gönder
           </Button>
-        </div>
+        </Flex>
       </form>
     </Form>
   );

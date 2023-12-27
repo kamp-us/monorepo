@@ -1,4 +1,7 @@
-import { MainNav, MainNavBrand } from "~/features/main-nav";
+import { PlusIcon } from "@radix-ui/react-icons";
+import { Box, Container, Theme } from "@radix-ui/themes";
+
+import { MainNav, MainNavBrand, MainNavLink } from "~/features/main-nav";
 
 export default function PanoLayout({
   children,
@@ -8,16 +11,22 @@ export default function PanoLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <>
-      <MainNav brand={<MainNavBrand href="/pano">pano</MainNavBrand>} />
-      <section
-        aria-label="PanoLayout"
-        role="contentinfo"
-        className="bg-background container mx-auto max-w-5xl py-10"
-      >
+    <Theme accentColor="amber">
+      <MainNav
+        brand={<MainNavBrand href="/pano">pano</MainNavBrand>}
+        links={
+          <>
+            <MainNavLink href="/pano/post/create">
+              <PlusIcon />
+              ekle
+            </MainNavLink>
+          </>
+        }
+      />
+      <Container size="3" mt="3" mb="3">
         {children}
         {modal}
-      </section>
-    </>
+      </Container>
+    </Theme>
   );
 }

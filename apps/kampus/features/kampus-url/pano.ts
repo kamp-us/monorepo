@@ -13,7 +13,7 @@ export function getSitePostsURL(post: { site: string }) {
 }
 
 function getPostLink(postID: string) {
-  return `/post/${postID}`;
+  return `post/${postID}`;
 }
 
 function getCommentLink(postID: string, commentID: string) {
@@ -24,5 +24,5 @@ function getCommentLink(postID: string, commentID: string) {
 }
 
 function getSitePostsLink(post: { site: string }) {
-  return `/site/${post.site}`;
+  return `site/${post.site}`;
 }

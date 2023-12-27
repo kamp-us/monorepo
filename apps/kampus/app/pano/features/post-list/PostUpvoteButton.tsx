@@ -1,8 +1,7 @@
+import { ThickArrowUpIcon, TriangleUpIcon } from "@radix-ui/react-icons";
+import { Button, Flex, IconButton, Text, Theme } from "@radix-ui/themes";
 import { ArrowBigUp } from "lucide-react";
 import { graphql, useFragment, useMutation } from "react-relay";
-
-import { Button } from "@kampus/ui";
-import { cn } from "@kampus/ui/utils";
 
 import { type PostUpvoteButton_post$key } from "./__generated__/PostUpvoteButton_post.graphql";
 
@@ -53,8 +52,6 @@ export const UpvoteButton = (props: UpvoteProps) => {
 
   const disabled = isCreating || isRemoving;
 
-  const upvoteStyle = cn();
-
   const onClick = () => {
     if (!post) {
       return;
@@ -72,15 +69,20 @@ export const UpvoteButton = (props: UpvoteProps) => {
   };
 
   return (
-    <>
-      <Button onClick={onClick} disabled={disabled} variant="ghost" size="icon">
+    <Flex asChild>
+      <Button
+        onClick={onClick}
+        disabled={disabled}
+        variant={post.isUpvotedByViewer ? "solid" : "soft"}
+        size="1"
+      >
         <ArrowBigUp
           fill={post.isUpvotedByViewer ? "currentColor" : "none"}
-          className={upvoteStyle}
-          size="24"
+          width="16"
+          height="15"
         />
+        {post?.upvoteCount ?? 0}
       </Button>
-      <div className="text-center font-semibold">{post?.upvoteCount ?? 0}</div>
-    </>
+    </Flex>
   );
 };

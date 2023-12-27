@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
+import { Box, Card, Flex, Text } from "@radix-ui/themes";
 import { graphql, useFragment } from "react-relay";
 
-import { cn } from "@kampus/ui/utils";
-
-import { Card, CardContent, TimeAgo } from "~/../../packages/ui";
+import { TimeAgo } from "~/../../packages/ui";
 import { UpdateCommentForm } from "../../UpdateCommentForm";
 import { type CommentItem_comment$key } from "./__generated__/CommentItem_comment.graphql";
 import { type CommentItem_viewer$key } from "./__generated__/CommentItem_viewer.graphql";
@@ -29,6 +29,11 @@ const commentsFragment = graphql`
       displayName
     }
     commentCount
+
+    post @required(action: LOG) {
+      id
+    }
+
     ...CommentUpvoteButton_comment
     ...CommentMoreOptions_comment
   }
@@ -55,62 +60,54 @@ export const CommentItem = (props: Props) => {
     setTargetHash(window.location.hash);
   }, [params]);
 
-  const hashStyles = "rounded-lg bg-amber-400 p-1";
-
   const comment = useFragment(commentsFragment, props.comment);
   const viewer = useFragment(viewerFragment, props.viewerRef);
 
+  if (!comment) {
+    return null;
+  }
+
   return (
-    <div
+    <Card
       id={`c_${comment.id}`}
       tabIndex={0}
-      className={cn("flex flex-col gap-4", {
-        [hashStyles]: targetHash === `#c_${comment.id}`,
-      })}
+      color={targetHash === `#c_${comment.id}` ? "amber" : undefined}
+      variant={targetHash === `#c_${comment.id}` ? undefined : "ghost"}
     >
-      <Card className="flex flex-row p-4">
-        <div className="flex flex-row gap-4">
-          <div className="flex flex-col">
-            <CommentUpvoteButton commentRef={comment} />
-          </div>
-          <div className="flex flex-col justify-center gap-1">
-            <div className="text-muted-foreground flex flex-col p-0 text-sm">
-              <div className="flex items-start gap-2 text-sm">
-                <div className="text-muted-foreground flex text-sm">
-                  <div>@{comment.owner?.displayName}&nbsp;·&nbsp;</div>
-                  <TimeAgo date={new Date(comment.createdAt as string)} />
-                </div>
-                <CommentMoreOptions
-                  comment={comment}
-                  viewerRef={viewer}
-                  setEditOpen={setEditing}
-                  commentConnectionID={props.connectionID}
-                />
-              </div>
-            </div>
-            <CardContent className="flex flex-col gap-2 p-0">
-              <div className="flex flex-row gap-4">
-                <div className="flex flex-col gap-1 align-baseline">
-                  {isEditing ? (
-                    <div className="flex w-full flex-col gap-2">
-                      <UpdateCommentForm
-                        connectionID={comment.__id}
-                        viewer={viewer}
-                        defaultValue={comment.content}
-                        setEditing={setEditing}
-                        commentID={comment.id}
-                      />
-                    </div>
-                  ) : (
-                    <p>{comment.content}</p>
-                  )}
-                </div>
-              </div>
-            </CardContent>
-          </div>
-        </div>
-        <div className="flex flex-row gap-2 "></div>
-      </Card>
-    </div>
+      <Flex direction="row" gap="4" align="center">
+        <CommentUpvoteButton commentRef={comment} />
+        <Box grow="1">
+          <Text size="2" color="gray">
+            @{comment.owner?.displayName}&nbsp;·&nbsp;
+            <Link href={`/pano/post/${comment.post?.id}/#c_${comment.id}`}>
+              <TimeAgo date={new Date(comment.createdAt as string)} />
+            </Link>
+          </Text>
+
+          <Box grow="1">
+            {isEditing ? (
+              <UpdateCommentForm
+                connectionID={comment.__id}
+                viewer={viewer}
+                defaultValue={comment.content}
+                setEditing={setEditing}
+                commentID={comment.id}
+              />
+            ) : (
+              <Text>{comment.content}</Text>
+            )}
+          </Box>
+        </Box>
+
+        {!isEditing && (
+          <CommentMoreOptions
+            comment={comment}
+            viewerRef={viewer}
+            setEditOpen={setEditing}
+            commentConnectionID={props.connectionID}
+          />
+        )}
+      </Flex>
+    </Card>
   );
 };

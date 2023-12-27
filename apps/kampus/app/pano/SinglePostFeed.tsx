@@ -1,6 +1,5 @@
+import { Heading, Text } from "@radix-ui/themes";
 import { graphql, useFragment, usePaginationFragment } from "react-relay";
-
-import { Separator, TypographyH4, TypographyP } from "@kampus/ui";
 
 import { type SinglePostFeed_post$key } from "./__generated__/SinglePostFeed_post.graphql";
 import { type SinglePostFeed_viewer$key } from "./__generated__/SinglePostFeed_viewer.graphql";
@@ -59,10 +58,11 @@ export const SinglePostFeed = (props: SinglePostFeedProps) => {
   return (
     <div className="flex flex-col gap-4">
       <PostItem post={data} showContent viewerRef={viewer} />
-      <Separator />
       <CreatePostCommentForm viewer={viewer} connectionID={comments?.__id} />
-      <TypographyH4>Yorumlar</TypographyH4>
-      {comments?.edges?.length === 0 && <TypographyP>Henüz yorum yapılmamış.</TypographyP>}
+      <Heading as="h4" size="4">
+        Yorumlar
+      </Heading>
+      {comments?.edges?.length === 0 && <Text>Henüz yorum yapılmamış.</Text>}
       {comments?.edges?.map((edge) => {
         if (!edge?.node) return null;
         return (
