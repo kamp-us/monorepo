@@ -21,7 +21,7 @@ const useOdinLessonActionsFragment = (key: OdinLessonActions_path$key | null) =>
 export const OdinLessonActions = (props: Props) => {
   const lesson = useOdinLessonActionsFragment(props.lesson);
   if (!lesson?.path) return null;
-  // https://github.com/kamp-us/monorepo/edit/dev/contents/odin/foundations/installations/installation_overview.md
+  // https://github.com/kamp-us/monorepo/edit/dev/content/odin/foundations/installations/installation_overview.md
   const contributionUrl = getOdinGithubEditUrl(lesson.path);
   const issueUrl = getOdinGithubIssueUrl({ title: lesson.title, path: lesson.path });
 

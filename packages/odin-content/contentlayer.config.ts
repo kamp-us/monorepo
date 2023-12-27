@@ -58,6 +58,6 @@ const Lesson = defineDocumentType(() => ({
 }));
 
 export default makeSource({
-  contentDirPath: "../../contents/odin",
+  contentDirPath: "../../content/odin",
   documentTypes: [Lesson],
 });

@@ -9,7 +9,7 @@ export const getOdinGithubUrl = ({ edit }: { edit: boolean }) => {
     url = url + "/blob";
   }
 
-  return `${url}/${branchName}/contents/odin`;
+  return `${url}/${branchName}/content/odin`;
 };
 
 export const getOdinGithubEditUrl = (path = "") => {
