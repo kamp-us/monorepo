@@ -31,7 +31,7 @@ const mdxToHtml = async (mdxSource: string) => {
 
 const Lesson = defineDocumentType(() => ({
   name: "Lesson",
-  filePathPattern: "**/*.mdx",
+  filePathPattern: "**/*.md",
   fields: {
     title: {
       type: "string",
@@ -52,6 +52,6 @@ const Lesson = defineDocumentType(() => ({
 }));
 
 export default makeSource({
-  contentDirPath: "curriculum",
+  contentDirPath: "../../contents/odin",
   documentTypes: [Lesson],
 });
