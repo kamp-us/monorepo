@@ -1,12 +1,12 @@
 const branchName = "dev";
-const baseUrl = "https://github.com/kamp-us/monorepo/";
+const baseUrl = "https://github.com/kamp-us/monorepo";
 
 export const getOdinGithubUrl = ({ edit }: { edit: boolean }) => {
   let url = baseUrl;
   if (edit) {
-    url = url + "edit";
+    url = url + "/edit";
   } else {
-    url = url + "blob";
+    url = url + "/blob";
   }
 
   return `${url}/${branchName}/contents/odin`;
