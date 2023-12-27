@@ -4,6 +4,8 @@ import { getMDXComponent } from "mdx-bundler/client/index.js";
 import * as ReactDOMServer from "react-dom/server";
 import wikiLinkPlugin from "remark-wiki-link-plus";
 
+import { buildPublicOdinLessonID, getPublicOdinPath, slugifyTurkishTitle } from "./utils";
+
 const mdxToHtml = async (mdxSource: string) => {
   const { code } = await bundleMDX({
     source: mdxSource,
@@ -42,7 +44,11 @@ const Lesson = defineDocumentType(() => ({
   computedFields: {
     id: {
       type: "string",
-      resolve: (doc) => doc._raw.flattenedPath,
+      resolve: (doc) => buildPublicOdinLessonID(doc._raw.sourceFilePath, doc.title),
+    },
+    path: {
+      type: "string",
+      resolve: (doc) => doc._raw.sourceFilePath,
     },
     html: {
       type: "string",
