@@ -28,7 +28,7 @@ interface Lesson {
 
 export const getOdinGithubIssueUrl = (lesson: Lesson) => {
   const params = {
-    template: "suggestion.yaml",
+    template: "odin_suggestion.yml",
     title: `${lesson.title}: <Önerinizin kısa bir açıklaması>`,
     "lesson-link": lesson.path,
   };
