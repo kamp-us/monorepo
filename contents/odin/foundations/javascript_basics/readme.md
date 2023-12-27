@@ -1,0 +1,1 @@
+# Temel Bilgiler/Javascript Temelleri

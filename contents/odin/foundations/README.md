@@ -1,0 +1,59 @@
+Sayfaları ister [The Odin Project sitesinde](https://www.theodinproject.com/paths/foundations/courses/foundations) isterseniz de [GitHub reposu](https://github.com/TheOdinProject/curriculum/tree/main/foundations) üzerinde görüntüleyebilirsiniz.
+
+## İÇERİK
+
+-   [ ] Introduction
+    -   [ ] How this Course Will Work - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/introduction/how_this_course_will_work.md)
+    -   [ ] Introduction to Web Development - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/introduction/introduction_to_web_development.md)
+    -   [ ] Motivation and Mindset - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/introduction/motivation_and_mindset.md)
+    -   [ ] Asking For Help - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/introduction/asking_for_help.md)
+    -   [ ] Join the Odin Community - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/introduction/join_the_odin_community.md)
+-   [ ] Prerequisites
+    -   [ ] Computer Basics - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/installations/computer_basics.md)
+    -   [ ] How Does the Web Work? - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/installations/how_does_the_web_work.md)
+    -   [ ] Installation Overview - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/installations/installation_overview.md)
+    -   [ ] Installations - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/installations/installations.md)
+    -   [ ] Text Editors - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/installations/text_editors.md)
+    -   [ ] Command Line Basics - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/installations/command_line_basics.md)
+    -   [ ] Setting Up Git - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/installations/setting_up_git.md)
+-   [ ] Git Basics
+    -   [ ] Introduction to Git - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/git/foundations_git/introduction_to_git.md)
+    -   [ ] Git Basics - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/git/foundations_git/git_basics.md)
+-   [ ] HTML Foundations
+    -   [ ] Introduction to HTML and CSS - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/intro-to-html-css.md)
+    -   [ ] Elements and Tags - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/html-foundations/elements-and-tags.md)
+    -   [ ] HTML Boilerplate - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/html-foundations/html-boilerplate.md)
+    -   [ ] Working with Text - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/html-foundations/working-with-text.md)
+    -   [ ] Lists - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/html-foundations/lists.md)
+    -   [ ] Links and Images - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/html-foundations/links-and-images.md)
+    -   [ ] Commit Messages - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/git/foundations_git/commit_messages.md)
+    -   [ ] [Project: Recipes](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/html-foundations/project-recipes.md)
+-   [ ] CSS Foundations
+    -   [ ] CSS Foundations - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/css-foundations.md)
+    -   [ ] Inspecting HTML and CSS - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/inspecting-html-and-css/inspecting-html-and-css.md)
+    -   [ ] The Box Model - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/the-box-model/the-box-model.md)
+    -   [ ] Block and Inline - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/block-and-inline.md)
+-   [ ] Flexbox
+    -   [ ] Introduction to Flexbox - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/flexbox/flexbox-intro.md)
+    -   [ ] Growing and Shrinking - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/flexbox/flexbox-growing-and-shrinking.md)
+    -   [ ] Axes - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/flexbox/flexbox-axes.md)
+    -   [ ] Alignment - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/flexbox/flexbox-alignment.md)
+    -   [ ] [Project: Landing Page](https://github.com/TheOdinProject/curriculum/tree/main/foundations/html_css/project/html-css-foundations-project.md)
+-   [ ] JavaScript Basics
+    -   [ ] Fundamentals Part 1 - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/fundamentals-1.md)
+    -   [ ] Fundamentals Part 2 - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/fundamentals-2.md)
+    -   [ ] JavaScript Developer Tools - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/javascript_developer_tools.md)
+    -   [ ] Fundamentals Part 3 - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/fundamentals-3.md)
+    -   [ ] Problem Solving - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/problem_solving.md)
+    -   [ ] Understanding Errors - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/understanding_errors.md)
+    -   [ ] [Project: Rock Paper Scissors](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/project_rock_paper_scissors.md)
+    -   [ ] Clean Code - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/clean_code.md)
+    -   [ ] Installing Node.js - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/installing_nodejs.md)
+    -   [ ] Fundamentals Part 4 - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/fundamentals-4.md)
+    -   [ ] DOM Manipulation and Events - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/DOM_manipulation_and_events.md)
+    -   [ ] Revisiting Rock Paper Scissors - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/revisiting_rock_paper_scissors.md)
+    -   [ ] [Project: Etch-a-Sketch](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/project_etch_a_sketch.md)
+    -   [ ] Fundamentals Part 5 - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/fundamentals-5.md)
+    -   [ ] [Project: Calculator](https://github.com/TheOdinProject/curriculum/tree/main/foundations/javascript_basics/project_calculator.md)
+-   [ ] Conclusion
+    -   [ ] Choose Your Path Forward - [markdown](https://github.com/TheOdinProject/curriculum/tree/main/foundations/tying_it_all_together/conclusion.md)
