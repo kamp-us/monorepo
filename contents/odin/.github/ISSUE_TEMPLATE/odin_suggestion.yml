@@ -1,0 +1,68 @@
+name: 📝 Müfredat İçeriği İyileştirmesi Önerisi
+description: Bozuk bir bağlantıyı veya yazım hatasını belirtin, başka bir kaynak önerisi sunun veya bir öneride bulunun
+title: '<Ders Adı>: <Önerinizin kısa açıklaması>'
+assignees:
+  - nil
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Öneride bulunduğunuz için teşekkür ederiz! Lütfen bu alanları doldurarak önerinizin incelenmesini kolaylaştırın - doğru miktarda ayrıntı vermek, proje sorumlularının işlem yapmasını çok daha kolay hale getirir.
+
+        Herhangi bir sorunuz varsa veya herhangi bir konuda emin değilseniz, sormaktan çekinmeyin! Proje ile ilgilenen kişiler burada yardımcı olmak için varlar.
+  - type: checkboxes
+    id: contributing
+    attributes:
+      label: Kontroller
+      description: Lütfen aşağıdaki onay kutularını işaretleyin
+      options:
+        - label: Böyle bir sorun mevcut değil (lütfen [açık sorunlar listemize](https://github.com/kamp-us/turkce-odin-project/issues) bakmayı unutmayın)
+          required: true
+        - label: Öneri için [Projeye Katkıda Bulunma Kılavuzu](https://github.com/kamp-us/turkce-odin-project/issues/28)'nu dikkatlice inceledim ve anladım
+          required: true
+        - label: Bu sorun üzerinde çalışmak ister misin?
+          required: false
+  - type: textarea
+    id: suggested-changes
+    attributes:
+      label: Açıklama
+      description: İlgili ekran görüntüleri veya ek bilgi sağlayabilirsin.
+      placeholder: Önerilen kaynak bölümünde bir yazım hatası var - bunun "wombat", değil "combat" olması gerekiyor
+    validations:
+      required: true
+  - type: dropdown
+    id: path
+    attributes:
+      label: Hangi yolu etkileyecek?
+      description: Önerinin hangi yolu etkilediğini seçin.
+      multiple: true
+      options:
+        - Temeller
+        - Node / JS
+    validations:
+      required: true
+  - type: input
+    id: lesson-link
+    attributes:
+      label: Ders Linki
+      description: İlgili dersin veya düzeltilmesi gereken içeriğin bir bağlantısı. Uygulanabilir değilse, öneriyi nerede bulabileceğimizi açıklayın.
+      placeholder: Örn. https://www.kamp.us/odin/mufredat/temel-bilgiler/git/commit-mesajlari
+    validations:
+      required: true
+
+  - type: input
+    id: contact
+    attributes:
+      label: (Opsiyonel) Discord Adı
+      description: Gerekirse değişiklikleri Discord üzerinde koordine etmeye yardımcı olmak için Discord adınızı verin.
+      placeholder: Örn. kampuslu
+    validations:
+      required: false
+  - type: textarea
+    id: additional-comments
+    attributes:
+      label: (Opsiyonel) Ek Yorumlar
+      description: Kapsamak istediğiniz başka bir şey var mı?
+      placeholder: kamp.us ❤️ açık kaynak
+    validations:
+      required: false
