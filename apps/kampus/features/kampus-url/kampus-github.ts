@@ -1,8 +1,15 @@
-export const getOdinGithubUrl = () => {
-  const baseUrl = "https://github.com/kamp-us/turkce-odin-project/edit";
-  const branchName = "main";
+const branchName = "dev";
+const baseUrl = "https://github.com/kamp-us/monorepo/";
 
-  return `${baseUrl}/${branchName}`;
+export const getOdinGithubUrl = ({ edit }: { edit: boolean }) => {
+  let url = baseUrl;
+  if (edit) {
+    url = url + "edit";
+  } else {
+    url = url + "blob";
+  }
+
+  return `${url}/${branchName}/contents/odin`;
 };
 
 export const getOdinGithubEditUrl = (path = "") => {
@@ -11,7 +18,7 @@ export const getOdinGithubEditUrl = (path = "") => {
     path = path.replace(".mdx", ".md");
   }
 
-  return `${getOdinGithubUrl()}/${path}`;
+  return `${getOdinGithubUrl({ edit: true })}/${path}`;
 };
 
 interface Lesson {
@@ -26,5 +33,5 @@ export const getOdinGithubIssueUrl = (lesson: Lesson) => {
     "lesson-link": lesson.path,
   };
 
-  return `${getOdinGithubUrl()}/issues/new?${new URLSearchParams(params).toString()}`;
+  return `${baseUrl}/issues/new?${new URLSearchParams(params).toString()}`;
 };
