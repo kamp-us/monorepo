@@ -316,6 +316,7 @@ type OdinQuery {
 type OdinLesson implements Node {
   id: ID!
   title: String!
+  path: String!
   body: OdinLessonBody!
 }
 

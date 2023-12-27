@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<1f9b6633a32b19230f062d501df84ad1>>
+ * @generated SignedSource<<5bdf74814b7e25b236ab673820a2a901>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -19,7 +19,7 @@ export type OdinLessonQuery$data = {
       readonly body: {
         readonly " $fragmentSpreads": FragmentRefs<"OdinLessonBody_body">;
       };
-      readonly " $fragmentSpreads": FragmentRefs<"OdinLessonTitle_title">;
+      readonly " $fragmentSpreads": FragmentRefs<"OdinLessonActions_path" | "OdinLessonTitle_title">;
     } | null;
   };
 };
@@ -86,6 +86,11 @@ return {
                 "args": null,
                 "kind": "FragmentSpread",
                 "name": "OdinLessonTitle_title"
+              },
+              {
+                "args": null,
+                "kind": "FragmentSpread",
+                "name": "OdinLessonActions_path"
               }
             ],
             "storageKey": null
@@ -148,6 +153,13 @@ return {
                 "alias": null,
                 "args": null,
                 "kind": "ScalarField",
+                "name": "path",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
                 "name": "id",
                 "storageKey": null
               }
@@ -160,16 +172,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "4a4f62ede402f2c78b6c617405ff04a0",
+    "cacheID": "4ac3236b262fb68711e2134d67be0849",
     "id": null,
     "metadata": {},
     "name": "OdinLessonQuery",
     "operationKind": "query",
-    "text": "query OdinLessonQuery(\n  $id: ID!\n) {\n  odin {\n    lesson(id: $id) {\n      body {\n        ...OdinLessonBody_body\n      }\n      ...OdinLessonTitle_title\n      id\n    }\n  }\n}\n\nfragment OdinLessonBody_body on OdinLessonBody {\n  html\n}\n\nfragment OdinLessonTitle_title on OdinLesson {\n  title\n}\n"
+    "text": "query OdinLessonQuery(\n  $id: ID!\n) {\n  odin {\n    lesson(id: $id) {\n      body {\n        ...OdinLessonBody_body\n      }\n      ...OdinLessonTitle_title\n      ...OdinLessonActions_path\n      id\n    }\n  }\n}\n\nfragment OdinLessonActions_path on OdinLesson {\n  title\n  path\n}\n\nfragment OdinLessonBody_body on OdinLessonBody {\n  html\n}\n\nfragment OdinLessonTitle_title on OdinLesson {\n  title\n}\n"
   }
 };
 })();
 
-(node as any).hash = "e6c2ac9ec9d395036a370b7eb281512d";
+(node as any).hash = "49a4b8ad70a1daedd736d6183bc35217";
 
 export default node;

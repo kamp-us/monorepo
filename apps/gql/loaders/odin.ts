@@ -21,6 +21,7 @@ export const transformOdinLesson = (lesson: Lesson) => {
     __typename: "OdinLesson" as const,
     id: lesson.id,
     title: lesson.title,
+    path: lesson._raw.sourceFilePath,
     body: {
       raw: lesson.body.raw,
       html: lesson.html,
