@@ -201,7 +201,8 @@ export const resolvers = {
     },
   },
   OdinLesson: {
-    id: (lesson) => stringify("OdinLesson", lesson.id),
+    id: (lesson) => lesson.id,
+    path: (lesson) => lesson.path,
     title: (lesson) => lesson.title,
     body: (lesson) => lesson.body,
   },

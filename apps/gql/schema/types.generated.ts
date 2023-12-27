@@ -127,6 +127,7 @@ export type OdinLesson = Node & {
   __typename?: "OdinLesson";
   body: OdinLessonBody;
   id: Scalars["ID"]["output"];
+  path: Scalars["String"]["output"];
   title: Scalars["String"]["output"];
 };
 
@@ -843,6 +844,7 @@ export type OdinLessonResolvers<
 > = ResolversObject<{
   body: Resolver<ResolversTypes["OdinLessonBody"], ParentType, ContextType>;
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  path: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
