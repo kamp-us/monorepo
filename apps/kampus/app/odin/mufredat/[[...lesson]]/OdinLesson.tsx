@@ -5,6 +5,7 @@ import { graphql, usePreloadedQuery } from "react-relay";
 import { type SerializablePreloadedQuery } from "~/features/relay";
 import useSerializablePreloadedQuery from "~/features/relay/use-serializable-preloaded-query";
 import { type OdinLessonQuery } from "~/app/odin/mufredat/[[...lesson]]/__generated__/OdinLessonQuery.graphql";
+import { OdinLessonActions } from "./OdinLessonActions";
 import { OdinLessonBody } from "./OdinLessonBody";
 import { OdinLessonTitle } from "./OdinLessonTitle";
 
@@ -24,6 +25,7 @@ export const OdinLessonContainer = (props: Props) => {
               ...OdinLessonBody_body
             }
             ...OdinLessonTitle_title
+            ...OdinLessonActions_path
           }
         }
       }
@@ -37,6 +39,7 @@ export const OdinLessonContainer = (props: Props) => {
     <>
       <OdinLessonTitle lesson={data.odin.lesson} />
       <OdinLessonBody body={lesson?.body ?? null} />
+      <OdinLessonActions lesson={data.odin.lesson} />
     </>
   );
 };
