@@ -8,22 +8,22 @@ Web'deki çoğu içerik metin tabanlıdır, bu nedenle kendinizi HTML kodlarıyl
 
 Bu derste, en çok kullanmanız muhtemel metin tabanlı öğeler hakkında bilgi edineceğiz.
 
-### Derse Genel Bakış
+### Derse genel bakış
 
 Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içermektedir.
 
-*   Paragraflar nasıl oluşturulur?
-*   Başlıklar nasıl oluşturulur?
-*   Kalın metin nasıl oluşturulur?
-*   İtalik metin nasıl oluşturulur?
-*   İç içe geçmiş öğeler arasındaki ilişkiler
-*   HTML yorumları nasıl oluşturulur?
+- Paragraflar nasıl oluşturulur?
+- Başlıklar nasıl oluşturulur?
+- Kalın metin nasıl oluşturulur?
+- İtalik metin nasıl oluşturulur?
+- İç içe geçmiş öğeler arasındaki ilişkiler
+- HTML yorumları nasıl oluşturulur?
 
 ### Paragraflar
 
 Bir HTML sayfasında aşağıdaki metnin çıktısının ne olmasını beklersiniz?
 
-~~~html
+```html
 <body>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
   incididunt ut labore et dolore magna aliqua.
@@ -31,9 +31,9 @@ Bir HTML sayfasında aşağıdaki metnin çıktısının ne olmasını beklersin
   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
   nisi ut aliquip ex ea commodo consequat.
 </body>
-~~~
+```
 
-Görünüşe göre iki paragraf metin gibi duruyor, bu nedenle onun bu şekilde görüntülenmesini bekleyebilirsiniz. Ancak durum böyle değil, aşağıdaki çıktıda görebileceğiniz gibi:
+Görünüşe göre iki paragraf metin gibi duruyor, bu nedenle onun bu şekilde görüntülenmesini bekleyebilirsiniz. Ancak durum böyle değil, aşağıdaki çıktıda görebileceğiniz gi-
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="xxrKqeV" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","padding":"1em"}}>
 <a href="https://codepen.io">CodePen</a>'de
@@ -120,7 +120,7 @@ TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProj
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-### Yerleştirme ve Girinti
+### Yerleştirme ve girinti
 
 Bu dersteki tüm örneklerde, diğer öğelerin içinde yer alan öğeleri girintilendirdiğimizi fark etmiş olabilirsiniz. Bu, öğelerin iç içe geçmesi olarak bilinir.
 
@@ -153,7 +153,7 @@ TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProj
 
 Öğeler arasındaki üst, alt ve kardeş ilişkileri, HTML'imizi CSS ile şekillendirmeye ve JavaScript ile işlev eklemeye başladığımızda çok daha önemli hale gelecektir. Ancak şimdilik, öğelerin birbiriyle nasıl ilişkili olduğu ve ilişkilerini tanımlamak için kullanılan terminoloji arasındaki farkı bilmek önemlidir.
 
-### HTML Yorumları
+### HTML yorumları
 
 HTML yorumları tarayıcı tarafından görülemez; kodumuz üzerinde *yorum* yapmamızı sağlarlar, böylece diğer geliştiriciler veya gelecekteki kişiler bunları okuyabilir ve kodda açık olmayan bir şey hakkında bazı bilgiler edinebilirler.
 
@@ -171,28 +171,28 @@ TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProj
 
 <div class="lesson-content__panel" markdown="1">
 
-1.  Kevin Powell'ın [HTML Paragraf ve Başlıklar Videosunu İzleyin](https://www.youtube.com/watch?v=yqcd-XkxZNM&list=PL4-IK0AVhVjM0xE0K2uZRvsM7LkIhsPT-&index=3)
-2.  Kevin Powell'ın [HTML Kalın ve İtalik Metin Videosunu İzleyin](https://www.youtube.com/watch?v=gW6cBZLUk6M&list=PL4-IK0AVhVjM0xE0K2uZRvsM7LkIhsPT-&index=4)
-3.  HTML'de metinle çalışma alıştırması yapmak için, farklı başlıklar kullanan, paragraflar kullanan ve paragraflardaki bazı metinleri kalın ve italik hale getiren düz bir blog makalesi sayfası oluşturun. Sitelerinizi oluştururken gerçek metin yerine sahte metin oluşturmak için [Lorem Ipsum](https://loremipsum.io/) kullanabilirsiniz.
+1. Kevin Powell'ın [HTML Paragraph and Headings adlı ingilizce videosunu izleyin](https://www.youtube.com/watch?v=yqcd-XkxZNM&list=PL4-IK0AVhVjM0xE0K2uZRvsM7LkIhsPT-&index=3)
+1. Kevin Powell'ın [HTML Bold and Italic Text adlı ingilizce videosunu izleyin](https://www.youtube.com/watch?v=gW6cBZLUk6M&list=PL4-IK0AVhVjM0xE0K2uZRvsM7LkIhsPT-&index=4)
+1. HTML'de metinle çalışma alıştırması yapmak için, farklı başlıklar kullanan, paragraflar kullanan ve paragraflardaki bazı metinleri kalın ve italik hale getiren düz bir blog makalesi sayfası oluşturun. Sitelerinizi oluştururken gerçek metin yerine sahte metin oluşturmak için [Lorem Ipsum](https://loremipsum.io/) kullanabilirsiniz.
 
 </div>
 
-### Bilgi Ölçme
+### Bilgi ölçme
   
-Bu bölüm, bu dersi kendi başınıza anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve yönlendirdiği materyali inceleyin.
+Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve bağlantılı olduğu materyali gözden geçirin.
  
-*   [HTML'de bir paragraf nasıl oluşturulur?](#create-paragraph-element)
-*   [HTML'de nasıl başlık oluşturulur?](#headings)
-*   [Kaç farklı başlık seviyesi vardır ve aralarındaki fark nedir?](#different-heading-levels)
-*   [Metni kalın ve önemli yapmak için hangi öğeyi kullanmalısınız?](#strong-element)
-*   [Metne vurgu katmak amacıyla italik hale getirmek için hangi öğeyi kullanmalısınız?](#em-element)
-*   [Bir elemanın içindeki herhangi bir iç içe elemanla ne gibi bir ilişkisi vardır?](#nested-relationship)
-*   [İki öğe aynı iç içe geçme seviyesindeyse aralarında nasıl bir ilişki vardır?](#elements-same-level)
-*   [HTML yorumları nasıl oluşturulur?](#html-comments)
+- [HTML'de bir paragraf nasıl oluşturulur?](#create-paragraph-element)
+- [HTML'de nasıl başlık oluşturulur?](#başlıklar)
+- [Kaç farklı başlık seviyesi vardır ve aralarındaki fark nedir?](#different-heading-levels)
+- [Metni kalın ve önemli yapmak için hangi öğeyi kullanmalısınız?](#strong-öğesi)
+- [Metne vurgu katmak amacıyla italik hale getirmek için hangi öğeyi kullanmalısınız?](#em-öğesi)
+- [Bir elemanın içindeki herhangi bir iç içe elemanla ne gibi bir ilişkisi vardır?](#nested-relationship)
+- [İki öğe aynı iç içe geçme seviyesindeyse aralarında nasıl bir ilişki vardır?](#elements-same-level)
+- [HTML yorumları nasıl oluşturulur?](#html-yorumları)
 
-### Ek Kaynaklar
+### Ek kaynaklar
 
-Bu bölüm, ilgili içeriğe yararlı bağlantılar içerir. Zorunlu değildir, bu nedenle tamamlayıcı olarak düşünün.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-*   [&lt;strong> &lt;b> &lt;em> ve &lt;i> etiketleri arasındaki anlamsal fark nedir ve bu öğeler ne zaman kullanılır?](https://medium.com/@zac_heisey/when-to-use-strong-b-em-and-i-tags-in-your-markup-fa4d0af8affb)
-*   [Etkileşimli bir HTML metin biçimlendirme makalesi](https://www.w3schools.com/html/html_formatting.asp)
+- [&lt;strong> &lt;b> &lt;em> ve &lt;i> etiketleri arasındaki anlamsal fark nedir ve bu öğeler ne zaman kullanılır? gibi soruları öğrenmek için bu ingilizce makaleye bakabilirsiniz.](https://medium.com/@zac_heisey/when-to-use-strong-b-em-and-i-tags-in-your-markup-fa4d0af8affb)
+- [HTML formatting adlı etkileşimli bir ingilizce makale](https://www.w3schools.com/html/html_formatting.asp)

@@ -5,7 +5,8 @@ title: 'Javascript Temelleri - 1'
 ### Giriş
 JavaScript'e dalalım!
 
-### Ders Özeti
+### Ders özeti
+
 Bu bölümde öğreneceğiniz konuların genel bir özeti bulunmaktadır.
 
 * Bir değişken nasıl tanımlanır?
@@ -22,13 +23,13 @@ Bu bölümde öğreneceğiniz konuların genel bir özeti bulunmaktadır.
 * Atama operatörleri nelerdir?
 * Tekil artı (unary plus) operatörü nedir?
 
-### JavaScript Kodu Nasıl Çalıştırılır?
+### JavaScript kodu nasıl çalıştırılır?
 
 Temel bilgiler kursunda yazacağımız JavaScript kodunun çoğunlukla tarayıcı üzerinde çalıştıracağız. JavaScript'in tarayıcı dışındaki bir ortamda nasıl çalıştırılacağını, ilerleyen zamanda temel bilgiler ve NodeJS kurslarında öğreneceksiniz. O zamana kadar tam tersi belirtilmedikçe JavaScript'i tarayıcınızda çalıştırmalısınız, aksi takdirde beklenmedik hatalarla karşılaşabilirsiniz.
 
 En kolay yol, içinde JavaScript kodu bulunan bir HTML dosyası yaratmaktır. Bilgisayarınızın herhangi bir yerindeki bir dosyaya, temel HTML taslağını yazın:
 
-~~~html
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +43,7 @@ En kolay yol, içinde JavaScript kodu bulunan bir HTML dosyası yaratmaktır. Bi
   </script>
 </body>
 </html>
-~~~
+```
 
 Bu dosyayı kaydedin ve bir web tarayıcısında açın (bunun için Visual Studio Code'daki ["Live Server"](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) eklentisini kullanabilirsiniz!) ve daha sonra <span id="access-devTools-console">boş web sayfasına sağ tıklayıp "İncele" veya "Öğeyi İncele" seçeneğini seçerek tarayıcının konsolunu açın. 'Geliştirici Araçları' panelinde 'Konsol' sekmesini bulun ve seçin</span>, burada `console.log` ifadesinin çıktısını görmelisiniz.
 
@@ -50,9 +51,9 @@ Bu dosyayı kaydedin ve bir web tarayıcısında açın (bunun için Visual Stud
 
 Bir web sayfasına JavaScript dahil etmenin başka bir yolu, harici kod kullanmaktır Bu, web sitenize harici CSS dosyalarını bağlamaya çok benzer.
 
-~~~html
+```html
   <script src="javascript.js"></script>
-~~~
+```
 
 Stil dosyaları .css'ye benzer şekilde, JavaScript dosyaları .js uzantısına sahiptir. Harici JavaScript dosyaları, daha karmaşık kodlar için kullanılır.
 
@@ -76,7 +77,6 @@ Sayılar, programlama mantığının yapı taşlarıdır! Azıcık basit matemat
 2. [Bu İngilizce MDN makalesi](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Math), basit matematik işlemlerini JavaScript ile nasıl yapabileceğinizi öğreterek, aynı konuyu farklı bir bakış açısıyla ele almakta. Sayılarla yapılabilecek daha çok şey var ancak şimdilik bilmeniz gereken bu kadar.
 3. JavaScript operatörlerini anlatan [bu İngilizce makaleyi](http://javascript.info/operators) okuyun (ve bir yandan kodlayın!). Sondaki Görevler kısmını yapmayı unutmayın! JavaScript'te sayılarla (ve daha nicesiyle!) neler yapabileceğinize dair iyi fikir edineceksiniz.okuyun (ve bir yandan kodlayın!). Sondaki Görevler kısmını yapmayı unutmayın! JavaScript'te sayılarla (ve daha nicesiyle!) neler yapabileceğinize dair iyi fikir edineceksiniz.
 
-
 ### Görev
 
 <div class="lesson-content__panel" markdown="1">
@@ -92,35 +92,35 @@ Aşağıdaki alıştırmaları deneyin (ve `console.log()` kullanmayı unutmayı
     * Konsolda şunu deneyin: `9 * a`
     * ve bunu: `let b = 7 * a` ( `undefined` \* değerini döndürür) ve sonra `console.log(b)` yazın.
 5. Şimdiye kadar bir şeyler kapmış olmalısınız. Şunu deneyin.
-    * Sabit bir değişken olan `max`ı `57` değeriyle belirtin.
-    * Başka bir değişken olan `actual`ı `max - 13` olarak ayarlayın.
-    * Başka bir değişken olan `percentage`i `actual / max` olarak ayarlayın.
-    * Eğer konsola `percentage` yazarsanız ve enter tuşuna basarsanız `0.7719` gibi bir değer göreceksiniz.
+    * Sabit bir değişken olan `MAX`ı `57` değeriyle belirtin.
+    * Başka bir değişken olan `actual`ı `MAX - 13` olarak ayarlayın.
+    * Başka bir değişken olan `percentage`i `actual / MAX` olarak ayarlayın.
+    * Eğer konsola `percentage` yazarsanız ve <kbd>Enter</kbd> tuşuna basarsanız `0.7719` gibi bir değer göreceksiniz.
 6. Script etiketinizdeki şeyleri biraz daha kurcalayın. Bir süre sonra, o sayıları ve değişkenleri web sayfasında nasıl göstereceğimizi öğreneceğiz ama mantık hep aynı kalacak, o yüzden ilerlemeden önce iyi anladığınıza emin olun.
 
 _* JavaScript kodunu konsolda çalıştırarak muhtemelen fark etmişsinizdir, konsol çalıştırdığı kodun çıktısını verir (buna döndürme denir). İlerleyen derslerde bunları göreceksiniz ancak şimdilik hatırlatmakta fayda var. Atama yapılmış bir tanımlama (örn. let b = 7 * a), undefined değerini döndürür yani aynı satırda bir değişken tanımlayıp sonra ona değer atayıp o değeri okumak mümkün değildir._
 </div>
 
-### Ek Kaynaklar
+### Bilgi kontrolü
 
-Bu bölüm, diğer içeriklere yardımcı olan faydalı bağlantılar içerir. Zorunlu değildir, ek kaynak olarak düşünün 
+Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve bağlantılı olduğu materyali gözden geçirin.
 
-* `var` ve `let` arasındaki kesin farklar [javascript.info](https://javascript.info/var) adresinde açıklanmaktadır.
+- [Bir değişken tanımlamanın üç yolunu sayın.](#variable-declaration)
+- [Üç farklı yolu olan değişken tanımlamanın hangisinden, neden kaçınmalısınız?](#avoid-var)
+- [Değişkenleri adlandırırken hangi kurallara dikkat etmelisiniz? ilgili ingilizce makale için tıklayın.](https://javascript.info/variables#variable-naming)
+- [Sayıları ve dizeleri bir araya getirdiğinizde ne olur? ilgili ingilizce makale için tıklayın.](https://javascript.info/operators#string-concatenation-with-binary)
+- [Modulo (%), veya Kalan, operatörü nasıl çalışır? ilgili ingilizce makale için tıklayın.](https://javascript.info/operators#remainder)
+- [`==` ve `===` arasındaki farkı açıklayın, ilgili ingilizce makale için tıklayın.](https://www.w3schools.com/js/js_numbers.asp)
+- [Ne zaman `NaN` sonucu alırsınız? ilgili ingilizce makale için tıklayın.](https://www.w3schools.com/js/js_numbers.asp)
+- [Bir sayıyı nasıl artırır veya azaltırsınız? ilgili ingilizce makale için tıklayın.](https://javascript.info/operators#increment-decrement)
+- [Ön ekli ve son ekli artırım/azaltım operatörleri arasındaki fark nedir? ilgili ingilizce makale için tıklayın.](https://javascript.info/operators#increment-decrement)
+- [Operatör önceliği nedir ve JS'de nasıl ele alınır? ilgili ingilizce makale için tıklayın.](https://javascript.info/operators#operator-precedence)
+- [Geliştirici araçlarına ve konsola nasıl erişilir?](#access-devTools-console)
+- [Bilgileri konsola nasıl yazdırırız?](#console-log)
+- [Tekil artı (unary plus) operatörü, dize olarak belirtilmiş bir sayıya ne yapar? örn. "10" ilgili ingilizce makale için tıklayın.](https://javascript.info/operators#numeric-conversion-unary)
 
-### Bilgi Kontrolü
+### Ek kaynaklar
 
-Bu bölüm, bu dersi anlayıp anlamadığınızı kendi başınıza kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta sorun yaşıyorsanız, soruya tıklayın ve bağlantının verdiği materyali inceleyin.
+Bu bölüm, diğer içeriklere yardımcı olan faydalı bağlantılar içerir. Zorunlu değildir, ek kaynak olarak düşünün. 
 
-* [Bir değişken tanımlamanın üç yolunu sayın.](#variable-declaration)
-* [Üç farklı yolu olan değişken tanımlamanın hangisinden, neden kaçınmalısınız?](#avoid-var)
-* [Değişkenleri adlandırırken hangi kurallara dikkat etmelisiniz?](https://javascript.info/variables#variable-naming)
-* [Sayıları ve dizeleri bir araya getirdiğinizde ne olur?](https://javascript.info/operators#string-concatenation-with-binary)
-* [Modulo (%), veya Kalan, operatörü nasıl çalışır?](https://javascript.info/operators#remainder)
-* [`==` ve `===` arasındaki farkı açıklayın.](https://www.w3schools.com/js/js_numbers.asp)
-* [Ne zaman `NaN` sonucu alırsınız?](https://www.w3schools.com/js/js_numbers.asp)
-* [Bir sayıyı nasıl artırır veya azaltırsınız?](https://javascript.info/operators#increment-decrement)
-* [Ön ekli ve son ekli artırım/azaltım operatörleri arasındaki fark nedir?](https://javascript.info/operators#increment-decrement)
-* [Operatör önceliği nedir ve JS'de nasıl ele alınır?](https://javascript.info/operators#operator-precedence)
-* [Geliştirici araçlarına ve konsola nasıl erişilir?](#access-devTools-console)
-* [Bilgileri konsola nasıl yazdırırız?](#console-log)
-* [Tekil artı (unary plus) operatörü, dize olarak belirtilmiş bir sayıya ne yapar? örn. "10"](https://javascript.info/operators#numeric-conversion-unary)
+- `var` ve `let` arasındaki farklar [javascript.info'nun eski "var" başlıklı bu ingilizce makalesinde](https://javascript.info/var) açıklanmıştır.

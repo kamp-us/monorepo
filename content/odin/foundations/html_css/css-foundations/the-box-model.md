@@ -60,13 +60,13 @@ Diyagramları dikkatlice incelediğinizden emin olun.
 Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve bağlantılı olduğu materyali gözden geçirin.
 
 *   [İçeriden dışarıya doğru, kutu modeli özelliklerinin sıralaması nedir?](#kutu-modeli)
-*   [CSS özelliklerinden `box-sizing` ne işe yarar? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model)
-*   [Standart ve alternatif kutu modeli arasındaki fark nedir? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model)
-*   [İki öğe arasında daha fazla boşluk oluşturmak için `dış kenar boşluğu` mu yoksa `iç kenar boşluğu` mu kullanırsınız? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#margins_padding_and_borders)
-*   [Bir öğenin içeriği ile kenarı arasında daha fazla boşluk oluşturmak için `dış kenar boşluğu` mu yoksa `iç kenar boşluğu` mu kullanırsınız? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#margins_padding_and_borders)
-*   [İki öğenin birbiriyle örtüşmesini isterseniz `dış kenar boşluğu` mu yoksa `iç kenar boşluğu` mu kullanırsınız? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#margins_padding_and_borders)
+*   [CSS özelliklerinden `box-sizing` ne işe yarar? ilgili ingilizce makale için tıklayın.](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model)
+*   [Standart ve alternatif kutu modeli arasındaki fark nedir? ilgili ingilizce makale için tıklayın.](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model)
+*   [İki öğe arasında daha fazla boşluk oluşturmak için `dış kenar boşluğu` mu yoksa `iç kenar boşluğu` mu kullanırsınız? ilgili ingilizce makale için tıklayın.](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#margins_padding_and_borders)
+*   [Bir öğenin içeriği ile kenarı arasında daha fazla boşluk oluşturmak için `dış kenar boşluğu` mu yoksa `iç kenar boşluğu` mu kullanırsınız? ilgili ingilizce makale için tıklayın.](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#margins_padding_and_borders)
+*   [İki öğenin birbiriyle örtüşmesini isterseniz `dış kenar boşluğu` mu yoksa `iç kenar boşluğu` mu kullanırsınız? ilgili ingilizce makale için tıklayın.](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#margins_padding_and_borders)
 *   [Tüm elementleriniz için alternatif kutu modelini nasıl ayarlıyorsunuz? öğrenmek için bu ingilizce makaleye göz atın.](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model)
-*   [Bir elementi yatay olarak nasıl ortalarsınız? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://css-tricks.com/almanac/properties/m/margin/#aa-auto-and-centering)
+*   [Bir elementi yatay olarak nasıl ortalarsınız? ilgili ingilizce makale için tıklayın.](https://css-tricks.com/almanac/properties/m/margin/#aa-auto-and-centering)
 
 ### Ek kaynaklar
 

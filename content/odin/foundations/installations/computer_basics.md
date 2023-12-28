@@ -32,16 +32,16 @@ Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
 ### Bilgi ölçme
 
-Bu bölüm, bu dersi anlayıp anlamadığınızı kendi başınıza kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta sorun yaşıyorsanız, soruya tıklayın ve bağlantının verdiği materyali inceleyin.
+Bu bölüm, bu dersi anlayıp anlamadığınızı kendi başınıza kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta sorun yaşıyorsanız, soruya tıklayın ve bağlantının verdiği materyali inceleyin. Bu bölümde bulunan materyallerin hepsi ingilizcedir.
 
-- [Windows bir işletim sistemi midir uygulama mıdır? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://edu.gcfglobal.org/en/computerbasics/understanding-operating-systems/1/)
-- [Açık kaynak ve kapalı kaynak yazılım arasındaki fark nedir? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://edu.gcfglobal.org/en/basic-computer-skills/open-source-vs-closed-source-software/1/)
-- [Ekran görüntülerinin kullanılma şekilleri nedir? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://edu.gcfglobal.org/en/techsavvy/taking-screenshots/1/)
-- [Zayıf ve güçlü parolalar nedir? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://edu.gcfglobal.org/en/techsavvy/password-tips/1/)
+- [Windows bir işletim sistemi midir uygulama mıdır?](https://edu.gcfglobal.org/en/computerbasics/understanding-operating-systems/1/)
+- [Açık kaynak ve kapalı kaynak yazılım arasındaki fark nedir?](https://edu.gcfglobal.org/en/basic-computer-skills/open-source-vs-closed-source-software/1/)
+- [Ekran görüntülerinin kullanılma şekilleri nedir?](https://edu.gcfglobal.org/en/techsavvy/taking-screenshots/1/)
+- [Zayıf ve güçlü parolalar nedir?](https://edu.gcfglobal.org/en/techsavvy/password-tips/1/)
 
 ### Ek kaynaklar
 
 Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-- Bilgisayarınızı verimli bir şekilde kullanmak için erişilebilirlik özelliklerinden nasıl yararlanabileceğinizi öğrenmek için GCF'nin bu sayfasına ["What are accessibility features"](https://edu.gcfglobal.org/en/computerbasics/using-accessibility-features/1/) göz atın.
-- Bu konuyu öğrenmek için daha fazla zaman harcamak istiyorsanız, [FreeCodeCamp's excellent course on computer basics](https://youtu.be/y2kg3MOk1sY) göz atın.
+- Bilgisayarınızı verimli bir şekilde kullanmak için erişilebilirlik özelliklerinden nasıl yararlanabileceğinizi öğrenmek için GCF'nin bu sayfasına ["What are accessibility features"](https://edu.gcfglobal.org/en/computerbasics/using-accessibility-features/1/) adlı ingilizce makaleye göz atın.
+- Bu konuyu öğrenmek için daha fazla zaman harcamak istiyorsanız, [FreeCodeCamp's excellent course on computer basics](https://youtu.be/y2kg3MOk1sY) adlı ingilizce videoya göz atın.
