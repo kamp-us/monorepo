@@ -1,27 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { MoreHorizontal } from "lucide-react";
+import { DotsHorizontalIcon, DotsVerticalIcon } from "@radix-ui/react-icons";
+import { AlertDialog, Button, DropdownMenu, Flex, IconButton } from "@radix-ui/themes";
 import { graphql, useFragment, useMutation } from "react-relay";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-  Button,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  useToast,
-} from "@kampus/ui";
+import { useToast } from "@kampus/ui";
 
 import { type MoreOptions_post$key } from "./__generated__/MoreOptions_post.graphql";
 import { type MoreOptions_viewer$key } from "./__generated__/MoreOptions_viewer.graphql";
@@ -72,6 +56,7 @@ const removePostMutation = graphql`
 
 // TODO: move this to server side
 function canUserEdit(username?: string | null, owner?: string | null) {
+  console.log({ username, owner });
   if (!owner) return false;
   if (!username) return false;
 
@@ -97,26 +82,28 @@ export const MoreOptionsDropdown = (props: Props) => {
   };
 
   return (
-    <AlertDialog>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button className="h-5 p-1" variant="ghost">
-            <MoreHorizontal size="16" aria-label="Daha fazla seçenek" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+    <AlertDialog.Root>
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <IconButton variant="ghost" color="gray">
+            <DotsVerticalIcon width="16" height="16" aria-label="Daha fazla seçenek" />
+          </IconButton>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content align="end">
           {canUserEdit(viewer?.actor?.displayName, post?.owner?.displayName) && (
             <>
-              <DropdownMenuItem asChild key="edit">
-                <Link href={`/post/${post?.id}/edit`}>Düzenle</Link>
-              </DropdownMenuItem>
-              <AlertDialogTrigger asChild>
-                <DropdownMenuItem>Sil</DropdownMenuItem>
-              </AlertDialogTrigger>
-              <DropdownMenuSeparator key="separator" />
+              <Link href={`/post/${post?.id}/edit`}>
+                <DropdownMenu.Item asChild key="edit" disabled>
+                  Düzenle
+                </DropdownMenu.Item>
+              </Link>
+              <AlertDialog.Trigger>
+                <DropdownMenu.Item>Sil</DropdownMenu.Item>
+              </AlertDialog.Trigger>
+              <DropdownMenu.Separator key="separator" />
             </>
           )}
-          <DropdownMenuItem
+          <DropdownMenu.Item
             onSelect={() => {
               toast({
                 description: "Link kopyalandı",
@@ -124,21 +111,27 @@ export const MoreOptionsDropdown = (props: Props) => {
             }}
           >
             Linki kopyala
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Silmek istediğine emin misin?</AlertDialogTitle>
-          <AlertDialogDescription>
-            Eğer bu gönderiyi silersen, bu işlemi geri alamazsın.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Hayır</AlertDialogCancel>
-          <AlertDialogAction onClick={onClick}>Evet</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+      <AlertDialog.Content>
+        <AlertDialog.Title>Silmek istediğine emin misin?</AlertDialog.Title>
+        <AlertDialog.Description>
+          Eğer bu gönderiyi silersen, bu işlemi geri alamazsın.
+        </AlertDialog.Description>
+        <Flex gap="3" mt="4" justify="end">
+          <AlertDialog.Cancel>
+            <Button variant="soft" color="gray">
+              Hayır
+            </Button>
+          </AlertDialog.Cancel>
+          <AlertDialog.Action onClick={onClick}>
+            <Button variant="solid" color="red">
+              Evet
+            </Button>
+          </AlertDialog.Action>
+        </Flex>
+      </AlertDialog.Content>
+    </AlertDialog.Root>
   );
 };

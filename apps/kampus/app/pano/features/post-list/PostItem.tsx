@@ -1,15 +1,18 @@
 "use client";
 
 import NextLink from "next/link";
-import { ExternalLinkIcon, MessageCircleIcon } from "lucide-react";
+import { ChatBubbleIcon, ExternalLinkIcon } from "@radix-ui/react-icons";
+import { Button, Card, Flex, Heading, IconButton, Inset, Text, Tooltip } from "@radix-ui/themes";
 import { graphql, useFragment } from "react-relay";
 
-import { Card, CardContent, CardFooter, CardTitle, TimeAgo } from "@kampus/ui";
+import { TimeAgo } from "@kampus/ui";
 import { cn } from "@kampus/ui/utils";
 
+import { getPostURL, getSitePostsURL } from "~/features/kampus-url/pano";
 import { type PostItem_post$key } from "./__generated__/PostItem_post.graphql";
 import { type PostItem_viewer$key } from "./__generated__/PostItem_viewer.graphql";
 import { MoreOptionsDropdown } from "./MoreOptions";
+import styles from "./PostItem.module.css";
 import { UpvoteButton } from "./PostUpvoteButton";
 
 interface LinkProps {
@@ -77,48 +80,35 @@ export const PostItem = (props: PostItemProps) => {
   }
 
   return (
-    <Card className="flex flex-row items-center gap-6 p-6">
-      <div className="flex flex-col gap-3 p-0">
+    <Card>
+      <Flex align="center" gap="2">
         <UpvoteButton postRef={post} />
-      </div>
-
-      <CardContent className="flex flex-1 flex-col gap-2 p-0">
-        <CardTitle className="flex gap-3">
-          <div className="flex items-center gap-1.5">
-            <Link className="font-semibold" href={post.url ?? ""}>
-              {post.title}
-            </Link>
-            <ExternalLinkIcon size={12} />
-          </div>
-
-          <div className="text-muted-foreground flex items-center gap-1 text-sm">
-            <Link className="text-sm" href={post.site ? "/site/" + post.site : ""}>
-              {post.site ?? ""}
-            </Link>
-          </div>
-        </CardTitle>
-        <div className="text-muted-foreground flex text-sm">
-          <div>@{post.owner.displayName}</div>&nbsp;·&nbsp;
+        <Flex align="center" gap="1">
+          <NextLink href={getPostURL(post)}>
+            <Button variant="soft" size="1">
+              <ChatBubbleIcon width="16" height="14" /> {`${post.commentCount}`}
+            </Button>
+          </NextLink>
+        </Flex>
+        <Tooltip content={post.site ?? ""}>
+          <Heading as="h3" size="3" className={styles.PostItemTitle}>
+            <Link href={post.url ?? ""}>{post.title}</Link>
+          </Heading>
+        </Tooltip>
+        <ExternalLinkIcon style={{ flexShrink: 0 }} />
+        <Flex grow="1" />
+        <Text size="1" color="gray" style={{ flexShrink: 0 }}>
+          @{post.owner.displayName} ·&nbsp;
           <TimeAgo date={new Date(post.createdAt as string)} />
-        </div>
+        </Text>
 
-        <div className="flex items-center gap-4 text-sm">
-          <div className="flex items-center gap-1 font-semibold">
-            <MessageCircleIcon size="12" />
-            <Link href={`/post/${post.id}`}>{`${post.commentCount} yorum`}</Link>
-          </div>
-        </div>
-      </CardContent>
-      <CardFooter className="flex h-full flex-col justify-between p-0">
-        <div className="flex flex-1 flex-col">
-          <MoreOptionsDropdown
-            key={post.id}
-            post={post}
-            viewerRef={viewer}
-            postConnectionID={props.postConnectionId}
-          />
-        </div>
-      </CardFooter>
+        <MoreOptionsDropdown
+          key={post.id}
+          post={post}
+          viewerRef={viewer}
+          postConnectionID={props.postConnectionId}
+        />
+      </Flex>
     </Card>
   );
 };

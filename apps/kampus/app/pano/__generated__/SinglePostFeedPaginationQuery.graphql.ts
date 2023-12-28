@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<6b510cb6581f4f6f0b387ac509439a3e>>
+ * @generated SignedSource<<f38b98ae4adb66ecfa2e19e00b0da9f8>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -276,8 +276,6 @@ return {
                           (v10/*: any*/),
                           (v14/*: any*/),
                           (v11/*: any*/),
-                          (v12/*: any*/),
-                          (v13/*: any*/),
                           {
                             "alias": null,
                             "args": null,
@@ -290,6 +288,8 @@ return {
                             ],
                             "storageKey": null
                           },
+                          (v12/*: any*/),
+                          (v13/*: any*/),
                           (v15/*: any*/),
                           (v7/*: any*/)
                         ],
@@ -367,12 +367,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "8296a6f08ec06ed693c0d25236076dca",
+    "cacheID": "5fd3776b40720b737af94bd0e85179ea",
     "id": null,
     "metadata": {},
     "name": "SinglePostFeedPaginationQuery",
     "operationKind": "query",
-    "text": "query SinglePostFeedPaginationQuery(\n  $after: String\n  $before: String\n  $first: Int = 10\n  $last: Int\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...SinglePostFeed_post_pbnwq\n    id\n  }\n}\n\nfragment CommentItem_comment on PanoComment {\n  id\n  content\n  createdAt\n  owner {\n    displayName\n    id\n  }\n  commentCount\n  ...CommentUpvoteButton_comment\n  ...CommentMoreOptions_comment\n}\n\nfragment CommentMoreOptions_comment on PanoComment {\n  id\n  post {\n    id\n  }\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment CommentUpvoteButton_comment on PanoComment {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment SinglePostFeed_post_pbnwq on PanoPost {\n  ...PostItem_post\n  commentCount\n  comments(first: $first, after: $after, last: $last, before: $before) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n        ...CommentItem_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n"
+    "text": "query SinglePostFeedPaginationQuery(\n  $after: String\n  $before: String\n  $first: Int = 10\n  $last: Int\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...SinglePostFeed_post_pbnwq\n    id\n  }\n}\n\nfragment CommentItem_comment on PanoComment {\n  id\n  content\n  createdAt\n  owner {\n    displayName\n    id\n  }\n  commentCount\n  post {\n    id\n  }\n  ...CommentUpvoteButton_comment\n  ...CommentMoreOptions_comment\n}\n\nfragment CommentMoreOptions_comment on PanoComment {\n  id\n  post {\n    id\n  }\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment CommentUpvoteButton_comment on PanoComment {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment SinglePostFeed_post_pbnwq on PanoPost {\n  ...PostItem_post\n  commentCount\n  comments(first: $first, after: $after, last: $last, before: $before) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n        ...CommentItem_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n"
   }
 };
 })();

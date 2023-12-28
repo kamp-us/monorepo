@@ -1,3 +1,4 @@
+import { Box, Flex, IconButton, Text } from "@radix-ui/themes";
 import { ArrowBigUp } from "lucide-react";
 import { graphql, useFragment, useMutation } from "react-relay";
 
@@ -62,11 +63,13 @@ export const CommentUpvoteButton = (props: Props) => {
   };
 
   return (
-    <>
-      <Button onClick={onClick} disabled={disabled} variant="ghost" size="icon">
-        <ArrowBigUp fill={comment.isUpvotedByViewer ? "currentColor" : "none"} size="24" />
-      </Button>
-      <div className="text-center font-semibold">{comment?.upvoteCount ?? 0}</div>
-    </>
+    <Flex asChild direction="column">
+      <IconButton onClick={onClick} disabled={disabled} variant="ghost" color="gray">
+        <ArrowBigUp fill={comment.isUpvotedByViewer ? "currentColor" : "none"} size="20" />
+        <Text as="div" weight="medium" align="center" size="2">
+          {comment?.upvoteCount ?? 0}
+        </Text>
+      </IconButton>
+    </Flex>
   );
 };

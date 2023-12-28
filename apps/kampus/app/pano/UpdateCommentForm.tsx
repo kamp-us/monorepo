@@ -1,20 +1,12 @@
 "use client";
 
 import React from "react";
+import { Flex, IconButton, TextArea } from "@radix-ui/themes";
 import { Check, X } from "lucide-react";
 import { graphql, useFragment, useMutation } from "react-relay";
 import { z } from "zod";
 
-import {
-  Button,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-  Textarea,
-  useForm,
-} from "@kampus/ui";
+import { Form, FormControl, FormField, FormItem, FormMessage, useForm } from "@kampus/ui";
 
 import { type UpdateCommentForm_viewer$key } from "./__generated__/UpdateCommentForm_viewer.graphql";
 
@@ -93,41 +85,43 @@ export function UpdateCommentForm(props: Props) {
 
   return (
     <Form {...form}>
-      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <form className="flex flex-col gap-2" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="content"
-          render={(props) => (
-            <FormItem>
-              <FormControl>
-                <Textarea
-                  placeholder={
-                    actor ? "Yorumunu buraya ekle..." : "Yorum yapmak için giriş yapmalısın."
-                  }
-                  className="max-h-64 resize-y"
-                  disabled={!actor}
-                  {...props.field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex gap-2">
-          <Button
-            size="icon"
-            variant="destructive"
-            disabled={isInFlight}
-            onClick={() => props.setEditing(false)}
-          >
-            <X size={16} />
-          </Button>
-          <Button disabled={isInFlight} size="icon" type="submit">
-            <Check size={16} />
-          </Button>
-        </div>
-      </form>
+      <Flex asChild direction="column" gap="2" width="100%">
+        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+        <form className="flex flex-col gap-2" onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="content"
+            render={(p) => (
+              <FormItem>
+                <FormControl>
+                  <TextArea
+                    autoFocus
+                    placeholder={
+                      actor ? "Yorumunu buraya ekle..." : "Yorum yapmak için giriş yapmalısın."
+                    }
+                    disabled={!actor}
+                    {...p.field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Flex gap="2" justify="start" direction="row-reverse">
+            <IconButton disabled={isInFlight} variant="solid" type="submit">
+              <Check size={16} />
+            </IconButton>
+            <IconButton
+              variant="soft"
+              color="gray"
+              disabled={isInFlight}
+              onClick={() => props.setEditing(false)}
+            >
+              <X size={16} />
+            </IconButton>
+          </Flex>
+        </form>
+      </Flex>
     </Form>
   );
 }

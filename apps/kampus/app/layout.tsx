@@ -7,25 +7,26 @@ import { RelayEnvironmentProvider } from "~/features/relay/RelayEnvironmentProvi
 
 import "./globals.css";
 
-import { ThemeProvider } from "@kampus/ui";
-import { cn } from "~/../../packages/ui/utils";
+import { trTR } from "@clerk/localizations";
+import { ClerkProvider } from "@clerk/nextjs";
+
+import { ThemeProvider } from "./ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata = {
   title: "kamp.us",
-  description: "topluluk",
+  description: "dijital enstitü",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          inter.variable
-        )}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <RelayEnvironmentProvider>{children}</RelayEnvironmentProvider>
+    <html lang="tr">
+      <body className={inter.variable}>
+        <ThemeProvider>
+          <ClerkProvider localization={trTR}>
+            <RelayEnvironmentProvider>{children}</RelayEnvironmentProvider>
+          </ClerkProvider>
           <Toaster />
         </ThemeProvider>
       </body>

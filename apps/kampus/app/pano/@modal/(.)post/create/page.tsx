@@ -1,8 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-
-import { Dialog, DialogContent } from "@kampus/ui";
+import { Dialog, Theme } from "@radix-ui/themes";
 
 import { CreatePanoPostForm } from "~/app/pano/CreatePanoPostForm";
 
@@ -10,10 +9,16 @@ export default function CreatePost({ searchParams }: { searchParams: { conn: str
   const router = useRouter();
 
   return (
-    <Dialog open onOpenChange={() => router.back()}>
-      <DialogContent className="sm:max-w-[425px]">
-        <CreatePanoPostForm connectionID={searchParams.conn} onCompleted={() => router.back()} />
-      </DialogContent>
-    </Dialog>
+    <Theme accentColor="amber">
+      <Dialog.Root open onOpenChange={() => router.back()}>
+        <Dialog.Content className="sm:max-w-[425px]">
+          <Dialog.Title>Yeni Pano Girdisi</Dialog.Title>
+          <Dialog.Description size="2" mb="4">
+            pano&apos;yu zenginleştir :)
+          </Dialog.Description>
+          <CreatePanoPostForm connectionID={searchParams.conn} onCompleted={() => router.back()} />
+        </Dialog.Content>
+      </Dialog.Root>
+    </Theme>
   );
 }

@@ -1,15 +1,19 @@
 import { getKampusURL } from "./get-kampus-url";
 
-export function getPostURL({ postID }: { postID: string }) {
-  return getKampusURL("pano", getPostLink(postID));
+export function getPostURL({ id }: { id: string }) {
+  return getKampusURL("pano", getPostLink(id));
 }
 
 export function getCommentURL({ postID, commentID }: { postID: string; commentID: string }) {
   return getKampusURL("pano", getCommentLink(postID, commentID));
 }
 
+export function getSitePostsURL(post: { site: string }) {
+  return getKampusURL("pano", getSitePostsLink(post));
+}
+
 function getPostLink(postID: string) {
-  return `/post/${postID}`;
+  return `post/${postID}`;
 }
 
 function getCommentLink(postID: string, commentID: string) {
@@ -20,5 +24,5 @@ function getCommentLink(postID: string, commentID: string) {
 }
 
 function getSitePostsLink(post: { site: string }) {
-  return `/site/${post.site}`;
+  return `site/${post.site}`;
 }

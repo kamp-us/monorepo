@@ -7,7 +7,7 @@ export const TopNav = ({ children, sticky }: PropsWithChildren<{ sticky?: boolea
   return (
     <header className={cn(!!sticky && "sticky", "top-0 z-40 w-full border-b bg-background")}>
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-        <div className="flex gap-6 md:gap-10">{children}</div>
+        <div className="flex flex-1 gap-6 md:gap-10">{children}</div>
       </div>
     </header>
   );

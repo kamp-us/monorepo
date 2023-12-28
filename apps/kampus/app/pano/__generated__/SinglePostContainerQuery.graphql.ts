@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c2fe2be1bad9a9dbac28d2bf7d3589bd>>
+ * @generated SignedSource<<d9abe5561f4eac9a2af1b75dc39309e5>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -289,8 +289,6 @@ return {
                           (v6/*: any*/),
                           (v10/*: any*/),
                           (v7/*: any*/),
-                          (v8/*: any*/),
-                          (v9/*: any*/),
                           {
                             "alias": null,
                             "args": null,
@@ -303,6 +301,8 @@ return {
                             ],
                             "storageKey": null
                           },
+                          (v8/*: any*/),
+                          (v9/*: any*/),
                           (v12/*: any*/),
                           (v2/*: any*/)
                         ],
@@ -379,12 +379,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "bce44ac06b004a5aa2ba6ae686442e66",
+    "cacheID": "8794e82a7b817e130cf5d00a344fe733",
     "id": null,
     "metadata": {},
     "name": "SinglePostContainerQuery",
     "operationKind": "query",
-    "text": "query SinglePostContainerQuery(\n  $id: ID!\n) {\n  viewer {\n    ...SinglePostFeed_viewer\n  }\n  pano {\n    post(id: $id) {\n      ...SinglePostFeed_post\n      id\n    }\n  }\n}\n\nfragment CommentItem_comment on PanoComment {\n  id\n  content\n  createdAt\n  owner {\n    displayName\n    id\n  }\n  commentCount\n  ...CommentUpvoteButton_comment\n  ...CommentMoreOptions_comment\n}\n\nfragment CommentItem_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n  ...CommentMoreOptions_viewer\n  ...UpdateCommentForm_viewer\n}\n\nfragment CommentMoreOptions_comment on PanoComment {\n  id\n  post {\n    id\n  }\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment CommentMoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment CommentUpvoteButton_comment on PanoComment {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment CreatePostCommentForm_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment SinglePostFeed_post on PanoPost {\n  ...PostItem_post\n  commentCount\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n        ...CommentItem_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n\nfragment SinglePostFeed_viewer on Viewer {\n  ...PostItem_viewer\n  ...CommentItem_viewer\n  ...CreatePostCommentForm_viewer\n}\n\nfragment UpdateCommentForm_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n"
+    "text": "query SinglePostContainerQuery(\n  $id: ID!\n) {\n  viewer {\n    ...SinglePostFeed_viewer\n  }\n  pano {\n    post(id: $id) {\n      ...SinglePostFeed_post\n      id\n    }\n  }\n}\n\nfragment CommentItem_comment on PanoComment {\n  id\n  content\n  createdAt\n  owner {\n    displayName\n    id\n  }\n  commentCount\n  post {\n    id\n  }\n  ...CommentUpvoteButton_comment\n  ...CommentMoreOptions_comment\n}\n\nfragment CommentItem_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n  ...CommentMoreOptions_viewer\n  ...UpdateCommentForm_viewer\n}\n\nfragment CommentMoreOptions_comment on PanoComment {\n  id\n  post {\n    id\n  }\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment CommentMoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment CommentUpvoteButton_comment on PanoComment {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment CreatePostCommentForm_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_post on PanoPost {\n  id\n  owner {\n    displayName\n    id\n  }\n}\n\nfragment MoreOptions_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostItem_post on PanoPost {\n  id\n  title\n  content\n  url\n  createdAt\n  site\n  commentCount\n  ...PostUpvoteButton_post\n  owner {\n    displayName\n    id\n  }\n  ...MoreOptions_post\n}\n\nfragment PostItem_viewer on Viewer {\n  ...MoreOptions_viewer\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n\nfragment PostUpvoteButton_post on PanoPost {\n  id\n  isUpvotedByViewer\n  upvoteCount\n}\n\nfragment SinglePostFeed_post on PanoPost {\n  ...PostItem_post\n  commentCount\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        content\n        createdAt\n        owner {\n          displayName\n          id\n        }\n        ...CommentItem_comment\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n\nfragment SinglePostFeed_viewer on Viewer {\n  ...PostItem_viewer\n  ...CommentItem_viewer\n  ...CreatePostCommentForm_viewer\n}\n\nfragment UpdateCommentForm_viewer on Viewer {\n  actor {\n    __typename\n    displayName\n    id\n  }\n}\n"
   }
 };
 })();

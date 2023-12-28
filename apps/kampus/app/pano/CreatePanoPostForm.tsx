@@ -1,10 +1,10 @@
 "use client";
 
+import { Button, Flex, Heading, Separator, Text, TextArea, TextField } from "@radix-ui/themes";
 import { graphql, useMutation } from "react-relay";
 import { z } from "zod";
 
 import {
-  Button,
   Form,
   FormControl,
   FormDescription,
@@ -94,11 +94,17 @@ export function CreatePanoPostForm(props: Props) {
           name="url"
           render={(props) => (
             <FormItem>
-              <FormLabel>URL</FormLabel>
-              <FormControl>
-                <Input placeholder="https://ornek.com" {...props.field} />
-              </FormControl>
-              <FormMessage />
+              <label>
+                <Text as="div" size="2" mb="1" weight="bold">
+                  URL
+                </Text>
+                <FormControl>
+                  <TextField.Input placeholder="https://ornek.com" {...props.field} />
+                </FormControl>
+              </label>
+              <Text asChild color="red">
+                <FormMessage />
+              </Text>
             </FormItem>
           )}
         />
@@ -107,11 +113,17 @@ export function CreatePanoPostForm(props: Props) {
           name="title"
           render={(props) => (
             <FormItem>
-              <FormLabel>Başlık</FormLabel>
-              <FormControl>
-                <Input placeholder="Ornek baslik" {...props.field} />
-              </FormControl>
-              <FormMessage />
+              <label>
+                <Text as="div" size="2" mb="1" weight="bold">
+                  Başlık
+                </Text>
+                <FormControl>
+                  <TextField.Input placeholder="Ornek baslik" {...props.field} />
+                </FormControl>
+              </label>
+              <Text asChild color="red">
+                <FormMessage />
+              </Text>
             </FormItem>
           )}
         />
@@ -120,23 +132,26 @@ export function CreatePanoPostForm(props: Props) {
           name="content"
           render={(props) => (
             <FormItem>
-              <FormLabel>Icerik</FormLabel>
-              <FormControl>
-                <Textarea placeholder="Ornek hakkindaki dusuncelerim .." {...props.field} />
-              </FormControl>
-              <FormDescription>Eklemek istediklerini ekleyebilirsin ..</FormDescription>
+              <label>
+                <Text as="div" size="2" mb="1" weight="bold">
+                  Icerik
+                </Text>
+                <FormControl>
+                  <TextArea placeholder="Eklemek istediklerin ..." {...props.field} />
+                </FormControl>
+              </label>
               <FormMessage />
             </FormItem>
           )}
         />
-        <div className="flex justify-end gap-1.5">
-          <Button onClick={onCancel} variant="outline" type="reset">
+        <Flex justify="end" gap="2">
+          <Button onClick={onCancel} variant="soft" type="reset" color="gray">
             Iptal
           </Button>
           <Button type="submit" disabled={isInFlight}>
             Gonder
           </Button>
-        </div>
+        </Flex>
       </form>
     </Form>
   );

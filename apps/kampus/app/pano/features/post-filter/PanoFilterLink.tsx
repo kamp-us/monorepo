@@ -1,4 +1,5 @@
-import Link from "next/link";
+import NextLink from "next/link";
+import { Link } from "@radix-ui/themes";
 
 import { type PanoPostFilterType } from "~/app/pano/features/post-filter/utils";
 
@@ -17,11 +18,14 @@ interface Props {
 
 export function PanoFilterLink({ isActive, children, filter }: Props) {
   return (
-    <Link
-      href={"/?" + createQueryString("filter", filter)}
-      style={{ fontWeight: isActive ? "bold" : "normal" }}
-    >
-      {children}
-    </Link>
+    <NextLink href={"/pano/?" + createQueryString("filter", filter)}>
+      <Link
+        color={isActive ? undefined : "gray"}
+        underline="always"
+        weight={isActive ? "bold" : "regular"}
+      >
+        {children}
+      </Link>
+    </NextLink>
   );
 }

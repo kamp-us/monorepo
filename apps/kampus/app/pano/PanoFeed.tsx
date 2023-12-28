@@ -1,8 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
+import { Button, Flex } from "@radix-ui/themes";
 import { graphql, useFragment, usePaginationFragment } from "react-relay";
-
-import { Button } from "@kampus/ui";
 
 import { PostItem } from "~/app/pano/features/post-list/PostItem";
 import { type PanoFeed_viewer$key } from "./__generated__/PanoFeed_viewer.graphql";
@@ -53,45 +52,32 @@ export function PanoFeed(props: Props) {
   const feed = data.panoFeed;
 
   return (
-    <>
-      <Button variant="outline" asChild>
-        <Link
-          href={{
-            pathname: `/post/create`,
-            search: `foo=bar`,
-          }}
-          as="post/create"
-        >
-          New post
-        </Link>
-      </Button>
-      <Suspense fallback="loading">
-        <section className="flex flex-col gap-4">
-          {feed?.edges?.map((edge) => {
-            if (!edge?.node) {
-              return null;
-            }
+    <Suspense fallback="loading">
+      <section className="flex flex-col gap-4">
+        {feed?.edges?.map((edge) => {
+          if (!edge?.node) {
+            return null;
+          }
 
-            return (
-              <PostItem
-                key={edge.node.id}
-                post={edge.node}
-                viewerRef={viewer}
-                postConnectionId={data.panoFeed?.__id}
-              />
-            );
-          })}
+          return (
+            <PostItem
+              key={edge.node.id}
+              post={edge.node}
+              viewerRef={viewer}
+              postConnectionId={data.panoFeed?.__id}
+            />
+          );
+        })}
 
-          <div className="flex gap-2">
-            <Button variant="secondary" onClick={() => loadPrevious(20)} disabled={!hasPrevious}>
-              {"< Prev"}
-            </Button>
-            <Button variant="secondary" onClick={() => loadNext(20)} disabled={!hasNext}>
-              {"Next >"}
-            </Button>
-          </div>
-        </section>
-      </Suspense>
-    </>
+        <Flex gap="2">
+          <Button variant="soft" onClick={() => loadPrevious(20)} disabled={!hasPrevious}>
+            {"< önceki sayfa"}
+          </Button>
+          <Button variant="soft" onClick={() => loadNext(20)} disabled={!hasNext}>
+            {"sonraki sayfa >"}
+          </Button>
+        </Flex>
+      </section>
+    </Suspense>
   );
 }
