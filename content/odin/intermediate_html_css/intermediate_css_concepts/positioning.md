@@ -58,7 +58,7 @@ Yapışkan öğeler, siz onları kaydırana kadar normal öğeler gibi davranır
 
 Bu bölüm, bu dersi anladığınızı kontrol etmeniz için sorular içermektedir. Aşağıdaki soruları kendi kendinize yanıtlamakta zorlanıyorsanız, yanıtı bulmak için yukarıdaki materyali gözden geçirin.
 
-- [Statik ve göreceli konumlandırma arasındaki fark nedir?](#static-ve-göreli-konumlandırma)
+- [Statik ve göreli konumlandırma arasındaki fark nedir?](#statik-ve-göreli-konumlandırma)
 - [Mutlak konumlandırma ne işe yarar?](#mutlak-konumlandırma)
 - [Sabit ve yapışkan konumlandırma arasındaki fark nedir? ilgili ingilizce makale için tıklayın.](https://www.kevinpowell.co/article/positition-fixed-vs-sticky/)
 
