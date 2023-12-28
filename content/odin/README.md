@@ -5,7 +5,7 @@ Müfredatın birebir orijinali takip edilmekte ve çevrilmekte olup her iki proj
 
 ### NASIL KATKI SAĞLAYABİLİRİM? 
 İngilizce ve Türkçe dil yeterliğiniz iyiyse yardımınıza ihtiyacımız var! <br/> <br/>
-	1. _Issues_ kısmındaki çeviri listelerinden bir metin seçin. <br/>
+	1. _Issues_ kısmındaki [çeviri listelerinden](https://github.com/kamp-us/monorepo/issues?q=is%3Aopen+is%3Aissue+label%3Acontent%2Fodin) bir metin seçin. <br/>
 	2. _Issue_ altına çeviriyi üstlendiğinizi belirten bir yorumda bulunun. <br/>
 	3. Bu repoyu bilgisayarınıza klonlayın. <br/>
 	4. Çeviriye başlamadan önce [çeviri rehberini](https://github.com/kamp-us/monorepo/blob/dev/content/odin/ceviri-rehberi.md) okuduğunuza emin olun.<br/> 
