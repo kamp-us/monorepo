@@ -404,7 +404,7 @@ export const resolvers = {
     metadata: async (_, args, { loaders }) =>
       transformMetadata(await loaders.rafine.metadata.parse.load(args.input)),
   },
-  RafineMetadataResult: {
+  RafineMetadata: {
     title: (metadata) => metadata.title,
     description: (metadata) => metadata.description,
     url: (metadata) => metadata.url,
