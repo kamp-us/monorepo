@@ -7,8 +7,6 @@ export const dynamic = "force-dynamic";
 export default async function OdinLessonPage({ params }: { params: { lesson: string[] } }) {
   const id = params.lesson.join("/");
 
-  console.log(params);
-
   const preloadedQuery = await loadSerializableQuery<OdinLessonQuery>(OdinLessonQueryNode, {
     id,
   });
