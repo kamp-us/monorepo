@@ -1,24 +1,29 @@
 "use client";
 
 import { ExternalLinkIcon, FileTextIcon, RocketIcon } from "@radix-ui/react-icons";
-import { Button, Callout, Card, Flex, Heading, Separator, Text } from "@radix-ui/themes";
+import { Button, Callout, Card, Flex, Heading, Link, Separator, Text } from "@radix-ui/themes";
 
 interface JourneyProps {
   title: string;
   description: string;
+  url: string;
 }
 
 export const Journey = (props: JourneyProps) => {
-  const { title, description } = props;
+  const { title, description, url } = props;
   return (
     <Card size="5">
       <Flex direction="column" gap="6">
         <Flex align="center" justify="between">
           <Heading size="8">{title}</Heading>
-          <Button variant="soft" size="2">
-            <FileTextIcon />
-            Dersleri incele
-          </Button>
+          <Flex direction="column" gap="1">
+            <Button variant="soft" size="2">
+              <FileTextIcon />
+              <Link className="flex items-center" href={url}>
+                Dersleri incele
+              </Link>
+            </Button>
+          </Flex>
         </Flex>
         <Separator size="4" />
         <Flex>
@@ -32,10 +37,11 @@ export const Journey = (props: JourneyProps) => {
 interface HelpNeededJourneyProps {
   title: string;
   description: string;
+  url: string;
 }
 
 export const HelpNeededJourney = (props: HelpNeededJourneyProps) => {
-  const { title, description } = props;
+  const { title, description, url } = props;
   return (
     <Card size="5">
       <Flex direction="column" gap="6">
@@ -49,22 +55,18 @@ export const HelpNeededJourney = (props: HelpNeededJourneyProps) => {
           </Callout.Text>
         </Callout.Root>
         <Flex align="center" justify="between">
-          <Flex align="center" gap="2">
+          <Flex direction="column" gap="1">
             <Heading size="8">{title}</Heading>
             <Text as="p" color="gray" size="2">
               Çeviriye ihtiyaç duyuluyor!
             </Text>
           </Flex>
-          <Flex gap="2">
-            <Button variant="soft" size="2">
-              <ExternalLinkIcon />
+          <Button variant="soft" size="2">
+            <ExternalLinkIcon />
+            <Link target="_blank" href={url}>
               Katkıda bulun
-            </Button>
-            <Button variant="soft" size="2">
-              <FileTextIcon />
-              Dersleri incele
-            </Button>
-          </Flex>
+            </Link>
+          </Button>
         </Flex>
         <Separator size="4" />
         <Flex>

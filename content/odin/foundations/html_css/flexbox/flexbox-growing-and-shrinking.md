@@ -1,5 +1,5 @@
 ---
-title: 'Flexbox Grow ve Shrink'
+title: 'Grow ve Shrink'
 ---
 
 ### Giriş
@@ -12,7 +12,7 @@ Son derste bu flex öğelere `flex: 1` koyduğunuzda gerçekte ne olduğuna bira
 
 Bu bölüm, bu derste öğreneceğiniz konulara genel bir bakış içermektedir.
 
--   `flex` kısaltması olarak tanımlanan 3 özelliği ve bunları ayrı ayrı nasıl kullanacağınızı öğreneceksiniz.
+- `flex` kısaltması olarak tanımlanan 3 özelliği ve bunları ayrı ayrı nasıl kullanacağınızı öğreneceksiniz.
 
 <br />
 
@@ -31,7 +31,6 @@ Bu durumda, `flex` aslında `flex-grow`, `flex-shrink` ve `flex-basis` için bir
 Yukarıdaki ekran görüntüsünde, `flex: 1` şu anlama gelir: `flex-grow: 1`, `flex-shrink: 1`, `flex-basis: 0`.
 
 Çoğu zaman flex kısaltmasının yalnızca _bir_ değeriyle tanımlandığını görürsünüz. Bu durumda, bu değer `flex-grow` değerine uygulanır. Yani div'lerimize `flex: 1` koyduğumuzda, aslında `flex: 1 1 0` şeklinde bir kısaltma belirtmiş oluruz.
-
 
 <br />
 
@@ -57,6 +56,7 @@ Aşağıdaki örnekte `flex` kısaltması için `flex-shrink` ve `flex-basis` de
 Varsayılan küçültme faktörü `flex-shrink: 1`dir, bu da tüm öğelerin eşit şekilde küçüleceği anlamına gelir. Eğer bir öğenin küçülmesini istemiyorsanız `flex-shrink: 0;` belirtebilirsiniz. Belirli öğelerin normalden daha yüksek oranda küçülmesini sağlamak için daha yüksek sayılar da belirtebilirsiniz.
 
 İşte bir örnek. Birazdan açıklayacağımız nedenlerden dolayı `flex-basis` değerini de değiştirdiğimizi unutmayın. Tarayıcı pencerenizi küçültürseniz, `flex-grow` kuralı aksi takdirde her öğenin eşit boyutta olması gerektiğini belirtmesine rağmen `.two` öğesinin verilen 250 piksel genişliğinden daha küçük olmadığını fark edeceksiniz.
+
 <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="JjJXZVz" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
   <span><a href="https://codepen.io">CodePen</a>'de TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan <a href="https://codepen.io/TheOdinProjectExamples/pen/JjJXZVz">flex-shrink örneğine</a> göz atın.</span>
 </p>
@@ -100,7 +100,6 @@ Gösterişli olmak ve bazı sütunların birbirleriyle belirli bir oranda ilişk
 
 2. Bu, tüm flex kısaltmaları değerlerini özetlemenin yanı sıra önceki makalede ele alınmamış bazı yeni sözdizimlerini de tanıtmaktadır. [MDN Doc](https://developer.mozilla.org/en-US/docs/Web/CSS/flex)
 
-
 </div>
 
 <br />
@@ -109,9 +108,8 @@ Gösterişli olmak ve bazı sütunların birbirleriyle belirli bir oranda ilişk
 
 Bu bölüm, bu dersi kendi başınıza anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve yönlendirdiği materyali gözden geçirin.
 
--   [flex özelliğinin kısaltmasında tanımlanan 3 değer nedir (örn. `flex: 1 1 auto`)?](#flex-kisaltmasi)
--   [flex kısaltması `flex:auto` için tanımlanan 3 değer nedir?](#flex-auto-nedir)
-
+- [flex özelliğinin kısaltmasında tanımlanan 3 değer nedir (örn. `flex: 1 1 auto`)?](#flex-kisaltmasi)
+- [flex kısaltması `flex:auto` için tanımlanan 3 değer nedir?](#flex-auto-nedir)
 
 <br />
 
@@ -119,6 +117,6 @@ Bu bölüm, bu dersi kendi başınıza anlayıp anlamadığınızı kontrol etme
 
 Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-*  Flexbox'ın nasıl ve neden çalıştığını anlatan [videoyu izleyiniz](https://www.youtube.com/watch?v=u044iM9xsWU&t=1s&pp=ugMICgJhchABGAE%3D) 
+- Flexbox'ın nasıl ve neden çalıştığını anlatan [videoyu izleyiniz](https://www.youtube.com/watch?v=u044iM9xsWU&t=1s&pp=ugMICgJhchABGAE%3D)
 
 Etkileşimli bir açıklama ve demo için [Scrim Flexbox](https://scrimba.com/learn/flexbox/the-flex-property-flexbox-tutorial-cGNKJTv) sayfasına göz atın. Alternatif bir açıklama için [flex-grow, flex-shrink ve flex-basis kullanımı üzerine Scrim](https://scrimba.com/learn/flexbox/flex-grow-shrink-basis-flexbox-tutorial-ck6L7fv)'i görüntüleyebilirsiniz. Bu Scrim'leri görüntülemek için Scrimba'da oturum açmanız gerektiğini unutmayın.

@@ -1,3 +1,7 @@
+---
+title: "Git'le tanışın"
+---
+
 ### Giriş
 
 Git, dosyalarınız ve dizinleriniz için **müthiş bir kaydetme düğmesi** gibidir. Git, resmi adıyla bir sürüm kontrol sistemidir.
@@ -32,11 +36,11 @@ Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
 <div class="lesson-content__panel" markdown="1">
 
-  1. Yerel, merkezi ve dağıtılmış sürüm kontrol sistemleri arasındaki farkları öğrenmek için [bu ingilizce kitapta sürüm kontrolü hakkındaki](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)  Bölüm 1.1 ila 1.4'ü okuyun.
-  1. Git'in ne olduğu ve hem bireysel hem de geliştiricilerden oluşan bir ekibin iş akışını nasıl iyileştirebileceği hakkındaki [bu ingilizce videoyu izleyin](https://www.youtube.com/watch?v=2ReR1YJrNOM).
-  1. Git ve GitHub tarihini öğrenmek için [bu ingilizce videoyu izleyin](https://www.youtube.com/watch?v=1h9_cB9mPT8&t=13s) ve ikisinin arasındaki farkı bildiğinizden emin olun. Git, komut satırında kullanılan bir teknoloji iken GitHub ziyaret edebileceğiniz bir [web sitesidir](https://github.com).
-  1. Git'i henüz yüklemediyseniz, [Git Kurulumu dersini](kamp.us/odin/temel_bilgiler/git_kurmak) ziyaret edin.
-  1. Tüm derslerin saklandığı The Odin Project'in kendi [GitHub reposuna](https://github.com/TheOdinProject/curriculum) bir göz atın. Oradayken, tüm [katkıda bulunanlarımıza](https://github.com/TheOdinProject/curriculum/graphs/contributors) bakın ve Git'in tüm işbirlikçilerin çabalarını nasıl kaydettiğini ve GitHub'un bunu nasıl görselleştirdiğine dikkat edin.
+1. Yerel, merkezi ve dağıtılmış sürüm kontrol sistemleri arasındaki farkları öğrenmek için [bu ingilizce kitapta sürüm kontrolü hakkındaki](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control) Bölüm 1.1 ila 1.4'ü okuyun.
+1. Git'in ne olduğu ve hem bireysel hem de geliştiricilerden oluşan bir ekibin iş akışını nasıl iyileştirebileceği hakkındaki [bu ingilizce videoyu izleyin](https://www.youtube.com/watch?v=2ReR1YJrNOM).
+1. Git ve GitHub tarihini öğrenmek için [bu ingilizce videoyu izleyin](https://www.youtube.com/watch?v=1h9_cB9mPT8&t=13s) ve ikisinin arasındaki farkı bildiğinizden emin olun. Git, komut satırında kullanılan bir teknoloji iken GitHub ziyaret edebileceğiniz bir [web sitesidir](https://github.com).
+1. Git'i henüz yüklemediyseniz, [Git Kurulumu dersini](kamp.us/odin/temel_bilgiler/git_kurmak) ziyaret edin.
+1. Tüm derslerin saklandığı The Odin Project'in kendi [GitHub reposuna](https://github.com/TheOdinProject/curriculum) bir göz atın. Oradayken, tüm [katkıda bulunanlarımıza](https://github.com/TheOdinProject/curriculum/graphs/contributors) bakın ve Git'in tüm işbirlikçilerin çabalarını nasıl kaydettiğini ve GitHub'un bunu nasıl görselleştirdiğine dikkat edin.
 </div>
 
 ### Bilgi kontrolü

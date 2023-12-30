@@ -7,7 +7,7 @@ const folders: Record<string, string> = {
   "css-foundations": "css-temelleri",
   flexbox: "flexbox",
   "html-foundations": "html-temelleri",
-  introduction: "giris",
+  introduction: "baslangic",
   foundations_git: "git-temelleri",
   intermediate_git: "git-orta-seviye",
   intermediate_html_css: "html-css-orta-seviye",

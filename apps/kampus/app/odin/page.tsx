@@ -57,7 +57,7 @@ const WallOfText = () => {
       </Text>
 
       <div className="mt-6 flex justify-center">
-        <Link href="odin/mufredat">
+        <Link href="odin/seruvenler">
           <Button className="flex gap-2">
             <BookOpenCheckIcon size={16} />
             Cevirilere goz at
