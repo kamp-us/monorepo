@@ -1,21 +1,10 @@
 "use client";
 
-import { Button, Flex, Heading, Separator, Text, TextArea, TextField } from "@radix-ui/themes";
+import { Button, Flex, Text, TextArea, TextField } from "@radix-ui/themes";
 import { graphql, useMutation } from "react-relay";
 import { z } from "zod";
 
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Input,
-  Textarea,
-  useForm,
-} from "@kampus/ui";
+import { Form, FormControl, FormField, FormItem, FormMessage, useForm } from "@kampus/ui";
 
 const mutation = graphql`
   mutation CreatePanoPostFormMutation(
