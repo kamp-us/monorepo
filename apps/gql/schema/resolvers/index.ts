@@ -16,6 +16,7 @@ import {
   transformPanoPostConnection,
   transformPanoUpvote,
 } from "~/loaders/pano";
+import { transformMetadata } from "~/loaders/rafine";
 import { transformSozlukTerm, transformSozlukTermsConnection } from "~/loaders/sozluk";
 import { transformUser } from "~/loaders/user";
 import { type Resolvers, type ResolversInterfaceTypes } from "../types.generated";
@@ -53,6 +54,8 @@ export const resolvers = {
     // @see PanoQuery field resolvers
     pano: () => ({ post: null, posts: [], postsBySite: null, allPosts: null }),
     odin: () => ({ lesson: null, lessons: null }),
+
+    rafine: () => ({ metadata: null }),
 
     node: async (_, args, { loaders }) => {
       const id = parse<NodeTypename>(args.id);
@@ -395,6 +398,16 @@ export const resolvers = {
         }
       }
     },
+  },
+
+  RafineQuery: {
+    metadata: async (_, args, { loaders }) =>
+      transformMetadata(await loaders.rafine.metadata.parse.load(args.input)),
+  },
+  RafineMetadata: {
+    title: (metadata) => metadata.title,
+    description: (metadata) => metadata.description,
+    url: (metadata) => metadata.url,
   },
 
   PanoPostError: {}, // union
