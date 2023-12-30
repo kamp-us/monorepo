@@ -1,8 +1,6 @@
-import { Box, Flex, IconButton, Text } from "@radix-ui/themes";
+import { Flex, IconButton, Text } from "@radix-ui/themes";
 import { ArrowBigUp } from "lucide-react";
 import { graphql, useFragment, useMutation } from "react-relay";
-
-import { Button } from "@kampus/ui";
 
 import { type CommentUpvoteButton_comment$key } from "./__generated__/CommentUpvoteButton_comment.graphql";
 

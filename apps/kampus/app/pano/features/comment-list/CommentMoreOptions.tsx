@@ -1,6 +1,6 @@
 "use client";
 
-import { DotsHorizontalIcon, DotsVerticalIcon } from "@radix-ui/react-icons";
+import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { AlertDialog, Button, DropdownMenu, Flex, IconButton } from "@radix-ui/themes";
 import { graphql, useFragment, useMutation } from "react-relay";
 

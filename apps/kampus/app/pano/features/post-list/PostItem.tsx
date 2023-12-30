@@ -2,13 +2,13 @@
 
 import NextLink from "next/link";
 import { ChatBubbleIcon, ExternalLinkIcon } from "@radix-ui/react-icons";
-import { Button, Card, Flex, Heading, IconButton, Inset, Text, Tooltip } from "@radix-ui/themes";
+import { Button, Card, Flex, Heading, Text, Tooltip } from "@radix-ui/themes";
 import { graphql, useFragment } from "react-relay";
 
 import { TimeAgo } from "@kampus/ui";
 import { cn } from "@kampus/ui/utils";
 
-import { getPostURL, getSitePostsURL } from "~/features/kampus-url/pano";
+import { getPostURL } from "~/features/kampus-url/pano";
 import { type PostItem_post$key } from "./__generated__/PostItem_post.graphql";
 import { type PostItem_viewer$key } from "./__generated__/PostItem_viewer.graphql";
 import { MoreOptionsDropdown } from "./MoreOptions";

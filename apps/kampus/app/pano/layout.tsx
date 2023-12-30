@@ -1,5 +1,5 @@
 import { PlusIcon } from "@radix-ui/react-icons";
-import { Box, Container, Theme } from "@radix-ui/themes";
+import { Container, Theme } from "@radix-ui/themes";
 
 import { MainNav, MainNavBrand, MainNavLink } from "~/features/main-nav";
 
