@@ -18,7 +18,7 @@ export const CurriculumSection = (props: CurriculumSectionProps) => {
             const color = url === "#" ? "orange" : "teal";
             return (
               <Card color={color} size="1" key={index}>
-                <Link color={color} href={`temel-bilgiler-seruveni/${url}`}>
+                <Link color={color} href={url === "#" ? "#" : `temel-bilgiler-seruveni/${url}`}>
                   {title}
                 </Link>
               </Card>

@@ -35,9 +35,9 @@ function slugifyTurkishTitle(text: string) {
   return text
     .replace(/[^a-zA-Z0-9ığüşöçİĞÜŞÖÇ\s]/g, "") // Remove non-alphanumeric characters except spaces
     .trim() // Trim leading and trailing spaces
-    .toLowerCase() // Convert to lowercase
     .replace(/\s+/g, "-") // Replace spaces with hyphens
-    .replace(/[ığüşöçİĞÜŞÖÇ]/g, (match) => turkishCharacters[match] || match); // Replace Turkish characters
+    .replace(/[ığüşöçİĞÜŞÖÇ]/g, (match) => turkishCharacters[match] || match) // Replace Turkish characters
+    .toLowerCase(); // Convert to lowercase
 }
 
 function getPublicOdinPath(path: string) {

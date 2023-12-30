@@ -7,7 +7,7 @@ export default function OdinRootLayout({ children }: PropsWithChildren) {
   return (
     <Theme accentColor="teal">
       <MainNav
-        brand={<MainNavBrand href="/odin">Turkce Odin Project</MainNavBrand>}
+        brand={<MainNavBrand href="/odin">Türkçe Odin Projesi</MainNavBrand>}
         links={[
           <Link key={1} href="/sozluk">
             sozluk

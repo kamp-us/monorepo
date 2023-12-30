@@ -9,7 +9,7 @@ export default function OdinHome() {
         <Link href="odin/seruvenler">
           <Button className="flex gap-2">
             <BookOpenCheckIcon size={16} />
-            Cevirilere goz at
+            Çevirilere göz at
           </Button>
         </Link>
       </Flex>
@@ -40,7 +40,7 @@ const WallOfText = () => {
       <Text as="p" weight="medium">
         Topluluk Katılımı: TheOdinProject&apos;in açık kaynak yapısı sayesinde, herkesin katkıda
         bulunma fırsatı vardır. Türkçe çeviri yaparak, kamp.us topluluğunun bu projeye katkıda
-        bulunmasına ve içerikleri iyileştirmesine olanak tanırız.
+        bulunmasına ve içerikleri iyileştirmesine olanak tanınır.
       </Text>
       <Text as="p" weight="medium">
         Eğitim Fırsatları: Türkçe konuşan öğrencilere web geliştirme eğitimi sunmak, kariyerlerini
