@@ -18,11 +18,11 @@ Bilgisayarınızda <span id="open-command-line">bir terminal açın</span>.
 
 - **macOS**: Uygulamalar > Araçlar klasörünüzü açın ve "Terminal" diye aratın. Terminal'i açmak için Spotlight aramasını da kullanabilirsiniz. <kbd>Cmd</kbd> + <kbd>Space</kbd> tuşlarına basarak Spotlight'ı açabilir, ve "Terminal" diye aratabilirsiniz. Sonrasında <kbd>Enter</kbd> tuşuna basarak Terminal'i açabilirsiniz.
 
-Açılan pencere, işletim sisteminize göre değişen bazı metinler dışında çoğunlukla boş olacaktır. Linux ve daha eski Mac'lerde satır "$" ile bitecek ve daha yeni Mac'lerde satır "%" ile bitecektir. İstem adı verilen bu sembol, terminalin bir komut girmenizi beklediğini gösterir. Şimdi deneyelim. 'Whoami' yazın ve <kbd>Enter</kbd>'a basın.
+Açılan pencere, işletim sisteminize göre değişen bazı metinler dışında çoğunlukla boş olacaktır. Linux ve daha eski Mac'lerde satır "\$" ile bitecek ve daha yeni Mac'lerde satır "%" ile bitecektir. İstem adı verilen bu sembol, terminalin bir komut girmenizi beklediğini gösterir. Şimdi deneyelim. 'Whoami' yazın ve <kbd>Enter</kbd>'a basın.
 
 Kullanıcı adınızı yazdıracaktır. Harika!
 
-Genellikle terminal kullanım kılavuzları ve talimatları komutları `$ whoami` gibi önce sembolü koyarak belirtir.  Bu size komutu terminalinize yazmanızı, ancak `$` girmemenizi söyler. Ve unutmayın, eğer daha yeni bir Mac kullanıyorsanız `%`, `$` ile aynıdır.
+Genellikle terminal kullanım kılavuzları ve talimatları komutları `$ whoami` gibi önce sembolü koyarak belirtir. Bu size komutu terminalinize yazmanızı, ancak `$` girmemenizi söyler. Ve unutmayın, eğer daha yeni bir Mac kullanıyorsanız `%`, `$` ile aynıdır.
 
 #### Bunu neden şimdi öğreneceksiniz?
 
@@ -81,11 +81,13 @@ Programcılar hakkında bilmeniz gereken önemli bir şey var. Programcılar dai
 Öncelikle, komut satırı içinde kopyalama ve yapıştırmanın beklediğiniz şekilde çalışmadığını çoktan fark etmiş olabilirsiniz. Komut satırının içindeyken, kopyalamak için <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> (Mac: <kbd>Cmd</kbd> + <kbd>C</kbd>) ve yapıştırmak için <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd> (Mac: <kbd>Cmd</kbd> + <kbd>V</kbd>) tuşlarını kullanmanız gerekir. Örneğin, tarayıcınızdaki komutları kopyalayıp komut satırına yapıştırmak için komut metnini vurgulayıp her zamanki gibi <kbd>Ctrl</kbd> + <kbd>C</kbd> tuşlarını kullanacak ve ardından <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd> tuşlarını kullanarak terminalinize yapıştıracaksınız. Deneyin bakalım!
 
 İkinci olarak, [tab completion](https://en.wikipedia.org/wiki/Command-line_completion) hakkında bilgi edinmeniz iyi olacaktır. Bu ipucu size çok fazla zaman kazandıracak. Diyelim ki komut satırındasınız ve `~/Documents/Odin-Project/foundations/javascript/calculator/` gibi uzak bir klasöre gitmeniz gerekiyor. Yazması uzun bir komut olacak ve çalışması için her şeyin tam olarak doğru olması gerekecektir. Bunu kolay bir şekilde yapabilmek için bir _yöntem_ bulunmakta! Basitçe, <kbd>Tab</kbd> tuşuna basmak, komut satırında yalnızca bir seçenek olduğunda yazmaya başladığınız komutları otomatik olarak tamamlayacaktır. Örneğin, home dizininde genellikle `Documents` ve `Downloads` klasörleri olur. Komut satırına `cd D` yazıp <kbd>Tab</kbd> tuşuna basarsanız, komut satırı, şu ana kadar yazdıklarınızla eşleşen farklı seçenekleri göstererek hangisini istediğinizden emin olmadığını size bildirecektir:
+
 ```bash
 $ cd D
 Documents/ Downloads/
 $ cd D
 ```
+
 Biraz daha yazdığınızda, adı sizin için tamamlayacak ve `cd Doc[tab]O[tab]f[tab]j[tab]cal[tab]` (bilgisayarınızda başka hangi klasörlerin bulunduğuna bağlı olarak) gibi her dizinin baş harfini yazıp <kbd>Tab</kbd> tuşuna bastığınızda yukarıdaki tam dosya yolunu yazmanızı mümkün kılacaktır. Deneyin ve bunun nasıl çalıştığına alışmaya çalışın bakalım. Bunu seveceksiniz.
 
 Üçüncü olarak, bir proje dizini içindeki her şeyi açmak için kullanışlı bir kısayol var: `.` Bir metin editörü yükledikten sonra, tüm projeyi ve tüm dosyalarını tek seferde açmak için bu kısayolu kullanabilirsiniz. Bu kısayol Git ile de yaygın olarak kullanılır (daha sonra ayrıntılı olarak ele alınacaktır) `git add .` gibi komutlar bir dizinin içindeki tüm dosyaları Git'in staging alanına eklemek için kullanılır. Örneğin, VS Code yüklüyse, proje dizinine `cd` kullanarak ulaşabilir ve ardından `code .` (nokta ile) yazabilirsiniz. Bu VS Code'u başlatacak ve proje klasörünü açacaktır. Daha ayrıntılı bir örnek için bu dersin bir sonraki bölümüne bakabilirsiniz.

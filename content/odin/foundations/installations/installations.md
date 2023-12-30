@@ -48,11 +48,11 @@ VirtualBox'ı kurmak çok basittir. Çok fazla teknik bilgi gerektirmez ve Windo
 
 Kurulum sırasında size çeşitli seçenekler sunulacaktır. İhtiyacınız olmadığı için Python Desteğini ok işaretli sürücü simgesine tıklayarak ve **Entire feature will be unavailable** seçeneğini seçerek devre dışı bırakmanızı öneririz:
 
-   ![The Python option is at the bottom of the list](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/01_turn_off_python.png)
+![The Python option is at the bottom of the list](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/01_turn_off_python.png)
 
 Kapatıldıktan sonra kurulum pencereniz bu şekilde görünmelidir:
 
-   ![You want the Python option to have a scarlet "X" on it](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/02_c_install.png)
+![You want the Python option to have a scarlet "X" on it](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/02_c_install.png)
 
 Uygulamayı `C:` sürücüsüne yüklediğinizden emin olun, aksi takdirde hata verme eğilimi vardır. Sanal makinenin kendisi herhangi bir yere kurulabilir ancak buna yakında değineceğiz.
 Yazılım yüklenirken ilerleme çubuğu takılmış gibi görünebilir, sadece bitmesini bekleyin.
@@ -61,11 +61,11 @@ Yazılım yüklenirken ilerleme çubuğu takılmış gibi görünebilir, sadece 
 
 Artık VirtualBox'ı kurduğunuza göre, programı başlatın. Açıldıktan sonra başlangıç ekranını görmelisiniz.
 
-   ![The VirtualBox start screen](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/03_start_screen.png)
+![The VirtualBox start screen](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/03_start_screen.png)
 
 Sanal bir işletim sistemi oluşturmak için **New** düğmesine tıklayın. Buna **Xubuntu** adını verin, sanal makinenin varsayılan `C:` konumundan başka bir yere kurulmasını istiyorsanız, bunu **Folder** seçeneğinde uygun şekilde değiştirin. Bu, sanal diskinizin bulunacağı yerdir, bu nedenle bunun için en az 30 GB'ınız olduğundan emin olun. **ISO Image** seçeneğinde **Other** seçeneğini seçin ve bilgisayarınızda `.iso` dosyasını bulmanız için bir pencere açılacaktır. Dosya büyük olasılıkla `İndirilenler` klasöründedir. **Skip Unattended Installation** seçeneğini olduğu gibi bırakın.
 
-   ![Half of the options being greyed out is normal. Don't worry about it.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/04_install_start.png)
+![Half of the options being greyed out is normal. Don't worry about it.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/04_install_start.png)
 
 **Next** tuşuna basarak devam edin ve sonraki adımları izleyin:
 
@@ -73,18 +73,17 @@ Sanal bir işletim sistemi oluşturmak için **New** düğmesine tıklayın. Bun
 
 Şimdi buna benzer bir pencere görmelisiniz:
 
-   ![No need to worry about the Product Key.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/05_unattended_install.png)
+![No need to worry about the Product Key.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/05_unattended_install.png)
 
 **Guest Additions** ve **Install in Background** seçeneklerini işaretleyiniz ve ayrıca **Username** ve **Password** alanlarınızı istediğiniz gibi değiştiriniz. Varsayılan parolayı değiştirmeyi unutursanız, parola `changeme` olacaktır. **Guest Additions ISO**, **Hostname** ve **Domain Name** alanlarını olduğu gibi bırakın. **Next** tuşuna basarak devam edin.
 
 #### Adım 2.2.2: Donanım
 
-   ![You might be tempted to give your VM more than 2 processors. Don't.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/06_hardware.png)
+![You might be tempted to give your VM more than 2 processors. Don't.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/06_hardware.png)
 
 Kurulumun **Hardware** bölümünde **Base Memory** değerini en az 2048 MB veya mümkünse daha fazlasına ayarlayınız. Üst limit toplam RAM'inizin yarısıdır ancak önerdiğimiz ayarlarla 4096 MB size sorunsuz bir deneyim sağlayacaktır.
 
 Örneğin, 8 GB (8192 MB) RAM'iniz varsa, sanal makinenizin işletim sistemine 4096 MB'a kadar (1024 MB 1 GB eder) ayırabilirsiniz. Ne kadar RAM'iniz olduğunu bilmiyorsanız, bunu nasıl bulacağınızı öğrenmek için [lütfen bu Google sorgusunu çalıştırın](https://www.google.com/search?q=how+to+find+how+much+ram+you+have). Sanal makineniz biraz yavaş çalışıyorsa, daha fazla bellek ayırmayı deneyin!
-
 
 <div class="lesson-note lesson-note--tip" markdown="1">
 
@@ -96,7 +95,7 @@ GigaBaytı MegaBayta çevirirken zorlanıyor musunuz? 1 GB RAM 1024 MB'a eşitti
 
 #### Adım 2.2.3: Sanal sabit disk
 
-   ![Don't Pre-allocate Full Size.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/07_virtual_hard_disk.png)
+![Don't Pre-allocate Full Size.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/07_virtual_hard_disk.png)
 
 Şimdi, **Disk Size** dışında tüm ayarları olduğu gibi bırakınız, sanal makinenize **en az 30GB** alan vermenizi öneririz. Bu diskin sanal makine oluşturma işleminin ilk adımında belirttiğiniz klasörde oluşturulacağını hatırlatırız, ancak yine de gerekirse disk ileride taşınabilir ve yeniden boyutlandırılabilir.
 
@@ -104,17 +103,17 @@ GigaBaytı MegaBayta çevirirken zorlanıyor musunuz? 1 GB RAM 1024 MB'a eşitti
 
 **Summary** sayfasına yönlendirilmek için **Next** seçeneğine tıklayın, bu sayfada gözetimsiz kurulum sürecini başlatmak için **Finish** seçeneğine tıklamanız yeterlidir. Bunun en güzel yanı nedir? İşletim sistemini ve GuestAdditions'ı size bir şey sormadan kendi başına yükler! Sadece kendi işini yapmasına izin verin, **Preview** bölümünde bunun gibi bir giriş ekranı gördüğünüzde işlemin bittiğini anlayacaksınız:
 
-   ![The Preview section is in the top right of VirtualBox window.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/08_preview_login.png)
+![The Preview section is in the top right of VirtualBox window.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/08_preview_login.png)
 
 Sadece **Show** adlı yeşil oka tıklayın ve bir sanal makine penceresi ve giriş ekranı ile karşılaşacaksınız. Kurulum işlemi sırasında belirlediğiniz parola ile oturum açın ve yapmamız gereken azıcık bir yapılandırma ayarı kaldı.
 
 **Finish'e** tıkladıktan sonra buna benzer bir hata almanız mümkündür:
 
-   ![The error shows up on the right side of the VirtualBox window and can be a little differently worded.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/09_virtualization_error.png)
+![The error shows up on the right side of the VirtualBox window and can be a little differently worded.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/09_virtualization_error.png)
 
-Bu, [bilgisayarınızın BIOS/UEFI ayarlarında sanallaştırmayı etkinleştirmeniz](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/virtualization_deployment_and_administration_guide/sect-troubleshooting-enabling_intel_vt_x_and_amd_v_virtualization_hardware_extensions_in_bios) gerektiği anlamına gelir. [Alternatif talimat seti](https://2nwiki.2n.cz/pages/viewpage.action?pageId=75202968). Eğer AMD CPU'nuz varsa muhtemelen aktifleştirmek için `SVM` adında bir şey arıyorsunuzdur, Intel CPU'lar içinse bu ayar `Intel Virtualization Technology'dir`.  Aldığınız hata, bulmanız gereken ayarı söylemelidir. Bunu hallettikten sonra, makineyi **Başlatın** ve akışına bırakın, bir giriş ekranı gördüğünüzde işlemin bittiğini anlayacaksınız:
+Bu, [bilgisayarınızın BIOS/UEFI ayarlarında sanallaştırmayı etkinleştirmeniz](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/virtualization_deployment_and_administration_guide/sect-troubleshooting-enabling_intel_vt_x_and_amd_v_virtualization_hardware_extensions_in_bios) gerektiği anlamına gelir. [Alternatif talimat seti](https://2nwiki.2n.cz/pages/viewpage.action?pageId=75202968). Eğer AMD CPU'nuz varsa muhtemelen aktifleştirmek için `SVM` adında bir şey arıyorsunuzdur, Intel CPU'lar içinse bu ayar `Intel Virtualization Technology'dir`. Aldığınız hata, bulmanız gereken ayarı söylemelidir. Bunu hallettikten sonra, makineyi **Başlatın** ve akışına bırakın, bir giriş ekranı gördüğünüzde işlemin bittiğini anlayacaksınız:
 
-   ![You can already make your VM full screen or just maximize the window.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/10_login_screen.png)
+![You can already make your VM full screen or just maximize the window.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/10_login_screen.png)
 
 ### Adım 3: Doğru sudo izinlerini ayarlama
 
@@ -124,19 +123,19 @@ Katılımsız kurulumun VirtualBox tarafından yapılandırılma şekli nedeniyl
 
 İlk olarak, pencerenizin sol üst köşesindeki <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}} /> simgesine tıklayın, ardından `Users` yazın ve `Users and Groups'u` göreceksiniz. Üzerine tıklayın.
 
-   ![It should be the top option you see. It is possible that due to localization it'll be called differently - try using the term in your language then.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/11_users_and_groups.png)
+![It should be the top option you see. It is possible that due to localization it'll be called differently - try using the term in your language then.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/11_users_and_groups.png)
 
 #### Adım 3.2: Groups'u yönetme
 
 Karşınıza gelen pencerede **Manage Groups** seçeneğine tıklayınız, ardından listede bir yere tıklayın ve klavyenizden `sudo` yazın. Bu sizi resimdeki gibi `sudo` girdisine getirecektir:
 
-   ![You will find the search functionality like this in many corners of Xubuntu.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/12_sudo_group.png)
+![You will find the search functionality like this in many corners of Xubuntu.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/12_sudo_group.png)
 
 #### Adım 3.2: Kendini sudo'ya Ekleme
 
 `sudo` seçiliyken **Properties** seçeneğine tıklayın ve açılan pencerede kullanıcı adınızı aşağıdaki gibi işaretleyin:
 
-   ![No need to touch anything else.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/13_sudo_properties.png)
+![No need to touch anything else.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/13_sudo_properties.png)
 
 Ve ardından **OK**'a tıklayın. Bir parola, giriş yaparken kullandığınız parola ile aynı, istemiyle karşılaşacaksınız.
 
@@ -144,18 +143,18 @@ Ve ardından **OK**'a tıklayın. Bir parola, giriş yaparken kullandığınız 
 
 Tüm bunlar tamamlandığına göre, bu pencereleri kapatabilir ve sanal makinenizi yeniden başlatabilirsiniz. Klavyede <kbd>CTRL + ALT + T</kbd> yaparak `Terminal` penceresi açabilirsiniz ve terminalde `reboot` yazın ardından komutu çalıştırmak için <kbd>Enter'a</kbd> basın. Alternatif olarak, <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}} /> ikonuna tıklayabilirsiniz, ardından sağ alttaki güç simgesine tıklayın ve **Restart** seçeneğini seçin.
 
-   ![You might want to take note of other options that you see in this menu.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/14_logout.png)
+![You might want to take note of other options that you see in this menu.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/14_logout.png)
 
-   ![Not the most exciting of menus, but take note of the Shut Down option.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/15_restart.png)
+![Not the most exciting of menus, but take note of the Shut Down option.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/15_restart.png)
 
 #### Adım 3.4: Yeni kazandığınız sudo ayrıcalıklarını test etme
 
 Artık `sudo'ya` erişiminiz olduğuna göre, bunu Xubuntu'yu `Terminal` üzerinden güncellemek için kullanabiliriz. Terminali açın ve aşağıdaki komutları birbiri ardına kullanın:
 
-~~~bash
+```bash
 sudo apt update
 sudo apt upgrade
-~~~
+```
 
 İlk komutu kullandıktan sonra parolanız sorulacaktır, parolanızı yazın ve <kbd>Enter'a</kbd> basarak terminalinize parolayı iletin. Ne yazdığınıza dair görsel bir geri bildirim olmayacaktır, ancak gerçekten yazıyorsunuz.
 
@@ -165,29 +164,29 @@ Bir süre `sudo apt upgrade` çalıştıktan sonra terminalde bir şeyler yükle
 
 İşte sanal ortamda çalışmaya başlamanıza yardımcı olacak bazı ipuçları:
 
--   Sanal makine ayarlarınızda araç çubuğunu etkinleştirin. Burada, özellikle tam ekran veya çoklu ekranlarla ilgili olanlar olmak üzere, oynamak isteyebileceğiniz yararlı seçenekler vardır. Bunu yapmak için **Settings** seçeneğine tıklayın ve ardından **User Interface'e** gidin ve son olarak **Show at Top of Screen** seçeneğini işaretleyin.
-    ![It's a good idea to look around the settings overall to get a feel of what's possible.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/16_toolbar.png)
--   Tüm çalışmalarınız sanal makinede gerçekleşmelidir. Metin düzenleyiciniz, dil ortamlarınız ve çeşitli araçlar dahil olmak üzere kodlama için ihtiyacınız olan her şeyi sanal makineye yükleyeceksiniz. Sanal makinenizin içindeki Xubuntu, önceden yüklenmiş bir web tarayıcısı ile birlikte gelir, ancak kısa bir süre sonra Chrome'u yükleyeceğiz.
--   Sanal makinenize yazılım yüklemek için, Xubuntu sanal makinesinin içinden Linux (Ubuntu) kurulum talimatlarını takip edeceksiniz.
--   Discord kanalımızda yardım isterken ekran görüntüsü almanız gerekebilir, nerede kullandığınıza bağlı olarak nasıl yapacağınız aşağıda açıklanmıştır:
-    -   **Sanal Makinenin içinde:** Ekranınızın bir kısmının ekran görüntüsünü almak için <kbd>Shift + PrtSrc</kbd> tuş kombinasyonunu kullanabilirsiniz. Alternatif olarak, **Whisker Menu'ye** tıklayabilir ve **Screenshot** yazabilirsiniz. Burada tüm ekranınızın, bulunduğunuz pencerenin ekran görüntüsünü almayı veya yakalamak için belirli bir alanı belirlemeyi seçebilirsiniz.
-    -   **Ana sisteminizde (Windows):** Ana sistem tuşunun kısayolunu (<kbd>Right Ctrl + E</kbd>) kullanabilir veya tam ekran görüntüsü için **View -> Take Screenshot** seçeneğine tıklayabilirsiniz. Farklı bir yol, sanal makine pencerenizin dışına tıklayarak pencerenin odağından çıkmak ve ardından ekranınızın bir kısmının ekran görüntüsünü almak için standart Windows kısayolu olan <kbd>Windows tuşu + Shift + S</kbd> kombinasyonunu kullanmak olabilir.
--   **Unutmayın:** TOP menüsüyle ilgili yapacağınız tüm geliştirmeler sanal makinede yapılmalıdır.
--   Tam ekrana geçmenizi (**View -> Full-screen Mode**) ve ana işletim sisteminizi (Windows) unutmanızı öneririz. En iyi performans için, sanal makinenizi çalıştırırken ana işletim sisteminizdeki tüm programları kapatın.
--   Sanal makine ayarlarınızın **Display** sekmesine ek monitörler eklediyseniz, sanal makine çalışırken **View -> Virtual Screen 2 -> Enable** seçeneğine tıklayın. Birden fazla monitörü tam ekran çalıştırabilirsiniz, ancak sanal makine daha fazla **Video Belleği** isteyebilir. Zaten daha fazla monitör eklerken arttırmış olmanız gerekir. **Tam ekrana geçmeden önce Sanal Ekranlarınızı pencere modunda açtığınızdan emin olun, aksi takdirde çalışmazlar.** Tam ekrandan çıktıktan sonra ikincil ekranınız kapanabilir. Bu talimatlarla yeniden açabilirsiniz.
+- Sanal makine ayarlarınızda araç çubuğunu etkinleştirin. Burada, özellikle tam ekran veya çoklu ekranlarla ilgili olanlar olmak üzere, oynamak isteyebileceğiniz yararlı seçenekler vardır. Bunu yapmak için **Settings** seçeneğine tıklayın ve ardından **User Interface'e** gidin ve son olarak **Show at Top of Screen** seçeneğini işaretleyin.
+  ![It's a good idea to look around the settings overall to get a feel of what's possible.](https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/16_toolbar.png)
+- Tüm çalışmalarınız sanal makinede gerçekleşmelidir. Metin düzenleyiciniz, dil ortamlarınız ve çeşitli araçlar dahil olmak üzere kodlama için ihtiyacınız olan her şeyi sanal makineye yükleyeceksiniz. Sanal makinenizin içindeki Xubuntu, önceden yüklenmiş bir web tarayıcısı ile birlikte gelir, ancak kısa bir süre sonra Chrome'u yükleyeceğiz.
+- Sanal makinenize yazılım yüklemek için, Xubuntu sanal makinesinin içinden Linux (Ubuntu) kurulum talimatlarını takip edeceksiniz.
+- Discord kanalımızda yardım isterken ekran görüntüsü almanız gerekebilir, nerede kullandığınıza bağlı olarak nasıl yapacağınız aşağıda açıklanmıştır:
+  - **Sanal Makinenin içinde:** Ekranınızın bir kısmının ekran görüntüsünü almak için <kbd>Shift + PrtSrc</kbd> tuş kombinasyonunu kullanabilirsiniz. Alternatif olarak, **Whisker Menu'ye** tıklayabilir ve **Screenshot** yazabilirsiniz. Burada tüm ekranınızın, bulunduğunuz pencerenin ekran görüntüsünü almayı veya yakalamak için belirli bir alanı belirlemeyi seçebilirsiniz.
+  - **Ana sisteminizde (Windows):** Ana sistem tuşunun kısayolunu (<kbd>Right Ctrl + E</kbd>) kullanabilir veya tam ekran görüntüsü için **View -> Take Screenshot** seçeneğine tıklayabilirsiniz. Farklı bir yol, sanal makine pencerenizin dışına tıklayarak pencerenin odağından çıkmak ve ardından ekranınızın bir kısmının ekran görüntüsünü almak için standart Windows kısayolu olan <kbd>Windows tuşu + Shift + S</kbd> kombinasyonunu kullanmak olabilir.
+- **Unutmayın:** TOP menüsüyle ilgili yapacağınız tüm geliştirmeler sanal makinede yapılmalıdır.
+- Tam ekrana geçmenizi (**View -> Full-screen Mode**) ve ana işletim sisteminizi (Windows) unutmanızı öneririz. En iyi performans için, sanal makinenizi çalıştırırken ana işletim sisteminizdeki tüm programları kapatın.
+- Sanal makine ayarlarınızın **Display** sekmesine ek monitörler eklediyseniz, sanal makine çalışırken **View -> Virtual Screen 2 -> Enable** seçeneğine tıklayın. Birden fazla monitörü tam ekran çalıştırabilirsiniz, ancak sanal makine daha fazla **Video Belleği** isteyebilir. Zaten daha fazla monitör eklerken arttırmış olmanız gerekir. **Tam ekrana geçmeden önce Sanal Ekranlarınızı pencere modunda açtığınızdan emin olun, aksi takdirde çalışmazlar.** Tam ekrandan çıktıktan sonra ikincil ekranınız kapanabilir. Bu talimatlarla yeniden açabilirsiniz.
 
 #### Sık karşılaşılan sorunlar/sorular:
 
--   Sanal makineyi başlatmaya çalıştığınızda yalnızca siyah bir ekranla karşılaşırsanız, sanal makineyi kapatın ve `power off'a` tıklayın , **Settings -> Display** seçeneğine tıklayın ve **Enable 3D Acceleration** seçeneğinin İŞARETLENMEDİĞİNDEN ve Video memory'nin **EN AZ 128MB** olarak ayarlandığından emin olun.
--   Yeriniz mi kalmadı? [Discord kanalımızdaki bu talimatlara bakın](https://discord.com/channels/505093832157691914/690588860085960734/1015965403572351047).
--   Dokunmatik ekran mı kullanıyorsunuz? VirtualBox'ta dokunmatik ekranın nasıl etkinleştirileceğine dair [işte bir video](https://www.youtube.com/watch?v=hW-iyHHoDy4).
--   **Sanal Makine için performans ipuçları**:
-    -   Sanal makineyi çalıştırırken Windows'taki etkinliğinizi en aza indirin. Dizüstü bilgisayara sahipseniz muhtemelen şarja takılı kullanınız.
-    -   Processors ayarının yalnızca 2 olarak ayarlandığından ve sanal makinenize verdiğiniz belleğin toplam RAM'inizin en fazla yarısı ve en az 2GB olduğundan emin olun. Eğer 2GB ayıramıyorsanız, dual boot kullanın.
-    -   Videolar sanal makinede takılıyorsa, Video Memory ayarını mümkün olan en üst düzeye çıkardığınızdan emin olun veya alternatif olarak makineniz kaldırabiliyorsa Windows'unuzda oynatın. Etkinleştirdiyseniz 3D Acceleration ayarını devre dışı bırakın.
-    -   Sanal makine pencerenizin sağ alt köşesindeki <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/17_turtle.png" alt="Icon with a green turtle and a V" style={{"display":"inline","margin":"auto"}} /> simgesine dikkat edin, eğer varsa, burada [VirtualBox forumunda ondan nasıl kurtulacağınıza dair bir başlık var](https://forums.virtualbox.org/viewtopic.php?f=25&t=99390). Bunun yerine <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/18_vboxV.png" alt="Icon of a chip with a V" style={{"display":"inline","margin":"auto"}} /> simgesi de bulunabilir. Eğer sağ altta <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/17_turtle.png" alt="Icon with a green turtle and a V" style={{"display":"inline","margin":"auto"}} /> veya <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/18_vboxV.png" alt="Icon of a chip with a V" style={{"display":"inline","margin":"auto"}} /> görmüyorsanız, bunları görmek için tam ekran modundan çıkmanız gerekir.
-  -   Performansınız hala yetersizse, dual boot yapın çünkü bu, tüm bilgisayar kaynaklarını yalnızca bir işletim sistemi için kullandığınızı garanti edecek ve böylece deneyiminizi önemli ölçüde arttıracaktır.
--   Farenizin kaydırma tekerleği Google Chrome'da garip davranıyorsa ve sanal makinenizin istendiği gibi çalıştığından emin olmak için sanal makine performans ipuçlarını gözden geçirdiyseniz, `imwheel'e` bakın: [daha fazla bilgi için bu AskUbuntu talimatlarına bakın](https://askubuntu.com/a/621140). VSCode'u yüklediyseniz, `gedit` yerine bu talimatları kullanın, aksi takdirde `sudo apt install gedit` komutuyla gedit'i yükleyin. Eğer gedit'i `snap` ile yüklerseniz, dosyayı kaydetmenize izin vermez. Her açılışta `imwheel`in çalıştığından emin olmak için whisker menüsüne tıklamalısınız <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}} /> , ardından `Session` yazın ve `Session and Startup'a` tıklayın. `Application Autostart'ı` göreceksiniz ve ona gidin, sonra da `Add'e` tıklayın. `Name` değeri için `imwheel` ve `Command` değeri için `imwheel -b "4 5` girin. `OK'e` tıklayın ve her şey hazır olmalı.
+- Sanal makineyi başlatmaya çalıştığınızda yalnızca siyah bir ekranla karşılaşırsanız, sanal makineyi kapatın ve `power off'a` tıklayın , **Settings -> Display** seçeneğine tıklayın ve **Enable 3D Acceleration** seçeneğinin İŞARETLENMEDİĞİNDEN ve Video memory'nin **EN AZ 128MB** olarak ayarlandığından emin olun.
+- Yeriniz mi kalmadı? [Discord kanalımızdaki bu talimatlara bakın](https://discord.com/channels/505093832157691914/690588860085960734/1015965403572351047).
+- Dokunmatik ekran mı kullanıyorsunuz? VirtualBox'ta dokunmatik ekranın nasıl etkinleştirileceğine dair [işte bir video](https://www.youtube.com/watch?v=hW-iyHHoDy4).
+- **Sanal Makine için performans ipuçları**:
+  - Sanal makineyi çalıştırırken Windows'taki etkinliğinizi en aza indirin. Dizüstü bilgisayara sahipseniz muhtemelen şarja takılı kullanınız.
+  - Processors ayarının yalnızca 2 olarak ayarlandığından ve sanal makinenize verdiğiniz belleğin toplam RAM'inizin en fazla yarısı ve en az 2GB olduğundan emin olun. Eğer 2GB ayıramıyorsanız, dual boot kullanın.
+  - Videolar sanal makinede takılıyorsa, Video Memory ayarını mümkün olan en üst düzeye çıkardığınızdan emin olun veya alternatif olarak makineniz kaldırabiliyorsa Windows'unuzda oynatın. Etkinleştirdiyseniz 3D Acceleration ayarını devre dışı bırakın.
+  - Sanal makine pencerenizin sağ alt köşesindeki <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/17_turtle.png" alt="Icon with a green turtle and a V" style={{"display":"inline","margin":"auto"}} /> simgesine dikkat edin, eğer varsa, burada [VirtualBox forumunda ondan nasıl kurtulacağınıza dair bir başlık var](https://forums.virtualbox.org/viewtopic.php?f=25&t=99390). Bunun yerine <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/18_vboxV.png" alt="Icon of a chip with a V" style={{"display":"inline","margin":"auto"}} /> simgesi de bulunabilir. Eğer sağ altta <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/17_turtle.png" alt="Icon with a green turtle and a V" style={{"display":"inline","margin":"auto"}} /> veya <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/18_vboxV.png" alt="Icon of a chip with a V" style={{"display":"inline","margin":"auto"}} /> görmüyorsanız, bunları görmek için tam ekran modundan çıkmanız gerekir.
+- Performansınız hala yetersizse, dual boot yapın çünkü bu, tüm bilgisayar kaynaklarını yalnızca bir işletim sistemi için kullandığınızı garanti edecek ve böylece deneyiminizi önemli ölçüde arttıracaktır.
+- Farenizin kaydırma tekerleği Google Chrome'da garip davranıyorsa ve sanal makinenizin istendiği gibi çalıştığından emin olmak için sanal makine performans ipuçlarını gözden geçirdiyseniz, `imwheel'e` bakın: [daha fazla bilgi için bu AskUbuntu talimatlarına bakın](https://askubuntu.com/a/621140). VSCode'u yüklediyseniz, `gedit` yerine bu talimatları kullanın, aksi takdirde `sudo apt install gedit` komutuyla gedit'i yükleyin. Eğer gedit'i `snap` ile yüklerseniz, dosyayı kaydetmenize izin vermez. Her açılışta `imwheel`in çalıştığından emin olmak için whisker menüsüne tıklamalısınız <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/96d534641514fe4d62aabe2919fac3c52cb286e7/foundations/installations/installations/imgs/00_whisker_icon.png" alt="The blue-white rodent Whisker Menu Icon" style={{"display":"inline","margin":"auto"}} /> , ardından `Session` yazın ve `Session and Startup'a` tıklayın. `Application Autostart'ı` göreceksiniz ve ona gidin, sonra da `Add'e` tıklayın. `Name` değeri için `imwheel` ve `Command` değeri için `imwheel -b "4 5` girin. `OK'e` tıklayın ve her şey hazır olmalı.
 
 ### Adım 5: Güvenli bir şekilde sanal makinenizi kapatma
 
@@ -236,9 +235,9 @@ Not: İsterseniz bu yöntemi [farklı Ubuntu dağıtımlarını](https://www.ubu
 
 İlk olarak, Ubuntu'yu flash sürücünüzden önyüklemeniz gerekir. Tam olarak ne yapmanız gerektiği değişebilir, ancak genel olarak aşağıdakileri yapmanız gerekecektir:
 
--  Flash belleği bilgisayara takın.
--  Bilgisayarı yeniden başlatın.
--  Sabit disk yerine flash belleği önyüklenebilir aygıt olarak seçin.
+- Flash belleği bilgisayara takın.
+- Bilgisayarı yeniden başlatın.
+- Sabit disk yerine flash belleği önyüklenebilir aygıt olarak seçin.
 
 Örneğin, bir Dell bilgisayarda boot menüsünü açmak için, flash sürücüyü takmanız, bilgisayarı yeniden başlatmanız ve bilgisayar ilk açılırken F12 tuşuna basmanız gerekir. Buradan, flash bellekten önyükleme yapmayı seçebilirsiniz. Sizin bilgisayarınızda yöntem tam olarak aynı olmayabilir, ancak Google bunu çözmenize yardımcı olabilir.
 
@@ -262,8 +261,8 @@ Ubuntu'yu yüklemeye çalışırken **Intel RST'yi** devre dışı bırakmanız�
 Yakın zamanda eklenen Linux terminali çalıştırabilme özelliği ile ChromeOS platformu, yerel Linux uygulamalarının yüklenebilmesine açılmıştır. Odin Project'i tamamlamak için Chromebook'unuzu kullanmak istiyorsanız, birkaç gereksinimi karşıladığınızdan emin olmanız gerekir:
 
 1.  Desteklenen bir Chromebook'unuz olmalı:
-    -   [Resmi Chromebook'lar](https://www.chromium.org/chromium-os/chrome-os-systems-supporting-linux)
-    -   [ChromeOS Flex Chromebook'lar](https://support.google.com/chromeosflex/answer/11513094)
+    - [Resmi Chromebook'lar](https://www.chromium.org/chromium-os/chrome-os-systems-supporting-linux)
+    - [ChromeOS Flex Chromebook'lar](https://support.google.com/chromeosflex/answer/11513094)
 2.  Linux'u [bu talimatları](https://support.google.com/chromebook/answer/9145439?hl=en) izleyerek kurabilirsiniz
 
 Bu iki gereksinimi de başarıyla karşıladıktan sonra, tüm müfredat boyunca Linux talimatlarını takip edebilirsiniz.
@@ -290,6 +289,7 @@ WSL2 tam teşekküllü bir Linux dağıtımı olduğundan, müfredatın Linux ha
   ```powershell
   wsl --install
   ```
+
 - Birkaç dakika sonra bilgisayarınızı yeniden başlatmanız istenecektir; bunu yapın.
 - Bir kullanıcı adı ve parola girmenizi isteyen açık bir Powershell penceresi göreceksiniz. Kullanıcı adınız küçük harfli olmalıdır, ancak bunun dışında size uygun olan herhangi bir şey olabilir. Ayrıca yeni bir parola girmeniz gerekecektir.
 - Parolanızı girerken herhangi bir görsel geri bildirim görmediğinizi fark edebilirsiniz. Bu, Linux'ta standart bir güvenlik özelliğidir ve gelecekte parola girmeniz gereken tüm durumlarda da geçerli olacaktır. Şifrenizi yazıp <kbd>Enter</kbd> tuşuna basmanız yeterli.
@@ -298,7 +298,7 @@ WSL2 tam teşekküllü bir Linux dağıtımı olduğundan, müfredatın Linux ha
 
 Windows Terminal, terminalleri daha kolay özelleştirmenize ve çalıştırmanıza olanak tanıyan ve her biri kendi farklı terminallerini çalıştırabilen birden çok sekmeyi destekleyen bir terminal uygulamasıdır.
 
-- Doğrudan yükleme seçeneğini kullanarak [Window's Terminal] (https://learn.microsoft.com/en-us/windows/terminal/install) yükleyin.
+- Doğrudan yükleme seçeneğini kullanarak [Window's Terminal](https://learn.microsoft.com/en-us/windows/terminal/install) yükleyin.
 
 #### Adım 1.2.2: WSL2'yi varsayılan olarak ayarlama (İsteğe bağlı)
 
@@ -341,22 +341,22 @@ Derslerimizde Google Chrome kullanıldığından ve Chrome/Chromium geliştirici
 
 #### 1. Adım: Google Chrome'u indirme
 
-   -   **Terminali** açın
-   -   En son **Google Chrome** `.deb` paketini indirmek için aşağıdaki komutu çalıştırın
+- **Terminali** açın
+- En son **Google Chrome** `.deb` paketini indirmek için aşağıdaki komutu çalıştırın
 
-~~~bash
+```bash
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-~~~
+```
 
 #### Adım 2: Google Chrome'u yükleme
 
-   -   **Google Chrome** `.deb` paketini yüklemek için terminale aşağıdaki komutu girin
+- **Google Chrome** `.deb` paketini yüklemek için terminale aşağıdaki komutu girin
 
-       ~~~bash
-       sudo apt install ./google-chrome-stable_current_amd64.deb
-       ~~~
+  ```bash
+  sudo apt install ./google-chrome-stable_current_amd64.deb
+  ```
 
-   -   Gerekirse şifrenizi girin
+- Gerekirse şifrenizi girin
 
 <div class="lesson-note lesson-note--tip" markdown="1">
 
@@ -366,20 +366,20 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
 #### Adım 3: Kurulum Dosyasını silme
 
-~~~bash
+```bash
 rm google-chrome-stable_current_amd64.deb
-~~~
+```
 
 #### Adım 4: Google Chrome'u kullanma
 
 Chrome'u iki şekilde başlatabilirsiniz,
 
-   -   Uygulamalar menüsünden **Google Chrome** öğesine tıklayın
-   -   **Veya**, terminalde `google-chrome` komutunu çalıştırın
+- Uygulamalar menüsünden **Google Chrome** öğesine tıklayın
+- **Veya**, terminalde `google-chrome` komutunu çalıştırın
 
-~~~bash
+```bash
 google-chrome
-~~~
+```
 
 <div class="lesson-note lesson-note--tip" markdown="1">
 
@@ -394,26 +394,26 @@ Chrome, bu terminali çeşitli mesajları vermek için kullanacak ve diğer komu
 
 #### 1. Adım: Google Chrome'u indirme
 
-   -   [Google Chrome indirme sayfasını ziyaret edin](https://www.google.com/chrome/)
-   -   **Download Chrome for Mac'e** tıklayın
+- [Google Chrome indirme sayfasını ziyaret edin](https://www.google.com/chrome/)
+- **Download Chrome for Mac'e** tıklayın
 
 #### 2. Adım: Google Chrome'u yükleme
 
-   -   **İndirilenler** klasörünü açın
-   -   **googlechrome.dmg** dosyasına çift tıklayın
-   -   Google Chrome simgesini **Uygulamalar** klasörü simgesine sürükleyin
+- **İndirilenler** klasörünü açın
+- **googlechrome.dmg** dosyasına çift tıklayın
+- Google Chrome simgesini **Uygulamalar** klasörü simgesine sürükleyin
 
 #### 3. Adım: Kurulum dosyasını silme
 
-   -   **Finder'ı** açın
-   -   Kenar çubuğunda Google Chrome'un yanındaki **ok** işaretine tıklayın
-   -   **İndirilenler** klasörüne gidin
-   -   **googlechrome.dmg** dosyasını çöp kutusuna sürükleyin
+- **Finder'ı** açın
+- Kenar çubuğunda Google Chrome'un yanındaki **ok** işaretine tıklayın
+- **İndirilenler** klasörüne gidin
+- **googlechrome.dmg** dosyasını çöp kutusuna sürükleyin
 
 #### 4. Adım: Google Chrome'u kullanma
 
-   -   **Uygulamalar** klasörüne gidin
-   -   **Google Chrome'a** çift tıklayın
+- **Uygulamalar** klasörüne gidin
+- **Google Chrome'a** çift tıklayın
 
 </details>
 
@@ -446,4 +446,4 @@ Chrome, bu terminali çeşitli mesajları vermek için kullanacak ve diğer komu
 
 Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-* Bu dersin henüz ek kaynağı bulunmuyor. Müfredatımıza katkıda bulunarak bu bölümü genişletmemize yardımcı olun.
+- Bu dersin henüz ek kaynağı bulunmuyor. Müfredatımıza katkıda bulunarak bu bölümü genişletmemize yardımcı olun.
