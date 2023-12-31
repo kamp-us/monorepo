@@ -289,6 +289,7 @@ export type Query = {
   node: Maybe<Node>;
   odin: OdinQuery;
   pano: PanoQuery;
+  rafine: RafineQuery;
   sozluk: SozlukQuery;
   user: Maybe<User>;
   viewer: Maybe<Viewer>;
@@ -301,6 +302,22 @@ export type QueryNodeArgs = {
 export type QueryUserArgs = {
   id: InputMaybe<Scalars["ID"]["input"]>;
   username: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type RafineMetadata = {
+  __typename?: "RafineMetadata";
+  description: Scalars["String"]["output"];
+  title: Scalars["String"]["output"];
+  url: Scalars["String"]["output"];
+};
+
+export type RafineQuery = {
+  __typename?: "RafineQuery";
+  metadata: Maybe<RafineMetadata>;
+};
+
+export type RafineQueryMetadataArgs = {
+  input: Scalars["String"]["input"];
 };
 
 export type RemovePanoCommentInput = {
@@ -608,6 +625,8 @@ export type ResolversTypes = ResolversObject<{
   PanoUpvote: ResolverTypeWrapper<PanoUpvote>;
   PanoUpvoteError: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>["PanoUpvoteError"]>;
   Query: ResolverTypeWrapper<{}>;
+  RafineMetadata: ResolverTypeWrapper<RafineMetadata>;
+  RafineQuery: ResolverTypeWrapper<RafineQuery>;
   RemovePanoCommentInput: RemovePanoCommentInput;
   RemovePanoCommentPayload: ResolverTypeWrapper<
     Omit<RemovePanoCommentPayload, "error"> & { error: Maybe<ResolversTypes["PanoCommentError"]> }
@@ -682,6 +701,8 @@ export type ResolversParentTypes = ResolversObject<{
   PanoUpvote: PanoUpvote;
   PanoUpvoteError: ResolversUnionTypes<ResolversParentTypes>["PanoUpvoteError"];
   Query: {};
+  RafineMetadata: RafineMetadata;
+  RafineQuery: RafineQuery;
   RemovePanoCommentInput: RemovePanoCommentInput;
   RemovePanoCommentPayload: Omit<RemovePanoCommentPayload, "error"> & {
     error: Maybe<ResolversParentTypes["PanoCommentError"]>;
@@ -1060,9 +1081,33 @@ export type QueryResolvers<
   >;
   odin: Resolver<ResolversTypes["OdinQuery"], ParentType, ContextType>;
   pano: Resolver<ResolversTypes["PanoQuery"], ParentType, ContextType>;
+  rafine: Resolver<ResolversTypes["RafineQuery"], ParentType, ContextType>;
   sozluk: Resolver<ResolversTypes["SozlukQuery"], ParentType, ContextType>;
   user: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType, Partial<QueryUserArgs>>;
   viewer: Resolver<Maybe<ResolversTypes["Viewer"]>, ParentType, ContextType>;
+}>;
+
+export type RafineMetadataResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["RafineMetadata"] = ResolversParentTypes["RafineMetadata"]
+> = ResolversObject<{
+  description: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type RafineQueryResolvers<
+  ContextType = KampusGQLContext,
+  ParentType extends ResolversParentTypes["RafineQuery"] = ResolversParentTypes["RafineQuery"]
+> = ResolversObject<{
+  metadata: Resolver<
+    Maybe<ResolversTypes["RafineMetadata"]>,
+    ParentType,
+    ContextType,
+    RequireFields<RafineQueryMetadataArgs, "input">
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type RemovePanoCommentPayloadResolvers<
@@ -1248,6 +1293,8 @@ export type Resolvers<ContextType = KampusGQLContext> = ResolversObject<{
   PanoUpvote: PanoUpvoteResolvers<ContextType>;
   PanoUpvoteError: PanoUpvoteErrorResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
+  RafineMetadata: RafineMetadataResolvers<ContextType>;
+  RafineQuery: RafineQueryResolvers<ContextType>;
   RemovePanoCommentPayload: RemovePanoCommentPayloadResolvers<ContextType>;
   RemovePanoPostPayload: RemovePanoPostPayloadResolvers<ContextType>;
   RemovePanoUpvotePayload: RemovePanoUpvotePayloadResolvers<ContextType>;

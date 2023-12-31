@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import Link from "next/link";
 import { Button, Flex } from "@radix-ui/themes";
 import { graphql, useFragment, usePaginationFragment } from "react-relay";
 

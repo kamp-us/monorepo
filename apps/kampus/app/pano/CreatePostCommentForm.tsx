@@ -1,20 +1,11 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { Button, Flex, Text, TextArea } from "@radix-ui/themes";
+import { Button, Flex, TextArea } from "@radix-ui/themes";
 import { graphql, useFragment, useMutation } from "react-relay";
 import { z } from "zod";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Textarea,
-  useForm,
-} from "@kampus/ui";
+import { Form, FormControl, FormField, FormItem, FormMessage, useForm } from "@kampus/ui";
 
 import { type CreatePostCommentForm_viewer$key } from "./__generated__/CreatePostCommentForm_viewer.graphql";
 

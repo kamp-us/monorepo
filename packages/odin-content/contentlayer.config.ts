@@ -4,7 +4,7 @@ import { getMDXComponent } from "mdx-bundler/client/index.js";
 import * as ReactDOMServer from "react-dom/server";
 import wikiLinkPlugin from "remark-wiki-link-plus";
 
-import { buildPublicOdinLessonID, getPublicOdinPath, slugifyTurkishTitle } from "./utils";
+import { buildPublicOdinLessonID } from "./utils";
 
 const mdxToHtml = async (mdxSource: string) => {
   const { code } = await bundleMDX({

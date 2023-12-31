@@ -2,9 +2,8 @@
 
 import { graphql, usePreloadedQuery } from "react-relay";
 
-import { type SerializablePreloadedQuery } from "features/relayfeatures/relay";
-import useSerializablePreloadedQuery from "features/relayfeatures/relayfeatures/relay/use-serializable-preloaded-query";
-
+import { type SerializablePreloadedQuery } from "~/features/relay";
+import useSerializablePreloadedQuery from "~/features/relay/use-serializable-preloaded-query";
 import { type SozlukTermQuery } from "./__generated__/SozlukTermQuery.graphql";
 import { SozlukTermBody } from "./SozlukTermBody";
 import { SozlukTermTitle } from "./SozlukTermTitle";

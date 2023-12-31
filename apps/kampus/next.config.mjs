@@ -21,30 +21,6 @@ const config = {
           source: "/gql",
           destination: GQL_URL,
         },
-        // if the host is `pano.*`,
-        // this rewrite will be applied
-        {
-          source: "/:path((?!_next/|_static/|[\\w-]+\\.\\w+).*)",
-          has: [
-            {
-              type: "host",
-              value: "pano.(.*)",
-            },
-          ],
-          destination: "/pano/:path",
-        },
-        // if the host is `sozluk.*`,
-        // this rewrite will be applied
-        {
-          source: "/:path((?!_next/|_static/|[\\w-]+\\.\\w+).*)",
-          has: [
-            {
-              type: "host",
-              value: "sozluk.(.*)",
-            },
-          ],
-          destination: "/sozluk/:path",
-        },
       ],
       afterFiles: [],
       fallback: [],

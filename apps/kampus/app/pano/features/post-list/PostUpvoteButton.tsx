@@ -1,5 +1,4 @@
-import { ThickArrowUpIcon, TriangleUpIcon } from "@radix-ui/react-icons";
-import { Button, Flex, IconButton, Text, Theme } from "@radix-ui/themes";
+import { Button, Flex } from "@radix-ui/themes";
 import { ArrowBigUp } from "lucide-react";
 import { graphql, useFragment, useMutation } from "react-relay";
 

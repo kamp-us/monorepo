@@ -5,7 +5,8 @@
     "apps/*",
     "config/*",
     "db/*",
-    "packages/*"
+    "packages/*",
+    "content/*"
   ],
   "scripts": {
     "gql": "turbo dev --filter=@kampus-apps/gql",
