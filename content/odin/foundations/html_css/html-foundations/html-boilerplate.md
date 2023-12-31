@@ -31,9 +31,9 @@ Her HTML sayfası bir doctype bildirimiyle başlar. Doctype'nin amacı tarayıc�
 
 Eski HTML sürümleri için doctype bildirimleri biraz daha karmaşıktı. Örneğin HTML4 için doctype bildirimi şu şekildedir:
 
-~~~html
+```html
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-~~~
+```
 
 Ancak muhtemelen eski bir HTML sürümünü kullanmak istemeyeceğiz ve her zaman `<!DOCTYPE html>` kullanacağız.
 
@@ -47,11 +47,11 @@ Bu daha sonra JavaScript kullanarak HTML'yi manipüle etmeyi öğrendiğimizde d
 
 `index.html` dosyasına geri dönelim ve `<html>` öğesini açılış ve kapanış etiketleriyle ekleyelim, şu şekilde:
 
-~~~html
+```html
 <!DOCTYPE html>
 <html lang="en">
 </html>
-~~~
+```
 
 #### `lang` özelliği nedir?
 
@@ -68,13 +68,13 @@ Web sayfasının karakter kümesi kodlaması için her zaman head öğesinde `<m
 
 Kodlamayı ayarlamak çok önemlidir çünkü bu web sayfasının tarayıcıda farklı dillerden gelen özel sembollerin ve karakterlerin doğru bir şekilde görüntülenmesini sağlar.
 
-#### Başlık öğesi
+#### Title öğesi
 
 HTML belgesinin `head` kısmında her zaman yer alması gereken başka bir öğe, `title` öğesidir:
 
  `<title>My First Webpage</title>`
 
-`title` öğesi, web sayfalarına insanlar tarafından okunabilir bir başlık vermek için kullanılır ve bu başlık web sayfamızın tarayıcı sekmesinde görüntülenir.
+`title` öğesi, web sayfalarına insanlar tarafından okunabilir bir başlık vermek için kullanılır ve bu başlık web sayfamızın tarayıcı sekmesinde görüntülenir. Örneğin, tarayıcınızın geçerli sekmesinin adına baktığınızda "HTML Şablonu" yazacaktır; bu geçerli `.html` dosyasının `<title>`idir.
 
 Eğer bir `title` öğesi eklemeseydik, web sayfasının başlığı varsayılan olarak dosya adı olurdu. Bizim durumumuzda bu `index.html` olurdu ve kullanıcılar için çok anlamlı olmayan bir başlık olurdu; kullanıcının birçok tarayıcı sekmesi açık ise web sayfamızı bulmak oldukça zorlaşırdı.
 
@@ -82,7 +82,7 @@ HTML belgesinin `head` kısmına yerleştirilebilecek birçok başka öğe bulun
 
 `index.html` dosyamıza geri dönelim ve içinde meta öğesi ve bir başlık içeren bir `head` öğesi ekleyelim. `head` öğesi, HTML öğesinin içinde yer almalı ve açılış `<html>` etiketi altındaki ilk öğe olmalıdır.
 
-~~~html
+```html
 <!DOCTYPE html>
 
 <html lang="en">
@@ -91,7 +91,7 @@ HTML belgesinin `head` kısmına yerleştirilebilecek birçok başka öğe bulun
     <title>My First Webpage</title>
   </head>
 </html>
-~~~
+```
 
 ### Body öğesi
 
@@ -99,7 +99,7 @@ HTML şablonunu tamamlamak için gereken son öğe `<body>` öğesidir. Bu, kull
 
 Boilerplate'i tamamlamak için `index.html` dosyasına bir body öğesi ekleyin. Body öğesi de HTML öğesinin içine yerleştirilir ve her zaman `head` öğesinin altında yer alır, aşağıdaki gibi:
 
-~~~html
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -110,7 +110,7 @@ Boilerplate'i tamamlamak için `index.html` dosyasına bir body öğesi ekleyin.
   <body>
   </body>
 </html>
-~~~
+```
 
 ### HTML dosyalarını tarayıcıda görüntüleme
 
@@ -132,7 +132,7 @@ Yukarıdaki yöntemlerden birini kullanarak üzerinde çalıştığımız index.
 
 `index.html` dosyasına geri dönelim ve başlık (daha fazlası sonradan açıklanacak) ekleyelim ve dosyayı kaydedelim.
 
-~~~html
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -144,11 +144,11 @@ Yukarıdaki yöntemlerden birini kullanarak üzerinde çalıştığımız index.
     <h1>Hello World!</h1>
   </body>
 </html>
-~~~
+```
 
 Şimdi tarayıcıda sayfayı yenilerseniz değişikliklerin etkili olduğunu ve "Hello World!" başlığının görüntülendiğini göreceksiniz.
 
-### VSCode Kısayolu 
+### VSCode kısayolu 
 
 VSCode'nun tek seferde tüm şablonu oluşturmak için kullanabileceğiniz yerleşik bir kısayolu vardır. Bu kısayolun yalnızca '.html' uzantılı bir dosyayı düzenlerken veya HTML dilinin zaten seçildiği bir metin dosyasını düzenlerken çalıştığını unutmayın. Kısayolu tetiklemek için `index.html` dosyasındaki her şeyi silin ve yalnızca ilk satıra `!` karakterini girin. Bu size birkaç seçenek sunacaktır. İlk seçeneği seçmek için <kbd>Enter</kbd> tuşuna basın ve işte size tamamen oluşturulmuş şablon.
 
@@ -158,11 +158,11 @@ Ancak not defteri gibi (Allah korusun) bu kısayola sahip olmayan bir metin düz
 
 <div class="lesson-content__panel" markdown="1">
 
-1. Kevin Powell'un harika [Building Your First Web Page](https://youtu.be/V8UAEoOvqFg?list=PL4-IK0AVhVjM0xE0K2uZRvsM7LkIhsPT-&t=93) videosunu izleyin ve adımları takip edin.
+1. Kevin Powell'un harika [Building Your First Web Page](https://youtu.be/V8UAEoOvqFg?list=PL4-IK0AVhVjM0xE0K2uZRvsM7LkIhsPT-&t=93) adlı ingilizce videosunu izleyin ve adımları takip edin.
 
 2. Kas hafızası oluşturmak için `index.html` dosyasının içeriğini silin ve şablonu tamamen hafızadan tekrar yazmaya çalışın. İlk birkaç kez takıldığınızda ders içeriğine göz atmanızda sakınca yok. Sadece hafızadan birkaç kez başarılı bir şekilde yapana kadar devam edin.
 
-3. Şablonunuzu W3 [HTML validator](https://validator.w3.org/) veya alternatif olarak [HTML validator](https://www.freeformatter.com/html-validator.html) üzerinden çalıştırın. Doğrulayıcılar işaretlemenizin doğru olduğundan emin olmanızı sağlar. Eksik kapanış etiketleri ve HTML'deki fazladan boşluklar gibi sıklıkla yaptığınız ve farkında olmadığınız sözdizimi hataları hakkında geri bildirim sağlayarak mükemmel bir öğrenme aracıdır.
+3. Şablonunuzu W3 [HTML validator](https://validator.w3.org/) adlı ingilizce websitesinden veya alternatif olarak [HTML validator](https://www.freeformatter.com/html-validator.html) adlı ingilizce websitesi üzerinden çalıştırın. Doğrulayıcılar işaretlemenizin doğru olduğundan emin olmanızı sağlar. Eksik kapanış etiketleri ve HTML'deki fazladan boşluklar gibi sıklıkla yaptığınız ve farkında olmadığınız sözdizimi hataları hakkında geri bildirim sağlayarak mükemmel bir öğrenme aracıdır.
 
 </div>
 
@@ -171,17 +171,17 @@ Ancak not defteri gibi (Allah korusun) bu kısayola sahip olmayan bir metin düz
 Bu bölümde, bu dersle ilgili anlayışınızı kendi başınıza kontrol etmek için sorular bulunmaktadır. Bir soruya cevap verirken zorluk yaşıyorsanız, üzerine tıklayarak bağlantı verilen materyali gözden geçirin.
 
 
-*   [What is the purpose of the doctype declaration?](#the-doctype)
-*   [What is the HTML element?](#html-element)
-*   [What is the purpose of the head element?](#head-element)
-*   [What is the purpose of the body element?](#body-element)
+- [doctype tanımının amacı nedir?](#the-doctype)
+- [HTML öğesi nedir?](#html-element)
+- [head öğesinin amacı nedir?](#head-element)
+- [body öğesinin amacı nedir?](#body-element)
 
 ### Ek kaynaklar
 
-Bu bölüm, ilgili içeriğe yönelik yararlı bağlantılar içermektedir. Zorunlu değildir, bu yüzden ek olarak düşünün.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-* [charsets you should use with your HTML pages](https://www.positioniseverything.net/html-encoding/) hakkında bu makaleyi okuyun.
+- [HTML sayfalarınızda kullanmanız gereken charset'ler](https://www.positioniseverything.net/html-encoding/) hakkındaki bu ingilizce makaleyi okuyun.
 
-* HTML sayfalarınızı tarayıcıda açmanın başka bir seçeneği VSCode ile [live server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) kullanmaktır. Bu HTML belgenizi açacak ve belgeyi kaydettiğiniz her seferde otomatik olarak yenileyecektir. Bununla birlikte ilk birkaç HTML projesinizde bu uzantıyı kullanmamanızı ve bunun yerine eski yöntemi kullanmanızı öneririz. Sayfayı tarayıcıda manuel olarak açıp yenileyerek bu sürece alışabilirsiniz ve hemen uzantılara bağımlı hale gelmezsiniz. Bunun nedeni uzantıları kullanırken bazı ince farklılıklar olabileceğidir. Örneğin canlı sunucu her zaman UTF-8 karakter kodlamasını kullanır ve `meta-charset` özelliğinde tanımlanan değeri kullanmaz. Bu sitenizde beklediğiniz şekilde kodlanmamış bazı karakterlerin gizlenmesine neden olabilir.
+- HTML sayfalarınızı tarayıcıda açmanın başka bir seçeneği VSCode ile [live server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) kullanmaktır. Bu HTML belgenizi açacak ve belgeyi kaydettiğiniz her seferde otomatik olarak yenileyecektir. Bununla birlikte ilk birkaç HTML projesinizde bu uzantıyı kullanmamanızı ve bunun yerine eski yöntemi kullanmanızı öneririz. Sayfayı tarayıcıda manuel olarak açıp yenileyerek bu sürece alışabilirsiniz ve hemen uzantılara bağımlı hale gelmezsiniz. Bunun nedeni uzantıları kullanırken bazı ince farklılıklar olabileceğidir. Örneğin canlı sunucu her zaman UTF-8 karakter kodlamasını kullanır ve `meta-charset` özelliğinde tanımlanan değeri kullanmaz. Bu sitenizde beklediğiniz şekilde kodlanmamış bazı karakterlerin gizlenmesine neden olabilir.
 
-* İsterseniz web sayfasının herhangi bir yerindeki öğelere `lang` özelliğini ekleyebilirsiniz. `lang` özelliği hakkında daha iyi bir anlayış için [bu belgeyi](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) okuyabilirsiniz.
+- İsterseniz web sayfasının herhangi bir yerindeki öğelere `lang` niteliğini ekleyebilirsiniz. `lang` niteliğini daha iyi anlamak için [bu ingilizce makaleyi](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) okuyun.

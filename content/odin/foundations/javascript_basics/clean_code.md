@@ -293,8 +293,8 @@ Temiz kod yazmayı öğrenmek sürekli bir gelişim sürecidir. Bu süreç, Odin
 Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve bağlantılı olduğu materyali gözden geçirin.
 
 - [Temiz kod yazmak neden önemli?](#giriş)
-- [Önceden bahsedilen 5 temiz kod yazma prensipleri nelerdir? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://onextrapixel.com/10-principles-for-keeping-your-programming-code-clean/)
-- [İyi ve kötü yorumların arasındaki farklar nelerdir? bunu öğrenmek için bu ingilizce makaleye göz atın.](https://onextrapixel.com/10-principles-for-keeping-your-programming-code-clean/)
+- [Önceden bahsedilen 5 temiz kod yazma prensipleri nelerdir? ilgili ingilizce makale için tıklayın.](https://onextrapixel.com/10-principles-for-keeping-your-programming-code-clean/)
+- [İyi ve kötü yorumların arasındaki farklar nelerdir? ilgili ingilizce makale için tıklayın.](https://onextrapixel.com/10-principles-for-keeping-your-programming-code-clean/)
 
 ### Ek kaynaklar
 

@@ -24,6 +24,7 @@
 | descendant combinator             | soydan gelen birleştirici         | -                                                                  | ÇEVİRİSİ KULLANILMALI       |
 | element                           | öğe                               | -                                                                  | ÇEVİRİSİ KULLANILMALI       |
 | exercise                          | alıştırma                         | -                                                                  | -                           |
+| explicit                          | belirli                       |CSS griddeki explicit concept içindir                                                                 | ÇEVİRİSİ KULLANILMALI      |
 | express                           | -                                 | express.js içindir, ingilizce fiil olan express değil              | ORİJİNALİ KULLANILMALI      |
 | falsy                             | yanlışımsı                        | -                                                                  | ÇEVİRİSİ KULLANILMALI       |
 | flex container                    | flex konteyneri                   | -                                                                  | ÇEVİRİSİ KULLANILMALI       |
@@ -39,6 +40,7 @@
 | graphical user interface          | grafiksel kullanıcı arayüzü       | -                                                                  | ÇEVİRİSİ KULLANILMALI       |
 | grid layout                       | grid düzen                        | -                                                                  | ÇEVİRİSİ KULLANILMALI       |
 | head                              | baş                               | HTML tag bağlamında                                                | ORİJİNALİ KULLANILMALI      |
+| implicit                          | belirsiz                     | CSS griddeki implicit concept içindir                                                                 | ÇEVİRİSİ KULLANILMALI       |
 | inheritence                       | kalıtım                           | -                                                                  | ÇEVİRİSİ KULLANILMALI       |
 | interactive                       | interaktif                        | -                                                                  | ÇEVİRİSİ KULLANILMALI       |
 | interpreter                       | yorumlayıcı                       | as in language interpreter                                         | ÇEVİRİSİ KULLANILMALI       |
