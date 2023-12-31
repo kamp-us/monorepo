@@ -33,7 +33,8 @@ Bir HTML sayfasında aşağıdaki metnin çıktısının ne olmasını beklersin
 </body>
 ```
 
-Görünüşe göre iki paragraf metin gibi duruyor, bu nedenle onun bu şekilde görüntülenmesini bekleyebilirsiniz. Ancak durum böyle değil, aşağıdaki çıktıda görebileceğiniz gi-
+Görünüşe göre iki paragraf metin gibi duruyor, bu nedenle onun bu şekilde görüntülenmesini bekleyebilirsiniz. Ancak durum böyle değil, aşağıdaki çıktıda görebileceğiniz gibi:
+
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="xxrKqeV" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","padding":"1em"}}>
 <a href="https://codepen.io">CodePen</a>'de
