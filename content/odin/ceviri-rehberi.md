@@ -44,6 +44,6 @@
 
 + **Sayfa sonlarında verilen dış linkleri çevirmeyiniz.** <br> _(örn. [Go deep into Javascript events with this video](https://www.youtube.com/watch?v=8aGhZQkoFbQ))_
 
-+ **Web geliştirme dünyasında birçok ürün ve bunlara dair terim bulunmaktadır. Çeviride anlamı koruyabilmek için bunların çevrilmemesine dikkat edilmelidir. Gerektiği yerde orijinal haliyle, çevrilmeden verilmelidir.**<br>_(örn. webpack, react, CRUD)_    ***Referans için: [Türkçe Odin Projesi-Sözcük Referans Listesi](https://github.com/kamp-us/turkce-odin-project/blob/main/ceviri-referans-listesi.md)
++ **Web geliştirme dünyasında birçok ürün ve bunlara dair terim bulunmaktadır. Çeviride anlamı koruyabilmek için bunların çevrilmemesine dikkat edilmelidir. Gerektiği yerde orijinal haliyle, çevrilmeden verilmelidir.**<br>_(örn. webpack, react, CRUD)_    ***Referans için: [Türkçe Odin Projesi-Sözcük Referans Listesi](https://github.com/kamp-us/monorepo/blob/dev/content/odin/ceviri-referans-listesi.md)
 
 + **Bir istisna olarak yazılım/bilgisayar terimi olan kısaltmalar, mümkün olduğunca orijinal halinde verilmeye çalışılmalıdır. Kısaltmanın Türkçe bir karşılığı varsa İngilizcesinin yanına parantez içinde yazılmalıdır.** <br> _(örn. USA(ABD) )_      ***Referans için: [Türkçe Odin Projesi-Sözcük Referans Listesi](https://github.com/kamp-us/monorepo/blob/dev/content/odin/ceviri-referans-listesi.md)
