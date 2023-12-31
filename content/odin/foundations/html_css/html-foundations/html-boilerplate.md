@@ -68,7 +68,7 @@ Web sayfasının karakter kümesi kodlaması için her zaman head öğesinde `<m
 
 Kodlamayı ayarlamak çok önemlidir çünkü bu web sayfasının tarayıcıda farklı dillerden gelen özel sembollerin ve karakterlerin doğru bir şekilde görüntülenmesini sağlar.
 
-#### Head öğesi
+#### Title öğesi
 
 HTML belgesinin `head` kısmında her zaman yer alması gereken başka bir öğe, `title` öğesidir:
 
