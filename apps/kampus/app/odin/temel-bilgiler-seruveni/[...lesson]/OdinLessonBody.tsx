@@ -1,5 +1,5 @@
 import { graphql, useFragment } from "react-relay";
-
+import { useEffect, useState } from 'react';
 import { type OdinLessonBody_body$key } from "./__generated__/OdinLessonBody_body.graphql";
 
 interface Props {
@@ -18,11 +18,38 @@ const useOdinLessonBodyFragment = (key: OdinLessonBody_body$key | null) =>
 
 export const OdinLessonBody = (props: Props) => {
   const body = useOdinLessonBodyFragment(props.body);
+  const [subtitles, setSubtitles] = useState<{ id: string, text: string }[]>([]);
+
+  useEffect(() => {
+    if (body?.html) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(body.html, 'text/html');
+      const h3Elements = doc.querySelectorAll('h3');
+      const h3Texts = Array.from(h3Elements).map(h3 => ({ id: h3.id, text: h3.textContent || '' }));
+      setSubtitles(h3Texts);
+    }
+  }, [body?.html]);
 
   return (
-    <div
-      className="prose dark:prose-invert hover:prose-a:text-blue-500"
-      dangerouslySetInnerHTML={{ __html: body?.html ?? "" }}
-    />
+    <div className="flex flex-row space-x-15">
+      <div
+        className="flex flex-col prose dark:prose-invert hover:prose-a:text-blue-500"
+        dangerouslySetInnerHTML={{ __html: body?.html ?? "" }}
+    >    
+    </div>
+      <div className="sticky top-5 mr-5 hidden xl:flex xl:flex-col justify-self-end ">
+        <h3>Ders içeriği</h3>
+        <ul className="border-l-4 ltr:ml:3">
+        {subtitles.map((subtitle, index) => (
+          <li className="p-2 pl-4" key={index}>
+            <a href={`#${subtitle.text}`}>
+              {subtitle.text}
+            </a>
+          </li>
+        ))}
+          </ul>
+      </div>
+      </div>
+  
   );
 };
