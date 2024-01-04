@@ -29,10 +29,10 @@ export const OdinLessonActions = (props: Props) => {
     <div className="border-t-border border-t-2 pt-4">
       <ul className="flex gap-10">
         <li>
-          <a href={contributionUrl}>Katkıda bulun</a>
+          <a href={contributionUrl} target="_blank" rel="noopener noreferrer">Katkıda bulun</a>
         </li>
         <li>
-          <a href={issueUrl}>Bir sorun bildir</a>
+          <a href={issueUrl} target="_blank" rel="noopener noreferrer">Bir sorun bildir</a>
         </li>
       </ul>
     </div>
