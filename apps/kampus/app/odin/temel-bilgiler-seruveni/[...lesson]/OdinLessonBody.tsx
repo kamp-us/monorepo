@@ -31,25 +31,29 @@ export const OdinLessonBody = (props: Props) => {
   }, [body?.html]);
 
   return (
-    <div className="flex flex-row space-x-15">
+    <div className="flex flex-row justify-between">
       <div
-        className="flex flex-col prose dark:prose-invert hover:prose-a:text-blue-500"
+        className="prose dark:prose-invert hover:prose-a:text-blue-500"
         dangerouslySetInnerHTML={{ __html: body?.html ?? "" }}
-    >    
+      >    
+      </div>
+      <div className="hidden xl:block">
+        
+          <div className="sticky top-20 pb-20">
+            <h3 className="text-md pb-4 prose dark:prose-invert hover:prose-a:text-blue-500">Ders içeriği</h3>
+
+            <ul className="border-l-4 ltr:ml:3">
+            {subtitles.map((subtitle, index) => (
+              <li className="p-2 pl-4" key={index}>
+                <a href={`#${subtitle.text}`}>
+                  {subtitle.text}
+                </a>
+              </li>
+            ))}
+            </ul>
+          </div>
+      </div>
     </div>
-      <div className="sticky top-5 mr-5 hidden xl:flex xl:flex-col justify-self-end ">
-        <h3>Ders içeriği</h3>
-        <ul className="border-l-4 ltr:ml:3">
-        {subtitles.map((subtitle, index) => (
-          <li className="p-2 pl-4" key={index}>
-            <a href={`#${subtitle.text}`}>
-              {subtitle.text}
-            </a>
-          </li>
-        ))}
-          </ul>
-      </div>
-      </div>
   
   );
 };
