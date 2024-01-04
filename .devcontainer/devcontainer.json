@@ -2,12 +2,14 @@
   "name": "kampus-monorepo",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:0-18-bullseye",
 
+  // Machine specs
   "hostRequirements": {
     "cpus": 8,
     "memory": "8gb",
     "storage": "32gb"
   },
   
+  // For requirements
   "features": {
     "ghcr.io/devcontainers-contrib/features/npm-package:1": {},
     "ghcr.io/devcontainers-contrib/features/typescript:2": {},
@@ -31,6 +33,8 @@
         "meta.relay",
         "ms-azuretools.vscode-docker"
 			],
+      
+      // These files will open once your codespace is built.
       "openFiles": [
         "README.md",
         "package.json"
