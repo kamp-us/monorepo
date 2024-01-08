@@ -3,6 +3,26 @@ import { graphql, useFragment } from "react-relay";
 import { getOdinGithubEditUrl, getOdinGithubIssueUrl } from "~/features/kampus-url/kampus-github";
 import { type OdinLessonActions_path$key } from "./__generated__/OdinLessonActions_path.graphql";
 
+import curriculumList, { Curriculum} from '../../curriculum-list';
+
+const getNextLesson = (curriculum: Curriculum, currentTitle: string) => {
+  const lessons = curriculum.sections.flatMap((section, sectionIndex) => 
+    section.lessons.map((lesson, lessonIndex) => ({
+      sectionIndex: sectionIndex + 1,
+      lessonIndex: lessonIndex + 1,
+      title: lesson.title,
+      url: lesson.url
+    }))
+  );
+  
+  const currentLessonIndex = lessons.findIndex(lesson => lesson.title === currentTitle);
+  const nextLesson = lessons[currentLessonIndex + 1]?.url;
+
+  console.log(nextLesson)
+  
+  return nextLesson;
+}
+
 interface Props {
   lesson: OdinLessonActions_path$key | null;
 }
@@ -24,6 +44,9 @@ export const OdinLessonActions = (props: Props) => {
   // https://github.com/kamp-us/monorepo/edit/dev/content/odin/foundations/installations/installation_overview.md
   const contributionUrl = getOdinGithubEditUrl(lesson.path);
   const issueUrl = getOdinGithubIssueUrl({ title: lesson.title, path: lesson.path });
+
+  const currentTitle = lesson.title;
+  getNextLesson(curriculumList.foundationsCurriculum, currentTitle); // curriculum hardcoded for now, wip
 
   return (
     <div>
@@ -126,7 +149,7 @@ export const OdinLessonActions = (props: Props) => {
                 <span>Ders tamamlandı</span>
               </a>
 
-              <a className=" flex items-center px-4" href="#">
+              <a className=" flex items-center px-4" href="#" >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
