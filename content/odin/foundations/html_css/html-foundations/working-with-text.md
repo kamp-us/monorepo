@@ -1,5 +1,5 @@
 ---
-title: 'Metinlerle Çalışma'
+title: 'Metin İle Çalışmak'
 ---
 
 ### Giriş

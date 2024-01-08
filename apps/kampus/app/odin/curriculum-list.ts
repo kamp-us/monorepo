@@ -102,8 +102,8 @@ const foundationsCurriculum = {
           url: "temel-bilgiler/html-css/html-temelleri/html-sablonu",
         },
         {
-          title: "Metin İle Çalışma",
-          url: "temel-bilgiler/html-css/html-temelleri/metin-ile-calisma",
+          title: "Metin İle Çalışmak",
+          url: "temel-bilgiler/html-css/html-temelleri/metin-ile-calismak",
         },
         {
           title: "Listeler",
