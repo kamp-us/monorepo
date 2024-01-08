@@ -31,20 +31,20 @@ export const OdinLessonBody = (props: Props) => {
   }, [body?.html]);
 
   return (
-    <div className="flex flex-row justify-center xl:justify-between">
+    <div className="flex flex-row justify-center xl:justify-between mb-10">
       <div
         className="prose dark:prose-invert hover:prose-a:text-blue-500"
         dangerouslySetInnerHTML={{ __html: body?.html ?? "" }}
       >    
       </div>
-      <div className="hidden xl:block">
+  <div className="hidden xl:block w-44">
         
-          <div className="sticky top-20 pb-20">
+          <div className="sticky top-20">
             <h3 className="text-md pb-4 prose dark:prose-invert hover:prose-a:text-blue-500">Ders içeriği</h3>
 
-            <ul className="border-l-4 ltr:ml:3">
+            <ul className="border-l-4">
             {subtitles.map((subtitle, index) => (
-              <li className="p-2 pl-4" key={index}>
+              <li className="p-2" key={index}>
                 <a href={`#${subtitle.text}`}>
                   {subtitle.text}
                 </a>
