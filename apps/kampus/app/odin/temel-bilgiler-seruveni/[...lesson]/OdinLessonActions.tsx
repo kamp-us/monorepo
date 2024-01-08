@@ -16,11 +16,7 @@ const getNextLesson = (curriculum: Curriculum, currentTitle: string) => {
   );
   
   const currentLessonIndex = lessons.findIndex(lesson => lesson.title === currentTitle);
-  const nextLesson = lessons[currentLessonIndex + 1]?.url;
-
-  console.log(nextLesson)
-  
-  return nextLesson;
+  return lessons[currentLessonIndex + 1]?.url;
 }
 
 interface Props {
@@ -46,7 +42,7 @@ export const OdinLessonActions = (props: Props) => {
   const issueUrl = getOdinGithubIssueUrl({ title: lesson.title, path: lesson.path });
 
   const currentTitle = lesson.title;
-  getNextLesson(curriculumList.foundationsCurriculum, currentTitle); // curriculum hardcoded for now, wip
+  const nextLesson = getNextLesson(curriculumList.foundationsCurriculum, currentTitle); // curriculum hardcoded for now, wip
 
   return (
     <div>
@@ -149,7 +145,7 @@ export const OdinLessonActions = (props: Props) => {
                 <span>Ders tamamlandı</span>
               </a>
 
-              <a className=" flex items-center px-4" href="#" >
+              <a className=" flex items-center px-4" href={`/${nextLesson}`} >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
