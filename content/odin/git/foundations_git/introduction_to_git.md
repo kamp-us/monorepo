@@ -1,5 +1,5 @@
 ---
-title: "Git'le tanışın"
+title: "Git'le Tanışın"
 ---
 
 ### Giriş

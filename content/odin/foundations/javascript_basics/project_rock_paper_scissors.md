@@ -1,5 +1,5 @@
 ---
-title: 'Proje Taş Kağıt Makas'
+title: 'Proje: Taş Kağıt Makas'
 ---
 
 ### Giriş

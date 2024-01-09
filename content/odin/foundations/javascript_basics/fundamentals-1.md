@@ -1,5 +1,5 @@
 ---
-title: 'Javascript Temelleri - 1'
+title: 'JavaScript Temelleri Bölüm 1'
 ---
 
 ### Giriş

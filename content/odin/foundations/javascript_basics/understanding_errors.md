@@ -1,5 +1,5 @@
 ---
-title: 'Hata Mesajlarını Anlama'
+title: 'Hata Mesajlarını Anlamak'
 ---
 
 ### Giriş
