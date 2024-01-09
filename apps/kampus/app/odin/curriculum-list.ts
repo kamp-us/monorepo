@@ -197,8 +197,8 @@ const foundationsCurriculum = {
           url: "temel-bilgiler/javascript-temelleri/problem-cozme",
         },
         {
-          title: "Hata Mesajlarını Anlama",
-          url: "temel-bilgiler/javascript-temelleri/hatalari-anlama",
+          title: "Hata Mesajlarını Anlamak",
+          url: "temel-bilgiler/javascript-temelleri/hata-mesajlarini-anlamak",
         },
         {
           title: "Proje: Taş Kağıt Makas",
