@@ -5,23 +5,22 @@ import { CurriculumSection } from "./CurriculumContent";
 
 export default function TemelBilgilerSeruveni() {
   const { curriculum } = curriculumList;
+  const temelBilgiler = curriculum[0]
 
   return (
-    <div>
-      {curriculum.map((cur, index) => (
+    <div className="my-10">
       <Flex direction="column" gap="6">
         <Flex gap="4" align="center">
-          <Text size="8">{cur.name}</Text>
+          <Text size="8">{temelBilgiler?.name}</Text>
           <Text size="2" color="gray">
-            {cur.sections.length} bölüm
+            {temelBilgiler?.sections.length} bölüm
           </Text>
         </Flex>
-        <Text size="4">{cur.description}</Text>
-        {cur.sections.map((section, sectionIndex) => {
-          return <CurriculumSection curriculumUrl={cur.url} key={sectionIndex} section={section} />;
+        <Text size="4">{temelBilgiler?.description}</Text>
+        {temelBilgiler?.sections.map((section, sectionIndex) => {
+          return <CurriculumSection curriculumUrl={temelBilgiler?.url} key={sectionIndex} section={section} />;
         })}
         </Flex>
-        ))}
     </div>
-  );
+  )
 }
