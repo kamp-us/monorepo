@@ -284,7 +284,7 @@ Resim dosyasının orijinal değerlerini değiştirmeyi planlamıyorsak bile `<i
 
 ### HTML'e CSS Ekleme
 
-Artık bazı temel sözdizimlerini öğrendiğimize göre, tüm bu CSS'i HTML'imize _nasıl_ ekleyeceğimizi merak ediyor olabilirsiniz. Bunu üç yöntemle yapabiliriz.
+Artık bazı temel sözdizimlerini öğrendiğimize göre, bu CSS'leri HTML dosyamıza _nasıl_ ekleyeceğimizi merak ediyor olabilirsiniz. Bunu üç yöntemle yapabiliriz:
 
 #### Harici CSS
 
