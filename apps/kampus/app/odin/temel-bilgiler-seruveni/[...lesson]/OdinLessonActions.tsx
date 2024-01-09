@@ -8,33 +8,39 @@ import next from "next";
 
 const getNextLesson = (curriculum: Curriculum[], currentTitle: string) => {
   let currentCurriculumUrl = null;
-  const lessons = curriculum.flatMap((curriculum) =>
-    curriculum.sections.flatMap((section) =>
+  let nextLessonUrl = null;
+  
+  for (let i = 0; i < curriculum.length; i++) {
+    const lessons = (curriculum[i]?.sections || []).flatMap((section) =>
       section.lessons.map((lesson) => {
         if (lesson.title === currentTitle) {
-          currentCurriculumUrl = curriculum.url;
+
+          currentCurriculumUrl = `/odin/${curriculum[i]?.url}`;
         }
         return {
           title: lesson.title,
           url: lesson.url,
         };
       })
-    )
-  );
-  let nextLessonUrl = null;
-  let currentLessonIndex = lessons.findIndex((lesson) => lesson.title === currentTitle);
-  
-  if (currentLessonIndex !== -1) {
-    while (lessons[currentLessonIndex + 1]?.url === "#") { 
-      currentLessonIndex++;
+    );
+
+    let currentLessonIndex = lessons.findIndex((lesson) => lesson.title === currentTitle);
+    
+    if (currentLessonIndex !== -1) {
+      while (lessons[currentLessonIndex + 1]?.url === "#") { 
+        currentLessonIndex++;
+      }
+      nextLessonUrl = `${currentCurriculumUrl}/${lessons[currentLessonIndex + 1]?.url}`;
+      if (currentLessonIndex === lessons.length - 1) {
+        nextLessonUrl = currentCurriculumUrl;
+      }
+      break;
     }
-    nextLessonUrl = lessons[currentLessonIndex + 1]?.url;
-    if (currentLessonIndex === lessons.length - 1) {
-      nextLessonUrl = currentCurriculumUrl;
-    }
-};
+  }
+
   return { nextLessonUrl, currentCurriculumUrl };
 };
+
 interface Props {
   lesson: OdinLessonActions_path$key | null;
 }
@@ -124,7 +130,7 @@ export const OdinLessonActions = (props: Props) => {
           <div className="rounded-lg">
             <div className="p-8">
               <div className="mx-auto flex max-w-sm flex-col justify-center space-y-6 md:max-w-full md:flex-row md:space-x-7 md:space-y-0">
-                <a className="flex items-center px-4" href={`/odin/${currentCurriculumUrl}`}>
+                <a className="flex items-center px-4" href={currentCurriculumUrl || undefined}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -145,7 +151,7 @@ export const OdinLessonActions = (props: Props) => {
                   </svg>
                   Serüvene dön
                 </a>
-                <Link href={`/odin/${currentCurriculumUrl}/${nextLessonUrl || undefined}`}>
+                <Link href={nextLessonUrl || undefined}>
                   <div className="flex items-center px-4">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
