@@ -45,9 +45,9 @@ export const OdinLessonBody = (props: Props) => {
             <ul className="border-l-4">
             {subtitles.map((subtitle, index) => (
               <li className="p-2" key={index}>
-                <a href={`#${subtitle.text}`}>
+                <p>
                   {subtitle.text}
-                </a>
+                </p>
               </li>
             ))}
             </ul>
