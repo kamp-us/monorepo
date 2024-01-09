@@ -4,6 +4,7 @@ import { graphql, useFragment } from "react-relay";
 import { getOdinGithubEditUrl, getOdinGithubIssueUrl } from "~/features/kampus-url/kampus-github";
 import curriculumList, { Curriculum } from "../../curriculum-list";
 import { type OdinLessonActions_path$key } from "./__generated__/OdinLessonActions_path.graphql";
+import next from "next";
 
 const getNextLesson = (curriculum: Curriculum[], currentTitle: string) => {
   let currentCurriculumUrl = null;
@@ -20,11 +21,20 @@ const getNextLesson = (curriculum: Curriculum[], currentTitle: string) => {
       })
     )
   );
-
-  const currentLessonIndex = lessons.findIndex((lesson) => lesson.title === currentTitle);
-  return { nextLessonUrl: lessons[currentLessonIndex + 1]?.url, currentCurriculumUrl };
+  let nextLessonUrl = null;
+  let currentLessonIndex = lessons.findIndex((lesson) => lesson.title === currentTitle);
+  
+  if (currentLessonIndex !== -1) {
+    while (lessons[currentLessonIndex + 1]?.url === "#") { 
+      currentLessonIndex++;
+    }
+    nextLessonUrl = lessons[currentLessonIndex + 1]?.url;
+    if (currentLessonIndex === lessons.length - 1) {
+      nextLessonUrl = currentCurriculumUrl;
+    }
 };
-
+  return { nextLessonUrl, currentCurriculumUrl };
+};
 interface Props {
   lesson: OdinLessonActions_path$key | null;
 }
@@ -114,7 +124,7 @@ export const OdinLessonActions = (props: Props) => {
           <div className="rounded-lg">
             <div className="p-8">
               <div className="mx-auto flex max-w-sm flex-col justify-center space-y-6 md:max-w-full md:flex-row md:space-x-7 md:space-y-0">
-                <a className="flex items-center px-4" href={`${currentCurriculumUrl}`}>
+                <a className="flex items-center px-4" href={`/odin/${currentCurriculumUrl}`}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -135,7 +145,7 @@ export const OdinLessonActions = (props: Props) => {
                   </svg>
                   Serüvene dön
                 </a>
-                <Link href={`${nextLessonUrl}`}>
+                <Link href={`/odin/${currentCurriculumUrl}/${nextLessonUrl || undefined}`}>
                   <div className="flex items-center px-4">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
