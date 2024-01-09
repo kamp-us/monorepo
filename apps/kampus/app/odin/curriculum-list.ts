@@ -160,11 +160,11 @@ const foundationsCurriculum = {
           url: "temel-bilgiler/html-css/flexbox/grow-ve-shrink",
         },
         {
-          title: 'Flexbox Eksenleri',
+          title: 'Eksenler',
           url: "temel-bilgiler/html-css/flexbox/eksenler",
         },
         {
-          title: 'Flexbox ile Hizalama',
+          title: 'Hizalama',
           url: "temel-bilgiler/html-css/flexbox/hizalama",
         },
         {
@@ -178,11 +178,11 @@ const foundationsCurriculum = {
       lessons: [
         {
           title: "JavaScript Temelleri Bölüm 1",
-          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-1",
+          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-bolum-1",
         },
         {
           title: "JavaScript Temelleri Bölüm 2",
-          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-2",
+          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-bolum-2",
         },
         {
           title: "JavaScript Geliştirici Araçları",
@@ -190,7 +190,7 @@ const foundationsCurriculum = {
         },
         {
           title: "JavaScript Temelleri Bölüm 3",
-          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-3",
+          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-bolum-3",
         },
         {
           title: "Problem Çözme",
@@ -214,7 +214,7 @@ const foundationsCurriculum = {
         },
         {
           title: "JavaScript Temelleri Bölüm 4",
-          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-4",
+          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-bolum-4",
         },
         {
           title: "DOM Manipülasyonu ve Eventler",
@@ -230,7 +230,7 @@ const foundationsCurriculum = {
         },
         {
           title: "JavaScript Temelleri Bölüm 5",
-          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-5",
+          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-bolum-5",
         },
         {
           title: "Proje: Hesap Makinesi",
