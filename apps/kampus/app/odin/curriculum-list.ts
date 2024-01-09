@@ -160,11 +160,11 @@ const foundationsCurriculum = {
           url: "temel-bilgiler/html-css/flexbox/grow-ve-shrink",
         },
         {
-          title: "Eksenler",
+          title: 'Flexbox Eksenleri',
           url: "temel-bilgiler/html-css/flexbox/eksenler",
         },
         {
-          title: "Hizalama",
+          title: 'Flexbox ile Hizalama',
           url: "temel-bilgiler/html-css/flexbox/hizalama",
         },
         {
@@ -197,7 +197,7 @@ const foundationsCurriculum = {
           url: "temel-bilgiler/javascript-temelleri/problem-cozme",
         },
         {
-          title: "Hataları Anlama",
+          title: "Hata Mesajlarını Anlama",
           url: "temel-bilgiler/javascript-temelleri/hatalari-anlama",
         },
         {
@@ -239,11 +239,11 @@ const foundationsCurriculum = {
       ],
     },
     {
-      header: "Her Şeyi Bir Araya Getirme",
+      header: "Sonuç",
       lessons: [
         {
-          title: "Her Şeyi Bir Araya Getirme",
-          url: "temel-bilgiler/her-seyi-birlestirme/her-seyi-bir-araya-getirme-sonuc",
+          title: "İlerlemek İstediğin Yolu Seç",
+          url: "temel-bilgiler/ilerlemek-istegin-yolu-sec",
         },
       ],
     },

@@ -1,5 +1,5 @@
 ---
-title: 'Her Şeyi Bir Araya Getirme - Sonuç'
+title: '"İlerlemek İstediğin Yolu Seç'
 ---
 
 ### Giriş
