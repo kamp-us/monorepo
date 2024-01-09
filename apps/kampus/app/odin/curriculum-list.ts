@@ -1,6 +1,7 @@
 export interface Curriculum {
   name: string;
   url: string;
+  enabled: boolean;
   description: string;
   sections: Section[];
 }
@@ -19,6 +20,7 @@ const curriculum = [
   {
     name: "Temel Bilgiler Serüveni",
     url: "temel-bilgiler-seruveni",
+    enabled: true,
     description: `İşte her şeyin başladığı yer! Gerçek, çalışan web siteleri oluşturmak
     için ihtiyacınız olan temel araçların hepsine pratik bir giriş.  Web geliştiricilerinin
       aslında ne yaptığını ve sonraki kurslar için ihtiyacınız olan temelleri öğreneceksiniz.`,
@@ -254,23 +256,26 @@ const curriculum = [
       },
     ],
   },
-  // { // next serüven to be added here, texting purposes for now
-  //   name: "Full Stack JavaScript Serüveni", 
-  //   url: "full-stack-javascript-seruveni",
-  //   description: "açıklama...",
-
-  //   sections: [
-  //     {
-  //       header: "Test header",
-  //       lessons: [
-  //         {
-  //           title: "test lesson",
-  //           url: "test-course-url",
-  //         }
-  //       ]
-  //     }
-  //   ]
-  //   }
+  { 
+    name: "Full Stack JavaScript Serüveni",
+    description: `Bu yolculuk, sizi JavaScript müfredatımızın tamamından geçirir. 
+      Kurslar, görüntülendikleri sırayla alınmalıdır. 
+      JavaScript ve NodeJS kullanarak sıfırdan güzel, duyarlı web siteleri oluşturmak 
+      için bilmeniz gereken her şeyi öğreneceksiniz.`,
+    enabled: false,
+    url: "https://github.com/kamp-us/monorepo/tree/dev/content/odin/intermediate_html_css",
+    sections: [
+      {
+        header: "Test header",
+        lessons: [
+          {
+            title: "test lesson",
+            url: "test-course-url",
+          }
+        ]
+      }
+    ]
+    }
 ];
 
 const curriculumList = {
