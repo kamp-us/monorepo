@@ -6,8 +6,9 @@ interface CurriculumSectionProps {
   section: Section;
 }
 
-export const CurriculumSection = (props: CurriculumSectionProps) => {
+export const CurriculumSection = (props: CurriculumSectionProps & { curriculumUrl: string }) => {
   const { lessons, header } = props.section;
+  const { curriculumUrl } = props;
   return (
     <Flex direction="column" gap="4">
       <Card size="3" variant="classic">
@@ -18,7 +19,7 @@ export const CurriculumSection = (props: CurriculumSectionProps) => {
             const color = url === "#" ? "orange" : "teal";
             return (
               <Card color={color} size="1" key={index}>
-                <Link color={color} href={url === "#" ? "#" : `temel-bilgiler-seruveni/${url}`}>
+                <Link color={color} href={url === "#" ? "#" : `${curriculumUrl}/${url}`}>
                   {title}
                 </Link>
               </Card>
