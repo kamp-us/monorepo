@@ -14,7 +14,7 @@ const paths = curriculumList.curriculum.map((curriculum) => {
 
 export default function SeruvenlerPage() {
   return (
-    <Flex direction="column" gap="4">
+    <Flex direction="column" gap="4" my="4">
       {paths.map((path) =>
         path.enabled ? (
           <Journey
