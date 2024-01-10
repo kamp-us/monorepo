@@ -2,7 +2,7 @@
 
 SVG'ler web üzerinde yaygın bir görüntü formatıdır. İlk başta biraz kafa karıştırıcı olabilir, ancak nasıl kullanılacağını bildikten sonra, web siteniz için yüksek kaliteli, dinamik görüntüler oluşturmak için son derece güçlü bir araçtır.
 
-In this lesson, we will learn exactly what SVGs are, what they're used for, and how you can embed them in your websites.
+Bu derste, SVG'lerin ne olduğunu kelimenin tam anlamıyla öğreneceğiz; ne için kullanılır, nasıl siteye gömülür ve daha fazlası!
 
 ### Öğrenme çıktıları
 
