@@ -3,7 +3,7 @@ title: 'JavaScript Temelleri Bölüm 1'
 ---
 
 ### Giriş
-JavaScript'e dalalım!
+Önceki bölümlerde HTML ile web sayfalarını nasıl yapılandıracağınızı ve CSS ile nasıl stil verileceğini öğrendiniz. Bir sonraki adım, web sayfasını etkileşimli hale getirmektir, ve işte tam olarak JavaScript'in amacı budur. Bu bölümde, JavaScript'in temellerine odaklanacağız ve web sayfası ile kullanıcı arasındaki çeşitli etkileşimleri nasıl manipüle edebileceğinizi öğreneceksiniz.
 
 ### Ders özeti
 
@@ -124,3 +124,4 @@ Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeni
 Bu bölüm, diğer içeriklere yardımcı olan faydalı bağlantılar içerir. Zorunlu değildir, ek kaynak olarak düşünün. 
 
 - `var` ve `let` arasındaki farklar [javascript.info'nun eski "var" başlıklı bu ingilizce makalesinde](https://javascript.info/var) açıklanmıştır.
+- [JavaScript'in ne olduğuna dair bu MDN makalesi] (https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript) bu konuda üst düzeyde biraz daha fazla bilgi vermektedir.

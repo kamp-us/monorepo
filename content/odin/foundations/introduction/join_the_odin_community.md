@@ -10,7 +10,7 @@ Diğer insanlarla çalışmak ve işbirliği yapmak, bir web geliştiricisi olar
 
 Web geliştirmeyi öğrenmek uzun ve zahmetli bir yolculuk olacak, ancak Discord topluluğumuza katılarak bu yolculuğu çok daha eğlenceli hale getirebilirsiniz. Müfredatımızı hangi hızda yaparsanız yapın, her zaman birkaç adım önünüzde yardım etmeye istekli insanlar olacaktır. Ayrıca, sizden birkaç adım geride olanlara yardım etmek, kendi anlayışınızı derinleştirmenin ve öğrenmenizi kalıcı hale getirmenin harika bir yoludur.
 
-Kodunuzun çalışmadığı ve hatta sizin için bir anlam ifade etmediği [umutsuzluk çölünde](https://www.thinkful.com/blog/why-learning-to-code-is-so-damn-hard/) ilerlerken, topluluğumuzda bir bilgi ve cesaret kaynağı bulabilirsiniz. The Odin Project'teki deneyimli üyeler, bilgi eksikliklerinizi gidermekte ve kodunuzu nasıl geliştireceğinize dair yeni bakış açıları ve fikirler sunmak konusunda yardımcı olurlar. Hepimiz daha önce aynı yollardan geçtik!
+Kodunuzun çalışmadığı ve hatta sizin için bir anlam ifade etmediği [umutsuzluk çölünde](https://web.archive.org/web/20230630111131/https://www.thinkful.com/blog/why-learning-to-code-is-so-damn-hard/#:~:text=Phase%20III%3A%20The%20Desert%20of%20Despair) ilerlerken, topluluğumuzda bir bilgi ve cesaret kaynağı bulabilirsiniz. The Odin Project'teki deneyimli üyeler, bilgi eksikliklerinizi gidermekte ve kodunuzu nasıl geliştireceğinize dair yeni bakış açıları ve fikirler sunmak konusunda yardımcı olurlar. Hepimiz daha önce aynı yollardan geçtik!
 
 Çözmek için çok uğraştığınız ve bitirmekten gurur duyduğunuz projeyi hatırlıyor musunuz? Topluluğumuz aracılığıyla, çalışmanızı ve ilerlemenizi, bir projeye ne kadar çok emek harcandığını tamamiyle anlayabilecek insanlarla paylaşabileceksiniz.
 
