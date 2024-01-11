@@ -370,7 +370,7 @@ _Tek bir_ öğeye _benzersiz_ bir stil eklemeniz gerekiyorsa bu yöntemi kullana
 
 <div class="lesson-content__panel" markdown="1">
 
-1.  [Odin Project CSS alıştırmaları repository'sine](https://github.com/TheOdinProject/css-exercises) gidin, aşağıdaki alıştırmaları sırasıyla tamamlamadan önce her bir README dosyasını gözden geçirin:
+1.  [Odin Project CSS alıştırmaları repository'sine](https://github.com/TheOdinProject/css-exercises) gidin ve README dosyasını okuyun. Daha sonra aşağıdaki alıştırmaları sırasıyla tamamlamadan önce her bir README dosyasını gözden geçirin:
     - `01-css-methods`
     - `02-class-id-selectors`
     - `03-group-selectors`

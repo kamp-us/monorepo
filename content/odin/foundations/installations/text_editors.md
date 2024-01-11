@@ -48,7 +48,7 @@ sudo apt install ./code-latest.deb
 
 <div class="lesson-note lesson-note--tip" markdown="1">
 
-`N: Download is performed unsandboxed (...)` ile başlayan bir uyarı görebilirsiniz. Bu konuda endişelenmenize gerek yok. [Daha fazla bilgi için bu reddit gönderisini okuyun.](https://www.reddit.com/r/linux4noobs/comments/ux6cwx/comment/i9x2twx/))_
+`N: Download is performed unsandboxed (...)` ile başlayan bir uyarı görebilirsiniz. Bu konuda endişelenmenize gerek yok. [Daha fazla bilgi için bu reddit gönderisini okuyun.](https://www.reddit.com/r/linux4noobs/comments/ux6cwx/comment/i9x2twx/))
 
 </div>
 
