@@ -3,7 +3,7 @@ import { Flex } from "@radix-ui/themes";
 import curriculumList from "../curriculum-list";
 import { HelpNeededJourney, Journey } from "./Journey";
 
-const paths = curriculumList.curriculum.map((curriculum) => {
+const paths = Object.values(curriculumList).map((curriculum) => {
   return {
     title: curriculum.name,
     description: curriculum.description,

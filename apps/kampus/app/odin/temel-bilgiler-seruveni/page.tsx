@@ -4,8 +4,7 @@ import curriculumList from "../curriculum-list";
 import { CurriculumSection } from "./CurriculumContent";
 
 export default function TemelBilgilerSeruveni() {
-  const { curriculum } = curriculumList;
-  const temelBilgiler = curriculum[0]
+  const temelBilgiler = curriculumList.foundationsCurriculum;
 
   return (
     <div className="my-10">

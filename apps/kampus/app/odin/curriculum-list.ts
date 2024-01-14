@@ -16,7 +16,7 @@ interface CurriculumLesson {
   url: string;
 }
 
-const curriculum = [
+const foundationsCurriculum = 
   {
     name: "Temel Bilgiler Serüveni",
     url: "temel-bilgiler-seruveni",
@@ -255,31 +255,34 @@ const curriculum = [
         ],
       },
     ],
-  },
-  { 
-    name: "Full Stack JavaScript Serüveni",
-    description: `Bu yolculuk, sizi JavaScript müfredatımızın tamamından geçirir. 
-      Kurslar, görüntülendikleri sırayla alınmalıdır. 
-      JavaScript ve NodeJS kullanarak sıfırdan güzel, duyarlı web siteleri oluşturmak 
-      için bilmeniz gereken her şeyi öğreneceksiniz.`,
-    enabled: false,
-    url: "https://github.com/kamp-us/monorepo/tree/dev/content/odin/intermediate_html_css",
-    sections: [
-      {
-        header: "Test header",
-        lessons: [
-          {
-            title: "test lesson",
-            url: "test-course-url",
-          }
-        ]
-      }
-    ]
+  } as Curriculum;
+
+const FullStackJsCurriculum =   { 
+  name: "Full Stack JavaScript Serüveni",
+  description: `Bu yolculuk, sizi JavaScript müfredatımızın tamamından geçirir. 
+    Kurslar, görüntülendikleri sırayla alınmalıdır. 
+    JavaScript ve NodeJS kullanarak sıfırdan güzel, duyarlı web siteleri oluşturmak 
+    için bilmeniz gereken her şeyi öğreneceksiniz.`,
+  enabled: false,
+  url: "https://github.com/kamp-us/monorepo/tree/dev/content/odin/intermediate_html_css",
+  sections: [
+    {
+      header: "Test header",
+      lessons: [
+        {
+          title: "test lesson",
+          url: "test-course-url",
+        }
+      ]
     }
-];
+  ]
+  } as Curriculum;
+
 
 const curriculumList = {
-  curriculum,
+  foundationsCurriculum,
+  FullStackJsCurriculum
+
 };
 
 export default curriculumList;

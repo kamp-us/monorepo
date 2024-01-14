@@ -1,48 +1,52 @@
-import { Link } from "@radix-ui/themes";
+'use client'
+
 import { graphql, useFragment } from "react-relay";
 
 import { getOdinGithubEditUrl, getOdinGithubIssueUrl } from "~/features/kampus-url/kampus-github";
 import curriculumList, { Curriculum } from "../../curriculum-list";
 import { type OdinLessonActions_path$key } from "./__generated__/OdinLessonActions_path.graphql";
 
-import { Button } from "@radix-ui/themes";
+import { Button, Card } from "@radix-ui/themes";
 import { GitHubLogoIcon, ExclamationTriangleIcon, RocketIcon, ArrowRightIcon } from '@radix-ui/react-icons'
+import Link from 'next/link'
+ 
 
-const getNextLesson = (curriculum: Curriculum[], currentTitle: string) => {
+const getNextLesson = (currentTitle: string) => {
   let currentCurriculumUrl = null;
   let nextLessonUrl = null;
   
-  for (let i = 0; i < curriculum.length; i++) {
-    const lessons = (curriculum[i]?.sections || []).flatMap((section) =>
-      section.lessons.map((lesson) => {
-        if (lesson.title === currentTitle) {
+  for (let curriculumName in curriculumList) {
+    const curriculumItem = (curriculumList as {[key: string]: Curriculum})[curriculumName];
+    if (curriculumItem) {
+      const lessons = (curriculumItem.sections || []).flatMap((section) =>
+        section.lessons.map((lesson) => {
+          if (lesson.title === currentTitle) {
+            currentCurriculumUrl = `/odin/${curriculumItem.url}`;
+          }
+          return {
+            title: lesson.title,
+            url: lesson.url,
+          };
+        })
+      );
 
-          currentCurriculumUrl = `/odin/${curriculum[i]?.url}`;
+      let currentLessonIndex = lessons.findIndex((lesson) => lesson.title === currentTitle);
+      
+      if (currentLessonIndex !== -1) {
+        while (lessons[currentLessonIndex + 1]?.url === "#") { 
+          currentLessonIndex++;
         }
-        return {
-          title: lesson.title,
-          url: lesson.url,
-        };
-      })
-    );
-
-    let currentLessonIndex = lessons.findIndex((lesson) => lesson.title === currentTitle);
-    
-    if (currentLessonIndex !== -1) {
-      while (lessons[currentLessonIndex + 1]?.url === "#") { 
-        currentLessonIndex++;
+        nextLessonUrl = `${currentCurriculumUrl}/${lessons[currentLessonIndex + 1]?.url}`;
+        if (currentLessonIndex === lessons.length - 1) {
+          nextLessonUrl = currentCurriculumUrl;
+        }
+        break;
       }
-      nextLessonUrl = `${currentCurriculumUrl}/${lessons[currentLessonIndex + 1]?.url}`;
-      if (currentLessonIndex === lessons.length - 1) {
-        nextLessonUrl = currentCurriculumUrl;
-      }
-      break;
     }
   }
 
   return { nextLessonUrl, currentCurriculumUrl };
 };
-
 interface Props {
   lesson: OdinLessonActions_path$key | null;
 }
@@ -68,7 +72,6 @@ export const OdinLessonActions = (props: Props) => {
   const currentTitle = lesson.title;
 
   const { nextLessonUrl, currentCurriculumUrl } = getNextLesson(
-    curriculumList.curriculum,
     currentTitle
   );
 
@@ -96,28 +99,24 @@ export const OdinLessonActions = (props: Props) => {
             <span>Bir sorun bildir</span>
           </a>
         </div>
-        <div className="text-center">
-          <div className="rounded-lg">
-            <div className="p-8">
-              <div className="mx-auto flex max-w-sm flex-col justify-center items-center space-y-6 md:max-w-full md:flex-row md:space-x-7 md:space-y-0">
-                <Button size="3">
-                  <a className="flex items-center px-4" href={currentCurriculumUrl || undefined}>
-                    <RocketIcon className="h-8 w-8 pr-2" />
-                    Serüvene dön
-                  </a>
-                </Button>
-                <Button size="3">
-                  <a href={nextLessonUrl || undefined}>
-                    <div className="flex items-center px-4">
-                      <ArrowRightIcon className="h-8 w-8 pr-2" />
-                      Sonraki Ders
-                    </div>
-                  </a>
+        <Card>
+          <div className="text-center">
+            <div className="rounded-lg">
+              <div className="p-8">
+                <div className="mx-auto flex max-w-sm flex-col justify-center items-center space-y-6 md:max-w-full md:flex-row md:space-x-7 md:space-y-0">
+                  <Button size="3">
+                      <RocketIcon className="h-8 w-8" />
+                    <Link href={currentCurriculumUrl || "/odin"}>Serüvene dön</Link>
                   </Button>
+                  <Button size="3">
+                      <ArrowRightIcon className="h-8 w-8" />
+                    <Link href={nextLessonUrl || "/odin"}>Sonraki Ders</Link>
+                  </Button>
+                </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+        </Card>
       </div>
     </div>
   );

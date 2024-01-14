@@ -4,19 +4,21 @@ import { type OdinLessonTitle_title$key } from "./__generated__/OdinLessonTitle_
 
 import curriculumList, { Curriculum } from "../../curriculum-list";
 
-const getCurrentCurriculum = (curriculum: Curriculum[], currentTitle: string): { name: string, url: string } | null => {
-  for (let curriculumItem of curriculum) {
-    for (let section of curriculumItem.sections) {
-      for (let lesson of section.lessons) {
-        if (lesson.title === currentTitle) {
-          return { name: curriculumItem.name, url: curriculumItem.url };
+const getCurrentCurriculum = (currentTitle: string): { name: string, url: string } | null => {
+  for (let curriculumName in curriculumList) {
+    const curriculumItem = (curriculumList as {[key: string]: Curriculum})[curriculumName];
+    if (curriculumItem) {
+      for (let section of curriculumItem.sections) {
+        for (let lesson of section.lessons) {
+          if (lesson.title === currentTitle) {
+            return { name: curriculumItem.name, url: curriculumItem.url };
+          }
         }
       }
     }
   }
   return null;
 };
-
 
 
 interface Props {
@@ -40,12 +42,11 @@ export const OdinLessonTitle = (props: Props) => {
   let currentCurriculumUrl = null;
   let currentCurriculumName = null;
   if (currentTitle) {
-    const currentCurriculum = getCurrentCurriculum(curriculumList.curriculum, currentTitle);
+    const currentCurriculum = getCurrentCurriculum(currentTitle);
     currentCurriculumUrl = currentCurriculum?.url;
     currentCurriculumName = currentCurriculum?.name;
   }
 
-console.log(lesson?.title)
   return <header className="mb-10 mt-2">
       <div className="flex flex-col items-center mb-2 space-y-4 xl:space-y-0 xl:space-x-4 xl:flex-row
        xl:justify-start">
