@@ -1,22 +1,22 @@
-'use client'
-
+import {
+  ArrowRightIcon,
+  ExclamationTriangleIcon,
+  GitHubLogoIcon,
+  RocketIcon,
+} from "@radix-ui/react-icons";
+import { Box, Button, Card, Flex, Separator } from "@radix-ui/themes";
 import { graphql, useFragment } from "react-relay";
 
 import { getOdinGithubEditUrl, getOdinGithubIssueUrl } from "~/features/kampus-url/kampus-github";
 import curriculumList, { Curriculum } from "../../curriculum-list";
 import { type OdinLessonActions_path$key } from "./__generated__/OdinLessonActions_path.graphql";
 
-import { Button, Card } from "@radix-ui/themes";
-import { GitHubLogoIcon, ExclamationTriangleIcon, RocketIcon, ArrowRightIcon } from '@radix-ui/react-icons'
-import Link from 'next/link'
- 
-
 const getNextLesson = (currentTitle: string) => {
   let currentCurriculumUrl = null;
   let nextLessonUrl = null;
-  
+
   for (let curriculumName in curriculumList) {
-    const curriculumItem = (curriculumList as {[key: string]: Curriculum})[curriculumName];
+    const curriculumItem = (curriculumList as { [key: string]: Curriculum })[curriculumName];
     if (curriculumItem) {
       const lessons = (curriculumItem.sections || []).flatMap((section) =>
         section.lessons.map((lesson) => {
@@ -31,14 +31,14 @@ const getNextLesson = (currentTitle: string) => {
       );
 
       let currentLessonIndex = lessons.findIndex((lesson) => lesson.title === currentTitle);
-      
+
       if (currentLessonIndex !== -1) {
-        while (lessons[currentLessonIndex + 1]?.url === "#") { 
+        while (lessons[currentLessonIndex + 1]?.url === "#") {
           currentLessonIndex++;
         }
         nextLessonUrl = `${currentCurriculumUrl}/${lessons[currentLessonIndex + 1]?.url}`;
         if (currentLessonIndex === lessons.length - 1) {
-          nextLessonUrl = currentCurriculumUrl;
+          nextLessonUrl = null;
         }
         break;
       }
@@ -71,53 +71,50 @@ export const OdinLessonActions = (props: Props) => {
 
   const currentTitle = lesson.title;
 
-  const { nextLessonUrl, currentCurriculumUrl } = getNextLesson(
-    currentTitle
-  );
+  const { nextLessonUrl, currentCurriculumUrl } = getNextLesson(currentTitle);
 
   return (
-    <div className="border-t-border flex justify-center border-t-2 ">
-      <div className="prose dark:prose-invert hover:prose-a:text-blue-500 flex flex-col items-center  ">
-        <div className="flex justify-evenly py-10 ">
-          <a
-            href={contributionUrl || undefined}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-5 no-underline"
-          >
-            <GitHubLogoIcon className="mr-1 inline h-4 w-4" />
-            <span>Katkıda Bulunun</span>
+    <Box>
+      <Separator orientation="horizontal" size="4" />
+      <Flex justify="center" my="4">
+        <Flex align="center" m="4">
+          <GitHubLogoIcon className="mx-1 h-4 w-4" />
+          <a href={contributionUrl || undefined} target="_blank" rel="noopener noreferrer">
+            Katkıda Bulunun
           </a>
-
-          <a
-            href={issueUrl || undefined}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-5 no-underline"
-          >
-            <ExclamationTriangleIcon className="mr-1 inline h-4 w-4" />
-            <span>Bir sorun bildir</span>
+        </Flex>
+        <Flex align="center" m="4">
+          <ExclamationTriangleIcon className="mx-1 h-4 w-4" />
+          <a href={issueUrl || undefined} target="_blank" rel="noopener noreferrer">
+            Bir sorun bildir
           </a>
-        </div>
-        <Card>
-          <div className="text-center">
-            <div className="rounded-lg">
-              <div className="p-8">
-                <div className="mx-auto flex max-w-sm flex-col justify-center items-center space-y-6 md:max-w-full md:flex-row md:space-x-7 md:space-y-0">
-                  <Button size="3">
-                      <RocketIcon className="h-8 w-8" />
-                    <Link href={currentCurriculumUrl || "/odin"}>Serüvene dön</Link>
-                  </Button>
-                  <Button size="3">
-                      <ArrowRightIcon className="h-8 w-8" />
-                    <Link href={nextLessonUrl || "/odin"}>Sonraki Ders</Link>
-                  </Button>
-                </div>
-                </div>
-              </div>
-            </div>
-        </Card>
-      </div>
-    </div>
+        </Flex>
+      </Flex>
+      <Card my="4">
+        <Flex
+          direction={{
+            initial: "column",
+            xs: "row",
+          }}
+          justify={"center"}
+          p="4"
+        >
+          <Box p="5" m="4" asChild>
+            <Button size="3">
+              <RocketIcon className="h-8 w-8" />
+              <a href={currentCurriculumUrl || undefined}>Serüvene dön</a>
+            </Button>
+          </Box>
+          {nextLessonUrl && (
+          <Box p="5" m="4" asChild>
+            <Button size="3">
+              <ArrowRightIcon className="h-8 w-8" />
+              <a href={nextLessonUrl || undefined}>Sonraki Ders</a>
+            </Button>
+            </Box>
+          )}
+        </Flex>
+      </Card>
+    </Box>
   );
 };

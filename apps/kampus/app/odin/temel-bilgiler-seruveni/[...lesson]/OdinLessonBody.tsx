@@ -31,7 +31,7 @@ export const OdinLessonBody = (props: Props) => {
   }, [body?.html]);
 
   return (
-    <div className="flex flex-row justify-center xl:justify-between mb-10">
+    <div className="flex flex-row justify-center xl:justify-between mb-7">
       <div
         className="prose dark:prose-invert hover:prose-a:text-blue-500"
         dangerouslySetInnerHTML={{ __html: body?.html ?? "" }}
