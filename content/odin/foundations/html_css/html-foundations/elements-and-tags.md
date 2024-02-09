@@ -37,11 +37,15 @@ Tamamlanmış bir paragraf etiketi şu şekilde gözükür:
 
 Elementleri içerik taşıyıcıları olarak düşünebilirsiniz. Açılış ve kapanış etiketleri tarayıcıya elementlerin ne taşıdığını bildirir. Tarayıcı böylece gelen içeriği nasıl göstereceğine karar verir.
 
-Bazı HTML elementleri kapanış etiketi içermez. Bu elementler genellikle böyle gözükür: `<br />`, `<img/>` ancak bazıları ileride göreceğiniz gibi eğik çizgi olmadan da kullanılabilir: `<br>`, `<img>`. Bu tip elementler kendiliğinden kapanan(self-closing) element veya boş element olarak da adlandırılabilirler, çünkü herhangi bir içerik çevrelemezler. Bunlardan bazılarını ileride göreceğiz fakat çoğu element hem açılış hem kapanış etiketine sahiptir.
-
 HTML size istediğiniz her şeyi üretmeniz için [önceden tanımlanmış elementlerin geniş listesi](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) sunar. İçerikleriniz için doğru etiketi kullanmak önemlidir. Doğru etiketleri kullanmak siteniz için şu iki konuda önemli bir etkiye sahiptir: sitenizin arama motorlarında nerede sıralandığı; sitenizin ekran koruyucu(screen reader) gibi eklentiler kullanan kullanıcılara ne kadar erişilebilir olduğu.
 
 İçeriğiniz için doğru etiketler kullanmaya semantik HTML denir. Bunun hakkında detaylı bilgiyi ileride göreceğiz.
+
+### İçerik İçermeyen Elementler
+
+Bazı HTML elementleri kapanış etiketi içermez. Bu elementler genellikle böyle gözükür: `<br >`, `<img>`. Bu tip elementler i̇çerik i̇çermeyen elementler olarak da adlandırılabilirler, çünkü herhangi bir içerik çevrelemezler. Kapanış etiketi olmaması, diğer etiketlerin yaptığı gibi içeriği sarmalayamayacakları anlamına gelir.
+
+Bunlar aynı zamanda kendiliğinden kapanan etiketler olarak adlandırılır. Ancak bunlar sadece ileri eğik çizgi (/) ile biten boş öğelerdir, örneğin: <br /> veya <img />. Tarihsel nedenlerden dolayı, bu kendiliğinden kapanan etiketleri sıkça görebilirsiniz. Tarayıcılar bunları sorunsuz bir şekilde işleyebilir, ancak HTML spesifikasyonunun en son sürümü, bu kullanımı önermez ve geçersiz olarak kabul eder.
 
 ### Ödev
 

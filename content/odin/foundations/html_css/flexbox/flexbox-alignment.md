@@ -1,5 +1,5 @@
 ---
-title: 'Flexbox ile Hizalama'
+title: 'Hizalama'
 ---
 
 ### Giriş

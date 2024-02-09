@@ -27,11 +27,11 @@ Bir internet sayfasındaki her şey dikdörtgen bir kutudur. Bu kutular, içleri
 }
 ```
 
-![boxes](https://cdn.statically.io/gh/TheOdinProject/curriculum/main/foundations/html_css/the-box-model/imgs/boxes.png)
+![boxes](https://cdn.statically.io/gh/TheOdinProject/curriculum/main/foundations/html_css/css-foundations/the-box-model/imgs/boxes.png)
 
 Yukarıdaki CSS'i bu internet sayfasına eklemek isterseniz, bunun için tarayıcının denetleyicisini kullanabilirsiniz. Kutular içinde kutular!
 
-![lines](https://cdn.statically.io/gh/TheOdinProject/curriculum/main/foundations/html_css/the-box-model/imgs/odin-lined.png)
+![lines](https://cdn.statically.io/gh/TheOdinProject/curriculum/main/foundations/html_css/css-foundations/the-box-model/imgs/odin-lined.png)
 
 Tamam, yukarıdaki resimde bazı daireler olabilir... ama söz konusu düzen olduğunda, bu öğeler daireler gibi değil, dikdörtgen kutular gibi bir araya gelirler. Sonuçta, bir internet sayfasını düzenlemek ve tüm öğelerini konumlandırmak, bu kutuları nasıl iç içe geçireceğinize ve üst üste koyacağınıza karar vermekten ibarettir.
 
@@ -43,7 +43,7 @@ Buradaki tek gerçek karmaşıklık, `iç kenar boşluğu`, `dış kenar boşlu�
 
 Diyagramları dikkatlice incelediğinizden emin olun.
 
-![the box model](https://cdn.statically.io/gh/TheOdinProject/curriculum/main/foundations/html_css/the-box-model/imgs/box-model.png)
+![the box model](https://cdn.statically.io/gh/TheOdinProject/curriculum/main/foundations/html_css/css-foundations/the-box-model/imgs/box-model.png)
 
 ### Ödev
 

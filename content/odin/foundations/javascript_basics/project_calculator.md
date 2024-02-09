@@ -1,5 +1,5 @@
 ---
-title: 'Proje Hesap Makinesi'
+title: 'Proje: Hesap Makinesi'
 ---
 
 ### Giriş
