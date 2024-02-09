@@ -12,11 +12,13 @@ Ancak bu projenin sadece HTML becerilerinizi geliştirmek için olduğunu unutma
 
 [Git'e Giriş](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/introduction-to-git)'de belirtildiği gibi, tüm projelerinizi bir portföy gibi düzenlemek ve başkaları tarafından görülebilmesi için GitHub'a bağlamak isteyeceksiniz.
 
-Bir depoyu nasıl kuracağınızı bilmiyorsanız, nasıl kurulacağını öğrenmek için [Git Temelleri](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/git-basics)'nde bulunan talimatları izleyin.
+Bir repoyu nasıl kuracağınızı bilmiyorsanız, nasıl kurulacağını öğrenmek için [Git Temelleri](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/git-basics)'nde bulunan talimatları izleyin.
+
 
 1.  GitHub.com'da bu proje için yeni bir repo oluşturun ve buna `odin-recipes` adını verin ve varsayılan private yerine `public` seçeneğini seçin.
 
-2.  Bu depoyu yerel makinenize, daha önce Git Temelleri dersinde oluşturduğunuz `repos` klasörünün içine taşıyın. Komut `git clone git@github.com:username/odin-recipes.git` gibi görünmelidir (SSH kullanın). Bu depoyu yerel makinenize, daha önce Git Temelleri dersinde oluşturduğunuz `repos` klasörünün içine taşıyın. Komut `git clone git@github.com:username/odin-recipes.git` gibi görünmelidir (SSH kullanın).
+2.  Bu repoyu yerel makinenize, daha önce Git Temelleri dersinde oluşturduğunuz `repos` klasörünün içine taşıyın. Komut `git clone git@github.com:username/odin-recipes.git` gibi görünmelidir (SSH kullanın).
+
 
 3.  Şimdi `cd` ile yerel makinenizde bulunan `odin-recipes` proje dizinine girin.
 
@@ -26,14 +28,18 @@ Eğer sorun yaşıyorsanız:
 
 -   Tüm Git komutlarının proje klasörünüzün içinden çalıştırılması gerekir (`odin-recipes` klasörüne `cd` yazmayı unuttunuz mu?).
 
--   SSH ile GitHub'dan klonlamak için [here on Step 2.3](/paths/foundations/courses/foundations/lessons/setting-up-git#step-2-configure-git-and-github) adımlarını izlediğinizden emin olun.
-
--   Git Temelleri Dersindeki [workflow](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/git-basics)'e bakın.
+-   SSH ile GitHub'dan klonlamak için [gerekli](/paths/foundations/courses/foundations/lessons/setting-up-git#step-2-configure-git-and-github) adımları izlediğinizden emin olun.
 
 
-#### Ne zaman taahhütte bulunulacağına dair ipuçları
+-   Git Temelleri Dersindeki [adımlara](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/git-basics) bakın.
 
-[Önceki Ders](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/commit-messages)'de taahhüt mesajları hakkında konuştuklarımızı unutmayın!
+
+
+#### Ne zaman commit atılacağına dair ipuçları
+
+
+[Önceki derste](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/commit-messages) commit mesajları hakkında konuştuklarımızı unutmayın!
+
 
 Projenizi oluştururken, `git push origin main` ile GitHub'a göndermeye hazır olmadan önce muhtemelen birkaç `git add` + `git commit` döngüsü yapacaksınız.
 
@@ -95,21 +101,26 @@ Bağlantılarınız gösterişli olmayacaktır, ancak şimdilik sadece onları o
 
 Çalışmanızı (projenizi) başkalarına göstermek veya aşağıda bir çözüm sunmak istiyorsanız, sitenizi yayınlamanız gerekir. Böylece başkaları yalnızca yerel makinenizden değil, web'den erişebilir. İyi haber şu ki, projeniz GitHub'daysa (yukarıda açıklandığı gibi), bunu yapmak inanılmaz derecede basittir.
 
-GitHub, web projelerini doğrudan bir GitHub deposundan yayınlamanıza olanak tanır. Bunu yapmak, projenize `your-github-username.github.io/your-github-repo-name` adresinden erişmenizi sağlayacaktır.
+GitHub, web projelerini doğrudan bir GitHub reposundan yayınlamanıza olanak tanır. Bunu yapmak, projenize `your-github-username.github.io/your-github-repo-name` adresinden erişmenizi sağlayacaktır.
+
 
 <div class="lesson-note">
-   Özel bir depo yayınlamak için GitHub ücretli hesabı gereklidir.
+   Özel bir repo yayınlamak için GitHub ücretli hesabı gereklidir.
+
 </div>
 
 Bunu yapmanın birkaç yolu vardır, ancak en basit olanı şudur:
 
 -   Projenizin ana HTML dosyasının `index.html` olarak adlandırıldığından emin olun. Eğer değilse, yeniden adlandırmanız gerekecektir.
--   Web üzerinden GitHub deponuza gidin ve aşağıdaki ekran görüntüsünde gösterildiği gibi **Ayarlar** düğmesine tıklayın.
-    ![Örnek bir depoda bulunan Ayarlara işaret eden ekran görüntüsü](https://cdn.statically.io/gh/TheOdinProject/curriculum/90b1a362af0bb8635af9593cd8911c9aefb68569/foundations/html_css/html-foundations/imgs/01.png)
+-   Web üzerinden GitHub reponuza gidin ve aşağıdaki ekran görüntüsünde gösterildiği gibi **Settings** düğmesine tıklayın.
+
+    ![Örnek bir repoda bulunan Ayarlara işaret eden ekran görüntüsü](https://cdn.statically.io/gh/TheOdinProject/curriculum/90b1a362af0bb8635af9593cd8911c9aefb68569/foundations/html_css/html-foundations/imgs/01.png)
+
 -   Sol taraftaki çubukta **Sayfalar** üzerine tıklayın.
 -  **Branch'i** _none_ yerine _main branch_ olarak değiştirin ve **Save** düğmesine tıklayın.
 -   Birkaç dakika sürebilir (GitHub web sitesi 10 dakikaya kadar diyor, ancak bir saate kadar sürdüğünü gördük. Projenize bir "tema" eklemeyin, aksi takdirde git çakışmaları yaşayabilirsiniz, bunun yerine sabırlı olun). ancak projenize web üzerinden `your-github-username.github.io/your-github-repo-name` adresinden erişilebilmelidir (tabii ki bağlantıda kendi bilgilerinizi değiştirerek).
--   Projeniz 1 saat sonra yayınlanmazsa, deponuzun kök dizininde `index.html` adlı bir dosyanız olduğundan ve tüm ayarların doğru yapıldığından emin olun. GitHub'daki reponuza gidin ve Eylemler'e tıklayın, herhangi bir giriş yoksa ayarlara geri dönün, **Dal** öğesini _ana dal_ yerine _hiçbiri_ olarak değiştirin ve **Kaydet** öğesine tıklayın, ardından **Dal** öğesini _hiçbiri_ yerine _ana dal_ olarak değiştirin ve **Kaydet** öğesine tıklayın.
+-   Projeniz 1 saat sonra yayınlanmazsa, reponuzun `main` dizininde `index.html` adlı bir dosyanız olduğundan ve tüm ayarların doğru yapıldığından emin olun. GitHub'daki reponuza gidin ve Actions'a tıklayın, herhangi bir giriş yoksa ayarlara geri dönün, **Branch** öğesini _main_ yerine _none_ olarak değiştirin ve **Kaydet** öğesine tıklayın, ardından **Branch** öğesini _none_ yerine _main_ olarak değiştirin ve **Kaydet** öğesine tıklayın.
+
 
 <div class="lesson-note" markdown="1">
 Aşağıdaki proje başvurularına baktığınızda şunu soruyor olabilirsiniz:
@@ -122,5 +133,6 @@ Aşağıdaki proje başvurularına baktığınızda şunu soruyor olabilirsiniz:
 1. Projeniz böyle görünmemelidir. Esas olarak projenin gereksinimlerine odaklanın.
 
 Bu durum gelecekteki projeler için de geçerlidir.
-Daha fazla bilgi için [Part 5](https://dev.to/theodinproject/learning-code-f56) of [Bir TOP Başarı Hikayesi Olmak](https://dev.to/theodinproject/becoming-a-top-success-story-mindset-3dp2)
+Daha fazla bilgi için [Becoming a TOP Success Story](https://dev.to/theodinproject/becoming-a-top-success-story-mindset-3dp2) isimli yazının [Part 5](https://dev.to/theodinproject/learning-code-f56)'ini okuyun. 
+
 </div>
