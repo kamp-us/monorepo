@@ -4,17 +4,17 @@ Bu proje için size sağlayacağımız bir tasarımdan tüm bir web sayfası olu
 
 Size sunduğumuz tasarım 2 resimden oluşuyor: biri web sitesinin tamamının resmi, diğeri ise kullandığımız bazı yazı tipleri ve renkler hakkında bazı ayrıntılar içeriyor.
 
-Bir şeye bakmak için google kullanmaktan veya önceki derslere geri dönmekten korkmayın. **Gerçek hayatta, profesyonel geliştiriciler yıllardır yaptıkları şeyler için google'ı sürekli kullanırlar.** Bu noktada her şeyi ezberlemiş olmanız beklenmemektedir, bu nedenle bu konuda endişelenmeyin. Ayrıca, derslerimizde henüz karşılaşmamış olabileceğiniz birkaç küçük ayrıntı var. Bu ayrıntılar önemsizdir ve kolayca aranabilir. (örneğin google `css rounded corners`).
+Bir şeye bakmak için Google kullanmaktan veya önceki derslere geri dönmekten korkmayın. **Gerçek hayatta, profesyonel geliştiriciler yıllardır yaptıkları şeyler için Google'ı sürekli kullanırlar.** Bu noktada her şeyi ezberlemiş olmanız beklenmemektedir, bu nedenle bu konuda endişelenmeyin. Ayrıca, derslerimizde henüz karşılaşmamış olabileceğiniz birkaç küçük ayrıntı var. Bu ayrıntılar önemsizdir ve kolayca aranabilir. (örneğin Google'da `css rounded corners` olarak aratabilirsiniz).
 
 Projenizi tasarıma olabildiğince benzetmeye çalışın, ancak piksel mükemmelliğine ulaşma konusunda endişelenmeyin. Çeşitli bölümler arasındaki tam kenar boşluklarını bulmak için cetvelinizi çıkarmayın veya pikselleri saymayın. Bu ödevin amacı, sıfırdan bir şey yaratmak ve çeşitli unsurları diğerlerine göre aşağı yukarı doğru konuma getirmektir. Tasarımın gerçekte `margin`i varken `margin: 24px` kullanmanız ya da `48px` olması önemli değildir.
 
-Son olarak_, bu tasarıma kendi içeriğinizi eklemekten çekinmeyin. Resimlerde bazı anlamsız kukla içerikler var, ancak bir iş uydurmak ve bu sayfayı kişiselleştirmek istiyorsanız, lütfen bunu yapmaktan çekinmeyin! Yer tutuculara gerçek resimler ekleyin ve renklerle ve yazı tipleriyle de biraz oynamaktan çekinmeyin.
+Son olarak_, bu tasarıma kendi içeriğinizi eklemekten çekinmeyin. Resimlerde bazı anlamsız yer doldurmalık içerikler var, ancak bir iş uydurmak ve bu sayfayı kişiselleştirmek istiyorsanız, lütfen bunu yapmaktan çekinmeyin! Yer doldurmalık resimler yerine gerçek resimler ekleyin ve renklerle ve yazı tipleriyle de biraz oynamaktan çekinmeyin.
 
 <div class="lesson-note" markdown="1">
 
 #### Web'deki resimler hakkında bir not
 
-Web üzerinde bulduğunuz herhangi bir görseli kullanmak için yasal hakkınız yoktur.Bulabileceğiniz pek çok ücretsiz görsel var, ancak kullandığınız görselin gerçekten kullanmanız için ücretsiz olduğundan emin olun ve projenizde görselin yaratıcısına atıfta bulunduğunuzdan emin olun. Kredi vermenin kolay bir yolu, deponuzdaki bir README dosyasına oluşturucunun adını ve iletişim bilgilerini koymaktır.
+Web üzerinde bulduğunuz herhangi bir görseli kullanmak için yasal hakkınız yoktur. Bulabileceğiniz pek çok ücretsiz görsel var, ancak kullandığınız görselin gerçekten kullanmanız için ücretsiz olduğundan emin olun ve projenizde görselin yaratıcısına atıfta bulunduğunuzdan emin olun. Kredi vermenin kolay bir yolu, reponuzdaki bir README dosyasına oluşturucunun adını ve iletişim bilgilerini koymaktır.
 
 Web'de kullanımı ücretsiz görseller bulmak için bazı iyi yerler şunlardır [Pexels](https://www.pexels.com/), [Pixabay](https://pixabay.com/) ve [Unsplash](https://unsplash.com/).
 
@@ -22,7 +22,7 @@ Web'de kullanımı ücretsiz görseller bulmak için bazı iyi yerler şunlardı
 
 ### Projenizin GitHub reposunu ayarlama
 
-Tarifler projesinde yaptığımız gibi, bu proje üzerinde çalışmaya başlamadan önce bir git deposu kurun. Git ve GitHub ileride sizin için bir portföy görevi görecek, bu yüzden her şeyi orada tutmanız gerekiyor! Nasıl kuracağınıza dair bir hatırlatıcıya ihtiyacınız olursa [Önceki Ders](https://www.theodinproject.com/lessons/foundations-recipes)'e geri dönün.
+Tarifler projesinde yaptığımız gibi, bu proje üzerinde çalışmaya başlamadan önce bir git reposu kurun. Git ve GitHub ileride sizin için bir portföy görevi görecek, bu yüzden her şeyi orada tutmanız gerekiyor! Nasıl kuracağınıza dair bir hatırlatıcıya ihtiyacınız olursa [önceki derse](https://www.theodinproject.com/lessons/foundations-recipes) geri dönün.
 
 ### Kendi kodunuzu tamamlamadan önce başkalarının bitmiş proje kodlarına bakma konusunda uyarı
 
@@ -37,16 +37,16 @@ Sıkıştığınızda veya nereden başlayacağınızı bilemediğinizde çözü
 
 Projenizi tamamladıktan sonra, projenin tamamlandığı alternatif yolları görmek için diğer çözümlere bakmaktan çekinmeyin.
 
-**SADECE BAKMAYIN. Gelin yardım isteyin [Discord server!](https://discord.com/channels/505093832157691914/516751477306294273) _(Kanalı görmek için [Discord Sunucusuna Katıl](https://discord.gg/fbFCkYabZB))._**
+**SADECE BAKMAYIN. [Discord server]'ından yardım isteyin (https://discord.com/channels/505093832157691914/516751477306294273) _(Kanalı görmek için [Discord Sunucusuna Katıl](https://discord.gg/fbFCkYabZB))._**
 
 ### Atama
 
 <div class="lesson-content__panel" markdown="1">
-Erken ve sık sık taahhütte bulunmayı unutmayın! [Taahhüt Mesajı dersine buradan başvurabilirsiniz](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/commit-messages)!
+Erken ve sık sık commit atmayı unutmayın! [Commit Mesajı dersine buradan geri dönebilirsiniz](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/commit-messages)!
 
-1. Tasarım görsellerini indirin ve burada ne oluşturacağınıza bir göz atın. [Birinci Resim (Tam Tasarım)](https://cdn.statically.io/gh/TheOdinProject/curriculum/81a5d553f4073e593d23a6ab00d50eef8620796d/foundations/html_css/project/imgs/01.png), [İkinci Resim (Renk and Fontlar)](https://cdn.statically.io/gh/TheOdinProject/curriculum/81a5d553f4073e593d23a6ab00d50eef8620796d/foundations/html_css/project/imgs/02.png)
-    1. Resimlerde kullanılan yazı tipi roboto'dur.
-    2. Kahraman metin, bir web sayfasının en üstünde görünen ifadedir.
+1. Tasarım görsellerini indirin ve burada ne oluşturacağınıza bir göz atın. [Birinci Resim (Tam Tasarım)](https://cdn.statically.io/gh/TheOdinProject/curriculum/81a5d553f4073e593d23a6ab00d50eef8620796d/foundations/html_css/project/imgs/01.png), [İkinci Resim (Renk ve Fontlar)](https://cdn.statically.io/gh/TheOdinProject/curriculum/81a5d553f4073e593d23a6ab00d50eef8620796d/foundations/html_css/project/imgs/02.png)
+    1. Resimlerde kullanılan yazı tipi Roboto'dur.
+    2. `hero` metin, bir web sayfasının en üstünde görünen ifadedir.
 2. Bunun gibi bir projeyi ele almanın birçok yolu vardır ve boş bir HTML belgesine bakıp nereden başlayacağınızı bilememek çok zor olabilir. Önerimiz: her seferinde bir bölümü ele alın. Oluşturduğunuz web sitesinde 4 ana bölüm (ve bir altbilgi) vardır, bu nedenle birini seçin ve devam etmeden önce oldukça iyi bir şekle getirin. En üstten başlamak her zaman sağlam bir plandır.
 3.Üzerinde çalıştığınız bölüm için, stil vermeye başlamadan önce tüm içeriği sayfaya yerleştirerek başlayın. Başka bir deyişle, HTML'yi yapın ve _sonra_ CSS'yi yapın. Şekillendirmeye başladığınızda muhtemelen HTML'ye geri dönmeniz gerekecektir, ancak başlangıçtan itibaren ileri geri gitmek daha fazla zaman alacak ve daha fazla hayal kırıklığına neden olabilecektir. (Not: Birden fazla stil sayfası kullanmanıza gerek yoktur. Bu proje için sadece bir CSS dosyası kullanmak yeterlidir).
 4. Bu sayfadaki öğelerin çoğu flexbox alıştırmalarımızda gördüklerinize çok benziyor... tazelemeye ihtiyacınız olursa o sayfalara geri dönmekten çekinmeyin.
@@ -58,12 +58,14 @@ Erken ve sık sık taahhütte bulunmayı unutmayın! [Taahhüt Mesajı dersine b
 
 Çalışmanızı (projeyi) başkalarına göstermek istiyorsanız veya aşağıdan bir çözüm gönderin, başkalarının web'den erişebilmesi için sitenizi yayınlamanız gerekecektir, sadece yerel makinenizde değil. İyi haber şu ki, projeniz GitHub'daysa (yukarıda açıklandığı gibi), bunu yapmak inanılmaz derecede basittir.
 
-GitHub, web projelerini doğrudan bir GitHub deposundan yayınlamanıza olanak tanır.Bunu yapmak projenize `your-github-username.github.io/your-github-repo-name` adresinden erişmenizi sağlayacaktır
+GitHub, web projelerini doğrudan bir GitHub reposundan yayınlamanıza olanak tanır. Bunu yapmak projenize `your-github-username.github.io/your-github-repo-name` adresinden erişmenizi sağlayacaktır
+
 
 Projenizi yayınlamak için birkaç yol vardır, ancak en basit olanı aşağıdakidir:
 
 - Projenizin ana HTML dosyasının `index.html` olarak adlandırıldığından emin olun. Eğer değilse, yeniden adlandırmanız gerekir.
-- Web üzerinden GitHub deponuza gidin ve aşağıdaki ekran görüntüsünde gösterildiği gibi **Ayarlar** düğmesine tıklayın.
+- Web üzerinden GitHub reponuza gidin ve aşağıdaki ekran görüntüsünde gösterildiği gibi **Settings** düğmesine tıklayın.
+
     ![Screenshot pointing to the Settings located in an example repository](https://cdn.statically.io/gh/TheOdinProject/curriculum/81a5d553f4073e593d23a6ab00d50eef8620796d/foundations/html_css/project/imgs/03.png)
 - Sol taraftaki çubukta **Sayfalar** üzerine tıklayın.
 - **Branch'i** _none_ yerine _main branch_ olarak değiştirin ve Kaydet'e tıklayın.
