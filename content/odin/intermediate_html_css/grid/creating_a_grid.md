@@ -23,7 +23,7 @@ Bu ders, size fazla uğraşmadan grid düzeni oluşturmanın ne kadar kolay oldu
 
 CSS Grid'i konteyner ve öğeler açısından düşünebiliriz. Basitçe, bir öğeyi grid konteyneri yaptığınız zaman o öğe grid'in bütününü içinde bulunduracaktır. CSS'de bir öğeyi grid konteynerı yapmak için `display: grid` ya da `display: inline-grid` özelliklerini kullanabilirsiniz.
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="ZEXYGGx" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="ZEXYGGx" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
     <span>TheOdinProject(<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
      tarafından (<a href="https://codepen.io">CodePen'de</a>) hazırlanan <a 
      href="https://codepen.io/TheOdinProjectExamples/pen/ZEXYGGx">My First Grid | CSS Grid</a>  adlı ingilizce örneğe bakınız.</span>
@@ -63,7 +63,7 @@ Eğer bu öğeleri geliştirici araçları ile denetlerseniz, kod tarafında bu 
 
 Yukarıdaki grid konteynerımıza dönecek olursak, dört grid öğemizi yerleştirmek için iki sütun ve iki satır tanımlayalım:
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="yLzyNYp" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="yLzyNYp" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
     <span>TheOdinProject(<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) 
     tarafından (<a href="https://codepen.io">CodePen'de</a>) hazırlanan 
     <a href="https://codepen.io/TheOdinProjectExamples/pen/yLzyNYp">Columns and Rows 1 | CSS Grid</a> adlı ingilizce örneğe bakınız.</span>
@@ -72,7 +72,7 @@ Yukarıdaki grid konteynerımıza dönecek olursak, dört grid öğemizi yerleş
 
 Eğer gridimize daha fazla sütun ve satır eklemek istersek, basitçe bu değerleri tanımlayarak başka bir iz oluşturabiliriz. Diyelim ki örneğimize üçüncü bir sütun eklemek istedik:
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="NWaPqxj" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="NWaPqxj" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
     <span>TheOdinProject(<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) 
     tarafından (<a href="https://codepen.io">CodePen'de</a>) hazırlanan 
     <a href="https://codepen.io/TheOdinProjectExamples/pen/NWaPqxj">Columns and Rows 2 | CSS Grid</a> adlı ingilizce örneğe bakınız.</span>
@@ -92,7 +92,7 @@ CSS Grid satırları ve sütunları tanımlamak için kısa özellikler bulundur
 
 Sütunların ve satırların aynı değere sahip olmasına gerek yoktur. Hadi sütunlarımızın değerlerini ilk sütunumuz diğerlerinin beş katı olacak şekilde değiştirelim:
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="LYzEVGo" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="LYzEVGo" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
     <span>TheOdinProject(<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) 
     tarafından (<a href="https://codepen.io">CodePen'de</a>) hazırlanan 
     <a href="https://codepen.io/TheOdinProjectExamples/pen/LYzEVGo">Columns and Rows 3 | CSS Grid</a> adlı ingilizce örneğe bakınız.</span>
@@ -103,7 +103,7 @@ Sütunların ve satırların aynı değere sahip olmasına gerek yoktur. Hadi s�
 
 Hadi 4 grid öğesi olan 2x2 düzenli orjinal örneğimize geri dönelim. `grid-template-columns` ya da `grid-template-rows` özelliklerini değiştirmeden beşinci bir öğe eklersek ne olacaktır?
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="qBPEdZw" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="qBPEdZw" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
     <span>TheOdinProject(<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) 
     tarafından (<a href="https://codepen.io">CodePen'de</a>) hazırlanan 
     <a href="https://codepen.io/TheOdinProjectExamples/pen/qBPEdZw">Implicit Grid | CSS Grid</a> adlı ingilizce örneğe bakınız.</span>
@@ -137,7 +137,7 @@ Grid satırları ve sütunları arasındaki aralık oluk ya da geçit olarak bil
 
 Grid aralığı özelliklerimizi eklemeden önce, geliştirici araçlarına güvenmeden işleri biraz daha kolay görülebilir hale getirelim. Devam edip grid öğelerimizin etrafına basit bir kenarlık ekleyeceğiz, böylece birbirlerinin etrafındaki yerleşimlerini daha iyi anlayabileceğiz:
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="eYGmNzj" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="eYGmNzj" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
     <span>TheOdinProject(<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) 
     tarafından (<a href="https://codepen.io">CodePen'de</a>) hazırlanan 
     <a href="https://codepen.io/TheOdinProjectExamples/pen/eYGmNzj">Gap 1 | CSS Grid</a> adlı ingilizce örneğe bakınız.</span>
@@ -146,8 +146,8 @@ Grid aralığı özelliklerimizi eklemeden önce, geliştirici araçlarına güv
 
 Sonrasında iki sütunumuzu ayırmak için hafif bir sütun aralığı kullanalım:
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="wvrBazJ" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-    <span>TheOdinProject(<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="wvrBazJ" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
+ <span>TheOdinProject(<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
     tarafından (<a href="https://codepen.io">CodePen'de</a>) hazırlanan 
     <a href="https://codepen.io/TheOdinProjectExamples/pen/wvrBazJ">Gap 2 | CSS Grid</a> adlı ingilizce örneğe bakınız.</span>
 </p>
@@ -155,7 +155,7 @@ Sonrasında iki sütunumuzu ayırmak için hafif bir sütun aralığı kullanal�
 
 Son olarak aradaki farkı vurgulamak için satırlarımıza fazlaca aralık ekleyelim:
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="abLzOmX" data-editable="true" data-user="TheOdinProjectExamples" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="abLzOmX" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
     <span>TheOdinProject(<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
     tarafından (<a href="https://codepen.io">CodePen'de</a>) hazırlanan 
     <a href="https://codepen.io/TheOdinProjectExamples/pen/abLzOmX">Gap 3 | CSS Grid</a> adlı ingilizce örneğe bakınız.</span>

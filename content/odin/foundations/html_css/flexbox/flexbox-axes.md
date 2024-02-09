@@ -1,5 +1,5 @@
 ---
-title: 'Flexbox Eksenleri'
+title: 'Eksenler'
 ---
 
 ### Giriş
