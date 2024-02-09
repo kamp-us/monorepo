@@ -1,15 +1,14 @@
+### Introduction
 
-### Introduction  
-
-So far, you've been working with remote repositories each time you've pushed or pulled from your own GitHub repository while working on the curriculum's various projects. In this section, we're going to cover  slightly more advanced topics, which you might not have yet encountered or had to use.
+So far, you've been working with remote repositories each time you've pushed or pulled from your own GitHub repository while working on the curriculum's various projects. In this section, we're going to cover slightly more advanced topics, which you might not have yet encountered or had to use.
 
 ### Lesson overview
 
 This section contains a general overview of topics that you will learn in this lesson.
 
-  - Using remotes to change history.
-  - Dangers of history-changing operations.
-  - Best practices of history-changing operations.
+- Using remotes to change history.
+- Dangers of history-changing operations.
+- Best practices of history-changing operations.
 
 #### git push -\-force
 
@@ -19,31 +18,32 @@ If you haven't updated your local branch, and you're attempting to `git push` a 
 
 You might perform a brief query and find the command `git push --force`. This command overwrites the remote repository with your own local history. So what would happen if we used this while working with others? Well, let's see what would happen when we're working with ourselves. Type the following commands into your terminal, and when the interactive rebase tool pops up remove our commit for `Create fourth file`:
 
-~~~bash
+```bash
 $ git push origin main
 $ git rebase -i --root
 $ git push --force
 $ git log
-~~~
+```
 
 Huh, that's interesting. We don't see our fourth file on our local system. Let's check our GitHub repository to see if it's there.
 
-Oh no, we just destroyed it!  In this scenario, the danger - you could potentially destroy the work of those you're collaborating with! `git push --force` is a **very dangerous command, and it should be used with caution when collaborating with others**. Instead, you can fix your outdated history error by updating your local history using `fetch`, `merge`, and then attempting to `push` again.
+Oh no, we just destroyed it! In this scenario, the danger - you could potentially destroy the work of those you're collaborating with! `git push --force` is a **very dangerous command, and it should be used with caution when collaborating with others**. Instead, you can fix your outdated history error by updating your local history using `fetch`, `merge`, and then attempting to `push` again.
 
 Let's consider a different scenario:
 
-~~~bash
+```bash
 $ touch test4.md
 $ git add test4.md && git commit -m "Create fifth file"
 $ git push origin main
 $ git log
-~~~
-We look at our commit message and realize *oops*, we made a mistake. We want to undo this commit and are once again tempted to just force the push. But wait, remember, this is a **very dangerous command**. If we're ever considering using it, always check if it's appropriate and if we can use a safer command instead. If we're collaborating with others and want to *undo* a commit we just made, we can instead use `git revert`!
+```
 
-~~~bash
+We look at our commit message and realize _oops_, we made a mistake. We want to undo this commit and are once again tempted to just force the push. But wait, remember, this is a **very dangerous command**. If we're ever considering using it, always check if it's appropriate and if we can use a safer command instead. If we're collaborating with others and want to _undo_ a commit we just made, we can instead use `git revert`!
+
+```bash
 git revert HEAD
 git push origin main
-~~~
+```
 
 Remember when we were working with HEAD, aka the current commit we're viewing, while rebasing? What this would do is it would revert the changes to HEAD! Then we would push our new commit to whichever branch we're working on, which in this example is main even though normally our work would most likely be on a feature-branch.
 
@@ -72,23 +72,22 @@ Let's review the dangers we've addressed so far. I know, I know, it's scary stuf
 <div class="lesson-content__panel" markdown="1">
 
 1.  Read through [GitHub's documentation on merge conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/about-merge-conflicts)
-    *   It's only a matter of time until you run into one (if you haven't already)! While merge conflicts might seem intimidating, they're actually very simple. Take your time with this resource and make sure you look at the two different ways the documentation suggests resolving merge conflicts - on GitHub itself, and on your command line. While you might not need this right now, keeping the source of this documentation in the back of your mind will prove invaluable for when you eventually run into a merge conflict and aren't sure where to find a simple solution.
 
-2.  Read [think-like-a-git](http://think-like-a-git.net/)
-    *   Take your time with this resource as well, it's very well written and will be very helpful in solidifying your understanding of Git.
+    - It's only a matter of time until you run into one (if you haven't already)! While merge conflicts might seem intimidating, they're actually very simple. Take your time with this resource and make sure you look at the two different ways the documentation suggests resolving merge conflicts - on GitHub itself, and on your command line. While you might not need this right now, keeping the source of this documentation in the back of your mind will prove invaluable for when you eventually run into a merge conflict and aren't sure where to find a solution.
+
+2.  Read [think-like-a-git](http://think-like-a-git.net/) \* Take your time with this resource as well, it's very well written and will be very helpful in solidifying your understanding of Git.
 </div>
 
 ### Knowledge check
 
 This section contains questions for you to check your understanding of this lesson on your own. If you’re having trouble answering a question, click it and review the material it links to.
 
-*   <a class='knowledge-check-link' href='#force-with-lease'>What is a safe way to push history changes to a remote repository?</a>
-*   <a class='knowledge-check-link' href='#dangers'>What are the dangers of history-changing operations?</a>
-*   <a class='knowledge-check-link' href='#best-practices'>What are best practices of history-changing operations?</a>
-
+- <a class='knowledge-check-link' href='#force-with-lease'>What is a safe way to push history changes to a remote repository?</a>
+- <a class='knowledge-check-link' href='#dangers'>What are the dangers of history-changing operations?</a>
+- <a class='knowledge-check-link' href='#best-practices'>What are best practices of history-changing operations?</a>
 
 ### Additional resources
 
 This section contains helpful links to related content. It isn’t required, so consider it supplemental.
 
-* If you're looking for an interactive way to deepen your knowledge of working with Git, check out this game, [Learn Git Branching](https://learngitbranching.js.org/)
+- If you're looking for an interactive way to deepen your knowledge of working with Git, check out this game, [Learn Git Branching](https://learngitbranching.js.org/)

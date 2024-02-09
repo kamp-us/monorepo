@@ -102,8 +102,8 @@ const foundationsCurriculum = {
           url: "temel-bilgiler/html-css/html-temelleri/html-sablonu",
         },
         {
-          title: "Metin İle Çalışma",
-          url: "temel-bilgiler/html-css/html-temelleri/metin-ile-calisma",
+          title: "Metin İle Çalışmak",
+          url: "temel-bilgiler/html-css/html-temelleri/metin-ile-calismak",
         },
         {
           title: "Listeler",
@@ -160,11 +160,11 @@ const foundationsCurriculum = {
           url: "temel-bilgiler/html-css/flexbox/grow-ve-shrink",
         },
         {
-          title: "Eksenler",
+          title: 'Eksenler',
           url: "temel-bilgiler/html-css/flexbox/eksenler",
         },
         {
-          title: "Hizalama",
+          title: 'Hizalama',
           url: "temel-bilgiler/html-css/flexbox/hizalama",
         },
         {
@@ -178,11 +178,11 @@ const foundationsCurriculum = {
       lessons: [
         {
           title: "JavaScript Temelleri Bölüm 1",
-          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-1",
+          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-bolum-1",
         },
         {
           title: "JavaScript Temelleri Bölüm 2",
-          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-2",
+          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-bolum-2",
         },
         {
           title: "JavaScript Geliştirici Araçları",
@@ -190,15 +190,15 @@ const foundationsCurriculum = {
         },
         {
           title: "JavaScript Temelleri Bölüm 3",
-          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-3",
+          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-bolum-3",
         },
         {
           title: "Problem Çözme",
           url: "temel-bilgiler/javascript-temelleri/problem-cozme",
         },
         {
-          title: "Hataları Anlama",
-          url: "temel-bilgiler/javascript-temelleri/hatalari-anlama",
+          title: "Hata Mesajlarını Anlamak",
+          url: "temel-bilgiler/javascript-temelleri/hata-mesajlarini-anlamak",
         },
         {
           title: "Proje: Taş Kağıt Makas",
@@ -214,7 +214,7 @@ const foundationsCurriculum = {
         },
         {
           title: "JavaScript Temelleri Bölüm 4",
-          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-4",
+          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-bolum-4",
         },
         {
           title: "DOM Manipülasyonu ve Eventler",
@@ -230,7 +230,7 @@ const foundationsCurriculum = {
         },
         {
           title: "JavaScript Temelleri Bölüm 5",
-          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-5",
+          url: "temel-bilgiler/javascript-temelleri/javascript-temelleri-bolum-5",
         },
         {
           title: "Proje: Hesap Makinesi",
@@ -239,11 +239,11 @@ const foundationsCurriculum = {
       ],
     },
     {
-      header: "Her Şeyi Bir Araya Getirme",
+      header: "Sonuç",
       lessons: [
         {
-          title: "Her Şeyi Bir Araya Getirme",
-          url: "temel-bilgiler/her-seyi-birlestirme/her-seyi-bir-araya-getirme-sonuc",
+          title: "İlerlemek İstediğin Yolu Seç",
+          url: "temel-bilgiler/ilerlemek-istegin-yolu-sec",
         },
       ],
     },

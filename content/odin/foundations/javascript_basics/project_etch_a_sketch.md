@@ -1,5 +1,5 @@
 ---
-title: 'Proje Çizim Tahtası'
+title: 'Proje: Çizim Tahtası'
 ---
 
 ### Giriş
