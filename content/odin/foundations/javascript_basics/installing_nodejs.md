@@ -8,7 +8,7 @@ Node.js, JavaScript'i web tarayıcınızın dışında çalıştırmanıza olana
 
 Node'u yüklemek için `nvm` (Node Version Manager) kullanacağız, çünkü bu, Node versiyonlarını değiştirmeyi ve Node'un güncelleştirmeyi kolaylaştırır. İlerleyen zamanlarda JavaScript ortamlarında kullanılan çeşitli kütüphaneler ve araçları yüklemek için kullanacağınız başka bir araç da `npm` (Node Package Manager) adını taşıyor. Bu ikisini karıştırmak kolay olabilir, bu yüzden dikkatlice okuyunuz!
 
-Node'u `nvm` kullanarak kurmak da çok kolay, bu yüzden işlem hızlı bir şekilde tamamlanabilir :)
+Node'u `nvm` kullanarak kurmak çok kolay, bu yüzden işlem hızlı bir şekilde tamamlanabilir :)
 
 ### Ders Genel Bakışı
 
