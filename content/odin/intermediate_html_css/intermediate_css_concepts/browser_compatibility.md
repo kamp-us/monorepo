@@ -1,83 +1,83 @@
-### Introduction
+### Giriş
 
-As you continue your web development journey, it is important to keep in mind that the end users of your work might be using a variety of browsers: Chrome, Internet Explorer, Firefox, and Safari to name a few. At the same time, the number of users using mobile operating systems is growing rapidly, therefore you should also consider the mobile versions of different browsers.
+Web geliştirme yolculuğunuza devam ederken çalışmanızın son kullanıcılarının çeşitli tarayıcılar kullanıyor olabileceğini aklınızda bulundurmanız önemlidir; Chrome, Internet Explorer, Firefox ve Safari bunlardan birkaçıdır. Aynı zamanda mobil işletim sistemi kullanan kullanıcıların sayısı hızla artıyor. Bu nedenle farklı tarayıcıların mobil versiyonlarını da göz önünde bulundurmalısınız.  
 
-### Learning outcomes
+### Öğrenme Çıktıları
 
-By the end of this lesson, you should:
+Bu dersin sonunda:
 
-- Understand browser compatibility and its history.
-- Know how new CSS features make their way into browsers.
-- Know how to check for compatibility.
+- Tarayıcı uyumluluğunu ve geçmişini anlayabilmelisiniz.
+- Yeni CSS özelliklerinin tarayıcılara nasıl geldiğini bilmelisiniz.
+- Uyumluluğu nasıl kontrol edeceğinizi bilmelisiniz.
 
-### Browser history
+### Tarayıcı Geçmişi
 
-<span id="first-web-browser">The history of modern browsing began back in December of 1990 with the release of WorldWideWeb browser.</span> It was written by Tim Berners-Lee while working for the European nuclear research agency known as CERN. It was later renamed to Nexus, to avoid confusion with the World Wide Web.
+<span id="first-web-browser">Modern taramanın tarihi 1990 yılının Aralık ayında WorldWideWeb tarayıcısının piyasaya sürülmesiyle başladı.</span>Tim Berners-Lee tarafından CERN olarak bilinen Avrupa nükleer araştırma ajansında çalışırken yazılmıştır. Daha sonrasında World Wide Web ile karıştırılmaması için Nexus olarak yeniden adlandırılmıştır.
 
-Nexus was the first of its kind, and allowed users to view basic style sheets, read newsgroups, and even had spellcheck! It might not seem like a lot today, but at that time it was truly groundbreaking.
+Nexus türünün ilk örneğiydi ve kullanıcıların temel stil sayfalarını görüntülemesine, haber gruplarını okumasına ve hatta yazım denetimi yapmasına olanak sağlıyordu. Bugün çok fazla bir şey gibi görünmeyebilir ancak o zamanlar gerçekten çığır açıcıydı.
 
-The release of Nexus was just the beginning though, as in the next decade people witnessed the first releases of browsers such as Mosaic Browser, which quickly gained popularity and quickly became the most popular browser on the globe. From there, the growth of the World Wide Web exploded with the releases of Opera and Netscape Navigator browsers.
+Nexus'un piyasaya sürülmesi sadece bir başlangıçtı. Sonraki on yılda insanlar hızlıca popülerlik kazanan ve dünyanın en popüler tarayıcısı haline gelen Mosaic Browser gibi tarayıcıların ilk sürümlerine tanık oldular. Bu noktadan sonra World Wide Web'in büyümesi Opera ve Netscape Navigator tarayıcılarının piyasaya sürülmesiyle patladı.
 
-In 1995 the world got introduced to the first version of Internet Explorer, which became the dominant player in the market. At some point, Internet Explorer was used by more than 90% of all users. To counter this dominance, Netscape launched what would become Mozilla Foundation which develops and maintains Firefox. Soon after that, in 2003, Apple launched Safari, and in 2008, Google launched Chrome.
+1995'te dünya pazarda baskın oyuncu haline gelen Internet Explorer'ın ilk sürümüyle tanıştı. Bir noktada Internet Explorer tüm kullanıcıların %90 dan fazlası tarafından kullanılıyordu. Bu hakimiyete karşı koymak için Netscape, Firefox'u geliştiren ve sürdüren Mozilla Vakfı'nı kurdu. Bundan kısa bir süre sonra, 2003'te Apple Safari'yi ve 2008'de Google Chrome'u piyasaya sürdü.
 
-You're most likely familiar with most, if not all these names.<span id="most-used-browser"> There is a lot of competition among the browsers still to this day, even though Chrome (and [Chromium](https://en.wikipedia.org/wiki/Chromium_(web_browser))) is the dominant player in the market</span>.
+Bu isimlerin hepsini olmasa da çoğunu büyük olasılıkla tanıyorsunuzdur.<span id="most-used-browser"> Chrome (ve [Chromium](https://en.wikipedia.org/wiki/Chromium_(web_browser))) pazardaki baskın oyuncu olsa da, bugün hala tarayıcılar arasında çok fazla rekabet var</span>.
 
-### What is browser compatibility?
+### Tarayıcı Uyumluluğu Nedir?
 
-Today, it is impossible to imagine the Web without the use of browsers. We have witnessed a shift from standalone applications to HTML5 and Progressive Web Apps that allow applications to fully function within a browser. For example, Microsoft Word and Excel for the longest time could only be executed via a standalone application. Now, you can utilize those applications through any browser without the need to install any files.
+Bugün interneti tarayıcıların kullanımı olmadan hayal etmek imkansız.  Bağımsız uygulamalardan, uygulamaların bir tarayıcı içinde tam olarak çalışmasına olanak tanıyan HTML5 ve aşamalı web uygulamalarına geçişe tanık olduk. Örneğin, Microsoft Word ve Excel en uzun süre boyunca yalnızca bağımsız bir uygulama aracılığıyla çalıştırılabiliyordu. Artık bu uygulamaları herhangi bir dosya yüklemeye gerek kalmadan herhangi bir tarayıcı üzerinden kullanabilirsiniz.
 
-As companies compete for the market share, different browsers are using different engines to display information on the web page. For example, Chrome and Chromium utilize Blink, while Safari uses WebKit.
+Şirketler pazar payı için rekabet ederken, farklı tarayıcılar web sayfasındaki bilgileri görüntülemek için farklı motorlar kullanmaktadır. Örneğin; Chrome ve Chromium Blink kullanırken Safari WebKit kullanmaktadır.
 
-Because of these differences, your applications may behave differently in the browser. Due to Chrome dominance, the vast majority of applications are designed to work smoothly with Chromium, and providing as good a level of performance in other browsers is secondary.
+Bu farklılıklardan dolayı uygulamanız tarayıcıda farklı davranabilir. Chrome'un hakimiyeti nedeniyle uygulamaların büyük çoğunluğu Chromium ile sorunsuz çalışacak şekilde tasarlanmıştır ve diğer tarayıcılarda iyi bir performans düzeyi sağlamak ikincildir.
 
-For your web development projects to have a broader reach, you must make sure that you're testing your web applications against the browsers which are most likely to be used by the users. Chrome, Safari, Firefox, and other Chromium-based browsers (Microsoft Edge, Brave, etc.) are more common among regular users. But you may find you need to support less common ones (like Internet Explorer) as well depending on the user base or the company you work for. For Chromium browsers, if it works in Chrome, it should work in other related browsers as well.
+Web geliştirme projelerinizin daha geniş bir erişime sahip olması için web uygulamalarınızı kullanıcılar tarafından kullanılma olasılığı en yüksek olan tarayıcılarda test ettiğinizden emin olmalısınız. Chrome, Safari, Firefox ve diğer Chromium tabanlı tarayıcılar (Microsoft Edge, Brave, vb.) normal kullanıcılar arasında daha yaygındır. Ancak kullanıcı tabanına veya çalıştığınız şirkete bağlı olarak daha az yaygın olanları da (Internet Explorer gibi) desteklemeniz gerekebilir. Chromium tarayıcılar için, eğer Chrome'da çalışıyorsa, diğer ilgili tarayıcılarda da çalışmalıdır.
 
-### Browser releases and new CSS features
+### Tarayıcı sürümleri ve yeni CSS özellikleri
 
-W3C [World Wide Web Consortium](https://www.w3.org/) is the authority behind developing web standards to maximize accessibility and consistency of the web experience. W3C is also the authority to develop new features in the CSS. This is a closely collaborative approach with the Web as a community as well as the companies developing the web browsers.
+W3C [World Wide Web Consortium](https://www.w3.org/), internet deneyiminin erişilebilirliğini ve tutarlılığını en üst düzeye çıkarmak için internet standartları geliştirmenin arkasındaki otoritedir. W3C aynı zamanda CSS'de yeni özellikler geliştiren otoritedir. Bu, bir topluluk olarak internetin yanı sıra internet tarayıcılarını geliştiren şirketlerle de yakın işbirliği içinde olan bir yaklaşımdır.
 
-When the web browsers such as Nexus and Netscape were released, there was no such organization as W3C to help create more compatibility. Your application could look and function differently in each browser. Even worse, your application could've been completely unusable. Web developers had to make specific adjustments for each browser, and not every developer had enough resources to make that work for everyone.
+Nexus ve Netscape gibi web tarayıcılar piyasaya sürüldüğünde daha fazla uyumluluk yaratmaya yardımcı olacak W3C gibi bir organizasyon yoktu. Uygulamanız her tarayıcıda farklı görünebilir ve çalışabilir; daha da kötüsü, uygulamanız tamamen kullanılamaz hale gelebilirdi. İnternet geliştiricileri her tarayıcı için özel ayarlamalar yapmak zorundaydı ve her geliştiricinin bunu herkes için çalıştıracak yeterli kaynağı yoktu.
 
-Today, as the standards around the web evolve and change, and web developers begin implementing new features in their codebase, the browsers must provide support for those new features. If the user experience is impacted by the lack of support in the browsers, the users might find their way to the competitor.
+Günümüzde, internet etrafındaki standartlar gelişip değiştikçe ve internet geliştiricileri kod tabanlarında yeni özellikler uygulamaya başladıkça tarayıcılar bu yeni özellikler için destek sağlamalıdır. Kullanıcı deneyimi tarayıcılardaki destek eksikliğinden etkilenirse kullanıcılar rakiplerine yönelebilir.
 
-### When is it safe to use new features?
+### Yeni özellikleri kullanmak ne zaman güvenlidir?
 
-As exciting as it is to implement new features, there is a risk of rushing. It would not be a positive experience for your users to find that, for example, your application used to work well in Firefox, but due to the changes in the codebase it is now unusable in Firefox but works well in Safari. Thankfully, there is a tool that can help you prevent this situation.
+Her ne kadar yeni özellikleri kullanmak heyecan verici olsa da acele etmenin bir riski var. Örneğin, uygulamanızın Firefox'ta iyi çalıştığını ancak kod tabanındaki değişiklikler nedeniyle artık Firefox'ta kullanılamaz olduğunu ama Safari'de iyi çalıştığını öğrenmek kullanıcılarınız için olumlu bir deneyim olmayacaktır. Neyse ki, bu durumu önlemenize yardımcı olabilecek bir araç var.
 
-["Can I Use"](https://caniuse.com/) is a great resource to help you validate if new features are supported by the browsers. It provides statistics on which browsers and platforms are supporting new technologies, and even which versions of the browsers support specific features.
+["Can I Use"](https://caniuse.com/), yeni özelliklerin tarayıcılar tarafından desteklenip desteklenmediğini doğrulamak için harika bir kaynak. Bu uygulama hangi tarayıcıların ve platformların yeni teknolojileri desteklediğine ve hatta tarayıcıların hangi sürümlerinin belirli özellikleri desteklediğine dair istatistikler sağlıyor.
 
-It is generally good advice to implement new features when they are supported by the most common browsers. This way you're less likely to encounter an issue that a lot of users will face.
+Yeni özellikleri en yaygın tarayıcılar tarafından desteklendiğinde uygulamak genellikle iyi bir tavsiyedir. Bu şekilde çok sayıda kullanıcının karşılaşacağı bir sorunla karşılaşma olasılığınız azalır.
 
-### Mobile browsers
+### Mobil tarayıcılar
 
-Traditionally, the Web was desktop computer first. The application was successful if it worked well on desktop browsers. But as smartphones have become more popular, each year more and more users are using mobile devices as their main Web-facing device. In some areas of the world, mobile users are a vast majority.
+Geleneksel olarak internet ilk olarak masaüstü bilgisayardı. Uygulama masaüstü tarayıcılarda çalışırsa başarılıydı. Ancak akıllı telefonlar daha popüler hale geldikçe her yıl daha fazla insan ana internet aracı olarak akıllı telefonları kullanmaya başladı. Dünyanın bazı bölgelerinde mobil kullanıcılar büyük bir çoğunluğu oluşturuyor.
 
-Mobile devices mostly consist of smartphones and tablets. The most popular mobile operating systems are [Android](<https://en.wikipedia.org/wiki/Android_(operating_system)>) and Apple's [iOS](https://en.wikipedia.org/wiki/IOS).
+Mobil cihazlar çoğunlukla akıllı telefonlar ve tabletlerden oluşuyor. En popüler mobil işletim sistemleri [Android](<https://en.wikipedia.org/wiki/Android_(operating_system)>) ve [iOS](https://en.wikipedia.org/wiki/IOS)'tur.
 
-As you're developing your applications, you must also consider whether your application should be fully mobile compatible. There are a couple of specifics about mobile browsers that you need to keep in mind.
+Uygulamalarınızı geliştirirken uygulamanızın tamamen mobil uyumlu olması gerekip gerekmediğini de göz önünde bulundurmalısınız. Mobil tarayıcılar hakkında aklınızda bulundurmanız gereken birkaç özellik vardır:
 
-1. <span id="apple-browsers">On iOS and iPadOS, Safari is technically the only supported browser. Yes, you can install Chrome or Firefox, and you can even set them as a default, but they are not full browsers. They are still using the Safari rendering engine (WebKit). Therefore, for your web application to work for the Apple users, you have to ensure support for WebKit and other technologies used in Safari.
-It's important to remember that mobile browsers are not one-to-one with their desktop counterparts. A project that works in the desktop version of Safari might still need adjustments to work properly on the mobile version of the same browser.</span>
-2. Another consideration for mobile browsers is the magnitude of different screen sizes. It is virtually impossible to have every physical device available to test, and thankfully browsers provide a way to emulate other devices. The important piece to remember is that when, for example, you emulate an iPhone in Chrome, all that you're emulating is the screen size. Keep in mind that any specific considerations of the operating system will not be reproducible. Which means that even though everything functions well in Chrome when emulating a device, it could behave differently on the actual phone or tablet device.
+1. <span id="apple-browsers">iOS ve iPadOS'ta Safari teknik olarak desteklenen tek tarayıcıdır. Evet Chrome ve Firefox indirebilir hatta varsayılan olarak ayarlabilirsiniz ancak tam olarak tarayıcı değiller. Hala Safari oluşturma motorunu (WebKit) kullanıyorlar. Bu nedenle, web uygulamanızın Apple kullanıcıları için çalışması için, WebKit ve Safari'de kullanılan diğer teknolojiler için destek sağlamanız gerekir.
+Mobil tarayıcıların masaüstü muadilleriyle bire bir aynı olmadığını unutmamak önemlidir. Safari'nin masaüstü sürümünde çalışan bir projenin, aynı tarayıcının mobil sürümünde düzgün çalışması için yine de ayarlamalar yapılması gerekebilir.</span>
+2. Mobil tarayıcılar için bir başka husus da farklı ekran boyutlarının fazlalığıdır. Her fiziksel cihazı test etmek için hazır bulundurmak neredeyse imkansızdır. Neyse ki tarayıcılar diğer cihazları taklit etmek için bir yol sağlıyor. Unutulmaması gereken önemli nokta, örneğin Chrome'da bir iPhone'u taklit ettiğinizde taklit ettiğiniz tek şeyin ekran boyutu olduğudur. İşletim sistemiyle ilgili herhangi bir özel hususun yeniden üretilemeyeceğini unutmayın. Bu da bir cihazı taklit ederken Chrome'da her şey iyi çalışsa bile gerçek telefon veya tablet cihazında farklı davranabileceği anlamına gelir
 
-### Assignment
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
-- Review [Can I Use](https://caniuse.com/). Are all technologies you have encountered so far supported by popular browsers?
-- Read this article [about browsers on iOS](https://adactio.com/journal/17428).
+- [Can I Use]'u (https://caniuse.com/) inceleyin. Şu ana kadar karşılaştığınız tüm teknolojiler popüler tarayıcılar tarafından destekleniyor mu?
+- [Web browsers on iOS](https://adactio.com/journal/17428) adlı makaleyi okuyun.
 </div>
 
-### Knowledge check
+### Bilgi ölçme
 
-- [What is the most used browser currently?](#most-used-browser)
-- [What was the original name of the first web browser?](#first-web-browser)
-- [How are mobile browsers different on Apple mobile operating systems from Android?](#apple-browsers)
+- [Şu anda en çok kullanılan tarayıcı hangisidir?](#most-used-browser)
+- [İlk web tarayıcısının orijinal adı neydi?](#first-web-browser)
+- [Mobil tarayıcılar Apple mobil işletim sistemlerinde Android'den nasıl farklıdır?](#apple-browsers)
 
-### Additional resources
+### Ek kaynaklar
 
-This section contains helpful links to other content. It isn’t required, so consider it supplemental.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-- Read more about the [history of web browsers](https://www.taskade.com/blog/history-of-web-browsers-internet-online-productivity/).
-- Take a look at this [comprehensive primer on browsers and rendering engines](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/).
+- [İnternet tarayıcılarının tarihi](https://www.taskade.com/blog/history-of-web-browsers-internet-online-productivity/) hakkında daha fazla bilgi edinin.
+- Tarayıcılar ve işleme motorları hakkındaki [bu kapsamlı kılavuza](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/) göz atın.
 
 
