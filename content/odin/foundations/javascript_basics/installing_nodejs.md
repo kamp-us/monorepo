@@ -6,11 +6,11 @@ title: 'Node.js Kurulumu'
 
 Node.js, JavaScript'i web tarayıcınızın dışında çalıştırmanıza olanak tanıyan bir JavaScript çalışma zamanı ortamıdır. Gelecek derslerdeki bazı alıştırmalar için buna ihtiyacımız olacak. Başlamak için, Node'u sisteminize kurmadan önce ihtiyacımız olan bazı gerekli araçlar var.
 
-Node'u yüklemek için `nvm` (Node Version Manager) kullanacağız, çünkü bu, Node versiyonlarını değiştirmeyi ve Node'un güncelleştirmeyi kolaylaştırır. İlerleyen zamanlarda JavaScript ortamlarında kullanılan çeşitli kütüphaneler ve araçları yüklemek için kullanacağınız başka bir araç da `npm` (Node Package Manager) adını taşıyor. Bu ikisini karıştırmak kolay olabilir, bu yüzden dikkatlice okuyunuz!
+Node'u yüklemek için `nvm` (Node Version Manager) kullanacağız, çünkü bu, Node versiyonlarını değiştirmeyi ve Node'u güncelleştirmeyi kolaylaştırır. İlerleyen zamanlarda JavaScript ortamlarında kullanılan çeşitli kütüphaneler ve araçları yüklemek için kullanacağınız başka bir araç da `npm` (Node Package Manager) adını taşıyor. Bu ikisini karıştırmak kolay olabilir, bu yüzden dikkatlice okuyunuz!
 
 Node'u `nvm` kullanarak kurmak çok kolay, bu yüzden işlem hızlı bir şekilde tamamlanabilir :)
 
-### Ders Genel Bakışı
+### Derse genel bakış
 
 Bu bölüm, bu derste öğreneceğiniz konuların genel bir bakışını içerir.
 
