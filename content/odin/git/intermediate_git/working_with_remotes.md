@@ -1,22 +1,26 @@
-### Introduction
+---
+title: "Remote'larla (Uzak Depolarla) Çalışmak"
+---
 
-So far, you've been working with remote repositories each time you've pushed or pulled from your own GitHub repository while working on the curriculum's various projects. In this section, we're going to cover slightly more advanced topics, which you might not have yet encountered or had to use.
+### Giriş
 
-### Lesson overview
+Şimdiye kadar, müfredatın çeşitli projeleri üzerinde çalışırken kendi GitHub reponuzdan pull veya push işlemi yaptınız, remote repo'larla (uzak depolarla) çalıştınız. Bu bölümde, daha önce henüz karşılaşmamış veya kullanmamış olabileceğiniz biraz daha gelişmiş konuları ele alacağız.
 
-This section contains a general overview of topics that you will learn in this lesson.
+### Derse genel bakış
 
-- Using remotes to change history.
-- Dangers of history-changing operations.
-- Best practices of history-changing operations.
+Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
+
+- Geçmişi (commit history) değiştirmek için remote'ları kullanma.
+- Geçmişi değiştirme işlemlerinin tehlikeleri.
+- Geçmiş değiştirme işlemlerinin en iyi uygulamaları.
 
 #### git push -\-force
 
-Let's say you're no longer working on a project all by yourself, but with someone else. You want to push a branch you've made changes on to a remote repository. Normally, Git will only let you push your changes if you've already updated your local branch with the latest commits from this remote.
+Diyelim ki artık bir projede tek başınıza değil, bir başkasıyla çalışıyorsunuz. Yapılan değişikliklerle bir branch'i bir remote repo'ya göndermek istiyorsunuz. Git, değişikliklerinizi yalnızca local branch'i bu remote repo'daki en son commit'lerle güncellediyseniz gönderebilmenizi sağlar.
 
-If you haven't updated your local branch, and you're attempting to `git push` a commit which would create a conflict on the remote repository, you'll get an error message. This is actually a great thing! This is a safety mechanism to prevent you from overwriting commits created by the people you're working with, which could be disastrous. You get the error because your history is outdated.
+Eğer local branch'inizi güncellemediyseniz ve bir conflict (çakışma) oluşturacak şekilde bir commit'i `git push` etmeye çalışıyorsanız, hata mesajı alırsınız. Bu aslında harika bir şey! Bu, birlikte çalıştığınız kişiler tarafından oluşturulan ve felaketle sonuçlanabilecek commit'lerin üzerine yazmanızı önleyen bir güvenlik mekanizmasıdır. Hatayı almanızın nedeni, geçmişinizin güncel olmamasıdır.
 
-You might perform a brief query and find the command `git push --force`. This command overwrites the remote repository with your own local history. So what would happen if we used this while working with others? Well, let's see what would happen when we're working with ourselves. Type the following commands into your terminal, and when the interactive rebase tool pops up remove our commit for `Create fourth file`:
+Kısa bir sorgu gerçekleştirebilir ve `git push --force` komutunu bulabilirsiniz. Bu komut, remote repo'nun üzerine kendi local history'nizi yazar. Peki bunu başkalarıyla çalışırken kullanırsak ne olur? Hadi kendimizle çalışırken ne olacağını görelim. Terminalinize aşağıdaki komutları yazın ve interactive rebase tool belirdiğinde `Create fourth file` için commit'inizi kaldırın:
 
 ```bash
 $ git push origin main
@@ -25,11 +29,11 @@ $ git push --force
 $ git log
 ```
 
-Huh, that's interesting. We don't see our fourth file on our local system. Let's check our GitHub repository to see if it's there.
+Hmm, bu ilginç.  ` fourth file` 'ı local sistemimizde göremiyoruz. Orada olup olmadığını görmek için GitHub repomuzu kontrol edelim.
 
-Oh no, we just destroyed it! In this scenario, the danger - you could potentially destroy the work of those you're collaborating with! `git push --force` is a **very dangerous command, and it should be used with caution when collaborating with others**. Instead, you can fix your outdated history error by updating your local history using `fetch`, `merge`, and then attempting to `push` again.
+Olamaz, onu az önce yok ettik! Bu senaryoda, işbirliği (collaborating) yaptığınız kişilerin çalışmalarını potansiyel olarak yok edebilirsiniz! `git push --force` **çok tehlikeli bir komuttur ve başkalarıyla işbirliği yaparken dikkatli kullanılmalıdır**. Bunun yerine, local history'nizi `fetch`, `merge` ile güncelleyerek, ardından da tekrar push'lamayı deneyerek güncel olmayan geçmiş hatanızı düzeltebilirsiniz.
 
-Let's consider a different scenario:
+Farklı bir senaryo düşünelim:
 
 ```bash
 $ touch test4.md
@@ -38,56 +42,56 @@ $ git push origin main
 $ git log
 ```
 
-We look at our commit message and realize _oops_, we made a mistake. We want to undo this commit and are once again tempted to just force the push. But wait, remember, this is a **very dangerous command**. If we're ever considering using it, always check if it's appropriate and if we can use a safer command instead. If we're collaborating with others and want to _undo_ a commit we just made, we can instead use `git revert`!
+Commit mesajımıza baktığımızda _oops_, bir hata yaptığımızı fark ederiz. Bu commit'i geri almak istiyoruz ve bir kez daha push'lamaya zorlamanın cazibesine kapılıyoruz. Ama durun! Unutmayın, bu **çok tehlikeli bir komuttur**. Eğer kullanmayı düşünürseniz, her zaman uygun olup olmadığını ve bunun yerine daha güvenli bir komut kullanıp kullanamayacağınızı kontrol ediniz. Eğer başkalarıyla işbirliği yapıyorsak ve yeni yaptığımız bir commit'i _geri almak_ istiyorsak, bunun yerine `git revert` komutunu kullanabiliriz!
 
 ```bash
 git revert HEAD
 git push origin main
 ```
 
-Remember when we were working with HEAD, aka the current commit we're viewing, while rebasing? What this would do is it would revert the changes to HEAD! Then we would push our new commit to whichever branch we're working on, which in this example is main even though normally our work would most likely be on a feature-branch.
+HEAD ile çalıştığımız zamanı hatırlıyor musunuz, yani yeniden düzenleme yaparken görüntülediğimiz mevcut commit'i? Bunun yapacağı şey, değişiklikleri HEAD'e geri döndürmektir! Daha sonra yeni commit'imizi üzerinde çalıştığımız branch'e (normalde çalışmamız büyük olasılıkla bir feature-branch üzerinde olacak olsa da bu örnekte main branch'e) göndeririz.
 
-So now that we've learned about the various dangers of `git push --force`, you're probably wondering why it exists and when to use it. A very common scenario in which developers use `git push --force` is updating pull requests. Collaborative work is covered more in depth in a separate lesson, but the take-away from this section should be that the `--force` option should be used only when you are certain that it is appropriate. There are also less common scenarios, such as when sensitive information is accidentally uploaded to a repository and you want to remove all occurrences of it.
+Şimdi `git push --force`un çeşitli tehlikelerini öğrendiğimize göre, muhtemelen neden var olduğunu ve ne zaman kullanılacağını merak ediyorsunuzdur. Geliştiricilerin `git push --force`u kullandığı çok yaygın bir senaryo, pull request'leri güncellemektir. Ortaklaşa çalışma ayrı bir derste daha ayrıntılı olarak ele alınmaktadır, ancak bu bölümden çıkarılacak sonuç, `--force` seçeneğinin yalnızca uygun olduğundan emin olduğunuzda kullanılması gerektiğidir. Hassas bilgilerin yanlışlıkla bir repoya yüklenmesi ve bu bilgilerin tüm oluşumlarını kaldırmak istemeniz gibi daha az yaygın senaryolar da vardır.
 
-<span id='force-with-lease'>It is worth giving special mention to `git push --force-with-lease`</span>, a command which in some companies is the default option. The reason for this is that it's a fail-safe! It checks if the branch you're attempting to push to has been updated and sends you an error if it has. This gives you an opportunity to, as mentioned before, `fetch` the work and update your local repository.
+<span id='force-with-lease'>Bazı şirketlerde varsayılan seçenek olan `git push --force-with-lease`</span>, komutundan özellikle bahsetmek gerekir. Bunun nedeni bir hata emniyeti olmasıdır! Push etmeye çalıştığınız branch'in güncellenip güncellenmediğini kontrol eder ve eğer güncellenmişse size bir hata gönderir. Bu size, daha önce de belirtildiği gibi, işi `fetch` etme ve local reponuzu güncellemek için bir fırsat verir.
 
-### Dangers and best practices
+### Tehlikeler ve en iyi uygulamalar (best practices)
 
-Let's review the dangers we've addressed so far. I know, I know, it's scary stuff - but we have to be mindful or our coworkers might end up hating our guts! If you look back through this lesson you'll see a common thread. `amend`, `rebase`, `reset`, `push --force` are all especially dangerous when you're collaborating with others. <span id='dangers'>These commands can destroy work your coworkers have created</span>. So keep that in mind. When attempting to rewrite history, always check the dangers of the particular command you're using and follow these best practices for the commands we've covered:
+Bugüne kadar ele aldığımız tehlikeleri gözden geçirelim. Biliyorum, biliyorum, korkutucu şeyler - ama dikkatli olmalıyız yoksa iş arkadaşlarımızı bizden nefret eder hale getirebilir! Bu derse geri dönüp baktığınızda bir ortak nokta göreceksiniz. `amend`, `rebase`, `reset`, `push --force`  gibi komutlar, başkalarıyla işbirliği yaparken özellikle tehlikelidir. <span id='dangers'>Bu komutlar, iş arkadaşlarınızın oluşturduğu çalışmaları yok edebilir.</span> Bu nedenle bunu akılda tutun. Commit history'i yeniden yazmaya çalışırken, kullandığınız belirli komutların tehlikelerini her zaman kontrol edin ve ele aldığımız komutlar için bu en iyi uygulamaları izleyin:
 
 <span id='best-practices'></span>
 
-1.  If working on a team project, make sure rewriting history is safe to do and others know you're doing it.
-2.  Ideally, stick to using these commands only on branches that you're working with by yourself.
-3.  Using the `-f` flag to force something should scare you, and you better have a really good reason for using it.
-4.  Don't push after every single commit, changing published history should be avoided when possible.
-5.  Regarding the specific commands we've covered:
-    1.  For `git amend` never amend commits that have been pushed to remote repositories.
-    2.  For `git rebase` never rebase a repository that others may work off of.
-    3.  For `git reset` never reset commits that have been pushed to remote repositories.
-    4.  For `git push --force` only use it when appropriate, use it with caution, and preferably default to using `git push --force-with-lease`.
+1. Eğer bir ekip projesinde çalışıyorsanız, geçmişi yeniden yazmanın güvenli olduğundan emin olun ve diğerlerinin bunu yaptığınızı bilmesini sağlayın.
+2. Mümkünse, bu komutları sadece tek başınıza çalıştığınız dallarda kullanmayı tercih edin.
+3. Bir şeyi zorlamak için `-f` flag'i kullanmak sizi korkutmalı ve bunu kullanmanız için gerçekten iyi bir nedeniniz olmalı.
+4. Her işlemden sonra push yapmayın, yayınlanan geçmişi değiştirmekten mümkün olduğunca kaçınılmalıdır.
+5. Ele aldığımız belirli komutlarla ilgili olarak:
+    1. `git amend` için, remote repo'lara push'lanan commit'leri asla değiştirmeyin.
+    2. `git rebase` için, başkalarının üzerinde çalışabileceği bir repoyu asla yeniden düzenlemeyin.
+    3. `git reset` için, remote repo'lara push'lanan commit'leri asla sıfırlamayın.
+    4. `git push --force` için, sadece uygun olduğunda kullanın, dikkatli kullanın ve tercihen öntanımlı olarak `git push --force-with-lease` kullanın.
 
-### Assignment
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
 
-1.  Read through [GitHub's documentation on merge conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/about-merge-conflicts)
+1. Okuyabilirsiniz [GitHub's documentation on merge conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/about-merge-conflicts)
 
-    - It's only a matter of time until you run into one (if you haven't already)! While merge conflicts might seem intimidating, they're actually very simple. Take your time with this resource and make sure you look at the two different ways the documentation suggests resolving merge conflicts - on GitHub itself, and on your command line. While you might not need this right now, keeping the source of this documentation in the back of your mind will prove invaluable for when you eventually run into a merge conflict and aren't sure where to find a solution.
+    - Bunlardan biriyle karşılaşmanız an meselesi (eğer henüz karşılaşmadıysanız)! Merge conflicts (birleştirme çakışmaları) korkutucu görünse de aslında çok basittir. Bu kaynağa zaman ayırın ve belgelerin merge conflicts çözmeyi önerdiği iki farklı yolu incelediğinizden emin olun - GitHub'ın kendisinde ve komut satırınızda. Şu anda buna ihtiyacınız olmasa da, bu belgenin kaynağını aklınızın bir köşesinde tutmak, sonunda bir merge conflicts ile karşılaştığınızda ve çözümü nerede bulacağınızdan emin olmadığınızda çok değerli olacaktır.
 
-2.  Read [think-like-a-git](http://think-like-a-git.net/) \* Take your time with this resource as well, it's very well written and will be very helpful in solidifying your understanding of Git.
+2.  Okuyunuz [think-like-a-git](http://think-like-a-git.net/) \* Bu kaynağa da zaman ayırın, çok iyi yazılmış ve Git anlayışınızı sağlamlaştırmada çok yardımcı olacaktır.
 </div>
 
-### Knowledge check
+### Bilgi ölçme
 
-This section contains questions for you to check your understanding of this lesson on your own. If you’re having trouble answering a question, click it and review the material it links to.
+Bu bölüm, bu dersi kendi başınıza anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve bağlantı verdiği materyali gözden geçirin.
 
-- <a class='knowledge-check-link' href='#force-with-lease'>What is a safe way to push history changes to a remote repository?</a>
-- <a class='knowledge-check-link' href='#dangers'>What are the dangers of history-changing operations?</a>
-- <a class='knowledge-check-link' href='#best-practices'>What are best practices of history-changing operations?</a>
+- <a class='knowledge-check-link' href='#force-with-lease'>Geçmiş değişikliklerini remote bir repoya göndermenin güvenli yolu nedir?</a>
+- <a class='knowledge-check-link' href='#dangers'>Geçmişi değiştiren operasyonların tehlikeleri nelerdir?</a>
+- <a class='knowledge-check-link' href='#best-practices'>Geçmişi değiştiren operasyonların en iyi uygulamaları nelerdir?</a>
 
-### Additional resources
+### Ek kaynaklar
 
-This section contains helpful links to related content. It isn’t required, so consider it supplemental.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-- If you're looking for an interactive way to deepen your knowledge of working with Git, check out this game, [Learn Git Branching](https://learngitbranching.js.org/)
+- Git ile çalışma bilginizi derinleştirmek için interaktif bir yol arıyorsanız, bu oyuna göz atın, [Learn Git Branching](https://learngitbranching.js.org/)
