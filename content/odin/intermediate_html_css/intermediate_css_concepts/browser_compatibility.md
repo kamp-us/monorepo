@@ -2,9 +2,9 @@
 
 Web geliştirme yolculuğunuza devam ederken çalışmanızın son kullanıcılarının çeşitli tarayıcılar kullanıyor olabileceğini aklınızda bulundurmanız önemlidir; Chrome, Internet Explorer, Firefox ve Safari bunlardan birkaçıdır. Aynı zamanda mobil işletim sistemi kullanan kullanıcıların sayısı hızla artıyor. Bu nedenle farklı tarayıcıların mobil versiyonlarını da göz önünde bulundurmalısınız.  
 
-### Öğrenme Çıktıları
+### Derse genel bakış
 
-Bu dersin sonunda:
+Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
 - Tarayıcı uyumluluğunu ve geçmişini anlayabilmelisiniz.
 - Yeni CSS özelliklerinin tarayıcılara nasıl geldiğini bilmelisiniz.
