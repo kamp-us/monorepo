@@ -45,7 +45,8 @@ Projenizi oluştururken, `git push origin main` ile GitHub'a göndermeye hazır 
 
 Kod yazarken, erken ve sık sık commit yapmak en iyi uygulama olarak kabul edilir. Kodda anlamlı bir değişiklik yaptığınız her seferde commit edin. Bu, ilerlemenizin bir zaman çizelgesini oluşturacak ve bitmiş kodunuzun bir anda ortaya çıkmadığını gösterecektir.
 
-`git push origin main` komutunu girdikten sonra tarayıcınıza geçin ve GitHub'daki deponuzu açın. Şimdi commitlediğiniz tüm dosyaları görebiliyor olmalısınız.
+`git push origin main` komutunu girdikten sonra tarayıcınıza geçin ve GitHub'daki reponuzu açın. Şimdi commitlediğiniz tüm dosyaları görebiliyor olmalısınız.
+
 
 Tamam, şimdilik bu kadar Git yeter, gerçekten bir şeyler inşa etme zamanı!
 
