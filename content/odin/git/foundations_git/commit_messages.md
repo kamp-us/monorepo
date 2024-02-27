@@ -1,3 +1,7 @@
+---
+title: "Commit Mesajları"
+---
+
 ### Giriş
 
 Bu ders iyi commit mesajlarının önemini, nasıl yazılacağını, ne zaman commit edileceğini ve iyi commit geçmişine sahip olmanın neden bu kadar önemli olduğunu açıklayacaktır!
