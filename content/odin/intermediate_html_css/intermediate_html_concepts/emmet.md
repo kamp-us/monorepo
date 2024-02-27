@@ -1,10 +1,14 @@
+---
+title: 'Emmet'
+---
+
 ### Giriş
 
 Emmet, VS Code içinde inşaa edilmiş bir eklentidir. HTML ve CSS'i daha efektif yazmaya yarayan Emmet, içinde birçok akıllı kısayollar bulunur. Şimdiye kadar halihazırda birçok HTML ve CSS yazdınız ve VS Code'u kullanıyorsanız Emmet'le bir şekilde karşılaşmış olma ihtimaliniz yüksektir.
 
-### Öğrenme Çıktıları
+### Derse genel bakış
 
-Bu dersin sonunda, bunları biliyor olacaksınız:
+Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
 -   Emmet'in en yararlı bazı kısayollarını kullan
 -	VS Code'da kendinize özel tuş bağlantıları kurmayı öğren
@@ -37,9 +41,9 @@ Aynı işlemi `Remove Tag` için yapmak istiyorsanız, `Emmet:Remove tag` şekli
 
 <div class="lesson-content__panel" markdown="1">
 
-1.  [This](https://www.youtube.com/watch?v=V8vizNQKtx0) , Emmet için iyi bir videodur. Devam edin ve `11:37`'e kadar izleyiniz çünkü henüz kapsamadığımız bazı içerikleri gösteriyor. Zamanla o konuya da geleceğiz.
-2.  [Emmet cheat sheet](https://docs.emmet.io/cheat-sheet/) 'ye bir göz atın. Onu ezberlemeniz gerekmiyor, ancak farklı kullanım şekilleriyle tanışmanız iyi olacaktır.
-3.  [Emmet documentation](https://docs.emmet.io/). 'ni inceleyin. Yine, her şeyi ezberlemeniz gerekmiyor, ancak farklı olanaklarla oynamak iyi olacaktır.
+1.  [Bu video](https://www.youtube.com/watch?v=V8vizNQKtx0), Emmet için iyi bir videodur. Devam edin ve `11:37`'e kadar izleyiniz çünkü henüz kapsamadığımız bazı içerikleri gösteriyor. Zamanla o konuya da geleceğiz.
+2.  [Emmet cheat sheet](https://docs.emmet.io/cheat-sheet/)'e bir göz atın. Onu ezberlemeniz gerekmiyor, ancak farklı kullanım şekilleriyle tanışmanız iyi olacaktır.
+3.  [Emmet documentation](https://docs.emmet.io/)'ı inceleyin. Yine, her şeyi ezberlemeniz gerekmiyor, ancak farklı olanaklarla oynamak iyi olacaktır.
 
 </div>
 
@@ -57,6 +61,6 @@ Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeni
 
 Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-- [Emmet Keybindings](https://marketplace.visualstudio.com/items?itemName=agutierrezr.emmet-keybindings) tarafından [Andrés Gutiérrez](https://agutierrezr.github.io/), Visual Studio Code için bir Emmet tuş bağlamaları setidir. Hangi tuşa ne atanacağını bilmiyorsanız, bu önceden tanımlanmış bir tuş bağlamaları grubu olarak kullanılabilir.
+- [Emmet Keybindings](https://marketplace.visualstudio.com/items?itemName=agutierrezr.emmet-keybindings), [Andrés Gutiérrez](https://agutierrezr.github.io/) tarafından  hazırlanan Visual Studio Code için bir Emmet tuş bağlamaları setidir. Hangi tuşa ne atanacağını bilmiyorsanız, bu önceden tanımlanmış bir tuş bağlamaları grubu olarak kullanılabilir.
 
-- [Emmet Live](https://marketplace.visualstudio.com/items?itemName=ysemeniuk.emmet-live) tarafından [Yurii Semeniuk](https://github.com/semeniuk), Visual Studio Code için başka bir uzantıdır. Emmet kısaltmalarını düzenlerken sürekli olarak karşılık gelen HTML yapısını oluşturabilir. İstenen sonuç için bu uzantıyı çağırmadan önce rastgele bir metin parçası seçmeyi deneyin.
+- [Emmet Live](https://marketplace.visualstudio.com/items?itemName=ysemeniuk.emmet-live), [Yurii Semeniuk](https://github.com/semeniuk) tarafından hazırlanan Visual Studio Code için başka bir uzantıdır. Emmet kısaltmalarını düzenlerken sürekli olarak karşılık gelen HTML yapısını oluşturabilir. İstenen sonuç için bu uzantıyı çağırmadan önce rastgele bir metin parçası seçmeyi deneyin.
