@@ -1,8 +1,14 @@
+---
+title: 'Proje: Tarifler'
+---
+
 ### Giriş
+
 
 Edindiğiniz tüm HTML bilgilerini uygulama zamanı geldi. Bu projede, temel bir yemek tarifi web sitesi oluşturacaksınız.
 
-Web sitesi, birkaç tarife bağlantı içeren bir ana dizin sayfasından oluşacaktır. Bitirdiğinizde web sitesi çok güzel görünmeyecek.
+Web sitesi, birkaç tarifle ilgili bağlantıların yer alacağı bir ana dizin sayfasından oluşacaktır. Bitirdiğinizde web sitesi çok güzel görünmeyecek.
+
 Tabii [Brütalist Web Tasarımı](https://brutalistwebsites.com/) ile ilgilenmiyorsanız.
 
 Ancak bu projenin sadece HTML becerilerinizi geliştirmek için olduğunu unutmamanız önemlidir; CSS ile şekillendirmek için gelecekte bu projeyi tekrar ziyaret edeceğiz.
@@ -11,6 +17,14 @@ Ancak bu projenin sadece HTML becerilerinizi geliştirmek için olduğunu unutma
 
 
 [Git'e Giriş](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/introduction-to-git)'de belirtildiği gibi, tüm projelerinizi bir portföy gibi düzenlemek ve başkaları tarafından görülebilmesi için GitHub'a bağlamak isteyeceksiniz.
+<div class="lesson-note lesson-note--warning" markdown="1">
+
+#### GitHub'da dosya oluşturma konusunda dikkatli olun
+
+GitHub doğrudan kendi sitesinde değişiklik yapmamıza izin verir. Bunu repoyu makinenize klonladıktan sonra yaparsanız, yerel kodunuzun uzaktakinden bir sürüm geride olmasına neden olur ve çalışmanızı gönderirken ekstra zorluklar yaratır. Çoğu zaman dosyaları yerel olarak oluşturmalısınız. 
+
+ Kursta ilerledikçe, bu durumlarla nasıl başa çıkacağınızı öğreneceksiniz, ancak şimdilik basit yolda kalmak için talimatları dikkatlice takip etmek önemlidir.
+</div>
 
 Bir repoyu nasıl kuracağınızı bilmiyorsanız, nasıl kurulacağını öğrenmek için [Git Temelleri](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/git-basics)'nde bulunan talimatları izleyin.
 
@@ -22,7 +36,7 @@ Bir repoyu nasıl kuracağınızı bilmiyorsanız, nasıl kurulacağını öğre
 
 3.  Şimdi `cd` ile yerel makinenizde bulunan `odin-recipes` proje dizinine girin.
 
-4.  README.md` dosyanızı oluşturun ve mevcut projenin ne olduğunu ve tamamladığınızda hangi becerileri göstermiş olacağınızı açıklayan kısa bir giriş yazın. (Bunu projenin sonunda bir öz değerlendirme olarak da yapabilirsiniz, bu da öğrendiklerinizi gözden geçirmek için iyi bir yoldur).
+4.  `README.md` dosyanızı oluşturun ve mevcut projenin ne olduğunu ve tamamladığınızda hangi becerileri göstermiş olacağınızı açıklayan kısa bir giriş yazın. (Bunu projenin sonunda bir öz değerlendirme olarak da yapabilirsiniz, bu da öğrendiklerinizi gözden geçirmek için iyi bir yoldur).
 
 Eğer sorun yaşıyorsanız:
 
@@ -50,20 +64,23 @@ Kod yazarken, erken ve sık sık commit yapmak en iyi uygulama olarak kabul edil
 
 Tamam, şimdilik bu kadar Git yeter, gerçekten bir şeyler inşa etme zamanı!
 
-### Görevlendirme
+### Ödev
+
 
 <div class="lesson-content__panel" markdown="1">
 
 #### Tekrar 1: Başlangıç yapısı
 
 1.  `odin-recipes` dizini içinde bir `index.html` dosyası oluşturun.
-2.  Her zamanki şablon HTML ile doldurun ve gövdeye `Odin Tarifleri` başlıklı bir `h1` ekleyin.
+2.  Her zamanki HTML şablonu ile doldurun ve gövdeye `Odin Tarifleri` başlıklı bir `h1` ekleyin.
+
 
 #### Tekrar 2: Tarif sayfası
 
 1.  `odin-recipes` dizini içinde yeni bir dizin oluşturun ve adını `recipes` koyun.
 
-2.  `Tarifler` dizini içinde yeni bir HTML dosyası oluşturun ve içereceği tarifin adını verin. Örneğin `tavuk.html`. En sevdiğiniz yemeğin adını kullanabilir veya biraz ilhama ihtiyacınız varsa [Kullanmak için bir tarif bulun](https://www.allrecipes.com/).
+2.  `recipes` dizini içinde yeni bir HTML dosyası oluşturun ve içereceği tarifin adını verin. Örneğin `tavuk.html`. En sevdiğiniz yemeğin adını kullanabilir veya biraz ilhama ihtiyacınız varsa [buradan kullanmak için bir tarif bulun](https://www.allrecipes.com/).
+
 
 3.  Şimdilik, içeriği tarifin adı olan bir `h1` başlığı ekleyin.
 4.  `index.html` dosyasına geri dönün, yeni oluşturduğunuz tarif sayfasına bir bağlantı ekleyin. Örneğin: `<h1>Yemek Tarifleri</h1>` başlığı altında bağlantıyı şu şekilde yazın: `<a href="recipes/recipename.html">Tarif Başlığı</a>`. Bağlantının metni yine tarifin adı olmalıdır.
@@ -72,18 +89,23 @@ Tamam, şimdilik bu kadar Git yeter, gerçekten bir şeyler inşa etme zamanı!
 
 Yeni tarif sayfanız aşağıdaki içeriğe sahip olmalıdır:
 
-1. Daha önce eklediğiniz h1 başlığı altında bitmiş yemeğin bir görüntüsü. Yemeğin görsellerini Google'da veya daha önce bağlantısını verdiğimiz [Tarif Sitesi](https://www.allrecipes.com/)'nde bulabilirsiniz.
+1. Daha önce eklediğiniz h1 başlığı altında bitmiş yemeğin bir görüntüsü. Yemeğin görsellerini Google'da veya daha önce bağlantısını verdiğimiz [tarif sitesinde](https://www.allrecipes.com/) bulabilirsiniz.
 
-2.  Görselin altında uygun büyüklükte bir `Açıklama` başlığı ve ardından tarifi anlatan bir veya iki paragraf bulunmalıdır.
 
-3.  Açıklamanın altına bir `Malzemeler` başlığı ve ardından tarif için gereken malzemelerin **sırasız bir listesini** ekleyin.
+2.  Görselin altında uygun büyüklükte bir "Açıklama" başlığı ve ardından tarifi anlatan bir veya iki paragraf bulunmalıdır.
+
+
+3.  Açıklamanın altına bir "Malzemeler" başlığı ve ardından tarif için gereken malzemelerin **sırasız bir listesini** ekleyin.
+
 
 4.  Son olarak, malzeme listesinin altına bir "Adımlar" başlığı ve ardından yemeği yapmak için gereken adımların **sıralı bir listesini** ekleyin.
 
 #### Tekrar 4: Daha fazla tarif
 
-1. Önceden oluşturduğunuz tarif sayfasına aynı sayfa yapısına sahip iki tarif daha ekleyin.
-2. Dizin sayfasındaki yeni tariflere bağlantı vermeyi unutmayın. Ayrıca, tüm bağlantıları sırasız bir listeye koymayı düşünün, böylece hepsi tek bir satırda olmaz. 
+1. Önceden oluşturduğunuz tarif sayfasının aynı sayfa yapısına sahip iki tarif daha ekleyin.
+
+2. Dizin sayfasındaki yeni tariflere bağlantı vermeyi unutmayın. Ayrıca, tüm bağlantıları sırasız bir listeye koymaya çalışın, böylece hepsi tek bir satırda olmaz. 
+
 
 Örnek:
 
@@ -100,7 +122,8 @@ Bağlantılarınız gösterişli olmayacaktır, ancak şimdilik sadece onları o
 
 ### Projenizi web üzerinde görüntüleme
 
-Çalışmanızı (projenizi) başkalarına göstermek veya aşağıda bir çözüm sunmak istiyorsanız, sitenizi yayınlamanız gerekir. Böylece başkaları yalnızca yerel makinenizden değil, web'den erişebilir. İyi haber şu ki, projeniz GitHub'daysa (yukarıda açıklandığı gibi), bunu yapmak inanılmaz derecede basittir.
+Çalışmanızı(projenizi) başkalarına göstermek veya aşağıdan bir çözüm göndermek istiyorsanız, sitenizi yayınlamanız gerekecektir, böylece başkaları sadece yerel makinenizden değil, web'den de erişebilir. İyi haber şu ki, projeniz GitHub'daysa(yukarıda açıklandığı gibi), bunu yapmak basit olacaktır.
+
 
 GitHub, web projelerini doğrudan bir GitHub reposundan yayınlamanıza olanak tanır. Bunu yapmak, projenize `your-github-username.github.io/your-github-repo-name` adresinden erişmenizi sağlayacaktır.
 

@@ -1,12 +1,18 @@
+---
+title: 'Proje: Açılış Sayfası'
+---
 ### Giriş
 
-Bu proje için size sağlayacağımız bir tasarımdan tüm bir web sayfası oluşturacaksınız. Eğer takip ettiyseniz, bunu başarmak için gereken becerilere sahip olmalısınız, ancak kolay olmayabilir!
+
+Bu proje için size vereceğimiz bir tasarımdan tüm bir web sayfası oluşturacaksınız. Eğer dersleri buraya kadar takip ettiyseniz, bunu başarmak için gereken becerilere sahip olmalısınız, ancak kolay olmayabilir!
+
 
 Size sunduğumuz tasarım 2 resimden oluşuyor: biri web sitesinin tamamının resmi, diğeri ise kullandığımız bazı yazı tipleri ve renkler hakkında bazı ayrıntılar içeriyor.
 
 Bir şeye bakmak için Google kullanmaktan veya önceki derslere geri dönmekten korkmayın. **Gerçek hayatta, profesyonel geliştiriciler yıllardır yaptıkları şeyler için Google'ı sürekli kullanırlar.** Bu noktada her şeyi ezberlemiş olmanız beklenmemektedir, bu nedenle bu konuda endişelenmeyin. Ayrıca, derslerimizde henüz karşılaşmamış olabileceğiniz birkaç küçük ayrıntı var. Bu ayrıntılar önemsizdir ve kolayca aranabilir. (örneğin Google'da `css rounded corners` olarak aratabilirsiniz).
 
-Projenizi tasarıma olabildiğince benzetmeye çalışın, ancak piksel mükemmelliğine ulaşma konusunda endişelenmeyin. Çeşitli bölümler arasındaki tam kenar boşluklarını bulmak için cetvelinizi çıkarmayın veya pikselleri saymayın. Bu ödevin amacı, sıfırdan bir şey yaratmak ve çeşitli unsurları diğerlerine göre aşağı yukarı doğru konuma getirmektir. Tasarımın gerçekte `margin`i varken `margin: 24px` kullanmanız ya da `48px` olması önemli değildir.
+Projenizi tasarıma olabildiğince benzetmeye çalışın, ancak piksel mükemmelliğine ulaşma konusunda endişelenmeyin. Çeşitli bölümler arasındaki tam kenar boşluklarını bulmak için cetvelinizi çıkarmayın veya pikselleri saymayın. Bu ödevin amacı, sıfırdan bir şey yaratmak ve çeşitli unsurları diğerlerine göre aşağı yukarı doğru konuma getirmektir. Tasarımın aslında `margin: 48px`'i varken, sizin `margin: 24px` kullanmanız önemli değil.
+
 
 Son olarak_, bu tasarıma kendi içeriğinizi eklemekten çekinmeyin. Resimlerde bazı anlamsız yer doldurmalık içerikler var, ancak bir iş uydurmak ve bu sayfayı kişiselleştirmek istiyorsanız, lütfen bunu yapmaktan çekinmeyin! Yer doldurmalık resimler yerine gerçek resimler ekleyin ve renklerle ve yazı tipleriyle de biraz oynamaktan çekinmeyin.
 
@@ -32,14 +38,17 @@ Sıkıştığınızda veya nereden başlayacağınızı bilemediğinizde çözü
 
 - Gönderilen tüm projeler *diğer öğrencilerin* çözümleridir. Bu, hala öğrenmekte olan diğer insanlar tarafından yazıldıkları ve "en iyi uygulama" veya yüksek kaliteli kodu temsil etmeyebilecekleri anlamına gelir.
 - Çözümlere bakmak sizi problem çözme ve araştırma becerilerinizi geliştirme şansından mahrum bırakır. Gerçek dünyada, her zaman bakabileceğiniz "çözümler" olmayacaktır ve kendi çözümlerinizi bulmanız gerekecektir.
-- Aynı sonuca ulaşmanın birçok farklı yolu vardır - bu "herkese uyan tek bir beden" değildir.
-- Bir benzetme: **Tamamlanmış bir koda bakarak kod yazmayı öğrenmek, pişmiş bir pizzaya bakarak pizza hamuru yapmayı öğrenmeye benzer.**  Sadece nihai ürünü görerek ve ona giden süreci görmeyerek tahmin edebileceğinizden çok daha fazla şey var.
+- Aynı sonuca ulaşmanın birçok farklı yolu vardır - bu "her soruna uygun bir çözüm" değildir.
+
+- Bir benzetme: "Tamamlanmış bir koda bakarak kod yazmayı öğrenmek, pişmiş bir pizzaya bakarak pizza hamuru yapmayı öğrenmeye benzer."  Sadece nihai ürünü görerek ve ona giden süreci görmeyerek tahmin edebileceğinizden çok daha fazla şey var.
+
 
 Projenizi tamamladıktan sonra, projenin tamamlandığı alternatif yolları görmek için diğer çözümlere bakmaktan çekinmeyin.
 
 **SADECE BAKMAYIN. [Discord server]'ından yardım isteyin (https://discord.com/channels/505093832157691914/516751477306294273) _(Kanalı görmek için [Discord Sunucusuna Katıl](https://discord.gg/fbFCkYabZB))._**
 
-### Atama
+### Ödev
+
 
 <div class="lesson-content__panel" markdown="1">
 Erken ve sık sık commit atmayı unutmayın! [Commit Mesajı dersine buradan geri dönebilirsiniz](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/commit-messages)!
@@ -48,7 +57,8 @@ Erken ve sık sık commit atmayı unutmayın! [Commit Mesajı dersine buradan ge
     1. Resimlerde kullanılan yazı tipi Roboto'dur.
     2. `hero` metin, bir web sayfasının en üstünde görünen ifadedir.
 2. Bunun gibi bir projeyi ele almanın birçok yolu vardır ve boş bir HTML belgesine bakıp nereden başlayacağınızı bilememek çok zor olabilir. Önerimiz: her seferinde bir bölümü ele alın. Oluşturduğunuz web sitesinde 4 ana bölüm (ve bir altbilgi) vardır, bu nedenle birini seçin ve devam etmeden önce oldukça iyi bir şekle getirin. En üstten başlamak her zaman sağlam bir plandır.
-3.Üzerinde çalıştığınız bölüm için, stil vermeye başlamadan önce tüm içeriği sayfaya yerleştirerek başlayın. Başka bir deyişle, HTML'yi yapın ve _sonra_ CSS'yi yapın. Şekillendirmeye başladığınızda muhtemelen HTML'ye geri dönmeniz gerekecektir, ancak başlangıçtan itibaren ileri geri gitmek daha fazla zaman alacak ve daha fazla hayal kırıklığına neden olabilecektir. (Not: Birden fazla stil sayfası kullanmanıza gerek yoktur. Bu proje için sadece bir CSS dosyası kullanmak yeterlidir).
+3.Üzerinde çalıştığınız bölüm için, stil vermeye başlamadan önce tüm içeriği sayfaya yerleştirerek başlayın. Başka bir deyişle, HTML'yi yapın ve _sonra_ CSS'yi yapın. Şekillendirmeye başladığınızda muhtemelen HTML'ye geri dönmeniz gerekecektir, ancak başlangıçtan itibaren ileri geri gitmek daha fazla zaman alacak ve daha fazla hayal kırıklığına neden olabilecektir. (Not: Birden fazla stil sayfası kullanmanıza gerek yok. Bu proje için sadece bir CSS dosyası kullanmak yeterlidir).
+
 4. Bu sayfadaki öğelerin çoğu flexbox alıştırmalarımızda gördüklerinize çok benziyor... tazelemeye ihtiyacınız olursa o sayfalara geri dönmekten çekinmeyin.
 5. Projenizin mobil cihazda güzel görünmesi konusunda endişelenmeyin. Bunu daha sonra öğreneceğiz.
 6. Bitirdiğinizde GitHub'a göndermeyi unutmayın!
@@ -56,7 +66,8 @@ Erken ve sık sık commit atmayı unutmayın! [Commit Mesajı dersine buradan ge
 
 ### Projenizi web üzerinde görüntüleme
 
-Çalışmanızı (projeyi) başkalarına göstermek istiyorsanız veya aşağıdan bir çözüm gönderin, başkalarının web'den erişebilmesi için sitenizi yayınlamanız gerekecektir, sadece yerel makinenizde değil. İyi haber şu ki, projeniz GitHub'daysa (yukarıda açıklandığı gibi), bunu yapmak inanılmaz derecede basittir.
+Çalışmanızı(projenizi) başkalarına göstermek veya aşağıdan bir çözüm göndermek istiyorsanız, sitenizi yayınlamanız gerekecektir, böylece başkaları sadece yerel makinenizden değil, web'den de erişebilir. İyi haber şu ki, projeniz GitHub'daysa(yukarıda açıklandığı gibi), bunu yapmak basit olacaktır.
+
 
 GitHub, web projelerini doğrudan bir GitHub reposundan yayınlamanıza olanak tanır. Bunu yapmak projenize `your-github-username.github.io/your-github-repo-name` adresinden erişmenizi sağlayacaktır
 
