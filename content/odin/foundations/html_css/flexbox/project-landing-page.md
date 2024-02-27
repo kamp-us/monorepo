@@ -9,18 +9,22 @@ Bu proje için size vereceğimiz bir tasarımdan tüm bir web sayfası oluştura
 
 Size sunduğumuz tasarım 2 resimden oluşuyor: biri web sitesinin tamamının resmi, diğeri ise kullandığımız bazı yazı tipleri ve renkler hakkında bazı ayrıntılar içeriyor.
 
-Bir şeye bakmak için Google kullanmaktan veya önceki derslere geri dönmekten korkmayın. **Gerçek hayatta, profesyonel geliştiriciler yıllardır yaptıkları şeyler için Google'ı sürekli kullanırlar.** Bu noktada her şeyi ezberlemiş olmanız beklenmemektedir, bu nedenle bu konuda endişelenmeyin. Ayrıca, derslerimizde henüz karşılaşmamış olabileceğiniz birkaç küçük ayrıntı var. Bu ayrıntılar önemsizdir ve kolayca aranabilir. (örneğin Google'da `css rounded corners` olarak aratabilirsiniz).
+Bir şeye bakmak için Google kullanmaktan veya önceki derslere geri dönmekten _korkmayın_. **Gerçek hayatta, profesyonel geliştiriciler yıllardır yaptıkları şeyler için Google'ı _sürekli_ kullanırlar.** Bu noktada her şeyi ezberlemiş olmanız beklenmiyor, bu nedenle bu konuda endişelenmeyin. Ayrıca, derslerimizde henüz karşılaşmamış olabileceğiniz birkaç küçük ayrıntı var. _Bunlar tasarım kaynaklı_ küçük ayrıntılardır ve kolayca bulunabilirler (örneğin Google'da `css rounded corners`).
+
 
 Projenizi tasarıma olabildiğince benzetmeye çalışın, ancak piksel mükemmelliğine ulaşma konusunda endişelenmeyin. Çeşitli bölümler arasındaki tam kenar boşluklarını bulmak için cetvelinizi çıkarmayın veya pikselleri saymayın. Bu ödevin amacı, sıfırdan bir şey yaratmak ve çeşitli unsurları diğerlerine göre aşağı yukarı doğru konuma getirmektir. Tasarımın aslında `margin: 48px`'i varken, sizin `margin: 24px` kullanmanız önemli değil.
 
 
-Son olarak_, bu tasarıma kendi içeriğinizi eklemekten çekinmeyin. Resimlerde bazı anlamsız yer doldurmalık içerikler var, ancak bir iş uydurmak ve bu sayfayı kişiselleştirmek istiyorsanız, lütfen bunu yapmaktan çekinmeyin! Yer doldurmalık resimler yerine gerçek resimler ekleyin ve renklerle ve yazı tipleriyle de biraz oynamaktan çekinmeyin.
+_Son olarak_, bu tasarıma kendinizden eklemeler yapmaktan çekinmeyin. Resimlerde bazı anlamsız yer doldurmalık içerikler var, ancak bir iş uydurmak ve bu sayfayı kişiselleştirmek istiyorsanız, lütfen bunu yapmaktan çekinmeyin! Yer doldurmalık resimler yerine gerçek resimler ekleyin ve renklerle ve yazı tipleriyle de biraz oynamaktan çekinmeyin.
+
 
 <div class="lesson-note" markdown="1">
 
 #### Web'deki resimler hakkında bir not
 
-Web üzerinde bulduğunuz herhangi bir görseli kullanmak için yasal hakkınız yoktur. Bulabileceğiniz pek çok ücretsiz görsel var, ancak kullandığınız görselin gerçekten kullanmanız için ücretsiz olduğundan emin olun ve projenizde görselin yaratıcısına atıfta bulunduğunuzdan emin olun. Kredi vermenin kolay bir yolu, reponuzdaki bir README dosyasına oluşturucunun adını ve iletişim bilgilerini koymaktır.
+Web üzerinde bulduğunuz herhangi bir görseli kullanmak için yasal hakkınız yoktur. Bulabileceğiniz pek çok ücretsiz görsel var, ancak kullandığınız görselin gerçekten kullanmanız için ücretsiz olduğundan emin olun ve projenizde görselin yaratıcısına referans verdiğinizden emin olun. Referans vermenin kolay bir yolu, reponuzdaki bir README dosyasına oluşturucunun adını ve iletişim bilgilerini koymaktır.
+
+
 
 Web'de kullanımı ücretsiz görseller bulmak için bazı iyi yerler şunlardır [Pexels](https://www.pexels.com/), [Pixabay](https://pixabay.com/) ve [Unsplash](https://unsplash.com/).
 
