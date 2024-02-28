@@ -1,29 +1,20 @@
 import { Flex } from "@radix-ui/themes";
 
+import curriculumList from "../curriculum-list";
 import { HelpNeededJourney, Journey } from "./Journey";
 
-const paths = [
-  {
-    title: "Temel Bilgiler Serüveni",
-    description:
-      "İşte her şeyin başladığı yer! Gerçek, çalışan web siteleri oluşturmak için ihtiyacınız olan temel araçların hepsine pratik bir giriş. Web geliştiricilerinin aslında ne yaptığını ve sonraki kurslar için ihtiyacınız olan temelleri öğreneceksiniz.",
-    enabled: true,
-    url: "/odin/temel-bilgiler-seruveni",
-  },
-  {
-    title: "Full Stack JavaScript Serüveni",
-    description: `Bu yolculuk, sizi JavaScript müfredatımızın tamamından geçirir. 
-      Kurslar, görüntülendikleri sırayla alınmalıdır. 
-      JavaScript ve NodeJS kullanarak sıfırdan güzel, duyarlı web siteleri oluşturmak 
-      için bilmeniz gereken her şeyi öğreneceksiniz.`,
-    enabled: false,
-    url: "https://github.com/kamp-us/monorepo/tree/dev/content/odin/intermediate_html_css",
-  },
-];
+const paths = Object.values(curriculumList).map((curriculum) => {
+  return {
+    title: curriculum.name,
+    description: curriculum.description,
+    enabled: curriculum.enabled,
+    url: curriculum.url,
+  };
+});
 
 export default function SeruvenlerPage() {
   return (
-    <Flex direction="column" gap="4">
+    <Flex direction="column" gap="4" my="4">
       {paths.map((path) =>
         path.enabled ? (
           <Journey

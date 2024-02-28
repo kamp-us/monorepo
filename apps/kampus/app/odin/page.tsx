@@ -3,11 +3,11 @@ import { BookOpenCheckIcon } from "lucide-react";
 
 export default function OdinHome() {
   return (
-    <Box>
+    <Box m="5">
       <WallOfText />
       <Flex mt="4" justify="center">
         <Link href="odin/seruvenler">
-          <Button className="flex gap-2">
+          <Button size="4" className="flex gap-2">
             <BookOpenCheckIcon size={16} />
             Çevirilere göz at
           </Button>
