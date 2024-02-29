@@ -1,4 +1,4 @@
-### JavaScript Kodunuzu Organize Etme
+### JavaScript kodunuzu organize etme
 
 JavaScript'in en zorlayıcı kısımlarından biri kodunuzu nasıl düzenleyeceğinizi öğrenmektir. Bu konunun neden bu kadar karışık olabileceği, JavaScript'in diğer dillerden çok daha karmaşık olması değil, aksine inanılmaz derecede esnek olmasıdır! Birçok dil, kodunuzda belirli kalıplar ve veri yapıları kullanmanızı zorlar, ancak bu durum JavaScript için geçerli değildir.
 
