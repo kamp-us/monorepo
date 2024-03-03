@@ -1,16 +1,17 @@
-### Introduction
-We're making a Tic Tac Toe game you can play in your browser!
+### Giriş
 
-### Assignment
+Tarayıcınızda oynayabileceğiniz bir Taş Kağıt Makas oyunu yapıyoruz!
+
+### Ödex
 
 <div class="lesson-content__panel" markdown="1">
-1. Set up your project with HTML, CSS and Javascript files and get the Git repo all set up.
-2. You’re going to store the gameboard as an array inside of a Gameboard object, so start there! Your players are also going to be stored in objects, and you’re probably going to want an object to control the flow of the game itself.
-   1. Your main goal here is to have as little global code as possible. Try tucking as much as you can inside factories. If you only need a single instance of something (e.g. the gameboard, the displayController etc.) then wrap the factory inside an IIFE (module pattern) so it cannot be reused to create additional instances.
-   2. In this project, think carefully about where each bit of logic should reside. Each little piece of functionality should be able to fit in the game, player or gameboard objects. Take care to put them in “logical” places. Spending a little time brainstorming here can make your life much easier later!
-   3. If you’re having trouble, [Building a house from the inside out](https://www.ayweb.dev/blog/building-a-house-from-the-inside-out) is a great article that lays out a highly applicable example both of how you might approach tackling this project as well as how you might organize and structure your code.
-3. Focus on getting a working game in the console first. Make sure you include logic that checks for when the game is over! You should be checking for all winning 3-in-a-rows and ties. Try to avoid thinking about the DOM and your HTML/CSS until your game is working.
-4. Once you have a working console game, create an object that will handle the display/DOM logic. Write a function that will render the contents of the gameboard array to the webpage (for now, you can always just fill the gameboard array with `"X"`s and `"O"`s just to see what's going on).
-5. Write the functions that allow players to add marks to a specific spot on the board by interacting with the appropriate DOM elements (e.g. letting players click on a board square to place their marker). Don't forget the logic that keeps players from playing in spots that are already taken!
-6. Clean up the interface to allow players to put in their names, include a button to start/restart the game and add a display element that shows the results upon game end!
+1. HTML, CSS ve Javascript dosyaları ile projenizi kurun ve Git deposunu hazırlayın.
+2. Oyun tahtasını bir Gameboard nesnesi içinde bir dizi olarak saklayacaksınız, bu yüzden önce buradan başlayın! Oyuncularınız da nesneler içinde saklanacak ve muhtemelen oyunun akışını kontrol eden bir nesneye ihtiyacınız olacak.
+   1. Buradaki ana hedefiniz mümkün olduğunca az global kod kullanmaktır. Bir şeyin sadece bir örneğine ihtiyacınız varsa (örneğin oyun tahtası, displayController vb.) o zaman fabrikayı bir IIFE'nin (modül deseni) içine alın ve bu şekilde ek örnekler oluşturulamaz.
+   2. Bu projede, her bir mantık parçasının nerede bulunması gerektiği konusunda dikkatlice düşünün. Her küçük işlev parçası, oyun, oyuncu veya oyun tahtası nesnelerine sığabilmelidir. Onları "logical" (mantıklı) yerlere koymaya özen gösterin. Burada biraz zaman harcamak, ileride işinizi çok daha kolaylaştırabilir!
+   3. Eğer bir sorun yaşıyorsanız, [Building a house from the inside out](https://www.ayweb.dev/blog/building-a-house-from-the-inside-out) bu projeye nasıl yaklaşacağınızı ve kodunuzu nasıl organize ve yapılandıracağınızı anlamak için oldukça uygun bir örneği ortaya koyan harika bir makaledir.
+3. Önce konsolda çalışan bir oyun elde etmeye odaklanın. Oyunun ne zaman bittiğini kontrol eden mantığı dahil edin! Tüm kazanan 3'lüleri (3-in-a-rows) ve beraberlikleri kontrol etmelisiniz. Oyununuz çalışıncaya kadar DOM ve HTML/CSS'i düşünmekten kaçının.
+4. Çalışan bir konsol oyununuz olduğunda, ekrandaki/DOM mantığını yönetecek bir nesne oluşturun. Oyun tahtası dizisinin içeriğini web sayfasına render eden bir işlev yazın (şimdilik, sadece oyun tahtası dizisini "X" ve "O" larla doldurarak ne olduğunu görebilirsiniz).
+5. Oyuncuların uygun DOM öğeleriyle etkileşime geçerek (örneğin, oyuncuların işaretlerini koymak için tahta karesine tıklamasına izin vererek) tahtadaki belirli bir yere işaret eklemelerine izin veren fonksiyonları yazın. Oyuncuların zaten dolu olan noktalara oynamasını engelleyen mantığı unutmayın!
+6. Arayüzü temizleyin, oyuncuların isimlerini girmelerine izin vermek için bir düğme ekleyin, oyunu başlatma/yeniden başlatma düğmesi ekleyin ve oyun sonunda sonuçları gösteren bir görüntü öğesi ekleyin!
 </div>
