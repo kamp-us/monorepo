@@ -1,13 +1,13 @@
-### Introduction
+### Giriş
 
-Let's extend the 'Book' example from the previous lesson and turn it into a small Library app.
+Önceki dersteki 'Book' örneğini gelişirelim ve onu küçük bir Kütüphane uygulamasına dönüştürelim.
 
-### Assignment
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
 
-1. If you haven't already, set up your project with skeleton HTML/CSS and JS files.
-2. All of your book objects are going to be stored in an array, so add a function to the script (not the constructor) that can take user's input and store the new book objects into an array. Your code should look something like this:
+1. Eğer henüz yapmadıysanız, proje dosyalarınızı temel HTML/CSS ve JS dosyalarıyla oluşturun.
+2. Tüm kitap nesneleriniz bir dizide saklanacak,bu yüzden betiğe (constructor değil) kullanıcının girdilerini alıp yeni kitap nesnelerini bir diziye kaydedecek bir fonksiyon ekleyin. Kodunuz şuna benzer olmalı:
 
    ```javascript
    const myLibrary = [];
@@ -21,13 +21,14 @@ Let's extend the 'Book' example from the previous lesson and turn it into a smal
    }
    ```
 
-3. Write a function that loops through the array and displays each book on the page. You can display them in some sort of table, or each on their own "card". It might help for now to manually add a few books to your array so you can see the display.
-4. Add a "NEW BOOK" button that brings up a form allowing users to input the details for the new book: author, title, number of pages, whether it's been read and anything else you might want. How you decide to display this form is up to you. For example, you may wish to have a form show in a sidebar or you may wish to explore [dialogs and modals](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) using the `<dialog>` tag. However you do this, you will most likely encounter an issue where submitting your form will not do what you expect it to do. That's because the `submit` input tries to send the data to a server by default. If you've done the bonus section for the calculator assignment, you might be familiar with `event.preventDefault();`. Read up on the [event.preventDefault documentation](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) again and see how you can solve this issue!
-5. Add a button on each book's display to remove the book from the library.
-   1. You will need to associate your DOM elements with the actual book objects in some way. One easy solution is giving them a data-attribute that corresponds to the index of the library array.
-6. Add a button on each book's display to change its `read` status.
-   1. To facilitate this you will want to create the function that toggles a book's `read` status on your `Book` prototype instance.
+3. Diziyi döngü ile gezip her kitabı sayfada gösteren bir fonksiyon yazın. Bunları bir tür tablo içinde gösterebilirsiniz veya her biri kendi "card"ında gösterebilirsiniz. Dizine -şimdilik- kendi elimile birkaç kitabı eklemek, gösterim açısından yardımcı olabilir.
+4. Bir tane "NEW BOOK" düğmesi ekleyin; bu düğme, kullanıcıların yeni kitap için detayları girmelerine izin veren bir form açmalıdır; yazar, başlık, sayfa sayısı, kitabın okunup okunmadığı ve istediğiniz diğer bilgiler içerebilir. Örneğin, bir formun kenar çubuğunda gösterilmesini isteyebilir veya `<dialog>` etiketini kullanarak [dialogs and modals](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) keşfetmek isteyebilirsiniz. Bunun nasıl yapılacağı size kalmış ancak büyük olasılıkla formunuzu gönderdiğinizde beklediğiniz gibi çalışmadığını göreceksiniz. Bu, `submit` girdisinin varsayılan olarak verileri bir sunucuya göndermeye çalışmasından kaynaklanır. Eğer hesap makinesi ödevinin bonus bölünü yaptıysanız, `event.preventDefault();` yöntemini hatırlayabilirsiniz. Bu sorunu nasıl çözebileceğinizi öğrenmek için [event.preventDefault documentation](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) belgesine göz atın!
+5. Kütüphaneden kitabı kaldırmak için her kitabın kendisine bir düğme ekleyin.
+   1. DOM öğelerinizi kütüphane dizisi içindeki ilgili kitap nesneleri ile ilişkilendirmeniz gerekecek. Bunun için kolay bir çözüm, onlara kütüphane dizisinin indeksine karşılık gelen bir veri özniteliği (index) vermektir.
+
+6. Her kitabın görüntüsüne, `read` durumunu değiştirmek için bir düğme ekleyin.
+   1. Bu işlemi kolaylaştırmak için `Book` prototip örneğinizde bir kitabın `read` durumunu değiştiren bir işlev oluşturmalısınız.
 
 
-NOTE: You're not required to add any type of storage right now. You will have the option to come back to this project later on in the course.
+NOT: Şu anda herhangi bir depolama türü eklemek zorunda değilsiniz. Bu projeye daha sonra kursun ilerleyen aşamalarında geri dönme seçeneğiniz olacak.
 </div>
