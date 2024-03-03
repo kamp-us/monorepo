@@ -1,6 +1,6 @@
 ### Giriş
 
-JavaScript, Java veya Ruby gibi diğer Nesne Yönelimli dillerde olduğu gibi _tam olarak_ sınıflara sahip değildir. Ancak ES6, `class` anahtar kelimesini kullanan nesne oluşturma için bir sözdizimi tanıttı. Bu temelde, constructor dersinde öğrendiğimiz nesne yapılandırıcıları ve prototiplerle _tam olarak_ aynı işi yapan yeni bir sözdizimidir.
+JavaScript, Java veya Ruby gibi diğer Nesne Yönelimli dillerde olduğu gibi _tam olarak_ sınıflara sahip değildir, ancak ES6, `class` anahtar kelimesini kullanan nesne oluşturma için bir sözdizimi tanıttı. Bu temelde, constructor dersinde öğrendiğimiz nesne yapılandırıcıları ve prototiplerle _tam olarak_ aynı işi yapan yeni bir sözdizimidir.
 
 Ancak, `class` sözdizimini kullanmak konusunda biraz tartışma var. Karşıtlar, `class`'ın temelde var olan prototype tabanlı yapılandırıcıların üzerine konan _sözdizimsel şeker_ (syntatic sugar) olduğunu ve bu nesnelerle gerçekte neler olup bittiğini gözden kaçırmak için tehlikeli ve/veya yanıltıcı olduğunu iddia ediyorlar. Tartışmalara rağmen, sınıfların gerçek kod tabanlarında ortaya çıkmaya başladığını ve muhtemelen karşılaşacağınız gibi çerçevelerde (özellikle sınıf tabanlı React koduyla çalışmayı tercih ederseniz) kullanıldığını göz önünde bulundurmanız önemlidir.
 
