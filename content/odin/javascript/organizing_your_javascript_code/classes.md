@@ -1,12 +1,12 @@
-### Introduction
+### Giriş
 
-JavaScript does _not_ have classes in the same sense as other Object Oriented languages like Java or Ruby. ES6, however, _did_ introduce a syntax for object creation that uses the `class` keyword. It is basically a new syntax that does the _exact_ same thing as the object constructors and prototypes we learned about in the constructor lesson.
+JavaScript, Java veya Ruby gibi diğer Nesne Yönelimli dillerde olduğu gibi _tam olarak_ sınıflara sahip değildir. Ancak ES6, `class` anahtar kelimesini kullanan nesne oluşturma için bir sözdizimi tanıttı. Bu temelde, constructor dersinde öğrendiğimiz nesne yapılandırıcıları ve prototiplerle _tam olarak_ aynı işi yapan yeni bir sözdizimidir.
 
 There is a bit of controversy about using the class syntax, however. Opponents argue that `class` is basically just _syntactic sugar_ over the existing prototype-based constructors and that it's dangerous and/or misleading to obscure what's _really_ going on with these objects. Despite the controversy, classes are beginning to crop up in real code bases that you are almost certainly going to encounter such as frameworks like React (especially if you end up working with class-based React code).
 
 Since we've already gone fairly in-depth with Constructors, you don't have too much left to learn here beyond the new syntax. If you choose to use classes in your code (that's fine!) you can use them much the same way as object constructors.
 
-### Lesson overview
+### Derse genel bakış
 
 This section contains a general overview of topics that you will learn in this lesson.
 
@@ -20,7 +20,7 @@ This section contains a general overview of topics that you will learn in this l
 - Use inheritance with classes.
 - Understand why composition is generally preferred to inheritance.
 
-### Assignment
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
 
@@ -39,12 +39,12 @@ This section contains a general overview of topics that you will learn in this l
 5.  Read [this article covering opinions regarding the pros and cons of classes](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65). [FunFunFunction's video on Composition over Inheritance](https://www.youtube.com/watch?v=wfMtDGfHWpA) elaborates on the cons mentioned in the article and does a great job of going over the topic.
 </div>
 
-### Practice
+### Pratik
 
 Go back to your [Library](https://www.theodinproject.com/lessons/node-path-javascript-library) project and refactor it to use `class` instead of plain constructors.  Don't forget to use the git workflow you learned in [this foundations lesson](https://www.theodinproject.com/lessons/foundations-revisiting-rock-paper-scissors) to work on a new feature. You should get used to working like this!
 
-### Knowledge check
-This section contains questions for you to check your understanding of this lesson. If you’re having trouble answering the questions below on your own, review the material above to find the answer.
+### Bilgi ölçme
+Bu bölüm, bu dersi anladığınızı kontrol etmeniz için sorular içermektedir. Aşağıdaki soruları kendi kendinize yanıtlamakta zorlanıyorsanız, yanıtı bulmak için yukarıdaki materyali gözden geçirin.
 
 - [Describe the pros and cons of using classes in JavaScript.](https://rajaraodv.medium.com/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65)
 - [How does JavaScript's object creation differ from a language like Java or Ruby?](https://rajaraodv.medium.com/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65)
@@ -57,8 +57,8 @@ This section contains questions for you to check your understanding of this less
 - [How is inheritance used with classes?](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#inheritance)
 - [Why is favoring Composition over Inheritance suggested?](https://www.youtube.com/watch?v=wfMtDGfHWpA)
 
-### Additional resources
+### Ek kaynaklar
 
-This section contains helpful links to other content. It isn't required, so consider it supplemental.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
 - [This playlist](https://www.youtube.com/playlist?list=PLtwj5TTsiP7uTKfTQbcmb59mWXosLP_7S) from Stephen Mayeux, explains ES6 Classes and some of their methods with easy to follow examples.
