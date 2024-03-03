@@ -13,7 +13,7 @@ Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 - JavaScript'te sınıfların kullanımının artıları ve eksilerini açıklama.
 - JavaScript'in nesne oluşturma işlemi Java veya Ruby gibi bir dil ile nasıl farklılık gösterir, kısaca tartışma.
 - Bir nesne yapılandırıcısı ile bir sınıf arasındaki farkları açıklama.
-- "Getters" ve "setters" kavramlarını açıklama.
+- "getters" ve "setters" kavramlarını açıklama.
 - Hesaplanmış isimlerin ve sınıf alanlarının ne olduğunu anlama.
 - Özel sınıf alanlarını ve yöntemlerini nasıl uygulayacağınızı açıklama.
 - Fonksiyon bağlama kavramını açıklama.
@@ -40,7 +40,6 @@ Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 [Library](https://www.theodinproject.com/lessons/node-path-javascript-library) projesine geri dönün ve basit yapılandırıcılar yerine `class` kullanacak şekilde yeniden düzenleyin. Yeni bir özellik üzerinde çalışmak için [this foundations lesson](https://www.theodinproject.com/lessons/foundations-revisiting-rock-paper-scissors) öğrendiğiniz git iş akışını kullanmayı unutmayın. Bu şekilde çalışmaya alışmalısınız!
 
 ### Bilgi ölçme
-
 Bu bölüm, bu dersi anladığınızı kontrol etmeniz için sorular içermektedir. Aşağıdaki soruları kendi kendinize yanıtlamakta zorlanıyorsanız, yanıtı bulmak için yukarıdaki materyali gözden geçirin.
 
 - [Describe the pros and cons of using classes in JavaScript.](https://rajaraodv.medium.com/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65)
