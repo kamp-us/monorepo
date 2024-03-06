@@ -1,48 +1,50 @@
-### Introduction
+---
+title: 'Tablolar'
+---
 
-HTML Tables allow you to create two-dimensional tables made of rows and columns. In this lesson, you will learn everything you need to know about HTML Tables.
+### Giriş
 
-### Learning outcomes
+HTML tabloları sütunlar ve satırlardan oluşan iki boyutlu tablolar yaratmanıza olanak sağlar. Bu derste, HTML tablolarıyla ilgili bilmeniz gereken her şeyi öğreneceksiniz.
 
-By the end of this lesson, you should be able to do the following:
+### Öğrenme çıktıları
 
--   Create advanced HTML tables.
+Bu dersin sonunda, aşağıdakileri yapabilmelisiniz:
 
-### HTML tables
+-   Gelişmiş HTML tabloları yaratmak
 
-Some data just really needs to be displayed in a table. HTML tables might be less commonly used than buttons, links, lists and everything else you've learned so far, but there are some cases where they're the _perfect_ tool. Some of the more advanced features can get a little tricky to set up correctly but getting started with tables is pretty easy. You create a table with `<table></table>` tags and then put the elements for rows, columns, headers, or anything else that's possible inside those table elements.
+### HTML tabloları
 
-For example: 
+Bazı verilerin gerçekten de bir tablo içerisinde gösterilmesine ihtiyaç vardır. HTML tabloları; buttonlar, linkler, listeler ve daha bir çok öğrendiğiniz etiketler kadar sıklıkla kullanılmaz ancak bazı durumlarda _mükemmel_ araçlara dönüşebilirler. Öğrendiğimiz bazı gelişmiş özellikleri düzgünce kullanmak biraz zorlu olsa da tabloları kullanmak çok kolaydır. `<table></table>` etiketlerini kullanarak bir tablo yaratabilir ve öğelerinizi satırların; sütunların, başlıkların veya mümkün olan herhangi bir şeyin içine koyabilirsiniz.
 
+Örneğin:
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="JjrYEqX" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/JjrYEqX">
-  HTML Tables Example</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+<span><a href="https://codepen.io">CodePen</a> aracılığıyla (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) 
+tarafından yapılmış olan <a href="https://codepen.io/TheOdinProjectExamples/pen/JjrYEqX">HTML tablo örneğine bakınız </a> </span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-In this codepen example we created a table element, containing two table row elements. The first row has two headings while the second row has 2 data cells.
+Bu codepen örneğinde, iki tane satır içeren bir tablo öğesi yarattık. İlk sütun iki başa sahip iken ikinci sütun iki veri hücresine sahip.
 
-### Assignment
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
 
-1.  Read these [Tables Basics](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics) and [Tables Advanced](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Advanced) tutorials from MDN. They should teach you all the syntax behind HTML tables. It's pretty straightforward. Make sure to code along!
-2.  Do this [Tables Assessment](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Structuring_planet_data) from MDN. It's good to put your newly learned skills to practice!
+1. MDN'den [Tables Basics](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics) ve [Tables Advanced](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Advanced) adlı ingilizce makaleleri okuyun. Bu makaleler HTML tablolarının arkasında olan tüm sözdizimini öğretecektir ve fazlasıyla kolaydır. Okuduğunuz makalelerle birlikte kodladığınızdan emin olun!
+2. MDN'den [Tablo ödevlerini](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Structuring_planet_data) yapınız. Yeni öğrendiğiniz becerileri pratiğe dökmek güzel!
 
 </div>
 
-### Knowledge check
+### Bilgi ölçme
 
-This section contains questions for you to check your understanding of this lesson on your own. If you’re having trouble answering a question, click it and review the material it links to.
+Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve bağlantılı olduğu materyali gözden geçirin. Bu bölümde bulunan materyallerin hepsi ingilizcedir.
 
 -   [What is a table?](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics#what_is_a_table_)
 -   [Why is it a bad idea to use HTML Tables for page layout?](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics#when_should_you_not_use_html_tables)
 -   [What are caption elements useful for?](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Advanced#adding_a_caption_to_your_table_with_caption)
 -   [What is the scope attribute?](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Advanced#the_scope_attribute)
 
-### Additional resources
+### Ek kaynaklar
 
-This section contains helpful links to related content. It isn’t required, so consider it supplemental.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
--   Pencil & Paper published a great [article about things you can achieve with tables](https://pencilandpaper.io/articles/ux-pattern-analysis-enterprise-data-tables) if you dare to spend some time giving them some love. They suggest some good habits on how you should format your data which is pretty simple and makes a huge difference. These are not a list of must dos to a table, but ideas worth keeping in mind for the next time a table is bothering you with how it looks. 
+- Eğer onlara biraz sevgi vererek biraz zaman ayırmaya cesaretin varsa, Pencil & Paper harika bir [tablolarla alakalı ingilizce makale](https://pencilandpaper.io/articles/ux-pattern-analysis-enterprise-data-tables) yayınladı.  Verilerinizi nasıl biçimlendirmeniz gerektiği konusunda basit ancak büyük farklar yaratabilecek iyi alışkanlıklar öneriyorlar. Bu, bir tabloya karşı bir sonraki sefer sizi rahatsız ediyorsa akılda bulundurulmaya değer fikirlerdir; bunlar bir tablo için mutlaka yapılması gerekenlerin bir listesi değil, ancak düşünmeye değer fikirlerdir.
