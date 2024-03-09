@@ -12,8 +12,6 @@ Web geliştiriciler, genelde ürünlerini veya hizmetlerini internet ağına ta�
 Eğer mantıksal problemleri çözmeyi, yararlı şeyler inşa etmeyi ve yeni teknolojiler deneyimlemeyi seviyorsanız; web geliştirme sizin için iyi bir meslek olabilir. 
 Web geliştiriciler genelde iyi bir iş-yaşam dengesine sahiptir, dolgun maaş alırlar ve yüksek talep görürler. Yaşadığınız yerdeki web geliştirme işi fırsatları hakkında daha iyi fikir sahibi olmak için Google'da arama yapın.
 
-Daha fazla bilgi için [bu blog yazısını](https://tr.wix.com/blog/makale/web-tasarim-nedir) okuyabilirsiniz.
-
 ### Web geliştirici türleri
 
 Biraz önce web geliştirme işinin önyüz, arkayüz veya full stack olabileceğinden bahsettik. Bu terimler tam olarak ne anlama geliyor?
@@ -25,8 +23,6 @@ Biraz önce web geliştirme işinin önyüz, arkayüz veya full stack olabilece�
 Arkayüz geliştiricileri verilerle çalışmak için Java, Python, Ruby ve JavaScript gibi programlama dillerini kullanır.
 
 **Full stack** geliştiricileri hem önyüz hem de arkayüz ile çalışmaya alışıktır. Odin Projesi'nde, web geliştirmenin tüm yönlerini ele alan full stack geliştirmeyi öğretmeye odaklanıyoruz .
-
-Daha fazla detay için, Udacity'nin bu konu hakkında İngilizce yazılmış harika bir blog yazısı var: [3 Web Dev Careers Decoded: Front-End vs Back-End vs Full Stack](https://www.udacity.com/blog/2020/12/front-end-vs-back-end-vs-full-stack-web-developers.html)
 
 ### Kariyer türleri
 
@@ -83,8 +79,6 @@ Bu "Temel Bilgiler" kursunda, eninde sonuna bilmeniz gereken konulara doğru bir
 
 Sonraki kurslar da bu konulara derinlemesine dalacak. İşe alınmanızı sağlayacak becerileri sağlamlaştırmak için onlarca satır kod yazacak, proje geliştirecek ve web sitesi oluşturacaksınız.
 
-Tüm bunları bitirmek zorlu olacak. Aslında önünüzdeki maceranın nasıl olacağını anlamanız için bu ingilizce blog yazısını ["Why Learning to Code is So Damn Hard"](https://web.archive.org/web/20230630111131/https://www.thinkful.com/blog/why-learning-to-code-is-so-damn-hard/) okusanız iyi olur. Sonuçta öğrenmeye değer olup da kolay olan şey var mı hiç?
-
 Evet, zorlu olacak.
 
 Ama aynı zamanda eğlenceli olacak.
@@ -92,6 +86,16 @@ Ama aynı zamanda eğlenceli olacak.
 Ve belki de hayatınızı bile değiştirebilir .
 
 _Neyi bekliyorsun?_
+
+### Ödev
+
+<div class="lesson-content__panel" markdown="1">
+
+1. Daha fazla bilgi için [bu blog yazısını](https://tr.wix.com/blog/makale/web-tasarim-nedir) okuyabilirsiniz.
+
+1. Daha fazla detay için, Udacity'nin bu konu hakkında İngilizce yazılmış harika bir blog yazısı var: [3 Web Dev Careers Decoded: Front-End vs Back-End vs Full Stack](https://www.udacity.com/blog/2020/12/front-end-vs-back-end-vs-full-stack-web-developers.html)
+
+1. Önünüzdeki maceranın nasıl olacağını anlamanız için bu ingilizce blog yazısını ["Why Learning to Code is So Damn Hard"](https://web.archive.org/web/20230630111131/https://www.thinkful.com/blog/why-learning-to-code-is-so-damn-hard/) okusanız iyi olur.
 
 ### Ek kaynaklar
 

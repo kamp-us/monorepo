@@ -19,8 +19,6 @@ Neden programlama öğrenmeye karar verdiğinizi düşünmek için bir dakikanı
 
 Programlamayı öğrenme motivasyonunuz bu nedenlerin bir kombinasyonu veya tamamen başka bir şey olabilir. O şey her ne olursa olsun, motivasyonunuza sıkıca sarılın - size ulaşmanız gereken kesin bir hedef verip bu yolculuğun sonuna kadar götürecek olan şey olacak.
 
-Motivasyonunuzu güçlendirmek istiyorsanız Discord kanalımızdaki [odin-success-stories](https://discord.com/channels/505093832157691914/705776663497277490) başarı hikayelerini (İngilizce) okuyabilirsiniz.
-
 
 ### Gelişim zihniyeti
 
@@ -39,12 +37,6 @@ Müfredat üzerinde çalışırken, zor kavramlar ve karmaşık projelerle karş
 
 Kendinizi yeteneklerinizi sorgularken bulduğunuzda, programlamayı öğrenirken elde ettiğiniz başarıları düşünüp; tamamladığınız projeler ve bir zamanlar anlamadığınız ama şimdi anlamaya başladığınız kavramlar size bunu başarabiliyor olduğunuza dair ihtiyacınız olan kanıttır.
 
-Gelişim zihniyeti hakkında daha fazla bilgi edinmek için bu kaynaklara göz atabilirsiniz:
-
-- [Believe you can get better adlı ingilizce video](https://www.ted.com/talks/carol_dweck_the_power_of_believing_that_you_can_improve)
-- [Grit adlı ingilizce video](https://ted.com/talks/angela_lee_duckworth_grit_the_power_of_passion_and_perseverance)
-- [You can learn anything adlı ingilizce video](https://www.khanacademy.org/college-careers-more/talks-and-interviews/talks-and-interviews-unit/conversations-with-sal/a/the-learning-myth-why-ill-never-tell-my-son-hes-smart)
-
 ### Öğrenme süreci
 
 Kavramları öğrenmek ve ardından bunları uygulamak, işlerin nasıl yürüdüğünü ve birbirine nasıl uyduğunu daha iyi anlamanıza yardımcı olacaktır. Projeler, teorik anlayışınızın programlama kavramları ve tekniklerinin gerçekte nasıl işlediğiyle uyumlu olmasını sağlamak için en iyi yöntemdir.
@@ -59,10 +51,6 @@ Bildiklerinizi başkalarına öğretmek, öğrendiklerinizi sağlamlaştırmak i
 
 Bu öğrenme yöntemini topluluğumuzdaki diğer kişilere yardım ederek uygulayabilirsiniz.
 
-- Öğrenmenin en iyi yolları hakkında bilgi edinmek için önemle tavsiye edilir: [öğrenmeyi öğrenmek](https://www.coursera.org/learn/learning-how-to-learn).
-
-- Ruby Rogues'un bir podcast'i [Öğrenmek üzerine ingilizce podcast](https://topenddevs.com/podcasts/ruby-rogues/episodes/131-rr-how-to-learn) bulunmakta, bu podcast sizin için motive edici ve yararlı olabilir, bu nedenle öğrenmeyle ilgili bazı yararlı düşünceler için göz atabilirsiniz.
-- 100 Days of Code, yeni geliştiricilerin kodlama yolculuklarını takip etmek ve çalışmalarını sergilemek için sıklıkla kullandıkları bir meydan okumadır. Motivasyonunuzu korumak ve diğer geliştiricilere ilham vermek için bir yol arıyorsanız [web sitelerine](https://www.100daysofcode.com/) göz atarak katılmayı düşünebilirsiniz.
   
 ### Sıkıştığınızda ne yapmalısınız?
 
@@ -171,6 +159,19 @@ Odin Projesi, web geliştirme eğitim yolculuğunuz boyunca çok fazla not alman
 
 Sonuç olarak herhangi bir yeni beceriyi öğrenmek, aşılması gereken engellerle dolu bir yolculuktur. Burada ortaya konulan ilkelerin sizi başarılı olmak ve Odin Projesi'nden en iyi şekilde yararlanmak için çok daha iyi bir konuma getireceğini umuyoruz.
 
+### Ödev
+
+<div class="lesson-content__panel" markdown="1">
+
+1. Motivasyonunuzu güçlendirmek istiyorsanız Discord kanalımızdaki [odin-success-stories](https://discord.com/channels/505093832157691914/705776663497277490) başarı hikayelerini (İngilizce) okuyabilirsiniz.
+1. Gelişim zihniyeti hakkında daha fazla bilgi edinmek için bu kaynaklara göz atabilirsiniz:
+  - [Believe you can get better adlı ingilizce video](https://www.ted.com/talks/carol_dweck_the_power_of_believing_that_you_can_improve)
+  - [Grit adlı ingilizce video](https://ted.com/talks/angela_lee_duckworth_grit_the_power_of_passion_and_perseverance)
+  - [You can learn anything adlı ingilizce video](https://www.khanacademy.org/college-careers-more/talks-and-interviews/talks-and-interviews-unit/conversations-with-sal/a/the-learning-myth-why-ill-never-tell-my-son-hes-smart)
+
+
+</div>
+
 ### Ek kaynaklar
 
 Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
@@ -184,3 +185,6 @@ Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir,
   - [TypingClub.com](https://www.typingclub.com)
   - [Monkeytype](https://monkeytype.com/)
 - [Why Procrastinators Procrastinate? adlı ingilizce makale](https://waitbutwhy.com/2013/10/why-procrastinators-procrastinate.html). Anında Tatmin Maymunu, Mantıklı Karar Alan, Panik Canavarı kişiliklerini ve Karanlık Oyun Alanı'nda yolunuzu bulmayı öğrenin. [Aynı yazardan kısa bir ingilizce giriş videosu](https://youtu.be/arj7oStGLkU)
+- 100 Days of Code, yeni geliştiricilerin kodlama yolculuklarını takip etmek ve çalışmalarını sergilemek için sıklıkla kullandıkları bir meydan okumadır. Motivasyonunuzu korumak ve diğer geliştiricilere ilham vermek için bir yol arıyorsanız [web sitelerine](https://www.100daysofcode.com/) göz atarak katılmayı düşünebilirsiniz.
+- Öğrenmenin en iyi yolları hakkında bilgi edinmek için önemle tavsiye edilir: [öğrenmeyi öğrenmek](https://www.coursera.org/learn/learning-how-to-learn).
+- Ruby Rogues'un [Öğrenmek üzerine ingilizce podcast](https://topenddevs.com/podcasts/ruby-rogues/episodes/131-rr-how-to-learn)'i bulunmakta, bu podcast sizin için motive edici ve yararlı olabilir, bu nedenle öğrenmeyle ilgili bazı yararlı düşünceler için göz atabilirsiniz.
