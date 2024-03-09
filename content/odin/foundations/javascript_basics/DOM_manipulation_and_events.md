@@ -31,7 +31,7 @@ DOM (veya Belge Nesne Modeli), bir web sayfasının içeriğinin ağaç benzeri 
 ```
 
 
-Yukarıdaki örnekte `<div class="display"></div>`, `<div id="container"></div>`'nin bir "çocuğu" ve `<div class="controls"></div>`'nin bir kardeşidir. Bunu bir aile ağacı gibi düşünün. `<div id="container"></div>` bir **ebeveyn**dir, **çocukları** bir sonraki seviyede, her biri kendi "dalında(branch)" yer alır.
+Yukarıdaki örnekte `<div class="display"></div>`, `<div id="container"></div>`'nin bir "çocuğu" ve `<div class="controls"></div>`'nin bir kardeşidir. Bunu bir aile ağacı gibi düşünün. `<div id="container"></div>` bir **ebeveyn**dir, **çocukları** bir sonraki seviyede, her biri kendi "branch'inde" yer alır.
 
 ### Seçicilerle düğümleri hedefleme
 
