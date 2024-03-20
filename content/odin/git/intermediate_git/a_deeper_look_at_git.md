@@ -1,38 +1,38 @@
-### Introduction
+### Giriş
 
-Git is a crucial skill to have, whether you're just a hobbyist or you aim to become a professional web developer.  It's the "save" button on steroids and allows for seamless collaboration.  There really aren't all that many commands for you to learn, but sometimes the real difficulty of Git comes from visualizing what's happening.
+Git, ister sadece bir hobi sahibi olun ister profesyonel bir web geliştiricisi olmayı hedefleyin, sahip olunması gereken çok önemli bir beceridir. Bu, "kaydet" düğmesinin steroidler üzerinde olduğu ve sorunsuz işbirliği sağladığı anlamına gelir. Öğrenmeniz gereken çok fazla komut yoktur, ancak bazen Git'in asıl zorluğu neler olduğunu görselleştirmekten kaynaklanır.
 
-In this lesson, we'll help with the visualization by diving deeper than just the `git add` and `git commit` and `git push` commands you've mostly been using. We'll cover topics such as Remotes, Pointers, and Changing Git History. This will expand your understanding of what's actually going on under the hood with Git.
+Bu derste, çoğunlukla kullandığınız `git add` ve `git commit` ve `git push` komutlarından daha derinlere inerek görselleştirmeye yardımcı olacağız. Remotes, Pointers ve Git Geçmişini Değiştirme gibi konuları ele alacağız. Git'in altında gerçekte neler olduğunu anlamanızı derinleştirecek.
 
-It is **very important** to take a look at all of this before progressing any further with the curriculum. The project work is becoming more and more complex, so using a disciplined Git workflow is no longer optional. Hopefully, after going through this lesson, you'll be much more comfortable changing your Git history and have a better understanding of Git as a whole.
+Müfredatta daha fazla ilerlemeden önce tüm bunlara bir göz atın **çok önemlidir**. Proje çalışmaları giderek daha karmaşık hale geliyor, bu nedenle artık düzenli bir Git iş akışı kullanmak isteğe bağlı değil. Umarım bu dersi tamamladıktan sonra Git geçmişinizi değiştirirken çok daha rahat olursunuz ve Git'i bir bütün olarak daha iyi anlarsınız.
 
 
-### Lesson overview
+### Derse genel bakış
 
-This section contains a general overview of topics that you will learn in this lesson.
+Bu bölüm, bu derste öğreneceğiniz konulara genel bir bakış içermektedir.
 
-* History-changing Git commands
-* Different ways of changing history
-* Using remotes to change history
-* Dangers of history-changing operations
-* Best practices of history-changing operations
-* Pointers
+* Geçmişi değiştiren Git komutları
+* Tarihi değiştirmenin farklı yolları
+* Geçmişi değiştirmek için uzaktan kumandaları kullanma
+* Tarih değiştiren operasyonların tehlikeleri
+* Tarih değiştiren operasyonların en iyi pratikleri
+* İşaretçiler
 
-### Changing history
+### Tarihi değiştirmek
 
-So let's say you're comfortable writing good commit messages and you're working with branches to have a good Git workflow going. But nobody is perfect, and as you're writing some beautiful code something goes wrong! Maybe you commit too early and are missing a file. Maybe you mess up one of your commit messages and omit a vital detail.
+Diyelim ki iyi commit mesajları yazma konusunda rahatsınız ve iyi bir Git iş akışına sahip olmak için branch çalışıyorsunuz. Ancak kimse mükemmel değildir ve siz güzel bir kod yazarken bir şeyler ters gidebilir! Belki de çok erken commit yaptınız ve bir dosyayı kaçırdınız. Belki de commit mesajlarınızdan birini karıştırdınız ve hayati bir ayrıntıyı atladınız.
 
-Let's look at some ways we can change recent and distant history to fit our needs. We're going to cover how to:
+Yakın ve uzak tarihi ihtiyaçlarımıza uyacak şekilde değiştirmenin bazı yollarına bakalım. Nasıl yapılacağını ele alacağız:
 
-- Change our most recent commit
-- Change multiple commit messages
-- Reorder commits
-- Squash commits together
-- Split up commits
+- En son işlemimizi değiştirin
+- Birden fazla commit mesajını değiştirme
+- Commitleri yeniden sıralayın
+- Commitleri birleştirin
+- Commitleri ayırın
 
-#### Getting set up
+#### Kuruluma başlama
 
-Before we get started with the lesson, let's create a Git playground in which we can safely follow along with the code and perform history-changing operations. Go to GitHub, and as you have in the past, create a new repository. Call it whatever you'd like, and clone this repository to your local system. Now, let's `cd` into the repository we just cloned and create some new files! Once you're in the repository, follow along with the following commands (including the typo). Look them up if you're confused about anything that's happening.
+Derse başlamadan önce, kodu güvenle takip edebileceğimiz ve geçmiş değiştirme işlemlerini gerçekleştirebileceğimiz bir Git oyun alanı oluşturalım. GitHub'a gidin ve geçmişte yaptığınız gibi yeni bir depo oluşturun. İstediğiniz adı verin ve bu depoyu yerel sisteminize klonlayın. Şimdi klonladığımız depoya `cd` ile girelim ve bazı yeni dosyalar oluşturalım! Depoya girdikten sonra, aşağıdaki komutları takip edin (yazım hatası dahil). Olan biten herhangi bir şey hakkında kafanız karışırsa göz atabilirsiniz.
 
 ```bash
   $ touch test{1..4}.md
@@ -41,44 +41,46 @@ Before we get started with the lesson, let's create a Git playground in which we
   $ git add test3.md && git commit -m 'Create third file and create fourth file'
 ```
 
-#### Setting up the code editor
+#### Kod düzenleyiciyi ayarlama
 
-To perform certain Git commands that require opening a text editor, such as `git commit --amend` and `git rebase -i`, it's important to configure your code editor correctly. By default, Git opens the text editor in the command-line interface (CLI), which may prevent you from saving and closing the editor after making changes.
+Bazı Git komutlarını gerçekleştirmek için metin düzenleyicinin açılmasını gerektiren işlemler, örneğin git commit --amend ve git rebase -i, kod düzenleyicinizi doğru şekilde yapılandırmak önemlidir. Git, varsayılan olarak metin düzenleyiciyi komut satırı arayüzünde (CLI) açar, bu da değişiklik yaptıktan sonra düzenleyiciyi kaydetmenizi ve kapatmanızı engelleyebilir.
 
-To set up your code editor properly, you can follow the instructions provided in the Git Basics lesson. Here's the specific section that covers the process: [Changing the Git Commit Message Editor](https://www.theodinproject.com/lessons/foundations-git-basics#changing-the-git-commit-message-editor).
+Kod düzenleyicinizi düzgün bir şekilde ayarlamak için Git Temelleri dersinde verilen talimatları takip edebilirsiniz. İşte süreci kapsayan özel bölüm: [Changing the Git Commit Message Editor adlı ingilizce makaleyi okuyun](https://www.theodinproject.com/lessons/foundations-git-basics#changing-the-git-commit-message-editor).
 
-#### Changing the last commit
+#### Son commit'in değiştirilmesi
 
-So if we look at the last commit we made *Uh-Oh!*, if you type in `git status` and `git log` you can see we forgot to add a file! Let's add our missing file and run `git commit --amend`
+Yaptığımız son işleme bakarsak *Uh-Oh!*, `git status` ve `git log` yazarsanız bir dosya eklemeyi unuttuğumuzu görebilirsiniz! Eksik dosyamızı ekleyelim ve `git commit --amend` komutunu çalıştıralım.
 
 ```bash
   $ git add test4.md
   $ git commit --amend
 ```
 
-What happened here is we first updated the staging area to include the missing file, and then we replaced the last commit with our new one to include the missing file. If we wanted to, we could have changed the message of the commit and it would have overwritten the message of the past commit.
+Burada olan şey, önce eksik dosyayı içerecek şekilde hazırlama alanını güncellememiz ve ardından eksik dosyayı içerecek şekilde son işlemimizi yenisiyle değiştirmemizdir. Eğer isteseydik, commit'in mesajını değiştirebilirdik ve bu da son commit'in mesajının üzerine yazılırdı.
 
-Remember to **only amend commits that have not been pushed anywhere!** The reason for this is that `git commit --amend` does not edit the last commit, it *replaces that commit with an entirely new one*. This means that you could potentially destroy a commit other developers are basing their work on. When rewriting history always make sure that you're doing so in a safe manner, and that your coworkers are aware of what you're doing.
+Unutmayın **yapmanız gereken sadece herhangi bir yere gönderilmemiş commit'leri değiştirmektir!** Bunun nedeni `git commit --amend` komutunun son commit'i düzenlememesi, *o commit'i tamamen yeni bir commit ile değiştirmesidir*. Bu, diğer geliştiricilerin çalışmalarını dayandırdığı bir commit'i potansiyel olarak yok edebileceğiniz anlamına gelir. Tarihi yeniden yazarken her zaman bunu güvenli bir şekilde yaptığınızdan ve iş arkadaşlarınızın ne yaptığınızın farkında olduğundan emin olun.
 
-#### Changing multiple commits
+#### Çoklu commit'leri değiştirme
 
-Now let's say we have commits further back in our history that we want to modify. This is where the beautiful command `git rebase` comes into play! We're going to get deeper into the complexities of `rebase` later on in this lesson, but for now we're going to start out with some very basic usage.
+Şimdi diyelim ki geçmişimizde değiştirmek istediğimiz daha eski commit'lerimiz var. İşte bu noktada güzel komut `git rebase` devreye giriyor! Bu dersin ilerleyen bölümlerinde `rebase`in karmaşıklıklarına daha derinlemesine değineceğiz, ancak şimdilik çok temel bir kullanımla başlayacağız.
 
-`git rebase -i` is a command which allows us to interactively stop after each commit we're trying to modify, and then make whatever changes we wish. We do have to tell this command which is the last commit we want to edit. For example, `git rebase -i HEAD~2` allows us to edit the last two commits. Let's see what this looks like in action, go ahead and type in:
+`git rebase -i`, değiştirmeye çalıştığımız her commit'ten sonra etkileşimli olarak durmamızı ve ardından istediğimiz değişiklikleri yapmamızı sağlayan bir komuttur. Bu komuta düzenlemek istediğimiz son commit'in hangisi olduğunu söylememiz gerekiyor. Örneğin, `git rebase -i HEAD~2` son iki komutu düzenlememize izin verir. Bunun nasıl göründüğünü görelim, devam edin ve yazın:
 
 ```bash
   $ git log
   $ git rebase -i HEAD~2
 ```
 
-You should notice that when rebasing, the commits are listed in opposite order compared to how we see them when we use `git log`. Take a minute to look through all of the options the interactive tool offers you. Now let's look at the commit messages at the top of the tool. If we wanted to edit one of these commits, we would change the word `pick` to be `edit` for the appropriate commit. If we wanted to remove a commit, we would remove it from the list, and if we wanted to change their order, we would change their position in the list. Let's see what an edit looks like!
+Yeniden düzenleme sırasında, commit'lerin `git log` kullandığımızda gördüğümüzün tersi sırada listelendiğini fark etmelisiniz. 
+İnteraktif aracın size sunduğu tüm seçenekleri incelemek için birkaç dakikanızı ayırın. Şimdi aracın üst kısmındaki commit mesajlarına bakalım. 
+Eğer bu commit'lerden birini düzenlemek istersek, uygun commit için `pick` kelimesini `edit` olarak değiştireceğiz. Eğer bir commit'i kaldırmak istersek, onu listeden kaldırırız ve eğer sıralarını değiştirmek istersek, listedeki konumlarını değiştiririz.Bir düzenlemenin neye benzediğini görelim!
 
 ```bash
 edit eacf39d Create send file
 pick 92ad0af Create third file and create fourth file
 ```
 
-This would allow us to edit the typo in the `Create send file` commit to be `Create second file`. Perform similar changes in your interactive rebase tool, but don't copy and paste the above code since it won't work. Save and exit the editor, which will allow us to edit the commit with the following instructions:
+Bu, `Gönderme dosyası oluştur` işlemindeki yazım hatasını `İkinci dosya oluştur` commit'i olacak şekilde düzenlememizi sağlayacaktır. Benzer değişiklikleri interaktif rebase aracınızda da yapın, ancak yukarıdaki kodu kopyalayıp yapıştırmayın çünkü çalışmayacaktır. Düzenleyiciyi kaydedin ve çıkın, bu da aşağıdaki talimatlarla commit'i düzenlememize olanak tanıyacaktır:
 
 ```bash
 You can amend the commit now, with
@@ -87,14 +89,14 @@ Once you're satisfied with your changes, run
        git rebase --continue
 ```
 
-So let's edit our commit by typing `git commit --amend`, fixing the typo in the title, and then finishing the rebase by typing `git rebase --continue`. That's all there is to it! Have a look at your handiwork by typing `git log`, and seeing the changed history. It seems simple, but this is a very dangerous tool if misused, so be careful. Most importantly, remember that **if you have to rebase commits in a shared repository, make sure you're doing so for a very good reason that your coworkers are aware of.**
+Şimdi `git commit --amend` yazarak commit'imizi düzenleyelim, başlıktaki yazım hatasını düzeltelim ve ardından `git rebase --continue` yazarak rebase işlemini bitirelim. Hepsi bu kadar! Yaptığınız işe `git log` yazarak ve değişiklik geçmişini görerek bir göz atın. Basit gibi görünse de yanlış kullanıldığında çok tehlikeli bir araçtır, bu yüzden dikkatli olun. En önemlisi, unutmayın ki **paylaşılan bir depodaki taahhütleri yeniden düzenlemeniz gerekiyorsa, bunu iş arkadaşlarınızın farkında olduğu çok iyi bir nedenle yaptığınızdan emin olun.**
 
 
-#### Squashing commits
+#### Commitlerin birleştirilmesi
 
-Using `squash` for our commits is a very handy way of keeping our Git history tidy. It's important to know how to `squash`, because this process may be the standard on some development teams. Squashing makes it easier for others to understand the history of your project. What often happens when a feature is merged, is we end up with some visually complex logs of all the changes a feature branch had on a main branch. These commits are important while the feature is in development, but aren't really necessary when looking through the entire history of your main branch.
+ Commitleriniz için `squash` kullanmak, Git geçmişimizi düzenli tutmanın çok kullanışlı bir yoludur. Nasıl `squash` yapılacağını bilmek önemlidir, çünkü bu süreç bazı geliştirme ekiplerinde standart olabilir. birleştirme işlemi, başkalarının projenizin geçmişini anlamasını kolaylaştırır. Bir özellik birleştirildiğinde genellikle olan şey, bir özellik branch'inin ana branch'de yaptığı tüm değişikliklerin görsel olarak karmaşık günlükleriyle sonuçlanır. Bu commitler özellik geliştirme aşamasındayken önemlidir, ancak ana branch'inizin tüm geçmişine bakarken gerçekten gerekli değildir.
 
-Let's say we want to `squash` the second commit into the first commit on the list, which is `Create first file`. First let's rebase all the way back to our root commit by typing `git rebase -i --root`. Now what we'll do is `pick` that first commit, as the one which the second commit is being `squash`ed into:
+Diyelim ki ikinci commit'i listedeki ilk commit olan `İlk dosyayı oluştur' commit'ine `squash' yapmak istiyoruz. Öncelikle `git rebase -i --root` yazarak kök commit'imize kadar geri dönelim. Şimdi yapacağımız şey, ikinci commit'in içine `squash` edildiği ilk commit'i `seçmek`:
 
 ```bash
 pick e30ff48 Create first file
@@ -102,13 +104,13 @@ squash 92aa6f3 Create second file
 pick 05e5413 Create third file and create fourth file
 ```
 
-Rename the commit to `Create first and second file`, then finish the rebase. That's it! Run `git log` and see how the first two commits got squashed together.
+İşlemi `Birinci ve ikinci dosyayı oluştur` olarak yeniden adlandırın, ardından yeniden düzenlemeyi tamamlayın. İşte bu kadar! git log`u çalıştırın ve ilk iki commitin nasıl birbirine karıştığını görün.
 
-#### Splitting up a commit
+#### Bir commit'i bölmek
 
-Before diving into Remotes, we're going to have a look at a handy Git command called `git reset`. Let's have a look at the commit `Create third file and create fourth file`. At the moment we're using blank files for convenience, but let's say these files contained functionality and the commit was describing too much at once. In that case what we could do is split it up into two smaller commits by, once again, using the interactive `rebase` tool.
+Before diving into Remotes, we're going to have a look at a handy Git command called `git reset`. Şimdi de `Üçüncü dosyayı oluştur ve dördüncü dosyayı oluştur' commit'ine bir göz atalım. Şu anda kolaylık sağlamak için boş dosyalar kullanıyoruz, ancak diyelim ki bu dosyalar işlevsellik içeriyordu ve commit bir kerede çok fazla şey açıklıyordu. Bu durumda yapabileceğimiz şey, bir kez daha etkileşimli `rebase` aracını kullanarak bunu iki küçük işleme bölmektir.
 
-We can open up the tool just like last time, change `pick` to `edit` for the commit we're going to split. But instead, what we're going to do is run `git reset HEAD^`, which resets the commit to the one right before HEAD. This allows us to add the files individually, add, and commit them individually. All together it would look something like this:
+Aracı geçen seferki gibi açabilir, böleceğimiz commit için `pick` i `edit` olarak değiştirebiliriz. Ancak bunun yerine, yapacağımız şey `git reset HEAD^` komutunu çalıştırmaktır, bu da işlemi HEAD'den hemen önceki işleme sıfırlar. Bu, dosyaları tek tek eklememize, eklememize ve işlememize olanak tanır. Hepsi birlikte şöyle bir şey gibi görünecektir:
 
 ```bash
 $ git reset HEAD^
@@ -116,41 +118,41 @@ $ git add test3.md && git commit -m 'Create third file'
 $ git add test4.md && git commit -m 'Create fourth file'
 ```
 
-Let's start by looking a bit closer at what happened here. When you ran `git reset`, you reset the current branch by pointing HEAD at the commit right before it. At the same time, `git reset` also updated the index (the staging area) with the contents of wherever HEAD is now pointed. So our staging area was also reset to what it was at the prior commit - which is great - because this allowed us to add and commit both files separately.
+Burada ne olduğuna biraz daha yakından bakarak başlayalım. Git reset`i çalıştırdığınızda, HEAD'i kendisinden hemen önceki commit'e işaret ederek mevcut branch'i sıfırlarsınız. Aynı zamanda `git reset`, HEAD'in şu anda işaret ettiği yerin içeriğiyle dizini de(hazırlama alanı) güncelledi. Böylece hazırlama alanımız da önceki commit'teki haline sıfırlandı - ki bu harika bir şey - çünkü bu bize her iki dosyayı ayrı ayrı ekleme ve commit etme imkanı verdi.
 
-Now let's say we want to move where HEAD points to but *don't* want to touch the staging area. If we want to leave the index alone, you can use `git reset --soft`. This would only perform the first part of `git reset` where the HEAD is moved to point somewhere else.
+Şimdi diyelim ki HEAD'in işaret ettiği yere gitmek istiyoruz ama hazırlık alanına dokunmak *istemiyoruz*. Eğer dizini yalnız bırakmak istiyorsak, `git reset --soft` kullanabilirsiniz. Bu sadece HEAD'in başka bir yere taşındığı `git reset`in ilk kısmını gerçekleştirecektir.
 
-You can think of `git reset --soft` as a more powerful amend. Instead of changing the last commit, you can go back multiple commits and combine all the changes included in them into one commit.
+Git reset --soft`u daha güçlü bir değişiklik olarak düşünebilirsiniz. Son commit'i değiştirmek yerine, birden fazla commit'e geri dönebilir ve bunların içerdiği tüm değişiklikleri tek bir commit'te birleştirebilirsiniz.
 
-The last part of reset we want to touch upon is `git reset --hard`. What this does is it performs all the steps of `git reset`, moving the HEAD and updating the index, but it *also* updates the working directory. This is important to note because it can be dangerous as it can potentially destroy data. A hard reset overwrites the files in the working directory to make it look exactly like the staging area of wherever HEAD ends up pointing to. Similarly to `git commit --amend`, a hard reset is a destructive command which overwrites history. This doesn't mean you should completely avoid it if working with shared repositories on a team with other developers. You should, however, **make sure you know exactly why you're using it, and that your coworkers are also aware of how and why you're using it.**
+Sıfırlamanın değinmek istediğimiz son kısmı `git reset --hard`dır. Bunun yaptığı şey, HEAD'i taşımak ve dizini güncellemek gibi `git reset`in tüm adımlarını gerçekleştirmektir, ancak *ayrıca* çalışma dizinini de günceller. Buna dikkat etmek önemlidir çünkü potansiyel olarak verileri yok edebileceği için tehlikeli olabilir. Sert sıfırlama, çalışma dizinindeki dosyaların üzerine yazarak HEAD'in işaret ettiği yerdeki hazırlama alanına tam olarak benzemesini sağlar. Git commit --amend`e benzer şekilde, hard reset geçmişin üzerine yazan yıkıcı bir komuttur. Bu, diğer geliştiricilerle bir ekipte paylaşılan depolarla çalışıyorsanız tamamen kaçınmanız gerektiği anlamına gelmez. Bununla birlikte, **onu tam olarak neden kullandığınızı bildiğinizden ve iş arkadaşlarınızın da onu nasıl ve neden kullandığınızın farkında olduğundan emin olmalısınız.**
 
 
 
-### Branches are pointers
+### Dallar işaretçilerdir
 
-While the focus of this lesson was more advanced tools for changing Git history, we're going into another advanced topic that might be hard for some to understand - Pointers. You've already learned about branches in the [Rock Paper Scissors revisited lesson](https://www.theodinproject.com/lessons/foundations-revisiting-rock-paper-scissors) and how these hold multiple *alternate reality* versions of our files. Now we're going to discuss what that actually means under the hood, and what it means for branches to be pointers.
+Bu dersin odak noktası Git geçmişini değiştirmek için daha gelişmiş araçlar olsa da, bazıları için anlaşılması zor olabilecek başka bir gelişmiş konuya giriyoruz - Pointer'lar. Dallar hakkında daha önce [Rock Paper Scissors revisited lesson adlı ingilizce makaleyi okuyun](https://www.theodinproject.com/lessons/foundations-revisiting-rock-paper-scissors) ve bunların dosyalarımızın birden fazla *alternatif gerçeklik* versiyonunu nasıl tuttuğunu açıklayacağız. Şimdi bunun gerçekte ne anlama geldiğini ve dalların işaretçi olmasının ne anlama geldiğini tartışacağız.
 
-Before we dive into branches, let's talk about commits. If you recall this [Git basics lesson from foundations](https://www.theodinproject.com/lessons/foundations-git-basics), they were described as Snapshots. If it helps, think of this in a very literal sense. Every time you type in `git commit`, your computer is taking a picture of all the file contents that have been staged with `git add`. In other words, your entire tracked workspace gets copied.
+Dallara dalmadan önce, commit'ler hakkında konuşalım. Eğer bunu hatırlarsanız [Git basics lesson from foundations adlı ingilizce makaleyi okuyun](https://www.theodinproject.com/lessons/foundations-git-basics), Anlık Görüntüler olarak tanımlandılar. Eğer yardımcı olacaksa, bunu çok gerçekçi bir anlamda düşünün. Her `git commit` yazdığınızda, bilgisayarınız `git add` ile sahnelenmiş olan tüm dosya içeriklerinin bir resmini çeker. Başka bir deyişle, izlenen tüm çalışma alanınız kopyalanır.
 
-So what is a branch? Based off of your exposure, you might be visualizing a branch as a group of commits. This actually isn't the case! **A branch is actually a pointer to a single commit!** Hearing this, your first thought might be *"Well if a branch is just a finger pointing at a single commit, how does that single commit know about all the commits that came before it?"* The answer to this question is very simple: Each commit is also a pointer that points to the commit that came before it! Wow. This might be a lot to take in, so let's take a moment to absorb that fact.
+Peki dal nedir? Deneyiminize dayanarak, bir dalı bir grup taahhüt olarak görselleştiriyor olabilirsiniz. Aslında durum böyle değildir! **Bir dal aslında tek bir commit'e işaret eden bir işaretçidir.** Bunu duyduğunuzda ilk düşünceniz *"Peki bir dal sadece tek bir commit'e işaret eden bir parmaksa, bu tek commit kendisinden önce gelen tüm commit'leri nasıl biliyor? "* olabilir: Her bir commit aynı zamanda kendisinden önce gelen commit'i işaret eden bir işaretçidir! Vay canına. Bunu anlamak zor olabilir, bu yüzden biraz durup bu gerçeği özümseyelim.
 
-Now that you've had a second to gather your thoughts and attempt to wrap your head around this concept, it might help to go back and look at a concrete example of pointers we used in this lesson. Let's think back to our use of `git rebase -i HEAD~2`. If you can remember, this command lets us edit the last two commits. Do you have any guesses on how Git knew which two commits to edit? That's right, by using pointers! We start at HEAD, which is a special pointer for keeping track of the branch you're currently on. HEAD points to our most recent commit in the current branch. That commit points to the commit made directly before it, which we can call commit two. That's how `git rebase -i HEAD~2` starts with a HEAD pointer, and then follows subsequent pointers to find which two commits to edit.
+Şimdi düşüncelerinizi toparlamak ve bu kavramı kafanızda oturtmaya çalışmak için bir saniyeniz olduğuna göre, geriye dönüp bu derste kullandığımız somut bir işaretçi örneğine bakmak yardımcı olabilir. Şimdi `git rebase -i HEAD~2` kullanımımıza geri dönelim. Hatırlarsanız, bu komut son iki işlemi düzenlememizi sağlar. Git'in hangi iki komutu düzenleyeceğini nasıl bildiğine dair bir tahmininiz var mı? Doğru, işaretçileri kullanarak! Şu anda üzerinde bulunduğunuz dalı takip etmek için özel bir işaretçi olan HEAD'den başlıyoruz. HEAD, geçerli daldaki en son işlemimize işaret eder. Bu commit, kendisinden hemen önce yapılan ve commit iki olarak adlandırabileceğimiz commit'e işaret eder. Bu şekilde `git rebase -i HEAD~2` bir HEAD işaretçisi ile başlar ve ardından hangi iki işlemin düzenleneceğini bulmak için sonraki işaretçileri takip eder.
 
-You might be feeling overwhelmed at this point, so let's recap what we've learned. A branch is a pointer to a single commit. A commit is a snapshot, and it's a pointer to the commit directly behind it in history. That's it!
+Bu noktada bunalmış hissediyor olabilirsiniz, bu yüzden öğrendiklerimizi özetleyelim. Bir dal, tek bir commit'in işaretçisidir. Bir commit bir anlık görüntüdür ve geçmişte hemen arkasındaki commit'e bir işaretçidir. İşte bu kadar!
 
-### Assignment
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
 
-1.  Read the chapter on [Rebasing covered by git-scm](https://git-scm.com/book/en/v2/Git-Branching-Rebasing) for an even deeper dive into Rebasing.
+1.  Aşağıdaki bölümü okuyun [Rebasing covered by git-scm adlı ingilizce makaleyi okuyun](https://git-scm.com/book/en/v2/Git-Branching-Rebasing) Rebasing'e daha da derinlemesine bir dalış için.
 
-2.  Read the chapter on [Reset covered by git-scm](https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified) for a deeper dive into `git reset`.
+2.  Aşağıdaki bölümü okuyun [Reset covered by git-scm adlı ingilizce makaleyi okuyun](https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified) `git reset` hakkında daha derin bir dalış için.
 
 </div>
 
-### Knowledge check
+### Bilgi ölçme
 
-This section contains questions for you to check your understanding of this lesson on your own. If you’re having trouble answering a question, click it and review the material it links to.
+Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve bağlantılı olduğu materyali gözden geçirin.
 
 *   <a class='knowledge-check-link' href='https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell'>Explain what it means for branches to be pointers.</a>
 *   <a class='knowledge-check-link' href='https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things'>How can you amend your last commit?</a>
@@ -158,8 +160,8 @@ This section contains questions for you to check your understanding of this less
 
 ### Additional resources
 
-This section contains helpful links to related content. It isn’t required, so consider it supplemental.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-*   Read this [Git Cheat Sheet](https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet) if you need a reference sheet.
-*   Watch this [video about Rebase & Merge](https://www.youtube.com/watch?v=f1wnYdLEpgI) for an example of how to use both rebase and merge.
-*   Read the chapter on [Branches covered by git-scm](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell) if you want an even deeper dive into Branches.
+*   Bir referans sayfasına ihtiyacınız varsa bu [Git Cheat Sheet adlı ingilizce makaleyi okuyun](https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet) adresini okuyun.
+*   Rebase ve merge'in nasıl kullanılacağına dair bir örnek için bu [Rebase & Merge hakkındaki videoyu](https://www.youtube.com/watch?v=f1wnYdLEpgI) izleyin.
+*   Branch'ler hakkında daha da derinlemesine bilgi edinmek istiyorsanız [Branches covered by git-scm adlı ingilizce makaleyi okuyun.](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
