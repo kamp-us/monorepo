@@ -1,42 +1,44 @@
-### Introduction
+### Giriş
 
-You've learned how to build some cool stuff already and, frankly, you could probably make some decent websites without a crazy amount of additional formal education. However, just because you can write English at a grade school level doesn't mean you will be editing the New York Times anytime soon.
+Bazı harika şeylerin nasıl yapılacağını zaten öğrendiniz ve açıkçası, muhtemelen çılgın miktarda ek resmi eğitim almadan bazı iyi web siteleri yapabilirsiniz. Ancak, ilkokul seviyesinde İngilizce yazabiliyor olmanız, yakın zamanda New York Times'da editörlük yapacağınız anlamına gelmez.
 
-In the world of programming, there's a difference between solving a problem the brute force way and solving a problem WELL. We touched on the first layer of this when we covered basic programming and how you should break apart your code into well-organized chunks.  
+Programlama dünyasında, bir sorunu kaba kuvvet yöntemiyle çözmek ile bir sorunu İYİ çözmek arasında fark vardır. Temel programlamayı ve kodunuzu nasıl iyi organize edilmiş parçalara ayırmanız gerektiğini ele aldığımızda bunun ilk katmanına değindik.  
 
-If you assume those lessons were all about learning how to write good code, these next few lessons are going to be about training yourself to figure out the best code to write -- the most elegant solution to the problem at hand.  It becomes particularly important whenever you start working with large data sets, like when your website becomes highly successful.
+Bu derslerin tamamının iyi kod yazmayı öğrenmekle ilgili olduğunu varsayarsanız, önümüzdeki birkaç ders, yazılacak en iyi kodu - eldeki soruna en zarif çözümü - bulmak için kendinizi eğitmekle ilgili olacaktır.  Büyük veri kümeleriyle çalışmaya başladığınızda, örneğin web siteniz çok başarılı olduğunda bu özellikle önemli hale gelir.
 
-We're taking a look at some more Computer Science-y concepts here because they are fundamental for a reason. Some problems require you to use tools beyond just arrays and iterators. There's no sense reinventing the wheel when others have already figured out good methods for solving certain types of problems.
+Burada biraz daha Bilgisayar Bilimleri ile ilgili kavramlara göz atıyoruz çünkü bunlar bir nedenden dolayı temeldir. Bazı sorunlar, diziler ve yineleyicilerin ötesinde araçlar kullanmanızı gerektirir. Başkaları belirli problem türlerini çözmek için iyi yöntemler bulmuşken tekerleği yeniden icat etmenin bir anlamı yoktur.
 
-If that doesn't get you interested, remember that this curriculum is meant to prepare you for life beyond the web page. If you're interested in applying for a job, you'll be asked questions that directly touch on some of this stuff.  It's going to require you to put on your thinking cap (sorry, it had to happen sometime), but we won't be doing anything too crazy. We'll stick to the practical side of this material as opposed to getting too stuck in theory.
+Bu ilginizi çekmiyorsa, bu müfredatın sizi web sayfasının ötesindeki hayata hazırlamak için olduğunu unutmayın. Bir işe başvurmakla ilgileniyorsanız, size doğrudan bu konuların bazılarına değinen sorular sorulacaktır.  Düşünme şapkanızı takmanızı gerektirecek (üzgünüm, bir ara olması gerekiyordu), ancak çok çılgınca bir şey yapmayacağız. Teoriye çok fazla takılmak yerine bu materyalin pratik tarafına bağlı kalacağız.
 
-### Lesson overview
+### Derse genel bakış
 
-This section contains a general overview of topics that you will learn in this lesson.
+Bu bölüm, bu derste öğreneceğiniz konulara genel bir bakış içermektedir.
 
--  What is an algorithm?
--  What is pseudo-code?
+-  Algoritma nedir?
+-  pseudo-code nedir?
 
-### Assignment
+### Görevlendirme
 
 <div class="lesson-content__panel" markdown="1">
-  1. Watch [Introduction to Algorithms by David Malan](https://www.youtube.com/watch?v=6hfOvs8pY1k) on TedEd to see how to think about algorithms.
-  2. Watch [What is an Algorithm?](https://youtu.be/e_WfC8HwVB8) on YouTube for a more structured look at solving problems using algorithms.
-  3. Read [this Quora answer about the importance of algorithms in web development](https://qr.ae/py3NAc) to get some context for why we're going over this stuff.
-  4. Watch [What is pseudocode?](https://www.youtube.com/watch?v=Rg-fO7rDsds)
+  1. Algoritmalar hakkında nasıl düşünülmesi gerektiğini görmek için TedEd'de [Introduction to Algorithms by David Malan] (https://www.youtube.com/watch?v=6hfOvs8pY1k) izleyin.
+  2. Algoritmaları kullanarak problem çözmeye daha yapılandırılmış bir bakış için YouTube'da [What is an Algorithm?] (https://youtu.be/e_WfC8HwVB8) adresini izleyin.
+  3. Bu konuyu neden ele aldığımızı anlamak için [this Quora answer about the importance of algorithms in web development] (https://qr.ae/py3NAc) okuyun.
+  4. Türkçesi "sözde kod" olan pseudocode'un ne anlama geldiğini anlamak için [What is pseudocode?](https://www.youtube.com/watch?v=Rg-fO7rDsds) izleyin.
+
+  
 </div>
 
-### Knowledge check
+### Bilgi kontrolü
 
-This section contains questions for you to check your understanding of this lesson on your own. If you’re having trouble answering a question, click it and review the material it links to.
+Bu bölüm, bu dersi kendi başınıza anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve bağlantı verdiği materyali gözden geçirin.
 
 - [What is an Algorithm?](https://youtu.be/e_WfC8HwVB8)
 - [What is the importance of algorithms in web development?](https://qr.ae/py3NAc)
 - [What is pseudocode?](https://www.youtube.com/watch?v=Rg-fO7rDsds)
 
-### Additional resources
+### Ek kaynaklar
 
-This section contains helpful links to other content. It isn't required, so consider it supplemental.
+Bu bölüm diğer içeriklere yararlı bağlantılar içerir. Zorunlu değildir, bu nedenle tamamlayıcı olarak kabul edin.
 
 - [Wikipedia on Computer Science](http://en.wikipedia.org/wiki/Computer_science)
 - [Wikipedia on Algorithms](http://en.wikipedia.org/wiki/Algorithm)
