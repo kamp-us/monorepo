@@ -1,21 +1,25 @@
-### Introduction
+---
+title: 'Diğer metin stilleri'
+---
 
-You've already done a bit of text-manipulation in our Foundations lessons. This lesson will cover a few more useful CSS properties that can be used when working with text.
+### Giriş
 
-### Learning outcomes
+Daha önce Temel Bilgiler derslerimizde birkaç metin manipülasyonu yaptınız. Bu ders, metinle çalışırken kullanılabilecek birkaç kullanışlı CSS özelliğini daha kapsayacak.
 
-* You'll learn how to use custom fonts on your web projects.
-* You'll learn some more text-related CSS properties.
+### Öğrenme çıktıları
 
-### Fonts
+* Web projelerinizde özel fontları nasıl kullanacağınızı öğreneceksiniz.
+* Metinle ilgili birkaç daha fazla CSS özelliğini öğreneceksiniz.
 
-In our Foundations lesson, we covered changing the `font-family` of an element, but there is some nuance and detail that we left out at the time.
+### Yazı Tipleri
 
-#### The system font stack
+Temel Bilgiler dersimizde bir öğenin `font-family`'sini değiştirmeyi ele almıştık, ancak o zaman bazı incelik ve detayları atlamıştık.
 
- If you use the `font-family` property to change to a font like `impact` or `Times New Roman`, and those fonts do not happen to be installed on your user's computer, then a fallback font will be displayed.  If you have not defined a fallback, then the default HTML font will be used, which is often somewhat ugly. For this reason, it's common to see somewhat long stacks of fonts listed on projects.
+#### Sistem font yığını
 
-One popular stack is this 'system font' stack. [Source: CSS Tricks](https://css-tricks.com/snippets/css/system-font-stack/)
+Eğer `font-family` özelliğini kullanarak `impact` veya `Times New Roman` gibi bir fonta geçiş yaparsanız ve bu fontlar kullanıcının bilgisayarında yüklü değilse, bir yedek font görüntülenecektir. Eğer bir yedek belirtmemişseniz, genellikle çirkin bir şekilde görünen varsayılan HTML fontu kullanılacaktır. Bu nedenle, projelerde uzun font yığınları görmek yaygındır.
+
+Bu popüler yığın, 'sistem font' kullanımını içerir. [Source: CSS Tricks](https://css-tricks.com/snippets/css/system-font-stack/)
 
 ```css
 body {
@@ -23,13 +27,13 @@ body {
 }
 ```
 
-The point of this somewhat ridiculous string of font-families is to try using the default font of the system's user interface. It will go through each of those fonts until it finds one that is installed on the system, and then use that. Using a stack like this often produces pleasing results, especially if you're going for a somewhat 'neutral' font style.
+Bu oldukça absürt font-family dizisinin amacı, sistem kullanıcı arayüzünün varsayılan fontunu kullanmaya çalışmaktır. Sistemde yüklü olan bir font bulana kadar her birini deneyecek ve ardından onu kullanacaktır. Bu tür bir yığın kullanmak genellikle hoş sonuçlar üretir, özellikle biraz 'tarafsız' bir font stili hedefliyorsanız.
 
-#### Online font libraries
+#### Çevrim içi font kütüphaneleri
 
-One popular and easy method to get fonts that are _not_ installed on a user's computer is to use an online font library like [Google Fonts](https://fonts.google.com/), [Font Library](https://fontlibrary.org/) or the premium, but non-free [Adobe Fonts](https://fonts.adobe.com/).
+Kullanıcının bilgisayarında _yüklü olmayan_ fontlara ulaşmanın popüler ve kolay bir yolu, [Google Fonts](https://fonts.google.com/), [Font Library](https://fontlibrary.org/) veya premium ancak ücretli [Adobe Fonts](https://fonts.adobe.com/) gibi çevrimiçi font kütüphanelerini kullanmaktır.
 
-To use a font from one of these libraries, go to the website, select a font and then copy a snippet from the website to import that font from their server into your website. You'll be given either a `<link>` tag to put in your HTML like so....
+Bu kütüphanelerden birinden bir font kullanmak için, web sitesine gidin, bir font seçin ve ardından bu font'u web sitenin sunucularından kendi web sitenize aktarmak için web sitesinden bir parçacık(snippet) kopyalayın.  HTML'nize koymanız için size bir `<link>` etiketi verilecektir, örneğin....
 
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,13 +41,13 @@ To use a font from one of these libraries, go to the website, select a font and 
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 ```
 
-... or an `@import` tag that can be dropped at the top of a CSS file.
+...   ya da CSS dosyanızın en üstüne ekleyebileceğiniz bir `@import` etiketi alırsınız.
 
 ```css
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 ```
 
-Either method will import that font and make it available for you to use in your CSS:
+Her iki yöntem de o fontu içe aktaracak ve CSS dosyanızda kullanılabilir hale getirecektir:
 
 ```css
 body {
@@ -51,11 +55,11 @@ body {
 }
 ```
 
-Keep in mind that it's important to add a fallback font.  If you're linking to an external API, you have no guarantee that the URL won't change, or that the external API won't go down at some point. Having a reasonable fallback means that if something goes wrong, at least your site won't look completely broken.
+Unutmayın ki bir yedek font eklemek önemlidir. Eğer harici bir API'ye bağlantı yapıyorsanız, URL'nin değişmeyeceğine veya harici API'nin bir noktada çökmeyeceğine dair herhangi bir garanti yoktur. Makul bir yedek font kullanmak, bir şeyler ters giderse en azından sitenizin tamamen bozulmamış görünmesini sağlar.
 
-#### Downloaded fonts
+#### İndirilmiş olan yazı tipleri
 
-It is also possible to use a font that you have downloaded from the web. In your CSS file, you import and define a custom font using the `@font-face` rule, and then use it as you would any other font-family. There are multiple types of font file formats and you can read more in depth about them on [fileinfo.com's page on Font File Formats](https://fileinfo.com/filetypes/font). Please take care when choosing a font file format however, because some are not universally supported by browsers. A list of browsers and the font formats they support can be found on [W3 Schools' page on CSS Web Fonts](https://www.w3schools.com/css/css3_fonts.asp).
+Web üzerinden indirdiğiniz bir fontu kullanmak da mümkündür. CSS dosyanızda, özel bir fontu `@font-face` kuralını kullanarak içe aktarıp ve tanımlarsınız ve ardından onu diğer font-family'ler gibi kullanabilirsiniz. Birden fazla font dosya formatı türü bulunmaktadır ve bunlar hakkında daha fazla bilgiye [fileinfo.com'un Font Dosya Biçimleri](https://fileinfo.com/filetypes/font) sayfasında detaylı olarak ulaşabilirsiniz. Ancak lütfen bir font dosya formatı seçerken dikkatli olun, çünkü bazıları tarayıcılar tarafından evrensel olarak desteklenmemektedir. Tarayıcılar ve destekledikleri font formatları hakkında bilgi için [W3 Schools'un CSS Web Yazı Tipleri](https://www.w3schools.com/css/css3_fonts.asp) sayfasını inceleyebilirsiniz."
 
 ```css
 @font-face {
@@ -68,19 +72,19 @@ h1 {
 }
 ```
 
-This method _may_ be more reliable than relying on a third-party font API, but it is always wise to include a fallback.
+Bu yöntem, üçüncü taraf bir font API'ına güvenmekten daha güvenilir olabilir, ancak her zaman bir yedek eklemek akıllıcadır.
 
-### Text styles
+### Metin stilleri
 
-You learned the basics of manipulating fonts in our Foundations lessons, but there is quite a bit more that you can do with CSS when it comes to manipulating text styles. These rules are all relatively simple and self-explanatory. You can refer to the docs for any questions you might have.
+Temel Bilgiler derslerimizde fontları manipüle etmenin temellerini öğrendiniz, ancak CSS ile metin stillerini manipüle etmek konusunda daha fazla şey yapabilirsiniz. Bu kurallar genellikle basit ve açıklayıcıdır. Herhangi bir sorunuz varsa dökümanlara bakabilirsiniz.
 
 #### font-style
 
-Typically used to make a font italic. You learned about the HTML `<em>` tag, which uses an italic font, but `<em>` _also_ signifies that the text it wraps is significant or should be emphasized in some way. A good rule of thumb to follow is that if you just want text to be italic (or bold, underlined, highlighted, etc.), use a CSS property. Otherwise, if text should have some sort of semantic emphasis, use the correct HTML element.
+Genellikle bir fontu eğik (italik) yapmak için kullanılır. HTML `<em>` etiketini öğrendiniz, bu etiket italik bir font kullanır, ancak `<em>` aynı zamanda sardığı metnin önemli olduğunu veya bir şekilde vurgulanması gerektiğini belirtir. Genel bir kural olarak, eğer bir metni sadece italik (veya kalın, altı çizili, vurgulu, vb.) yapmak istiyorsanız, bir CSS özelliği kullanın. Aksi takdirde, metnin semantik vurguya ihtiyacı varsa, doğru HTML öğesini kullanın.
 
-For example, if you want all your header text to be italic you should use `font-style` to accomplish this. If you want some text in the _middle of a sentence_ to appear italic in order to emphasize that text, it is appropriate to use an `em` element. The [MDN doc on the Emphasis Element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em) puts stress on our point above.
+Örneğin, tüm başlık metninizi italik yapmak istiyorsanız, bunu gerçekleştirmek için `font-style`'ı kullanmalısınız. Eğer bir cümle içindeki metnin _orta kısmının_ italik görünmesini istiyorsanız ve bu metni vurgulamak istiyorsanız, bir `em` öğesini kullanmak uygun olacaktır. [Emphasis Element üzerine MDN dökümanı](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em) yukarıdaki noktayı vurgular.
 
-We should use `font-style: italic;` if italics is required for styling purposes.
+Eğer stil amaçları için italik kullanılması gerekiyorsa, `font-style: italic;` kullanmalıyız.
 
 ```css
 h1 {
@@ -88,7 +92,7 @@ h1 {
 }
 ```
 
-We should use the `em` element if italics is required for emphasis.
+Vurgu amacıyla italik kullanılması gerekiyorsa, `em` öğesini kullanmalıyız.
 
 ```html
 <p>I <em>never</em> said he stole your money</p>
@@ -96,42 +100,48 @@ We should use the `em` element if italics is required for emphasis.
 <p>I never said he stole <em>your</em> money</p>
 ```
 
-#### letter-spacing
-Letter spacing does what you would expect.... it changes the space between letters in a word. This can be useful for adjusting custom fonts that you feel have too much or too little space. It can also be aesthetically pleasing in some cases, like headers.
+#### letter-spacing(harf aralığı)
+letter-spacing, beklendiği gibi davranır... bir kelimenin harfleri arasındaki boşluğu değiştirir. Bu, fazla veya az boşluğa sahip olduğunu düşündüğünüz özel fontları ayarlamak için kullanışlı olabilir. Aynı zamanda bazı durumlarda, özellikle başlıklarda, estetik olarak hoş görünebilir.
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="MWomjGr" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/MWomjGr">
-  Letter Spacing | CSS Text Styles</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+<span>
+  <a href="https://codepen.io/TheOdinProjectExamples/pen/MWomjGr">Letter Spacing | CSS Text Styles</a>TheOdinProject tarafından
+  (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
+  aracılığıyla <a href="https://codepen.io">CodePen</a> üzerinde paylaşıldı.
+</span>
+
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-Obviously, use this sparingly and with care. Do not make your site hard to read!
+Tabii ki, bunu dikkatlice ve ölçülü bir şekilde kullanın. Sitenizi okunması zor hale getirmeyin!
 
-#### line-height
-Line height adjusts the space between lines in wrapped text. Adding a little line-height can increase readability.
+#### line-height(satır yüksekliği)
+line-height, sarılı metindeki satırlar arasındaki boşluğu ayarlar. Biraz satır yüksekliği eklemek, okunabilirliği artırabilir.
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="vYZmXzY" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/vYZmXzY">
-  Line Height | CSS Text Styles</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+<span>
+  <a href="https://codepen.io/TheOdinProjectExamples/pen/vYZmXzY">Line Height | CSS Text Styles</a> - TheOdinProject
+  (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
+  tarafından <a href="https://codepen.io">CodePen</a> üzerinde paylaşıldı.
+</span>
+
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 #### text-transform
-Text transform simply changes the case of the given text. You can use this, for example, to force your heading tags to be all uppercase, or to capitalize every word.
+Text transform basitçe verilen metnin büyük-küçük harf durumunu değiştirir. Bu örneğin başlık etiketlerinizi tamamen büyük harfe zorlamak veya her kelimenin ilk harfini büyük yapmak için kullanılabilir.
 
-Usage is simple, and can be seen in the clear example on these [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform).
+Kullanımı basittir ve açık bir örnek için bu [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform)'dan bakabilirsiniz.
 
 #### text-shadow
-As you might expect, `text-shadow` adds a shadow around the text in the selected element. This one is best used sparingly, but can be used to great effect in headings or other presentational text.
+Bekleyebileceğiniz gibi, `text-shadow` seçilen öğedeki metnin etrafına bir gölge ekler. Bu özellik genellikle özenle kullanılır, ancak başlıklar veya diğer sunum metinlerinde büyük etki yaratmak için kullanılabilir.
 
-The examples on the [MDN reference page for text-shadow](https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow) show how to use it.
+Bu özelliği nasıl kullanacağınızı gösteren örnekler [MDN'in text-shadow için referans sayfasında]https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow) bulunmaktadır.
 
 #### ellipsis
-This one isn't a single property, but it's a useful trick to keep in your toolbox. With the `text-overflow` property, you can truncate overflowing text with an ellipsis. Making an overflow happen, however, requires the use of a couple other properties because the default behavior of text simply printing outside its container isn't technically considered an `overflow` (that's confusing, we know.  Sorry.)
+Bu, tek bir özellik değil, ancak takım çantanızda bulundurmanız gereken kullanışlı bir hile. `text-overflow` özelliği ile taşan metni üç nokta ile kırpabilirsiniz. Ancak bir taşmanın gerçekleşmesi için, metnin varsayılan davranışının basitçe konteynerının dışına basılması, teknik olarak bir `overflow(taşma)` olarak kabul edilmez (bu karmaşık, biliyoruz, özür dileriz).
 
-The full snippet is:
+Tam kod parçası:
 
 ```css
 .overflowing {
@@ -141,19 +151,19 @@ The full snippet is:
 }
 ```
 
-You can see more detail and an example in [this CSS Tricks Article](https://css-tricks.com/snippets/css/truncate-string-with-ellipsis/).  (Be ready to go look that article up every time you want to use this.)
+Daha fazla ayrıntı ve bir örneği [bu CSS Tricks makalesinde](https://css-tricks.com/snippets/css/truncate-string-with-ellipsis/) görebilirsiniz. (Bu özelliği kullanmak istediğinizde her seferinde o makaleyi aramak için hazır olun.)
 
-### Knowledge check
+### Bilgi ölçme
 
-This section contains questions for you to check your understanding of this lesson. If you’re having trouble answering the questions below on your own, review the material above to find the answer.
+Bu bölüm, bu dersi anladığınızı kontrol etmeniz için sorular içermektedir. Aşağıdaki soruları kendi kendinize yanıtlamakta zorlanıyorsanız, yanıtı bulmak için yukarıdaki materyali gözden geçirin.
 
 - [What are the 2 ways to add fonts that are not installed on a user's computer?](#online-font-libraries)
 - [What is the 'system font stack' and why would you want to use it?](#the-system-font-stack)
 - [Which property would you use to increase or decrease the space between letters in a word?](#letter-spacing)
 - [Which property would you use to increase or decrease the space between lines in a paragraph?](#line-height)
 
-### Additional resources
+### Ek kaynaklar
 
-This section contains helpful links to other content. It isn't required, so consider it supplemental for if you need to dive deeper into something.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-- [Modern CSS Techniques To Improve Legibility](https://www.smashingmagazine.com/2020/07/css-techniques-legibility/) by [Edoardo Cavazza](https://www.smashingmagazine.com/author/edoardo-cavazza/) is a great article that covers some additional text styles and techniques that can be utilized to improve websites legibility.
+- [Edoardo Cavazza](https://www.smashingmagazine.com/author/edoardo-cavazza/)'nın yazdığı [Modern CSS Techniques To Improve Legibility](https://www.smashingmagazine.com/2020/07/css-techniques-legibility/) başlıklı makale, web sitelerinin okunabilirliğini artırmak için kullanılabilecek bazı ek metin stilleri ve teknikleri kapsayan harika bir makaledir.

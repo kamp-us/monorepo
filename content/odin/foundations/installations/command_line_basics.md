@@ -122,7 +122,7 @@ Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeni
 
 Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-- [The Art of Command Line adlı ingilizce repo](https://github.com/jlevy/the-art-of-command-line#readme) başlangıç için birebirdir!. Açık kaynak git deposudur. Burada birçok profesyonel ipucu mevcut!
+- [The Art of Command Line adlı ingilizce repo](https://github.com/jlevy/the-art-of-command-line#readme) başlangıç için birebirdir!. Açık kaynak git reposudur. Burada birçok profesyonel ipucu mevcut!
 - [Learn Enough Command Line to Be Dangerous](https://www.learnenough.com/command-line-tutorial) adlı çevrimiçi ingilizce kitap, komut satırında uzmanlaşmak için harika bir kaynaktır. Bölüm 1 ve 2 ücretsizdir ve komut satırı araçlarına iyi bir giriş sağlar. Kitabın geri kalanı ücretsiz değildir ve bu noktada gerçekten ihtiyacınız olandan daha fazla derinliğe iner ancak ilginizi çekerse kitabın geri kalanını satın almaktan ve okumaktan çekinmeyin.
 - [ExplainShell.com](http://explainshell.com/), özellikle garip shell komutlarının yapısını çözmek veya Bash'in nasıl çalıştığını öğrenmek istiyorsanız harika bir ingilizce kaynaktır.
 - [Unix/Linux Command Cheat Sheet adlı ingilizce cheatsheet](https://files.fosswire.com/2007/08/fwunixref.pdf), Linux kullanımına aşina olduğunuzda düzenli olarak başvurabileceğiniz önemli komutların listesini içerir. Bilgisayarınızın başında olmadığınız zamanlarda fiziksel bir kopyasını yanınızda bulundurmak için çıktısını alabilirsiniz.

@@ -14,7 +14,7 @@ Fakat Git'teki bir _kaydetme işlemi_, dosya ve klasörlerdeki farklılıkları 
 
 Müfredatımız dahilinde **yalnızca** GitHub'ı desteklediğimizi ve alternatiflerin sorunlarını gidermeye yardımcı olmayacağımızı lütfen unutmayın.
 
-<span id="git-local"></span>Git _yerel_ makinenizde çalışırken,<span id="github-remote"></span> GitHub tüm kodlama projeleriniz için web üzerinde uzak bir depolama tesisidir. Bu, Git'i öğrenerek portföyünüzü GitHub'da sergileyebileceğiniz anlamına gelir! Bu gerçekten önemli çünkü neredeyse tüm yazılım geliştirme şirketleri Git kullanmayı modern web geliştiricileri için temel bir beceri olarak görüyor. Bir GitHub portföyüne sahip olmak, gelecekteki potansiyel işverenlere neler yapabileceğinize dair kanıt sağlayacaktır.
+<span id="git-local"></span>Git _yerel_ makinenizde çalışırken,<span id="github-remote"></span> GitHub tüm kodlama projeleriniz için web üzerinde remote bir depolama tesisidir. Bu, Git'i öğrenerek portföyünüzü GitHub'da sergileyebileceğiniz anlamına gelir! Bu gerçekten önemli çünkü neredeyse tüm yazılım geliştirme şirketleri Git kullanmayı modern web geliştiricileri için temel bir beceri olarak görüyor. Bir GitHub portföyüne sahip olmak, gelecekteki potansiyel işverenlere neler yapabileceğinize dair kanıt sağlayacaktır.
 
 Bu derste Git'in tarihçesini, ne olduğunu ve ne işe yaradığını kısaca inceleyeceğiz.
 
@@ -49,8 +49,8 @@ Bu bölüm, dersi anlayıp anlamadığınızı kontrol etmeniz için sorular iç
 
 - <a class="knowledge-check-link" href="#giriş"> Git ne tür bir program </a>
 - <a class="knowledge-check-link" href="#text-editor-and-git">Git ile bir metin editörü arasında kaydettikleri ve kayıt tuttukları açısından ne gibi farklar vardır? </a>
-- <a class="knowledge-check-link" href="#git-local"> Git yerel düzeyde mi yoksa uzak düzeyde mi çalışır ? </a>
-- <a class="knowledge-check-link" href="#github-remote">Github yerel düzeyde mi yoksa uzak düzeyde mi çalışır ? </a>
+- <a class="knowledge-check-link" href="#git-local"> Git yerel düzeyde mi yoksa remote düzeyde mi çalışır ? </a>
+- <a class="knowledge-check-link" href="#github-remote">Github yerel düzeyde mi yoksa remote düzeyde mi çalışır ? </a>
 - <a class="knowledge-check-link" href="https://www.youtube.com/watch?v=2ReR1YJrNOM">Git geliştiriciler için neden önemlidir ?</a>
 - <a class="knowledge-check-link" href="https://youtu.be/1h9_cB9mPT8?t=162">Git ve GitHub neden geliştirici ekipleri için kullanışlıdır ?</a>
 

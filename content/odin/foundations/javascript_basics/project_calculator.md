@@ -51,5 +51,5 @@ Erken ve sık sık commit yapmayı unutmayın! "Commit Message" dersine [buradan
 - Kullanıcılar gerekli matematiği yaparlarsa ondalıklı sayılar alabilirler ancak henüz ondalıklı sayıları yazamazlar. Bir `.` butonu ekleyin ve kullanıcıların ondalıklı sayı girmesine izin verin! Ancak birden fazla yazmalarına izin vermediğinizden emin olun: `12.3.56.5.` Bu sayılar üzerinde matematik işlemleri yapmak zordur. \(ekranda zaten bir tane varsa ondalık butonunu devre dışı bırakın\)
 - Güzel görünsün! Bu, CSS becerilerinizi pratik yapmak için harika bir projedir. En azından işlemleri tuş takımı butonlarından farklı bir renk yapın.
 - “Geri al” tuşu ekleyin, böylece kullanıcı yanlış sayıya tıklarsa geri alabilir.
-- Klavye desteği ekleyin! (`/`) gibi tuşlar size sorun çıkartabilir. Bu sorunu çözmek için [bu dökümantasyonu](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) okuyun.
+- Klavye desteği ekleyin!
 </div>
