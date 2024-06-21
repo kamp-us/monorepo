@@ -1,29 +1,29 @@
-### Introduction
+### Giriş
 
-By now you should be comfortable with basic CSS selectors and have no trouble grabbing things by their type, class or ID. But to be a real CSS surgeon, sometimes you need more specialized tools. In this lesson we'll look at advanced CSS selectors and show you how to target elements in a more specific and finely grained way.
+Bu noktada temel CSS seçicileriyle rahat hissetmelisiniz ve tür, sınıf veya kimliğine göre öğeleri seçmede zorluk yaşamamalısınız. Ancak gerçek bir CSS cerrahı olabilmek için bazen daha özelleşmiş araçlara ihtiyaç duyarsınız. Bu dersimizde, gelişmiş CSS seçicilerine göz atacak ve öğeleri daha spesifik ve ince bir şekilde hedeflemenin yollarını göstereceğiz.
 
-These selectors can be especially useful when you can't (or don't want to) change your HTML markup.
+Bu seçiciler, HTML işaretleminizi değiştiremiyorsanız (veya değiştirmek istemiyorsanız) özellikle kullanışlı olabilir.
 
-There are _a lot_ of advanced selectors, so going through every single one is outside the scope of this lesson. However, we'll go through some of the most useful and common ones, as well as arm you with the concepts and vocabulary to learn more on your own.
+Gelişmiş seçici sayısı oldukça fazla olduğundan, her birini ayrıntılı bir şekilde ele almak bu dersin kapsamı dışındadır. Bununla birlikte, en kullanışlı ve yaygın olanları üzerinden geçecek ve kendi başınıza daha fazlasını öğrenmek için kavramları ve kelime dağarcığınızı güçlendireceğiz.
 
-As always feel free to open up your code editor and run your own experiments with these selectors - practice makes perfect!
+Her zamanki gibi kod düzenleyicinizi açıp bu seçicilerle kendi deneylerinizi yapmaktan çekinmeyin - pratik mükemmelleştirir!
 
-### Learning outcomes
+### Öğrenme çıktıları
 
-* Understand how to use parent and sibling selectors
-* Recognize the difference between pseudo classes and pseudo elements
-* Learn about some of the most useful and common pseudo elements and pseudo classes
-* Learn about the different ways to select an attribute or its parts
+* Ebeveyn ve kardeş seçicilerini nasıl kullanılacağını anlayın.
+* Yalancı sınıf ve yalancı öğe arasındaki farkı tanıyın.
+* En kullanışlı ve yaygın yalancı öğeleri ve yalancı sınıfları öğrenin.
+* Bir özniteliği veya onun bölümlerini seçmek için farklı yöntemleri öğrenin.
 
-### Child and sibling combinators
+### Çocuk ve kardeş birleştiricileri
 
-Let's have a look at some more ways we can access different elements _without_ referring to their classes. Here are three new selectors to do just that.
+Farklı öğelere başvururken sınıflarına başvurmadan kullanabileceğimiz başka yolları inceleyelim. İşte bunu yapmak için üç yeni seçici.
 
-* `>` - the child combinator
-* `+` - the adjacent sibling combinator
-* `~` - the general sibling combinator
+* `>` - çocuk birleştirici
+* `+` - bitişik kardeş birleştirici
+* `~` - genel kardeş birleştirici
 
-We'll tackle some practical examples using this sample markup.
+Bu örnek işaretleme kullanarak bazı pratik örnekleri ele alacağız.
 
 ```html
 <main class="parent">
@@ -39,7 +39,7 @@ We'll tackle some practical examples using this sample markup.
 </main>
 ```
 
-By now, you should be pretty comfortable writing rules using the descendant combinator you learned about in [intro to CSS](https://www.theodinproject.com/lessons/foundations-intro-to-css). For instance, if we wanted to select all the `child` and `grand-child` divs inside of `main`, we could write:
+Bu noktada, [intro to CSS](https://www.theodinproject.com/lessons/foundations-intro-to-css) 'de öğrendiğiniz soy birleştiriciyi kullanarak kurallar yazmada oldukça rahat olmalısınız. Örneğin, `main` içindeki tüm `child` ve `grand-child` div'lerini seçmek istiyorsak şu şekilde yazabiliriz:
 
 ```css
 main div {
@@ -47,7 +47,7 @@ main div {
 }
 ```
 
-But what if we wanted to be more specific and <span id="childvdesc-knowledge-check">select _only_ the `child` or `grand-child` divs?</span> That's where the child combinator `>` comes in handy. Unlike the descendant combinator, it will only select direct children.
+Ancak daha spesifik olmak istersek ve sadece `child` veya `grand-child` div'lerini seçmek istersek, çocuk birleştirici `>` işe yarar. Soy birleştiriciye benzemez, yalnızca doğrudan çocukları seçer.
 
 ```css
 /* This rule will only select divs with a class of child */
@@ -61,7 +61,7 @@ main > div > div {
 }
 ```
 
-Phrased another way, the child selector will select an element that is one level of indentation down. In order to select an element that is adjacent to our target, or on the same level of indentation, we can use the adjacent sibling combinator `+`.
+Başka bir deyişle, çocuk seçici, bir düzey içeriğe sahip bir öğeyi seçecektir. Hedefimize bitişik veya aynı düzeydeki bir öğeyi seçmek için bitişik kardeş birleştirici `+` kullanabiliriz.
 
 ```css
 /* This rule will only select the div with the class child group2 */
@@ -75,8 +75,7 @@ Phrased another way, the child selector will select an element that is one level
 }
 ```
 
-Finally, if we want to select all of an element's siblings and not just the first one, we can use the general sibling combinator `~`.
-
+Son olarak, bir öğenin tüm kardeşlerini seçmek istiyorsak ve sadece ilk olanı değilse, genel kardeş birleştirici `~` kullanabiliriz.
 ```css
 /* This rule will select all of .group1's siblings - in this case the 2nd and 3rd .child divs */
 .group1 ~ div {
@@ -84,35 +83,35 @@ Finally, if we want to select all of an element's siblings and not just the firs
 }
 ```
 
-Just like the descendant combinator, these selectors don't have any special specificity rules - their specificity score will just be made up of their component parts.
+Descendant birleştirici gibi, bu seçicilerin özel öncelik kuralları yoktur - öncelik skorları yalnızca bileşen parçalardan oluşacaktır.
 
-This [MDN article on combinators](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Combinators) provides a good overview if you want to learn more about them.
+Eğer daha fazlasını öğrenmek istiyorsanız, [this MDN article on combinators](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Combinators) size iyi bir genel bakış sunar.
 
-### Pseudo-selectors
+### Yalancı Seçiciler (Pseudo-selectors)
 
-Before diving into pseudo-selectors, a quick note on the difference between [pseudo-elements and pseudo-classes](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements). <span id="syntax-exist-knowledge-check">Pseudo-class selectors are prefixed with a single colon and are a different way to target elements that already exist in HTML. Pseudo-elements are prefixed with two colons and are used to target elements that _don't_ normally exist in the markup.</span> If that doesn't make sense straight away, don't worry - we'll explore some examples below.
+Yalancı seçicilere dalmadan önce, [pseudo-elements and pseudo-classes](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements) üzerine kısa bir not. <span id="syntax-exist-knowledge-check">Pseudo-class seçicileri tek iki nokta üst üste ile öne eklenir ve zaten HTML'de var olan öğeleri hedefleme farklı bir yoludur. Pseudo-elements iki iki nokta üst üste ile öne eklenir ve genellikle işaretleme normalde olmayan öğeleri hedeflemek için kullanılır.</span> Eğer bu hemen anlaşılır gelmiyorsa, endişelenmeyin - aşağıda bazı örnekleri keşfedeceğiz.
 
-### Pseudo-classes
+### Yalancı Sınıflar (Pseudo-classes)
 
-Pseudo-classes offer us different ways to target elements in our HTML. There are quite a lot of them, and they come in a couple of different flavors. Some are based on their position or structure within the HTML. Others are based on the state of a particular element, or how the user is currently interacting with it. There are too many to cover in detail here but we'll have a look at some of the most useful ones. Pseudo-classes share the same specificity as regular classes (0, 0, 1, 0). Just like regular classes, most can be chained together.
+Yalancı sınıflar bize HTML'deki öğeleri hedefleme farklı yolları sunar. Bunlardan bir hayli fazla sayıda ve birkaç farklı çeşidi vardır. Bazıları HTML içindeki konumlarına veya yapısına dayanır. Diğerleri belirli bir öğenin durumuna veya kullanıcının şu anda nasıl etkileşimde bulunduğuna dayanır. Bunların hepsini burada detaylı bir şekilde ele almak mümkün değildir, ancak en kullanışlı olanlara bir göz atacağız. Yalancı sınıflar, düzenli sınıflarla aynı önceliğe sahiptir (0, 0, 1, 0). Düzenli sınıflar gibi, çoğu bir araya getirilebilir.
 
 <div class="lesson-note lesson-note--tip" markdown="1">
-The (0,0,1,0) above is the notation for calculating specificity. To find out more about how it works, glance over the "Calculating CSS Specificity Value" section from [this article on CSS Specificity](https://css-tricks.com/specifics-on-css-specificity/).
+Yukarıdaki (0,0,1,0), öncelik hesaplama için bir notasyondur. Nasıl çalıştığı hakkında daha fazla bilgi edinmek için [this article on CSS Specificity](https://css-tricks.com/specifics-on-css-specificity/) başlıklı makalenin "Calculating CSS Specificity Value" bölümüne göz atın.
 </div>
 
-As always don't forget to check the [docs](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes) to see a complete picture of what's available.
+Her zamanki gibi mevcut olanakların tam resmini görmek için [docs](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes) göz atmayı unutmayın.
 
-#### Dynamic and user action pseudo-classes
+#### Dinamik ve Kullanıcı Eylemi Yalancı Sınıflar
 
-These types of useful pseudo-classes can make your page feel much more dynamic and interactive.
+Bu tür yararlı yalancı sınıflar, sayfanızın çok daha dinamik ve etkileşimli hissetmesini sağlayabilir.
 
-[`:focus`](https://css-tricks.com/almanac/selectors/f/focus/) applies to an element that is currently selected by the user either through selecting it with their cursor or using their keyboard.
+[`:focus`](https://css-tricks.com/almanac/selectors/f/focus/), kullanıcının şu anda faresiyle seçtiği veya klavyesini kullanarak seçtiği bir öğeye uygulanır.
 
-<span id="hover-active-knowledge-check">[`:hover`](https://css-tricks.com/almanac/selectors/h/hover/) will affect anything under the user's mouse pointer.</span> It can be used to give extra oomph to buttons and links to highlight that they're interactable, or to trigger a drop-down menu.
+<span id="hover-active-knowledge-check">[`:hover`](https://css-tricks.com/almanac/selectors/h/hover/) kullanıcının fare işaretçisinin altındaki her şeyi etkiler.</span> Bu, düğmelere ve bağlantılara etkileşimli olduklarını vurgulamak veya bir açılır menüyü tetiklemek için kullanılabilir.
 
-[`:active`](https://css-tricks.com/almanac/selectors/a/active/) applies to elements that are currently being clicked, and is especially useful for giving your user feedback that their action had an effect. This is a great one to give your buttons and other interactive elements more 'tactile' feedback.
+[`:active`](https://css-tricks.com/almanac/selectors/a/active/), şu anda tıklanan öğelere uygulanır ve kullanıcının eyleminin bir etkisi olduğuna dair geri bildirim sağlamak için özellikle kullanışlıdır. Bu, düğmelerinize ve diğer etkileşimli öğelere daha fazla 'dokunsal' geri bildirim sağlamak için harika bir seçenektir.
 
-Have you ever wondered why links are blue but turn purple when clicked in unstyled HTML? It's because browsers implement that styling by default. To implement your own custom styling for links, take advantage of the [`:link`](https://css-tricks.com/almanac/selectors/l/link/) and [`:visited`](https://css-tricks.com/almanac/selectors/v/visited/) pseudo-classes. A simplified version of default browser styling might look something like this:
+Hiç düşündünüz mü, neden bağlantılar standart HTML'de mavi iken tıklanınca mor oluyor? Bu, tarayıcıların varsayılan olarak bu stillemeyi uygulamasından kaynaklanır. Bağlantılar için kendi özel stilinizi uygulamak için [`:link`](https://css-tricks.com/almanac/selectors/l/link/) ve [`:visited`](https://css-tricks.com/almanac/selectors/v/visited/) yalancı sınıflarından faydalanın. Varsayılan tarayıcı stillemesinin basitleştirilmiş bir versiyonu şöyle görünebilir:
 
 ```css
   /* This rule will apply to all links */
@@ -131,19 +130,19 @@ Have you ever wondered why links are blue but turn purple when clicked in unstyl
   }
 ```
 
-#### Structural pseudo-classes
+#### Yapısal Yalancı Sınıflar
 
-Structural pseudo-classes are a powerful way to select elements based on their position within the DOM.
+Yapısal yalancı sınıflar, öğeleri DOM içindeki konumlarına göre seçmenin güçlü bir yoludur.
 
-[`:root`](https://css-tricks.com/almanac/selectors/r/root/) is a special class that represents the very top level of your document - the one element that has no parents. Generally when working with the web, this is equivalent to the `html` element, but there are a [few subtle differences](https://stackoverflow.com/questions/15899615/whats-the-difference-between-css3s-root-pseudo-class-and-html).
+[`:root`](https://css-tricks.com/almanac/selectors/r/root/), belgenizin en üst düzeyini temsil eden özel bir sınıftır - hiç ebeveyni olmayan tek öğe. Genellikle web ile çalışırken, bu genellikle `html` elementine eşdeğerdir, ancak [birkaç ince fark vardır](https://stackoverflow.com/questions/15899615/whats-the-difference-between-css3s-root-pseudo-class-and-html).
 
-`:root` is generally the place where you will place your 'global' CSS rules that you want available everywhere - such as your custom properties and CSS variables, or rules such as `box-sizing: border-box;`.
+`:root` genellikle her yerde kullanılabilir olmasını istediğiniz 'global' CSS kurallarınızı koymak için yerdir - örneğin, özel özellikleriniz ve CSS değişkenleriniz veya `box-sizing: border-box;` gibi kurallar.
 
-<span id="first-child-knowledge-check">[`:first-child`](https://css-tricks.com/almanac/selectors/f/first-child/)</span> and [`:last-child`](https://css-tricks.com/almanac/selectors/l/last-child/) will match elements that are the first or last sibling.
+<span id="first-child-knowledge-check">[`:first-child`](https://css-tricks.com/almanac/selectors/f/first-child/)</span> ve [`:last-child`](https://css-tricks.com/almanac/selectors/l/last-child/), ilk veya son kardeş olan öğelerle eşleşecektir.
 
-Similarly, [`:empty`](https://css-tricks.com/almanac/selectors/e/empty/) will match elements that have no children at all, and [`:only-child`](https://css-tricks.com/almanac/selectors/o/only-child/) will match elements that don't have any siblings.
+Benzer şekilde, [`:empty`](https://css-tricks.com/almanac/selectors/e/empty/), hiç çocuğu olmayan öğelerle eşleşir ve [`:only-child`](https://css-tricks.com/almanac/selectors/o/only-child/) hiçbir kardeşi olmayan öğelerle eşleşir.
 
-For a more dynamic approach we can use <span id="second-child-knowledge-check">[`:nth-child`](https://css-tricks.com/almanac/selectors/n/nth-child/).</span> This is a flexible pseudo-class with a few different uses.
+Daha dinamik bir yaklaşım için <span id="second-child-knowledge-check">[`:nth-child`](https://css-tricks.com/almanac/selectors/n/nth-child/)</span>'i kullanabiliriz. Bu, birkaç farklı kullanımı olan esnek bir yalancı sınıftır.
 
 ```css
   .myList:nth-child(5) {/* Selects the 5th element with class myList */}
@@ -155,17 +154,17 @@ For a more dynamic approach we can use <span id="second-child-knowledge-check">[
   .myList:nth-child(even) {/* Selects every even element with class myList */}
 ```
 
-### Pseudo-elements
+### Yalancı Öğeler (Pseudo-elements)
 
-While pseudo-classes give us an alternative way to interact with our HTML elements based on their state or structure, pseudo-elements are more abstract. They allow us to affect parts of our HTML that aren't elements at all. These special elements share the same specificity as regular elements (0, 0, 0, 1). There are a number of useful pseudo-elements that can be utilized in any number of creative ways.
+Yalancı sınıflar, HTML öğelerimizle etkileşimde bulunmanın alternatif bir yolunu sağlarken, yalancı öğeler daha soyuttur. Bize hiçbir öğe olmayan HTML parçalarını etkilememize olanak tanır. Bu özel öğeler, düzenli öğelerle aynı önceliğe sahiptir (0, 0, 0, 1). Her türlü yaratıcı şekilde kullanılabilen bir dizi yararlı yalancı öğe bulunmaktadır.
 
-[`::marker`](https://css-tricks.com/almanac/selectors/m/marker/) allows you to customize the styling of your `<li>` elements' bullets or numbers.
+[`::marker`](https://css-tricks.com/almanac/selectors/m/marker/), `<li>` öğelerinizin madde işaretlerini veya numaralarını özelleştirmenize olanak tanır.
 
-[`::first-letter`](https://css-tricks.com/almanac/selectors/f/first-letter/) and [`::first-line`](https://css-tricks.com/almanac/selectors/f/first-line/) allow you to (you guessed it!) give special styling to the first letter or line of some text.
+[`::first-letter`](https://css-tricks.com/almanac/selectors/f/first-letter/) ve [`::first-line`](https://css-tricks.com/almanac/selectors/f/first-line/), bir metnin ilk harfini veya satırını (siz tahmin ettiniz!) özel bir stil vermenize olanak tanır.
 
-[`::selection`](https://css-tricks.com/almanac/selectors/s/selection/) allows you to change the highlighting when a user selects text on the page.
+[`::selection`](https://css-tricks.com/almanac/selectors/s/selection/), kullanıcının sayfa üzerinde metin seçtiğinde vurgulamayı değiştirmenize olanak tanır.
 
-[`::before` and `::after`](https://css-tricks.com/almanac/selectors/a/after-and-before/) allow us to add extra elements onto the page with CSS, instead of HTML. Using it to decorate text in various ways is one common use case.
+[`::before` ve `::after`](https://css-tricks.com/almanac/selectors/a/after-and-before/), HTML yerine CSS ile sayfaya ekstra öğeler eklememize izin verir. Metni çeşitli şekillerde süslemek için kullanma, yaygın bir kullanım alanıdır.
 
 ```html
 <style>
@@ -183,25 +182,25 @@ While pseudo-classes give us an alternative way to interact with our HTML elemen
 </body>
 ```
 
-Using these pseudo-elements this way would give us this result:
+Bu şekilde yalancı öğeleri kullanmak bize şu sonucu verecektir:
 
-Let's 😎 🥸 🤓 emojify 🤓 🥸 😎 this span!
+Hadi bu span'i 😎 🥸 🤓 emojilerle 🤓 🥸 😎 süsleyelim!
 
- There are lots more! Have a quick browse through the [pseudo-element docs](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements) to see a complete list of what's possible.
+Daha birçok örnek var! [pseudo-element docs](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements) göz atarak mümkün olanların tam bir listesini görebilirsiniz.
 
-### Attribute selectors
+### Nitelik Seçicileri
 
-The last tool we're going to add to the box is attribute selectors. Recall that an attribute is simply anything in the opening tag of an HTML element - such as `src='picture.jpg'` or `href="www.theodinproject.com"`.
+Kutuya ekleyeceğimiz son araç, nitelik seçicileridir. Hatırlarsanız, bir nitelik, bir HTML öğesinin açılış etiketindeki her şeydir - örneğin, `src='picture.jpg'` veya `href="www.theodinproject.com"` gibi.
 
-Since we write our own values for attributes, we need a slightly more flexible system to be able to target specific values.
+Kendi değerlerimizi niteliklere yazdığımızdan, belirli değerlere hedef alabilmek için biraz daha esnek bir sistemimize ihtiyacımız var.
 
-Attribute selectors have the same specificity as classes and pseudo-classes (0, 0, 1, 0).
+Attribut seçicilerinin özellik açısından sınıflar ve yalancı sınıflarla aynıdır (0, 0, 1, 0).
 
-Let's look at some examples for basic usage.
+Temel kullanım için bazı örnekleri inceleyelim.
 
-* `[attribute]` - This general selector will select anything where the given attribute exists. Its value doesn't matter.
-* `selector[attribute]` - Optionally we can combine our attribute selectors with other types of selectors, such as class or element selectors.
-* `[attribute="value"]` -<span id="type-text-knowledge-check"> To get really specific, we can use `=` to match a specific attribute with a specific value.</span>
+* `[attribute]` - Bu genel seçici, belirtilen niteliğin var olduğu her şeyi seçer. Değerinin bir önemi yoktur.
+* `selector[attribute]` - İsteğe bağlı olarak, nitelik seçicilerimizi sınıf veya öğe seçicileri gibi diğer türdeki seçicilerle birleştirebiliriz.
+* `[attribute="value"]` - <span id="type-text-knowledge-check">Gerçekten spesifik olmak için, `=` kullanarak belirli bir niteliği belirli bir değerle eşleştirebiliriz.</span>
 
 ```css
   [src] {
@@ -217,12 +216,11 @@ Let's look at some examples for basic usage.
   }
 ```
 
-Sometimes we need to be more general in how we access these attributes. For example, perhaps we're only interested in `img` elements where the `src` attribute's value ends in `.jpg`. For cases like this we have some attribute selectors that allow us to match a part of the attribute's value. If you've ever come across [regular expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) before, these attributes use a similar syntax.
+SBazen bu niteliklere daha genel bir şekilde nasıl erişeceğimizi düşünmemiz gerekebilir. Örneğin, belki de sadece `src` niteliğinin değeri `.jpg` ile biten `img` öğeleri ile ilgileniyoruz. Bu tür durumlar için, niteliğin değerinin bir kısmını eşleştirmemizi sağlayan bazı nitelik seçicilere sahibiz. Daha önce [regular expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) karşılaştıysanız, bu nitelikler benzer bir sözdizimini kullanır.
 
-
-* `[attribute^="value"]` - `^=` <span id="thunder-knowledge-check">Will match strings from the start.</span>
-* `[attribute$="value"]` - `$=` Will match strings from the end.
-* `[attribute*="value"]` - `*=` The wildcard selector will match anywhere inside the string.
+* `[attribute^="value"]` - `^=` <span id="thunder-knowledge-check">Değerin başından eşleşecektir.</span>
+* `[attribute$="value"]` - `$=` Değerin sonundan eşleşecektir.
+* `[attribute*="value"]` - `*=` Joker karakter seçici, dize içinde herhangi bir yerde eşleşecektir.
 
 ```css
 [class^='aus'] {
@@ -250,19 +248,18 @@ Sometimes we need to be more general in how we access these attributes. For exam
 }
 ```
 
-To see what other things you can achieve with attribute selectors, such as searching case insensitivity, or sub-strings separated by hyphens, have a browse through the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors).
+Nitelik seçicileri ile neler başarabileceğinizi, örneğin büyük-küçük harfe duyarsız arama veya tirelerle ayrılmış alt dizeleri arama gibi şeyleri görmek için [MDN docs](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors) göz atın.
 
-
-### Assignment
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
-1. Complete [CSS Diner](https://flukeout.github.io/). You should be familiar with most of the content in the first couple of exercises, but practice and review never hurt! Don't forget to read the examples and explanations on the right.
-2. Read [Shay Howe's article on Complex Selectors](https://learn.shayhowe.com/advanced-html-css/complex-selectors/). This covers most of the content of this lesson in a bit more detail. As stated in their article, they sometimes use a single colon instead of a double one for pseudo-elements. Please keep in mind that the double colon is now the standard.
+1. [CSS Diner](https://flukeout.github.io/) adresindeki görevi tamamlayın. İlk birkaç alıştırmada içeriğin çoğunu zaten biliyor olmalısınız, ancak pratik yapmak ve gözden geçirmek her zaman faydalıdır! Sağ taraftaki örnekleri ve açıklamaları okumayı unutmayın.
+2. [Shay Howe's article on Complex Selectors](https://learn.shayhowe.com/advanced-html-css/complex-selectors/) makalesini okuyun. Bu dersin çoğunu biraz daha ayrıntılı bir şekilde ele alıyor. Makalelerinde bazen yalancı öğeler için tek iki nokta yerine tek bir nokta kullanabilirler. Lütfen unutmayın ki çift iki nokta artık standarttır.
 </div>
 
-### Knowledge check
+### Bilgi ölçme
 
-This section contains questions for you to check your understanding of this lesson. If you’re having trouble answering the questions below on your own, review the material above to find the answer.
+Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve bağlantılı olduğu materyali gözden geçirin.
 
 * [What is the difference between the child combinator and the descendant combinator?](#childvdesc-knowledge-check)
 * [How does the syntax of pseudo-classes and pseudo-elements differ?](#syntax-exist-knowledge-check)
@@ -273,14 +270,14 @@ This section contains questions for you to check your understanding of this less
 * [How could you select all input elements with a type of text?](#type-text-knowledge-check)
 * [How could you select all classes that begin with `thunder`?](#thunder-knowledge-check)
 
-### Additional resources
+### Ek kaynaklar
 
-This section contains helpful links to other content. It isn't required, so consider it supplemental for if you need to dive deeper into something.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-* [Kevin Powell](https://www.youtube.com/kepowob/search?query=pseudo) has a variety of videos on several of these topics if you'd like a deeper dive.
-* [The CSS Tricks Almanac](https://css-tricks.com/almanac/selectors/) has a great reference for all pseudo-elements and selectors. It includes examples, extra resources and browser support charts.
-* [W3 Schools](https://www.w3schools.com/cssref/css_selectors.asp) also has a solid, more concise reference list. Includes an interactive selector tool if you'd like to play around with some hands on examples.
-* [The Free Code Camp Selector Cheat Sheet](https://www.freecodecamp.org/news/css-selectors-cheat-sheet/) has a solid summary of some of the most common selectors.
-* [A nice concise article](https://www.growingwiththeweb.com/2012/08/pseudo-classes-vs-pseudo-elements.html) on the differences between pseudo-classes and pseudo-elements. Also provides a solid summary of the different kinds of selectors.
+* [Kevin Powell](https://www.youtube.com/kepowob/search?query=pseudo), bu konularda daha derinlemesine bir inceleme yapmak istiyorsanız çeşitli videolara sahiptir.
+* [CSS Tricks Almanac](https://css-tricks.com/almanac/selectors/), tüm yalancı öğeler ve seçiciler için harika bir referansa sahiptir. Örnekler, ek kaynaklar ve tarayıcı desteği tablolarını içerir.
+* [W3 Schools](https://www.w3schools.com/cssref/css_selectors.asp) ayrıca sağlam, daha özlü bir referans listesine sahiptir. Birkaç pratik örnekle oynamak istiyorsanız etkileşimli bir seçici aracı içerir.
+* [The Free Code Camp Selector Cheat Sheet](https://www.freecodecamp.org/news/css-selectors-cheat-sheet/), en yaygın kullanılan bazı seçicilerin sağlam bir özetini içerir.
+* [A nice concise article](https://www.growingwiththeweb.com/2012/08/pseudo-classes-vs-pseudo-elements.html) hakkında güzel ve özlü bir makale. Aynı zamanda farklı türdeki seçicilerin sağlam bir özetini sunar.
 * [Smashing Magazine on Taming Advanced CSS Selectors](http://coding.smashingmagazine.com/2009/08/17/taming-advanced-css-selectors/)
-* [CSS Tricks on Attribute Selectors](https://css-tricks.com/attribute-selectors/) will help if you need a deeper look at attributes.
+* [CSS Tricks on Attribute Selectors](https://css-tricks.com/attribute-selectors/) makalesi niteliklere daha derinlemesine bir bakışa ihtiyacınız varsa size yardımcı olacaktır.
