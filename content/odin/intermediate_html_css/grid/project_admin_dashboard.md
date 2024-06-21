@@ -1,49 +1,49 @@
-### Introduction
+### Giriş
 
-Now that you've had plenty of practice using Grid, we are going to build a full dashboard design. For this project, use whatever tools you need to get it done, but try to lean on Grid for the majority of the layout work. Go back through the lessons or practice assignments if you need a refresher.
+Artık Grid'i kullanarak bolca pratik yaptığınıza göre, tam bir gösterge paneli tasarımı oluşturacağız. Bu proje için ihtiyacınız olan her türlü aracı kullanın, ancak düzenleme işinin çoğunluğu için Grid'e dayandırmaya çalışın. İhtiyacınız olduğunda önceki derslere veya pratik ödevlere göz atabilirsiniz.
 
-![dashboard project](https://cdn.statically.io/gh/TheOdinProject/curriculum/43cc6ab69fdfbef40d431a65677d2144668930ac/intermediate_html_css/grid/project_admin_dashboard/imgs/dashboard-project.png)
+![gösterge paneli projesi](https://cdn.statically.io/gh/TheOdinProject/curriculum/43cc6ab69fdfbef40d431a65677d2144668930ac/intermediate_html_css/grid/project_admin_dashboard/imgs/dashboard-project.png)
 
-### Assignment
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
 
-#### Step 1: Set up and planning
+#### Adım 1: Kurulum ve planlama
 
-1. Set up your HTML and CSS files with some simple dummy content, just to make sure you have everything linked correctly.
-2. Set up your Git repository (refer to past projects if you need a refresher).
-3. Download a full-resolution copy of the [project design file](https://cdn.statically.io/gh/TheOdinProject/curriculum/43cc6ab69fdfbef40d431a65677d2144668930ac/intermediate_html_css/grid/project_admin_dashboard/imgs/dashboard-project.png) and get a general idea for how you're going to need to lay things out in your HTML document.
+1. HTML ve CSS dosyalarınızı bazı basit geçici içeriklerle ayarlayın. Her şeyin doğru bağlandığından emin olun.
+2. Git reponuzu hazırlayın (ihtiyaç duyarsanız geçmiş projelere başvurun).
+3. [Proje tasarım dosyasının](https://cdn.statically.io/gh/TheOdinProject/curriculum/43cc6ab69fdfbef40d431a65677d2144668930ac/intermediate_html_css/grid/project_admin_dashboard/imgs/dashboard-project.png) tam çözünürlüklü bir kopyasını indirin ve HTML belgenizdeki öğeleri nasıl düzenlemeniz gerektiği konusunda genel bir fikir edinin.
 
-#### Step 2: Layout
+#### Adım 2: Düzen
 
-1. Start by writing out the HTML elements for the sidebar, header and main-content containers.
-2. In your CSS file, apply Grid properties until you have this basic layout built.
+1. Kenar çubuğu, başlık ve ana içerik konteynerleri için HTML elementlerini yazmaya başlayın.
+2. CSS dosyanızda, bu temel düzen oluşturulana kadar grid özelliklerini uygulayın.
 
-#### Step 3: Nesting
+#### Adım 3: İç içe yerleştirme
 
-1. Taking it one section at a time, begin nesting child elements under the parent elements in the HTML. Remember that you can keep making grid containers within grid containers.
-2. In the sidebar, use more grids to lay out the navigation and branding sections.
-3. In the header, use more grids to lay out the search bar, user info and buttons.
-4. For the main-content, use more grids to lay out the projects, announcements and trending items.
-5. Fill out some dummy content and placeholder images so you can position all of your grid items.
+1. Tek bir bölümü ele alarak, HTML'deki ana öğelerin altında alt öğeleri iç içe yerleştirmeye başlayın. Unutmayın ki, grid konteynerler içinde sürekli olarak grid konteynerler oluşturabilirsiniz.
+2. Kenar çubuğunda, gezinme ve marka bölümlerini düzenlemek için daha fazla grid kullanın.
+3. Başlıkta, arama çubuğunu, kullanıcı bilgilerini ve butonları düzenlemek için daha fazla grid kullanın.
+4. Ana içerikte, projeleri, duyuruları ve trend olan öğeleri düzenlemek için daha fazla grid kullanın.
+5. Tüm grid öğelerinizi konumlandırabilmek için sahte içerik ve yer tutucu resimler kullanın.
 
-#### Step 4: Gather assets
+#### Adım 4: Kaynakları toplayın
 
-1. Once you have your grid layout complete you can either recreate the dashboard example above or style your own design.
-2. Check out some color palettes from [Tailwind.](https://tailwindcss.com/docs/customizing-colors)
-3. All of the icons and more can be downloaded as SVGs from [Material Design Icons.](https://pictogrammers.com/library/mdi/)
-4. Choose your own fonts! The design example uses `Roboto`, which is available with Google fonts.
+1. Grid düzeninizi tamamladıktan sonra yukarıdaki gösterge paneli örneğini yeniden oluşturabilir veya kendi tasarımınızı şekillendirebilirsiniz.
+2. [Tailwind](https://tailwindcss.com/docs/customizing-colors) üzerinden bazı renk paletlerine göz atın.
+3. Tüm simgeler ve daha fazlası [Material Design Icons](https://pictogrammers.com/library/mdi/) üzerinden SVG olarak indirilebilir
+4. Kendi yazı tiplerinizi seçin! Tasarım örneğinde Google fontlarında bulunan `Roboto` kullanılmıştır.
 
-#### Step 5: Some tips!
+#### Adım 5: Bazı ipuçları!
 
-1. When building the layout, apply background colors or borders to your containers to help you visualize your grid.
-2. It's up to you whether to use pixels, `fr` units or both for your grid tracks.
-3. This project does not have to be responsive, but if you'd like to you can expand or shrink the project cards section when resizing the browser window.
-4. You don't have to make a pixel perfect match with the design example. Consider this an opportunity to practice your CSS skills with your own designs.
-5. Don't forget to push your finished dashboard to GitHub. Use GitHub Pages to publish it to the world!
+1. Düzeni oluştururken, grid'i görselleştirmeye yardımcı olması için konteynerlara arka plan renkleri veya border'lar uygulayın.
+2. Grid izleri için piksel veya `fr` birimlerini kullanmak tamamen sizin tercihiniz olacaktır.
+3. Bu proje mobil uyumlu olmak zorunda değil, ancak isterseniz tarayıcı penceresini yeniden boyutlandırırken proje kartları bölümünü genişletebilir veya küçültebilirsiniz.
+4. Tasarım örneğiyle piksel piksel mükemmel bir eşleşme yapmak zorunda değilsiniz. Bunu kendi tasarımlarınızla CSS becerilerinizi geliştirmek için bir fırsat olarak değerlendirebilirsiniz.
+5. Tamamladığınız gösterge paneli projenizi GitHub'a göndermeyi unutmayın. GitHub Pages'i kullanarak tüm dünyaya yayınlayın!
 
-#### Step 6: Section feedback
+#### Adım 6: Bölüm geri bildirimi
 
-1. Before you move on, we would like your feedback [here](https://docs.google.com/forms/d/e/1FAIpQLSf_hNwIjvqcPZyl9Lx41mgJNQKp04qOro03SI8ABw4Zp7U_4w/viewform?usp=sf_link). Getting user (you) feedback is important so we can continue to improve the curriculum and get an idea of your experience.
+1. Devam etmeden önce, geri bildiriminizi [burada] (https://docs.google.com/forms/d/e/1FAIpQLSf_hNwIjvqcPZyl9Lx41mgJNQKp04qOro03SI8ABw4Zp7U_4w/viewform?usp=sf_link) istiyoruz. Kullanıcılardan (sizden) geri bildirim almak, müfredatı geliştirmeye devam edebilmemiz ve deneyimleriniz hakkında fikir sahibi olabilmemiz için önemlidir.
 
 </div>
