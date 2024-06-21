@@ -1,0 +1,50 @@
+{
+  "name": "kampus-monorepo",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:0-18-bullseye",
+
+  // Machine specs
+  "hostRequirements": {
+    "cpus": 8,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
+  
+  // For requirements
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/npm-package:1": {},
+    "ghcr.io/devcontainers-contrib/features/typescript:2": {},
+    "ghcr.io/devcontainers-contrib/features/pnpm:2": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers-contrib/features/prettier:1": {},
+    "ghcr.io/devcontainers-contrib/features/prisma:2": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+
+  // Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"esbenp.prettier-vscode",
+        "ZixuanChen.vitest-explorer",
+        "DavidAnson.vscode-markdownlint",
+        "meta.relay",
+        "ms-azuretools.vscode-docker"
+			],
+      
+      // These files will open once your codespace is built.
+      "openFiles": [
+        "README.md",
+        "package.json"
+      ]
+		}
+	},
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "npm ci"
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
