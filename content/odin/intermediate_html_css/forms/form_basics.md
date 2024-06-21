@@ -1,33 +1,31 @@
-### Introduction
+### Giriş
 
-Forms are one of the most critical parts of your site. They are your user's gateway into your backend – the user provides data in a form, and you do stuff with it.
+Formlar, sitenizin en kritik bölümlerinden biridir. Kullanıcılarınızın backend'inize giriş kapısıdır – kullanıcılar bir formda veri sağlar ve siz de bu veriyle işlemler yaparsınız.
 
-You need to specify the proper types of inputs for each possible data item since there are often multiple ways to collect a piece of data, but only one way is easiest for your user.
+Her olası veri öğesi için uygun giriş türlerini belirtmelisiniz, çünkü genellikle bir veri parçasını toplamanın birden fazla yolu olabilir, ancak kullanıcılarınız için en kolay olan tek bir yol vardır.
 
-In this lesson, we will explore the basics of HTML forms and some of the different types of inputs available to you.
+Bu ders kapsamında, HTML formlarının temellerini ve size sunulan çeşitli giriş türlerini keşfedeceğiz.
 
-### Learning outcomes
+### Öğrenme çıktıları
 
-By the end of this lesson, you should be able to:
+Dersin sonunda şunları yapabilmelisiniz:
 
-- Create forms with HTML
-- Have a basic idea of how to style forms
+- HTML ile formlar oluşturabilmek
+- Formları nasıl stilize edeceğiniz konusunda temel bir fikre sahip olmak
 
-### The form element
+### Form öğesi
 
-The form element is a container element like the div element we learned earlier in the curriculum. The form element wraps all of the inputs a user will interact with on a form.
+Form öğesi, önceki müfredatta öğrendiğimiz div öğesi gibi bir konteyner öğesidir. Form öğesi, bir formda kullanıcının etkileşimde bulunacağı tüm girişleri sarmalar.
 
-The form element accepts two essential attributes; the first is the `action` attribute which takes a URL value that tells the form where it should send its data to be processed.
-Later in the curriculum, we will learn to hook backend systems up to frontend forms using this attribute. For now, it's only essential to know what the `action` attribute is used for.
+Form öğesi iki temel özellik kabul eder; ilki, formun hangi URL'ye verilerini işlemek üzere göndermesi gerektiğini belirten `action` niteliğidir. Müfredatın ilerleyen aşamalarında, bu niteliği kullanarak backend sistemlerini frontend formlarına bağlamayı öğreneceğiz. Şu anda sadece `action` niteliğinin ne için kullanıldığını bilmek önemlidir.
 
-The second is the `method` attribute which tells the browser [which HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) it should use to submit the form.
-The GET and POST request methods are the two you will find yourself using the most.
+İkinci olarak, tarayıcıya formu göndermek için hangi [which HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)nin kullanılacağını belirten `metot` niteliğidir. En çok kullanılan iki yöntem GET ve POST istek yöntemleridir.
 
-We use GET when we want to retrieve something from a server. For example, Google uses a GET request when you search as it *gets* the search results.
+GET'i bir şeyi sunucudan almak istediğimizde kullanırız. Örneğin, Google bir arama yaptığınızda *arama sonuçlarını alması* için GET isteği kullanır.
 
-POST is used when we want to change something on the server, for example, when a user makes an account or makes a payment on a website.
+POST, sunucuda bir şeyi değiştirmek istediğimizde kullanılır; örneğin, bir kullanıcı bir hesap oluşturur veya bir web sitesinde ödeme yaparsa.
 
-The markup for creating a form element looks like this:
+Form elementi oluşturmak için işaretleme şu şekildedir:
 
 ~~~html
 <form action="example.com/path" method="post">
@@ -35,15 +33,15 @@ The markup for creating a form element looks like this:
 </form>
 ~~~
 
-### Form controls
+### Form kontrolleri
 
-To start collecting user data, we need to use form control elements. These are all the elements users will interact with on the form, such as text boxes, dropdowns, checkboxes and buttons. In the following few sections, we will explore some of the form controls you will use most commonly.
+Kullanıcı verilerini toplamaya başlamak için form kontrol elemanlarını kullanmamız gerekiyor. Bunlar, kullanıcıların form üzerinde etkileşimde bulunacağı tüm elemanlardır; metin kutuları, açılır menüler, onay kutuları ve düğmeler gibi. İlerleyen birkaç bölümde, en sık kullanacağınız bazı form kontrol elemanlarını keşfedeceğiz.
 
-### The input element
+### İnput öğesi
 
-The input element is the most versatile of all the form control elements. It accepts a `type` attribute which tells the browser what *type* of data it should expect and how it should render the input element.
+Input öğesi, tüm form kontrol elemanları arasında en çok yönlü olanıdır. Tarayıcıya ne tür veri bekleyeceğini ve input öğesini nasıl render etmesi gerektiğini söyleyen bir `type` niteliğini kabul eder.
 
-A text input looks like this:
+Bir metin girişi şu şekildedir:
 
 ~~~html
 <form action="example.com/path" method="post">
@@ -51,13 +49,13 @@ A text input looks like this:
 </form>
 ~~~
 
-Text inputs accept any text input. For example, you would use it to collect things like users' first and last names.
+Metin girişleri, herhangi bir metin girişini kabul eder. Örneğin, kullanıcıların ad ve soyadı gibi bilgileri toplamak için kullanabilirsiniz.
 
 **Labels**
 
-An input on its own isn't very useful since the user will not know what kind of data they are supposed to provide. Instead, we can give our inputs a label to inform users what type of data they are expected to enter.
+Tek başına bir input pek kullanışlı değildir çünkü kullanıcı, hangi türde veri sağlamaları gerektiğini bilemeyecektir. Bunun yerine, kullanıcılara girmeleri beklenen veri türünü bildirmek için inputlarımıza bir etiket ekleyebiliriz.
 
-To create a label, we use the `<label>` element. The text we want displayed in the label will go between its opening and closing tags:
+Etiket oluşturmak için `<label>` elementini kullanırız. Etikette görüntülenmesini istediğimiz metin, açılış ve kapanış etiketleri arasına gelecektir:
 
 ~~~html
 <form action="example.com/path" method="post">
@@ -66,47 +64,47 @@ To create a label, we use the `<label>` element. The text we want displayed in t
 </form>
 ~~~
 
-Labels accept a `for` attribute, which associates it with a particular input. The input we want to associate with a label needs an `id` attribute with the same value as the label's `for` attribute.
+Etiketler, onları belirli bir girişle ilişkilendiren bir `for` niteliğini kabul eder. Bir etiketin ilişkilendirilmek istediği giriş, etiketin `for` niteliğiyle aynı değere sahip bir `id` niteliğine sahip olmalıdır.
 
-When a label is associated with an input and is clicked, it will focus the cursor on that input, ready for the user to input some data. This helps make our forms more accessible to users who rely on assistive technologies.
+Bir etiket, bir girişle ilişkilendirildiğinde ve tıklandığında, imleci bu girişe odaklar ve kullanıcının bazı verileri girmeye hazır hale gelir. Bu, formlarımızı yardımcı teknolojilere bağımlı kullanıcılar için daha erişilebilir hale getirmeye yardımcı olur.
 
-**Placeholder attribute**
+**Placeholder niteliği**
 
-To guide users on what to enter in form elements, we can include placeholder text in input fields.
+Kullanıcıları form elemanlarına ne girecekleri konusunda yönlendirmek için, giriş alanlarına yer tutucu metin ekleyebiliriz.
 
-This is done by adding a `placeholder` attribute to an input. The value will be the *placeholder* text we want to display in the input:
+Bunu, bir girişe `placeholder` niteliği ekleyerek yaparız. Değer, girişte görüntülemek istediğimiz *yer tutucu* metin olacaktır:
 
 ~~~html
 <label for="first_name">First Name:</label>
 <input type="text" id="first_name" placeholder="Bob...">
 ~~~
 
-Use placeholder text to demonstrate how text should be entered and formatted.
+Yer tutucu, metnin nasıl girilmesi ve biçimlendirilmesi gerektiğini göstermek için kullanılır.
 
 
 <span id="the-name-attribute">**The name attribute**</span>
 
-We need to use labels so that users understand what the data entered into an input field will represent. Just like that, we also need to let the backend, where we send our data, know what each piece of data represents.
+Kullanıcılara bir giriş alanına girilen verinin neyi temsil ettiğini anlatmak için etiketler kullanmalıyız. Aynı şekilde, verimizi gönderdiğimiz backend'e her bir veri parçasının neyi temsil ettiğini bildirmemiz gerekir.
 
-We do this by adding a `name` attribute to our inputs:
+Bunu, girişlerimize bir `name` niteliği ekleyerek yaparız:
 
 ~~~html
 <label for="first_name">First Name:</label>
 <input type="text" id="first_name" name="first_name">
 ~~~
 
-The `name` attribute serves as a reference to the data inputted into a form control after submitting it. You can think of it as a variable name for the input. Form input should always have a `name` attribute; otherwise, it will be ignored when the form is submitted.
+`name` niteliği, bir form kontrolüne girilen veriye bir referans olarak görev yapar ve form gönderildikten sonra bu veriye erişmemizi sağlar. Bu, giriş için bir değişken adı gibi düşünülebilir. Form girişi her zaman bir `name` niteliğine sahip olmalıdır; aksi takdirde, form gönderildiğinde görmezden gelinir.
 
-To get a better understanding of what this looks like we can submit a form to [httpbin](http://httpbin.org/). This service will send back a response which will let us view what data was submitted. Fill in the form below and click submit:
+Bu konsepti daha iyi anlamak için bir formu [httpbin](http://httpbin.org/) adresine göndererek deneyebiliriz. Bu servis, gönderilen verileri görmemize olanak tanıyan bir yanıt gönderecektir. Aşağıdaki formu doldurun ve gönder düğmesine tıklayın:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="dyVRMbq" data-preview="true" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/dyVRMbq">
-  form-basics-name-attribute</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span><a href="https://codepen.io/TheOdinProjectExamples/pen/dyVRMbq">
+  form-basics-name-attribute</a> - TheOdinProject tarafından (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
+  tarafından paylaşılan <a href="https://codepen.io">CodePen</a> örneği.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-The output we care about from the response is the "form" object. It should look something like this:
+Yanıttan önemsediğimiz çıkış, "form" nesnesidir. Şu şekilde görünmelidir:
 
 ~~~json
 "form": {
@@ -116,57 +114,57 @@ The output we care about from the response is the "form" object. It should look 
   },
 ~~~
 
-Try changing the `name` attributes of some of the input fields in the form and removing the attribute entirely, then submit the form again to see how the form data in the response changes.
+Formdaki bazı giriş alanlarının `name` niteliklerini değiştirmeyi deneyin ve niteliği tamamen kaldırın, ardından formu tekrar göndererek yanıttaki form verilerinin nasıl değiştiğini görmek için çıktıları kontrol edin.
 
-**Using form controls outside of forms**
+**Form denetimlerini formların dışında kullanma**
 
-It's worth mentioning that you can use any of the form controls HTML provides outside of the `<form>` element, even when you don't have a backend server where you can send data.
+Değerli bir not olarak belirtmek gerekir ki `<form>` elementi dışında HTML'in sağladığı tüm form kontrollerini, veri gönderebileceğiniz bir backend sunucusunun olmadığı durumlarda bile kullanabilirsiniz.
 
-For example you might want to have an input that gets some data from a user and display that somewhere else on the page with JavaScript:
+Örneğin, kullanıcıdan bazı veriler alıp bunları JavaScript ile sayfanın başka bir yerinde göstermek isteyebilirsiniz:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="result" data-slug-hash="PoJjNYr" data-preview="true" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/PoJjNYr">
-  using-form-controls-outside-of-form</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span><a href="https://codepen.io/TheOdinProjectExamples/pen/PoJjNYr">
+  using-form-controls-outside-of-form</a> - TheOdinProject tarafından (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
+  tarafından paylaşılan <a href="https://codepen.io">CodePen</a> örneği.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-We will need to manipulate data from form controls like this in projects later in the curriculum.
+Bu tür form kontrolü verilerini, müfredatın ilerleyen bölümlerindeki projelerde kullanmak zorunda kalacağız.
 
-**The type attribute**
+**Type niteliği**
 
-`Email inputs` are specialized text inputs just for email addresses. They are different from text inputs in that they will display a different keyboard which will include the @ symbol on mobile devices to make entering email addresses easier.
+`Email inputs`, sadece e-posta adresleri için özel olarak tasarlanmış metin girişleridir. Metin girişlerinden farklı olarak, mobil cihazlarda e-posta adreslerini girmeyi kolaylaştırmak için @ sembolünü içeren farklı bir klavye görüntülerler.
 
-They also validate that the user has entered a correctly formatted email address, but there will be more on validations later.
+Ayrıca, kullanıcının doğru biçimlendirilmiş bir e-posta adresi girdiğini doğrularlar, ancak doğrulamalarla ilgili daha fazla bilgi ilerleyen aşamalarda bulunacaktır.
 
-To create an email input, we use an input element with `type` attribute of "email":
+Bir e-posta girişi oluşturmak için, "email" olan bir `type` niteliğine sahip bir input öğesi kullanırız:
 
 ~~~html
 <label for="user_email">Email Address:</label>
 <input type="email" id="user_email" name="email" placeholder="you@example.com">
 ~~~
 
-`Password inputs` are another specialized text input. They differ from regular text inputs in that they mask the inputted data with another character – usually an asterisk (*) or bullet point (•) – to prevent anyone from seeing what has been entered.
+`Password inputs`, başka bir özel metin girişidir. Normal metin girişlerinden farklı olarak, giriş verilerini başka bir karakterle – genellikle bir yıldız (*) veya noktalama işareti (•) – maskeleyerek gizler ve kimse tarafından girilen verinin görülmesini engeller.
 
-A password input can be created using an input element with a type of "password":
+Bir şifre girişi, "password" olan bir `type` niteliğine sahip bir input öğesi kullanılarak oluşturulabilir:
 
 ~~~html
 <label for="user_password">Password:</label>
 <input type="password" id="user_password" name="password">
 ~~~
 
-The `number input` only accepts number values and ignores any other characters the user tries to enter.
+`number input`, yalnızca sayı değerlerini kabul eder ve kullanıcının girmeye çalıştığı diğer karakterleri yok sayar.
 
-We create a number input using the input element with a `type` attribute of "number":
+Bir sayı girişi oluşturmak için "number" olan bir `type` niteliğine sahip bir input öğesi kullanırız:
 
 ~~~html
 <label for="amount">Amount:</label>
 <input type="number" id="amount" name="amount">
 ~~~
 
-To collect dates from a user, we can use a `date input`. This input is unique because it provides a better user experience for choosing dates by rendering a simple date picker calendar.
+Kullanıcıdan tarih bilgisi toplamak için bir `date input` kullanabiliriz. Bu giriş, basit bir tarih seçici takvimini görüntüleyerek tarihleri seçme konusunda daha iyi bir kullanıcı deneyimi sunar.
 
-To create a date input, we use the input element with a `type` attribute of "date":
+Bir tarih girişi oluşturmak için "date" olan bir `type` niteliğine sahip bir input öğesi kullanırız:
 
 ~~~html
 <label for="dob">Date of Birth:</label>
@@ -175,35 +173,35 @@ To create a date input, we use the input element with a `type` attribute of "dat
 
 **Text area**
 
-While technically not an input element, the text area element provides an input box that can accept text that spans multiple lines like user comments and reviews. It can also be resized by clicking and dragging the bottom right corner to make it bigger or smaller.
+Teknik olarak bir giriş öğesi olmasa da, metin alanı öğesi, kullanıcı yorumları ve incelemeleri gibi birden fazla satırı içeren metni kabul edebilen bir giriş kutusu sağlar. Ayrıca, alt sağ köşesine tıklanıp sürüklenerek daha büyük veya daha küçük hale getirilebilir.
 
-To create a text area, we use the `<textarea>` element:
+Bir metin alanı oluşturmak için `<textarea>` öğesini kullanırız:
 
 ~~~html
 <textarea></textarea>
 ~~~
 
-Unlike input elements, Textarea elements do have a closing tag. This allows you to wrap some initial content you want the text area to display:
+Giriş öğelerinin aksine, Metin Alanı öğelerinin kapanış etiketi bulunur. Bu, metin alanının görüntülemesini istediğiniz bazı başlangıç içeriğini sarmak için kullanılabilir:
 
 ~~~html
 <textarea>Some initial content</textarea>
 ~~~
 
-Text area elements accept a couple of unique attributes that other form controls do not. These are the `rows` and `cols` attributes. They allow you to control the initial height (rows) and width (cols) of the text area:
+Metin Alanı öğeleri, diğer form kontrollerinde bulunmayan birkaç benzersiz niteliği kabul eder. Bunlar `rows` ve `cols` nitelikleridir. Bu nitelikler, metin alanının başlangıçtaki yüksekliğini (rows) ve genişliğini (cols) kontrol etmenize olanak tanır:
 
 ~~~html
 <textarea rows="20" cols="60"></textarea>
 ~~~
 
-### Selection elements
+### Seçim öğeleri
 
-Sometimes you will want users to select a value from a predefined list. This is where select elements will be useful.
+Bazen kullanıcılardan önceden belirlenmiş bir listeden bir değer seçmelerini istemek isteyebilirsiniz. Bu durumda seçim öğeleri (select elements) işe yarar olacaktır.
 
 **Select dropdown**
 
-The select element renders a dropdown list where users can select an option. Syntactically, select elements have similar markup to unordered lists. The select element wraps option elements which are the options that can be selected.
+Seçim öğesi (select elementi), kullanıcıların bir seçenek seçebileceği bir açılır liste oluşturur. Sözdizimsel olarak, seçim öğelerinin işaretleme biçimi düzenlenmemiş listelere benzerdir. Seçim öğesi, seçilebilecek seçenekleri içeren option öğelerini sarmalar.
 
-To create a select dropdown, we use the `<select>` element. Any options we want to display within the select element are defined using `<option>` elements:
+Açılır bir liste oluşturmak için <select> öğesini kullanırız. Seçim öğesi içinde görüntülemek istediğimiz herhangi bir seçeneği, <option> öğelerini kullanarak tanımlarız:
 
 ~~~html
 <select name="Car">
@@ -216,9 +214,9 @@ To create a select dropdown, we use the `<select>` element. Any options we want 
 </select>
 ~~~
 
-All the option elements should have a `value` attribute (otherwise the text content inside is used). This value will be sent to the server when the form is submitted.
+Tüm option öğelerinin bir `value` niteliğine sahip olması gereklidir (aksi halde içerideki metin içeriği kullanılır). Bu değer, form gönderildiğinde sunucuya gönderilecektir.
 
-We can set one of the options to be the default selected element when the browser first renders the form by giving one of the options the `selected` attribute:
+Tarayıcı formu ilk kez render ettiğinde, seçeneklerden birini varsayılan olarak seçilmiş olarak ayarlayabiliriz; bunun için bir seçeneğe `selected` niteliği ekleriz:
 
 ~~~html
 <select name="Car">
@@ -231,7 +229,7 @@ We can set one of the options to be the default selected element when the browse
 </select>
 ~~~
 
-We may also split the list of options into groups using the `<optgroup>` element. The optgroup element takes a `label` attribute which the browser uses as the label for each group:
+Ayrıca, `<optgroup>` öğesini kullanarak seçenek listesini gruplara bölebiliriz. Optgroup öğesi, tarayıcının her grup için etiket olarak kullandığı bir `label` niteliğini alır: 
 
 ~~~html
 <select name="fashion">
@@ -250,10 +248,9 @@ We may also split the list of options into groups using the `<optgroup>` element
 
 **Radio buttons**
 
-Select dropdowns are great for saving space on the page when we have an extensive list of options we want users to choose from. However, when we have a smaller list of 5 or fewer options to choose from, it is often a better user experience to have them displayed on the page instead of hidden behind a dropdown.
+Seçim kutuları (select dropdowns), kullanıcıların seçebilecekleri kapsamlı bir seçenek listemiz olduğunda sayfada yer kazanmak için harikadır. Ancak, 5 veya daha az seçeneğe sahip daha küçük bir liste varsa, bunları bir açılır listenin arkasına gizlemek yerine sayfada görüntülemek genellikle daha iyi bir kullanıcı deneyimidir.
 
-In this case, we can use radio buttons. Radio buttons allow us to create multiple options that the user can choose one of. To create radio buttons, we use the ever adaptable input element again with a `type` attribute of "radio":
-
+Bu durumda, radyo düğmelerini kullanabiliriz. Radyo düğmeleri, kullanıcının birini seçebileceği birden çok seçenek oluşturmamıza izin verir. Radyo düğmeleri oluşturmak için, çok amaçlı input öğesini bir kez daha kullanırız ve bu kez "radio" olan bir `type` niteliğine sahiptir:
 ~~~html
 <h1>Ticket Type</h1>
 <div>
@@ -272,9 +269,10 @@ In this case, we can use radio buttons. Radio buttons allow us to create multipl
 </div>
 ~~~
 
-When we select one of the radio buttons and then select another, it will deselect the first one. Radio buttons know to do this because they have the same `name` attribute. This is how the browser knows these elements are part of the same group of options.
+Bir radyo düğmesini seçtiğimizde ve ardından başka bir tane seçtiğimizde, ilk olanı seçilmemiş duruma getirecektir. Radyo düğmeleri bunu yapmayı bilir çünkü aynı `name` niteliğine sahiptirler. Bu, tarayıcının bu öğelerin aynı seçenek grubunun bir parçası olduğunu bilmesini sağlar.
 
-We can set the default selected radio button by adding the `checked` attribute to it:
+Varsayılan olarak seçili radyo düğmesini belirleyebiliriz, bunun için `checked` niteliğini ekleriz:
+
 
 ~~~html
 <h1>Ticket Type</h1>
@@ -296,9 +294,9 @@ We can set the default selected radio button by adding the `checked` attribute t
 
 **Checkboxes**
 
-Checkboxes are similar to radio buttons in that they allow users to choose from a set of predefined options. But unlike radio buttons, they allow multiple options to be selected at once.
+Onay kutuları (checkboxes), kullanıcıların önceden belirlenmiş bir dizi seçenek arasından seçim yapmalarına izin veren radyo düğmelerine benzer. Ancak radyo düğmelerinin aksine, birden çok seçeneğin aynı anda seçilmesine izin verirler.
 
-To create a checkbox, we use the input element with a `type` attribute of "checkbox":
+Bir onay kutusu oluşturmak için, "checkbox" olan bir `type` niteliğine sahip input öğesini kullanırız:
 
 ~~~html
 <h1>Pizza Toppings</h1>
@@ -324,7 +322,7 @@ To create a checkbox, we use the input element with a `type` attribute of "check
 </div>
 ~~~
 
-We can also have a single checkbox when we want users to toggle if they want something to be true or false. Like signing up to a newsletter when they create an account for example:
+Aynı zamanda, kullanıcılara bir şeyin doğru veya yanlış olup olmadığını açma veya kapatma seçeneği sunmak istediğimizde tek bir onay kutusu da kullanabiliriz. Örneğin, bir hesap oluştururken bir bülten aboneliğine kaydolma:
 
 ~~~html
 <div>
@@ -333,7 +331,7 @@ We can also have a single checkbox when we want users to toggle if they want som
 </div>
 ~~~
 
-We can set checkboxes to be checked by default on page load by giving them a `checked` attribute:
+Sayfa yüklenirken onay kutularını varsayılan olarak işaretleyebiliriz, bunun için bir `checked` niteliği ekleriz:
 
 ~~~html
 <div>
@@ -342,23 +340,23 @@ We can set checkboxes to be checked by default on page load by giving them a `ch
 </div>
 ~~~
 
-### Buttons
+### Butonlar
 
-The button element creates clickable buttons that the user can interact with to submit forms and trigger other actions.
+Düğme öğesi, kullanıcının formları göndermek ve diğer eylemleri tetiklemek için etkileşimde bulunabileceği tıklanabilir düğmeler oluşturur.
 
-To create a button, we use the `<button>` element. The content or text we want to have displayed inside the button will go within the opening and closing tags:
+Bir düğme oluşturmak için `<button>` öğesini kullanırız. Düğme içinde görüntülemek istediğimiz içerik veya metin, açılış ve kapanış etiketleri arasına yerleştirilir:
 
 ~~~html
 <button>Click Me</button>
 ~~~
 
-The button element also accepts a `type` attribute that tells the browser which kind of button it is dealing with. There are three types of buttons available to us.
+Düğme öğesi aynı zamanda tarayıcıya hangi tür düğme ile uğraştığını söyleyen bir `type` niteliğini de kabul eder. Bize sunulan üç tür düğme bulunmaktadır.
 
 **Submit buttons**
 
-Once a user is finished filling in a form, they will need a way to submit it. There is a specialized button for this; the submit button. When a submit button is clicked, it will submit the form it is contained within. The `type` attribute has a value of submit by default, i.e. if the `type` is not specified or the value provided is invalid.
+Kullanıcı bir formu doldurmayı bitirdiğinde, bunu göndermek için bir yol bulmaları gerekecektir. Bunun için özel bir düğme bulunmaktadır; gönderme düğmesi (submit button). Bir gönderme düğmesine tıklandığında, içinde bulunduğu formu gönderecektir. `type` niteliğinin varsayılan değeri submit'tir, yani `type` belirtilmemişse veya sağlanan değer geçersizse.
 
-To create a submit button, we use the button element with a `type` attribute of "submit":
+Bir gönderme düğmesi oluşturmak için, `type` niteliği "submit" olan button öğesini kullanırız:
 
 ~~~html
 <button type="submit">Submit</button>
@@ -366,9 +364,9 @@ To create a submit button, we use the button element with a `type` attribute of 
 
 **Reset button**
 
-A reset button clears all the data the user has entered into the form and sets all the inputs in the form back to what they were initially.
+Bir sıfırlama düğmesi (reset button), kullanıcının forma girdiği tüm verileri temizler ve formdaki tüm girişleri başlangıçtaki durumlarına geri getirir.
 
-To create a reset button, we use the button element with a `type` attribute of "reset":
+Bu düğmeyi oluşturmak için, `type` niteliği "reset" olan button öğesini kullanırız:
 
 ~~~html
 <button type="reset">Reset</button>
@@ -376,29 +374,29 @@ To create a reset button, we use the button element with a `type` attribute of "
 
 **Generic button**
 
-The third and final button type is simply a generic button that can be used for anything. It's commonly used with JS for creating interactive UI's.
+Üçüncü ve son düğme türü, sadece herhangi bir şey için kullanılabilen genel bir düğmedir. Genellikle etkileşimli kullanıcı arayüzleri oluşturmak için JS ile birlikte kullanılır.
 
-To create a generic button, we use the button element with a `type` attribute of "button":
+Genel bir düğme oluşturmak için, `type` niteliği "button" olan button öğesini kullanırız:
 
 ~~~html
 <button type="button">Click to Toggle</button>
 ~~~
 
 <div class="lesson-note lesson-note--tip" markdown="1">
-It is important to remember that a button within a form with the `type` value of submit (which happens to be the default value) will always try to make a new request and submit data back to the server. Hence, for buttons that are used within a form for different purposes other than submitting the data, the `type` attribute should always be specified to avoid unwanted effects of submitting a form.
+Unutulmaması önemli olan bir nokta, submit (gönder) değerine sahip olan (ki bu aynı zamanda varsayılan değerdir) bir form içindeki bir düğmenin her zaman yeni bir istek yapmaya ve veriyi sunucuya göndermeye çalışacağıdır. Bu nedenle, veriyi gönderme amacı dışında farklı amaçlar için bir form içinde kullanılan düğmeler için istenmeyen sonuçların önlenmesi için `type` niteliğinin her zaman belirtilmiş olması önemlidir.
 </div>
 
-### Organizing form elements
+### Form öğelerini düzenleme
 
-Using the correct inputs for the data we want users to enter goes a long way towards making our forms user friendly. However, in larger forms, users can easily get overwhelmed and discouraged if there are many inputs to fill in.
+Kullanıcıların girmesini istediğimiz veri için doğru girişleri kullanmak, formlarımızı kullanıcı dostu hale getirmenin önemli bir adımıdır. Ancak daha büyük formlarda, kullanıcılar birçok girişi doldurmak zorunda kalırlarsa kolayca bunalmış ve cesaretini kaybetmiş hissedebilirler.
 
-Luckily, HTML provides a couple of elements that make it easy to organize forms into sections that are visually distinct and manageable to digest.
+Neyse ki, HTML bize formları görsel olarak farklı ve anlaşılır sekmelere ayırmayı kolaylaştıran birkaç öğe sağlar.
 
 **Fieldset element**
 
-The fieldset element is a container element that allows us to group related form inputs into one logical unit.
+`fieldset` öğesi, ilişkili form girişlerini tek bir mantıksal birimde gruplamamıza olanak tanıyan bir konteyner öğesidir.
 
-To create a fieldset, we use the `<fieldset>` element. Whatever form inputs we want to group together go within the opening and closing fieldset tags:
+Bir `fieldset` oluşturmak için, `<fieldset>` öğesini kullanırız. Bir araya gruplamak istediğimiz form girişleri, açılış ve kapanış `fieldset` etiketleri arasına yerleştirilir:
 
 ~~~html
 <fieldset>
@@ -412,9 +410,9 @@ To create a fieldset, we use the `<fieldset>` element. Whatever form inputs we w
 
 **Legend**
 
-The legend element is used to give field sets a heading or caption so the user can see what a grouping of inputs is for.
+`legend` öğesi, alan setlerine başlık veya açıklama eklemek için kullanılır, böylece kullanıcı bir grup girişin ne için olduğunu görebilir.
 
-To create a legend, we use the `<legend>` element with the text we want to display within its opening and closing tags. A legend should always come right after an opening fieldset tag:
+Bir `legend` oluşturmak için, istediğimiz metni içeren `<legend>` öğesini kullanırız. Bir `legend` her zaman açılış `fieldset` etiketinden hemen sonra gelmelidir:
 
 ~~~html
 <fieldset>
@@ -444,7 +442,7 @@ To create a legend, we use the `<legend>` element with the text we want to displ
 </fieldset>
 ~~~
 
-A common use-case for these elements is using a fieldset to group radio buttons and using a legend to communicate to the user what each of the options is ultimately for:
+Bu öğelerin yaygın bir kullanım durumu, radio düğmelerini gruplamak için bir `fieldset` kullanmak ve her bir seçeneğin sonunda kullanıcıya bu seçeneğin aslında ne için olduğunu iletmek için bir `legend` kullanmaktır:
 
 ~~~html
 <fieldset>
@@ -467,41 +465,41 @@ A common use-case for these elements is using a fieldset to group radio buttons 
 </fieldset>
 ~~~
 
-### A note on styling forms
+### Şekillendirme formları hakkında bir not
 
-We will provide resources that go deep into styling forms in the assignment section that comes next. However, before we get to the assignment, we should talk about some of the challenges with styling HTML forms and how we can get around them:
+Sonraki bölümde gelen ödev bölümünde formları stilize etme konusuna derinlemesine girecek kaynaklar sağlayacağız. Ancak önce, HTML formlarını stilize etme konusundaki bazı zorluklar ve bu zorlukların üstesinden nasıl gelebileceğimiz hakkında konuşmalıyız:
 
-**Default browser styles**
+**Varsayılan tarayıcı stilleri**
 
-Each browser has its own default styles for form controls, making your forms visually different for users depending on what browser they are using.
+Her tarayıcının form kontrolleri için kendi varsayılan stilleri vardır, bu da kullanıcılarınızın hangi tarayıcıyı kullandığına bağlı olarak formlarınızın görsel olarak farklı olmasına neden olur.
 
-To have a consistent design among all browsers, we have to override these default styles and style them ourselves.
+Tüm tarayıcılarda tutarlı bir tasarıma sahip olabilmek için bu varsayılan stilleri geçersiz kılmalı ve kendimiz stil vermeliyiz.
 
-**Tricky and downright impossible to style form controls**
+**Form kontrollerini stilize etmek zor ve bazen imkansızdır**
 
-Text-based form controls like text, email, password and text areas are reasonably straightforward to style. They operate like any other HTML element, and most CSS properties can be used on them.
+Metin tabanlı form kontrolleri, metin, e-posta, şifre ve metin alanları gibi, oldukça açıktır. Diğer HTML öğeleri gibi çalışırlar ve çoğu CSS özelliği onlar üzerinde kullanılabilir.
 
-Things get more tricky when creating custom styles for radio buttons and checkboxes. But there are many [guides](https://moderncss.dev/pure-css-custom-checkbox-style) out there you can use to achieve your desired design. There have also been [new CSS properties](https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color) made available in recent times to make styling radio buttons and checkboxes much easier.
+Şeyler, özel stiller oluştururken radio düğmeleri ve onay kutuları için daha karmaşık hale gelir. Ancak istediğiniz tasarımı elde etmek için kullanabileceğiniz birçok [guides](https://moderncss.dev/pure-css-custom-checkbox-style) bulunmaktadır. Ayrıca, son zamanlarda radio düğmeleri ve onay kutuları için stil oluşturmayı çok daha kolay hale getiren [new CSS properties](https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color) de bulunmaktadır.
 
-Certain aspects of other elements are downright impossible to style, for example, calendar or date pickers. If we want custom styles for these, we will have to build custom form controls with JavaScript or use one of the many JavaScript libraries that provide us with ready-made solutions.
+Diğer bazı öğelerin belirli yönleri stilize etmek neredeyse imkansızdır, örneğin takvim veya tarih seçicileri. Bu öğeler için özel stiller istiyorsak, özel form kontrolleri oluşturmak için JavaScript kullanmamız veya bize hazır çözümler sunan birçok JavaScript kütüphanesinden birini kullanmamız gerekecek.
 
-### Assignment
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
 
-#### Form basics
+#### Form temelleri
 
-1. Read and follow along to [MDN's Introductory Guides to Forms](https://developer.mozilla.org/en-US/docs/Learn/Forms#introductory_guides) - complete [Your first form](https://developer.mozilla.org/en-US/docs/Learn/Forms/Your_first_form) and [How to structure a web form](https://developer.mozilla.org/en-US/docs/Learn/Forms/How_to_structure_a_web_form#test_your_skills!)
-2. Read and follow along to [MDN's The Different Form Controls Guides](https://developer.mozilla.org/en-US/docs/Learn/Forms#the_different_form_controls)
+1. [MDN's Introductory Guides to Forms](https://developer.mozilla.org/en-US/docs/Learn/Forms#introductory_guides) - [Your first form](https://developer.mozilla.org/en-US/docs/Learn/Forms/Your_first_form) ve [How to structure a web form](https://developer.mozilla.org/en-US/docs/Learn/Forms/How_to_structure_a_web_form#test_your_skills!) bölümlerini okuyun ve uygulayın.
+2. [MDN's The Different Form Controls Guides](https://developer.mozilla.org/en-US/docs/Learn/Forms#the_different_form_controls) bölümünü okuyun ve uygulayın.
 
-#### Styling forms
+#### Formları stillendirme
 
-1. Read and follow along to [MDN's Form Styling Guides](https://developer.mozilla.org/en-US/docs/Learn/Forms#form_styling_guides)
-2. Read and follow along to [the internetingishard guide to forms](https://internetingishard.netlify.app/html-and-css/forms/index.html)
+1. [MDN's Form Styling Guides](https://developer.mozilla.org/en-US/docs/Learn/Forms#form_styling_guides) bölümünü okuyun ve uygulayın.
+2. [the internetingishard guide to forms](https://internetingishard.netlify.app/html-and-css/forms/index.html)'ni okuyun ve uygulayın.
 
 </div>
 
-### Knowledge check
+### Bilgi ölçme
 
 - [Explain what the form element is for and what two attributes it should always include.](#the-form-element)
 - [Explain what form controls are at a high level.](#form-controls)
@@ -510,8 +508,8 @@ Certain aspects of other elements are downright impossible to style, for example
 - [What are the three types of buttons in HTML?](#buttons)
 - [What are the two most challenging aspects of styling forms?](#a-note-on-styling-forms)
 
-### Additional resources
+### Ek kaynaklar
 
-This section contains helpful links to other content. It isn’t required, so consider it supplemental.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
 - [Web.dev's Form Course](https://web.dev/learn/forms/)
