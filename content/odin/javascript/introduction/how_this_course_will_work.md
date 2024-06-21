@@ -1,24 +1,28 @@
-### Introduction
+---
+title: 'Bu Kurs Nasıl İşleyecek?'
+---
 
-JavaScript is the future of the web. More and more of the logic is making its way to the client side in order to facilitate lightning-fast user experiences. JavaScript is even moving to the server side with Node.js. That's why in this course we'll be diving deep into it to make sure you come out with a good understanding of how it works.
+### Giriş
 
-You've already completed the [Foundations course](https://www.theodinproject.com/paths/foundations/courses/foundations), right? Good, because now we'll be moving at warp speed into new frontiers. This section will cover a lot of ground and your brain may melt down a few times, but don't worry, that's just a flesh wound. Patch 'er up and keep going! When in doubt, build something.
+JavaScript web'in geleceğidir. Mantığın giderek daha fazla kısmı istemci tarafına kaydığı için kullanıcı deneyimlerini hızlandırmak amacıyla JavaScript'in önemi artıyor. Ayrıca JavaScript, Node.js ile sunucu tarafına da yayılıyor. Bu nedenle bu eğitimde JavaScript'in nasıl çalıştığını iyi bir şekilde anladığınızdan emin olmak için derinlemesine dalacağız.
 
-### The path
+[Temel Bilgiler Kursu](https://www.theodinproject.com/paths/foundations/courses/foundations) 'nu zaten tamamladınız, değil mi? Harika, çünkü şimdi yeni ufuklara hızla ilerleyeceğiz. Bu bölüm çok geniş bir yelpazeyi kapsayacağından bazen zorlanabilirsiniz, ama endişelenmeyin, bu sadece geçici bir zorluk. Onu atlattıktan sonra devam edin! Kararsız kaldığınızda, birkaç proje yapın.
 
-How is this course set up? It starts with a deeper look at the basics, just like the [Ruby Programming course](/paths/full-stack-ruby-on-rails/courses/ruby-programming) did with Ruby. You don't need to have completed the Ruby Programming course or [the Ruby on Rails course](/paths/full-stack-ruby-on-rails/courses/ruby-on-rails) to understand these basics. We won't be focusing deeply on the really basic coding items, so it will move quickly. You should, however, already have completed the [Foundations course](https://www.theodinproject.com/paths/foundations/courses/foundations) -- specifically, the [JavaScript Basics section ](https://www.theodinproject.com/paths/foundations/courses/foundations#javascript-basics) -- before starting this course. 
+### Yol Haritası
 
-The last thing you'll do is a final project which integrates everything you've learned in all the courses of this curriculum. This is the kind of project that you'll be telling employers all about and a great chance to prove that you're now, officially, a serious web developer.
+Bu kurs nasıl ayarlandı? Tıpkı [Ruby Programlama Kursu](/paths/full-stack-ruby-on-rails/courses/ruby-programming) 'nun Ruby ile yaptığı gibi, temel bilgilere daha derin bir bakışla başlar. Bu temelleri anlamak için Ruby Programlama Kursu'nu veya [Ruby on Rails Kursu](/paths/full-stack-ruby-on-rails/courses/ruby-on-rails) 'nu tamamlamış olmanıza gerek yok. Gerçekten temel kodlama öğelerine derinlemesine odaklanmayacağız, bu yüzden hızlı ilerleyeceğiz. Bununla birlikte, bu eğitime başlamadan önce [Temel Bilgiler Kursu](https://www.theodinproject.com/paths/foundations/courses/foundations) 'nu - özellikle [JavaScript Temel Bilgiler Bölümü](https://www.theodinproject.com/paths/foundations/courses/foundations#javascript-basics) 'nü - tamamlamış olmanız gerekir.
 
-### Format
+Yapacağınız son şey ise, bu müfredatın tüm derslerinde öğrendiğiniz her şeyi entegre eden bir final projesidir. Bu, işverenlere anlatacağınız türden bir proje ve artık resmi olarak ciddi bir web geliştiricisi olduğunuzu kanıtlamanın harika bir yolu.
 
-There is a lot to cover, but this course has been broken up into bite-sized lessons and their accompanying projects. These projects will give you a chance to apply what you have learned and to show what you are capable of. After a few of them, you'll really start getting the hang of things.
+### Öğrenme Biçimi
 
-### In each lesson:
+Kapsanacak çok şey var, ancak bu kurs ısırık büyüklüğünde derslere ve bunlara eşlik eden projelere bölünmüştür. Bu projeler size öğrendiklerinizi uygulama ve neler yapabileceğinizi gösterme şansı verecektir. Birkaç tanesinden sonra, işleri gerçekten kavramaya başlayacaksınız.
 
-1. We will introduce the topic briefly and provide you with a list of things you should pay attention to ("Points to Ponder").
-2. You will be asked to do readings, watch videos, do online courses or otherwise consume content to initially learn the material.
-3. Every few lessons you will be asked to build a larger project.
-4. Finally, we will include supplemental resources and other potentially useful tidbits at the end of each lesson.
+### Her bir derste: 
 
-### Enough talk - get learning!
+1. Size konuyu kısaca tanıtacağız ve dikkat etmeniz gereken şeylerin bir listesini sunacağız ("Üzerinde Düşünülmesi Gereken Noktalar").
+2. Başlangıçta materyali öğrenmek için okumalar yapmanız, videolar izlemeniz, çevrimiçi kurslar yapmanız veya başka bir şekilde içerik tüketmeniz istenecektir.
+3. Her birkaç derste bir daha büyük bir proje yapmanız istenecektir.
+4. Son olarak, her dersin sonuna ek kaynaklar ve diğer potansiyel olarak yararlı bilgiler ekleyeceğiz.
+
+### Bu kadar konuşma yeter - hadi öğrenelim!
