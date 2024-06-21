@@ -1,24 +1,24 @@
-### Introduction
+### Giriş
 
-Validations allow us to set specific constraints or rules that determine what data users can enter into an input. When a user enters data that breaks the rules, a message will appear, providing feedback on what was wrong with the entered data and how to fix it.
+Doğrulamalar, kullanıcıların bir girişe hangi verileri girebileceğini belirleyen belirli kısıtlamaları veya kuralları ayarlamamıza olanak tanır. Kullanıcı, kuralları ihlal eden veri girdiğinde, bir mesaj görünecek ve girilen veride neyin yanlış olduğu ve nasıl düzeltilmesi gerektiği konusunda geri bildirim sağlayacaktır.
 
-Validations are a vital ingredient in well-designed forms. They help protect our backend systems from receiving incorrect data, and they help make the experience of interacting with our form as dead-stupid-simple as possible for our users.
+Doğrulamalar, iyi tasarlanmış formların önemli bir bileşenidir. Backend sistemimizi yanlış veri alınmasından korumaya yardımcı olurlar ve kullanıcılarımızla etkileşimde bulunma deneyimini mümkün olduğunca basit hale getirmeye yardımcı olurlar.
 
-This lesson will explore some of the built-in validations you can use with HTML forms. We will also dive into styling validations with CSS.
+Bu ders, HTML formlarıyla kullanabileceğiniz bazı yerleşik doğrulamaları keşfedecek. Ayrıca, CSS ile doğrulamaların nasıl biçimlendirileceğine de gireceğiz.
 
-### Learning outcomes
+### Öğrenme çıktıları
 
-By the end of this lesson, you should be able to:
+Bu dersin sonunda şunları yapabilmelisiniz:
 
-- Explain what form validations are
-- Know how to use a few of the basic built-in HTML validations
-- Know how to build custom validations
+- Form doğrulamalarının ne olduğunu açıklamak
+- Temel yerleşik HTML doğrulamalarından bazılarını nasıl kullanacağınızı bilmek
+- Özel doğrulamaları nasıl oluşturacağınızı bilmek
 
-### Required validation
+### Gerekli doğrulama
 
-We will often want to ensure specific fields have been filled in before submitting the form, for example, the email and password in a login form.
+Çoğu zaman, formu göndermeden önce belirli alanların doldurulmuş olmasını isteyeceğiz, örneğin, bir giriş formundaki e-posta ve şifre.
 
-To make a field required, we simply add the `required` attribute to it:
+Bir alanı zorunlu hale getirmek için, ona sadece `required` niteliğini ekleriz:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="vYeZGzB" data-preview="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
 <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/vYeZGzB">
@@ -27,163 +27,164 @@ on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-To ensure a good user experience and to meet accessibility guidelines, we should always indicate which fields are required. This will often be done by adding an asterisk(\*) to the required field label like we have done in the example.
+İyi bir kullanıcı deneyimi sağlamak ve erişilebilirlik kurallarını karşılamak için her zaman hangi alanların zorunlu olduğunu belirtmeliyiz. Bu genellikle örneklediğimiz gibi, zorunlu alan etiketine bir yıldız (\*) ekleyerek yapılır.
 
-### Text length validations
+### Metin uzunluğu doğrulamaları
 
-Sometimes we will want users to enter a minimum or a maximum amount of text into a field. Real-world examples of using these validations would be the old 140 character limit that Twitter used to have in its status field or having minimum and maximum length constraints on a username field.
+Bazı durumlarda, kullanıcılardan bir alana belirli bir metin miktarını girmelerini istemek isteyebiliriz. Bu doğrulamaları kullanmanın gerçek dünya örnekleri, Twitter'ın eski durum alanındaki 140 karakterlik sınırlama veya bir kullanıcı adı alanında minimum ve maksimum uzunluk kısıtlamaları gibi olabilir.
 
-#### Minimum length validation
+#### Minimum uzunluk doğrulaması
 
 To add the minimum length validation, we give the form control a `minlength` attribute with an integer value that represents the minimum number of characters we want to allow in the form control:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="WNZOwgp" data-preview="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/WNZOwgp">
-  forms-min-length-validation</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span>CodePen tarafından yapılan <a href="https://codepen.io/TheOdinProjectExamples/pen/WNZOwgp">forms-min-length-validation</a> 
+  örneği TheOdinProjectExamples (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlandı ve 
+  <a href="https://codepen.io">CodePen</a>'de paylaşıldı.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-Try entering less than three characters into the text area and clicking the tweet button to see the validation in action.
+"Tweet" düğmesine tıklayarak metin alanına üç karakterden az giriş yapmayı deneyin ve doğrulamayı görmek için aşağıdaki adımları izleyin.
 
-#### Maximum length validation
+#### Maksimum uzunluk doğrulaması
 
-To add a maximum length validation, we give the form control a `maxlength` attribute with an integer value which represents the maximum number of characters we want to allow in the form control:
+Maksimum uzunluk doğrulaması eklemek için, form kontrolüne, form kontrolünde izin vermek istediğimiz maksimum karakter sayısını temsil eden bir tamsayı değeri içeren bir `maxlength` niteliği veririz:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="zYEzqJJ" data-preview="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/zYEzqJJ">
-  forms-maximum-length-validations</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span>CodePen tarafından yapılan <a href="https://codepen.io/TheOdinProjectExamples/pen/zYEzqJJ">forms-maximum-length-validations</a> 
+  örneği TheOdinProjectExamples (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) 
+  tarafından hazırlandı ve <a href="https://codepen.io">CodePen</a>'de paylaşıldı.</span>
+
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-With the maximum length validation, the browser will prevent users from entering more characters than the max length attribute value. Try this for yourself in the example above.
+Maksimum uzunluk doğrulaması ile tarayıcı, kullanıcıları maksimum uzunluk niteliği değerinden daha fazla karakter girmekten engelleyecektir. Bu örnekte bunu kendiniz deneyin.
 
-#### Combining validations
+#### Doğrulamaları Birleştirme
 
-HTML allows us to apply as many validations as we wish to a form control. For example, we can give our tweet textarea both `minlength` and `maxlength` validations:
+HTML, bir form kontrolüne istediğimiz kadar doğrulama uygulamamıza izin verir. Örneğin, tweet metin alanımıza hem `minlength` hem de `maxlength` doğrulamalarını verebiliriz:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="vYeZGVY" data-preview="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/vYeZGVY">
-  forms-combining-validations</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span>CodePen tarafından yapılan <a href="https://codepen.io/TheOdinProjectExamples/pen/vYeZGVY">forms-combining-validations</a> 
+  örneği TheOdinProjectExamples (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlandı ve 
+  <a href="https://codepen.io">CodePen</a>'de paylaşıldı.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 This gives us much more scope to control what users input.
 
-### Number range validations
+Bu, kullanıcıların girdilerini kontrol etme konusunda çok daha fazla kapsama sahip olmamıza olanak tanır.
 
-Just like we often need to control the length of text-based form controls, there will be many situations where we will want to control the range of values users can enter into number based form controls.
+### Sayı aralığı doğrulamaları
 
-We can do this with the min and max attributes, which allows us to set the lower and upper bounds of the value entered into the form control.
-The min and max attributes only work with number-based form controls such as the number, dates and time inputs.
-You can view the complete list of supported elements on [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/max#syntax).
+Metin tabanlı form kontrollerinin uzunluğunu kontrol etmeye ihtiyaç duyduğumuz gibi, sayı tabanlı form kontrollerine girilebilecek değerlerin aralığını kontrol etmek istediğimiz birçok durum olacaktır.
 
-Some real-world use cases for using these validations would be limiting the quantity on a product order form or choosing the number of passengers on a flight booking form.
+Bunu, form kontrolüne girilen değerin alt ve üst sınırlarını belirlememize olanak tanıyan `min` ve `max` nitelikleri ile yapabiliriz.
+`min` ve `max` nitelikleri, yalnızca sayı tabanlı form kontrolleriyle, örneğin sayı, tarih ve saat girişleri gibi çalışır.
+Desteklenen öğelerin tam listesini [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/max#syntax) inceleyebilirsiniz.
 
-#### Min validation
+Bu doğrulamaları kullanmanın bazı gerçek dünya kullanım örnekleri, bir ürün sipariş formundaki miktarı sınırlamak veya bir uçuş rezervasyon formundaki yolcu sayısını belirlemek olabilir.
 
-To add a minimum value validation, we give the form control a `min` attribute with an integer value which represents the minimum number we want the form control to accept:
+#### Minimum değer doğrulaması
+
+Minimum değer doğrulaması eklemek için, form kontrolüne, form kontrolünün kabul etmesini istediğimiz minimum sayıyı temsil eden bir tamsayı değeri içeren bir `min` niteliği veririz:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="poWwyxd" data-preview="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/poWwyxd">
-  forms-min-validation</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span>CodePen tarafından yapılan <a href="https://codepen.io/TheOdinProjectExamples/pen/poWwyxd">forms-min-validation</a> örneği TheOdinProjectExamples 
+  (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlandı ve <a href="https://codepen.io">CodePen</a>'de paylaşıldı.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-Try submitting the form with a quantity of 0 to see the validation in action.
+Formu 0 miktarında göndermeyi deneyerek doğrulamayı gözlemleyebilirsiniz.
 
-#### Max validation
+#### Maksimum değer doğrulaması
 
-To add a maximum value validation, we give the form control a `max` attribute with an integer value which represents the maximum number we want the form control to accept:
+Maksimum değer doğrulaması eklemek için, form kontrolüne, form kontrolünün kabul etmesini istediğimiz maksimum sayıyı temsil eden bir tamsayı değeri içeren bir `max` niteliği veririz:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="XWegdxB" data-preview="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/XWegdxB">
-  forms-max-validation</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span>CodePen tarafından yapılan <a href="https://codepen.io/TheOdinProjectExamples/pen/XWegdxB">forms-max-validation</a> 
+  örneği TheOdinProjectExamples (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlandı ve 
+  <a href="https://codepen.io">CodePen</a>'de paylaşıldı.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-Try submitting the form with seven passengers to see the validation in action.
+Yedi yolcu ile formu göndermeyi deneyerek doğrulamayı gözlemleyebilirsiniz.
 
-### Pattern validations
+### Desen doğrulamaları
 
-To ensure we get the correct information from users, we will often want to ensure data matches a particular pattern.
-Real-world applications would be checking if a credit card number or a zipcode is in the correct format.
+Kullanıcılardan doğru bilgileri almak için verilerin belirli bir modele uymasını sağlamak isteyeceğiz.
+Gerçek dünya uygulamaları, bir kredi kartı numarasının veya posta kodunun doğru formatta olup olmadığını kontrol etme gerekliliğini içerebilir.
 
-To add a pattern validation, we give the form control a `pattern` attribute with a [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) as the value. In our example we are using the pattern validation to ensure a US zip code is in the correct format (5 numbers followed by an optional dash and 4 more numbers):
+Desen doğrulaması eklemek için, form kontrolüne, [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) olarak değeri olan bir `pattern` niteliği veririz. Örneğimizde desen doğrulamasını kullanarak bir ABD posta kodunun doğru formatta olup olmadığını kontrol ediyoruz (5 sayıdan sonra isteğe bağlı bir tire ve 4 daha fazla sayı):
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="YzrQqRK" data-preview="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/YzrQqRK">
-  forms-pattern-basic-validation</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span>CodePen tarafından yapılan <a href="https://codepen.io/TheOdinProjectExamples/pen/YzrQqRK">forms-pattern-basic-validation</a> örneği TheOdinProjectExamples 
+  (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlandı ve <a href="https://codepen.io">CodePen</a>'de paylaşıldı.</span>
 </p>
+
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-Entering an incorrect zip code and submitting the form will display the following validation error in the browser "Please match the requested format".
-This isn't very useful since it doesn't communicate how to fix the issue.
+Forma yanlış bir posta kodu girdikten sonra göndermeye çalışmak, tarayıcıda "Lütfen istenen formata uyun" şeklinde bir doğrulama hatasını görüntüler. Bu, sorunu nasıl düzelteceğimizi iletmemesi nedeniyle çok kullanışlı değildir.
 
-It is good practice to use a `placeholder` attribute to show users an example of the expected pattern they need to enter:
+Kullanıcılara girmeleri gereken beklenen desenin bir örneğini göstermek için `placeholder` niteliğini kullanmak iyi bir uygulamadır:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="LYzLNXv" data-preview="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/LYzLNXv">
-  forms-pattern-with-placeholder-validation</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span>CodePen tarafından yapılan <a href="https://codepen.io/TheOdinProjectExamples/pen/LYzLNXv">forms-pattern-with-placeholder-validation</a> 
+  örneği TheOdinProjectExamples (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlandı ve <a href="https://codepen.io">
+  CodePen</a>'de paylaşıldı.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-The pattern attribute can only be used on `<input>` elements. Some input elements already validate data that matches a certain pattern. For example, the email input field will make sure a valid email is entered and the url input element will check to ensure the URL starts with http or https:
+Desen niteliği sadece `<input>` öğelerinde kullanılabilir. Bazı giriş öğeleri zaten belirli bir modele uyan verileri doğrular. Örneğin, e-posta giriş alanı geçerli bir e-posta girişi yapıldığını kontrol eder ve URL giriş öğesi, URL'nin http veya https ile başladığını kontrol eder:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="eYGRZbK" data-preview="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/eYGRZbK">
-  forms-built-in-pattern-validations</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span>CodePen tarafından yapılan <a href="https://codepen.io/TheOdinProjectExamples/pen/eYGRZbK">forms-built-in-pattern-validations</a> örneği TheOdinProjectExamples 
+  (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlandı ve <a href="https://codepen.io">CodePen</a>'de paylaşıldı.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-### Styling validations
+### Doğrulama Stilleri
 
-We can target form controls that have passed or failed validations using the `:valid` and `:invalid` pseudo-classes.
+Geçmiş veya başarısız olan doğrulamalara sahip form kontrol öğelerini hedefleyebiliriz. 
 
-To see this in action, we will be using our email and website example that we looked at previously:
+Bu amaçla, daha önce incelediğimiz e-posta ve web sitesi örneklerini kullanacağız:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="dyVRMwx" data-preview="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/dyVRMwx">
-  forms-styling-validations</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span>CodePen tarafından yapılan <a href="https://codepen.io/TheOdinProjectExamples/pen/dyVRMwx">forms-styling-validations</a> örneği TheOdinProjectExamples 
+  (a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlandı ve <a href="https://codepen.io">CodePen</a>'de paylaşıldı.</span>
+
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-First of all, we target any valid inputs and give them a green border. Our email and URL inputs initially have a green border since they are not required fields and are valid.
+İlk olarak, herhangi bir geçerli girişi hedefleyip onlara yeşil bir kenarlık veriyoruz. E-posta ve URL giriş öğelerimiz, zorunlu alanlar olmadığı ve geçerli oldukları için başlangıçta yeşil bir kenarlığa sahiptir.
 
-When a field is invalid, we give it a red border instead. Try entering an invalid email address and URL to see how this looks.
+Bir alan geçersiz olduğunda, ona kırmızı bir kenarlık veriyoruz. Nasıl göründüğünü görmek için geçersiz bir e-posta adresi ve URL girmeyi deneyin.
 
-### Conclusion
+### Çıkarım
 
-The built-in validations will take you far with ensuring your users enter the correct data. They are quick and easy to add. However, they have their limitations.
+Yerleşik doğrulamalar, kullanıcıların doğru verileri girmesini sağlama konusunda oldukça etkilidir. Hızlı ve kolay bir şekilde eklenirler. Ancak, kendi sınırlamalarına sahiptirler.
 
-Sometimes you will need to include validations that the built-in validations won't be able to do. For example, validating that a password input and password confirmation input have the same value or validating that a username has not already been taken. We are also limited with what we can do with styling the validation messages and the content within them.
+Bazen, yerleşik doğrulamaların başa çıkamayacağı doğrulamaları eklemeniz gerekebilir. Örneğin, bir şifre girişi ile şifre onay girişinin aynı değere sahip olduğunu doğrulama veya bir kullanıcı adının zaten alınıp alınmadığını kontrol etme gibi durumlar. Ayrıca, doğrulama mesajlarını ve içerdikleri içeriği biçimlendirme konusunda sınırlıyız.
 
-In this case, we will need to get creative and make custom validations using JavaScript and CSS. We'll dive into how to achieve validation via JavaScript in a future lesson.
+Bu durumda, özel doğrulamalar yapmak için JavaScript ve CSS kullanmak gerekecek. JavaScript ile doğrulama nasıl yapılır konusuna gelecekteki bir derste daha detaylı bir şekilde değineceğiz.
 
-It's also worth noting client-side validations are not a silver bullet for ensuring users enter the correct data. To ensure the integrity of any user data coming into our systems, we should also have server-side validations in place. We will cover this side of validations later in the curriculum.
+Ayrıca, istemci tarafındaki doğrulamaların kullanıcıların doğru verileri girmesini garantileme konusunda tek başına bir çözüm olmadığını belirtmek önemlidir. Sistemimize gelen kullanıcı verilerinin bütünlüğünü sağlamak için aynı zamanda sunucu tarafı doğrulamalarının da olması gerekmektedir. Bu doğrulama türünü müfredatın ilerleyen bölümlerinde ele alacağız.
 
-### Assignment
+### Ödev
 
 <div class="lesson-content__panel" markdown="1">
 
-1. Read and follow along to [MDN's Client-Side Form Validation Guide](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
-   - Skip the section on "Validating forms using JavaScript". This will be covered in a future lesson.
+1. [MDN's Client-Side Form Validation Guide](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)'ı okuyun ve takip edin.
+   - "Validating forms using JavaScript" bölümünü atlayın. Bu, gelecekteki bir dersimizde ele alınacaktır.
 
-2. Go through SitePoint's [Complete Guide to HTML Forms and Constraint Validation Guide](https://www.sitepoint.com/html-forms-constraint-validation-complete-guide/). You can skip the section on "JavaScript and the Constraint Validation API" and "Creating a Custom Form Validator".
+2. SitePoint'in [Complete Guide to HTML Forms and Constraint Validation Guide](https://www.sitepoint.com/html-forms-constraint-validation-complete-guide/) adlı kaynağı inceleyin. "JavaScript and the Constraint Validation API" ve "Creating a Custom Form Validator" bölümlerini atlayabilirsiniz.
 
-3. Read Silo Creativo's article [Improving UX in forms](https://www.silocreativo.com/en/css-rescue-improving-ux-forms/).
+3. Silo Creativo'nun makalesi olan [Improving UX in forms](https://www.silocreativo.com/en/css-rescue-improving-ux-forms/) okuyun.
 
 </div>
 
-### Knowledge check
+
+### Bilgi ölçme
 
 - [What does the <code>required</code> validation do?](#required-validation)
 - [What validations can you use for checking text length?](#text-length-validations)
@@ -191,11 +192,11 @@ It's also worth noting client-side validations are not a silver bullet for ensur
 - [What can you use the pattern validation for?](#pattern-validations)
 - [What pseudo CSS selectors are available for styling valid and invalid inputs?](#styling-validations)
 
-### Additional resources
+### Ek kaynaklar
 
-- Check out [HTML5Pattern](https://www.html5pattern.com/) for a list of commonly used pattern regular expressions you may find helpful.
-- Look through [this Twitter thread](https://threadreaderapp.com/thread/1400388896136040454.html) of the do's and don'ts for form validation UX.
-- Check out these [10 Guidelines](https://www.nngroup.com/articles/errors-forms-design-guidelines/) for form validation design.
-- [Learn Regex: A Beginner’s Guide](https://www.sitepoint.com/learn-regex/) is a great resource for understanding how regex patterns are built and shows how to use a fantastic tool for creating them. 
-- [Demystifying Regex with Practical Examples](https://www.sitepoint.com/demystifying-regex-with-practical-examples/) contains some practical examples in detail so you can understand how they work rather than simply copying and pasting.
-- One last resource on regular expressions that can be helpful is MDN's [regular expression syntax cheatsheet](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Cheatsheet). This cheatsheet does a great job explaining the syntax of regular expressions in more detail.
+- [HTML5Pattern](https://www.html5pattern.com/)'ı ziyaret ederek, yaygın olarak kullanılan desen düzenli ifadelerinin bir listesine göz atabilirsiniz.
+- [this Twitter thread](https://threadreaderapp.com/thread/1400388896136040454.html) inceleyerek, form doğrulama kullanıcı deneyimi için yapılması ve yapılmaması gerekenleri öğrenebilirsiniz.
+- Form doğrulama tasarımı için [10 Guidelines](https://www.nngroup.com/articles/errors-forms-design-guidelines/)ye göz atabilirsiniz.
+- [Learn Regex: A Beginner’s Guide](https://www.sitepoint.com/learn-regex/), regex desenlerinin nasıl oluşturulduğunu anlamak ve bunları oluşturmak için harika bir araç kullanımını gösteren kaynaklardan biridir.
+- [Demystifying Regex with Practical Examples](https://www.sitepoint.com/demystifying-regex-with-practical-examples/), regex'in nasıl çalıştığını sadece kopyala-yapıştır yapmak yerine detaylı bir şekilde anlamanız için pratik örnekler içerir.
+- Regex hakkında başka bir yardımcı kaynak ise MDN'nin [regular expression syntax cheatsheet](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Cheatsheet)'dur. Bu kılavuz, düzenli ifadelerin sözdizimini daha ayrıntılı bir şekilde açıklamaktadır.
