@@ -1,98 +1,94 @@
-### Introduction
+### Giriş
 
-In this lesson we will examine the different parts of a grid and explore common properties that can be used to position grid items.
+Bu derste bir ızgaranın farklı bölümlerini inceleyecek ve ızgara öğelerini konumlandırmak için kullanılabilecek ortak özellikleri keşfedeceğiz.
 
-### Learning outcomes
+### Öğrenme çıktıları
 
-By the end of this lesson, you should be able to:
+Bu dersin sonunda:
 
-Describe the differences between tracks, lines, and cells
-* Position items by defining their start and end lines
-* Use shorthand notation
+İzler, çizgiler ve hücreler arasındaki farkları tanımlayabilmelisiniz
+* Başlangıç ve bitiş çizgilerini tanımlayarak öğeleri konumlandırabilmelisiniz
+* Kısaltılmış gösterim kullanabilmelisiniz
 
-### Reviewing tracks
+### Parçaların incelenmesi
 
-Before we dive straight into positioning, let's establish some terminology to better understand the different parts of a grid. In the previous lesson you learned that when you define a grid using `grid-template`, you are defining the *tracks* the grid will have. You can think of a grid track as any single row or column on a grid.
+Doğrudan konumlandırmaya geçmeden önce bir ızgaranın farklı bölümlerini daha iyi anlamak için bazı terminolojiler oluşturalım. Bir önceki derste `grid-template` kullanarak bir ızgara tanımladığınızda ızgaranın sahip olacağı *izleri* tanımladığınızı öğrendiniz. Bir ızgara izini, ızgaradaki herhangi bir tek satır ya da sütun olarak düşünebilirsiniz.
 
-To give an example, if we wanted to create a 3x3 grid with 100 pixel rows and 100 pixel columns, we need to define 3 horizontal tracks with a height of 100 pixels and 3 vertical tracks with a width of 100 pixels:
+Bir örnek vermek gerekirse, 100 piksel satır ve 100 piksel sütun içeren 3x3'lük bir ızgara oluşturmak istiyorsak, 100 piksel yüksekliğinde 3 yatay iz ve 100 piksel genişliğinde 3 dikey iz tanımlamamız gerekir:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="poWvJXQ" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/poWvJXQ">
-  3x3 Layout | CSS Grid</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span><a href="https://codepen.io">CodePen'de</a> TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan<a href="https://codepen.io/TheOdinProjectExamples/pen/poWvJXQ">
+  3x3 Düzen | CSS Izgaraları</a> örneğine bakınız.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-You will notice two CSS lines have been commented out in this CodePen. Uncomment the property in the `.first-row` class selector to see the grid track between the first and second-row grid lines.
+Bu CodePen'de iki CSS satırının yorumlandığını fark edeceksiniz. Birinci ve ikinci satır ızgara çizgileri arasındaki ızgara izini görmek için `.first-row` sınıf seçicisindeki özelliğin yorumunu kaldırın.
 
-Next, uncomment the property in the `.last-column` class selector to see the grid track between the third and fourth-column grid lines.
+Ardından, üçüncü ve dördüncü sütun ızgara çizgileri arasındaki ızgara izini görmek için `.last-column` sınıf seçicisindeki özelliği kaldırın.
 
-### Lines
+### Çizgiler
 
-Whenever we create grid tracks, grid lines are created *implicitly*. This is important. Grid lines are only created after our grid tracks have been defined. We can not explicitly create grid lines.
+Izgara izleri oluşturduğumuzda, ızgara çizgileri *dolaylı olarak* oluşturulur. Bu çok önemlidir. Izgara çizgileri yalnızca ızgara izlerimiz tanımlandıktan sonra oluşturulur. Izgara çizgilerini açıkça oluşturamayız.
 
-Every track has a start line and an end line. The lines are numbered from left to right and top to bottom starting at 1. So our 3x3 grid above has vertical lines for columns ranging from 1 to 4 and horizontal lines for rows ranging from 1 to 4.
+Her parçanın bir başlangıç çizgisi ve bir bitiş çizgisi vardır. Çizgiler 1'den başlayarak soldan sağa ve yukarıdan aşağıya doğru numaralandırılır. Dolayısıyla, yukarıdaki 3x3 ızgaramızda 1 ila 4 arasında değişen sütunlar için dikey çizgiler ve 1 ila 4 arasında değişen satırlar için yatay çizgiler vardır.
 
-Grid lines are what we use to position grid items. We'll get to that in a minute, but first let's take a deeper look at grid lines using our developer tools.
+Izgara çizgileri, ızgara öğelerini konumlandırmak için kullandığımız şeydir. Buna birazdan değineceğiz, ancak önce geliştirici araçlarımızı kullanarak ızgara çizgilerine daha derinlemesine bir göz atalım.
 
-If you open up developer tools in Chrome, you can navigate to the Layout pane and find the Grid overlay display settings. Make sure that _show line numbers_ is enabled. Select the correct element from the Grid overlays (e.g. this might be our `div.container` if you are inspecting our CodePen.) You should now see an overlay of the grid lines.
+Chrome'da geliştirici araçlarını açarsanız, Düzen bölmesine gidebilir ve Izgara yer paylaşımı görüntüleme ayarlarını bulabilirsiniz. Satır numaralarını göster_ seçeneğinin etkin olduğundan emin olun. Izgara kaplamalarından doğru öğeyi seçin (örneğin, CodePen'imizi inceliyorsanız bu bizim `div.container`ımız olabilir.) Şimdi ızgara çizgilerinin bir katmanını görmelisiniz.
 
-Notice that the developer tools also show negative lines opposite from the positive lines. You don't have to worry about the negative lines for now, but know that this gives you another option to use when positioning the grid items.
+Geliştirici araçlarının pozitif çizgilerin karşısında negatif çizgiler de gösterdiğine dikkat edin. Şimdilik negatif çizgiler konusunda endişelenmenize gerek yok, ancak bunun size ızgara öğelerini konumlandırırken kullanabileceğiniz başka bir seçenek sunduğunu bilin.
 
-### Cells
+### Hücreler
 
-The space in a grid shared by a single row track and a single column track is called a grid *cell*. You can think of a grid cell like a cell in a spreadsheet: a space defined by a *row, column* coordinate.
+Bir ızgarada tek bir satır izi ve tek bir sütun izi tarafından paylaşılan alana ızgara *hücresi* denir. Bir ızgara hücresini elektronik tablodaki bir hücre gibi düşünebilirsiniz: *satır, sütun* koordinatıyla tanımlanan bir alan.
 
-By default, each child element of a grid container will occupy one cell. In the example above, we have 9 cells in our grid (3 rows x 3 columns), each with one automatically positioned child element inside. The element marked with the letter "A" is occupying a cell that lies in row track 1 (between row grid lines 1 and 2) and column track 1 (between column grid lines 1 and 2). The item marked with the letter "H" is in a cell at row track 3 (between row grid lines 3 and 4) and column track 2 (between column grid lines 2 and 3).
+Varsayılan olarak, bir ızgara kapsayıcısının her bir alt öğesi bir hücreyi kaplayacaktır. Yukarıdaki örnekte, ızgaramızda 9 hücre (3 satır x 3 sütun) vardır ve her birinin içinde otomatik olarak konumlandırılmış bir alt öğe bulunur. "A" harfiyle işaretlenmiş öğe, satır izi 1 (satır ızgara çizgileri 1 ve 2 arasında) ve sütun izi 1 (sütun ızgara çizgileri 1 ve 2 arasında) içinde yer alan bir hücreyi kaplamaktadır. "H" harfiyle işaretlenmiş öğe, satır izi 3 (satır kılavuz çizgileri 3 ve 4 arasında) ve sütun izi 2'de (sütun kılavuz çizgileri 2 ve 3 arasında) bulunan bir hücrededir.
 
-But what happens if we wanted to change the order of our grid items? Or if we want items to occupy more than one cell?
+Ancak ızgara öğelerimizin sırasını değiştirmek istersek ne olur? Ya da öğelerin birden fazla hücreyi kaplamasını istersek?
 
-### Positioning
+### Konumlandırma
 
-To get a feel for how items can be positioned we will create a mock floor plan for an apartment. Let's start with a total area of our apartment (the grid container) divided into a 5x5 grid. To make this example a little clearer, we'll use a background color to distinguish our container space. Note that we're also using `display: inline-grid` here so that our container does not stretch to take up space the way a block-level box would. This will just help us better visualize the space.
+Öğelerin nasıl konumlandırılabileceğini anlamak için bir daire için temsili bir kat planı oluşturacağız. Dairemizin toplam alanını (ızgara konteyneri) 5x5 ızgaraya bölerek başlayalım. Bu örneği biraz daha net hale getirmek için konteyner alanımızı ayırt etmek için bir arka plan rengi kullanacağız. Ayrıca burada `display: inline-grid` kullandığımıza dikkat edin, böylece konteynerimiz blok seviyesindeki bir kutu gibi uzayıp yer kaplamaz. Bu sadece alanı daha iyi görselleştirmemize yardımcı olacaktır.
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="rNGaOxB" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/rNGaOxB">
-  Positioning 1 | CSS Grid</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span><a href="https://codepen.io">CodePen'de</a> TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan<a href="https://codepen.io/TheOdinProjectExamples/pen/rNGaOxB">
+  Konumlandırma 1 | CSS Izgaraları</a> örneğine bakınız.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-As it stands this is a pretty sad unit. To make it less of an empty box and more of a home we are going to add some items to our grid container that will represent different rooms.
+Bu haliyle oldukça hüzünlü bir birim. Onu boş bir kutu olmaktan çıkarıp bir ev haline getirmek için ızgara konteynerimize farklı odaları temsil edecek bazı öğeler ekleyeceğiz.
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="poWvjgY" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/poWvjgY">
-  Positioning 2 | CSS Grid</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span><a href="https://codepen.io">CodePen'de</a> TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan<a href="https://codepen.io/TheOdinProjectExamples/pen/poWvjgY">
+  Konumlandırma 2 | CSS Izgaraları</a> örneğine bakınız.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-Most of our rooms represent a single grid cell. But we have given ourselves a large living room. (Yay!) We positioned this item using `grid-column-start` and `grid-column-end`. Their property values represent the column grid lines we wish it to start and end with.
+Odalarımızın çoğu tek bir ızgara hücresini temsil eder. Ama biz kendimize büyük bir oturma odası verdik. (Yaşasın!) Bu öğeyi `grid-column-start` ve `grid-column-end` kullanarak konumlandırdık. Özellik değerleri, başlamasını ve bitmesini istediğimiz sütun ızgara çizgilerini temsil eder.
 
-You will also notice we have commented out property values for this item's grid row positioning. Uncomment the `grid-row-start` and `grid-row-end` properties to see how our living room can get even bigger by taking up the grid track between the first and third-row grid lines.
+Ayrıca, bu öğenin ızgara satırı konumlandırması için özellik değerlerini yorumladığımızı da fark edeceksiniz. Birinci ve üçüncü satır ızgara çizgileri arasındaki ızgara izini alarak oturma odamızın nasıl daha da büyüyebileceğini görmek için `grid-row-start` ve `grid-row-end` özelliklerini yorumdan çıkarın.
 
-These properties allow us to use our existing grid lines to tell items how many rows and columns each item should span across. Take a minute to play around with the property values here. If the line numbers are confusing, inspect the container using your dev tools to show the grid overlay.
+Bu özellikler, öğelere her bir öğenin kaç satır ve sütuna yayılması gerektiğini söylemek için mevcut ızgara çizgilerimizi kullanmamızı sağlar. Buradaki özellik değerleriyle oynamak için bir dakikanızı ayırın. Satır numaraları kafa karıştırıcıysa ızgara katmanını göstermek için geliştirme araçlarınızı kullanarak konteyneri inceleyin.
 
-Next, we need to use our space more efficiently. We will make the rest of our rooms span multiple grid cells and fill out the rest of our apartment.
+Daha sonra, alanımızı daha verimli kullanmamız gerekiyor. Odalarımızın geri kalanını birden fazla ızgara hücresine yayacağız ve dairemizin geri kalanını dolduracağız.
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="jOGEbrX" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/jOGEbrX">
-  Positioning 3 | CSS Grid</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span><a href="https://codepen.io">CodePen'de</a> TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan<a href="https://codepen.io/TheOdinProjectExamples/pen/jOGEbrX">
+  Konumlandırma 3 | CSS Izgaraları</a> örneğine bakınız.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-Now we have the blueprints for our full apartment. If you take a look at the `#kitchen` selector you will see we used shorthand properties here. `grid-column` is just a combination of `grid-column-start` and `grid-column-end` with a slash between the two values. And `grid-row` is the shorthand version for setting an item's row positioning.
+Artık dairemizin tamamı için planlarımız var. Eğer `#kitchen` seçicisine bakarsanız burada kısaltılmış özellikler kullandığımızı göreceksiniz. `grid-column` sadece `grid-column-start` ve `grid-column-end` değerlerinin iki değer arasında bir eğik çizgi ile birleştirilmesidir. `grid-row` ise bir öğenin satır konumlandırmasını ayarlamanın kısaltılmış yoludur.
 
-One problem with our floor plan is that the bathroom and kitchen are on opposite ends of the apartment. We would save money on the plumbing by placing these two rooms back to back. Take a minute now and see if you can change the starting and ending positions for the bathroom, bedroom and closet so that the bathroom is right next to the kitchen. You can use either the long or shorthand properties here.
+Kat planımızla ilgili bir sorun, banyo ve mutfağın dairenin iki ucunda olmasıdır. Bu iki odayı arka arkaya yerleştirerek tesisattan tasarruf edebiliriz. Şimdi bir dakikanızı ayırın ve banyo, yatak odası ve dolap için başlangıç ve bitiş konumlarını değiştirip değiştiremeyeceğinize bakın, böylece banyo mutfağın hemen yanında olur. Burada uzun ya da kısa yol özelliklerini kullanabilirsiniz.
 
 ### grid-area
 
-You now know how to position your grid items using row and column lines. But there are other ways to position items and this is where things can get a little confusing.
+Artık satır ve sütun çizgilerini kullanarak ızgara öğelerinizi nasıl konumlandıracağınızı biliyorsunuz. Ancak öğeleri konumlandırmanın başka yolları da var ve bu noktada işler biraz karmaşıklaşabilir.
 
-There is an even shorter shorthand for positioning grid items with start and end lines. You can combine `grid-row-start` / `grid-column-start` / `grid-row-end` / `grid-column-end` into one line using `grid-area`.
+Izgara öğelerini başlangıç ve bitiş çizgileriyle konumlandırmak için daha da kısa bir kısaltma vardır. `Grid-row-start` / `grid-column-start` / `grid-row-end` / `grid-column-end` öğelerini `grid-area` kullanarak tek bir satırda birleştirebilirsiniz.
 
-Our living room above can be written out like this:
+Yukarıdaki oturma odamız şu şekilde yazılabilir:
 
 ~~~css
 /* styles.css */
@@ -102,11 +98,11 @@ Our living room above can be written out like this:
 }
 ~~~
 
-But `grid-area` can also refer to a few different things.
+Ancak `grid-area` birkaç farklı şeyi de ifade edebilir.
 
-Instead of using the grid lines to position all the items in a grid, we can create a visual layout of the grid in words. To do this we give each item on the grid a name using `grid-area`.
+Bir ızgaradaki tüm öğeleri konumlandırmak için ızgara çizgilerini kullanmak yerine ızgaranın görsel bir düzenini kelimelerle oluşturabiliriz. Bunu yapmak için ızgaradaki her öğeye `grid-area` kullanarak bir isim veririz.
 
-So our living room can be written just like this:
+Yani oturma odamız bu şekilde yazılabilir:
 
 ~~~css
 /* styles.css */
@@ -116,60 +112,58 @@ So our living room can be written just like this:
 }
 ~~~
 
-We could do this to all of our grid items and give each room a `grid-area` value as a name. Then we can map out the whole structure with the grid container using `grid-template-areas`.
+Bunu tüm ızgara öğelerimiz için yapabilir ve her odaya isim olarak bir `grid-area` değeri verebiliriz. Daha sonra `grid-template-areas` kullanarak tüm yapıyı ızgara konteyneri ile eşleyebiliriz.
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="dyVPYpv" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/dyVPYpv">
-  grid-template-areas 1 | CSS Grid</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span><a href="https://codepen.io">CodePen'de</a> TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan<a href="https://codepen.io/TheOdinProjectExamples/pen/dyVPYpv">
+  grid-template-areas 1 | CSS Izgaraları</a> örneğine bakınız.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-Wow! You might want to open up the CodePen browser and make it large enough to really read the `grid-template-areas` layout line by line. But this tool gives us a completely different way to position items.
+Vay canına! CodePen tarayıcısını açıp `grid-template-areas` düzenini gerçekten satır satır okumak için yeterince büyük yapmak isteyebilirsiniz. Ancak bu araç bize öğeleri konumlandırmak için tamamen farklı bir yol sunuyor.
 
-We can even use `.` to indicate empty cells. Say our apartment might be getting a water heater and washer/dryer. We might not be sure of the exact layout but we can visualize some space easily by removing more room in the bathroom and kitchen:
+Boş hücreleri belirtmek için `.` bile kullanabiliriz. Diyelim ki dairemize bir su ısıtıcısı ve çamaşır makinesi/kurutucusu alınıyor. Tam yerleşim planından emin olmayabiliriz, ancak banyo ve mutfakta daha fazla yer açarak bir miktar alanı kolayca görselleştirebiliriz:
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="ZEXYbpg" data-editable="true" data-user="TheOdinProjectExamples" style={{"height":"300px","boxSizing":"border-box","display":"flex","alignItems":"center","justifyContent":"center","border":"2px solid","margin":"1em 0","padding":"1em"}}>
-  <span>See the Pen <a href="https://codepen.io/TheOdinProjectExamples/pen/ZEXYbpg">
-  grid-template-areas 2 | CSS Grid</a> by TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+  <span><a href="https://codepen.io">CodePen'de</a> TheOdinProject (<a href="https://codepen.io/TheOdinProjectExamples">@TheOdinProjectExamples</a>) tarafından hazırlanan<a href="https://codepen.io/TheOdinProjectExamples/pen/ZEXYbpg">
+  grid-template-areas 2 | CSS Izgaraları</a> örneğine bakınız.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-So now you know two very different ways of using `grid-area` on a grid item. You might even see the term "grid area" refer to a group of cells. For example, all the grid cells of the living room together is a grid area. The apartment analogy should help. A grid item can take up multiple cells forming an area of the grid much like a room with four walls in an apartment.
+Artık bir ızgara öğesinde `grid-area` kullanmanın iki farklı yolunu biliyorsunuz. Hatta "ızgara alanı" teriminin bir grup hücreyi ifade ettiğini de görebilirsiniz. Örneğin, oturma odasının tüm ızgara hücreleri birlikte bir ızgara alanıdır. Apartman benzetmesi yardımcı olacaktır. Bir ızgara öğesi, bir apartman dairesinde dört duvarlı bir oda gibi ızgaranın bir alanını oluşturan birden fazla hücreyi kaplayabilir.
 
-### Wrapping up
+### Toparlamak gerekirse
 
-As you go through the assignments you will come across more terminology like `span` and `auto` when positioning grid items across tracks. There are also properties to justify and align grid items similar to Flexbox. The best way to learn all this terminology and how to position items is with lots of practice!
+Ödevleri gözden geçirdikçe, ızgara öğelerini parçalar arasında konumlandırırken `span` ve `auto` gibi daha fazla terminolojiyle karşılaşacaksınız. Flexbox'a benzer şekilde ızgara öğelerini yaslamak ve hizalamak için özellikler de vardır. Tüm bu terminolojiyi ve öğelerin nasıl konumlandırılacağını öğrenmenin en iyi yolu bol bol pratik ise yapmaktır!
 
-### Assignment
+### Ödev
 <div class="lesson-content__panel" markdown="1">
-- Read MDN's [Line-based Placement with CSS Grid.](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Line-based_Placement_with_CSS_Grid)
-- Review [Part 4 on Grid Properties](https://css-tricks.com/snippets/css/complete-guide-grid/#grid-properties) from CSS-Tricks.
+- MDN'nin [CSS Grid ile Çizgi Tabanlı Yerleştirme] (https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Line-based_Placement_with_CSS_Grid) makalesini okuyun
+- CSS-Tricks'ten [Grid Özellikleri Üzerine - Bölüm 4] (https://css-tricks.com/snippets/css/complete-guide-grid/#grid-properties)'ü inceleyin.
 </div>
 
-### Practice
+### Pratik
 
-> When doing the following exercises, please use all the documentation and resources you need to accomplish them. You are _not_ intended to have any of this stuff memorized at this point. Check the docs, use google, do what you need to do (besides checking the solutions) to get them done.
+> Aşağıdaki alıştırmaları yaparken, lütfen bunları gerçekleştirmek için ihtiyaç duyduğunuz tüm belgeleri ve kaynakları kullanın. Bu noktada bunların hiçbirini ezberlemeniz amaçlanmamıştır. Dokümanları kontrol edin, google'ı kullanın, bunları yapmak için ne yapmanız gerekiyorsa yapın (çözümleri kontrol etmenin yanı sıra).
 
-Go back to our [CSS exercises repository](https://github.com/TheOdinProject/css-exercises) (you've done these previously, but don't forget that the instructions are in the README). Do the first exercise in the 'grid' directory:
+[CSS alıştırmaları depomuza](https://github.com/TheOdinProject/css-exercises) geri dönün (bunları daha önce yaptınız, ancak talimatların README'de olduğunu unutmayın). İlk alıştırmayı 'grid' dizininde yapın:
 
 1. grid-layout-1
 
-### Knowledge check
+### Bilgi ölçme
 
-This section contains questions for you to check your understanding of this lesson. If you’re having trouble answering the questions below on your own, review the material above to find the answer.
+Bu bölüm, bu dersi anladığınızı kontrol etmeniz için sorular içermektedir. Aşağıdaki soruları kendi başınıza yanıtlamakta zorlanıyorsanız, yanıtı bulmak için yukarıdaki materyali gözden geçirin.
 
-- [Explain the difference between a track and a line.](#reviewing-tracks)
-- [What is the smallest unit on a grid?](#cells)
-- [What kind of value do we give to the `grid-column-start` or `grid-column-end` properties?](#positioning)
-- [Which property can we use to combine all the start and end values for a grid item?](#grid-area)
-- [Which grid container property can map out a visual structure of grid items?](#grid-area)
+- [İz ve çizgi arasındaki farkı açıklayın]( #reviewing-tracks)
+- [Bir ızgara üzerindeki en küçük birim nedir?](#cells)
+- [`grid-column-start` veya `grid-column-end` özelliklerine ne tür bir değer vereceğiz?](#positioning)
+- [Bir grid öğesinin tüm başlangıç ve bitiş değerlerini birleştirmek için hangi özelliği kullanabiliriz?](#grid-area)
+- [Hangi grid konteyner özelliği grid öğelerinin görsel yapısını eşleyebilir?](#grid-area)
 
-### Additional resources
+### Ek kaynaklar
 
-This section contains helpful links to other content. It isn’t required, so consider it supplemental.
+Bu bölüm diğer içeriklere yararlı bağlantılar içerir. Zorunlu değildir, bu nedenle destekleyici olarak kabul edin.
 
-- Play through levels 1 - 17 of [CSS Grid Garden](https://cssgridgarden.com/) to practice positioning items. Note the rest of the levels go beyond the scope of this lesson.
-- If you want to know more about using `grid-template-areas` check out this [Smashing Magazine article from Rachel Andrew.](https://www.smashingmagazine.com/understanding-css-grid-template-areas)
-- To learn more about alignment and centering items read through these MDN Docs on [Box Alignment in CSS Grid Layout.](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Box_Alignment_in_CSS_Grid_Layout)
+- Öğeleri konumlandırma alıştırması yapmak için [CSS Grid Garden] (https://cssgridgarden.com/) 1 - 17 seviyelerini oynayın. Diğer seviyelerin bu dersin kapsamı dışında olduğunu unutmayın.
+- Eğer `grid-template-areas` kullanımı hakkında daha fazla bilgi edinmek istiyorsanız [Rachel Andrew'un Smashing Magazine makalesine](https://www.smashingmagazine.com/understanding-css-grid-template-areas) göz atın.
+- Hizalama ve öğeleri merkezleme hakkında daha fazla bilgi edinmek için [CSS Izgara Düzeninde Kutu Hizalama](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Box_Alignment_in_CSS_Grid_Layout) hakkındaki bu MDN Dokümanlarını okuyun.
