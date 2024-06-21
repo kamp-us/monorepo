@@ -1,78 +1,78 @@
-### Introduction
+### Giriş
 
-Git basics are very simple, but it sometimes feels like a bottomless pit when you find yourself on the wrong side of a confusing error situation. It's doubly frustrating because you think that messing up or trying the wrong solution can lose data. It's actually very hard to "lose" data with Git but it can certainly be hiding somewhere you wouldn't think to look without an experienced dev poking around.
+Git temelleri çok basittir ancak kendinizi kafa karıştırıcı bir hata durumunun yanlış tarafında bulduğunuzda bazen dipsiz bir kuyuda gibi hissedersiniz. Bu durum çok sinir bozucudur çünkü yanlış bir çözüm denediğinizde ya da hata yaptığınızda veri kaybedebileceğinizi düşünüyorsunuz. Aslında Git ile veri "kaybetmek" çok zordur ancak deneyimli bir geliştirici etrafı kurcalamadan bakmayı düşünmeyeceğiniz bir yerde saklanıyor olabilir.
 
-The thing about Git is that, unless you've got a seriously impressive memory, you can't just learn it by reading about it up front... you need to do it. Find a problem you want to go back and fix, hit an error in your merge, etc. and Google the hell out of it, learning a new Git tactic in the process.
+Git ile ilgili olan şey şu ki, ciddi anlamda etkileyici bir hafızanız yoksa bunu önceden okuyarak öğrenemezsiniz... yaparak öğrenmeniz gerekir. Geri dönüp düzeltmek istediğiniz bir sorun bulun, birleştirme işleminizde bir hataya rastlayın vb. ve Google'da aratın, bu süreçte yeni bir Git taktiği öğrenin.
 
-To help you out, come back and refer to this lesson again when you're in trouble. We'll first cover a real-world example of a GitHub workflow used on this very project. The Additional Resources section below should also help you find high quality resources for when you need them later on.
+Size yardımcı olması için, başınız sıkıştığında geri dönün ve bu derse tekrar bakın. İlk olarak bu projede kullanılan GitHub iş akışının gerçek dünyadaki bir örneğini ele alacağız. Aşağıdaki Ek Kaynaklar bölümü de daha sonra ihtiyaç duyduğunuzda kullanabileceğiniz yüksek kaliteli kaynakları bulmanıza yardımcı olacaktır.
 
-### Lesson overview
+### Derse genel bakış
 
-This section contains a general overview of topics that you will learn in this lesson.
+Bu bölüm, bu derste öğreneceğiniz konuların genel bir özetini içerir.
 
-- Using Git to make open source contributions
+- Açık kaynak katkıları yapmak için Git'i kullanmak.
 
-### A Git workflow for open source contribution
+### Açık kaynak katkısı için bir Git iş akışı
 
-Let's say you want to contribute to the [repo that houses our curriculum content](https://github.com/TheOdinProject/curriculum/)
+Diyelim ki [müfredat içeriğimizi barındıran repo](https://github.com/TheOdinProject/curriculum/)'ya katkıda bulunmak istiyorsunuz
 
-How do you contribute when you do not have write access to the repository? Below is a production-ready workflow that is actually used by contributors to this website. We'll assume here that you have commented on an [open issue on our repo](https://github.com/TheOdinProject/curriculum/issues) and that it has been assigned to you. If you don't have an issue assigned to you, you can still follow along with some arbitrary updates, just stop before step 3 in the **Sending your pull request** section since your changes aren't legitimate.
+Repo'ya yazma erişiminiz olmadığında nasıl katkıda bulunursunuz? Aşağıda, bu web sitesine katkıda bulunanlar tarafından kullanılan üretime hazır bir iş akışı yer almaktadır. Burada bir repomuzdaki [açık sorun](https://github.com/TheOdinProject/curriculum/issues) hakkında yorum yaptığınızı ve bu sorunun size atandığını varsayacağız. Size atanmış bir sorun yoksa, yine de bazı rastgele güncellemelerle takip edebilirsiniz, sadece **pull request'inizi (çekme talebinizi) gönderme** bölümündeki 3. adımdan önce durun, çünkü değişiklikleriniz geçerli değildir.
 
-The key players in this story will be the `upstream` (the original GitHub repository), the `origin` (your fork of that repo), and the "local" repository (your local clone of `origin`). Think of it as a happy triangle... except that "local" can only pull from `upstream`, not push.
+Bu senaryodaki kilit noktalar `upstream (yukarı akış)` (orijinal GitHub reposu), `origin` (bu reponun sizdeki fork'u (çatalı)) ve "local" reposu (sizin `origin`inizin yerel klonu) olacaktır. Bunu mutlu bir üçgen olarak düşünün... ancak "yerel" `upstream`den sadece çekebilir, `upstream`'e pushlayamaz (itemez).
 
-#### Initial setup
+#### İlk kurulum
 
-1. Read [the contributing guide](https://github.com/TheOdinProject/.github/blob/main/CONTRIBUTING.md) for the project.
-2. Navigate to the curriculum repository and fork the original ("upstream") repository into your own GitHub account by using the "fork" button at the top of that repo's page on GitHub.
-3. Clone your forked repository onto your local machine using something like `git clone git@github.com:your_user_name_here/curriculum.git` (you can get the url from the little widget on the sidebar on the right of that repo's page on GitHub).
-4. Because you cloned the repository, you've already got a remote that points to `origin`, which is your fork on GitHub. You will use this to push changes back up to GitHub. You'll also want to be able to pull directly from the original repository on GitHub, which we'll call `upstream`, by setting it up as another remote. Do this by using the git command below inside the project folder `curriculum`:
+1. Proje için [katkı sağlama kılavuzu](https://github.com/TheOdinProject/.github/blob/main/CONTRIBUTING.md)'nu okuyun.
+2. Müfredat reposuna gidin ve GitHub'daki repo sayfasının üst kısmındaki "fork" düğmesini kullanarak orijinal ("upstream") repoyu kendi GitHub hesabınıza forklayın.
+3. Fork'lanmış reponuzu `git clone git@github.com:your_user_name_here/curriculum.git` gibi bir şey kullanarak yerel makinenize klonlayın (url'yi GitHub'daki repo sayfasının sağındaki kenar çubuğundaki küçük widget'tan alabilirsiniz).
+4. Repoyu klonladığınız için, GitHub'daki fork'unuz olan `origin`'i işaret eden bir remote'a zaten sahipsiniz. Değişiklikleri GitHub'a geri göndermek için bunu kullanacaksınız. Ayrıca, `upstream` olarak adlandıracağımız GitHub'daki orijinal repodan başka bir uzak olarak ayarlayarak doğrudan çekebilmek isteyeceksiniz. Bunu `curriculum` proje klasörü içinde aşağıdaki git komutunu kullanarak yapın:
 
 ```
 git remote add upstream git@github.com:TheOdinProject/curriculum.git
 ```
 
-#### Ongoing workflow
+#### Devam eden iş akışı
 
-We've got one main branch -- `main`. `main` is for production-ready code. Any code deployed to `main` (on the original repo, not on your fork) will be tested in staging and shipped to production. You'll be working in a feature branch and submitting your pull requests to the `main` branch.
+Bir ana dalımız var -- `main`. `main` üretime hazır kod içindir. `main` dalına gönderilen tüm kodlar (orijinal repoda, sizin fork'unuzda değil) hazırlama aşamasında test edilecek ve üretime gönderilecektir. Bir özellik dalında çalışacak ve çekme isteklerinizi `main` dalına göndereceksiniz.
 
-1. Create a new feature branch for whatever feature you want to build, and add commits following the same practices that you learned about in the [branching section of our Revisiting Rock Paper Scissors lesson](https://www.theodinproject.com/lessons/foundations-revisiting-rock-paper-scissors#using-branches).
-2. When you're done with your feature, odds are that someone has made changes to the upstream repository in the meantime. That means that your `main` branch is probably out of date. Fetch the most updated copy using `git fetch upstream`.
-3. Now merge the upstream's changes into your local version of `main` using `git merge`. Specifically, you'll first want to make sure you're on your `main` branch using `git checkout main` and then `git merge upstream/main` to merge in those upstream changes that we just fetched.
-4. Note that a `git fetch upstream` followed by a `git merge upstream/some_branch` is the EXACT same thing as doing a `git pull upstream some_branch`. We prefer to split it up here so that we can explicitly walk through the steps.
-5. Now that your `main` branch is up-to-date with upstream, you need to merge it into your feature branch. Yes, that is correct and it seems odd at first. Don't you want to merge the feature branch into the `main` branch instead? Yes, you do, _but not yet_. **Your feature branch is dirty.** You don't know if it has any conflicts which might creep up. Any time you are merging in more "senior" branches (e.g. merging the feature into `main`), you want it to be a clean and conflict-free merge if possible. So you first merge the "senior" branch into your dirty branch to resolve those conflicts. Run `git checkout your_feature_name` to jump back onto your feature branch, then `git merge main` to merge `main` into it.
-6. You may have merge conflicts... resolve those using the skills you learned in [the Deeper Look at Git lesson](https://www.theodinproject.com/lessons/ruby-a-deeper-look-at-git)! ([JS Course Link](https://www.theodinproject.com/lessons/javascript-a-deeper-look-at-git))
+1. Oluşturmak istediğiniz özellik için yeni bir özellik dalı oluşturun ve Taş Kağıt Makas dersimizin [dallara ayırma bölümünde](https://www.theodinproject.com/lessons/foundations-revisiting-rock-paper-scissors#using-branches) öğrendiğiniz uygulamaların aynısını izleyerek commit'ler (taahhütler) ekleyin.
+2. Özelliğinizi tamamladığınızda, büyük olasılıkla birileri bu arada upstream reposunda değişiklikler yapmıştır. Bu da `main` dalınızın muhtemelen güncel olmadığı anlamına gelir. En güncel kopyayı `git fetch upstream` kullanarak getirin.
+3. Şimdi `git merge` kullanarak upstream değişikliklerini yerel "main" sürümünüzle birleştirin. Özellikle, önce `git checkout main` kullanarak `main` dalınızda olduğunuzdan emin olmak ve ardından az önce getirdiğimiz upstream değişikliklerini birleştirmek için `git merge upstream/main` kullanmak isteyeceksiniz.
+4. Bir `git fetch upstream` ardından bir `git merge upstream/some_branch` yapmanın bir `git pull upstream some_branch` yapmakla TAMAMEN aynı şey olduğunu unutmayın. Adımlar boyunca açıkça yürüyebilmek için burada bölmeyi tercih ediyoruz.
+5. Artık `main` dalınız upstream ile güncel olduğuna göre onu özellik dalınızla birleştirmeniz gerekir. Evet, bu doğru ve ilk başta garip görünüyor. Bunun yerine özellik dalını `ana` dal ile birleştirmek istemez misiniz? Evet, istiyorsunuz, _ama henüz değil_. **Özellik dalınız kirli.** Ortaya çıkabilecek herhangi bir çakışma olup olmadığını bilmiyorsunuz. Daha "kıdemli" dallarda birleştirme yaptığınız zaman (örneğin, özelliği `ana` dalla birleştirmek), mümkünse temiz ve çakışmasız bir birleştirme olmasını istersiniz. Bu nedenle, bu çakışmaları çözmek için önce "kıdemli" dalı kirli dalınızla birleştirirsiniz. Özellik dalınıza geri dönmek için `git checkout your_feature_name` komutunu çalıştırın, ardından `main` ile birleştirmek için `git merge main` komutunu çalıştırın.
+6. Birleştirme çakışmalarınız olabilir... [Git'e Derinlemesine Bakış dersinde](https://www.theodinproject.com/lessons/ruby-a-deeper-look-at-git) öğrendiğiniz becerileri kullanarak bunları çözün! ([JS Kurs Bağlantısı](https://www.theodinproject.com/lessons/javascript-a-deeper-look-at-git))
 
 #### Sending your pull request
 
-1. Now that your feature branch is squeaky clean and you know it'll merge cleanly into `main`, the hard part is all over. All that's left is to make the Pull Request (often abbreviated as PR) against our `upstream` repo on GitHub!
-2. Now you want to send your feature branch back up to your `origin` (your fork of the `upstream` repository). You can't send directly to `upstream` because you don't have access, so you'll need to make a pull request. Use `git push origin your_feature_name` to ship your feature branch up to your fork on GitHub.
-3. If you have been following along with the above steps to get familiar with this workflow, you should **stop at this point**. If you have completed an assigned issue, the final step is to submit a pull request to merge your feature branch into the original `upstream` repository's `main` branch. This can be done using GitHub's interface.
-4. Shake your moneymaker, you're an OSS contributor!
+1. Artık özellik dalınız tertemiz olduğuna ve `main` ile temiz bir şekilde birleşeceğini bildiğinize göre, zor kısım tamamen bitti. Geriye kalan tek şey, GitHub'daki `upstream` repomuza karşı pull request (genellikle PR olarak kısaltılır) yapmak!
+2. Şimdi özellik dalınızı `origin`inize (`upstream` reposunun forkuna) geri göndermek istiyorsunuz. Erişiminiz olmadığı için doğrudan `upstream`e gönderemezsiniz, bu nedenle bir pull request yapmanız gerekir. Özellik dalınızı GitHub'daki fork'unuza göndermek için `git push origin your_feature_name` komutunu kullanın.
+3. Bu iş akışına aşina olmak için yukarıdaki adımları takip ediyorsanız, **bu noktada durmalısınız**. Atanmış bir sorunu tamamladıysanız son adım, özellik dalınızı orijinal `upstream` reposunun `main` dalıyla birleştirmek için bir pull request göndermektir. Bu, GitHub'ın arayüzü kullanılarak yapılabilir.
+4. Paranızı sallayın, siz artık açık kaynak kodlu bir yazılım destekçisisiniz!
 
-### Knowledge check
+### Bilgi ölçme
 
-This section contains questions for you to check your understanding of this lesson. If you’re having trouble answering the questions below on your own, review the material above to find the answer.
+Bu bölüm, bu dersi kendi kendinize anlayıp anlamadığınızı kontrol etmeniz için sorular içermektedir. Bir soruyu yanıtlamakta zorlanıyorsanız, soruya tıklayın ve bağlantılı olduğu materyali gözden geçirin.
 
-- <a class='knowledge-check-link' href='#initial-setup'>What name is typically given for a Git remote that points to a repo that's been forked? </a>
-- <a class='knowledge-check-link' href='#sending-your-pull-request'>Can you directly send your changes to a repository that you don't own/have write access to?</a>
-- <a class='knowledge-check-link' href='#ongoing-workflow'>What should you do immediately before merging your feature branch into main?</a>
+- <a class='knowledge-check-link' href='#initial-setup'>Fork'lanmış bir repoya işaret eden Git remote'a için tipik olarak hangi isim verilir? </a>
+- <a class='knowledge-check-link' href='#sending-your-pull-request'>Değişikliklerinizi sahibi olmadığınız/yazma erişiminiz olmayan bir repoya doğrudan gönderebilir misiniz?</a>
+- <a class='knowledge-check-link' href='#ongoing-workflow'>Özellik dalınızı ana dal ile birleştirmeden hemen önce ne yapmalısınız?</a>
 
-### Additional resources
+### Ek kaynaklar
 
-This section contains helpful links to other content. It isn't required, so consider it supplemental.
+Bu alanda içerikle alakalı faydalı linkler bulunmaktadır. Zorunlu değildir, ek olarak düşünülmelidir.
 
-- Seth Robertson's [Git Best Practices](http://sethrobertson.github.io/GitBestPractices/)
+- Seth Robertson'dan [Git Best Practices](http://sethrobertson.github.io/GitBestPractices/)
 - [Git Branching and Tagging Best Practices on SO](http://programmers.stackexchange.com/questions/165725/git-branching-and-tagging-best-practices)
 - [Git Best Practices Workflow Guidelines](http://www.lullabot.com/blog/article/git-best-practices-workflow-guidelines)
-- GitHub's [official training site](https://training.github.com/)
+- GitHub'ın [orijinal eğitim sayfası](https://training.github.com/)
 - [Understand Git Conceptually](http://www.sbf5.com/~cduan/technical/git/)
-- Learn about [Git Branching from Peter Cottle](http://pcottle.github.io/learnGitBranching/) using his interactive branching tutorial.
-- Need more still? See [this meta-list of git tutorials for beginners](http://sixrevisions.com/resources/git-tutorials-beginners/).
-- [Git Immersion](http://gitimmersion.com/lab_01.html) is another great tutorial to learn the shortcuts of git (if you're following the Ruby path or are willing to learn some Ruby).
-- [Contributing to Open Source](https://youtu.be/mENDYhfxH-o) is a tutorial video reviewing this lesson.
+- Peter Cottle'dan [Git Branching](http://pcottle.github.io/learnGitBranching/) hakkında interaktif branching eğitimini kullanarak bilgi edinin.
+- Daha fazlasına mı ihtiyacınız var? Yeni başlayanlar için git eğitimlerinin [bu meta listesine](http://sixrevisions.com/resources/git-tutorials-beginners/) bakın.
+- [Git Immersion](http://gitimmersion.com/lab_01.html) git'in kısayollarını öğrenmek için bir başka harika öğreticidir (Ruby yolunu takip ediyorsanız veya biraz Ruby öğrenmeye istekliyseniz).
+- [Contributing to Open Source](https://youtu.be/mENDYhfxH-o) bu dersi gözden geçiren bir eğitim videosudur.
 
-Sometimes (okay, maybe a lot of times) when you're working with Git, something goes terribly wrong. Don't panic! Git is designed to help you recover from your misfortune. These resources will help you get back on track towards version control nirvana:
+Git ile çalışırken bazen (tamam, belki de çoğu zaman) bir şeyler korkunç bir şekilde ters gider. Panik yapmayın! Git, yaşadığınız talihsizlikten kurtulmanıza yardımcı olmak için tasarlanmıştır. Bu kaynaklar, sürüm kontrolü nirvanasına doğru tekrar yola çıkmanıza yardımcı olacaktır:
 
-- [Dangit, Git!?!](https://dangitgit.com/) is a quick reference to get you out of common Git problems.
-- This article on [How to undo (almost) anything with Git](https://github.blog/2015-06-08-how-to-undo-almost-anything-with-git/) will walk you through some of many options Git provides for undoing various mistakes.
-- If the problem you're facing is more advanced, you can click through [this more in-depth guide](https://sethrobertson.github.io/GitFixUm/fixup.html) to find the answer to your specific question.
+- [Dangit, Git!?!] (https://dangitgit.com/) sizi yaygın Git sorunlarından kurtarmak için hızlı bir referanstır.
+- Bu makale Git'in çeşitli hataları geri almak için sunduğu birçok seçenekten bazılarında size yol gösterecektir. [How to undo (almost) anything with Git](https://github.blog/2015-06-08-how-to-undo-almost-anything-with-git/)
+- Karşılaştığınız sorun daha ileri düzeydeyse, spesifik sorunuzun yanıtını bulmak için [bu daha derinlemesine kılavuza] (https://sethrobertson.github.io/GitFixUm/fixup.html) göz atabilirsiniz.
